@@ -1,0 +1,2 @@
+# Reclassify .jsx files as JavaScript for analysis
+*.jsx linguist-language=JavaScript
