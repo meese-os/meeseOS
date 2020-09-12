@@ -1,0 +1,60 @@
+{
+  "backgroundType": "gradient",
+  "plainBackgroundMode": "daylight",
+  "gradientColors": "#EE7752, #E73C7E, #23A6D5, #23D5AB",
+  "FirstName": "Aaron",
+  "MiddleName": "",
+  "LastName": "Meese",
+  "devDesc": "| Soldier | Programmer | Web Developer | Writer ",
+  "icons": [
+    {
+      "id": 0,
+      "image": "fa-github",
+      "url": "https://github.com/ajmeese7",
+      "style": "socialicons"
+    },
+    {
+      "id": 1,
+      "image": "fa-medium",
+      "url": "https://medium.com/@ajmeese7",
+      "style": "socialicons"
+    },
+    {
+      "id": 2,
+      "image": "fa-instagram",
+      "url": "https://www.instagram.com/ajmeese7/",
+      "style": "socialicons"
+    },
+    {
+      "id": 3,
+      "image": "fa-linkedin",
+      "url": "https://www.linkedin.com/in/aaronmeese/",
+      "style": "socialicons"
+    },
+    {
+      "id": 4,
+      "image": "fa-twitter",
+      "url": "https://www.twitter.com/ajmeese7/",
+      "style": "socialicons"
+    },
+    {
+      "id": 5,
+      "image": "fa-stack-overflow",
+      "url": "https://stackoverflow.com/users/story/6456163",
+      "style": "socialicons"
+    }
+  ],
+  "aboutHeading": "About Me",
+  "showInstaProfilePic": true,
+  "instaLink": "https://www.instagram.com/",
+  "instaUsername": "ajmeese7",
+  "instaQuerry": "/?__a=1",
+  "aboutDescription": "I'm a Web Developer from Baton Rouge, Louisiana. I'm currently a Signals Analyst for the US Army, working on my Associate's in Computer Science and several Open Source projects on the side. I am passionate about learning, and my eventual goal is to work in Artificial Intelligence.",
+  "projectHeading": "Recently Updated Projects",
+  "gitHubLink": "https://api.github.com/users/",
+  "gitHubUsername": "ajmeese7",
+  "gitHubQuery": "/repos?sort=updated&direction=desc",
+  "projectsLength": 4,
+  "showNavigationbar": true,
+  "showBlog": false
+}
