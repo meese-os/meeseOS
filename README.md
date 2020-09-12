@@ -6,6 +6,8 @@ project, which was released under the GNU Lesser General Public License v3.0.
 The React code here deploys the code to my [GitHub pages](https://ajmeese7.github.io) repo,
 which [aaronmeese.com](https://aaronmeese.com) is pointing to for hosting.
 
+To build and deploy to GitHub pages, run `npm run build` then `npm run custom-deploy`.
+
 ## TODO
 - Fix the muted tones on the middle nav element
 - Pick a better favicon and other logo sizes

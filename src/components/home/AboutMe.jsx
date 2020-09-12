@@ -8,22 +8,18 @@ import {
   instaUsername,
   instaQuerry,
 } from "../../editable-stuff/configurations.json";
+import { useWindowSize } from "@react-hook/window-size/throttled";
 {/*import Pdf from "../../editable-stuff/resume.pdf";*/}
 
 const AboutMe = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1200);
   const [instaProfilePic, setInstaProfilePic] = useState("");
   const [showInsta, setShowInsta] = useState(showInstaProfilePic);
+  const [width, height] = useWindowSize({ fps: 60 });
   {/*const [resumeURL] = useState(Pdf);*/}
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      const ismobile = window.innerWidth < 1200;
-      if (ismobile !== isMobile) setIsMobile(ismobile);
-    }, false);
-
     if (showInsta) handleRequest();
-  }, [isMobile, showInsta]);
+  }, [showInsta]);
 
   const handleRequest = (e) => {
     axios
@@ -60,7 +56,7 @@ const AboutMe = () => {
           )}
           <div className={`col-lg-${showInsta ? "7" : "12"}`}>
             <h1 className="display-4 mb-5 text-center">{aboutHeading}</h1>
-            <p className={`lead text-${isMobile ? "center" : "justify"}`}>{aboutDescription}</p>
+            <p className={`lead text-${width < 1200 ? "center" : "justify"}`}>{aboutDescription}</p>
             {/*resumeURL && (
               <p className="lead text-center">
                 <a

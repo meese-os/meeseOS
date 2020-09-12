@@ -26,7 +26,7 @@ const ProjectCard = ({ value }) => {
           "September",
           "October",
           "November",
-          "December",
+          "December"
         ];
         const day = date.getDate();
         const monthIndex = date.getMonth();
@@ -52,7 +52,7 @@ const ProjectCard = ({ value }) => {
           <p className="card-text">{description} </p>
           <a
             href={`${svn_url}/archive/master.zip`}
-            className="btn btn-outline-secondary mr-3"
+            className="btn btn-outline-secondary mr-3 d-none d-lg-inline-block"
           >
             <i className="fab fa-github" /> Clone Project
           </a>
@@ -119,7 +119,7 @@ const Language = ({ value }) => {
       Languages:{" "}
       {array.map((language) => (
         <p key={language} className="badge badge-light card-link">
-          {language}: {Math.trunc((data[language] / total_count) * 1000) / 10} %
+          {language}: {Math.trunc((data[language] / total_count) * 1000) / 10}%
         </p>
       ))}
     </div>
