@@ -3,7 +3,7 @@
 This site is based off the template of the [Developer's Portfolio](https://github.com/hashirshoaeb/home)
 project, which was released under the GNU Lesser General Public License v3.0.
 
-The React code here deploys the code to my [GitHub pages](ajmeese7.github.io) repo,
+The React code here deploys the code to my [GitHub pages](https://ajmeese7.github.io) repo,
 which [aaronmeese.com](https://aaronmeese.com) is pointing to for hosting.
 
 ## TODO
