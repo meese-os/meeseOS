@@ -39,7 +39,7 @@ const Project = () => {
     <div id="projects" className="jumbotron jumbotron-fluid bg-transparent m-0">
       {projectsArray.length && (
         <div className="container container-fluid p-5">
-          <h1 className={`display-4 pb-${width < 1200 ? "6" : "5"}`}>{projectHeading}</h1>
+          <h1 className={`display-4 pb-${width < 1200 ? "6" : "5"}`} style={{marginBottom: "17.5px"}}>{projectHeading}</h1>
           <div className="row">
             {projectsArray.map((project) => (
               <ProjectCard key={project.id} id={project.id} value={project} />

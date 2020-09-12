@@ -13,6 +13,7 @@ const ProjectCard = ({ value }) => {
       const hours = Math.trunc(diff / 1000 / 60 / 60);
 
       if (hours < 24) {
+        if (hours < 1) return setUpdatedAt("just now");
         return setUpdatedAt(`${hours.toString()} hours ago`);
       } else {
         const monthNames = [
