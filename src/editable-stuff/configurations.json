@@ -48,7 +48,7 @@
   "showInstaProfilePic": true,
   "instaLink": "https://www.instagram.com/",
   "instaUsername": "ajmeese7",
-  "instaQuerry": "/?__a=1",
+  "instaQuery": "/?__a=1",
   "aboutDescription": "I'm a Web Developer from Baton Rouge, Louisiana. I'm currently a Signals Analyst for the US Army, working on my Associate's in Computer Science and several Open Source projects on the side. I am passionate about learning, and my eventual goal is to work in Artificial Intelligence.",
   "projectHeading": "Recently Updated Projects",
   "gitHubLink": "https://api.github.com/users/",

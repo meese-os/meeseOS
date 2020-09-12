@@ -6,7 +6,7 @@ import {
   showInstaProfilePic,
   instaLink,
   instaUsername,
-  instaQuerry,
+  instaQuery,
 } from "../../editable-stuff/configurations.json";
 import { useWindowSize } from "@react-hook/window-size/throttled";
 {/*import Pdf from "../../editable-stuff/resume.pdf";*/}
@@ -14,7 +14,7 @@ import { useWindowSize } from "@react-hook/window-size/throttled";
 const AboutMe = () => {
   const [instaProfilePic, setInstaProfilePic] = useState("");
   const [showInsta, setShowInsta] = useState(showInstaProfilePic);
-  const [width, height] = useWindowSize({ fps: 60 });
+  const [width] = useWindowSize({ fps: 60 });
   {/*const [resumeURL] = useState(Pdf);*/}
 
   useEffect(() => {
@@ -23,14 +23,12 @@ const AboutMe = () => {
 
   const handleRequest = (e) => {
     axios
-      .get(instaLink + instaUsername + instaQuerry)
-      .then((response) => {
-        // handle success
-        // console.log(response.data.graphql);
-        return setInstaProfilePic(
+      .get(instaLink + instaUsername + instaQuery)
+      .then((response) =>
+        setInstaProfilePic(
           response.data.graphql.user.profile_pic_url_hd
-        );
-      })
+        )
+      )
       .catch((error) => {
         // handle error
         setShowInsta(false);

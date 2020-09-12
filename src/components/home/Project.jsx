@@ -9,29 +9,31 @@ import {
   projectsLength,
 } from "../../editable-stuff/configurations.json";
 import { useWindowSize } from "@react-hook/window-size/throttled";
+require('dotenv').config();
 
 const Project = () => {
-  const [width, height] = useWindowSize({ fps: 60 });
+  const [width] = useWindowSize({ fps: 60 });
   const [projectsArray, setProjectsArray] = useState([]);
 
   // TODO: Add support for most popular projects section with sort=stars
   const handleRequest = useCallback((e) => {
+    // TODO: Find an alternative for GitHub pages, since these
+    // values will not be available and the rate limit still applies
+    const headers = {
+      auth: {
+        username: process.env.GH_USERNAME,
+        password: process.env.OAUTH_TOKEN
+      }
+    }
+
     axios
-      .get(gitHubLink + gitHubUsername + gitHubQuery)
-      .then((response) => {
-        // handle success
-        // console.log(response.data.slice(0, 4));
-        return setProjectsArray(response.data.slice(0, projectsLength));
-      })
+      .get(gitHubLink + gitHubUsername + gitHubQuery, headers)
+      .then((response) => setProjectsArray(response.data.slice(0, projectsLength)))
       .catch(error => console.error(error.message))
-      .finally(() => {
-        // always executed
-      });
+      .finally(() => {});
   }, []);
 
-  useEffect(() => {
-    handleRequest();
-  }, [handleRequest]);
+  useEffect(() => handleRequest(), [handleRequest]);
 
   return (
     <div id="projects" className="jumbotron jumbotron-fluid bg-transparent m-0">

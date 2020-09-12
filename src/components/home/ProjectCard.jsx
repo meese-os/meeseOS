@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+require('dotenv').config();
 
 const ProjectCard = ({ value }) => {
   const [updated_at, setUpdatedAt] = useState("0 mints");
@@ -38,9 +39,7 @@ const ProjectCard = ({ value }) => {
     [value.pushed_at]
   );
 
-  useEffect(() => {
-    handleUpdatetime();
-  }, [handleUpdatetime]);
+  useEffect(() => handleUpdatetime(), [handleUpdatetime]);
 
   const { name, description, svn_url, stargazers_count, languages_url } = value;
   return (
@@ -81,22 +80,20 @@ const ProjectCard = ({ value }) => {
 const Language = ({ value }) => {
   const [data, setData] = useState([]);
 
+  // TODO: Look into getting all this data at once,
+  // instead of approaching the rate limit
   const handleRequest = useCallback(
     (e) => {
       axios
-        .get(value)
-        .then((response) => {
-          // handle success
-          // console.log(response.data);
-          return setData(response.data);
+        .get(value, {
+          auth: {
+            username: process.env.GH_USERNAME,
+            password: process.env.OAUTH_TOKEN
+          }
         })
-        .catch((error) => {
-          // handle error
-          return console.error(error.message);
-        })
-        .finally(() => {
-          // always executed
-        });
+        .then(response => setData(response.data))
+        .catch(error => console.error(error.message))
+        .finally(() => {});
     },
     [value]
   );
