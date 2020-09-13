@@ -105,11 +105,9 @@ const Language = ({ value }) => {
   for (let index in data) {
     array.push(index);
     total_count += data[index];
-    // console.log(index, this.state.data[index]);
   }
-  // console.log("array contains ", array, this.state.data[array[0]]);
 
-  // TODO: If no languages are found, hide langauge element
+  if (!array.length) return null;
   return (
     <div className="pb-3">
       Languages:{" "}
