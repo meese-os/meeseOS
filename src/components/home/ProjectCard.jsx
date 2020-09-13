@@ -14,7 +14,8 @@ const ProjectCard = ({ value }) => {
 
       if (hours < 24) {
         if (hours < 1) return setUpdatedAt("just now");
-        return setUpdatedAt(`${hours.toString()} hours ago`);
+        let measurement = hours == 1 ? "hour" : "hours";
+        return setUpdatedAt(`${hours.toString()} ${measurement} ago`);
       } else {
         const monthNames = [
           "January",
@@ -83,8 +84,6 @@ const ProjectCard = ({ value }) => {
 const Language = ({ value }) => {
   const [data, setData] = useState([]);
 
-  // TODO: Look into getting all this data at once,
-  // instead of approaching the rate limit
   const getLanguages = useCallback((e) => {
     axios
       .get(value, {
