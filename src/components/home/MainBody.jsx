@@ -9,7 +9,6 @@ import {
 } from "../../editable-stuff/configurations.json";
 
 const MainBody = () => {
-  // const [backgroundType, setBackgroundType] = useState(Configs.backgroundType);
   const [hoverstatus, setHoverstatus] = useState(
     new Array(icons.length).fill("socialicons")
   );
@@ -47,8 +46,9 @@ const MainBody = () => {
                 href={icon.url}
                 aria-label={`My ${icon.image.split("-")[1]}`}
               >
+                {/* TODO: Add support for Stack Overflow icon's aria-label */}
                 <i
-                  className={`fab ${icon.image}  fa-3x ${hoverstatus[icon.id]}`}
+                  className={`fab ${icon.image} fa-3x ${hoverstatus[icon.id]}`}
                   onMouseOver={() => toggleHover({ icon, event: "enter" })}
                   onMouseOut={() => toggleHover({ icon, event: "leave" })}
                 />

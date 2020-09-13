@@ -2,21 +2,17 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import ProjectCard from "./ProjectCard";
 import {
-  projectHeading,
-  gitHubLink,
   gitHubUsername,
   gitHubQuery,
   projectsLength,
 } from "../../editable-stuff/configurations.json";
-import { useWindowSize } from "@react-hook/window-size/throttled";
 require('dotenv').config();
 
 const Project = () => {
-  const [width] = useWindowSize({ fps: 60 });
-  const [projectsArray, setProjectsArray] = useState([]);
+  const [recentProjects, setRecentProjectsArray] = useState([]);
+  const [popularProjects, setPopularProjectsArray] = useState([]);
 
-  // TODO: Add support for most popular projects section with sort=stars
-  const handleRequest = useCallback((e) => {
+  const getGitHubData = useCallback((e) => {
     // TODO: Find an alternative for GitHub pages, since these
     // values will not be available and the rate limit still applies
     const headers = {
@@ -26,22 +22,42 @@ const Project = () => {
       }
     }
 
+    let data;
     axios
-      .get(gitHubLink + gitHubUsername + gitHubQuery, headers)
-      .then((response) => setProjectsArray(response.data.slice(0, projectsLength)))
+      .get("https://api.github.com/users/" + gitHubUsername + gitHubQuery, headers)
+      .then(response => {
+        data = response.data;
+        setRecentProjectsArray(response.data.slice(0, projectsLength))
+      })
       .catch(error => console.error(error.message))
-      .finally(() => {});
+      .finally(() => {
+        // Sort by most popular projects
+        let popular = data.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1);
+        setPopularProjectsArray(popular.slice(0, projectsLength));
+      });
   }, []);
 
-  useEffect(() => handleRequest(), [handleRequest]);
+  useEffect(() => getGitHubData(), [getGitHubData]);
 
   return (
     <div id="projects" className="jumbotron jumbotron-fluid bg-transparent m-0">
-      {projectsArray.length && (
+      {/* TODO: Add static content for if the rate limit is exceeded */}
+      {popularProjects.length && (
         <div className="container container-fluid p-5">
-          <h1 className={`display-4 pb-${width < 1200 ? "6" : "5"}`} style={{marginBottom: "17.5px"}}>{projectHeading}</h1>
+          <h1 className="display-4 pb-4">Most Popular Projects</h1>
           <div className="row">
-            {projectsArray.map((project) => (
+            {popularProjects.map((project) => (
+              <ProjectCard key={project.id} id={project.id} value={project} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {recentProjects.length && (
+        <div className="container container-fluid p-5">
+          <h1 className="display-4 pb-4">Recently Updated Projects</h1>
+          <div className="row">
+            {recentProjects.map((project) => (
               <ProjectCard key={project.id} id={project.id} value={project} />
             ))}
           </div>

@@ -1,7 +1,4 @@
 {
-  "backgroundType": "gradient",
-  "plainBackgroundMode": "daylight",
-  "gradientColors": "#EE7752, #E73C7E, #23A6D5, #23D5AB",
   "FirstName": "Aaron",
   "MiddleName": "",
   "LastName": "Meese",
@@ -46,14 +43,11 @@
   ],
   "aboutHeading": "About Me",
   "showInstaProfilePic": true,
-  "instaLink": "https://www.instagram.com/",
   "instaUsername": "ajmeese7",
   "instaQuery": "/?__a=1",
   "aboutDescription": "I'm a Web Developer from Baton Rouge, Louisiana. I'm currently a Signals Analyst for the US Army, working on my Associate's in Computer Science and several Open Source projects on the side. I am passionate about learning, and my eventual goal is to work in Artificial Intelligence.",
-  "projectHeading": "Recently Updated Projects",
-  "gitHubLink": "https://api.github.com/users/",
   "gitHubUsername": "ajmeese7",
-  "gitHubQuery": "/repos?sort=updated&direction=desc",
+  "gitHubQuery": "/repos?sort=updated&per_page=100&direction=desc",
   "projectsLength": 4,
   "showNavigationbar": true,
   "showBlog": false

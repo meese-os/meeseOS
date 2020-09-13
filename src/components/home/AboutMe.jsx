@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useWindowSize } from "@react-hook/window-size/throttled";
 import {
   aboutHeading,
   aboutDescription,
   showInstaProfilePic,
-  instaLink,
   instaUsername,
   instaQuery,
 } from "../../editable-stuff/configurations.json";
-import { useWindowSize } from "@react-hook/window-size/throttled";
 {/*import Pdf from "../../editable-stuff/resume.pdf";*/}
 
 const AboutMe = () => {
@@ -23,20 +22,17 @@ const AboutMe = () => {
 
   const handleRequest = (e) => {
     axios
-      .get(instaLink + instaUsername + instaQuery)
+      .get("https://www.instagram.com/" + instaUsername + instaQuery)
       .then((response) =>
         setInstaProfilePic(
           response.data.graphql.user.profile_pic_url_hd
         )
       )
       .catch((error) => {
-        // handle error
         setShowInsta(false);
         return console.error(error.message);
       })
-      .finally(() => {
-        // always executed
-      });
+      .finally(() => {});
   };
 
   return (

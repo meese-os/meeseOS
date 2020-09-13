@@ -45,6 +45,8 @@ const ProjectCard = ({ value }) => {
   const { name, description, svn_url, stargazers_count, languages_url } = value;
   return (
     <div className="col-md-6">
+      {/* TODO: try to only show first two repos on mobile screens;
+        https://www.starconfig.com.au/bootstrap-3-and-4-utilities-display-properties-how-to-hide-elements/ */}
       <div className="card shadow-lg p-3 mb-5 bg-white rounded">
         {/* <img src="" className="card-img-top" alt="..." /> */}
         <div className="card-body">
@@ -83,25 +85,20 @@ const Language = ({ value }) => {
 
   // TODO: Look into getting all this data at once,
   // instead of approaching the rate limit
-  const handleRequest = useCallback(
-    (e) => {
-      axios
-        .get(value, {
-          auth: {
-            username: process.env.GH_USERNAME,
-            password: process.env.OAUTH_TOKEN
-          }
-        })
-        .then(response => setData(response.data))
-        .catch(error => console.error(error.message))
-        .finally(() => {});
-    },
-    [value]
-  );
+  const getLanguages = useCallback((e) => {
+    axios
+      .get(value, {
+        auth: {
+          username: process.env.GH_USERNAME,
+          password: process.env.OAUTH_TOKEN
+        }
+      })
+      .then(response => setData(response.data))
+      .catch(error => console.error(error.message))
+      .finally(() => {});
+  }, [value]);
 
-  useEffect(() => {
-    handleRequest();
-  }, [handleRequest]);
+  useEffect(() => getLanguages(), [getLanguages]);
 
   const array = [];
   let total_count = 0;
@@ -112,6 +109,7 @@ const Language = ({ value }) => {
   }
   // console.log("array contains ", array, this.state.data[array[0]]);
 
+  // TODO: If no languages are found, hide langauge element
   return (
     <div className="pb-3">
       Languages:{" "}
