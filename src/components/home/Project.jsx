@@ -46,8 +46,8 @@ const Project = () => {
         <div className="container container-fluid p-5">
           <h1 className="display-4 pb-4">Most Popular Projects</h1>
           <div className="row">
-            {popularProjects.map((project) => (
-              <ProjectCard key={project.id} id={project.id} value={project} />
+            {popularProjects.map((project, index) => (
+              <ProjectCard key={project.id} id={project.id} value={project} index={index} />
             ))}
           </div>
         </div>
@@ -57,8 +57,8 @@ const Project = () => {
         <div className="container container-fluid p-5">
           <h1 className="display-4 pb-4">Recently Updated Projects</h1>
           <div className="row">
-            {recentProjects.map((project) => (
-              <ProjectCard key={project.id} id={project.id} value={project} />
+            {recentProjects.map((project, index) => (
+              <ProjectCard key={project.id} id={project.id} value={project} index={index} />
             ))}
           </div>
         </div>

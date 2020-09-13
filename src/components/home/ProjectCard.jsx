@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 require('dotenv').config();
 
-const ProjectCard = ({ value }) => {
+const ProjectCard = ({ value, index }) => {
   const [updated_at, setUpdatedAt] = useState("0 mints");
 
   const handleUpdatetime = useCallback(
@@ -45,9 +45,8 @@ const ProjectCard = ({ value }) => {
 
   const { name, description, svn_url, stargazers_count, languages_url } = value;
   return (
-    <div className="col-md-6">
-      {/* TODO: try to only show first two repos on mobile screens;
-        https://www.starconfig.com.au/bootstrap-3-and-4-utilities-display-properties-how-to-hide-elements/ */}
+    <div className={`col-md-6 ${index > 1 ? "d-none d-lg-block" : ""}`}>
+      {/* ^sets only two repo cards to display per section on screens smaller than 992px */}
       <div className="card shadow-lg p-3 mb-5 bg-white rounded">
         {/* <img src="" className="card-img-top" alt="..." /> */}
         <div className="card-body">
