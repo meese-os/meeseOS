@@ -6,7 +6,15 @@ const Footer = () => {
   return (
     <footer style={bgStyle} className="mt-auto py-3 text-center">
       {/* <strong> &copy; 2020 </strong>*/}
-      <i className="fas fa-code"></i> with <i className="fas fa-heart"></i> by{" "}
+      <a
+        className="text-dark"
+        rel="noopener"
+        href="https://github.com/ajmeese7/aaronmeese.com"
+        aria-label="Website Code"
+      >
+        <i className="fas fa-code"></i>
+      </a>{" "}
+      with <i className="fas fa-heart"></i> by{" "}
       <a
         className="badge badge-dark"
         rel="noopener"
