@@ -14,7 +14,7 @@ const ProjectCard = ({ value, index }) => {
 
       if (hours < 24) {
         if (hours < 1) return setUpdatedAt("just now");
-        let measurement = hours == 1 ? "hour" : "hours";
+        let measurement = hours === 1 ? "hour" : "hours";
         return setUpdatedAt(`${hours.toString()} ${measurement} ago`);
       } else {
         const monthNames = [

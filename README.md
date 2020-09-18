@@ -13,9 +13,6 @@ it'll be overwritten every commit.
 ## TODO
 - Fix the muted tones on the middle nav element
 - Pick a better favicon and other logo sizes
-- Add a 'top projects' query and section, by stars or code or pins or something
-- Improve the look of all sections on mobile, specifically the project cards and the
-size of icons/words in the home section
+  - Figure out how to change the PDF favicon
 - Testimonials section for work, with links to projects and names
-- Create a resume PDF and add it to `editable-stuff`
 - Link to Discord dev space

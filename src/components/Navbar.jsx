@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FirstName } from "../editable-stuff/configurations.json";
-{/*import Pdf from "../editable-stuff/resume.pdf";*/}
+import Pdf from "../editable-stuff/resume.pdf";
 
 const Navbar = (props) => {
   const [isTop, setIsTop] = useState(true);
@@ -50,7 +50,6 @@ const Navbar = (props) => {
               Projects
             </a>
           </li>
-          {/*
           <li className="nav-item">
             <a
               className="nav-link lead"
@@ -61,7 +60,6 @@ const Navbar = (props) => {
               <b>Resume</b>
             </a>
           </li>
-          */}
         </ul>
       </div>
     </nav>

@@ -8,19 +8,19 @@ import {
   instaUsername,
   instaQuery,
 } from "../../editable-stuff/configurations.json";
-{/*import Pdf from "../../editable-stuff/resume.pdf";*/}
+import Pdf from "../../editable-stuff/resume.pdf";
 
 const AboutMe = () => {
   const [instaProfilePic, setInstaProfilePic] = useState("");
   const [showInsta, setShowInsta] = useState(showInstaProfilePic);
   const [width] = useWindowSize({ fps: 60 });
-  {/*const [resumeURL] = useState(Pdf);*/}
+  const [resumeURL] = useState(Pdf);
 
   useEffect(() => {
-    if (showInsta) handleRequest();
+    if (showInsta) getProfilePicture();
   }, [showInsta]);
 
-  const handleRequest = (e) => {
+  const getProfilePicture = (e) => {
     axios
       .get("https://www.instagram.com/" + instaUsername + instaQuery)
       .then((response) =>
@@ -51,7 +51,7 @@ const AboutMe = () => {
           <div className={`col-lg-${showInsta ? "7" : "12"}`}>
             <h1 className="display-4 mb-5 text-center">{aboutHeading}</h1>
             <p className={`lead text-${width < 1200 ? "center" : "justify"}`}>{aboutDescription}</p>
-            {/*resumeURL && (
+            {resumeURL && (
               <p className="lead text-center">
                 <a
                   className="btn btn-outline-dark btn-lg"
@@ -64,7 +64,7 @@ const AboutMe = () => {
                   Resume
                 </a>
               </p>
-            )*/}
+            )}
           </div>
         </div>
       </div>
