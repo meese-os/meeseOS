@@ -7,43 +7,43 @@
     {
       "id": 0,
       "image": "fa-github",
-      "url": "https://github.com/ajmeese7",
+      "url": "https://link.aaronmeese.com/github",
       "style": "socialicons"
     },
     {
       "id": 1,
       "image": "fa-medium",
-      "url": "https://medium.com/@ajmeese7",
+      "url": "https://link.aaronmeese.com/medium",
       "style": "socialicons"
     },
     {
       "id": 2,
       "image": "fa-instagram",
-      "url": "https://www.instagram.com/ajmeese7/",
+      "url": "https://link.aaronmeese.com/instagram",
       "style": "socialicons"
     },
     {
       "id": 3,
       "image": "fa-linkedin",
-      "url": "https://www.linkedin.com/in/aaronmeese/",
+      "url": "https://link.aaronmeese.com/linkedin",
       "style": "socialicons"
     },
     {
       "id": 4,
       "image": "fa-twitter",
-      "url": "https://www.twitter.com/ajmeese7/",
+      "url": "https://link.aaronmeese.com/twitter",
       "style": "socialicons"
     },
     {
       "id": 5,
       "image": "fa-stack-overflow",
-      "url": "https://stackoverflow.com/users/story/6456163",
+      "url": "https://link.aaronmeese.com/stackoverflow",
       "style": "socialicons"
     },
     {
       "id": 6,
       "image": "fa-discord",
-      "url": "https://discord.gg/PxRTQg3",
+      "url": "https://link.aaronmeese.com/discord",
       "style": "socialicons"
     }
   ],
