@@ -15,4 +15,3 @@ it'll be overwritten every commit.
 - Pick a better favicon and other logo sizes
   - Figure out how to change the PDF favicon
 - Testimonials section for work, with links to projects and names
-- Link to Discord dev space

@@ -39,6 +39,12 @@
       "image": "fa-stack-overflow",
       "url": "https://stackoverflow.com/users/story/6456163",
       "style": "socialicons"
+    },
+    {
+      "id": 6,
+      "image": "fa-discord",
+      "url": "https://discord.gg/PxRTQg3",
+      "style": "socialicons"
     }
   ],
   "aboutHeading": "About Me",
