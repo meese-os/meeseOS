@@ -109,9 +109,9 @@ const Languages = ({ value, svn_url }) => {
       {array.map((language) => (
         <a 
           key={language}
+          className="badge badge-light card-link mr-2 mb-1 ml-0"
           href={svn_url + `/search?l=${language}`}
           target=" _blank"
-          className="badge badge-light card-link mr-2 mb-1 ml-0"
         >
           {language}: {Math.trunc((data[language] / total_count) * 1000) / 10}%
         </a>

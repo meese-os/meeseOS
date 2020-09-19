@@ -42,7 +42,7 @@ const Project = () => {
   return (
     <div id="projects" className="jumbotron jumbotron-fluid bg-transparent m-0">
       {popularProjects.length && (
-        <div className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
+        <div id="popularProjects" className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
           <h1 className="display-4 pb-4">Most Popular Projects</h1>
           <div className="row">
             {popularProjects.map((project, index) => (
@@ -52,8 +52,9 @@ const Project = () => {
         </div>
       )}
 
+      {/* NOTE: When a project is starred, it will show as recently updated with the old date */}
       {recentProjects.length && (
-        <div className="container container-fluid p-5">
+        <div id="recentProjects" className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
           <h1 className="display-4 pb-4">Recently Updated Projects</h1>
           <div className="row">
             {recentProjects.map((project, index) => (

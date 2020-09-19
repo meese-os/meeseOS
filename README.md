@@ -14,9 +14,8 @@ If you want to start it up locally, run `npm run start`.
 
 ## Desktop TODOs
 - Figure out how to change the PDF favicon
-- Separate nav sections for popular and recent repositories
 - Testimonial picture format in configurations like the following:
-    - ```<img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." />```
+  - ```<img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." />```
 
 ## Mobile TODOs
 - Make the nav look better

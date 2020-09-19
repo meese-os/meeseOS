@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NavItem from "./home/NavItem";
 import { FirstName } from "../editable-stuff/configurations.json";
 import Pdf from "../editable-stuff/resume.pdf";
 
@@ -34,32 +35,11 @@ const Navbar = (props) => {
 
       <div className="collapse navbar-collapse" id="navbarToggler">
         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li className="nav-item">
-            <a
-              className="nav-link lead"
-              href={process.env.PUBLIC_URL + "/#aboutme"}
-            >
-              <b>About</b>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link lead"
-              href={process.env.PUBLIC_URL + "/#projects"}
-            >
-              Projects
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link lead"
-              href={Pdf}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <b>Resume</b>
-            </a>
-          </li>
+          <NavItem name="About" href="#aboutme" />
+          {/*<NavItem name="Testimonials" href="#testimonials" />*/}
+          <NavItem name="Popular" href="#popularProjects" />
+          <NavItem name="Recent" href="#recentProjects" />
+          <NavItem name="Resume" href={Pdf} />
         </ul>
       </div>
     </nav>
