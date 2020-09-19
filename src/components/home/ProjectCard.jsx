@@ -5,7 +5,7 @@ require('dotenv').config();
 const ProjectCard = ({ value, index }) => {
   const [updated_at, setUpdatedAt] = useState("0 mints");
 
-  const handleUpdatetime = useCallback(
+  const handleUpdateTime = useCallback(
     (e) => {
       const date = new Date(value.pushed_at);
       const nowdate = new Date();
@@ -41,7 +41,7 @@ const ProjectCard = ({ value, index }) => {
     [value.pushed_at]
   );
 
-  useEffect(() => handleUpdatetime(), [handleUpdatetime]);
+  useEffect(() => handleUpdateTime(), [handleUpdateTime]);
 
   const { name, description, svn_url, stargazers_count, languages_url } = value;
   return (
@@ -66,7 +66,7 @@ const ProjectCard = ({ value, index }) => {
             <i className="fab fa-github" /> Repo
           </a>
           <hr />
-          <Language value={languages_url}></Language>
+          <Language value={languages_url} />
           <p className="card-text">
             <span className="text-dark card-link mr-4">
               <i className="fab fa-github" /> Stars{" "}
@@ -109,8 +109,8 @@ const Language = ({ value }) => {
   return (
     <div className="pb-3">
       Languages:{" "}
-      {array.map((language) => (
-        <p key={language} className="badge badge-light card-link">
+      {array.map((language, index) => (
+        <p key={language} className={`badge badge-light card-link ${index > 0 ? "ml-2" : ""}`}>
           {language}: {Math.trunc((data[language] / total_count) * 1000) / 10}%
         </p>
       ))}

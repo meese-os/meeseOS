@@ -11,7 +11,6 @@ to have the CNAME file inside `/public` if you plan on implementing custom domai
 it'll be overwritten every commit.
 
 ## TODO
-- Fix the muted tones on the middle nav element
 - Pick a better favicon and other logo sizes
   - Figure out how to change the PDF favicon
 - Testimonials section for work, with links to projects and names
