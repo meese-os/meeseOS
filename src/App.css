@@ -90,6 +90,14 @@
   margin-top: 0px;
 }
 
+.card, .card:hover {
+  transition: transform .3s,box-shadow .3s;
+}
+.card:hover {
+  box-shadow: 0 2rem 3rem rgba(0,0,0,.175) !important;
+  transform: translateY(-2px);
+}
+
 #stars {
   width: 1px;
   height: 1px;
