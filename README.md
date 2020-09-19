@@ -10,7 +10,17 @@ To build and deploy to GitHub pages, run `npm run build` then `npm run custom-de
 to have the CNAME file inside `/public` if you plan on implementing custom domain support, otherwise
 it'll be overwritten every commit.
 
-## TODO
-- Pick a better favicon and other logo sizes
-  - Figure out how to change the PDF favicon
-- Testimonials section for work, with links to projects and names
+If you want to start it up locally, run `npm run start`.
+
+## Desktop TODOs
+- Figure out how to change the PDF favicon
+- Separate nav sections for popular and recent repositories
+- Testimonial picture format in configurations like the following:
+    - ```<img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." />```
+
+## Mobile TODOs
+- Make the nav look better
+- Make description look better
+- See if I can break up the long list of social icons, it's too much
+- Fix the titles lookily choppily inserted
+- Make the stars and date break lines instead of pinching together

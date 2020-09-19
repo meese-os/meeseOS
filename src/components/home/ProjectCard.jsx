@@ -48,30 +48,28 @@ const ProjectCard = ({ value, index }) => {
     <div className={`col-md-6 ${index > 1 ? "d-none d-lg-block" : ""}`}>
       {/* ^sets only two repo cards to display per section on screens smaller than 992px */}
       <div className="card shadow-lg p-3 mb-5 bg-white rounded">
-        {/* <img src="" className="card-img-top" alt="..." /> */}
         <div className="card-body">
-          <h5 className="card-title">{name} </h5>
-          <p className="card-text">{description} </p>
-          <a
-            href={`${svn_url}/archive/master.zip`}
-            className="btn btn-outline-secondary mr-3 d-none d-lg-inline-block"
-          >
-            <i className="fab fa-github" /> Clone Project
-          </a>
           <a
             href={svn_url}
             target=" _blank"
-            className="btn btn-outline-secondary"
+            className="text-dark text-decoration-none"
           >
-            <i className="fab fa-github" /> Repo
+            <h5 className="card-title d-inline-block">{name} </h5>
           </a>
+          <p className="card-text">{description} </p>
           <hr />
-          <Language value={languages_url} />
-          <p className="card-text">
-            <span className="text-dark card-link mr-4">
-              <i className="fab fa-github" /> Stars{" "}
-              <span className="badge badge-dark">{stargazers_count}</span>
-            </span>
+          <Languages value={languages_url} svn_url={svn_url} />
+          <p className="card-text d-flex justify-content-between">
+            <a
+              href={svn_url + "/stargazers"}
+              target=" _blank"
+              className="text-dark text-decoration-none"
+            >
+              <span className="text-dark card-link mr-4">
+                <i className="fab fa-github" /> Stars{" "}
+                <span className="badge badge-dark">{stargazers_count}</span>
+              </span>
+            </a>
             <small className="text-muted">Updated {updated_at}</small>
           </p>
         </div>
@@ -80,7 +78,7 @@ const ProjectCard = ({ value, index }) => {
   );
 };
 
-const Language = ({ value }) => {
+const Languages = ({ value, svn_url }) => {
   const [data, setData] = useState([]);
 
   const getLanguages = useCallback((e) => {
@@ -108,11 +106,15 @@ const Language = ({ value }) => {
   if (!array.length) return null;
   return (
     <div className="pb-3">
-      Languages:{" "}
-      {array.map((language, index) => (
-        <p key={language} className={`badge badge-light card-link ${index > 0 ? "ml-2" : ""}`}>
+      {array.map((language) => (
+        <a 
+          key={language}
+          href={svn_url + `/search?l=${language}`}
+          target=" _blank"
+          className="badge badge-light card-link mr-2 mb-1 ml-0"
+        >
           {language}: {Math.trunc((data[language] / total_count) * 1000) / 10}%
-        </p>
+        </a>
       ))}
     </div>
   );

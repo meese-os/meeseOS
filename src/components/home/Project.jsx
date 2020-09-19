@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { useWindowSize } from "@react-hook/window-size/throttled";
 import ProjectCard from "./ProjectCard";
 import {
   gitHubUsername,
@@ -11,10 +12,9 @@ require('dotenv').config();
 const Project = () => {
   const [recentProjects, setRecentProjectsArray] = useState([]);
   const [popularProjects, setPopularProjectsArray] = useState([]);
+  const [width] = useWindowSize({ fps: 60 });
 
   const getGitHubData = useCallback((e) => {
-    // TODO: Find an alternative for GitHub pages, since these
-    // values will not be available and the rate limit still applies
     const headers = {
       auth: {
         username: process.env.GH_USERNAME,
@@ -41,9 +41,8 @@ const Project = () => {
 
   return (
     <div id="projects" className="jumbotron jumbotron-fluid bg-transparent m-0">
-      {/* TODO: Add static content for if the rate limit is exceeded */}
       {popularProjects.length && (
-        <div className="container container-fluid p-5">
+        <div className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
           <h1 className="display-4 pb-4">Most Popular Projects</h1>
           <div className="row">
             {popularProjects.map((project, index) => (
