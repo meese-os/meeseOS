@@ -3,7 +3,7 @@ import NavItem from "./home/NavItem";
 import { FirstName } from "../editable-stuff/configurations.json";
 import Pdf from "../editable-stuff/resume.pdf";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [isTop, setIsTop] = useState(true);
   useEffect(() => {
     document.addEventListener("scroll", () => {

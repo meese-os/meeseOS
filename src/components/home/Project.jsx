@@ -7,7 +7,6 @@ import {
   gitHubQuery,
   projectsLength,
 } from "../../editable-stuff/configurations.json";
-require('dotenv').config();
 
 const Project = () => {
   const [recentProjects, setRecentProjectsArray] = useState([]);
@@ -17,8 +16,8 @@ const Project = () => {
   const getGitHubData = useCallback((e) => {
     const headers = {
       auth: {
-        username: process.env.GH_USERNAME,
-        password: process.env.OAUTH_TOKEN
+        username: gitHubUsername,
+        password: process.env.REACT_APP_OAUTH_TOKEN
       }
     }
 
