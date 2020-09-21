@@ -36,7 +36,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarToggler">
         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
           <NavItem name="About" href="#aboutme" />
-          {/*<NavItem name="Testimonials" href="#testimonials" />*/}
+          <NavItem name="Articles" href="#articles" />
           <NavItem name="Popular" href="#popularProjects" />
           <NavItem name="Recent" href="#recentProjects" />
           <NavItem name="Resume" href={Pdf} />

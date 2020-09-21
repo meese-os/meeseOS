@@ -98,6 +98,10 @@
   transform: translateY(-2px);
 }
 
+.medium-image {
+  max-width: 100%;
+}
+
 #stars {
   width: 1px;
   height: 1px;

@@ -55,6 +55,7 @@
   "gitHubUsername": "ajmeese7",
   "gitHubQuery": "/repos?sort=updated&per_page=100&direction=desc",
   "projectsLength": 4,
-  "showNavigationbar": true,
-  "showBlog": false
+  "showArticles": true,
+  "mediumUsername": "ajmeese7",
+  "showNavigationbar": true
 }

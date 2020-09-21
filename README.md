@@ -16,6 +16,13 @@ If you want to start it up locally, run `npm run start`.
 - Figure out how to change the PDF favicon
 - Testimonial picture format in configurations like the following:
   - ```<img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." />```
+- After I get more testimonials from people, look into redoing the section to
+look more like [this](https://launchschool.com/results).
+- Make popular and recent slideshow style, so you can click between them
+- Add claps like stars for Medium, then fix them in the same way as the other sections
+  - Add an hourly ms param to update the cache every hour for Cloudflare Workers
+  - Add a similar `Load More` button to testimonials, where the `index > 1` can be
+  incremented somehow. Try to fade in the new ones gracefully.
 
 ## Mobile TODOs
 - Make the nav look better
@@ -23,3 +30,4 @@ If you want to start it up locally, run `npm run start`.
 - See if I can break up the long list of social icons, it's too much
 - Fix the titles lookily choppily inserted
 - Make the stars and date break lines instead of pinching together
+- Limit testimonials and include a `Load More` button

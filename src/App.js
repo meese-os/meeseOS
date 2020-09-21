@@ -8,6 +8,7 @@ import {
 } from "./editable-stuff/configurations.json";
 import MainBody from "./components/home/MainBody";
 import AboutMe from "./components/home/AboutMe";
+import Articles from "./components/home/Articles";
 import Project from "./components/home/Project";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -17,6 +18,7 @@ const Home = () => {
     <Fragment>
       <MainBody />
       <AboutMe />
+      <Articles />
       <Project />
     </Fragment>
   );
