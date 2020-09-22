@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
+import {
+  articlesLength,
+} from "../../editable-stuff/configurations.json";
 
 const ArticleCard = ({ value, index }) => {
   const [created_at, setCreatedAt] = useState("0 mints");
-  console.log("All:", value)
 
   const handleCreatedTime = useCallback(
     (e) => {
@@ -43,7 +45,7 @@ const ArticleCard = ({ value, index }) => {
   useEffect(() => handleCreatedTime(), [handleCreatedTime]);
 
   return (
-    <div className={`col-md-6 ${index > 1 ? "d-none" : ""}`}>
+    <div className={`col-md-6 ${index > articlesLength - 1 ? "d-none" : ""}`}>
       <div className="card shadow-lg p-3 mb-5 bg-white rounded">
         <div className="card-body">
           <a
