@@ -2,7 +2,7 @@
   "FirstName": "Aaron",
   "MiddleName": "",
   "LastName": "Meese",
-  "devDesc": "| Soldier | Philosopher | Web Developer | Writer ",
+  "descWords": ["Soldier", "Philosopher", "Web Developer", "Writer"],
   "icons": [
     {
       "id": 0,

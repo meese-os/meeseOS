@@ -26,7 +26,6 @@ look more like [this](https://launchschool.com/results).
 
 ## Mobile TODOs
 - Make the nav look better
-- Make description look better
 - See if I can break up the long list of social icons, it's too much
 - Fix the titles lookily choppily inserted
 - Make the stars and date break lines instead of pinching together
