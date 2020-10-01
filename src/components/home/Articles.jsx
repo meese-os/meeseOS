@@ -12,8 +12,7 @@ const Articles = () => {
   const [nextArticle, setNextArticle] = useState([]);
   const [width] = useWindowSize({ fps: 60 });
 
-  // Modified from https://github.com/alekrumkamp/medium-feed-json, and hoping to
-  // push my modifications to the main repo soon
+  // Follow the guide at https://github.com/ajmeese7/medium-feed-json for your own domain here
   const getMediumData = useCallback((e) => {
     const url = `https://medium-feed.ajmeese7.workers.dev?username=${mediumUsername}&next=${nextArticle}`;
     axios
@@ -29,21 +28,26 @@ const Articles = () => {
   }, [nextArticle]);
 
   useEffect(() => getMediumData(), [getMediumData]);
-  
+
+  if (!articles.length || !showArticles) {
+    document.addEventListener('DOMContentLoaded', (event) => {
+      let articlesNavItem = document.querySelectorAll("a[href*='articles']")[0];
+      articlesNavItem.parentNode.remove();
+    })
+
+    return null;
+  }
+
   return (
     <div id="articles" className="jumbotron jumbotron-fluid bg-transparent m-0 pb-0">
-      {showArticles && (
-        <div className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
-          <h1 className="display-4 pb-4">Latest Articles</h1>
-          <div className="row">
-            {articles && (
-              articles.map((article, index) => (
-                <ArticleCard key={index} id={index} value={article} index={index} />
-              ))
-            )}
-          </div>
+      <div className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
+        <h1 className="display-4 pb-4">Latest Articles</h1>
+        <div className="row">
+          {articles.map((article, index) => (
+            <ArticleCard key={index} id={index} value={article} index={index} />
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

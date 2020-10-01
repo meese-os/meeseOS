@@ -1,9 +1,9 @@
 import React from "react";
 
-var bold = false;
 const NavItem = ({ name, href }) => {
+  // TODO: Re-implement the bolding if I can find a way to handle
+  // the article item being deleted, or find a more creative way to do it
   const isPdf = href.indexOf('#') === -1;
-  bold = !bold;
 
   return (
     <li className="nav-item">
@@ -13,7 +13,7 @@ const NavItem = ({ name, href }) => {
         target={isPdf ? "_blank" : "_self"}
         rel={isPdf ? "noreferrer noopener" : ""}
       >
-        {bold ? <b>{name}</b> : name}
+        <b>{name}</b>
       </a>
     </li>
   );

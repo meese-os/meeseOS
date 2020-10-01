@@ -36,7 +36,7 @@ const AboutMe = () => {
   };
 
   return (
-    <div id="aboutme" className="jumbotron jumbotron-fluid m-0">
+    <div id="aboutme" className="jumbotron jumbotron-fluid m-0 pb-0">
       <div className="container container-fluid p-5">
         <div className="row">
           {showInsta && (

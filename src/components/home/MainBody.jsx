@@ -71,8 +71,7 @@ const TypistContent = () => {
   let lastWord = descWords.pop();
   return (
     <Typist className="lead" cursor={{ hideWhenDone: false }}>
-      const {LastName.toLowerCase()} =
-      {" "}
+      const {LastName.toLowerCase()} ={" "}
       {descWords.map((word, index) => (
         <p key={index} style={{ display: "inline" }}>
           "{word}";
