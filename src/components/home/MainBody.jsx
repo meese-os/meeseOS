@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import Typist from "react-typist";
 import 'react-typist/dist/Typist.css';
+import '../../lettercrap';
+import { useWindowSize } from "@react-hook/window-size/throttled";
 import {
   FirstName,
-  LastName,
   MiddleName,
+  LastName,
+  LetterCrap,
   descWords,
   icons,
 } from "../../editable-stuff/configurations.json";
 
 const MainBody = () => {
+  const [width] = useWindowSize({ fps: 60 });
   const [hoverstatus, setHoverstatus] = useState(
     new Array(icons.length).fill("socialicons")
   );
@@ -34,7 +38,14 @@ const MainBody = () => {
       <div id="stars"></div>
       <div className="container container-fluid text-center">
         <h1 className="display-1" style={{lineHeight: "1.1"}}>
-          {FirstName + " " + MiddleName + " " + LastName}
+          <div
+            className={`${LetterCrap && width > 1200 ? "" : "d-none"}`}
+            data-lettercrap-text={FirstName + " " + LastName}
+            data-lettercrap-aspect-ratio='0.3'
+          ></div>
+          {(!LetterCrap || width < 1200) && (
+            FirstName + " " + MiddleName + " " + LastName
+          )}
         </h1>
         <TypistContent />
         <div className="p-5">
@@ -67,6 +78,7 @@ const MainBody = () => {
   );
 };
 
+// NOTE: Typist breaks when resizing the screen now. Why?
 const TypistContent = () => {
   let lastWord = descWords.pop();
   return (

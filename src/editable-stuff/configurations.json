@@ -2,6 +2,7 @@
   "FirstName": "Aaron",
   "MiddleName": "",
   "LastName": "Meese",
+  "LetterCrap": true,
   "descWords": ["Soldier", "Philosopher", "Web Developer", "Writer"],
   "icons": [
     {
