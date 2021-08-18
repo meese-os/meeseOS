@@ -8,6 +8,7 @@ const Footer = () => {
       {/* <strong> &copy; 2020 </strong>*/}
       <a
         className="text-dark"
+        target="_blank"
         rel="noopener"
         href="https://github.com/ajmeese7/aaronmeese.com"
         aria-label="Website Code"
@@ -17,6 +18,7 @@ const Footer = () => {
       with <i className="fas fa-heart"></i> by{" "}
       <a
         className="badge badge-dark"
+        target="_blank"
         rel="noopener"
         href="https://github.com/ajmeese7"
         aria-label="My GitHub"
