@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Typist from "react-typist";
-import 'react-typist/dist/Typist.css';
+import Typical from 'react-typical';
 import '../../lettercrap';
 import { useWindowSize } from "@react-hook/window-size/throttled";
 import {
@@ -41,15 +40,15 @@ const MainBody = () => {
           <div
             className={`${LetterCrap && width > 1200 ? "" : "d-none"}`}
             data-lettercrap-text={FirstName + " " + LastName}
-            data-lettercrap-aspect-ratio='0.3'
+            data-lettercrap-aspect-ratio="0.3"
           ></div>
           {(!LetterCrap || width < 1200) && (
             FirstName + " " + MiddleName + " " + LastName
           )}
         </h1>
-        <TypistContent />
+        <TypingAnimation />
         <div className="p-5">
-          {icons && icons.map((icon) => (
+          {icons && icons.map((icon,) => (
             <a
               key={icon.id}
               target="_blank"
@@ -78,21 +77,15 @@ const MainBody = () => {
   );
 };
 
-// NOTE: Typist breaks when resizing the screen now. Why?
-const TypistContent = () => {
-  let lastWord = descWords.pop();
-  return (
-    <Typist className="lead" cursor={{ hideWhenDone: false }}>
-      const {LastName.toLowerCase()} ={" "}
-      {descWords.map((word, index) => (
-        <p key={index} style={{ display: "inline" }}>
-          "{word}";
-          <Typist.Backspace count={word.length + 3} delay={1000} />
-        </p>
-      ))}
-      "{lastWord}";
-    </Typist>
-  );
-}
+// https://stackoverflow.com/a/55387306/6456163
+const interleave = (arr, thing) => [].concat(...arr.map(n => [n, thing])).slice(0, -1)
+const lastName = LastName.toLowerCase()
+const phrases = descWords.map(x => "const " + lastName + " = " + x + ";")
+const typingArray = interleave(phrases, 1750)
+
+// https://github.com/catalinmiron/react-typical/issues/6#issuecomment-667327923
+const TypingAnimation =  React.memo(() => {
+  return <Typical wrapper="p" steps={typingArray} loop={1} className={'lead'} />
+}, (props, prevProp) => true ); // this line prevents re-rendering
 
 export default MainBody;
