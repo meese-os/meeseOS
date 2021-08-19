@@ -7,6 +7,7 @@ import {
   showInstaProfilePic,
   instaUsername,
   instaQuery,
+  fallbackPicture,
 } from "../../editable-stuff/configurations.json";
 import Pdf from "../../editable-stuff/resume.pdf";
 
@@ -35,22 +36,27 @@ const AboutMe = () => {
       .finally(() => {});
   };
 
+  const profilePic = 
+    <img
+      className="border border-secondary rounded-circle w-100"
+      src={instaProfilePic || fallbackPicture}
+      alt="profilepicture"
+    />;
+
   return (
     <div id="aboutme" className="jumbotron jumbotron-fluid m-0 pb-0">
       <div className="container container-fluid p-5">
         <div className="row">
-          {showInsta && (
-            <div className="col-5 d-none d-lg-block align-self-center">
-              <img
-                className="border border-secondary rounded-circle"
-                src={instaProfilePic}
-                alt="profilepicture"
-              />
+          <div className="col-5 d-none d-lg-block align-self-center">
+            {profilePic}
+          </div>
+          <div className="col-lg-7">
+            <h1 className="display-4 mb-lg-5 text-center">{aboutHeading}</h1>
+            <div className="col-7 col-md-5 d-block d-lg-none mx-auto my-4">
+              {profilePic}
             </div>
-          )}
-          <div className={`col-lg-${showInsta ? "7" : "12"}`}>
-            <h1 className="display-4 mb-5 text-center">{aboutHeading}</h1>
-            <p className={`lead text-${width < 1200 ? "center" : "justify"}`}>{aboutDescription}</p>
+            <p className={`lead text-${width < 992 ? "center" : "justify"}`}>{aboutDescription}</p>
+            
             {resumeURL && (
               <p className="lead text-center">
                 <a

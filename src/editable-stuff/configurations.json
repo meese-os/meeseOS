@@ -49,8 +49,9 @@
     }
   ],
   "aboutHeading": "About Me",
-  "showInstaProfilePic": true,
+  "showInstaProfilePic": false,
   "instaUsername": "ajmeese7",
+  "fallbackPicture": "http://link.aaronmeese.com/profilePic",
   "instaQuery": "/?__a=1",
   "aboutDescription": "I'm a Web Developer from Baton Rouge, Louisiana. I'm currently a Signals Intelligence Analyst for the US Army, working on my Associate's in Computer Science and several Open Source projects on the side. I am passionate about learning, and my eventual goal is to work in Artificial Intelligence.",
   "gitHubUsername": "ajmeese7",
