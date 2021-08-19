@@ -8,6 +8,7 @@ import {
   instaUsername,
   instaQuery,
   fallbackPicture,
+  showResume,
 } from "../../editable-stuff/configurations.json";
 import Pdf from "../../editable-stuff/resume.pdf";
 
@@ -15,7 +16,6 @@ const AboutMe = () => {
   const [instaProfilePic, setInstaProfilePic] = useState("");
   const [showInsta, setShowInsta] = useState(showInstaProfilePic);
   const [width] = useWindowSize({ fps: 60 });
-  const [resumeURL] = useState(Pdf);
 
   useEffect(() => {
     if (showInsta) getProfilePicture();
@@ -57,7 +57,7 @@ const AboutMe = () => {
             </div>
             <p className={`lead text-${width < 992 ? "center" : "justify"}`}>{aboutDescription}</p>
             
-            {resumeURL && (
+            {showResume && (
               <p className="lead text-center">
                 <a
                   className="btn btn-outline-dark btn-lg"

@@ -80,7 +80,7 @@ const MainBody = () => {
 // https://stackoverflow.com/a/55387306/6456163
 const interleave = (arr, thing) => [].concat(...arr.map(n => [n, thing])).slice(0, -1)
 const lastName = LastName.toLowerCase()
-const phrases = descWords.map(x => "const " + lastName + " = " + x + ";")
+const phrases = descWords.map(x => "let " + lastName + " = '" + x + "';")
 const typingArray = interleave(phrases, 1750)
 
 // https://github.com/catalinmiron/react-typical/issues/6#issuecomment-667327923

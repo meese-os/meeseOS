@@ -3,7 +3,7 @@
   "MiddleName": "",
   "LastName": "Meese",
   "LetterCrap": true,
-  "descWords": ["Soldier", "Philosopher", "Web Developer", "Writer"],
+  "descWords": ["Soldier", "Analyst", "Writer", "Thinker", "Programmer"],
   "icons": [
     {
       "id": 0,
@@ -60,5 +60,6 @@
   "showArticles": true,
   "mediumUsername": "ajmeese7",
   "articlesLength": 2,
-  "showNavigationbar": true
+  "showNavigationbar": true,
+  "showResume": false
 }

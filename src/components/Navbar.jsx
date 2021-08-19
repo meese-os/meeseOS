@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavItem from "./home/NavItem";
-import { FirstName } from "../editable-stuff/configurations.json";
+import {
+  FirstName,
+  showResume
+} from "../editable-stuff/configurations.json";
 import Pdf from "../editable-stuff/resume.pdf";
 
 const Navbar = () => {
@@ -39,7 +42,7 @@ const Navbar = () => {
           <NavItem name="Articles" href="#articles" />
           <NavItem name="Popular" href="#popularProjects" />
           <NavItem name="Recent" href="#recentProjects" />
-          <NavItem name="Resume" href={Pdf} />
+          {showResume && <NavItem name="Resume" href={Pdf} />}
         </ul>
       </div>
     </nav>
