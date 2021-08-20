@@ -4,7 +4,6 @@ import { useWindowSize } from "@react-hook/window-size/throttled";
 import ArticleCard from "./ArticleCard";
 import {
   showArticles,
-  mediumUsername,
 } from "../../editable-stuff/configurations.json";
 
 let articles = [];
@@ -12,15 +11,15 @@ const Articles = () => {
   const [nextArticle, setNextArticle] = useState([]);
   const [width] = useWindowSize({ fps: 60 });
 
-  // Follow the guide at https://github.com/ajmeese7/medium-feed-json for your own domain here
+  // https://github.com/ajmeese7/medium-feed-json
   const getMediumData = useCallback((e) => {
-    const url = `https://medium-feed.ajmeese7.workers.dev?username=${mediumUsername}&next=${nextArticle}`;
+    const url = `https://medium-feed.ajmeese7.workers.dev?next=${nextArticle}`;
     axios
       .get(url)
       .then(response => response.data)
       .then(response => {
         if (response.data.posts.length === 0) return;
-        response.data.posts.forEach(post => articles.push(post));
+        articles = articles.concat(response.data.posts);
         setNextArticle(response.next);
       })
       .catch(error => console.error(error.message))
