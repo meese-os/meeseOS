@@ -1,45 +1,20 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { useWindowSize } from "@react-hook/window-size/throttled";
 import {
   aboutHeading,
   aboutDescription,
-  showInstaProfilePic,
-  instaUsername,
-  instaQuery,
-  fallbackPicture,
+  picture,
   showResume,
 } from "../../editable-stuff/configurations.json";
 import Pdf from "../../editable-stuff/resume.pdf";
 
 const AboutMe = () => {
-  const [instaProfilePic, setInstaProfilePic] = useState("");
-  const [showInsta, setShowInsta] = useState(showInstaProfilePic);
   const [width] = useWindowSize({ fps: 60 });
-
-  useEffect(() => {
-    if (showInsta) getProfilePicture();
-  }, [showInsta]);
-
-  const getProfilePicture = (e) => {
-    axios
-      .get("https://www.instagram.com/" + instaUsername + instaQuery)
-      .then((response) =>
-        setInstaProfilePic(
-          response.data.graphql.user.profile_pic_url_hd
-        )
-      )
-      .catch((error) => {
-        setShowInsta(false);
-        return console.error(error.message);
-      })
-      .finally(() => {});
-  };
 
   const profilePic = 
     <img
       className="border border-secondary rounded-circle w-100"
-      src={instaProfilePic || fallbackPicture}
+      src={picture}
       alt="profilepicture"
     />;
 
