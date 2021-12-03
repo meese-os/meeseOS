@@ -12,6 +12,7 @@ import Articles from "./components/home/Articles";
 import Project from "./components/home/Project";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import "./ghostCursor.js"
 
 const Home = () => {
   return (
