@@ -1,32 +1,33 @@
-# aaronmeese.com
+# karameese.com
+Kara Meese's personal website codebase.
 
-This site is based off the template of the [Developer's Portfolio](https://github.com/hashirshoaeb/home)
-project, which was released under the GNU Lesser General Public License v3.0.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dcf3bef2-ca38-415e-8bee-bf8f873a8168/deploy-status)](https://app.netlify.com/sites/karameese/deploys)
 
-The React code here deploys the code to my [GitHub pages](https://ajmeese7.github.io) repo,
-which [aaronmeese.com](https://aaronmeese.com) is pointing to for hosting.
+This project has been modified from [this repository](https://github.com/chetanverma16/react-portfolio-template),
+it is not my original work.
 
-To build and deploy to GitHub pages, run `npm run build` then `npm run custom-deploy`. You'll want
-to have the CNAME file inside `/public` if you plan on implementing custom domain support, otherwise
-it'll be overwritten every commit.
+## Setup
+1. PHP Setup
+- `sudo nano /etc/php/8.0/fpm/php.ini` to turn on `display_errors` and `display_startup_errors`
+	- `Ctrl+w` to search for `display_errors`
+	- `sudo service php8.0-fpm restart` to restart the service
+	- `sudo systemctl enable php8.0-fpm` to enable the service at boot
+	- `sudo chmod 777 karameese.com` to grant access to the PHP daemon
 
-If you want to start it up locally, run `npm run start`.
+2. Email Setup
+- Add `contactform@karameese.com` to your email contacts, so the messages won't be filtered out as spam!
 
-## Desktop TODOs
-- Figure out how to change the PDF favicon
-- Testimonial picture format in configurations like the following:
-  - ```<img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." />```
-- After I get more testimonials from people, look into redoing the section to
-look more like [this](https://launchschool.com/results).
-- Make popular and recent slideshow style, so you can click between them
-- Add claps like stars for Medium, then fix them in the same way as the other sections
-  - Add an hourly ms param to update the cache every hour for Cloudflare Workers
-  - Add a similar `Load More` button to testimonials, where the `index > 1` can be
-  incremented somehow. Try to fade in the new ones gracefully.
+3. Old Site Setup
+- `yarn install`
+- `yarn run build`
 
-## Mobile TODOs
-- Make the nav look better
-- See if I can break up the long list of social icons, it's too much
-- Fix the titles lookily choppily inserted
-- Make the stars and date break lines instead of pinching together
-- Limit testimonials and include a `Load More` button
+TODO:
+- On window resize, make sure all small windows are updated to remain on the screen
+- Figure out an implementation for mobile
+- GPT-3 for AI, how to tie to OS without doing everything manually?
+- Easter egg button to switch between gradient and solid color stops in vis
+- Rearranging tasks on taskbar
+- Drag desktop icons
+- https://github.com/ProjectOpenSea/opensea-whitelabel/issues/10#issuecomment-866398011
+- Capability to zoom in on images like https://www.w3schools.com/howto/howto_js_image_magnifier_glass.asp
+- Set up a CI for building and configuring the site on the server, like Gatsby did before

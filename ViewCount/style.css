@@ -1,0 +1,58 @@
+@font-face {
+	font-family: "W95FA";
+	src:
+		url('../W95FA/W95FA.otf') format('opentype'),
+		url('../W95FA/w95fa.woff') format('woff'),
+		url('../W95FA/w95fa.woff2');
+}
+
+html,
+body {
+	background: none;
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+div {
+	position: relative;
+}
+
+.winHTML {
+	border-radius: 0 !important;
+	width: 100%;
+	height: 100%;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-image: url("background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-color: black;
+}
+
+h1 {
+	display: table;
+	margin: auto;
+	margin-top: 25px;
+	text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgb(0 0 0 / 15%)
+}
+
+#viewerCount {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 100%;
+	margin-top: 25px;
+}
+
+.number {
+	background-color: white;
+	padding: 7.5px;
+	border: 2px solid black;
+}

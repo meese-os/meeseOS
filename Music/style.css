@@ -1,0 +1,150 @@
+@font-face {
+	font-family: "W95FA";
+	src:
+		url('../W95FA/W95FA.otf') format('opentype'),
+		url('../W95FA/w95fa.woff') format('woff'),
+		url('../W95FA/w95fa.woff2');
+}
+
+html,
+body {
+	background: none;
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+div {
+	position: relative;
+}
+
+#visualizer {
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	background: #000;
+}
+
+#visCanvas {
+	border: none;
+	background: none;
+	width: 100%;
+	height: 100%;
+}
+
+#songInfo {
+	position: absolute;
+	right: 0;
+	width: 50%;
+	height: 100%;
+	text-align: center;
+	background-color: #FBCFED;
+}
+
+#controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 18px;
+}
+
+#controls button {
+	padding: 5px;
+	margin: 5px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	box-shadow: none;
+}
+
+#currentlyPlaying {
+	width: 95%;
+	margin: auto;
+	margin-top: 2px;
+	font-family: W95FA;
+	font-size: 24px;
+	height: 26px;
+	white-space: nowrap;
+}
+
+#playpauseicon {
+	width: 24px;
+	height: 24px;
+}
+
+#volume {
+	width: calc(100vh - 24px - 15px);
+	position: absolute;
+	bottom: calc((100vh - 24px - 15px) / 2);
+	-webkit-appearance: none;
+	transform: rotate(270deg);
+	border: none;
+	box-shadow: inset 0 0 25px #fbcfed;
+	right: -30px;
+}
+
+/* https://stackoverflow.com/a/38163892/6456163 */
+input[type='range']::-webkit-slider-runnable-track {
+	-webkit-appearance: none;
+	background: #fa87f4;
+	border-radius: 10px;
+	height: 10px;
+	margin-top: -1px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 10px;
+	height: 10px;
+	cursor: ns-resize;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.5) inset,
+	0 0 0 99px #fe00c0 inset;
+	border-radius: 5px;
+}
+
+.disabled {
+	display: none !important;
+}
+
+.winHTML {
+	border-radius: 0 !important;
+	width: 100%;
+	height: 100%;
+	padding: 0 !important;
+	margin: 0 !important;
+	overflow-y: auto;
+	overflow-x: hidden
+}
+
+.marquee {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	display: block;
+	height: auto;
+}
+
+.marquee .marqueetext1 {
+	animation: cssmarquee1 12s infinite linear;
+	margin: 0;
+	display: inline-block;
+}
+
+@keyframes cssmarquee1 {
+	from {
+		transform: translateX(0%);
+		opacity: 0;
+	}
+	5% {
+		opacity: 1;
+	}
+	25% {
+		transform: translateX(0%);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}

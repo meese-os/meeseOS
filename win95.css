@@ -1,0 +1,319 @@
+/* Windows 95 Styles */
+:root {
+	/* Vaporwave Color Palette */
+  --barbie: #fe00c0;
+	--cotton-candy: #fa87f4;
+	--barney: #9701ff;
+	--bsod: #4900ff;
+	--blue-razz: #01b9ff;
+	--carribbean: #01fff8;
+
+	/* Normal Window Borders */
+	--window-border-top: 2px solid var(--barney);
+	--window-border-right: 2px solid var(--barney);
+	--window-border-bottom: 2px solid var(--barney);
+	--window-border-left: 2px solid var(--barney);
+
+	/* Window Buttons */
+	--window-button-top: 2px solid var(--carribbean);
+	--window-button-left: 2px solid var(--carribbean);
+	--window-button-bottom: 2px solid var(--bsod);
+	--window-button-right: 2px solid var(--bsod);
+
+	/* Windows Colors */
+	--windows-gray: #c0c0c0;
+}
+
+* {
+	font-family: W95FA, monospace;
+}
+
+/* scrollbars */
+::-webkit-scrollbar {
+	width: 16px;
+	background-color: #DEDEDE;
+	background-image: url('win95scroll.png');
+	box-shadow: none;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: #DEDEDE;
+	background-image: url('win95scroll.png');
+	box-shadow: none;
+}
+
+::-webkit-resizer {
+	border-radius: 0;
+	background-color: #BDBDBD;
+	box-shadow: none;
+	width: 12px;
+	border-top: 2px solid #DEDEDE;
+	border-left: 2px solid #DEDEDE;
+	border-bottom: 2px solid #7B7B7B;
+	border-right: 2px solid #7B7B7B;
+	background-color: #BDBDBD;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 0;
+	background-color: #BDBDBD;
+	box-shadow: none;
+	width: 12px;
+	border-top: 2px solid #DEDEDE;
+	border-left: 2px solid #DEDEDE;
+	border-bottom: 2px solid #7B7B7B;
+	border-right: 2px solid #7B7B7B;
+	background-color: #BDBDBD;
+}
+
+::-webkit-scrollbar-button {
+	border-radius: 0;
+	background-color: #BDBDBD;
+	box-shadow: none;
+	width: 12px;
+	border-top: 2px solid #DEDEDE;
+	border-left: 2px solid #DEDEDE;
+	border-bottom: 2px solid #7B7B7B;
+	border-right: 2px solid #7B7B7B;
+	background-color: #BDBDBD;
+}
+
+/* buttons */
+button {
+	background-color: #BDBDBD;
+	border-top: 2px solid #DEDEDE;
+	border-left: 2px solid #DEDEDE;
+	border-bottom: 2px solid #7B7B7B;
+	border-right: 2px solid #7B7B7B;
+	color: #000;
+	border-radius: 0;
+	transition: none;
+	box-shadow: none !important;
+}
+
+button:active {
+	border-top: 2px solid #7B7B7B;
+	border-left: 2px solid #7B7B7B;
+	border-bottom: 2px solid #DEDEDE;
+	border-right: 2px solid #DEDEDE;
+}
+
+#FIL2tbl div {
+	background-color: #BDBDBD;
+	border-top: 2px solid #DEDEDE;
+	border-left: 2px solid #DEDEDE;
+	border-bottom: 1px solid #7B7B7B;
+	border-right: 1px solid #7B7B7B;
+	box-shadow: inset -1px 0 0 #7B7B7B;
+	color: #000;
+}
+
+#FIL2tbl div:active {
+	border-top: 2px solid #7B7B7B;
+	border-left: 2px solid #7B7B7B;
+	border-bottom: 2px solid #DEDEDE;
+	border-right: 1px solid #DEDEDE;
+	box-shadow: inset -1px 0 0 #DEDEDE;
+}
+
+/* inputs */
+input,
+textarea {
+	border-top: 2px solid #DEDEDE;
+	border-left: 2px solid #DEDEDE;
+	border-bottom: 1px solid #7B7B7B;
+	border-right: 1px solid #7B7B7B;
+	color: #000;
+	border-radius: 0;
+	transition: none;
+	box-shadow: none !important;
+}
+
+input:active,
+textarea:active {
+	border-top: 2px solid #7B7B7B;
+	border-left: 2px solid #7B7B7B;
+	border-bottom: 2px solid #DEDEDE;
+	border-right: 2px solid #DEDEDE;
+}
+
+/* dividers */
+hr {
+	border-top: 1px solid #7B7B7B;
+	border-left: 1px solid #7B7B7B;
+	border-bottom: 1px solid #DEDEDE;
+	border-right: 1px solid #DEDEDE;
+	background: none;
+	height: 0;
+	width: calc(100% - 20px);
+}
+
+/* windows */
+.window {
+	border-radius: 0;
+	border-top: var(--window-border-top);
+	border-left: var(--window-border-left);
+	border-bottom: var(--window-border-bottom);
+	border-right: var(--window-border-right);
+	margin-left: -2px;
+	margin-top: -2px;
+	background-color: #BDBDBD;
+}
+
+#notifWindow {
+	border-radius: 0;
+	border-top: var(--window-border-top);
+	border-left: var(--window-border-left);
+	border-bottom: var(--window-border-bottom);
+	border-right: var(--window-border-right);
+	background-color: #BDBDBD;
+}
+
+#notifWindow .winExit {
+	border-top: 1px solid #DEDEDE;
+	border-bottom: 1px solid #7B7B7B;
+	border-left: 1px solid #DEDEDE;
+	border-right: 1px solid #7B7B7B;
+	width: 12px;
+	height: 12px;
+}
+
+.winAero, .winImg {
+	display: none;
+}
+
+.winCap {
+	background: linear-gradient(90deg, var(--barbie), var(--cotton-candy));
+	height: 28px;
+	left: 2px;
+	padding-left: 2px;
+	padding-right: 23px;
+	margin-top: 1px;
+	width: calc(100% - var(--windowBorderWidth) - var(--windowBorderWidth) - 23px);
+}
+
+.winCap .smarticon {
+	margin-top: -2px;
+	margin-bottom: 2px;
+}
+
+.winCaptionTitle {
+	margin-top: -2px;
+	margin-bottom: 2px;
+}
+
+.winHTML {
+	border-radius: 0;
+	border-top: 1px solid #7B7B7B;
+	border-left: 1px solid #7B7B7B;
+	border-right: 1px solid #DEDEDE;
+	border-bottom: 1px solid #DEDEDE;
+	margin-left: -1px;
+	margin-bottom: -1px;
+	background-color: var(--windows-gray);
+}
+
+/* Window Buttons */
+.winShrink,
+.winExit,
+.winBig,
+.winFld {
+	background-color: var(--barney) !important;
+	color: var(--cotton-candy);
+	text-shadow: #000 1px 1px;
+	border-top: var(--window-button-top);
+	border-left: var(--window-button-left);
+	border-bottom: var(--window-button-bottom);
+	border-right: var(--window-button-right);
+	border-radius: 0;
+	top: 7px;
+	width: 12px;
+	height: 10px;
+	font-size: 14px;
+	line-height: 8px;
+	box-shadow: none;
+}
+.winExit {
+	right: 7px;
+}
+.winBig {
+	right: 30px;
+}
+.winShrink {
+	right: 48px;
+}
+.winFld {
+	left: calc(100% - 90px);
+	line-height: 13px;
+}
+
+/* taskbar */
+#taskbar {
+	top: 0px;
+	background-color: var(--barbie);
+	border-top: 2px solid var(--barney);
+	text-shadow: none;
+	color: #000;
+}
+#desktop {
+	top: 31px;
+}
+
+.widget {
+	color: #000;
+	text-shadow: none;
+}
+
+/* context menu */
+#ctxMenu {
+	border-top: var(--window-border-top);
+	border-left: var(--window-border-left);
+	border-bottom: var(--window-border-bottom);
+	border-right: var(--window-border-right);
+	background-color: #BDBDBD !important;
+	backdrop-filter: none;
+	color: #000;
+	border-radius: 0;
+}
+
+#ctxMenu p {
+	transition: none;
+	box-shadow: none;
+	background: none;
+	border-radius: 0;
+}
+
+#ctxMenu p:hover {
+	background-color: #000080 !important;
+	color: #FFF;
+	transition: none;
+	box-shadow: none;
+}
+
+#ctxMenu p:hover img {
+	filter: invert(1);
+}
+
+#ctxMenu hr {
+	border-top: 1px solid #7B7B7B;
+	border-bottom: 1px solid #DEDEDE;
+	border-left: none;
+	border-right: none;
+	width: calc(100% - 1px);
+	height: 0;
+	margin-left: 0;
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+.winBimg {
+	display: none !important;
+}
+
+#tskbrBimg {
+	display: none !important;
+}
+
+.closedWindow {
+	border: 0px;
+}
