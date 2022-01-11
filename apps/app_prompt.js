@@ -345,9 +345,6 @@ apps.prompt = new Application({
 					this.appWindow.alwaysOnTop(1);
 					this.appWindow.paddingMode(1);
 					break;
-				case 'shutdown':
-
-					break;
 				default:
 					doLog("No case found for '" + signal + "' signal in app '" + this.dsktpIcon + "'");
 		}

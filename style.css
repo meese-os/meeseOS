@@ -1245,100 +1245,6 @@ div {
 	margin: 2px 0 1px 0px;
 }
 
-#loadingBg {
-	width: calc(100% + 40px);
-	height: calc(100% + 40px);
-	top: -20px;
-	left: -20px;
-	z-index: 9999999999999998;
-	transition: opacity 1s;
-	background-color: #000;
-	background-image: url('images/background.jpg');
-	filter: blur(10px);
-	background-position: center;
-	background-size: cover;
-}
-
-#isLoading {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	text-align: center;
-	transition: 1s;
-	z-index: 9999999999999999;
-	color: 000;
-}
-
-#isLoadingDiv {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	background: #FFF;
-	text-align: center;
-	padding: 32px;
-	border-radius: 32px;
-	box-shadow: 0 0 32px #000;
-	overflow: auto;
-	transform: translate(-50%, -50%);
-}
-
-#loadingInfo {
-	font-family: monospace;
-	font-size: 12px;
-	line-height: 20px;
-	width: 0;
-	min-width: 0;
-	max-width: 100%;
-	height: 20px;
-	min-height: 20px;
-	max-height: 20px;
-	overflow: visible;
-	margin-top: 0;
-	margin-bottom: 0;
-	color: #FFF;
-	background: #0A0;
-	position: relative;
-	display: inline-block;
-	white-space: nowrap;
-	box-shadow: 0 -3px 0 #0A0;
-}
-
-#loadingInfo:before {
-	content: "\00a0";
-}
-
-#loadingInfoDiv {
-	width: 75%;
-	min-width: 75%;
-	max-width: 75%;
-	height: 20px;
-	min-height: 20px;
-	max-height: 20px;
-	background: #000;
-	position: relative;
-	display: inline-block;
-	text-align: left;
-	overflow: hidden;
-}
-
-#bootCrashTest {
-	padding: 3px;
-	color: #000;
-	background-color: #000;
-	transition: 0.2s;
-}
-
-#bootCrashTest:hover {
-	color: #F00;
-	background-color: #000;
-}
-
-#bootCrashTest:active {
-	color: #000;
-	background-color: #F00;
-}
-
 #windowFrameOverlay {
 	display: none;
 	box-shadow: inset 0 0 10px #FFF, 0 0 35px #000;
@@ -1368,10 +1274,6 @@ div {
 
 .cursorPointer {
 	cursor: url(./cursors/pointer.png) 11 2, pointer;
-}
-
-.cursorLoadLight {
-	cursor: url(./cursors/wait.png) 14 13, wait;
 }
 
 .cursorLoadDark {
@@ -1656,4 +1558,105 @@ div {
 
 #bgSizeElement {
 	display: none;
+}
+
+[data-letter-crap] {
+	/* TODO: Conditional font size */
+	position: relative;
+	white-space: pre;
+	overflow: hidden;
+	font-size: 10px;
+	line-height: 10px;
+	font-family: monospace;
+	padding: 0;
+	margin: auto;
+	color: #0A0;
+	width: 90%;
+	max-width: 1200px;
+}
+
+#loadingSeparator {
+	border: 0;
+	/* TODO: Get dashed woring or remove property
+		https://stackoverflow.com/questions/22881338/dashed-border-with-border-image
+		https://developer.mozilla.org/en-US/docs/Web/CSS/border-image
+		https://www.google.com/search?q=dashed+border+with+border+image&oq=dashed+border+with+border+image&aqs=chrome..69i57.3528j0j1&sourceid=chrome&ie=UTF-8
+	*/
+	border-top: 1px dashed gray;
+	width: 250px;
+	border-image: radial-gradient(gray, transparent) 1;
+}
+
+#loadingBg {
+	width: calc(100% + 40px);
+	height: calc(100% + 40px);
+	top: -20px;
+	left: -20px;
+	z-index: 9999999999999998;
+	transition: 1s;
+	background-color: #000;
+	filter: blur(10px);
+}
+
+#isLoading {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-align: center;
+	transition: 1s;
+	z-index: 9999999999999999;
+	color: #FFF;
+}
+
+#isLoadingDiv {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	background: #FFF;
+	text-align: center;
+	padding: 32px;
+	border-radius: 32px;
+	box-shadow: 0 0 32px #000;
+	overflow: auto;
+	transform: translate(-50%, -50%);
+}
+
+#loadingBar {
+	font-family: monospace;
+	font-size: 12px;
+	line-height: 20px;
+	width: 0;
+	min-width: 0;
+	max-width: 100%;
+	height: 20px;
+	min-height: 20px;
+	max-height: 20px;
+	overflow: visible;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: #FFF;
+	background: #0A0;
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	box-shadow: 0 -3px 0 #0A0;
+}
+
+#loadingBar:before {
+	content: "\00a0";
+}
+
+#loadingBarDiv {
+	width: 75%;
+	min-width: 200px;
+	max-width: 800px;
+	height: 20px;
+	min-height: 20px;
+	max-height: 20px;
+	background: #000;
+	position: relative;
+	display: inline-block;
+	text-align: left;
+	overflow: visible;
 }

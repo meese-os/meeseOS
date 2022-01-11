@@ -5,7 +5,7 @@ apps.smartIconSettings = new Application({
 	abbreviation: "SIS",
 	codeName: "smartIconSettings",
 	image: "smarticons/aOS/fg.png",
-	hideApp: 1,
+	hideApp: 2,
 	launchTypes: 1,
 	main: function (launchtype) {
 		this.appWindow.setCaption("Smart Icon Settings");
@@ -121,9 +121,6 @@ apps.smartIconSettings = new Application({
 						smartIconOptions = JSON.parse(ufload("system/smarticon_settings"));
 						updateSmartIconStyle();
 					}
-					break;
-				case 'shutdown':
-
 					break;
 				default:
 					doLog("No case found for '" + signal + "' signal in app '" + this.dsktpIcon + "'");

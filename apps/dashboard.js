@@ -15,7 +15,6 @@ apps.startMenu = new Application({
 			getId('win_startMenu_exit').style.display = "none";
 			getId('win_startMenu_fold').style.display = 'none';
 			getId('win_startMenu_top').style.transform = 'scale(1)';
-			getId('win_startMenu_cap').classList.remove('cursorLoadLight');
 			getId('win_startMenu_cap').classList.add('cursorDefault');
 			getId('win_startMenu_cap').setAttribute('onmousedown', '');
 			getId('win_startMenu_size').style.pointerEvents = "none";
@@ -50,7 +49,6 @@ apps.startMenu = new Application({
 				this.appWindow.setContent(
 					'<div style="width:100%;height:100%;">' +
 					'<div style="position:relative;text-align:center;">' +
-					'<button onclick="c(function(){ctxMenu(apps.startMenu.vars.powerCtx, 1, event)})">Power</button>  ' +
 					'<button onclick="openapp(apps.files, \'dsktp\')">Files</button> ' +
 					// TODO: Unbreak this
 					'<button onclick="openapp(apps.appsbrowser, \'dsktp\')">All Apps</button><br>' +
@@ -65,7 +63,7 @@ apps.startMenu = new Application({
 				getId("appDsBtableWrapper").style.height = outerbound.height - (innerbound.top - outerbound.top) + "px";
 				if (this.vars.listOfApps.length === 0) {
 					getId('appDsBtable').innerHTML = '<tr><td></td></tr>';
-					getId('appDsBtable').classList.add('cursorLoadLight');
+					getId('appDsBtable').classList.add('cursorLoadDark');
 					for (let appHandle in appsSorted) {
 						if (apps[appsSorted[appHandle]].keepOffDesktop < 2) {
 							apps.startMenu.vars.listOfApps += '<tr class="cursorPointer dashboardSearchItem" onClick="openapp(apps.' + appsSorted[appHandle] + ', \'dsktp\')" oncontextmenu="ctxMenu(apps.startMenu.vars.ctx, 1, event, \'' + appsSorted[appHandle] + '\')">' +
@@ -78,7 +76,7 @@ apps.startMenu = new Application({
 					
 					getId('appDsBtable').innerHTML = apps.startMenu.vars.listOfApps;
 					getId('appDsBtable').innerHTML += '<tr><th><div style="width:32px;height:32px;position:relative;"></div></th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td>';
-					getId('appDsBtable').classList.remove('cursorLoadLight');
+					getId('appDsBtable').classList.remove('cursorLoadDark');
 					apps.startMenu.vars.appElems = getId('appDsBtable').getElementsByClassName('dashboardSearchItem');
 				} else {
 					getId('appDsBtable').innerHTML = this.vars.listOfApps;
@@ -135,26 +133,6 @@ apps.startMenu = new Application({
 			/*[' Settings', function() {
 				openapp(apps.settings, 'dsktp');
 			}, 'ctxMenu/gear.png'],*/
-			['+Log Out', function() {
-				window.shutDown('restart', 1);
-			}, 'ctxMenu/power.png'],
-			[' Restart', function() {
-				window.shutDown('restart', 0);
-			}, 'ctxMenu/power.png'],
-			[' Shut Down', function() {
-				window.shutDown(0, 1);
-			}, 'ctxMenu/power.png']
-		],
-		powerCtx: [
-			[' Log Out', function() {
-				window.shutDown('restart', 1);
-			}, 'ctxMenu/power.png'],
-			[' Restart', function() {
-				window.shutDown('restart', 0);
-			}, 'ctxMenu/power.png'],
-			[' Shut Down', function() {
-				window.shutDown(0, 1);
-			}, 'ctxMenu/power.png']
 		],
 		ctx: [
 			[' Open', function (arg) {
@@ -233,19 +211,28 @@ apps.startMenu = new Application({
 
 					// Settings page stuff
 					window.setTimeout(function() {
-						getId('loadingInfo').innerHTML = 'Welcome.';
 						getId('desktop').style.display = '';
 						getId('taskbar').style.display = '';
 					}, 0);
-					window.setTimeout(function() {
-						getId('isLoading').style.opacity = 0;
-						getId('loadingBg').style.opacity = 0;
-					}, 5);
-					window.setTimeout(function() {
+
+					if (artificialLoadingScreen) {
+						window.setTimeout(function() {
+							getId('isLoading').classList.remove('cursorLoadDark');
+							getId('isLoading').style.opacity = 0;
+							getId('loadingBg').style.opacity = 0;
+							getId('isLoading').innerHTML = '';
+
+							setTimeout(function() {
+								// The 1000 is the transition time for #loadingBg in `/style.css`
+								getId('isLoading').style.display = 'none';
+								getId('loadingBg').style.display = 'none';
+							}, 1000);
+						}, timePerQuip * (quips.length + 1));
+					} else {
 						getId('isLoading').style.display = 'none';
-						getId('isLoading').innerHTML = '';
 						getId('loadingBg').style.display = 'none';
-					}, 1005);
+					}
+					
 					window.setTimeout(function() {
 						var dsktpIconFolder = ufload("system/desktop/");
 						if (dsktpIconFolder) {
@@ -271,9 +258,6 @@ apps.startMenu = new Application({
 						tempStr = tempStr[tempStr.length - 1]; 
 						appsSorted[i] = tempStr; 
 					}
-
-					break;
-				case "shutdown":
 
 					break;
 				default:

@@ -910,9 +910,6 @@ apps.bash = new Application({
 						this.vars.alias = JSON.parse(ufload("system/apps/bash/alias"));
 					}
 					break;
-				case 'shutdown':
-
-					break;
 				default:
 					doLog("No case found for '" + signal + "' signal in app '" + this.dsktpIcon + "'");
 		}

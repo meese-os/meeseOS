@@ -578,9 +578,6 @@ apps.files = new Application({
 						this.vars.favorites = JSON.parse(ufload("system/apps/files/favorites"));
 					}
 					break;
-				case 'shutdown':
-
-					break;
 				default:
 					doLog("No case found for '" + signal + "' signal in app '" + this.dsktpIcon + "'", "#F00");
 		}

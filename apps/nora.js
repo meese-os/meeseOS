@@ -930,9 +930,6 @@ apps.nora = new Application({
 					this.vars.sayDynamic('hello');
 					this.vars.say("[This app in in Beta. It's not complete.]");
 					break;
-				case 'shutdown':
-
-					break;
 				default:
 					doLog("No case found for '" + signal + "' signal in app '" + this.dsktpIcon + "'");
 		}

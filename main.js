@@ -113,7 +113,7 @@ if (typeof document.getElementsByClassName === 'undefined') {
 const winFadeDistance = 0;
 const winBorder = 3;
 
-var darkMode = true;
+var darkMode = false;
 const darkSwitch = (light, dark) => darkMode ? dark : light;
 if (darkMode) {
 	document.body.classList.add('darkMode');
@@ -125,22 +125,18 @@ var autoMobile = true;
 function checkMobileSize() {
 	if (!autoMobile) return;
 	if (!mobileMode && (!window.matchMedia("(pointer: fine)").matches || parseInt(getId("monitor").style.width, 10) < 768)) {
-		setMobile(1);
+		setMobile(true);
 	} else if (mobileMode && (window.matchMedia("(pointer: fine)").matches && parseInt(getId("monitor").style.width, 10) >= 768)) {
-		setMobile(0);
+		setMobile(false);
 	}
 }
 
-// 0 is off, 1 is on, 2 is automatic
-var mobileMode = 2;
-const mobileSwitch = (no, yes) => !!mobileMode ? yes : no;
-
-function setMobile(type) {
-	if (type) {
-		mobileMode = 1;
+var mobileMode = false;
+function setMobile(newSetting) {
+	mobileMode = newSetting;
+	if (newSetting) {
 		getId('monitor').classList.add('mobileMode');
 	} else {
-		mobileMode = 0;
 		getId('monitor').classList.remove('mobileMode');
 	}
 }
@@ -273,9 +269,6 @@ var vartry = function (varname) {
 		return '-failed vartry(' + varname + ') ' + err + '-';
 	}
 }
-
-// Convert number to true/false
-const getStatus = (num) => !!num ? 'Enabled' : 'Disabled';
 
 // this is where the user's files go
 var USERFILES = [];
@@ -418,9 +411,6 @@ var Application = function (
 						this.appWindow.closeKeepTask();
 						break;
 					case "USERFILES_DONE":
-
-						break;
-					case 'shutdown':
 
 						break;
 					default:
@@ -948,20 +938,39 @@ function checkWaitingCode() {
 	finishedWaitingCodes++;
 }
 
-getId('loadingInfo').innerHTML = 'Applications List';
+var quips = [
+	"Contracting a wizard...",
+	"Moving dragon from the mouth of the cave...",
+	"Collecting all the loot...",
+	"Divvying up dubloons...",
+]
+
+var artificialLoadingScreen = true;
+var currentQuip = 0, timePerQuip = 1500;
+if (artificialLoadingScreen) {
+	for (let i = 1; i <= quips.length; i++) {
+		setTimeout(() => {
+			currentQuip++;
+			getId('loadingBar').innerHTML = quips[i - 1];
+		}, timePerQuip * i)
+	}
+} else {
+	// Show the loading bar at 100% very briefly to give
+	// the impression that something is happening
+	quips = [true];
+	currentQuip = 1;
+}
+
 c(function() {
 	Dashboard();
-	getId('loadingInfo').innerHTML = 'NORAA';
 });
 
 c(function() {
 	NORA();
-	getId('loadingInfo').innerHTML = 'Info Viewer...';
 });
 
 c(function() {
 	AppInfo();
-	getId('loadingInfo').innerHTML = 'JavaScript Console';
 });
 
 var currentSelection = "";
@@ -973,69 +982,56 @@ function setCurrentSelection() {
 requestAnimationFrame(setCurrentSelection);
 c(function() {
 	JSConsole();
-	getId('loadingInfo').innerHTML = 'Bash Console';
 });
 
 c(() => Bash());
 
 c(function() {
 	AppPrompt();
-	getId('loadingInfo').innerHTML = 'Smart Icon Settings';
 });
 
 c(function() {
 	SmartIconSettings();
-	getId('loadingInfo').innerHTML = 'JS Paint';
 })
 
 c(function() {
 	JSPaint();
-	getId('loadingInfo').innerHTML = 'Properties Viewer';
 });
 
 c(function() {
 	PropertiesViewer();
-	getId('loadingInfo').innerHTML = 'File Manager';
 });
 c(function() {
 	FileManager();
-	getId('loadingInfo').innerHTML = 'Save Master';
 });
 
 c(function() {
 	window.SRVRKEYWORD = window.SRVRKEYWORD || "";
 	SaveMaster();
-	getId('loadingInfo').innerHTML = 'Messaging';
 });
 
 c(function() {
 	Messaging();
-	getId('loadingInfo').innerHTML = 'Music Player';
 });
 
 c(function() {
 	MusicPlayer();
-	getId('loadingInfo').innerHTML = 'Old Site';
 });
 
 c(function() {
 	OldSite();
-	getId('loadingInfo').innerHTML = 'Help';
 });
 
 c(function() {
 	Help();
-	getId('loadingInfo').innerHTML = 'Accreditation';
 });
 
 c(function() {
 	Accreditation();
-	getId('loadingInfo').innerHTML = 'View Count';
 });
 
 c(function() {
 	ViewCount();
-	getId('loadingInfo').innerHTML = 'Finalizing...';
 });
 
 // Function to open apps
@@ -1637,10 +1633,6 @@ if ('serviceWorker' in navigator) {
 }
 
 c(function() {
-	getId('loadingInfo').innerHTML = 'Loading your files...';
-	getId('isLoading').classList.remove('cursorLoadLight');
-	getId('isLoading').classList.add('cursorLoadDark');
-
 	initStatus = 1;
 	doLog('Took ' + (perfCheck('masterInit') / 1000) + 'ms to initialize.');
 	perfStart("masterInit");
@@ -1659,9 +1651,9 @@ bootFileHTTP.onreadystatechange = function() {
 		doLog('Took ' + (perfCheck('masterInit') / 1000) + 'ms to fetch USERFILES.');
 		perfStart("masterInit");
 		m("init fileloader");
-		getId("loadingInfo").innerHTML += "<br>Your OS key is " + SRVRKEYWORD;
+		//getId("loadingBar").innerHTML += "<br>Your OS key is " + SRVRKEYWORD;
 		for (let app in apps) {
-			getId("loadingInfo").innerHTML = "Loading your files...<br>Loading " + app;
+			//getId("loadingBar").innerHTML = "Loading your files...<br>Loading " + app;
 			try {
 				apps[app].signalHandler("USERFILES_DONE");
 			} catch (err) {
@@ -1687,9 +1679,9 @@ c(function() {
 	doLog('Took ' + (perfCheck('masterInit') / 1000) + 'ms to fetch USERFILES.');
 	perfStart("masterInit");
 	m("init fileloader");
-	getId("loadingInfo").innerHTML += "<br>Your OS key is " + SRVRKEYWORD;
+	//getId("loadingBar").innerHTML += "<br>Your OS key is " + SRVRKEYWORD;
 	for (let app in apps) {
-		getId("loadingInfo").innerHTML = "Loading your files...<br>Your OS key is" + SRVRKEYWORD + "<br>Loading " + app;
+		//getId("loadingBar").innerHTML = "Loading your files...<br>Your OS key is" + SRVRKEYWORD + "<br>Loading " + app;
 		try {
 			apps[app].signalHandler("USERFILES_DONE");
 		} catch (err) {
@@ -1726,74 +1718,6 @@ window.resetOS = function() {
 	// TODO: Call this somewhere
 	document.cookie = 'keyword=; Max-Age=-99999999;';
 	window.location = 'index.php';
-};
-
-window.shutDown = function (arg, logout) {
-	getId('isLoading').style.opacity = '0';
-	getId('loadingBg').style.opacity = '0';
-	getId('isLoading').style.transition = '1s';
-	getId('isLoading').style.display = 'block';
-	getId('loadingBg').style.display = 'block';
-	window.shutDownPercentComplete = 0;
-	window.shutDownTotalPercent = 1;
-	getId('isLoading').classList.remove('cursorLoadDark');
-	getId('isLoading').classList.add('cursorLoadLight');
-	
-	if (arg === 'restart') {
-		getId('isLoading').innerHTML = `<div id="isLoadingDiv"><h1>Restarting ${websiteTitle}</h1><hr><div id="loadingInfoDiv"><div id="loadingInfo" class="liveElement" data-live-eval="shutDownPercentComplete / shutDownTotalPercent * 100 + \'%\'" data-live-target="style.width">Shutting down...</div></div></div>`;
-		requestAnimationFrame(function() {
-			getId('isLoading').style.opacity = '1';
-			getId('loadingBg').style.opacity = '1';
-		});
-		window.setTimeout(function() {
-			getId('isLoading').classList.remove('cursorLoadLight');
-			getId('isLoading').classList.add('cursorLoadDark');
-			shutDownPercentComplete = codeToRun.length;
-			for (let app in apps) {
-				c(function (args) {
-					m('THERE WAS AN ERROR SHUTTING DOWN THE APP ' + args + '. SHUTDOWN SHOULD CONTINUE WITH NO ISSUE.');
-					shutDownPercentComplete++;
-					apps[args].signalHandler('shutdown');
-				}, app);
-			}
-			shutDownTotalPercent = codeToRun.length - shutDownPercentComplete;
-			shutDownPercentComplete = 0;
-			c(function() {
-				getId('isLoading').innerHTML = `<div id="isLoadingDiv"><h1>Restarting ${websiteTitle}</h1><hr><div id="loadingInfoDiv"><div id="loadingInfo" class="liveElement" data-live-eval="shutDownPercentComplete / shutDownTotalPercent * 100 + \'%\'" data-live-target="style.width">Goodbye!</div></div></div>`;
-				if (logout) {
-					document.cookie = "logintoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-				}
-				window.location = 'blackScreen.html';
-			});
-		}, 1005);
-	} else {
-		getId('isLoading').innerHTML = `<div id="isLoadingDiv"><h1>Shutting Down ${websiteTitle}</h1><hr><div id="loadingInfoDiv"><div id="loadingInfo" class="liveElement" data-live-eval="shutDownPercentComplete / shutDownTotalPercent * 100 + \'%\'" data-live-target="style.width">Shutting down...</div></div></div>`;
-		requestAnimationFrame(function() {
-			getId('isLoading').style.opacity = '1';
-			getId('loadingBg').style.opacity = '1';
-		});
-		window.setTimeout(function() {
-			getId('isLoading').classList.remove('cursorLoadLight');
-			getId('isLoading').classList.add('cursorLoadDark');
-			shutDownPercentComplete = codeToRun.length;
-			for (let app in apps) {
-				c(function (args) {
-					m('THERE WAS AN ERROR SHUTTING DOWN THE APP ' + args + '. SHUTDOWN SHOULD CONTINUE WITH NO ISSUE.');
-					shutDownPercentComplete++;
-					apps[args].signalHandler('shutdown');
-				}, app);
-			}
-			shutDownTotalPercent = codeToRun.length - shutDownPercentComplete;
-			shutDownPercentComplete = 0;
-			c(function() {
-				getId('isLoading').innerHTML = `<div id="isLoadingDiv"><h1>Shutting Down ${websiteTitle}</h1><hr><div id="loadingInfoDiv"><div id="loadingInfo" class="liveElement" data-live-eval="shutDownPercentComplete / shutDownTotalPercent * 100 + \'%\'" data-live-target="style.width">Goodbye!</div></div></div>`;
-				if (logout) {
-					document.cookie = "logintoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-				}
-				window.location = 'blackScreen.html';
-			});
-		}, 1005);
-	}
 };
 
 // Open apps on startup

@@ -11,7 +11,6 @@
 	<link rel="icon" href="favicon.png" type="image/x-icon">
 	<style id="smartIconStyle"></style>
 	<link rel="stylesheet" type="text/css" href="win95.css">
-	<script src="ghostCursor.js"></script>
 </head>
 
 <body id="pagebody">
@@ -44,28 +43,38 @@
 			<div id="tskbrAero" class="winAero"></div>
 			<div id="tskbrBimg" class="winBimg"></div>
 			<div id="time"></div>
-			<div id="icons">Loading, please wait.</div>
+			<div id="icons">Loading, please wait...</div>
 		</div>
 		<div id="ctxMenu" onclick="getId('ctxMenu').style.display='none'" class="backdropFilterCtxMenu noselect"></div>
 		<?php
 			// TODO: This is where I can store the options for the terminal vs the desktop
 			if (file_get_contents('USERFILES/'.$_COOKIE['keyword'].'/system/apps/settings/ugly_boot.txt') == '1') {
+				// TODO: Test without background image code
 				echo '<div id="loadingBg" style="background-image:url('.file_get_contents('USERFILES/'.$_COOKIE['keyword'].'/system/desktop/background_image.txt').');opacity:0"></div><script defer>requestAnimationFrame(function(){getId("desktop").style.display = "";getId("taskbar").style.display = "";});</script>';
 			} else {
 				echo '<div id="loadingBg" style="background-image:url('.file_get_contents('USERFILES/'.$_COOKIE['keyword'].'/system/desktop/background_image.txt').');"></div>';
 			}
 		?>
-		<div id="isLoading" class="cursorLoadLight">
-			<div id="isLoadingDiv">
-				<h1>MeeseOS</h1>
-				<hr>
-				<div id="loadingInfoDiv">
-					<div id="loadingInfo" class="liveElement"
-						data-live-eval="finishedWaitingCodes / codeToRun.length * 100 + '%'" data-live-target="style.width">
-						Initializing...</div>
+		<div id="isLoading" class="cursorLoadDark">
+			<div
+				data-lettercrap-text="Aaron Meese"
+				data-lettercrap-aspect-ratio="0.3"
+			></div>
+			<hr id="loadingSeparator" />
+
+			<h1>MeeseOS</h1>
+			<div id="loadingBarDiv">
+				<div id="loadingBar" class="liveElement"
+					data-live-eval="currentQuip / quips.length * 100 + '%'" data-live-target="style.width">
+					<!-- TODO: Make this transition smoother;
+						- https://github.com/lucagez/bars
+						- https://codepen.io/avstorm/pen/abdajMB
+						- https://kimmobrunfeldt.github.io/progressbar.js/
+						- https://loading.io/progress/
+						- https://codepen.io/sleek-geek/pen/LVVEMY
+					-->
+					Initializing...
 				</div>
-				<br><br>
-				<img id="loadingImage" src="appicons/aOS.png" style="display:none">
 			</div>
 		</div>
 	</div>
@@ -74,6 +83,10 @@
 </body>
 
 <?php
+	// Scripts down here to guarantee availability of DOM elements
+	echo '<script src="ghostCursor.js"></script>';
+	echo '<script src="lettercrap.js"></script>';
+
 	echo '<script src="./helperFunctions.js"></script>';
 	echo '<script src="./dateFunctions.js"></script>';
 	echo '<script src="./smartIconFunctions.js"></script>';
@@ -101,10 +114,8 @@
 	echo '<script src="./apps/save_master.js"></script>';
 	echo '<script src="./apps/smart_icon_settings.js"></script>';
 	echo '<script src="./apps/view_count.js"></script>';
-	echo '<script src="main.js?ms='.round(microtime(true) * 1000).'"></script>';
-?>
 
-<?php
+	echo '<script src="main.js?ms='.round(microtime(true) * 1000).'"></script>';
 	echo '<script defer>';
 	require 'filepreloaderBeta.php';
 	echo '</script>';

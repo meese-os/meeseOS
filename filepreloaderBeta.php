@@ -25,10 +25,6 @@ if (!is_dir('USERFILES')) {
 	}
 }
 
-if (isset($_COOKIE['password'])) {
-	setcookie('password', '', time() - 3600);
-}
-
 // alphabet available to make userkeys from
 $newUser = 0;
 $lettertypes = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
