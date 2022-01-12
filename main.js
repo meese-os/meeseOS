@@ -921,7 +921,6 @@ function c(code, args) {
 }
 
 var workingcodetorun = [];
-var finishedWaitingCodes = 0;
 window.setInterval(checkWaitingCode, 0);
 
 function checkWaitingCode() {
@@ -934,8 +933,6 @@ function checkWaitingCode() {
 	} else {
 		workingcodetorun[0](workingcodetorun[1]);
 	}
-
-	finishedWaitingCodes++;
 }
 
 var quips = [
@@ -948,11 +945,33 @@ var quips = [
 var artificialLoadingScreen = true;
 var currentQuip = 0, timePerQuip = 1500;
 if (artificialLoadingScreen) {
+	var audio = new Audio("./dial-up-modem.mp3");
+	window.addEventListener("load", function() {
+		audio.play();
+
+		// Modified from https://stackoverflow.com/a/26869192/6456163
+		var fadeLength = 250;
+		var fadePoint = ((timePerQuip * quips.length) - fadeLength) / 1000;
+		var fadeAmount = 0.1;
+		var volumeReductionInterval = fadeLength / 10;
+		var fadeAudio = setInterval(function () {
+			if (audio.currentTime >= fadePoint) {
+				if (audio.volume > fadeAmount) {
+					// Only fade if past the fade out point or not at zero already
+					audio.volume -= fadeAmount;
+				} else {
+					// When volume at zero stop all the intervalling
+					clearInterval(fadeAudio);
+				}
+			}
+		}, volumeReductionInterval);
+	});
+
 	for (let i = 1; i <= quips.length; i++) {
 		setTimeout(() => {
 			currentQuip++;
 			getId('loadingBar').innerHTML = quips[i - 1];
-		}, timePerQuip * i)
+		}, timePerQuip * i);
 	}
 } else {
 	// Show the loading bar at 100% very briefly to give

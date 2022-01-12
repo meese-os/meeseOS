@@ -68,8 +68,8 @@ function pause() {
 }
 
 audio.addEventListener("canplaythrough", play);
-window.addEventListener('load', function() {
-	console.log('All audio assets are loaded...')
+window.addEventListener("load", function() {
+	console.log("All audio assets are loaded...")
 	play();
 });
 
