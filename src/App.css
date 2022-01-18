@@ -91,19 +91,20 @@
 }
 
 [data-letter-crap] {
-	white-space: pre;
-	overflow: hidden;
-	font-size: 10px;
-	line-height: 10px;
-	font-family: monospace;
-	padding: 0;
+  white-space: pre;
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 10px;
+  font-family: monospace;
+  padding: 0;
 }
 
-.card, .card:hover {
-  transition: transform .3s,box-shadow .3s;
+.card,
+.card:hover {
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .card:hover {
-  box-shadow: 0 2rem 3rem rgba(0,0,0,.175) !important;
+  box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.175) !important;
   transform: translateY(-2px);
 }
 

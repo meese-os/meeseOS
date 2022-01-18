@@ -11,12 +11,13 @@ import Pdf from "../../editable-stuff/resume.pdf";
 const AboutMe = () => {
   const [width] = useWindowSize({ fps: 60 });
 
-  const profilePic = 
+  const profilePic = (
     <img
       className="border border-secondary rounded-circle w-100"
       src={picture}
       alt="profilepicture"
-    />;
+    />
+  );
 
   return (
     <div id="aboutme" className="jumbotron jumbotron-fluid m-0 pb-0">
@@ -30,8 +31,10 @@ const AboutMe = () => {
             <div className="col-7 col-md-5 d-block d-lg-none mx-auto my-4">
               {profilePic}
             </div>
-            <p className={`lead text-${width < 992 ? "center" : "justify"}`}>{aboutDescription}</p>
-            
+            <p className={`lead text-${width < 992 ? "center" : "justify"}`}>
+              {aboutDescription}
+            </p>
+
             {showResume && (
               <p className="lead text-center">
                 <a

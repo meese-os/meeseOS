@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavItem from "./home/NavItem";
-import {
-  FirstName,
-  showResume
-} from "../editable-stuff/configurations.json";
+import { FirstName, showResume } from "../editable-stuff/configurations.json";
 import Pdf from "../editable-stuff/resume.pdf";
 
 const Navbar = () => {
@@ -33,7 +30,7 @@ const Navbar = () => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon" />
       </button>
 
       <div className="collapse navbar-collapse" id="navbarToggler">
