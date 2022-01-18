@@ -1,9 +1,7 @@
 @font-face {
 	font-family: "W95FA";
-	src:
-		url('../W95FA/W95FA.otf') format('opentype'),
-		url('../W95FA/w95fa.woff') format('woff'),
-		url('../W95FA/w95fa.woff2');
+	src: url("../W95FA/W95FA.otf") format("opentype"),
+		url("../W95FA/w95fa.woff") format("woff"), url("../W95FA/w95fa.woff2");
 }
 
 html,
@@ -40,7 +38,7 @@ h1 {
 	display: table;
 	margin: auto;
 	margin-top: 25px;
-	text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgb(0 0 0 / 15%)
+	text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgb(0 0 0 / 15%);
 }
 
 #viewerCount {

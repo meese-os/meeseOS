@@ -1,43 +1,42 @@
 /* TODO: Come back and try to steal Aero transparency */
 @font-face {
 	font-family: "W95FA";
-	src:
-		url('W95FA/W95FA.otf') format('truetype'),
-		url('W95FA/W95FA.woff') format('woff'),
-		url('W95FA/W95FA.woff2') format('woff2');
+	src: url("W95FA/W95FA.otf") format("truetype"),
+		url("W95FA/W95FA.woff") format("woff"),
+		url("W95FA/W95FA.woff2") format("woff2");
 }
 
 /* Default styling */
 ::-webkit-scrollbar {
 	width: 16px;
 	background-color: #555;
-	box-shadow: inset 0 0 10px #CCC;
+	box-shadow: inset 0 0 10px #ccc;
 	cursor: url(./cursors/aeroCursor.png) 3 2, default;
 }
 
 ::-webkit-scrollbar-corner {
 	background-color: #555;
-	box-shadow: inset 0 0 10px #CCC;
+	box-shadow: inset 0 0 10px #ccc;
 	cursor: url(./cursors/aeroCursor.png) 3 2, default;
 }
 
 ::-webkit-resizer {
 	border-radius: 8px;
-	background-color: #CCC;
+	background-color: #ccc;
 	box-shadow: inset 0 0 10px #555;
 	cursor: url(./cursors/aeroCursor.png) 3 2, default;
 }
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 8px;
-	background-color: #CCC;
+	background-color: #ccc;
 	box-shadow: inset 0 0 10px #555;
 	cursor: url(./cursors/aeroCursor.png) 3 2, default;
 }
 
 ::-webkit-scrollbar-button {
 	border-radius: 8px;
-	background-color: #CCC;
+	background-color: #ccc;
 	box-shadow: inset 0 0 10px #555;
 	cursor: url(./cursors/aeroCursor.png) 3 2, default;
 }
@@ -73,8 +72,8 @@
 
 .showMeHighlight {
 	transition: 0.3s !important;
-	background-color: rgba(190, 190, 255, .6) !important;
-	outline: 1px solid #FFF;
+	background-color: rgba(190, 190, 255, 0.6) !important;
+	outline: 1px solid #fff;
 	box-shadow: 0 0 3px #000;
 }
 
@@ -143,16 +142,16 @@ iframe {
 }
 
 .darkMode a {
-	color: #7F9FEE;
+	color: #7f9fee;
 }
 
 .darkMode a:visited {
-	color: #956ADB;
+	color: #956adb;
 }
 
 button {
-	background-color: #FFF;
-	box-shadow: inset 0 0 5px #CCC;
+	background-color: #fff;
+	box-shadow: inset 0 0 5px #ccc;
 	border-radius: 5px;
 	color: #333;
 	border: 1px solid #333;
@@ -163,7 +162,7 @@ button {
 }
 
 button:hover {
-	box-shadow: inset 0 0 5px #AAA;
+	box-shadow: inset 0 0 5px #aaa;
 }
 
 button:focus {
@@ -177,8 +176,8 @@ button:active {
 .darkMode button {
 	background-color: #272727;
 	box-shadow: inset 0 0 5px #333;
-	color: #CCC;
-	border: 1px solid #CCC;
+	color: #ccc;
+	border: 1px solid #ccc;
 }
 
 .darkMode button:hover {
@@ -194,8 +193,8 @@ button:active {
 }
 
 select {
-	background-color: #FFF;
-	box-shadow: inset 0 0 5px #CCC;
+	background-color: #fff;
+	box-shadow: inset 0 0 5px #ccc;
 	border-radius: 5px;
 	color: #333;
 	border: 1px solid #333;
@@ -205,7 +204,7 @@ select {
 }
 
 select:hover {
-	box-shadow: inset 0 0 5px #AAA;
+	box-shadow: inset 0 0 5px #aaa;
 }
 
 select:focus {
@@ -219,8 +218,8 @@ select:active {
 .darkMode select {
 	background-color: #272727;
 	box-shadow: inset 0 0 5px #333;
-	color: #CCC;
-	border: 1px solid #CCC;
+	color: #ccc;
+	border: 1px solid #ccc;
 }
 
 .darkMode select:hover {
@@ -237,11 +236,11 @@ select:active {
 
 input,
 textarea {
-	background-color: #FFF;
+	background-color: #fff;
 	border: 1px solid #333;
 	border-radius: 0;
 	color: #333;
-	box-shadow: inset 0 0 5px #CCC;
+	box-shadow: inset 0 0 5px #ccc;
 	outline: none;
 	transition: 0.2s;
 	user-select: auto;
@@ -249,7 +248,7 @@ textarea {
 
 input:hover,
 textarea:hover {
-	box-shadow: inset 0 0 5px #AAA;
+	box-shadow: inset 0 0 5px #aaa;
 }
 
 input:focus,
@@ -265,8 +264,8 @@ textarea:active {
 .darkMode input,
 .darkMode textarea {
 	background-color: #272727;
-	border: 1px solid #CCC;
-	color: #CCC;
+	border: 1px solid #ccc;
+	color: #ccc;
 	box-shadow: inset 0 0 5px #333;
 }
 
@@ -401,7 +400,7 @@ div {
 	top: -3px;
 	right: 8px;
 	font-size: 20px;
-	color: #0FA;
+	color: #0fa;
 	transition: 3s;
 	transition: 3s;
 	z-index: 101;
@@ -483,12 +482,14 @@ div {
 	top: 0px;
 	left: var(--windowBorderWidth);
 	padding-left: 23px;
-	width: calc(100% - 92px - var(--windowBorderWidth) - var(--windowBorderWidth));
+	width: calc(
+		100% - 92px - var(--windowBorderWidth) - var(--windowBorderWidth)
+	);
 	white-space: nowrap;
 	height: 32px;
 	text-shadow: 0px 0px 2px #000;
-	color: #FFF;
-	transition: opacity .5s;
+	color: #fff;
+	transition: opacity 0.5s;
 }
 
 .leftCaptionButtons .winCap {
@@ -521,7 +522,7 @@ div {
 	height: calc(100% - 32px - var(--windowBorderWidth));
 	bottom: var(--windowBorderWidth);
 	left: var(--windowBorderWidth);
-	background-color: #FFF;
+	background-color: #fff;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	padding-left: 3px;
@@ -548,19 +549,19 @@ div {
 
 .darkMode .winHTML {
 	background-color: #272727;
-	color: #DDD;
+	color: #ddd;
 }
 
 .darkResponsive {
-	background-color: #FFF;
+	background-color: #fff;
 	color: #000;
 	border-color: #000;
 }
 
 .darkMode .darkResponsive {
 	background-color: #272727;
-	color: #DDD;
-	border-color: #DDD;
+	color: #ddd;
+	border-color: #ddd;
 }
 
 .darkMode .darkInvert {
@@ -579,7 +580,7 @@ div {
 }
 
 .STNtableTD:hover {
-	background-color: #CCC;
+	background-color: #ccc;
 }
 
 .darkMode .STNtableTD:hover {
@@ -595,11 +596,11 @@ div {
 }
 
 .darkMode #FILtbl td {
-	border-top: 1px solid #FFF;
+	border-top: 1px solid #fff;
 }
 
 #FILtbl tr:hover {
-	background-color: #AAA;
+	background-color: #aaa;
 }
 
 .darkMode #FILtbl tr:hover {
@@ -612,8 +613,8 @@ div {
 	font-size: 12px;
 }
 
-#FIL2tbl>div,
-.FIL2sidetbl>div {
+#FIL2tbl > div,
+.FIL2sidetbl > div {
 	position: relative;
 	white-space: nowrap;
 }
@@ -622,13 +623,13 @@ div {
 	position: relative;
 }
 
-#FIL2tbl>div:hover,
-.FIL2sidetbl>div:hover {
-	background-color: #AAA;
+#FIL2tbl > div:hover,
+.FIL2sidetbl > div:hover {
+	background-color: #aaa;
 }
 
-.darkMode #FIL2tbl>div:hover,
-.darkMode .FIL2sidetbl>div:hover {
+.darkMode #FIL2tbl > div:hover,
+.darkMode .FIL2sidetbl > div:hover {
 	background-color: #555;
 }
 
@@ -663,7 +664,7 @@ div {
 	filter: none;
 }
 
-.FIL2viewCompact>div {
+.FIL2viewCompact > div {
 	font-size: 12px;
 	width: 148px;
 	height: 18px;
@@ -676,11 +677,11 @@ div {
 	padding: 1px;
 }
 
-.darkMode .FIL2viewCompact>div {
-	border: 1px solid #FFF;
+.darkMode .FIL2viewCompact > div {
+	border: 1px solid #fff;
 }
 
-.FIL2viewSmall>div {
+.FIL2viewSmall > div {
 	font-size: 12px;
 	width: 298px;
 	height: 18px;
@@ -693,11 +694,11 @@ div {
 	padding: 1px;
 }
 
-.darkMode .FIL2viewSmall>div {
-	border: 1px solid #FFF;
+.darkMode .FIL2viewSmall > div {
+	border: 1px solid #fff;
 }
 
-.FIL2viewMedium>div {
+.FIL2viewMedium > div {
 	font-size: 12px;
 	width: calc(100% - 8px);
 	height: 14px;
@@ -716,7 +717,7 @@ div {
 	margin-bottom: -5px;
 }
 
-.FIL2viewLarge>div {
+.FIL2viewLarge > div {
 	font-size: 12px;
 	width: calc(100% - 10px);
 	height: 18px;
@@ -728,8 +729,8 @@ div {
 	padding: 1px;
 }
 
-.darkMode .FIL2viewLarge>div {
-	border: 1px solid #FFF;
+.darkMode .FIL2viewLarge > div {
+	border: 1px solid #fff;
 }
 
 #tMgMemTable {
@@ -738,7 +739,7 @@ div {
 }
 
 #tMgMemTable td {
-	background-color: #BBB;
+	background-color: #bbb;
 }
 
 .darkMode #tMgMemTable td {
@@ -757,7 +758,7 @@ div {
 }
 
 #NORAout a {
-	color: #0F0;
+	color: #0f0;
 }
 
 #NORAspeech {
@@ -816,7 +817,7 @@ div {
 }
 
 .helpItem:hover {
-	background-color: #DDD;
+	background-color: #ddd;
 }
 
 .darkMode .helpItem:hover {
@@ -887,9 +888,9 @@ div {
 	top: 5px;
 	font-size: 24px;
 	line-height: 14px;
-	border: 1px solid rgba(255, 255, 255, .3);
+	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 5px;
-	color: rgba(255, 255, 255, .3);
+	color: rgba(255, 255, 255, 0.3);
 	text-align: center;
 	box-shadow: 0 0 1px #000;
 }
@@ -948,7 +949,7 @@ div {
 .winBig,
 .winExit,
 .winFld {
-	transition: .2s;
+	transition: 0.2s;
 }
 
 .app {
@@ -957,25 +958,25 @@ div {
 	border-radius: 5px;
 	text-align: center;
 	overflow: visible;
-	transition: background-color .5s, opacity .5s;
+	transition: background-color 0.5s, opacity 0.5s;
 }
 
 .app:hover {
-	background-color: #BBE;
+	background-color: #bbe;
 	/*Aero theme if supported*/
-	background-color: rgba(190, 190, 255, .6);
+	background-color: rgba(190, 190, 255, 0.6);
 }
 
 .app:active {
-	transition: background-color .1s;
-	background-color: #99F;
+	transition: background-color 0.1s;
+	background-color: #99f;
 	/*Aero theme if supported*/
-	background-color: rgba(150, 150, 255, .6);
+	background-color: rgba(150, 150, 255, 0.6);
 }
 
 .appIcon {
 	font-family: Courier, monospace;
-	color: #FFF;
+	color: #fff;
 	text-shadow: 0px 0px 5px #000;
 	width: 100px;
 	font-size: 50px;
@@ -993,7 +994,7 @@ div {
 .appName {
 	bottom: 0;
 	color: #000;
-	text-shadow: 0px 0px 2px #FFF;
+	text-shadow: 0px 0px 2px #fff;
 	font-size: 12px;
 	text-align: center;
 	width: 100px;
@@ -1047,7 +1048,7 @@ div {
 	user-select: none;
 	width: 1050px;
 	height: 32px;
-	color: #FFF;
+	color: #fff;
 	text-shadow: 0px 0px 2px #000;
 	font-family: Courier, monospace;
 	font-size: 21px;
@@ -1075,7 +1076,7 @@ div {
 }
 
 #icons::-webkit-scrollbar-thumb {
-	background: #BFBFBF !important;
+	background: #bfbfbf !important;
 	box-shadow: none !important;
 	border-radius: 0;
 }
@@ -1089,7 +1090,7 @@ div {
 	border-radius: 2px;
 	display: none;
 	position: static;
-	transition: background-color .5s;
+	transition: background-color 0.5s;
 	padding-right: 5px;
 }
 
@@ -1130,7 +1131,7 @@ div {
 }
 
 #icons .icon.openAppIcon .iconOpenIndicator {
-	box-shadow: 0 0 5px #FFF;
+	box-shadow: 0 0 5px #fff;
 }
 
 #icons .iconImg {
@@ -1175,8 +1176,8 @@ div {
 }
 
 #ctxMenu {
-	background-color: #FFF;
-	border: 1px solid #7F7F7F;
+	background-color: #fff;
+	border: 1px solid #7f7f7f;
 	color: #333;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 	display: none;
@@ -1198,7 +1199,7 @@ div {
 
 .darkMode #ctxMenu {
 	background-color: #272727;
-	color: #CCC;
+	color: #ccc;
 }
 
 .darkMode #ctxMenu.backdropFilterCtxMenu {
@@ -1217,7 +1218,6 @@ div {
 	transition: 0.2s;
 	padding: 2px;
 	padding-left: 4px;
-
 }
 
 #ctxMenu p:hover {
@@ -1247,7 +1247,7 @@ div {
 
 #windowFrameOverlay {
 	display: none;
-	box-shadow: inset 0 0 10px #FFF, 0 0 35px #000;
+	box-shadow: inset 0 0 10px #fff, 0 0 35px #000;
 	pointer-events: none;
 	z-index: 9999999999;
 }
@@ -1287,7 +1287,7 @@ div {
 .widget {
 	padding-top: 1px;
 	height: 31px;
-	color: #FFF;
+	color: #fff;
 	text-shadow: 0 0 2px #000;
 	position: static;
 	display: inline-block;
@@ -1479,15 +1479,15 @@ div {
 
 .darkMode #widgetMenu .winExit,
 .darkMode .notifWindow .winExit {
-	color: #FFF;
-	border-color: #FFF;
+	color: #fff;
+	border-color: #fff;
 }
 
 #liveBackground {
 	position: absolute;
 	display: none;
 	border: none;
-	background: #FFF;
+	background: #fff;
 	left: 0;
 	top: 0;
 	height: 100%;
@@ -1515,7 +1515,9 @@ div {
 	font-weight: bold;
 }
 
-#MPlframe, #VWcframe, #oldSiteFrame {
+#MPlframe,
+#VWcframe,
+#oldSiteFrame {
 	border: none;
 	display: block;
 	width: 100%;
@@ -1534,8 +1536,8 @@ div {
 	margin: 3px;
 }
 
-#contactForm input[type=text],
-#contactForm input[type=email] {
+#contactForm input[type="text"],
+#contactForm input[type="email"] {
 	width: 200px;
 }
 
@@ -1570,7 +1572,7 @@ div {
 	font-family: monospace;
 	padding: 0;
 	margin: auto;
-	color: #0A0;
+	color: #0a0;
 	width: 90%;
 	max-width: 1200px;
 }
@@ -1606,14 +1608,14 @@ div {
 	text-align: center;
 	transition: 1s;
 	z-index: 9999999999999999;
-	color: #FFF;
+	color: #fff;
 }
 
 #isLoadingDiv {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	background: #FFF;
+	background: #fff;
 	text-align: center;
 	padding: 32px;
 	border-radius: 32px;
@@ -1635,12 +1637,12 @@ div {
 	overflow: visible;
 	margin-top: 0;
 	margin-bottom: 0;
-	color: #FFF;
-	background: #0A0;
+	color: #fff;
+	background: #0a0;
 	position: relative;
 	display: inline-block;
 	white-space: nowrap;
-	box-shadow: 0 -3px 0 #0A0;
+	box-shadow: 0 -3px 0 #0a0;
 }
 
 #loadingBar:before {
