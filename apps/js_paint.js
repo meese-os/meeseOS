@@ -5,7 +5,7 @@ apps.jsPaint = new Application({
 	abbreviation: "jsP",
 	codeName: "jsPaint",
 	image: "appicons/CSE.png",
-	hideApp: 0,
+	hideApp: 2,
 	main: function() {
 		this.appWindow.setDims("auto", "auto", 753, 507);
 		this.appWindow.paddingMode(0);

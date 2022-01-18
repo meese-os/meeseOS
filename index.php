@@ -8,7 +8,7 @@
 		echo '<link rel="stylesheet" type="text/css" href="style.css?ms='.round(microtime(true) * 1000).'">';
 	?>
 
-	<link rel="icon" href="favicon.png" type="image/x-icon">
+	<link rel="icon" href="logo.png" type="image/x-icon">
 	<style id="smartIconStyle"></style>
 	<link rel="stylesheet" type="text/css" href="win95.css">
 </head>

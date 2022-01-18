@@ -387,7 +387,7 @@ var Application = function (
 	try {
 		if (typeof appIcon === "object") {
 			if (appIcon.hasOwnProperty('resizeable')) resizeable = appIcon.resizeable;
-			appImg = appIcon.image || "appicons/aOS.png";
+			appImg = appIcon.image || "logo.png";
 			appPath = appIcon.codeName;
 			keepOffDesktop = typeof appIcon.hideApp === "number" ? appIcon.hideApp : 1;
 			appVariables = appIcon.vars || {};
@@ -1020,6 +1020,7 @@ c(function() {
 c(function() {
 	PropertiesViewer();
 });
+
 c(function() {
 	FileManager();
 });

@@ -9,8 +9,8 @@ function console_log($output, $with_script_tags = true) {
 	echo $js_code;
 }
 
-$owner_email = "karabmeese@gmail.com";
-$website_url = "karameese.com";
+$owner_email = "ajmeese7@gmail.com";
+$website_url = "aaronmeese.com";
 
 $email = filter_var( $_POST["email"], FILTER_VALIDATE_EMAIL );
 if (!$_POST["subject"] || !$_POST["message"] || !$_POST["name"] || !$email) {

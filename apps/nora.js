@@ -275,7 +275,7 @@ apps.nora = new Application({
 			],
 			[
 				'how do i',
-				'how do i [some action on aOS]',
+				'how do i [some action on website]',
 				'Have me tell you how to do something, as long as that action has been documented.',
 				function (text) {
 					if (this[4].phrases[text.toLowerCase()]) {

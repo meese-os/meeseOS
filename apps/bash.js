@@ -46,10 +46,8 @@ apps.bash = new Application({
 			this.workdirtrans = this.workdirorig;
 
 			this.workdirdepth = 0;
-			if (this.workdirorig[0] === '/') {
-				this.workdirfinal = "window";
-			} else {
-				this.workdirfinal = 'window';
+			this.workdirfinal = 'window';
+			if (this.workdirorig[0] !== '/') {
 				this.workdirtrans = this.workdir + '/' + this.workdirtrans;
 			}
 

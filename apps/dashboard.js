@@ -4,7 +4,7 @@ apps.startMenu = new Application({
 	title: "Dashboard",
 	abbreviation: "DsB",
 	codeName: "startMenu",
-	image: "smarticons/aOS/fg.png",
+	image: "logo.png",
 	hideApp: 1,
 	launchTypes: 1,
 	main: function (launchType) {
