@@ -1,5 +1,5 @@
 // TODO: Figure out why this animation is being duplicated and fix it
-//new ghostCursor();
+// new ghostCursor();
 
 // element control shorthand
 function getId(target) {

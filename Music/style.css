@@ -1,9 +1,7 @@
 @font-face {
 	font-family: "W95FA";
-	src:
-		url('../W95FA/W95FA.otf') format('opentype'),
-		url('../W95FA/w95fa.woff') format('woff'),
-		url('../W95FA/w95fa.woff2');
+	src: url("../W95FA/W95FA.otf") format("opentype"),
+		url("../W95FA/w95fa.woff") format("woff"), url("../W95FA/w95fa.woff2");
 }
 
 html,
@@ -41,7 +39,7 @@ div {
 	width: 50%;
 	height: 100%;
 	text-align: center;
-	background-color: #FBCFED;
+	background-color: #fbcfed;
 }
 
 #controls {
@@ -87,7 +85,7 @@ div {
 }
 
 /* https://stackoverflow.com/a/38163892/6456163 */
-input[type='range']::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
 	-webkit-appearance: none;
 	background: #fa87f4;
 	border-radius: 10px;
@@ -95,13 +93,13 @@ input[type='range']::-webkit-slider-runnable-track {
 	margin-top: -1px;
 }
 
-input[type='range']::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	width: 10px;
 	height: 10px;
 	cursor: ns-resize;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.5) inset,
-	0 0 0 99px #fe00c0 inset;
+		0 0 0 99px #fe00c0 inset;
 	border-radius: 5px;
 }
 
@@ -116,7 +114,7 @@ input[type='range']::-webkit-slider-thumb {
 	padding: 0 !important;
 	margin: 0 !important;
 	overflow-y: auto;
-	overflow-x: hidden
+	overflow-x: hidden;
 }
 
 .marquee {

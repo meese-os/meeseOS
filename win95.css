@@ -1,7 +1,7 @@
 /* Windows 95 Styles */
 :root {
 	/* Vaporwave Color Palette */
-  --barbie: #fe00c0;
+	--barbie: #fe00c0;
 	--cotton-candy: #fa87f4;
 	--barney: #9701ff;
 	--bsod: #4900ff;
@@ -31,60 +31,60 @@
 /* scrollbars */
 ::-webkit-scrollbar {
 	width: 16px;
-	background-color: #DEDEDE;
-	background-image: url('win95scroll.png');
+	background-color: #dedede;
+	background-image: url("win95scroll.png");
 	box-shadow: none;
 }
 
 ::-webkit-scrollbar-corner {
-	background-color: #DEDEDE;
-	background-image: url('win95scroll.png');
+	background-color: #dedede;
+	background-image: url("win95scroll.png");
 	box-shadow: none;
 }
 
 ::-webkit-resizer {
 	border-radius: 0;
-	background-color: #BDBDBD;
+	background-color: #bdbdbd;
 	box-shadow: none;
 	width: 12px;
-	border-top: 2px solid #DEDEDE;
-	border-left: 2px solid #DEDEDE;
-	border-bottom: 2px solid #7B7B7B;
-	border-right: 2px solid #7B7B7B;
-	background-color: #BDBDBD;
+	border-top: 2px solid #dedede;
+	border-left: 2px solid #dedede;
+	border-bottom: 2px solid #7b7b7b;
+	border-right: 2px solid #7b7b7b;
+	background-color: #bdbdbd;
 }
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 0;
-	background-color: #BDBDBD;
+	background-color: #bdbdbd;
 	box-shadow: none;
 	width: 12px;
-	border-top: 2px solid #DEDEDE;
-	border-left: 2px solid #DEDEDE;
-	border-bottom: 2px solid #7B7B7B;
-	border-right: 2px solid #7B7B7B;
-	background-color: #BDBDBD;
+	border-top: 2px solid #dedede;
+	border-left: 2px solid #dedede;
+	border-bottom: 2px solid #7b7b7b;
+	border-right: 2px solid #7b7b7b;
+	background-color: #bdbdbd;
 }
 
 ::-webkit-scrollbar-button {
 	border-radius: 0;
-	background-color: #BDBDBD;
+	background-color: #bdbdbd;
 	box-shadow: none;
 	width: 12px;
-	border-top: 2px solid #DEDEDE;
-	border-left: 2px solid #DEDEDE;
-	border-bottom: 2px solid #7B7B7B;
-	border-right: 2px solid #7B7B7B;
-	background-color: #BDBDBD;
+	border-top: 2px solid #dedede;
+	border-left: 2px solid #dedede;
+	border-bottom: 2px solid #7b7b7b;
+	border-right: 2px solid #7b7b7b;
+	background-color: #bdbdbd;
 }
 
 /* buttons */
 button {
-	background-color: #BDBDBD;
-	border-top: 2px solid #DEDEDE;
-	border-left: 2px solid #DEDEDE;
-	border-bottom: 2px solid #7B7B7B;
-	border-right: 2px solid #7B7B7B;
+	background-color: #bdbdbd;
+	border-top: 2px solid #dedede;
+	border-left: 2px solid #dedede;
+	border-bottom: 2px solid #7b7b7b;
+	border-right: 2px solid #7b7b7b;
 	color: #000;
 	border-radius: 0;
 	transition: none;
@@ -92,37 +92,37 @@ button {
 }
 
 button:active {
-	border-top: 2px solid #7B7B7B;
-	border-left: 2px solid #7B7B7B;
-	border-bottom: 2px solid #DEDEDE;
-	border-right: 2px solid #DEDEDE;
+	border-top: 2px solid #7b7b7b;
+	border-left: 2px solid #7b7b7b;
+	border-bottom: 2px solid #dedede;
+	border-right: 2px solid #dedede;
 }
 
 #FIL2tbl div {
-	background-color: #BDBDBD;
-	border-top: 2px solid #DEDEDE;
-	border-left: 2px solid #DEDEDE;
-	border-bottom: 1px solid #7B7B7B;
-	border-right: 1px solid #7B7B7B;
-	box-shadow: inset -1px 0 0 #7B7B7B;
+	background-color: #bdbdbd;
+	border-top: 2px solid #dedede;
+	border-left: 2px solid #dedede;
+	border-bottom: 1px solid #7b7b7b;
+	border-right: 1px solid #7b7b7b;
+	box-shadow: inset -1px 0 0 #7b7b7b;
 	color: #000;
 }
 
 #FIL2tbl div:active {
-	border-top: 2px solid #7B7B7B;
-	border-left: 2px solid #7B7B7B;
-	border-bottom: 2px solid #DEDEDE;
-	border-right: 1px solid #DEDEDE;
-	box-shadow: inset -1px 0 0 #DEDEDE;
+	border-top: 2px solid #7b7b7b;
+	border-left: 2px solid #7b7b7b;
+	border-bottom: 2px solid #dedede;
+	border-right: 1px solid #dedede;
+	box-shadow: inset -1px 0 0 #dedede;
 }
 
 /* inputs */
 input,
 textarea {
-	border-top: 2px solid #DEDEDE;
-	border-left: 2px solid #DEDEDE;
-	border-bottom: 1px solid #7B7B7B;
-	border-right: 1px solid #7B7B7B;
+	border-top: 2px solid #dedede;
+	border-left: 2px solid #dedede;
+	border-bottom: 1px solid #7b7b7b;
+	border-right: 1px solid #7b7b7b;
 	color: #000;
 	border-radius: 0;
 	transition: none;
@@ -131,18 +131,18 @@ textarea {
 
 input:active,
 textarea:active {
-	border-top: 2px solid #7B7B7B;
-	border-left: 2px solid #7B7B7B;
-	border-bottom: 2px solid #DEDEDE;
-	border-right: 2px solid #DEDEDE;
+	border-top: 2px solid #7b7b7b;
+	border-left: 2px solid #7b7b7b;
+	border-bottom: 2px solid #dedede;
+	border-right: 2px solid #dedede;
 }
 
 /* dividers */
 hr {
-	border-top: 1px solid #7B7B7B;
-	border-left: 1px solid #7B7B7B;
-	border-bottom: 1px solid #DEDEDE;
-	border-right: 1px solid #DEDEDE;
+	border-top: 1px solid #7b7b7b;
+	border-left: 1px solid #7b7b7b;
+	border-bottom: 1px solid #dedede;
+	border-right: 1px solid #dedede;
 	background: none;
 	height: 0;
 	width: calc(100% - 20px);
@@ -157,7 +157,7 @@ hr {
 	border-right: var(--window-border-right);
 	margin-left: -2px;
 	margin-top: -2px;
-	background-color: #BDBDBD;
+	background-color: #bdbdbd;
 }
 
 #notifWindow {
@@ -166,19 +166,20 @@ hr {
 	border-left: var(--window-border-left);
 	border-bottom: var(--window-border-bottom);
 	border-right: var(--window-border-right);
-	background-color: #BDBDBD;
+	background-color: #bdbdbd;
 }
 
 #notifWindow .winExit {
-	border-top: 1px solid #DEDEDE;
-	border-bottom: 1px solid #7B7B7B;
-	border-left: 1px solid #DEDEDE;
-	border-right: 1px solid #7B7B7B;
+	border-top: 1px solid #dedede;
+	border-bottom: 1px solid #7b7b7b;
+	border-left: 1px solid #dedede;
+	border-right: 1px solid #7b7b7b;
 	width: 12px;
 	height: 12px;
 }
 
-.winAero, .winImg {
+.winAero,
+.winImg {
 	display: none;
 }
 
@@ -189,7 +190,9 @@ hr {
 	padding-left: 2px;
 	padding-right: 23px;
 	margin-top: 1px;
-	width: calc(100% - var(--windowBorderWidth) - var(--windowBorderWidth) - 23px);
+	width: calc(
+		100% - var(--windowBorderWidth) - var(--windowBorderWidth) - 23px
+	);
 }
 
 .winCap .smarticon {
@@ -204,10 +207,10 @@ hr {
 
 .winHTML {
 	border-radius: 0;
-	border-top: 1px solid #7B7B7B;
-	border-left: 1px solid #7B7B7B;
-	border-right: 1px solid #DEDEDE;
-	border-bottom: 1px solid #DEDEDE;
+	border-top: 1px solid #7b7b7b;
+	border-left: 1px solid #7b7b7b;
+	border-right: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
 	margin-left: -1px;
 	margin-bottom: -1px;
 	background-color: var(--windows-gray);
@@ -270,7 +273,7 @@ hr {
 	border-left: var(--window-border-left);
 	border-bottom: var(--window-border-bottom);
 	border-right: var(--window-border-right);
-	background-color: #BDBDBD !important;
+	background-color: #bdbdbd !important;
 	backdrop-filter: none;
 	color: #000;
 	border-radius: 0;
@@ -285,7 +288,7 @@ hr {
 
 #ctxMenu p:hover {
 	background-color: #000080 !important;
-	color: #FFF;
+	color: #fff;
 	transition: none;
 	box-shadow: none;
 }
@@ -295,8 +298,8 @@ hr {
 }
 
 #ctxMenu hr {
-	border-top: 1px solid #7B7B7B;
-	border-bottom: 1px solid #DEDEDE;
+	border-top: 1px solid #7b7b7b;
+	border-bottom: 1px solid #dedede;
 	border-left: none;
 	border-right: none;
 	width: calc(100% - 1px);
