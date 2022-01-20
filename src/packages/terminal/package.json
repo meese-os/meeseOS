@@ -1,0 +1,70 @@
+{
+  "name": "@osjs/xterm-application",
+  "version": "1.4.0",
+  "description": "OS.js Xterm Application",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint index.js",
+    "stylelint": "stylelint index.scss",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && NODE_ENV=production npm run build"
+  },
+  "files": [
+    "dist/",
+    "metadata.json",
+    "server.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/os-js/osjs-xterm-application.git"
+  },
+  "keywords": [
+    "osjs"
+  ],
+  "dependencies": {
+    "clipboard-polyfill": "^2.8.6",
+    "hyperapp": "^1.2.10",
+    "node-pty": "^0.9.0",
+    "uuid": "^7.0.1",
+    "xterm": "^4.4.0",
+    "xterm-addon-attach": "^0.5.0",
+    "xterm-addon-fit": "^0.3.0"
+  },
+  "author": "Anders Evenrud <andersevenrud@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/os-js/osjs-xterm-application/issues"
+  },
+  "homepage": "https://github.com/os-js/osjs-xterm-application#readme",
+  "osjs": {
+    "type": "package"
+  },
+  "devDependencies": {
+    "@osjs/dev-meta": "^2.0.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@osjs/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@osjs/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {}
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
+}
