@@ -8,15 +8,7 @@ enabled = true
   plugins = ["react"]
 
 [[analyzers]]
-name = "php"
-enabled = true
-
-[[analyzers]]
 name = "docker"
-enabled = true
-
-[[transformers]]
-name = "php-cs-fixer"
 enabled = true
 
 [[transformers]]

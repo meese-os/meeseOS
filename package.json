@@ -1,52 +1,90 @@
 {
-  "name": "developers-portfolio",
-  "description": "A personal static website/portfolio template hosted with GitHub Pages, built to showcase my recent projects.",
-  "homepage": "https://ajmeese7.github.io",
-  "version": "1.0.0",
-  "private": true,
-  "author": {
-    "name": "Aaron Meese",
-    "email": "ajmeese7@gmail.com",
-    "url": "https://github.com/ajmeese7"
+  "name": "@osjs/osjs",
+  "version": "3.1.12",
+  "description": "OS.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "eslint": "eslint 'src/client/**/*.js' 'src/server/**/*.js'",
+    "stylelint": "stylelint 'src/client/*.scss'",
+    "serve": "node src/server/index.js",
+    "build:manifest": "osjs-cli package:discover",
+    "package:discover": "osjs-cli package:discover",
+    "package:create": "osjs-cli package:create",
+    "make:auth": "osjs-cli make:auth",
+    "make:settings": "osjs-cli make:settings",
+    "make:vfs": "osjs-cli make:vfs",
+    "make:application": "osjs-cli make:application",
+    "make:iframe-application": "osjs-cli make:iframe-application",
+    "make:provider": "osjs-cli make:provider",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "keywords": [
+    "osjs"
+  ],
+  "author": "Anders Evenrud <andersevenrud@gmail.com>",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "@osjs/dev-meta": "^2.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "source-map-loader": "^0.2.4"
   },
   "dependencies": {
-    "@popperjs/core": "^2.1.1",
-    "@react-hook/window-size": "3.0.5",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.4.1",
-    "gh-pages": "^2.2.0",
-    "jquery": "^3.5.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-photo-gallery": "^8.0.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^4.0.3",
-    "react-typical": "^0.1.3",
-    "typescript": "^3.8.3"
+    "@osjs/calculator-application": "^1.2.8",
+    "@osjs/cli": "^3.1.3",
+    "@osjs/client": "^3.7.1",
+    "@osjs/dialogs": "^3.1.0",
+    "@osjs/draw-application": "^1.2.12",
+    "@osjs/filemanager-application": "^1.6.2",
+    "@osjs/freedesktop-sounds": "^3.0.3",
+    "@osjs/gnome-icons": "^4.0.5",
+    "@osjs/gui": "^4.0.36",
+    "@osjs/htmlviewer-application": "^1.2.6",
+    "@osjs/musicplayer-application": "^1.2.8",
+    "@osjs/panels": "^3.0.31",
+    "@osjs/preview-application": "^1.1.17",
+    "@osjs/server": "^3.2.3",
+    "@osjs/settings-application": "^1.1.8",
+    "@osjs/standard-theme": "^4.0.9",
+    "@osjs/textpad-application": "^1.2.7",
+    "hyperapp": "^1.2.10",
+    "typeface-roboto": "0.0.75"
   },
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "custom-deploy": "node pages.js"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osjs/OS.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/osjs/OS.js/issues"
+  },
+  "homepage": "https://www.os-js.org",
+  "engines": {
+    "node": ">=10.0.0"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 8
+    },
+    "extends": "@osjs/eslint-config"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+  "stylelint": {
+    "extends": "@osjs/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {}
+      ]
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+    "plugins": [
+      "@babel/plugin-transform-runtime"
     ]
   }
 }

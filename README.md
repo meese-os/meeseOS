@@ -1,32 +1,49 @@
 # aaronmeese.com
 
-This site is based off the template of the [Developer's Portfolio](https://github.com/hashirshoaeb/home)
-project, which was released under the GNU Lesser General Public License v3.0.
+## Installation
+You can also install this directly onto your system by using the following set of commands.
 
-The React code here deploys the code to my [GitHub pages](https://ajmeese7.github.io) repo,
-which [aaronmeese.com](https://aaronmeese.com) is pointing to for hosting.
+> **NOTE:** Requires Node v12 (or later).
 
-To build and deploy to GitHub pages, run `npm run build` then `npm run custom-deploy`. You'll want
-to have the CNAME file inside `/public` if you plan on implementing custom domain support, otherwise
-it'll be overwritten every commit.
+```bash
+# Install dependencies
+npm install
 
-If you want to start it up locally, run `npm run start`.
+# It's recommended that you update dependencies
+npm update
 
-## Desktop TODOs
-- Figure out how to change the PDF favicon
-- Testimonial picture format in configurations like the following:
-  - ```<img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." />```
-- After I get more testimonials from people, look into redoing the section to
-look more like [this](https://launchschool.com/results).
-- Make popular and recent slideshow style, so you can click between them
-- Add claps like stars for Medium, then fix them in the same way as the other sections
-  - Add an hourly ms param to update the cache every hour for Cloudflare Workers
-  - Add a similar `Load More` button to testimonials, where the `index > 1` can be
-  incremented somehow. Try to fade in the new ones gracefully.
+# Optionally install extra packages:
+# For a list of packages, see https://manual.os-js.org/resource/official/
+npm install @osjs/example-application
 
-## Mobile TODOs
-- Make the nav look better
-- See if I can break up the long list of social icons, it's too much
-- Fix the titles lookily choppily inserted
-- Make the stars and date break lines instead of pinching together
-- Limit testimonials and include a `Load More` button
+# Discover installed packages
+npm run package:discover
+
+# Build client
+npm run build
+
+# Start serving
+npm run serve
+```
+
+## Upgrade
+You can list outdated packages with `npm outdated`.
+
+To upgrade, use `npm update`.
+
+It is also recommended that you run `npm run package:discover` afterwards.
+
+> Releases uses [semantic versioning](https://semver.org/) so if an update has breaking changes the `npm update` command will not upgrade to the latest release. You'll have to do it manually by using `npm install <package>@^<version>`. **Make sure to read the [migration guide](https://manual.os-js.org/guide/migrate/) before you update for any special notices.**
+
+## Remove Packages
+Depending on how you installed your package(s), this is the procedure:
+
+1. `npm remove packagename` or `rm -rf src/packages/PackageName`
+2. `npm run package:discover`
+
+You can also disable packages.
+
+## SEE MORE [HERE](https://manual.os-js.org/)
+
+## Deployment
+For deploying to production, see [this guide](https://manual.os-js.org/guide/deploy/).
