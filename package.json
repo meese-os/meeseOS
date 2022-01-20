@@ -1,7 +1,7 @@
 {
-  "name": "@osjs/osjs",
+  "name": "aaronmeese.com",
   "version": "3.1.12",
-  "description": "OS.js",
+  "description": "aaronmeese.com, implemented in OS.js",
   "main": "index.js",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
@@ -23,11 +23,12 @@
   "keywords": [
     "osjs"
   ],
-  "author": "Anders Evenrud <andersevenrud@gmail.com>",
+  "author": "Aaron Meese <aaronjmeese@gmail.com>",
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@osjs/dev-meta": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "nodemon-webpack-plugin": "^4.7.0",
     "source-map-loader": "^0.2.4"
   },
   "dependencies": {

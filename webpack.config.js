@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {DefinePlugin} = webpack;
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 const npm = require('./package.json');
 const plugins = [];
 
@@ -20,6 +21,7 @@ if (mode === 'production') {
   }));
 }
 
+const siteTitle = 'Aaron Meese';
 module.exports = {
   mode,
   devtool: 'source-map',
@@ -29,6 +31,10 @@ module.exports = {
   performance: {
     maxEntrypointSize: 500 * 1024,
     maxAssetSize: 500 * 1024
+  },
+  watchOptions: {
+    aggregateTimeout: 500,
+    poll: 1000,
   },
   optimization: {
     minimize,
@@ -43,10 +49,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/client/index.ejs'),
       favicon: path.resolve(__dirname, 'src/client/favicon.png'),
-      title: 'OS.js'
+      title: siteTitle
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new NodemonPlugin({
+      script: 'src/server/index.js',
+
     }),
     ...plugins
   ],

@@ -42,8 +42,7 @@ import {name as applicationName} from './metadata.json';
  */
 const createConnection = async (core, proc, win, term, fit) => {
   const params = {
-    connection: {
-    },
+    connection: {},
     size: {
       cols: term.cols,
       rows: term.rows
@@ -100,9 +99,7 @@ const createConnection = async (core, proc, win, term, fit) => {
   });
 
   term.onKey(() => {
-    if (closed) {
-      win.destroy();
-    }
+    if (closed) win.destroy();
   });
 
   term.onResize((size) => {
@@ -122,7 +119,10 @@ const createConnection = async (core, proc, win, term, fit) => {
  * Creates a new Terminal and Window
  */
 const createTerminal = (core, proc, index) => {
-  const term = new Terminal();
+  const term = new Terminal({
+    cols: 40,
+    rows: 30,
+  });
 
   const fitAddon = new FitAddon();
   term.loadAddon(fitAddon);
@@ -163,7 +163,7 @@ const createTerminal = (core, proc, index) => {
     id: 'Xterm_' + String(index),
     title: proc.metadata.title.en_EN,
     icon: proc.resource(proc.metadata.icon),
-    dimension: {width: 960, height: 288},
+    dimension: {width: 625, height: 360},
     attributes: {
       classNames: ['Window_Xterm']
     }
