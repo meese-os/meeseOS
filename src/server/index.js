@@ -49,6 +49,7 @@ const {
 
 const config = require('./config.js');
 const osjs = new Core(config, {});
+require('dotenv').config();
 
 osjs.register(CoreServiceProvider, {before: true});
 osjs.register(PackageServiceProvider);

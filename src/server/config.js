@@ -49,9 +49,6 @@ module.exports = {
     login: username,
     ssh: {
       hostname: linux,
-
-      // Custom port
-      //args: '-p 1022'
     }
   },
 };

@@ -99,7 +99,9 @@ const createConnection = async (core, proc, win, term, fit) => {
   });
 
   term.onKey(() => {
-    if (closed) win.destroy();
+    if (closed) {
+      win.destroy();
+    }
   });
 
   term.onResize((size) => {
