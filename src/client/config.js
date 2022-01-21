@@ -40,5 +40,12 @@ export default {
       username: 'demo',
       password: 'demo'
     }
+  },
+  desktop: {
+    settings: {
+      widgets: [{
+        name: 'digitalclock'
+      }]
+    }
   }
 };
