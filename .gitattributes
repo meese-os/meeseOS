@@ -1,2 +1,29 @@
 # Reclassify .jsx files as JavaScript for analysis
 *.jsx linguist-language=JavaScript
+
+# Force the following filetypes to have Unix EOLs, so Windows does not break them
+*.* text eol=lf
+
+# (binary is a macro for -text -diff)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.zip binary
+*.7z binary
+*.ttf binary
+*.eot binary
+*.woff binary
+*.pyc binary
+*.pdf binary
+*.ez binary
+*.bz2 binary
+*.swp binary

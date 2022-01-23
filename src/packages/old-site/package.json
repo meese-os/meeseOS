@@ -1,0 +1,75 @@
+{
+  "name": "@osjs/example-react-application",
+  "version": "1.1.11",
+  "description": "OS.js Example React Application",
+  "scripts": {
+    "eslint": "eslint *.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "stylelint": "stylelint index.scss src/**/*.scss",
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/os-js/osjs-example-react-application.git"
+  },
+  "keywords": [
+    "osjs"
+  ],
+  "files": [
+    "dist/",
+    "server.js",
+    "metadata.json"
+  ],
+  "dependencies": {
+    "@react-hook/window-size": "3.0.5",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.6.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-typical": "^0.1.3"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "@osjs/dev-meta": "^1.0.3",
+    "css-loader": "^5.2.7",
+    "postcss": "^8.4.5",
+    "postcss-loader": "^4.0.0",
+    "postcss-preset-env": "^7.2.3",
+    "style-loader": "^2.0.0"
+  },
+  "author": "Anders Evenrud <andersevenrud@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/os-js/osjs-example-react-application/issues"
+  },
+  "homepage": "https://github.com/os-js/osjs-example-react-application#readme",
+  "osjs": {
+    "type": "package"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@osjs/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@osjs/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
+}
