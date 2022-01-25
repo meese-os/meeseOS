@@ -4,6 +4,7 @@ const minimize = mode === 'production';
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {DefinePlugin} = webpack;
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
@@ -56,14 +57,19 @@ module.exports = {
     }),
     new NodemonPlugin({
       script: 'src/server/index.js',
-
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve('src/client/dial-up-modem.mp3'),
+        to: path.resolve('dist/dial-up-modem.mp3')
+      },
+    ]),
     ...plugins
   ],
   module: {
     rules: [
       {
-        test: /\.(svg|png|jpe?g|gif|webp)$/,
+        test: /\.(svg|png|jpe?g|gif|webp|mp3)$/,
         use: [
           {
             loader: 'file-loader'

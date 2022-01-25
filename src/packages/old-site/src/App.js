@@ -1,14 +1,4 @@
 import React, { Fragment } from 'react';
-
-/*export default class App extends React.Component {
-  render() {
-    return (
-      <div>Second Test</div>
-    );
-  }
-}
-
-import React, { Fragment } from "react";*/
 import { BrowserRouter, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";

@@ -1,7 +1,7 @@
 {
   "name": "@osjs/xterm-application",
   "version": "1.4.0",
-  "description": "OS.js Xterm Application",
+  "description": "MeeseOS Terminal Application",
   "scripts": {
     "eslint": "eslint index.js",
     "stylelint": "stylelint index.scss",

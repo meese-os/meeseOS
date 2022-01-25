@@ -13,7 +13,7 @@ const register = (core, args, options, metadata) => {
   // Create a new Window instance
   proc.createWindow({
     id: proc.metadata.name,
-    title: metadata.title.en_EN,
+    title: metadata.title,
     dimension: {width: 600, height: 350},
     position: {left: 300, top: 200}
   })
