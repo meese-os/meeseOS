@@ -78,7 +78,6 @@ module.exports = {
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
-        include: /typeface/,
         use: {
           loader: 'file-loader',
           options: {
