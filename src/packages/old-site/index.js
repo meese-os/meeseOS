@@ -7,33 +7,36 @@ import App from './src/App';
 
 // Our launcher
 const register = (core, args, options, metadata) => {
-  // Create a new Application instance
-  const proc = core.make('osjs/application', {args, options, metadata});
+	// Create a new Application instance
+	const proc = core.make('osjs/application', {args, options, metadata});
 
-  // Create a new Window instance
-  proc.createWindow({
+	// Create a new Window instance
+	const win = proc.createWindow({
+		// TODO: Show title instead of name at the top of the window somehow
     id: proc.metadata.name,
     title: metadata.title,
-    dimension: {width: 600, height: 350},
-    position: {left: 300, top: 200}
-  })
-    .on('destroy', () => proc.destroy())
-    .render($content => ReactDOM.render(React.createElement(App), $content));
+		dimension: {width: 700, height: 450},
+		position: {left: 300, top: 200}
+	});
 
-  // Creates a new WebSocket connection (see server.js)
-  //const sock = proc.socket('/socket');
-  //sock.on('message', (...args) => console.log(args))
-  //sock.on('open', () => sock.send('Ping'));
+	win.maximize();
+	win.on('destroy', () => proc.destroy())
+	win.render($content => ReactDOM.render(React.createElement(App), $content));
 
-  // Use the internally core bound websocket
-  //proc.on('ws:message', (...args) => console.log(args))
-  //proc.send('Ping')
+	// Creates a new WebSocket connection (see server.js)
+	//const sock = proc.socket('/socket');
+	//sock.on('message', (...args) => console.log(args))
+	//sock.on('open', () => sock.send('Ping'));
 
-  // Creates a HTTP call (see server.js)
-  //proc.request('/test', {method: 'post'})
-  //.then(response => console.log(response));
+	// Use the internally core bound websocket
+	//proc.on('ws:message', (...args) => console.log(args))
+	//proc.send('Ping')
 
-  return proc;
+	// Creates a HTTP call (see server.js)
+	//proc.request('/test', {method: 'post'})
+	//.then(response => console.log(response));
+
+	return proc;
 };
 
 // Creates the internal callback function when OS.js launches an application

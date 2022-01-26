@@ -163,21 +163,22 @@ const createTerminal = (core, proc, index) => {
 
   proc.createWindow({
     id: 'Xterm_' + String(index),
-    title: proc.metadata.title.en_EN,
+    title: proc.metadata.title,
     icon: proc.resource(proc.metadata.icon),
     dimension: {width: 625, height: 360},
     attributes: {
       classNames: ['Window_Xterm']
     }
-  })
-    .on('resized', fit)
-    .on('maximize', fit)
-    .on('restore', fit)
-    .on('moved', () => term.focus())
-    .on('focus', () => term.focus())
-    .on('blur', () => term.blur())
-    .on('render', (win) => createConnection(core, proc, win, term, fit))
-    .render(render);
+  });
+
+  win.on('resized', fit)
+  win.on('maximize', fit)
+  win.on('restore', fit)
+  win.on('moved', () => term.focus())
+  win.on('focus', () => term.focus())
+  win.on('blur', () => term.blur())
+  win.on('render', (win) => createConnection(core, proc, win, term, fit))
+  win.render(render);
 };
 
 //

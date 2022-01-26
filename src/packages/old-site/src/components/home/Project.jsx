@@ -17,19 +17,18 @@ const Project = () => {
     const headers = {
       auth: {
         username: gitHubUsername,
-        password: process.env.REACT_APP_OAUTH_TOKEN
+        password: process.env.GITHUB_PAT
       }
     }
 
-    let data;
     axios
       .get("https://api.github.com/users/" + gitHubUsername + gitHubQuery, headers)
       .then(response => {
-        data = response.data;
-        setRecentProjectsArray(response.data.slice(0, projectsLength))
+        setRecentProjectsArray(response.data.slice(0, projectsLength));
+				return response.data;
       })
       .catch(error => console.error(error.message))
-      .finally(() => {
+      .then((data) => {
         // Sort by most popular projects
         let popular = data.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1);
         setPopularProjectsArray(popular.slice(0, projectsLength));
