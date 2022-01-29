@@ -1,6 +1,6 @@
 {
   "name": "@osjs/example-react-application",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "OS.js Example React Application",
   "scripts": {
     "eslint": "eslint *.js",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
-    "@osjs/dev-meta": "^1.0.3",
+    "@osjs/dev-meta": "git://github.com/ajmeese7/osjs-dev-meta",
     "css-loader": "^5.2.7",
     "postcss": "^8.4.5",
     "postcss-loader": "^4.0.0",

@@ -26,7 +26,7 @@ const Home = () => {
 };
 
 const App = () => (
-  <BrowserRouter basename={process.env.PUBLIC_URL + "/"}>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     {showNavigationbar && <Navbar />}
     <Route path="/" exact component={Home} />
     <Footer />

@@ -3,7 +3,6 @@ import axios from "axios";
 import { useWindowSize } from "@react-hook/window-size/throttled";
 import ProjectCard from "./ProjectCard";
 import {
-  gitHubUsername,
   gitHubQuery,
   projectsLength,
 } from "../../editable-stuff/configurations.json";
@@ -16,19 +15,22 @@ const Project = () => {
   const getGitHubData = useCallback((e) => {
     const headers = {
       auth: {
-        username: gitHubUsername,
-        password: process.env.GITHUB_PAT
+        username: process.env.GH_USERNAME,
+        password: process.env.GH_PAT
       }
     }
 
     axios
-      .get("https://api.github.com/users/" + gitHubUsername + gitHubQuery, headers)
+      .get("https://api.github.com/users/" + process.env.GH_USERNAME + gitHubQuery, headers)
       .then(response => {
         setRecentProjectsArray(response.data.slice(0, projectsLength));
 				return response.data;
       })
       .catch(error => console.error(error.message))
       .then((data) => {
+				// TODO: Handle this more elegantly, like displaying an error message
+				if (!data) return;
+
         // Sort by most popular projects
         let popular = data.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1);
         setPopularProjectsArray(popular.slice(0, projectsLength));

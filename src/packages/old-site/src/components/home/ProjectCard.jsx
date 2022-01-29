@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-require('dotenv').config();
 
 const ProjectCard = ({ value, index }) => {
   const [updated_at, setUpdatedAt] = useState("0 mints");
-
   const handleUpdateTime = useCallback(
     (e) => {
       const date = new Date(value.pushed_at);
@@ -86,7 +84,7 @@ const Languages = ({ value, svn_url }) => {
       .get(value, {
         auth: {
           username: process.env.GH_USERNAME,
-          password: process.env.OAUTH_TOKEN
+          password: process.env.GH_PAT
         }
       })
       .then(response => setData(response.data))
@@ -107,7 +105,7 @@ const Languages = ({ value, svn_url }) => {
   return (
     <div className="pb-3">
       {array.map((language) => (
-        <a 
+        <a
           key={language}
           className="badge badge-light card-link mr-2 mb-1 ml-0"
           href={svn_url + `/search?l=${language}`}

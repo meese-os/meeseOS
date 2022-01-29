@@ -1,6 +1,6 @@
 {
   "name": "aaronmeese.com",
-  "version": "3.1.12",
+  "version": "3.2.0",
   "description": "aaronmeese.com, implemented in OS.js",
   "main": "index.js",
   "scripts": {
@@ -26,17 +26,27 @@
   "author": "Aaron Meese <aaronjmeese@gmail.com>",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "@osjs/dev-meta": "^2.1.0",
-    "copy-webpack-plugin": "^5.1.1",
-    "html-webpack-plugin": "^3.2.0",
+    "@babel/plugin-transform-runtime": "^7.16.10",
+    "@babel/preset-env": "^7.16.11",
+    "@osjs/dev-meta": "git://github.com/ajmeese7/osjs-dev-meta",
+    "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^10.2.1",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
     "nodemon-webpack-plugin": "^4.7.0",
-    "source-map-loader": "^0.2.4"
+    "sass": "^1.49.0",
+    "sass-loader": "^12.4.0",
+    "source-map-loader": "^3.0.1",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "@osjs/calculator-application": "^1.2.8",
     "@osjs/cli": "^3.1.3",
     "@osjs/client": "^3.7.1",
-    "@osjs/dialogs": "^3.1.0",
+    "@osjs/dialogs": "^3.1.1",
     "@osjs/draw-application": "^1.2.12",
     "@osjs/filemanager-application": "^1.6.2",
     "@osjs/freedesktop-sounds": "^3.0.3",
@@ -46,14 +56,14 @@
     "@osjs/musicplayer-application": "^1.2.8",
     "@osjs/panels": "^3.0.31",
     "@osjs/preview-application": "^1.1.17",
-    "@osjs/server": "^3.2.3",
+    "@osjs/server": "git://github.com/ajmeese7/osjs-server",
     "@osjs/settings-application": "^1.1.8",
     "@osjs/standard-theme": "^4.0.9",
     "@osjs/textpad-application": "^1.2.7",
     "@osjs/widgets": "^3.1.0",
-    "dotenv": "^14.2.0",
+    "dotenv": "^14.3.2",
     "hyperapp": "^1.2.10",
-    "typeface-roboto": "0.0.75"
+    "typeface-roboto": "1.1.13"
   },
   "repository": {
     "type": "git",

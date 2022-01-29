@@ -1,5 +1,6 @@
 import React from "react";
 
+// TODO: Make the page scroll to the href instead of jerking
 const NavItem = ({ name, href }) => {
   // TODO: Re-implement the bolding if I can find a way to handle
   // the article item being deleted, or find a more creative way to do it
@@ -9,7 +10,8 @@ const NavItem = ({ name, href }) => {
     <li className="nav-item">
       <a
         className="nav-link lead"
-        href={process.env.PUBLIC_URL + href}
+				// TODO: Test for PDF
+        href={href}
         target={isPdf ? "_blank" : "_self"}
         rel={isPdf ? "noreferrer noopener" : ""}
       >

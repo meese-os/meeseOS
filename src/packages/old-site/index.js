@@ -12,7 +12,7 @@ const register = (core, args, options, metadata) => {
 
 	// Create a new Window instance
 	const win = proc.createWindow({
-		// TODO: Show title instead of name at the top of the window somehow
+		// TODO: Show title instead of name in app list, like the Music Player
     id: proc.metadata.name,
     title: metadata.title,
 		dimension: {width: 700, height: 450},

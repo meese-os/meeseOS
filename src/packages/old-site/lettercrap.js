@@ -7,13 +7,13 @@
   const likelihoodOfChangingExistingText = 0.1;
   const randomChoice = x => x[Math.floor(Math.random() * x.length)];
 
-  function createImageURL(text) {
-    let canvas = document.createElement('canvas');
-    let context = canvas.getContext('2d');
-    let fontsize = measureTextBinaryMethod(text, 'monospace', 0, 10, canvas.width);
-    canvas.height = fontsize + 1;
-    canvas.width = context.measureText(text).width + 2;
-    context.fillText(text, 1, fontsize);
+function createImageURL(text) {
+	let canvas = document.createElement('canvas');
+	let context = canvas.getContext('2d');
+	const fontsize = measureTextBinaryMethod(text, 'monospace', 0, 10, canvas.width);
+	canvas.height = fontsize + 1;
+	canvas.width = context.measureText(text).width + 2;
+	context.fillText(text, 1, fontsize);
     return canvas.toDataURL();
 
     // https://jsfiddle.net/be6ppdre/29/

@@ -1,8 +1,6 @@
-.swp
-.tern-*
 node_modules
-/packages.json
-/sessions
-/.env*
-/session-store.db
+packages.json
+sessions
+.env
+session-store.db
 dist

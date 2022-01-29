@@ -161,7 +161,7 @@ const createTerminal = (core, proc, index) => {
     });
   };
 
-  proc.createWindow({
+  const win = proc.createWindow({
     id: 'Xterm_' + String(index),
     title: proc.metadata.title,
     icon: proc.resource(proc.metadata.icon),
