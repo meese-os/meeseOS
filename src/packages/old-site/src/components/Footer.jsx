@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <footer style={bgStyle} className="mt-auto py-3 text-center">
-      {/* <strong> &copy; 2020 </strong>*/}
+      {/*<strong> &copy; {new Date().getFullYear()} </strong>*/}
       <a
         className="text-dark"
         target="_blank"

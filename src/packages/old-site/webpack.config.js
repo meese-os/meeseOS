@@ -1,5 +1,5 @@
 const path = require("path");
-const webpack = require('webpack');
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const dotenv = require("dotenv");
@@ -63,12 +63,26 @@ const jsxLoader = {
 		},
 	]
 };
-const binaryLoader = {
+const pdfLoader = {
 	test: /\.pdf$/,
 	loader: "file-loader",
 };
+const fontAwesomeLoader = {
+	test: /\.(ttf|eot|svg|woff(2)?)$/,
+	include: path.resolve(__dirname, "node_modules/font-awesome/fonts"),
+	use: [
+		{
+			loader: "file-loader",
+			options: {
+				name: "[name].[ext]",
+				outputPath: "fonts/",
+				publicPath: "./fonts/"
+			}
+		}
+	]
+}
 
-module.exports ={
+module.exports = {
 	mode,
 	devtool: "source-map",
 	entry: path.resolve(__dirname, "index.js"),
@@ -101,14 +115,21 @@ module.exports ={
 	],
 	module: {
 		rules: [
-			binaryLoader,
+			fontAwesomeLoader,
+			pdfLoader,
 			styleLoader,
 			jsxLoader,
 			{
 				test: /\.scss$/,
 				exclude: /node_modules/,
 				use: [
-					MiniCssExtractPlugin.loader,
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							esModule: false,
+							publicPath: "",
+						}
+					},
 					cssLoader,
 					postcssLoader,
 					sassLoader,

@@ -1,12 +1,12 @@
-const path = require('path');
-const mode = process.env.NODE_ENV || 'development';
-const minimize = mode === 'production';
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const path = require("path");
+const mode = process.env.NODE_ENV || "development";
+const minimize = mode === "production";
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const plugins = [];
 
-if (mode === 'production') {
+if (mode === "production") {
   plugins.push(new OptimizeCSSAssetsPlugin({
     cssProcessorOptions: {
       discardComments: true
@@ -16,25 +16,25 @@ if (mode === 'production') {
 
 module.exports = {
   mode,
-  devtool: 'source-map',
+  devtool: "source-map",
   entry: [
-    path.resolve(__dirname, 'index.js'),
+    path.resolve(__dirname, "index.js"),
   ],
   optimization: {
     minimize,
   },
   externals: {
-    osjs: 'OSjs'
+    osjs: "OSjs"
   },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        'logo.svg'
+        "logo.svg"
       ]
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
     ...plugins
   ],
@@ -42,26 +42,26 @@ module.exports = {
     rules: [
       {
         test: /\.(svg|png|jpe?g|gif|webp)$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: [
           {
-            loader: 'file-loader'
+            loader: "file-loader"
           }
         ]
       },
       {
         test: /\.(sa|sc|c)ss$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true
             }
           },
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               sourceMap: true
             }
@@ -70,9 +70,9 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: "babel-loader"
         }
       }
     ]
