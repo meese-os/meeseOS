@@ -43,11 +43,7 @@ module.exports = {
       {
         test: /\.(svg|png|jpe?g|gif|webp)$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        type: "asset/resource"
       },
       {
         test: /\.(sa|sc|c)ss$/,

@@ -21,7 +21,7 @@ const Navbar = () => {
         isTop ? "bg-transparent" : "bg-gradient"
       } `}
     >
-      <a className="navbar-brand" href={process.env.PUBLIC_URL + "/#home"}>
+      <a className="navbar-brand" href={process.env.PUBLIC_URL + "#home"}>
         {`<${FirstName} />`}
       </a>
       <button

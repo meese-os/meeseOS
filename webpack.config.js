@@ -70,11 +70,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.(svg|png|jpe?g|gif|webp|mp3)$/,
-				use: [
-					{
-						loader: "file-loader"
-					}
-				]
+				type: "asset/resource"
 			},
 			{
 				test: /\.(woff(2)?|ttf|eot)$/,

@@ -65,7 +65,7 @@ const jsxLoader = {
 };
 const pdfLoader = {
 	test: /\.pdf$/,
-	loader: "file-loader",
+	type: "asset/resource"
 };
 const fontAwesomeLoader = {
 	test: /\.(ttf|eot|svg|woff(2)?)$/,
@@ -104,8 +104,7 @@ module.exports = {
 		new webpack.DefinePlugin({
 			"process.env.PUBLIC_URL": JSON.stringify(minimize ? env_vars.PUBLIC_URL : localhost),
 			"process.env.GH_USERNAME": JSON.stringify(env_vars.GH_USERNAME),
-			"process.env.GH_PAT": JSON.stringify(env_vars.GH_PAT),
-			//"process.env.OAUTH_TOKEN": JSON.stringify(env_vars.OAUTH_TOKEN),
+			"process.env.GH_PAT": JSON.stringify(env_vars.GH_PAT)
 		}),
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
@@ -126,8 +125,7 @@ module.exports = {
 					{
 						loader: MiniCssExtractPlugin.loader,
 						options: {
-							esModule: false,
-							publicPath: "",
+							esModule: false
 						}
 					},
 					cssLoader,

@@ -1,6 +1,6 @@
 {
   "name": "aaronmeese.com",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "aaronmeese.com, implemented in OS.js",
   "main": "index.js",
   "scripts": {
@@ -67,12 +67,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/osjs/OS.js.git"
+    "url": "git+https://github.com/ajmeese7/aaronmeese.com.git"
   },
   "bugs": {
-    "url": "https://github.com/osjs/OS.js/issues"
+    "url": "https://github.com/ajmeese7/aaronmeese.com/issues"
   },
-  "homepage": "https://www.os-js.org",
+  "homepage": "https://aaronmeese.com",
   "engines": {
     "node": ">=10.0.0"
   },
