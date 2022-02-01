@@ -46,14 +46,14 @@ import {
 	NotificationServiceProvider,
 	SettingsServiceProvider,
 	AuthServiceProvider
-} from '@osjs/client';
+} from "@osjs/client";
 
-import {PanelServiceProvider} from '@osjs/panels';
-import {GUIServiceProvider} from '@osjs/gui';
-import {DialogServiceProvider} from '@osjs/dialogs';
-import {WidgetServiceProvider} from '@osjs/widgets';
-import config from './config.js';
-import './index.scss';
+import {PanelServiceProvider} from "@osjs/panels";
+import {GUIServiceProvider} from "@osjs/gui";
+import {DialogServiceProvider} from "@osjs/dialogs";
+import {WidgetServiceProvider} from "@osjs/widgets";
+import config from "./config.js";
+import "./index.scss";
 
 const init = () => {
 	const osjs = new Core(config, {});
@@ -73,4 +73,4 @@ const init = () => {
 	osjs.boot();
 };
 
-window.addEventListener('DOMContentLoaded', () => init());
+window.addEventListener("DOMContentLoaded", () => init());

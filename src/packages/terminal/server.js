@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-const os = require('os');
-const pty = require('node-pty');
-const {v4: uuidv4} = require('uuid');
+const os = require("os");
+const pty = require("node-pty");
+const {v4: uuidv4} = require("uuid");
 
 let connections = {};
 let terminals = [];
@@ -39,34 +39,34 @@ let terminals = [];
  * Creates a new Terminal
  */
 const createTerminal = (core, ws, options = {}, args = []) => {
-	const useLogin = core.config('xterm.login', true);
-	const hostname = core.config('xterm.ssh.hostname', 'localhost');
+	const useLogin = core.config("xterm.login", true);
+	const hostname = core.config("xterm.ssh.hostname", "localhost");
 
 	if (useLogin) {
-		const username = typeof useLogin === 'string' ? useLogin : options.username;
+		const username = typeof useLogin === "string" ? useLogin : options.username;
 		let sshCommand = `sshpass -p ${process.env.SSH_PASSWORD} ssh -o StrictHostKeyChecking=no ${username}@${hostname}`;
 
 		// If you're on Windows, you have to run `sshpass` from your WSL distro.
 		// Make sure you have the sshpass binary installed.
-		if (os.platform() === 'win32') sshCommand = `wsl -- ${sshCommand}`;
-		args = [...args, '-c', sshCommand];
+		if (os.platform() === "win32") sshCommand = `wsl -- ${sshCommand}`;
+		args = [...args, "-c", sshCommand];
 	}
 
 	// Logs on the server side (CLI) so does not pose a security threat
-	console.log('[Xterm]', 'Creating terminal...', {useLogin, options, args});
+	console.log("[Xterm]", "Creating terminal...", {useLogin, options, args});
 
-	const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
+	const shell = os.platform() === "win32" ? "powershell.exe" : "bash";
 	const size = options.size || {cols: 80, rows: 24};
 	const term = pty.spawn(shell, args, {
 		cols: size.cols,
 		rows: size.rows,
-		name: 'xterm-color',
+		name: "xterm-color",
 		cwd: process.cwd(),
 		env: process.env
 	});
 
 	const kill = () => {
-		console.log('[Xterm]', 'Closing terminal...');
+		console.log("[Xterm]", "Closing terminal...");
 		term.kill();
 
 		const foundIndex = terminals.findIndex(t => t.pid == term.pid);
@@ -82,7 +82,7 @@ const createTerminal = (core, ws, options = {}, args = []) => {
 	term.onExit((ev) => {
 		try {
 			// This is a workaround for ping wrapper
-			ws.send(JSON.stringify({action: 'exit', event: ev}));
+			ws.send(JSON.stringify({action: "exit", event: ev}));
 		} catch (e) {
 			console.warn(e);
 		}
@@ -97,9 +97,9 @@ const createTerminal = (core, ws, options = {}, args = []) => {
 		}
 	});
 
-	ws.on('message', (data) => {
+	ws.on("message", (data) => {
 		// This is a workaround for ping wrapper
-		if (typeof data === 'string') {
+		if (typeof data === "string") {
 			const message = JSON.parse(data);
 			if (message.data) {
 				term.write(message.data);
@@ -109,7 +109,7 @@ const createTerminal = (core, ws, options = {}, args = []) => {
 		}
 	});
 
-	ws.on('close', () => kill());
+	ws.on("close", () => kill());
 
 	terminals.push({
 		uuid: options.uuid,
@@ -123,10 +123,10 @@ const createTerminal = (core, ws, options = {}, args = []) => {
  * Creates a new Terminal connection
  */
 const createConnection = (core, ws) => {
-	console.log('[Xterm]', 'Creating connection...');
+	console.log("[Xterm]", "Creating connection...");
 	let pinged = false;
 
-	ws.on('message', (uuid) => {
+	ws.on("message", (uuid) => {
 		if (!pinged) {
 			try {
 				const term = createTerminal(core, ws, connections[uuid]);
@@ -145,8 +145,8 @@ const createConnection = (core, ws) => {
 const init = async (core, proc) => {
 	const {app} = core;
 
-	app.post(proc.resource('/create'), (req, res) => {
-		console.log('[Xterm]', 'Requested connection...');
+	app.post(proc.resource("/create"), (req, res) => {
+		console.log("[Xterm]", "Requested connection...");
 
 		const username = req.session.user.username;
 		const uuid = uuidv4();
@@ -160,8 +160,8 @@ const init = async (core, proc) => {
 		res.json({uuid});
 	});
 
-	app.post(proc.resource('/resize'), (req, res) => {
-		console.log('[Xterm]', 'Requested resize...');
+	app.post(proc.resource("/resize"), (req, res) => {
+		console.log("[Xterm]", "Requested resize...");
 
 		const {size, pid, uuid} = req.body;
 		const {cols, rows} = size;
@@ -177,7 +177,7 @@ const init = async (core, proc) => {
 		res.send();
 	});
 
-	app.ws(proc.resource('/socket'), (ws, req) => {
+	app.ws(proc.resource("/socket"), (ws, req) => {
 		createConnection(core, ws);
 	});
 };

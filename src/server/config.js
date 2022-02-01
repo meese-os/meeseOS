@@ -34,16 +34,16 @@
 // Complete config tree: https://github.com/os-js/osjs-server/blob/master/src/config.js
 //
 
-const path = require('path');
-const root = path.resolve(__dirname, '../../');
-const username = 'xterm';
-const linux = 'raspberrypi';
-const windows = 'localhost';
+const path = require("path");
+const root = path.resolve(__dirname, "../../");
+const username = "xterm";
+const linux = "raspberrypi";
+//const windows = "localhost";
 
 module.exports = {
 	root,
 	port: 8000,
-	public: path.resolve(root, 'dist'),
+	public: path.resolve(root, "dist"),
 	xterm: {
 		// String to force username, false to login to default account
 		login: username,

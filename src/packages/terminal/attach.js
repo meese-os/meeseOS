@@ -15,16 +15,16 @@ export class AttachAddon {
 	constructor(socket, options) {
 		this._socket = socket;
 		// always set binary type to arraybuffer, we do not handle blobs
-		this._socket.binaryType = 'arraybuffer';
+		this._socket.binaryType = "arraybuffer";
 		this._bidirectional = (options && options.bidirectional === false) ? false : true;
 		this._disposables = [];
 	}
 
 	activate(terminal) {
 		this._disposables.push(
-			addSocketListener(this._socket, 'message', ev => {
+			addSocketListener(this._socket, "message", ev => {
 				const data = ev.data;
-				if (typeof data === 'string') {
+				if (typeof data === "string") {
 					const message = JSON.parse(data);
 					if (message.content) {
 						terminal.write(message.content);
@@ -40,8 +40,8 @@ export class AttachAddon {
 			this._disposables.push(terminal.onBinary(data => this._sendBinary(data)));
 		}
 
-		this._disposables.push(addSocketListener(this._socket, 'close', () => this.dispose()));
-		this._disposables.push(addSocketListener(this._socket, 'error', () => this.dispose()));
+		this._disposables.push(addSocketListener(this._socket, "close", () => this.dispose()));
+		this._disposables.push(addSocketListener(this._socket, "error", () => this.dispose()));
 	}
 
 	dispose() {

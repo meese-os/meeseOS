@@ -37,14 +37,14 @@
 export default {
 	auth: {
 		login: {
-			username: 'demo',
-			password: 'demo'
+			username: "demo",
+			password: "demo"
 		}
 	},
 	desktop: {
 		settings: {
 			widgets: [{
-				name: 'digitalclock'
+				name: "digitalclock"
 			}]
 		}
 	}

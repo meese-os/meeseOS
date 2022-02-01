@@ -45,11 +45,11 @@ const {
 	VFSServiceProvider,
 	AuthServiceProvider,
 	SettingsServiceProvider
-} = require('@osjs/server');
+} = require("@osjs/server");
 
-const config = require('./config.js');
+const config = require("./config.js");
 const osjs = new Core(config, {});
-require('dotenv').config();
+require("dotenv").config();
 
 osjs.register(CoreServiceProvider, {before: true});
 osjs.register(PackageServiceProvider);
@@ -65,8 +65,8 @@ const shutdown = signal => (error) => {
 	osjs.destroy(() => process.exit(signal));
 };
 
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
+process.on("SIGTERM", shutdown(0));
+process.on("SIGINT", shutdown(0));
+process.on("exit", shutdown(0));
 
 osjs.boot().catch(shutdown(1));

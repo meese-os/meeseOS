@@ -27,7 +27,7 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-const path = require('path');
+const path = require("path");
 
 //
 // This is where you can place your custom CLI tasks
@@ -36,8 +36,8 @@ const path = require('path');
 //
 
 module.exports = {
-  discover: [
-    path.resolve(__dirname, '../packages') // OS.js/src/packages
-  ],
-  tasks: []
+	discover: [
+		path.resolve(__dirname, "../packages") // OS.js/src/packages
+	],
+	tasks: []
 };
