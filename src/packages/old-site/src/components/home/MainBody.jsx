@@ -47,7 +47,7 @@ const MainBody = () => {
           )}
         </h1>
         <TypingAnimation />
-        <div className="p-5">
+        <div className="p-5" id="socialIcons">
           {icons && icons.map((icon,) => (
             <a
               key={icon.id}

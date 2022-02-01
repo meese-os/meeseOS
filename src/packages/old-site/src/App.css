@@ -490,3 +490,7 @@
 .bg-gradient {
   background: linear-gradient(rgb(245, 245, 245), rgba(245, 245, 245, 0));
 }
+
+#socialIcons a:hover {
+	text-decoration: none;
+}
