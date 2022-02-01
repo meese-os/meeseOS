@@ -39,13 +39,13 @@
 //
 
 import {
-  Core,
-  CoreServiceProvider,
-  DesktopServiceProvider,
-  VFSServiceProvider,
-  NotificationServiceProvider,
-  SettingsServiceProvider,
-  AuthServiceProvider
+	Core,
+	CoreServiceProvider,
+	DesktopServiceProvider,
+	VFSServiceProvider,
+	NotificationServiceProvider,
+	SettingsServiceProvider,
+	AuthServiceProvider
 } from '@osjs/client';
 
 import {PanelServiceProvider} from '@osjs/panels';
@@ -56,21 +56,21 @@ import config from './config.js';
 import './index.scss';
 
 const init = () => {
-  const osjs = new Core(config, {});
+	const osjs = new Core(config, {});
 
-  // Register your service providers
-  osjs.register(CoreServiceProvider);
-  osjs.register(DesktopServiceProvider);
-  osjs.register(VFSServiceProvider);
-  osjs.register(NotificationServiceProvider);
-  osjs.register(SettingsServiceProvider, {before: true});
-  osjs.register(AuthServiceProvider, {before: true});
-  osjs.register(PanelServiceProvider);
-  osjs.register(DialogServiceProvider);
-  osjs.register(GUIServiceProvider);
-  osjs.register(WidgetServiceProvider);
+	// Register your service providers
+	osjs.register(CoreServiceProvider);
+	osjs.register(DesktopServiceProvider);
+	osjs.register(VFSServiceProvider);
+	osjs.register(NotificationServiceProvider);
+	osjs.register(SettingsServiceProvider, {before: true});
+	osjs.register(AuthServiceProvider, {before: true});
+	osjs.register(PanelServiceProvider);
+	osjs.register(DialogServiceProvider);
+	osjs.register(GUIServiceProvider);
+	osjs.register(WidgetServiceProvider);
 
-  osjs.boot();
+	osjs.boot();
 };
 
 window.addEventListener('DOMContentLoaded', () => init());

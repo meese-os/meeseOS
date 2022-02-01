@@ -35,17 +35,17 @@
 //
 
 export default {
-  auth: {
-    login: {
-      username: 'demo',
-      password: 'demo'
-    }
-  },
-  desktop: {
-    settings: {
-      widgets: [{
-        name: 'digitalclock'
-      }]
-    }
-  }
+	auth: {
+		login: {
+			username: 'demo',
+			password: 'demo'
+		}
+	},
+	desktop: {
+		settings: {
+			widgets: [{
+				name: 'digitalclock'
+			}]
+		}
+	}
 };

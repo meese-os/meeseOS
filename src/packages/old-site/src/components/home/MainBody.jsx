@@ -84,8 +84,8 @@ const phrases = descWords.map(x => "let " + lastName + " = '" + x + "';")
 const typingArray = interleave(phrases, 1750)
 
 // https://github.com/catalinmiron/react-typical/issues/6#issuecomment-667327923
-const TypingAnimation =  React.memo(() => {
-  return <Typical wrapper="p" steps={typingArray} loop={1} className={'lead'} />
+const TypingAnimation = React.memo(() => {
+	return <Typical wrapper="p" steps={typingArray} loop={1} className={'lead'} />
 }, (props, prevProp) => true ); // this line prevents re-rendering
 
 export default MainBody;

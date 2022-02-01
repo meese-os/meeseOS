@@ -39,12 +39,12 @@
 //
 
 const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
+	Core,
+	CoreServiceProvider,
+	PackageServiceProvider,
+	VFSServiceProvider,
+	AuthServiceProvider,
+	SettingsServiceProvider
 } = require('@osjs/server');
 
 const config = require('./config.js');
@@ -58,11 +58,11 @@ osjs.register(AuthServiceProvider);
 osjs.register(SettingsServiceProvider);
 
 const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
+	if (error instanceof Error) {
+		console.error(error);
+	}
 
-  osjs.destroy(() => process.exit(signal));
+	osjs.destroy(() => process.exit(signal));
 };
 
 process.on('SIGTERM', shutdown(0));
