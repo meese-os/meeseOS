@@ -1,29 +1,14 @@
-# Reclassify .jsx files as JavaScript for analysis
-*.jsx linguist-language=JavaScript
+# Don't allow people to merge changes to these generated files, because the result
+# may be invalid.  You need to run "rush update" again.
+pnpm-lock.yaml               merge=text
+shrinkwrap.yaml              merge=binary
+npm-shrinkwrap.json          merge=binary
+yarn.lock                    merge=binary
 
-# Force the following filetypes to have Unix EOLs, so Windows does not break them
-*.* text eol=lf
-
-# (binary is a macro for -text -diff)
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.ico binary
-*.mov binary
-*.mp4 binary
-*.mp3 binary
-*.flv binary
-*.fla binary
-*.swf binary
-*.gz binary
-*.zip binary
-*.7z binary
-*.ttf binary
-*.eot binary
-*.woff binary
-*.pyc binary
-*.pdf binary
-*.ez binary
-*.bz2 binary
-*.swp binary
+# Rush's JSON config files use JavaScript-style code comments.  The rule below prevents pedantic
+# syntax highlighters such as GitHub's from highlighting these comments as errors.  Your text editor
+# may also require a special configuration to allow comments in JSON.
+#
+# For more information, see this issue: https://github.com/microsoft/rushstack/issues/1088
+#
+*.json                       linguist-language=JSON-with-Comments
