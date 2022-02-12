@@ -1,0 +1,39 @@
+{
+  "name": "___NAME___",
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "eslint": "eslint index.js server.js",
+    "stylelint": "stylelint index.scss",
+    "prepublishOnly": "npm run test && rm ./dist/* && npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@osjs/dev-meta": "^2.1.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@osjs/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@osjs/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "osjs": {
+    "type": "package"
+  }
+}

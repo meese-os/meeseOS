@@ -1,0 +1,18 @@
+name: CodeClimate Coverage
+on: [push, pull_request]
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    name: CodeClimate Coverage
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14'
+    - run: npm install -g jest
+    - run: npm install
+    - uses: paambaati/codeclimate-action@v2.4.0
+      env:
+        CC_TEST_REPORTER_ID: c7ef634d96a67d1c98a87dadc02205dc01f9b935cd10699d9d1bce46ccdcbd27
+      with:
+        coverageCommand: npm run coverage

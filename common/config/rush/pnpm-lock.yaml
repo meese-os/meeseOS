@@ -5,14 +5,39 @@ importers:
   .:
     specifiers: {}
 
+  ../../cli:
+    specifiers:
+      '@osjs/eslint-config': ^2.0.1
+      commander: ^4.1.1
+      consola: ^2.15.0
+      eslint: ^7.17.0
+      fs-extra: ^9.0.1
+      getopts: ^2.2.5
+      globby: ^11.0.2
+      inquirer: ^7.3.3
+      temp: ^0.9.4
+      which: ^2.0.2
+    dependencies:
+      commander: 4.1.1
+      consola: 2.15.3
+      fs-extra: 9.1.0
+      getopts: 2.3.0
+      globby: 11.1.0
+      inquirer: 7.3.3
+      temp: 0.9.4
+      which: 2.0.2
+    devDependencies:
+      '@osjs/eslint-config': 2.0.1_eslint@7.32.0
+      eslint: 7.32.0
+
   ../../website:
     specifiers:
+      '@aaronmeese.com/cli': workspace:*
       '@babel/core': ^7.12.9
       '@babel/plugin-transform-runtime': ^7.12.1
       '@babel/preset-env': ^7.12.7
       '@babel/runtime': ^7.12.5
       '@osjs/calculator-application': ^1.2.8
-      '@osjs/cli': ^3.1.3
       '@osjs/client': ^3.7.1
       '@osjs/dialogs': ^3.1.0
       '@osjs/draw-application': ^1.2.12
@@ -52,8 +77,8 @@ importers:
       webpack: ^4.44.2
       webpack-cli: ^3.3.12
     dependencies:
+      '@aaronmeese.com/cli': link:../cli
       '@osjs/calculator-application': 1.2.8
-      '@osjs/cli': 3.1.3
       '@osjs/client': 3.7.2
       '@osjs/dialogs': 3.1.1
       '@osjs/draw-application': 1.2.12
@@ -1339,21 +1364,6 @@ packages:
     dependencies:
       '@osjs/gui': 4.1.0
       hyperapp: 1.2.10
-    dev: false
-
-  /@osjs/cli/3.1.3:
-    resolution: {integrity: sha512-84UZB3t/r8GKELp2D4LTyLkDtNWLYzS8txFhc3TFW+3XW10JrFYsuG1PpTEMRlPPVpJVJ73xBHiKJP/zyStDfA==}
-    engines: {node: '>=8.0'}
-    hasBin: true
-    dependencies:
-      commander: 4.1.1
-      consola: 2.15.3
-      fs-extra: 9.1.0
-      getopts: 2.3.0
-      globby: 11.1.0
-      inquirer: 7.3.3
-      temp: 0.9.4
-      which: 2.0.2
     dev: false
 
   /@osjs/client/3.7.2:

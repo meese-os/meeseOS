@@ -460,6 +460,10 @@
     {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"
+    },
+    {
+      "packageName": "@aaronmeese.com/cli",
+      "projectFolder": "cli"
     }
   ]
 }
