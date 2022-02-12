@@ -466,6 +466,10 @@
       "projectFolder": "client"
     },
     {
+      "packageName": "@aaronmeese.com/dialogs",
+      "projectFolder": "dialogs"
+    },
+    {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"
     }

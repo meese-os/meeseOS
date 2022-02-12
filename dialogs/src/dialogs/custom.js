@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,49 +28,44 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the client bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+import {app, h} from 'hyperapp';
+import Dialog from '../dialog';
 
-import {
-  Core,
-  CoreServiceProvider,
-  DesktopServiceProvider,
-  VFSServiceProvider,
-  NotificationServiceProvider,
-  SettingsServiceProvider,
-  AuthServiceProvider
-} from '@aaronmeese.com/client';
+/**
+ * Custom OS.js Dialog
+ */
+export default class CustomDialog extends Dialog {
 
-import {PanelServiceProvider} from '@osjs/panels';
-import {GUIServiceProvider} from '@osjs/gui';
-import {DialogServiceProvider} from '@aaronmeese.com/dialogs';
-import {WidgetServiceProvider} from '@osjs/widgets';
-import config from './config.js';
-import './index.scss';
+  constructor(core, options, valueCallback, callback) {
+    super(core, {}, options, callback);
 
-const init = () => {
-  const osjs = new Core(config, {});
+    this.valueCallback = valueCallback;
+  }
 
-  // Register your service providers
-  osjs.register(CoreServiceProvider);
-  osjs.register(DesktopServiceProvider);
-  osjs.register(VFSServiceProvider);
-  osjs.register(NotificationServiceProvider);
-  osjs.register(SettingsServiceProvider, {before: true});
-  osjs.register(AuthServiceProvider, {before: true});
-  osjs.register(PanelServiceProvider);
-  osjs.register(DialogServiceProvider);
-  osjs.register(GUIServiceProvider);
-  osjs.register(WidgetServiceProvider);
+  render(render) {
+    return super.render({}, ($content, win) => render($content, win, this));
+  }
 
-  osjs.boot();
-};
+  renderCustom(render, styles = {}) {
+    return this.render(($content, dialogWindow, dialog) => {
+      app({}, {}, () => {
+        return this.createView([
+          h('div', {
+            style: {
+              'flex-grow': 1,
+              'flex-shrink': 1,
+              position: 'relative',
+              ...styles
+            },
+            oncreate: $el => render($el, dialogWindow, dialog)
+          })
+        ]);
+      }, $content);
+    });
+  }
 
-window.addEventListener('DOMContentLoaded', () => init());
+  getValue() {
+    return this.valueCallback(this);
+  }
+
+}

@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,49 +28,55 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the client bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+import {h, app} from 'hyperapp';
+import Dialog from '../dialog';
+import {Box} from '@osjs/gui';
 
-import {
-  Core,
-  CoreServiceProvider,
-  DesktopServiceProvider,
-  VFSServiceProvider,
-  NotificationServiceProvider,
-  SettingsServiceProvider,
-  AuthServiceProvider
-} from '@aaronmeese.com/client';
+/**
+ * Default OS.js Confirm Dialog
+ */
+export default class ConfirmDialog extends Dialog {
 
-import {PanelServiceProvider} from '@osjs/panels';
-import {GUIServiceProvider} from '@osjs/gui';
-import {DialogServiceProvider} from '@aaronmeese.com/dialogs';
-import {WidgetServiceProvider} from '@osjs/widgets';
-import config from './config.js';
-import './index.scss';
+  /**
+   * Constructor
+   * @param {Core} core OS.js Core reference
+   * @param {Object} args Arguments given from service creation
+   * @param {String} [args.title] Dialog title
+   * @param {String} [args.message] Dialog message
+   * @param {Boolean} [args.yesno=true] Yes/No or Ok/Cancel
+   * @param {String[]} [args.buttons] Custom buttons
+   * @param {Function} callback The callback function
+   */
+  constructor(core, args, callback) {
+    const yesno = typeof args.yesno === 'undefined' || args.yesno === true;
 
-const init = () => {
-  const osjs = new Core(config, {});
+    const buttons = args.buttons instanceof Array
+      ? args.buttons
+      : yesno ? ['yes', 'no'] : ['ok', 'cancel'];
 
-  // Register your service providers
-  osjs.register(CoreServiceProvider);
-  osjs.register(DesktopServiceProvider);
-  osjs.register(VFSServiceProvider);
-  osjs.register(NotificationServiceProvider);
-  osjs.register(SettingsServiceProvider, {before: true});
-  osjs.register(AuthServiceProvider, {before: true});
-  osjs.register(PanelServiceProvider);
-  osjs.register(DialogServiceProvider);
-  osjs.register(GUIServiceProvider);
-  osjs.register(WidgetServiceProvider);
+    super(core, args, {
+      className: 'confirm',
+      window: {
+        title: args.title || 'Confirm',
+        attributes: {
+          minDimension: {
+            height: 140
+          }
+        }
+      },
+      buttons
+    }, callback);
+  }
 
-  osjs.boot();
-};
+  render(options) {
+    super.render(options, ($content) => {
+      app({}, {}, (state, actions) => this.createView([
+        h(Box, {grow: 1}, [
+          h('div', {class: 'osjs-dialog-message'}, String(this.args.message))
+        ])
+      ]), $content);
+    });
+  }
 
-window.addEventListener('DOMContentLoaded', () => init());
+}
+

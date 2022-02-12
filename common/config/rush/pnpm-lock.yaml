@@ -91,15 +91,68 @@ importers:
       webpack: 4.46.0_webpack-cli@3.3.12
       webpack-cli: 3.3.12_webpack@4.46.0
 
-  ../../website:
+  ../../dialogs:
     specifiers:
-      '@aaronmeese.com/cli': workspace:*
-      '@aaronmeese.com/client': workspace:*
       '@babel/core': ^7.12.9
       '@babel/plugin-transform-runtime': ^7.12.1
       '@babel/preset-env': ^7.12.7
       '@babel/runtime': ^7.12.5
-      '@osjs/dialogs': ^3.1.0
+      '@osjs/eslint-config': ^2.0.0
+      '@osjs/gui': ^4.0.36
+      '@osjs/stylelint-config': ^2.0.0
+      babel-loader: ^8.2.1
+      copy-webpack-plugin: ^6.3.2
+      css-loader: ^5.0.1
+      deepmerge: ^2.2.1
+      eslint: ^7.14.0
+      file-loader: ^5.1.0
+      hyperapp: ^1.2.10
+      is-plain-object: ^2.0.4
+      mini-css-extract-plugin: ^1.3.1
+      optimize-css-assets-webpack-plugin: ^5.0.4
+      sass: ^1.32.13
+      sass-loader: ^10.1.0
+      stylelint: ^13.8.0
+      stylelint-config-standard: ^20.0.0
+      stylelint-scss: ^3.18.0
+      webpack: ^4.44.2
+      webpack-cli: ^3.3.12
+    dependencies:
+      '@osjs/gui': 4.1.0
+      deepmerge: 2.2.1
+      hyperapp: 1.2.10
+      is-plain-object: 2.0.4
+    devDependencies:
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
+      '@babel/runtime': 7.17.2
+      '@osjs/eslint-config': 2.0.1_eslint@7.32.0
+      '@osjs/stylelint-config': 2.0.1_stylelint@13.13.1
+      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
+      copy-webpack-plugin: 6.4.1_webpack@4.46.0
+      css-loader: 5.2.7_webpack@4.46.0
+      eslint: 7.32.0
+      file-loader: 5.1.0_webpack@4.46.0
+      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      sass: 1.49.7
+      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
+      stylelint: 13.13.1
+      stylelint-config-standard: 20.0.0_stylelint@13.13.1
+      stylelint-scss: 3.21.0_stylelint@13.13.1
+      webpack: 4.46.0_webpack-cli@3.3.12
+      webpack-cli: 3.3.12_webpack@4.46.0
+
+  ../../website:
+    specifiers:
+      '@aaronmeese.com/cli': workspace:*
+      '@aaronmeese.com/client': workspace:*
+      '@aaronmeese.com/dialogs': workspace:*
+      '@babel/core': ^7.12.9
+      '@babel/plugin-transform-runtime': ^7.12.1
+      '@babel/preset-env': ^7.12.7
+      '@babel/runtime': ^7.12.5
       '@osjs/draw-application': ^1.2.12
       '@osjs/eslint-config': ^2.0.0
       '@osjs/filemanager-application': ^1.6.2
@@ -139,7 +192,7 @@ importers:
     dependencies:
       '@aaronmeese.com/cli': link:../cli
       '@aaronmeese.com/client': link:../client
-      '@osjs/dialogs': 3.1.1
+      '@aaronmeese.com/dialogs': link:../dialogs
       '@osjs/draw-application': 1.2.12
       '@osjs/filemanager-application': 1.6.2
       '@osjs/freedesktop-sounds': 3.0.3
@@ -1444,15 +1497,6 @@ packages:
       async-dependency-graph: 1.1.5
       deepmerge: 4.2.2
       omit-deep: 0.3.0
-    dev: false
-
-  /@osjs/dialogs/3.1.1:
-    resolution: {integrity: sha512-Kb4d2wcMzAhM+3/fmVjYvdOGEjJ4ON8R2lAy6AOaA+62kM0YrIaykQ6eUIRSofOqAH/kBRYxBMWR7Gd5AlqFSg==}
-    dependencies:
-      '@osjs/gui': 4.1.0
-      deepmerge: 2.2.1
-      hyperapp: 1.2.10
-      is-plain-object: 2.0.4
     dev: false
 
   /@osjs/draw-application/1.2.12:

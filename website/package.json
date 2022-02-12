@@ -51,7 +51,7 @@
   "dependencies": {
     "@aaronmeese.com/cli": "workspace:*",
     "@aaronmeese.com/client": "workspace:*",
-    "@osjs/dialogs": "^3.1.0",
+    "@aaronmeese.com/dialogs": "workspace:*",
     "@osjs/draw-application": "^1.2.12",
     "@osjs/filemanager-application": "^1.6.2",
     "@osjs/freedesktop-sounds": "^3.0.3",
