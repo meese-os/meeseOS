@@ -458,8 +458,8 @@
     //   "reviewCategory": "tools"
     // }
     {
-      "packageName": "stylelint-config",
-      "projectFolder": "config/stylelint-config"
+      "packageName": "@aaronmeese.com/website",
+      "projectFolder": "website"
     }
   ]
 }
