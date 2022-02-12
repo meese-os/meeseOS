@@ -1,0 +1,25 @@
+{
+  "name": "FileManager",
+  "category": "utilities",
+  "icon": "icon.png",
+  "title": {
+    "en_EN": "File Manager",
+    "nb_NO": "Filbehandler",
+    "fr_FR": "Gestionnaire de fichiers",
+    "de_DE": "Dateimanager",
+    "vi_VN": "Quản lý tập tin",
+    "pt_BR": "Gerenciador de arquivos"
+  },
+  "description": {
+    "en_EN": "File Manager",
+    "nb_NO": "Behandle filer",
+    "fr_FR": "Gestionnaire de fichiers",
+    "de_DE": "Dateimanager",
+    "vi_VN": "Ứng dụng quản lý tập tin",
+    "pt_BR": "Gerenciador de arquivos"
+  },
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

@@ -469,6 +469,10 @@
       "packageName": "@aaronmeese.com/dialogs",
       "projectFolder": "dialogs"
     },
+		{
+      "packageName": "@aaronmeese.com/filemanager",
+      "projectFolder": "apps/filemanager"
+    },
     {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"
