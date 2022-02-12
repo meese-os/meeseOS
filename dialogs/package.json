@@ -21,7 +21,7 @@
     "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "dependencies": {
-    "@osjs/gui": "^4.0.36",
+    "@aaronmeese.com/gui": "workspace:*",
     "deepmerge": "^2.2.1",
     "hyperapp": "^1.2.10",
     "is-plain-object": "^2.0.4"

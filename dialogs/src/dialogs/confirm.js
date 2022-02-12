@@ -30,7 +30,7 @@
 
 import {h, app} from 'hyperapp';
 import Dialog from '../dialog';
-import {Box} from '@osjs/gui';
+import {Box} from '@aaronmeese.com/gui';
 
 /**
  * Default OS.js Confirm Dialog

@@ -29,7 +29,7 @@
  */
 
 import {h, app} from 'hyperapp';
-import {SelectField, ToggleField, Box} from '@osjs/gui';
+import {SelectField, ToggleField, Box} from '@aaronmeese.com/gui';
 import Dialog from '../dialog';
 
 /**

@@ -31,7 +31,7 @@
 import {h} from 'hyperapp';
 import merge from 'deepmerge';
 import plain from 'is-plain-object';
-import {Box, Button, Toolbar} from '@osjs/gui';
+import {Box, Button, Toolbar} from '@aaronmeese.com/gui';
 
 let dialogCount = 0;
 

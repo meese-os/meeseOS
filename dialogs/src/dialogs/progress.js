@@ -30,7 +30,7 @@
 
 import {h, app} from 'hyperapp';
 import Dialog from '../dialog';
-import {Box, Progressbar} from '@osjs/gui';
+import {Box, Progressbar} from '@aaronmeese.com/gui';
 
 /**
  * Default OS.js Progress Dialog

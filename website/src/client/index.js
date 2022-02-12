@@ -49,7 +49,7 @@ import {
 } from '@aaronmeese.com/client';
 
 import {PanelServiceProvider} from '@osjs/panels';
-import {GUIServiceProvider} from '@osjs/gui';
+import {GUIServiceProvider} from '@aaronmeese.com/gui';
 import {DialogServiceProvider} from '@aaronmeese.com/dialogs';
 import {WidgetServiceProvider} from '@osjs/widgets';
 import config from './config.js';

@@ -17,7 +17,7 @@
     "type": "package"
   },
   "dependencies": {
-    "@osjs/gui": "^4.0.30",
+    "@aaronmeese.com/gui": "workspace:*",
     "hyperapp": "^1.2.10"
   },
   "devDependencies": {

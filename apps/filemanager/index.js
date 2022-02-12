@@ -46,7 +46,7 @@ import {
   Statusbar,
   Panes,
   listView
-} from '@osjs/gui';
+} from '@aaronmeese.com/gui';
 
 /**
  * Creates default settings

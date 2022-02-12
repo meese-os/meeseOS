@@ -474,6 +474,10 @@
       "projectFolder": "apps/filemanager"
     },
 		{
+      "packageName": "@aaronmeese.com/gui",
+      "projectFolder": "gui"
+    },
+		{
       "packageName": "@aaronmeese.com/server",
       "projectFolder": "server"
     },
