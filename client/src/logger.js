@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,43 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+const methods = ['debug', 'log', 'info', 'warn', 'error'];
+let middleware = [];
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
+const reduce = (name, input) => middleware
+  .reduce((current, m) => m(name, ...current), input);
 
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
+const bind = (fn, thisArg) =>
+  typeof thisArg[fn].bind === 'function'
+    ? thisArg[fn].bind(thisArg)
+    : Function.prototype.bind.apply(thisArg[fn], thisArg);
+
+const bindMethod = fn => {
+  const log = bind(fn, console);
+  if (middleware.length > 0) {
+    return (...args) => log(...reduce(fn, args));
+  }
+
+  return log;
+};
+
+const assignMethods = (thisArg) => methods
+  .forEach(m => thisArg[m] = bindMethod(m));
+
+const instance = {
+  addMiddleware: m => {
+    middleware.push(m);
+    assignMethods(instance);
+  },
+  clearMiddleware: () => {
+    middleware = [];
+    assignMethods(instance);
+  }
+};
+
+assignMethods(instance);
+
+export default instance;

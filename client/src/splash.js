@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,61 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+/**
+ * Splash Screen UI
+ */
+export default class Splash {
+  /**
+   * Create Splash
+   * @param {Core} core Core reference
+   */
+  constructor(core) {
+    /**
+     * Core instance reference
+     * @type {Core}
+     * @readonly
+     */
+    this.core = core;
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
+    /**
+     * Splash root element
+     * @type {Element}
+     * @readonly
+     */
+    this.$loading = document.createElement('div');
+    this.$loading.className = 'osjs-boot-splash';
 
-body,
-html {
-  width: 100%;
-  height: 100%;
+    core.on('osjs/core:boot', () => this.show());
+    core.on('osjs/core:booted', () => this.destroy());
+    core.on('osjs/core:logged-in', () => this.show());
+    core.on('osjs/core:started', () => this.destroy());
+  }
+
+  /**
+   * Initializes splash
+   */
+  init() {
+    this.$loading.appendChild(document.createTextNode('Loading...'));
+  }
+
+  /**
+   * Shows splash
+   */
+  show() {
+    if (!this.$loading.parentNode) {
+      this.core.$root.appendChild(this.$loading);
+    }
+  }
+
+  /**
+   * Destroys splash
+   */
+  destroy() {
+    if (this.$loading.parentNode) {
+      this.$loading.remove();
+    }
+  }
 }

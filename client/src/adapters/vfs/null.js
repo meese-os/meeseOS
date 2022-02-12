@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,29 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+/**
+ * Null VFS adapter
+ * @param {Core} core Core reference
+ * @param {object} [options] Adapter options
+ */
+const nullAdapter = ({
+  readdir: (path, options) => Promise.resolve([]),
+  readfile: (path, type, options) => Promise.resolve({body: new ArrayBuffer(), mime: 'application/octet-stream'}),
+  writefile: (path, data, options) => Promise.resolve(-1),
+  copy: (from, to, options) => Promise.resolve(false),
+  rename: (from, to, options) => Promise.resolve(false),
+  mkdir: (path, options) => Promise.resolve(false),
+  unlink: (path, options) => Promise.resolve(false),
+  exists: (path, options) => Promise.resolve(false),
+  stat: (path, options) => Promise.resolve({}),
+  url: (path, options) => Promise.resolve(null),
+  mount: options => Promise.resolve(true),
+  unmount: options => Promise.resolve(true),
+  search: (root, pattern, options) => Promise.resolve([]),
+  touch: (path, options) => Promise.resolve(false)
+});
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
-
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
+export default nullAdapter;

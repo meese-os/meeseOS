@@ -25,24 +25,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
-
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
-
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
+@import "./src/styles/variables";
+@import "./src/styles/core";
+@import "./src/styles/window";
+@import "./src/styles/notifications";
+@import "./src/styles/login";
+@import "./src/styles/search";
+@import "./src/styles/iconview";

@@ -458,12 +458,16 @@
     //   "reviewCategory": "tools"
     // }
     {
-      "packageName": "@aaronmeese.com/website",
-      "projectFolder": "website"
-    },
-    {
       "packageName": "@aaronmeese.com/cli",
       "projectFolder": "cli"
+    },
+    {
+      "packageName": "@aaronmeese.com/client",
+      "projectFolder": "client"
+    },
+    {
+      "packageName": "@aaronmeese.com/website",
+      "projectFolder": "website"
     }
   ]
 }

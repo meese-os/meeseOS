@@ -20,11 +20,7 @@
     "build": "npm run package:discover && webpack",
     "watch": "webpack --watch"
   },
-  "keywords": [
-    "osjs"
-  ],
   "author": "Aaron Meese <aaronjmeese@gmail.com>",
-  "license": "BSD-2-Clause",
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-transform-runtime": "^7.12.1",
@@ -53,9 +49,8 @@
     "source-map-loader": "^0.2.4"
   },
   "dependencies": {
-    "@osjs/calculator-application": "^1.2.8",
     "@aaronmeese.com/cli": "workspace:*",
-    "@osjs/client": "^3.7.1",
+    "@aaronmeese.com/client": "workspace:*",
     "@osjs/dialogs": "^3.1.0",
     "@osjs/draw-application": "^1.2.12",
     "@osjs/filemanager-application": "^1.6.2",

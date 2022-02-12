@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,58 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+export const createPackageAvailabilityCheck = (core) => {
+  const user = core.getUser();
+  const permissions = core.config('packages.permissions', {});
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
+  const checkMetadataGroups = iter => {
+    const m = iter.strictGroups === false ? 'some' : 'every';
 
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
+    return iter.groups instanceof Array
+      ? iter.groups[m](g => user.groups.indexOf(g) !== -1)
+      : true;
+  };
+
+  const checkConfigGroups = iter => {
+    const perm = permissions[iter.name];
+    if (perm && perm.groups instanceof Array) {
+      const m = perm.strictGroups === false ? 'some' : 'every';
+      return perm.groups[m](g => user.groups.indexOf(g) !== -1);
+    }
+
+    return true;
+  };
+
+  const checkBlacklist = iter => user.blacklist instanceof Array
+    ? user.blacklist.indexOf(iter.name) === -1
+    : true;
+
+  const checks =  [
+    checkMetadataGroups,
+    checkConfigGroups,
+    checkBlacklist
+  ];
+
+  return metadata => checks.every(fn => fn(metadata));
+};
+
+export const createManifestFromArray = list => list
+  .map(iter => ({
+    type: 'application',
+    ...iter,
+    files: (iter.files || [])
+      .map(file =>
+        typeof file === 'string'
+          ? {filename: file, type: 'preload'}
+          : {type: 'preload', ...file}
+      )
+  }));
+
+export const filterMetadataFilesByType = (files, type) =>
+  (files || []).filter(file => file.type === type);
+
+export const metadataFilesToFilenames = files =>
+  (files || []).map(file => file.filename);

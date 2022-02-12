@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,18 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
-
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
-
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
+export * from './en_EN';
+export * from './fr_FR';
+export * from './nb_NO';
+export * from './sl_SI';
+export * from './vi_VN';
+export * from './de_DE';
+export * from './zh_CN';
+export * from './fa_FA';
+export * from './pt_BR';
+export * from './ru_RU';
+export * from './tr_TR';
+export * from './sv_SE';

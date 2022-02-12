@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,76 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+/**
+ * Middleware Data
+ *
+ * @typedef {Object} MiddlewareData
+ * @property {string} [group] Middleware group
+ */
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
+/**
+ * Middleware Manager
+ */
+export default class Middleware {
 
-body,
-html {
-  width: 100%;
-  height: 100%;
+  /**
+   * Create new middleware
+   */
+  constructor() {
+    /**
+     * @type {MiddlewareData}
+     */
+    this.middleware = {};
+  }
+
+  /**
+   * Destroy middleware
+   */
+  destroy() {
+    this.clear();
+  }
+
+  /**
+   * Clear middleware
+   */
+  clear() {
+    this.middleware = {};
+  }
+
+  /**
+   * Add middleware function to a group
+   * @param {string} group Middleware group
+   * @param {Function} callback Middleware function to add
+   */
+  add(group, callback) {
+    if (!this.middleware[group]) {
+      this.middleware[group] = [];
+    }
+
+    this.middleware[group].push(callback);
+  }
+
+  /**
+   * Remove middleware function from a group
+   * @param {string} group Middleware group
+   * @param {Function} callback Middleware function to remove
+   */
+  remove(group, callback) {
+    if (this.middleware[group]) {
+      this.middleware[group] =
+        this.middleware[group].filter(cb => cb !== callback);
+    }
+  }
+
+  /**
+   * Gets middleware functions for a group
+   * @param {string} group Middleware group
+   * @return {Function[]}
+   */
+  get(group) {
+    return this.middleware[group] || [];
+  }
 }

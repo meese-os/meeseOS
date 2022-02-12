@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,54 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+/**
+ * @typedef {Object} URLResolverOptions
+ * @property {string} [type] URL type (ws/http)
+ * @property {string} [boolean] Add prefix to URL
+ */
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
+/**
+ * Resolves an URL
+ * @param {CoreConfig} configuration
+ */
+export const urlResolver = configuration => {
+  const {http, ws} = configuration;
 
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
+  /**
+   * @param {string} [endpoint='/']
+   * @param {URLResolverOptions} [options={}]
+   * @param {PackageMetadata} [metadata={}] Metadata for package resolving
+   */
+  return (endpoint = '/', options = {}, metadata = {}) => {
+    if (typeof endpoint !== 'string') {
+      return http.public;
+    } else if (endpoint.match(/^(http|ws|ftp)s?:/i)) {
+      return endpoint;
+    }
+
+    const {type, prefix} = {
+      type: null,
+      prefix: options.type === 'websocket',
+      ...options
+    };
+
+    const str = type === 'websocket' ? ws.uri : http.uri;
+
+    let url = endpoint.replace(/^\/+/, '');
+    if (metadata.type) {
+      const path = endpoint.replace(/^\/?/, '/');
+      const type = metadata.type === 'theme' ? 'themes' : (
+        metadata.type === 'icons' ? 'icons' : 'apps'
+      );
+
+      url = `${type}/${metadata.name}${path}`;
+    }
+
+    return prefix
+      ? str.replace(/\/$/, '') + url.replace(/^\/?/, '/')
+      : http.public.replace(/^\/?/, '/') + url;
+  };
+};

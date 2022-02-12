@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,56 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+import Notifications from '../notifications';
+import {ServiceProvider} from '@osjs/common';
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
+/**
+ * OS.js Notification Service Provider
+ */
+export default class NotificationServiceProvider extends ServiceProvider {
 
-body,
-html {
-  width: 100%;
-  height: 100%;
+  /**
+   * @param {Core} core OS.js Core
+   */
+  constructor(core) {
+    super(core);
+
+    /**
+     * @type {Notifications}
+     * @readonly
+     */
+    this.notifications = new Notifications(core);
+  }
+
+  /**
+   * Destroys notifications
+   */
+  destroy() {
+    this.notifications.destroy();
+  }
+
+  /**
+   * Get a list of services this provider registers
+   * @return {string[]}
+   */
+  provides() {
+    return [
+      'osjs/notification'
+    ];
+  }
+
+  /**
+   * Initializes authentication
+   * @return {Promise<undefined>}
+   */
+  init() {
+    this.core.instance('osjs/notification', (options) => {
+      return this.notifications.create(options);
+    });
+
+    return this.notifications.init();
+  }
 }

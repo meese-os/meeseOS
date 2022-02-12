@@ -46,7 +46,7 @@ import {
   NotificationServiceProvider,
   SettingsServiceProvider,
   AuthServiceProvider
-} from '@osjs/client';
+} from '@aaronmeese.com/client';
 
 import {PanelServiceProvider} from '@osjs/panels';
 import {GUIServiceProvider} from '@osjs/gui';

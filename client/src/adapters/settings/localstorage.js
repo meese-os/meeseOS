@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -25,24 +25,46 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
 
-//
-// This is the client base stylesheet.
-// This is where you add all your dependent styles and override any
-// OS.js defaults.
-//
+import logger from '../../logger';
 
-@import "~typeface-roboto/index.css";
-@import "~@aaronmeese.com/client/dist/main.css";
-@import "~@osjs/gui/dist/main.css";
-@import "~@osjs/dialogs/dist/main.css";
-@import "~@osjs/panels/dist/main.css";
-@import "~@osjs/widgets/dist/main.css";
+/**
+ * LocalStorage Settings adapter
+ * @param {Core} core Core reference
+ * @param {object} [options] Adapter options
+ */
+const localStorageSettings = core => ({
+  clear: ns => {
+    if (ns) {
+      localStorage.removeItem(ns);
+    } else {
+      localStorage.clear();
+    }
 
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
+    return Promise.resolve(true);
+  },
+
+  save: settings => {
+    Object.keys(settings).forEach((k) => {
+      localStorage.setItem(k, JSON.stringify(settings[k]));
+    });
+
+    return Promise.resolve(true);
+  },
+
+  load: () => Promise.resolve(Object.keys(localStorage).reduce((o, v) => {
+    let value = localStorage.getItem(v);
+    try {
+      value = JSON.parse(value);
+    } catch (e) {
+      logger.warn('localStorageAdapter parse error', e);
+    }
+
+    return Object.assign(o, {[v]: value});
+  }, {}))
+});
+
+
+export default localStorageSettings;
