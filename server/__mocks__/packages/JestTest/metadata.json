@@ -1,0 +1,12 @@
+{
+  "type": "application",
+  "name": "JestTest",
+  "category": null,
+  "server": "server.js",
+  "title": "Jest test",
+  "description": "Jest test",
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

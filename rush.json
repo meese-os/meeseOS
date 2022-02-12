@@ -473,6 +473,10 @@
       "packageName": "@aaronmeese.com/filemanager",
       "projectFolder": "apps/filemanager"
     },
+		{
+      "packageName": "@aaronmeese.com/server",
+      "projectFolder": "server"
+    },
     {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"

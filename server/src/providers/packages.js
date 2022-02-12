@@ -1,4 +1,4 @@
-/*
+/**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,45 +28,71 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+const fs = require("fs-extra");
+const path = require("path");
+const chokidar = require("chokidar");
+const {ServiceProvider} = require("@osjs/common");
+const Packages = require("../packages");
+const {closeWatches} = require("../utils/core");
 
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
+/**
+ * OS.js Package Service Provider
+ */
+class PackageServiceProvider extends ServiceProvider {
+	constructor(core) {
+		super(core);
 
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
+		const {configuration} = this.core;
+		const manifestFile = path.join(configuration.public, configuration.packages.metadata);
+		const discoveredFile = path.resolve(configuration.root, configuration.packages.discovery);
 
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
+		this.watches = [];
+		this.packages = new Packages(core, {
+			manifestFile,
+			discoveredFile
+		});
+	}
 
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
+	provides() {
+		return [
+			"osjs/packages"
+		];
+	}
 
-  osjs.destroy(() => process.exit(signal));
-};
+	init() {
+		this.core.singleton("osjs/packages", () => this.packages);
 
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
+		return this.packages.init();
+	}
 
-osjs.boot().catch(shutdown(1));
+	start() {
+		this.packages.start();
+
+		if (this.core.configuration.development) {
+			this.initDeveloperTools();
+		}
+	}
+
+	async destroy() {
+		await closeWatches(this.watches);
+		await this.packages.destroy();
+		super.destroy();
+	}
+
+	/**
+	 * Initializes some developer features
+	 */
+	initDeveloperTools() {
+		const {manifestFile} = this.packages.options;
+
+		if (fs.existsSync(manifestFile)) {
+			const watcher = chokidar.watch(manifestFile);
+			watcher.on("change", () => {
+				this.core.broadcast("osjs/packages:metadata:changed");
+			});
+			this.watches.push(watcher);
+		}
+	}
+}
+
+module.exports = PackageServiceProvider;

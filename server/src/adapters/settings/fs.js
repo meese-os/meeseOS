@@ -27,46 +27,41 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
+const fs = require("fs-extra");
+const path = require("path");
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+/**
+ * FS Settings adapter
+ * @param {Core} core Core reference
+ * @param {object} [options] Adapter options
+ */
+module.exports = (core, options) => {
+	const fsOptions = {
+		system: false,
+		path: "home:/.osjs/settings.json",
+		...options || {}
+	};
 
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
+	const getRealFilename = (req) => fsOptions.system
+		? Promise.resolve(fsOptions.path)
+		: core.make("osjs/vfs")
+			.realpath(fsOptions.path, req.session.user);
 
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
+	const before = req => getRealFilename(req)
+		.then(filename => fs.ensureDir(path.dirname(filename))
+			.then(() => filename));
 
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
+	const save = req => before(req)
+		.then(filename => fs.writeJson(filename, req.body))
+		.then(() => true);
 
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
+	const load = req => before(req)
+		.then(filename => fs.readJson(filename))
+		.catch(error => {
+			core.logger.warn(error);
+			return {};
+		});
 
-  osjs.destroy(() => process.exit(signal));
+	return {save, load};
 };
 
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
-
-osjs.boot().catch(shutdown(1));

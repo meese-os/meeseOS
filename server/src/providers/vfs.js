@@ -1,4 +1,4 @@
-/*
+/**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,45 +28,62 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+const {ServiceProvider} = require("@osjs/common");
+const Filesystem = require("../filesystem");
 
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
+/**
+ * OS.js Virtual Filesystem Service Provider
+ */
+class VFSServiceProvider extends ServiceProvider {
 
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
+  constructor(core, options = {}) {
+    super(core, options);
 
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
-
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
+    this.filesystem = new Filesystem(core, options);
   }
 
-  osjs.destroy(() => process.exit(signal));
-};
+  async destroy() {
+    await this.filesystem.destroy();
+    super.destroy();
+  }
 
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
+  depends() {
+    return [
+      "osjs/express"
+    ];
+  }
 
-osjs.boot().catch(shutdown(1));
+  provides() {
+    return [
+      "osjs/fs",
+      "osjs/vfs"
+    ];
+  }
+
+  async init() {
+    const filesystem = this.filesystem;
+
+    await filesystem.init();
+
+    this.core.singleton("osjs/fs", () => this.filesystem);
+
+    this.core.singleton("osjs/vfs", () => ({
+      realpath: (...args) => this.filesystem.realpath(...args),
+      request: (...args) => this.filesystem.request(...args),
+      call: (...args) => this.filesystem.call(...args),
+      mime: (...args) => this.filesystem.mime(...args),
+
+      get adapters() {
+        return filesystem.adapters;
+      },
+
+      get mountpoints() {
+        return filesystem.mountpoints;
+      }
+    }));
+
+    this.core.app.use("/vfs", filesystem.router);
+  }
+}
+
+module.exports = VFSServiceProvider;

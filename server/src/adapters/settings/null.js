@@ -28,45 +28,15 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+/**
+ * Null Settings adapter
+ * @param {Core} core Core reference
+ * @param {object} [options] Adapter options
+ */
+module.exports = (core, options) => ({
+	init: async () => true,
+	destroy: async () => true,
+	save: async () => true,
+	load: async () => ({})
+});
 
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
-
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
-
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
-
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
-
-  osjs.destroy(() => process.exit(signal));
-};
-
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
-
-osjs.boot().catch(shutdown(1));

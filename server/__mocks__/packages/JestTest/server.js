@@ -1,7 +1,7 @@
 /*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-2019, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,45 +28,12 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
-
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
-
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
-
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
-
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
-
-  osjs.destroy(() => process.exit(signal));
-};
-
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
-
-osjs.boot().catch(shutdown(1));
+module.exports = (core, proc) => ({
+	init: async () => {},
+	start: () => {},
+	destroy: () => {},
+	onmessage: (ws, respond, args) => respond("Pong"),
+	test: () => {
+		throw new Error("Simulated failure");
+	},
+});

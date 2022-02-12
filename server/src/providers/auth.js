@@ -28,45 +28,35 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+const {ServiceProvider} = require("@osjs/common");
+const Auth = require("../auth.js");
 
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
+/**
+ * OS.js Auth Service Provider
+ */
+class AuthServiceProvider extends ServiceProvider {
 
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
+  constructor(core, options) {
+    super(core, options);
 
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
-
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
+    this.auth = new Auth(core, options);
   }
 
-  osjs.destroy(() => process.exit(signal));
-};
+  destroy() {
+    this.auth.destroy();
 
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
+    super.destroy();
+  }
 
-osjs.boot().catch(shutdown(1));
+  async init() {
+    const {route, routeAuthenticated} = this.core.make("osjs/express");
+
+    route("post", "/register", (req, res) => this.auth.register(req, res));
+    route("post", "/login", (req, res) => this.auth.login(req, res));
+    routeAuthenticated("post", "/logout", (req, res) => this.auth.logout(req, res));
+
+    await this.auth.init();
+  }
+}
+
+module.exports = AuthServiceProvider;

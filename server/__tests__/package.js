@@ -28,45 +28,75 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+const osjs = require("osjs");
+const path = require("path");
+const Package = require("../src/package.js");
 
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
+describe("Package", () => {
+	let core;
+	let pkg;
 
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
+	beforeAll(() => osjs().then(c => (core = c)));
+	afterAll(() => core.destroy());
 
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
+	test("#constructor", () => {
+		const filename = path.resolve(core.configuration.root, "packages/JestTest/metadata.json");
+		const metadata = require(filename);
 
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
+		pkg = new Package(core, {
+			filename,
+			metadata
+		});
+	});
 
-  osjs.destroy(() => process.exit(signal));
-};
+	test("#init", () => {
+		return expect(pkg.init())
+			.resolves
+			.toBe(undefined);
+	});
 
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
+	test("#validate", () => {
+		const manifest = require(
+			path.resolve(core.configuration.public, "metadata.json")
+		);
 
-osjs.boot().catch(shutdown(1));
+		expect(pkg.validate(manifest))
+			.toBe(true);
+
+		expect(pkg.validate([]))
+			.toBe(false);
+	});
+
+	test("#start", () => {
+		expect(pkg.start())
+			.toBe(true);
+	});
+
+	test("#action", () => {
+		expect(pkg.action("init"))
+			.toBe(true);
+
+		expect(pkg.action("invalid"))
+			.toBe(false);
+
+		expect(pkg.action("test"))
+			.toBe(false);
+	});
+
+	test("#resource", () => {
+		expect(pkg.resource("test"))
+			.toBe("/apps/JestTest/test");
+
+		expect(pkg.resource("/test"))
+			.toBe("/apps/JestTest/test");
+	});
+
+	test("#watch", () => {
+		expect(pkg.watch(jest.fn()))
+			.toBe(path.resolve(core.configuration.public, "apps/JestTest"));
+	});
+
+	test("#destroy", async () => {
+		await pkg.destroy();
+	});
+});

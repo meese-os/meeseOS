@@ -1,4 +1,4 @@
-/*
+/**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,45 +28,26 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the server bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
+const Core = require("./src/core.js");
+const Auth = require("./src/auth.js");
+const Filesystem = require("./src/filesystem.js");
+const Settings = require("./src/settings.js");
+const Packages = require("./src/packages.js");
+const CoreServiceProvider = require("./src/providers/core");
+const PackageServiceProvider = require("./src/providers/packages");
+const VFSServiceProvider = require("./src/providers/vfs");
+const AuthServiceProvider = require("./src/providers/auth");
+const SettingsServiceProvider = require("./src/providers/settings");
 
-const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
-
-const config = require('./config.js');
-const osjs = new Core(config, {});
-require('dotenv').config();
-
-osjs.register(CoreServiceProvider, {before: true});
-osjs.register(PackageServiceProvider);
-osjs.register(VFSServiceProvider);
-osjs.register(AuthServiceProvider);
-osjs.register(SettingsServiceProvider);
-
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
-
-  osjs.destroy(() => process.exit(signal));
+module.exports = {
+	Core,
+	Auth,
+	Filesystem,
+	Settings,
+	Packages,
+	CoreServiceProvider,
+	PackageServiceProvider,
+	VFSServiceProvider,
+	AuthServiceProvider,
+	SettingsServiceProvider
 };
-
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
-
-osjs.boot().catch(shutdown(1));
