@@ -1,0 +1,98 @@
+{
+  "name": "@aaronmeese.com/panels",
+  "version": "1.0.0",
+  "description": "aaronmeese.com Panels",
+  "main": "dist/main.js",
+  "module": "dist/main.js",
+  "style": "dist/main.css",
+  "files": [
+    "dist/main.js",
+    "dist/main.js.map",
+    "dist/main.css",
+    "dist/main.css.map",
+    "dist/*.png",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "eslint": "eslint index.js 'src/**/*.js'",
+    "stylelint": "stylelint index.scss src/**/*.scss",
+    "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
+  },
+  "dependencies": {
+    "@aaronmeese.com/event-emitter": "workspace:*",
+    "hyperapp": "^1.2.10"
+  },
+  "devDependencies": {
+    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "babel-loader": "^8.2.1",
+    "copy-webpack-plugin": "^6.3.2",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.14.0",
+    "file-loader": "^5.1.0",
+    "mini-css-extract-plugin": "^1.3.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "sass": "^1.32.13",
+    "sass-loader": "^10.1.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@aaronmeese.com/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "esdoc": {
+    "source": "./src",
+    "destination": "./doc",
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "brand": {
+            "title": "aaronmeese.com Panel API",
+            "description": "aaronmeese.com Panel API Documentation"
+          },
+          "lint": {
+            "enable": false
+          },
+          "coverage": {
+            "enable": false
+          },
+          "undocumentIdentifier": {
+            "enable": false
+          }
+        }
+      },
+      {
+        "name": "esdoc-publish-html-plugin"
+      }
+    ]
+  }
+}

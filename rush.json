@@ -473,6 +473,10 @@
       "packageName": "@aaronmeese.com/eslint-config",
       "projectFolder": "config/eslint"
     },
+		{
+      "packageName": "@aaronmeese.com/event-emitter",
+      "projectFolder": "event-emitter"
+    },
     {
       "packageName": "@aaronmeese.com/filemanager",
       "projectFolder": "apps/filemanager"
@@ -480,6 +484,10 @@
     {
       "packageName": "@aaronmeese.com/gui",
       "projectFolder": "gui"
+    },
+		{
+      "packageName": "@aaronmeese.com/panels",
+      "projectFolder": "panels"
     },
     {
       "packageName": "@aaronmeese.com/server",

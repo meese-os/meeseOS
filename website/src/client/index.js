@@ -48,7 +48,7 @@ import {
   AuthServiceProvider
 } from '@aaronmeese.com/client';
 
-import {PanelServiceProvider} from '@osjs/panels';
+import {PanelServiceProvider} from '@aaronmeese.com/panels';
 import {GUIServiceProvider} from '@aaronmeese.com/gui';
 import {DialogServiceProvider} from '@aaronmeese.com/dialogs';
 import {WidgetServiceProvider} from '@aaronmeese.com/widgets';

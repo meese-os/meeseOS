@@ -29,7 +29,7 @@
  */
 
 import * as VFS from './vfs';
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import {parseMontpointPrefix, filterMountByGroups, createWatchEvents} from './utils/vfs';
 import defaultAdapter from './adapters/vfs/null';
 import systemAdapter from './adapters/vfs/system';

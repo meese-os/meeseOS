@@ -1,5 +1,5 @@
 import {createInstance} from 'osjs';
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import Packages from '../src/packages.js';
 
 const packageList = [{

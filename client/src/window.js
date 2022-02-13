@@ -27,7 +27,7 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import {droppable} from './utils/dnd';
 import {escapeHtml, createCssText, supportsTransition, getActiveElement} from './utils/dom';
 import {

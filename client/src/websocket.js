@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import logger from './logger';
 
 const eventNames = ['open', 'close', 'message', 'error'];

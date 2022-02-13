@@ -44,7 +44,7 @@ import {resourceResolver} from '../utils/desktop';
 import * as dnd from '../utils/dnd';
 import {BasicApplication} from '../basic-application.js';
 import {ServiceProvider} from '@osjs/common';
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import logger from '../logger';
 import merge from 'deepmerge';
 

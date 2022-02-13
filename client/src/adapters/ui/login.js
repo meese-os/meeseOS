@@ -29,7 +29,7 @@
  */
 
 import {h, app} from 'hyperapp';
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 
 const createAttributes = (props, field, disabled) => {
   disabled = disabled ? 'disabled' : undefined;

@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 import merge from 'deepmerge';
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import {loadOptionsFromConfig} from './utils/windows';
 import Websocket from './websocket';
 import Window from './window';

@@ -27,7 +27,7 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import {EventEmitter} from '@osjs/event-emitter';
+import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import {h, app} from 'hyperapp';
 import {doubleTap} from '../../utils/input';
 import {pathJoin} from '../../utils/vfs';

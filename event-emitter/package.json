@@ -1,0 +1,89 @@
+{
+  "name": "@aaronmeese.com/event-emitter",
+  "version": "1.0.0",
+  "description": "A simple event emitter",
+  "main": "dist/main.js",
+  "typings": "index.d.ts",
+  "files": [
+    "dist/",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "test": "npm run eslint && npm run jest",
+    "jest": "jest",
+    "coverage": "jest --coverage",
+    "eslint": "eslint index.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "prepublishOnly": "npm run test && NODE_ENV=production npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+		"@aaronmeese.com/eslint-config": "workspace:*",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "babel-loader": "^8.2.1",
+    "eslint": "^7.14.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {}
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "esdoc": {
+    "source": "./",
+    "destination": "./doc",
+    "excludes": [
+      "(node_modules|doc|test)"
+    ],
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "brand": {
+            "title": "aaronmeese.com EventEmitter API",
+            "description": "aaronmeese.com EventEmitter API Documentation"
+          },
+          "lint": {
+            "enable": false
+          },
+          "coverage": {
+            "enable": false
+          },
+          "undocumentIdentifier": {
+            "enable": false
+          }
+        }
+      },
+      {
+        "name": "esdoc-publish-html-plugin"
+      }
+    ]
+  }
+}
