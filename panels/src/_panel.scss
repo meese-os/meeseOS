@@ -54,7 +54,7 @@
     min-height: 1em;
     position: relative;
     box-sizing: border-box;
-    padding: $base-margin / 1.5;
+    padding: calc($base-margin / 1.5);
   }
 
   .osjs-panel-item--icon {
@@ -63,7 +63,7 @@
 
     > img {
       height: $base-margin;
-      margin-right: $base-margin / 2;
+      margin-right: calc($base-margin / 2);
     }
   }
 }
@@ -72,7 +72,7 @@
   .osjs-panel {
     .osjs-panel-item--icon > img {
       margin-right: 0;
-      margin-left: $base-margin / 2;
+      margin-left: calc($base-margin / 2);
     }
   }
 }

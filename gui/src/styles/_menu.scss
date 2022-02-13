@@ -35,7 +35,7 @@
     box-sizing: border-box;
 
     & > span {
-      margin: $base-margin / 2;
+      margin: calc($base-margin / 2);
       display: block;
       pointer-events: none;
     }
@@ -83,7 +83,7 @@
 .osjs-gui-menu-separator {
   height: 1px;
   display: block;
-  padding: $base-margin / 2;
+  padding: calc($base-margin / 2);
   box-sizing: border-box;
 
   &::after {
@@ -96,7 +96,7 @@
 
 .osjs-gui-menu-label {
   display: flex;
-  padding: $base-margin / 2;
+  padding: calc($base-margin / 2);
   padding-right: 1.5em;
   box-sizing: border-box;
   position: relative;
@@ -106,11 +106,11 @@
   align-items: center;
 
   & > .osjs-icon {
-    margin-right: $base-margin / 2;
+    margin-right: calc($base-margin / 2);
   }
 
   & > .osjs-gui-menu-checkbox {
-    margin-right: $base-margin / 2;
+    margin-right: calc($base-margin / 2);
 
     &::after {
       left: 50%;
@@ -132,7 +132,7 @@
     &::after {
       content: '\25B6';
       position: absolute;
-      right: $base-margin / 2;
+      right: calc($base-margin / 2);
       top: 50%;
       transform: translateY(-50%);
     }
@@ -141,13 +141,13 @@
 
 .osjs-root[data-dir="rtl"] {
   .osjs-gui-menu-label {
-    padding-right: $base-margin / 2;
+    padding-right: calc($base-margin / 2);
     padding-left: 1.5em;
 
     & > .osjs-icon,
     & > .osjs-gui-menu-checkbox {
       margin-right: 0;
-      margin-left: $base-margin / 2;
+      margin-left: calc($base-margin / 2);
     }
   }
 
@@ -155,7 +155,7 @@
     &[data-has-children] > .osjs-gui-menu-label {
       &::after {
         right: auto;
-        left: $base-margin / 2;
+        left: calc($base-margin / 2);
       }
     }
   }

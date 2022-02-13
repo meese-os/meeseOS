@@ -33,7 +33,7 @@
   z-index: 1;
   width: 100%;
   line-height: 2;
-  padding: $base-margin / 2;
+  padding: calc($base-margin / 2);
   text-align: center;
   min-height: $base-margin * 2;
   position: relative;

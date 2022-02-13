@@ -49,8 +49,8 @@
 
     & > .osjs-gui-panes-spacer {
       height: 100%;
-      width: $base-margin / 2;
-      min-width: $base-margin / 2;
+      width: calc($base-margin / 2);
+      min-width: calc($base-margin / 2);
       cursor: ew-resize;
     }
   }
@@ -62,8 +62,8 @@
 
     & > .osjs-gui-panes-spacer {
       width: 100%;
-      height: $base-margin / 2;
-      min-height: $base-margin / 2;
+      height: calc($base-margin / 2);
+      min-height: calc($base-margin / 2);
       cursor: ns-resize;
     }
   }
@@ -71,7 +71,7 @@
 
 .osjs-gui-panes-pane {
   position: relative;
-  margin: $base-margin / 2;
+  margin: calc($base-margin / 2);
   box-sizing: border-box;
   overflow: hidden;
   display: flex;

@@ -34,7 +34,7 @@
 
   & > div {
     flex: 1 1;
-    padding: $base-margin / 1.5 $base-margin / 3;
+    padding: calc($base-margin / 1.5) calc($base-margin / 3);
 
     & > img {
       margin-left: 0 !important;

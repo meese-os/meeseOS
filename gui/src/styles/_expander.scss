@@ -39,13 +39,13 @@
   &-header {
     flex: 1 1;
     display: flex;
-    padding: $base-margin / 2;
+    padding: calc($base-margin / 2);
     cursor: pointer;
 
     &-icon {
       flex: 0 0;
       min-width: 1em;
-      margin-right: $base-margin / 2;
+      margin-right: calc($base-margin / 2);
 
       &::after {
         content: '\25BC';

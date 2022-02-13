@@ -67,7 +67,7 @@
     height: 100%;
 
     & > .osjs__image {
-      padding: $base-margin / 2;
+      padding: calc($base-margin / 2);
 
       & > .osjs-icon {
         width: 3em;
@@ -76,7 +76,7 @@
     }
 
     & > .osjs__label {
-      padding: $base-margin / 2;
+      padding: calc($base-margin / 2);
       height: 2em;
       line-height: 1.2;
       overflow: hidden;

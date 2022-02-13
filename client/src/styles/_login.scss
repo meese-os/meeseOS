@@ -63,7 +63,7 @@
   input,
   select,
   button {
-    padding: $base-margin / 2;
+    padding: calc($base-margin / 2);
     display: block;
     width: 100%;
     border-radius: 0;
@@ -148,7 +148,7 @@
       content: '\21B4';
       position: absolute;
       top: 50%;
-      right: $base-margin / 2;
+      right: calc($base-margin / 2);
       transform: translate(-50%, -50%);
       color: #fff;
     }

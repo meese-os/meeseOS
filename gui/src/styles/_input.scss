@@ -38,7 +38,7 @@
     width: 100%;
     height: 100%;
     outline: none;
-    padding: $base-margin / 2;
+    padding: calc($base-margin / 2);
     margin: 0;
     background: transparent;
     border: 0 none;
@@ -81,7 +81,7 @@
       display: inline-block;
       width: 1em;
       height: 1em;
-      right: $base-margin / 2;
+      right: calc($base-margin / 2);
     }
   }
 }
@@ -143,13 +143,13 @@
       display: block;
       flex-grow: 1;
       position: relative;
-      padding-left: $base-margin / 2;
+      padding-left: calc($base-margin / 2);
     }
   }
 }
 
 .osjs-gui-field-label {
-  $half-margin: $base-margin / 2;
+  $half-margin: calc($base-margin / 2);
 
   display: flex;
   flex-wrap: nowrap;
@@ -196,6 +196,6 @@
 .osjs-root[data-dir="rtl"] {
   .osjs-gui-select-field > div::after {
     right: auto;
-    left: $base-margin / 2;
+    left: calc($base-margin / 2);
   }
 }
