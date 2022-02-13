@@ -485,6 +485,10 @@
 			"packageName": "@aaronmeese.com/terminal",
 			"projectFolder": "apps/terminal"
 		},
+		{
+			"packageName": "@aaronmeese.com/textpad",
+			"projectFolder": "apps/textpad"
+		},
     {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"

@@ -56,12 +56,12 @@
 		"@aaronmeese.com/gui": "workspace:*",
 		"@aaronmeese.com/server": "workspace:*",
 		"@aaronmeese.com/terminal": "workspace:*",
+		"@aaronmeese.com/textpad": "workspace:*",
 		"@aaronmeese.com/widgets": "workspace:*",
     "@osjs/freedesktop-sounds": "^3.0.3",
     "@osjs/gnome-icons": "^4.0.5",
     "@osjs/panels": "^3.0.31",
     "@osjs/standard-theme": "^4.0.9",
-    "@osjs/textpad-application": "^1.2.7",
     "dotenv": "^14.2.0",
     "hyperapp": "^1.2.10",
     "typeface-roboto": "0.0.75"

@@ -1,0 +1,40 @@
+{
+  "name": "Textpad",
+  "category": "utilities",
+  "icon": "icon.png",
+  "title": {
+    "en_EN": "Textpad",
+    "nb_NO": "Tekstblokk",
+    "fr_FR": "Bloc-notes",
+    "pt_BR": "Bloco de Notas"
+  },
+  "description": {
+    "en_EN": "Edit text files",
+    "nb_NO": "Redigèr tekstfiler",
+    "fr_FR": "Bloc-notes",
+    "pt_BR": "Editor de arquivos de texto"
+  },
+  "mimes": [
+    "^text\/(.*)",
+    "application\/json",
+    "application\/java",
+    "application\/javascript",
+    "application\/postscript",
+    "application\/ecmascript",
+    "application\/x-httpd-php-source",
+    "application\/x-httpd-php",
+    "application\/x-php",
+    "application\/x-lua",
+    "application\/x-python",
+    "application\/x-python-code",
+    "application\/x-python-code",
+    "application\/x-java-class",
+    "application\/x-javascript",
+    "application\/x-lisp",
+    "application\/x-bsh",
+    "application\/x-sh"
+  ],
+  "files": [
+    "main.js"
+  ]
+}
