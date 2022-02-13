@@ -1,0 +1,82 @@
+/*
+ * OS.js - JavaScript Cloud/Web Desktop Platform
+ *
+ * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @licence Simplified BSD License
+ */
+
+$base-margin: 1em;
+
+$font-family: 'Roboto', sans-serif;
+$font-color: #242424;
+
+$transition-duration: 0.1s;
+$transition-timing-function: ease-out;
+
+$window-border: 1px solid #716c6c;
+$window-background: #ebebeb;
+
+$panel-background: rgba(0, 0, 0, 0.9);
+$panel-foreground: #fff;
+
+$main-border-color: #c1c1c1;
+
+$input-background: #fff;
+$input-border: 1px solid $main-border-color;
+$input-foreground: $font-color;
+
+$button-background-fallback: #d9d9d9;
+$button-background-active: linear-gradient(to bottom, #f4f4f4 0%, #f8f8f8 100%);
+$button-background: linear-gradient(to bottom, #f8f8f8 0%, #f4f4f4 100%);
+$button-border-active: 1px solid #242424;
+$button-border: 1px solid $main-border-color;
+$button-foreground: $font-color;
+
+$range-slider-height: 2em;
+$range-slider-button-height: 1em;
+$range-slider-button-width: 1em;
+$range-slider-button-border-radius: 0;
+$range-slider-track-height: 0.5em;
+$range-slider-track-width: 100%;
+$range-slider-track-border-radius: 0;
+
+$view-background: #d9d9d9;
+$view-border: 1px solid $main-border-color;
+
+$active-background: rgba(0, 0, 200, 0.9);
+$active-foreground: #fff;
+
+$progress-background: rgba(0, 0, 200, 0.5);
+$progress-foreground: #fff;
+
+$outline: 1px solid rgba(0, 0, 200, 0.2);
+$zebra-background: #f9f9f9;
+
+$scrollbar-button-border: $button-border;
+$scrollbar-button-background: $button-background;
+$scrollbar-button-foreground: $input-foreground;
+$scrollbar-track-border: $button-border;
+$scrollbar-track-background: $window-background;

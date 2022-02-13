@@ -498,6 +498,10 @@
       "projectFolder": "backend/server"
     },
     {
+      "packageName": "@aaronmeese.com/standard-theme",
+      "projectFolder": "frontend/standard-theme"
+    },
+    {
       "packageName": "@aaronmeese.com/stylelint-config",
       "projectFolder": "development/stylelint"
     },

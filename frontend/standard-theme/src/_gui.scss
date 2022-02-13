@@ -1,0 +1,224 @@
+/*
+ * OS.js - JavaScript Cloud/Web Desktop Platform
+ *
+ * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @licence Simplified BSD License
+ */
+
+.osjs-gui-button {
+  & > button {
+    @include button;
+  }
+}
+
+.osjs-gui-input,
+.osjs-gui-field {
+  select,
+  textarea,
+  input {
+    @include input;
+
+    font-size: inherit;
+    font-family: $font-family;
+  }
+}
+
+.osjs-gui-tabs-header {
+  & > div {
+    @include view;
+
+    &.osjs__active {
+      border-bottom-color: $window-background;
+      background-color: transparent;
+    }
+  }
+}
+
+.osjs-gui-tabs-panes {
+  margin-top: -1px;
+
+  & > div {
+    @include view;
+
+    &.osjs__active {
+      background-color: transparent;
+    }
+  }
+}
+
+.osjs-gui-toggle-field {
+  & > label {
+    & > span.osjs-toggle-input {
+      &::before {
+        @include button;
+      }
+
+      &::after {
+        margin: 1px;
+      }
+    }
+
+    & > input[type=radio] + span.osjs-toggle-input::before {
+      border-radius: 100%;
+    }
+  }
+}
+
+.osjs-gui-range-field > input[type=range] {
+  @include range-slider-input();
+
+  width: 100%;
+
+  &::-webkit-slider-runnable-track {
+    @include range-slider-track();
+  }
+
+  &::-webkit-slider-thumb {
+    @include range-slider-button();
+
+    -webkit-appearance: none;
+  }
+
+  &::-moz-range-track {
+    @include range-slider-track();
+  }
+
+  &::-moz-range-thumb {
+    @include range-slider-button();
+  }
+
+  &::-ms-track {
+    @include range-slider-track();
+
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+
+  &::-ms-fill-lower {
+    @include range-slider-ms-fill();
+  }
+
+  &::-ms-fill-upper {
+    @include range-slider-ms-fill();
+  }
+
+  &::-ms-thumb {
+    @include range-slider-button();
+  }
+}
+
+.osjs-gui-icon-view-wrapper {
+  @include input;
+
+  .osjs__active .osjs__label,
+  .osjs__active .osjs__image {
+    background: $active-background;
+    color: $active-foreground;
+  }
+}
+
+.osjs-gui-menu {
+  ul {
+    @include panel;
+    // @include window;
+  }
+
+  li:hover > div > span {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .osjs__disabled {
+    opacity: 0.5;
+  }
+}
+
+.osjs-gui-menubar {
+  & > div {
+    cursor: pointer;
+
+    &:hover {
+      background-color: $active-background;
+      color: $active-foreground;
+    }
+  }
+}
+
+.osjs-notification {
+  @include panel;
+
+  .osjs-notification-title {
+    font-weight: bold;
+  }
+
+  .osjs-notification-message {
+    margin-top: 1em;
+  }
+}
+
+.osjs-gui-progressbar-wrapper {
+  @include view;
+
+  color: $progress-foreground;
+}
+
+.osjs-gui-progressbar-value {
+  background: $progress-background;
+}
+
+.osjs-gui-list-view {
+  .osjs__active {
+    background: $active-background;
+    color: $active-foreground;
+  }
+
+  .rows:not([data-zebra="false"]) > div:nth-child(2n+1):not(.osjs__active) {
+    background-color: $zebra-background;
+  }
+}
+
+.osjs-gui-list-view-wrapper {
+  @include input;
+}
+
+.osjs-gui-list-view-header {
+  @include view;
+
+  border: 0 none;
+}
+
+.osjs-gui-box-styled {
+  @include input;
+}
+
+.osjs-gui-expander {
+  &-header {
+    @include view;
+
+    border: 0 none;
+  }
+}

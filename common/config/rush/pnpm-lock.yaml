@@ -498,6 +498,50 @@ importers:
       webpack: 4.46.0_webpack-cli@3.3.12
       webpack-cli: 3.3.12_webpack@4.46.0
 
+  ../../frontend/standard-theme:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      '@aaronmeese.com/stylelint-config': workspace:*
+      '@babel/core': ^7.12.9
+      '@babel/plugin-transform-runtime': ^7.12.1
+      '@babel/preset-env': ^7.12.7
+      '@babel/runtime': ^7.12.5
+      babel-loader: ^8.2.1
+      copy-webpack-plugin: ^6.3.2
+      css-loader: ^5.0.1
+      eslint: ^7.14.0
+      file-loader: ^5.1.0
+      mini-css-extract-plugin: ^1.3.1
+      optimize-css-assets-webpack-plugin: ^5.0.4
+      sass: ^1.49.7
+      sass-loader: ^10.1.0
+      stylelint: ^13.8.0
+      stylelint-config-standard: ^20.0.0
+      stylelint-scss: ^3.18.0
+      webpack: ^4.44.2
+      webpack-cli: ^3.3.12
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
+      '@babel/runtime': 7.17.2
+      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
+      copy-webpack-plugin: 6.4.1_webpack@4.46.0
+      css-loader: 5.2.7_webpack@4.46.0
+      eslint: 7.32.0
+      file-loader: 5.1.0_webpack@4.46.0
+      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      sass: 1.49.7
+      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
+      stylelint: 13.13.1
+      stylelint-config-standard: 20.0.0_stylelint@13.13.1
+      stylelint-scss: 3.21.0_stylelint@13.13.1
+      webpack: 4.46.0_webpack-cli@3.3.12
+      webpack-cli: 3.3.12_webpack@4.46.0
+
   ../../frontend/widgets:
     specifiers:
       '@aaronmeese.com/eslint-config': workspace:*
@@ -555,6 +599,7 @@ importers:
       '@aaronmeese.com/gui': workspace:*
       '@aaronmeese.com/panels': workspace:*
       '@aaronmeese.com/server': workspace:*
+      '@aaronmeese.com/standard-theme': workspace:*
       '@aaronmeese.com/stylelint-config': workspace:*
       '@aaronmeese.com/terminal': workspace:*
       '@aaronmeese.com/textpad': workspace:*
@@ -565,7 +610,6 @@ importers:
       '@babel/runtime': ^7.12.5
       '@osjs/freedesktop-sounds': ^3.0.3
       '@osjs/gnome-icons': ^4.0.5
-      '@osjs/standard-theme': ^4.0.9
       babel-loader: ^8.2.1
       copy-webpack-plugin: ^6.3.2
       css-loader: ^5.0.1
@@ -594,12 +638,12 @@ importers:
       '@aaronmeese.com/gui': link:../frontend/gui
       '@aaronmeese.com/panels': link:../frontend/panels
       '@aaronmeese.com/server': link:../backend/server
+      '@aaronmeese.com/standard-theme': link:../frontend/standard-theme
       '@aaronmeese.com/terminal': link:../apps/terminal
       '@aaronmeese.com/textpad': link:../apps/textpad
       '@aaronmeese.com/widgets': link:../frontend/widgets
       '@osjs/freedesktop-sounds': 3.0.3
       '@osjs/gnome-icons': 4.0.5
-      '@osjs/standard-theme': 4.0.9
       dotenv: 14.3.2
       hyperapp: 1.2.10
       typeface-roboto: 0.0.75
@@ -1882,10 +1926,6 @@ packages:
 
   /@osjs/gnome-icons/4.0.5:
     resolution: {integrity: sha512-PfpHn7X6CZ5Ro1A7lU2kxxBY720jfKABQ6z0ltwpJu76vBOVhxE9xJvwVzild12HrzEktHv2BBJF0l0MjSf9mQ==}
-    dev: false
-
-  /@osjs/standard-theme/4.0.9:
-    resolution: {integrity: sha512-YIUelSbBlSXpVY36yEkfsoYcCIS0ZtnLtcREzx7LqYcjGPdeSn09ns9AN39RdMMAvrPCPBA1wNPuwdLxbg7mlQ==}
     dev: false
 
   /@sindresorhus/is/0.14.0:

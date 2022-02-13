@@ -1,0 +1,22 @@
+{
+  "type": "theme",
+  "name": "StandardTheme",
+  "title": {
+    "en_EN": "Standard Theme",
+    "fr_FR": "Thème Standard",
+    "de_DE": "Standard-Thema",
+    "sl_SI": "Standardna Tema",
+    "pt_BR": "Tema padrão"
+  },
+  "description": {
+    "en_EN": "Standard Theme",
+    "fr_FR": "Thème Standard",
+    "de_DE": "Standard-Thema",
+    "sl_SI": "Standardna Tema",
+    "pt_BR": "Tema padrão"
+  },
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

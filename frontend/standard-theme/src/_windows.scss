@@ -1,0 +1,124 @@
+/*
+ * OS.js - JavaScript Cloud/Web Desktop Platform
+ *
+ * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @licence Simplified BSD License
+ */
+
+.osjs-window-button {
+  & > div {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      width: 1em;
+      height: 1em;
+      border-radius: 100%;
+      box-sizing: border-box;
+      transform: translate(-50%, -50%);
+    }
+
+    &::before {
+      background: #bababa;
+      background: linear-gradient(to bottom, #bababa 0%, #d9d9d9 100%);
+      z-index: 1;
+    }
+
+    &::after {
+      border: 1px solid rgba(102, 102, 102, 0.5);
+      z-index: 2;
+    }
+  }
+}
+
+.osjs-window {
+  @include window;
+
+  &[data-focused=false] {
+    opacity: 0.5;
+  }
+
+  &[data-loading=true] {
+    pointer-events: none;
+
+    &::after {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &[data-focused=true] {
+    /* stylelint-disable no-descending-specificity */
+    .osjs-window-button {
+      &[data-action=close] {
+        & > div::before {
+          @include window-button(#e56c5c, #f09c8d);
+        }
+
+        &:hover > div::before,
+        &:active > div::before {
+          @include window-button(#f09c8d, #e56c5c);
+        }
+      }
+
+      &[data-action=maximize] {
+        & > div::before {
+          @include window-button(#8dd22b, #b1ec70);
+        }
+
+        &:hover > div::before,
+        &:active > div::before {
+          @include window-button(#b1ec70, #8dd22b);
+        }
+      }
+
+      &[data-action=minimize] {
+        & > div::before {
+          @include window-button(#f9c435, #fdd675);
+        }
+
+        &:hover > div::before,
+        &:active > div::before {
+          @include window-button(#fdd675, #f9c435);
+        }
+      }
+    }
+  }
+}
+
+.osjs-window-title {
+  text-align: center;
+}
+
+.osjs-window-header {
+  padding: $base-margin / 2;
+}
+
+.osjs-window-icon {
+  margin-right: $base-margin /  2;
+}
