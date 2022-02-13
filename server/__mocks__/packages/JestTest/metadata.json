@@ -3,8 +3,12 @@
   "name": "JestTest",
   "category": null,
   "server": "server.js",
-  "title": "Jest test",
-  "description": "Jest test",
+  "title": {
+    "en_EN": "Jest test"
+  },
+  "description": {
+    "en_EN": "Jest test"
+  },
   "files": [
     "main.js",
     "main.css"

@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-const {ServiceProvider} = require("@osjs/common");
-const Filesystem = require("../filesystem");
+const {ServiceProvider} = require('@osjs/common');
+const Filesystem = require('../filesystem');
 
 /**
  * OS.js Virtual Filesystem Service Provider
@@ -49,14 +49,14 @@ class VFSServiceProvider extends ServiceProvider {
 
   depends() {
     return [
-      "osjs/express"
+      'osjs/express'
     ];
   }
 
   provides() {
     return [
-      "osjs/fs",
-      "osjs/vfs"
+      'osjs/fs',
+      'osjs/vfs'
     ];
   }
 
@@ -65,9 +65,9 @@ class VFSServiceProvider extends ServiceProvider {
 
     await filesystem.init();
 
-    this.core.singleton("osjs/fs", () => this.filesystem);
+    this.core.singleton('osjs/fs', () => this.filesystem);
 
-    this.core.singleton("osjs/vfs", () => ({
+    this.core.singleton('osjs/vfs', () => ({
       realpath: (...args) => this.filesystem.realpath(...args),
       request: (...args) => this.filesystem.request(...args),
       call: (...args) => this.filesystem.call(...args),
@@ -82,7 +82,7 @@ class VFSServiceProvider extends ServiceProvider {
       }
     }));
 
-    this.core.app.use("/vfs", filesystem.router);
+    this.core.app.use('/vfs', filesystem.router);
   }
 }
 

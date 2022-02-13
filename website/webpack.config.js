@@ -58,12 +58,12 @@ module.exports = {
     new NodemonPlugin({
       script: 'src/server/index.js',
     }),
-    new CopyWebpackPlugin([
+    /*new CopyWebpackPlugin([
       {
         from: path.resolve('src/client/dial-up-modem.mp3'),
         to: path.resolve('dist/dial-up-modem.mp3')
       },
-    ]),
+    ]),*/
     ...plugins
   ],
   module: {

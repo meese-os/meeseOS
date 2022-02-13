@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-const nullAdapter = require("./adapters/settings/null");
-const fsAdapter = require("./adapters/settings/fs");
+const nullAdapter = require('./adapters/settings/null');
+const fsAdapter = require('./adapters/settings/fs');
 
 /**
  * TODO: typedef
@@ -47,77 +47,77 @@ const fsAdapter = require("./adapters/settings/fs");
  */
 class Settings {
 
-	/**
-	 * Create new instance
-	 * @param {Core} core Core reference
-	 * @param {SettingsOptions} [options] Instance options
-	 */
-	constructor(core, options = {}) {
-		/**
-		 * @type {Core}
-		 */
-		this.core = core;
+  /**
+   * Create new instance
+   * @param {Core} core Core reference
+   * @param {SettingsOptions} [options] Instance options
+   */
+  constructor(core, options = {}) {
+    /**
+     * @type {Core}
+     */
+    this.core = core;
 
-		this.options = {
-			adapter: nullAdapter,
-			...options
-		};
+    this.options = {
+      adapter: nullAdapter,
+      ...options
+    };
 
-		if (this.options.adapter === "fs") {
-			this.options.adapter = fsAdapter;
-		}
+    if (this.options.adapter === 'fs') {
+      this.options.adapter = fsAdapter;
+    }
 
-		this.adapter = nullAdapter(core, this.options.config);
+    this.adapter = nullAdapter(core, this.options.config);
 
-		try {
-			this.adapter = this.options.adapter(core, this.options.config);
-		} catch (e) {
-			this.core.logger.warn(e);
-		}
-	}
+    try {
+      this.adapter = this.options.adapter(core, this.options.config);
+    } catch (e) {
+      this.core.logger.warn(e);
+    }
+  }
 
-	/**
-	 * Destroy instance
-	 */
-	destroy() {
-		if (this.adapter.destroy) {
-			this.adapter.destroy();
-		}
-	}
+  /**
+   * Destroy instance
+   */
+  destroy() {
+    if (this.adapter.destroy) {
+      this.adapter.destroy();
+    }
+  }
 
-	/**
-	 * Initializes adapter
-	 * @return {Promise<boolean>}
-	 */
-	async init() {
-		if (this.adapter.init) {
-			return this.adapter.init();
-		}
+  /**
+   * Initializes adapter
+   * @return {Promise<boolean>}
+   */
+  async init() {
+    if (this.adapter.init) {
+      return this.adapter.init();
+    }
 
-		return true;
-	}
+    return true;
+  }
 
-	/**
-	 * Sends save request to adapter
-	 * @param {Request} req Express request
-	 * @param {Response} res Express response
-	 * @return {Promise<undefined>}
-	 */
-	async save(req, res) {
-		const result = await this.adapter.save(req, res);
-		res.json(result);
-	}
+  /**
+   * Sends save request to adapter
+   * @param {Request} req Express request
+   * @param {Response} res Express response
+   * @return {Promise<undefined>}
+   */
+  async save(req, res) {
+    const result = await this.adapter.save(req, res);
+    res.json(result);
+  }
 
-	/**
-	 * Sends load request to adapter
-	 * @param {Request} req Express request
-	 * @param {Response} res Express response
-	 * @return {Promise<undefined>}
-	 */
-	async load(req, res) {
-		const result = await this.adapter.load(req, res);
-		res.json(result);
-	}
+  /**
+   * Sends load request to adapter
+   * @param {Request} req Express request
+   * @param {Response} res Express response
+   * @return {Promise<undefined>}
+   */
+  async load(req, res) {
+    const result = await this.adapter.load(req, res);
+    res.json(result);
+  }
 }
 
 

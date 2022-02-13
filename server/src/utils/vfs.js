@@ -28,201 +28,201 @@
  * @licence Simplified BSD License
  */
 
-const fs = require("fs-extra");
-const url = require("url");
-const sanitizeFilename = require("sanitize-filename");
-const formidable = require("formidable");
-const {Stream} = require("stream");
+const fs = require('fs-extra');
+const url = require('url');
+const sanitizeFilename = require('sanitize-filename');
+const formidable = require('formidable');
+const {Stream} = require('stream');
 
 /**
  * A map of error codes
  */
 const errorCodes = {
-	ENOENT: 404,
-	EACCES: 401
+  ENOENT: 404,
+  EACCES: 401
 };
 
 /**
  * Gets prefix of a VFS path
  */
-const getPrefix = path => String(path).split(":")[0];
+const getPrefix = path => String(path).split(':')[0];
 
 /**
  * Sanitizes a path
  */
 const sanitize = filename => {
-	const [name, str] = (filename.replace(/\/+/g, "/")
-		.match(/^([\w-_]+):+(.*)/) || [])
-		.slice(1);
+  const [name, str] = (filename.replace(/\/+/g, '/')
+    .match(/^([\w-_]+):+(.*)/) || [])
+    .slice(1);
 
-	const sane = str.split("/")
-		.map(s => sanitizeFilename(s))
-		.join("/")
-		.replace(/\/+/g, "/");
+  const sane = str.split('/')
+    .map(s => sanitizeFilename(s))
+    .join('/')
+    .replace(/\/+/g, '/');
 
-	return name + ":" + sane;
+  return name + ':' + sane;
 };
 
 /**
  * Gets the stream from a HTTP request
  */
 const streamFromRequest = req => {
-	const isStream = req.files.upload instanceof Stream;
-	return isStream
-		? req.files.upload
-		: fs.createReadStream(req.files.upload.path);
+  const isStream = req.files.upload instanceof Stream;
+  return isStream
+    ? req.files.upload
+    : fs.createReadStream(req.files.upload.path);
 };
 
-const validateAll = (arr, compare, strict = true) => arr[strict ? "every" : "some"](g => compare.indexOf(g) !== -1);
+const validateAll = (arr, compare, strict = true) => arr[strict ? 'every' : 'some'](g => compare.indexOf(g) !== -1);
 
 /**
  * Validates array groups
  */
 const validateNamedGroups = (groups, userGroups, strict) => {
-	const namedGroups = groups
-		.filter(g => typeof g === "string");
+  const namedGroups = groups
+    .filter(g => typeof g === 'string');
 
-	return namedGroups.length
-		? validateAll(namedGroups, userGroups, strict)
-		: true;
+  return namedGroups.length
+    ? validateAll(namedGroups, userGroups, strict)
+    : true;
 };
 
 /**
  * Validates matp of groups based on method:[group,...]
  */
 const validateMethodGroups = (groups, userGroups, method, strict) => {
-	const methodGroups = groups
-		.find(g => typeof g === "string" ? false : (method in g));
+  const methodGroups = groups
+    .find(g => typeof g === 'string' ? false : (method in g));
 
-	return methodGroups
-		? validateAll(methodGroups[method], userGroups, strict)
-		: true;
+  return methodGroups
+    ? validateAll(methodGroups[method], userGroups, strict)
+    : true;
 };
 
 /**
  * Validates groups
  */
 const validateGroups = (userGroups, method, mountpoint, strict) => {
-	const groups = mountpoint.attributes.groups || [];
-	if (groups.length) {
-		const namedValid = validateNamedGroups(groups, userGroups, strict);
-		const methodValid = validateMethodGroups(groups, userGroups, method, strict);
+  const groups = mountpoint.attributes.groups || [];
+  if (groups.length) {
+    const namedValid = validateNamedGroups(groups, userGroups, strict);
+    const methodValid = validateMethodGroups(groups, userGroups, method, strict);
 
-		return namedValid && methodValid;
-	}
+    return namedValid && methodValid;
+  }
 
-	return true;
+  return true;
 };
 
 /**
  * Checks permissions for given mountpoint
  */
 const checkMountpointPermission = (req, res, method, readOnly, strict) => {
-	const userGroups = req.session.user.groups;
+  const userGroups = req.session.user.groups;
 
-	return ({mount}) => {
-		if (readOnly) {
-			const {attributes, name} = mount;
+  return ({mount}) => {
+    if (readOnly) {
+      const {attributes, name} = mount;
 
-			if (attributes.readOnly) {
-				const failed = typeof readOnly === "function"
-					? getPrefix(readOnly(req, res)) === name
-					: readOnly;
+      if (attributes.readOnly) {
+        const failed = typeof readOnly === 'function'
+          ? getPrefix(readOnly(req, res)) === name
+          : readOnly;
 
-				if (failed) {
-					return Promise.reject(createError(403, `Mountpoint '${name}' is read-only`));
-				}
-			}
-		}
+        if (failed) {
+          return Promise.reject(createError(403, `Mountpoint '${name}' is read-only`));
+        }
+      }
+    }
 
-		if (validateGroups(userGroups, method, mount, strict)) {
-			return Promise.resolve(true);
-		}
+    if (validateGroups(userGroups, method, mount, strict)) {
+      return Promise.resolve(true);
+    }
 
-		return Promise.reject(createError(403, `Permission was denied for '${method}' in '${mount.name}'`));
-	};
+    return Promise.reject(createError(403, `Permission was denied for '${method}' in '${mount.name}'`));
+  };
 };
 
 /**
  * Creates a new custom Error
  */
 const createError = (code, message) => {
-	const e = new Error(message);
-	e.code = code;
-	return e;
+  const e = new Error(message);
+  e.code = code;
+  return e;
 };
 
 /**
  * Resolves a mountpoint
  */
 const mountpointResolver = core => async (path) => {
-	const {adapters, mountpoints} = core.make("osjs/vfs");
-	const prefix = getPrefix(path);
-	const mount = mountpoints.find(m => m.name === prefix);
+  const {adapters, mountpoints} = core.make('osjs/vfs');
+  const prefix = getPrefix(path);
+  const mount = mountpoints.find(m => m.name === prefix);
 
-	if (!mount) {
-		throw createError(403, `Mountpoint not found for '${prefix}'`);
-	}
+  if (!mount) {
+    throw createError(403, `Mountpoint not found for '${prefix}'`);
+  }
 
-	const adapter = await (mount.adapter
-		? adapters[mount.adapter]
-		: adapters.system);
+  const adapter = await (mount.adapter
+    ? adapters[mount.adapter]
+    : adapters.system);
 
-	return Object.freeze({mount, adapter});
+  return Object.freeze({mount, adapter});
 };
 
 /*
  * Parses URL Body
  */
 const parseGet = req => {
-	const {query} = url.parse(req.url, true);
+  const {query} = url.parse(req.url, true);
 
-	return Promise.resolve({fields: query, files: {}});
+  return Promise.resolve({fields: query, files: {}});
 };
 
 /*
  * Parses Json Body
  */
 const parseJson = req => {
-	const isJson = req.headers["content-type"] &&
-		req.headers["content-type"].indexOf("application/json") !== -1;
+  const isJson = req.headers['content-type'] &&
+    req.headers['content-type'].indexOf('application/json') !== -1;
 
-	if (isJson) {
-		return {fields: req.body, files: {}};
-	}
+  if (isJson) {
+    return {fields: req.body, files: {}};
+  }
 
-	return false;
+  return false;
 };
 
 /*
  * Parses Form Body
  */
 const parseFormData = (req, {maxFieldsSize, maxFileSize}) => {
-	const form = new formidable.IncomingForm();
-	form.maxFieldsSize = maxFieldsSize;
-	form.maxFileSize = maxFileSize;
+  const form = new formidable.IncomingForm();
+  form.maxFieldsSize = maxFieldsSize;
+  form.maxFileSize = maxFileSize;
 
-	return new Promise((resolve, reject) => {
-		form.parse(req, (err, fields, files) => {
-			return err ? reject(err) : resolve({fields, files});
-		});
-	});
+  return new Promise((resolve, reject) => {
+    form.parse(req, (err, fields, files) => {
+      return err ? reject(err) : resolve({fields, files});
+    });
+  });
 };
 
 /**
  * Middleware for handling HTTP requests
  */
 const parseFields = config => (req, res) => {
-	if (["get", "head"].indexOf(req.method.toLowerCase()) !== -1) {
-		return Promise.resolve(parseGet(req));
-	}
+  if (['get', 'head'].indexOf(req.method.toLowerCase()) !== -1) {
+    return Promise.resolve(parseGet(req));
+  }
 
-	const json = parseJson(req);
-	if (json) {
-		return Promise.resolve(json);
-	}
+  const json = parseJson(req);
+  if (json) {
+    return Promise.resolve(json);
+  }
 
-	return parseFormData(req, config);
+  return parseFormData(req, config);
 };
 
 /**
@@ -230,29 +230,29 @@ const parseFields = config => (req, res) => {
  * Used for direct access via API
  */
 const methodArguments = {
-	realpath: ["path"],
-	exists: ["path"],
-	stat: ["path"],
-	readdir: ["path"],
-	readfile: ["path"],
-	writefile: ["path", upload => ({upload})],
-	mkdir: ["path"],
-	unlink: ["path"],
-	touch: ["path"],
-	search: ["root", "pattern"],
-	copy: ["from", "to"],
-	rename: ["from", "to"]
+  realpath: ['path'],
+  exists: ['path'],
+  stat: ['path'],
+  readdir: ['path'],
+  readfile: ['path'],
+  writefile: ['path', upload => ({upload})],
+  mkdir: ['path'],
+  unlink: ['path'],
+  touch: ['path'],
+  search: ['root', 'pattern'],
+  copy: ['from', 'to'],
+  rename: ['from', 'to']
 };
 
 module.exports = {
-	mountpointResolver,
-	createError,
-	checkMountpointPermission,
-	validateGroups,
-	streamFromRequest,
-	sanitize,
-	getPrefix,
-	parseFields,
-	errorCodes,
-	methodArguments
+  mountpointResolver,
+  createError,
+  checkMountpointPermission,
+  validateGroups,
+  streamFromRequest,
+  sanitize,
+  getPrefix,
+  parseFields,
+  errorCodes,
+  methodArguments
 };

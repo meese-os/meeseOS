@@ -1,4 +1,4 @@
-/**
+/*!
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,26 +28,20 @@
  * @licence Simplified BSD License
  */
 
-const Core = require('./src/core.js');
-const Auth = require('./src/auth.js');
-const Filesystem = require('./src/filesystem.js');
-const Settings = require('./src/settings.js');
-const Packages = require('./src/packages.js');
-const CoreServiceProvider = require('./src/providers/core');
-const PackageServiceProvider = require('./src/providers/packages');
-const VFSServiceProvider = require('./src/providers/vfs');
-const AuthServiceProvider = require('./src/providers/auth');
-const SettingsServiceProvider = require('./src/providers/settings');
+.Window_Xterm {
+  .osjs-window-content {
+    background: #000;
+  }
 
-module.exports = {
-  Core,
-  Auth,
-  Filesystem,
-  Settings,
-  Packages,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-};
+  .terminal,
+  .xterm-viewport {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  @import 'xterm';
+
+  .xterm .xterm-helper-textarea {
+    left: 0 !important;
+  }
+}

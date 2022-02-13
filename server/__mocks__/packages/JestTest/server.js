@@ -29,11 +29,11 @@
  */
 
 module.exports = (core, proc) => ({
-	init: async () => {},
-	start: () => {},
-	destroy: () => {},
-	onmessage: (ws, respond, args) => respond("Pong"),
-	test: () => {
-		throw new Error("Simulated failure");
-	},
+  init: async () => {},
+  start: () => {},
+  destroy: () => {},
+  onmessage: (ws, respond, args) => respond('Pong'),
+  test: () => {
+    throw new Error('Simulated failure');
+  },
 });

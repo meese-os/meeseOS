@@ -28,111 +28,111 @@
  * @licence Simplified BSD License
  */
 
-const path = require("path");
+const path = require('path');
 const maxAge = 60 * 60 * 12;
 const mb = m => m * 1024 * 1024;
 
 const defaultConfiguration = {
-	development: !(process.env.NODE_ENV || "").match(/^prod/i),
-	logging: false, // TODO: Configure this in another file via arguments, not here
-	index: "index.html",
-	bind: "0.0.0.0",
-	port: 8000,
-	public: null,
-	morgan: "tiny",
-	express: {
-		maxFieldsSize: mb(20),
-		maxFileSize: mb(200),
-		maxBodySize: "100kb"
-	},
-	https: {
-		enabled: false,
-		options: {
-			key: null,
-			cert: null
-		}
-	},
-	ws: {
-		port: null,
-		ping: 30 * 1000
-	},
-	proxy: [
-		/*
-		{
-			source: "pattern",
-			destination: "pattern",
-			options: {}
-		}
-		*/
-	],
-	auth: {
-		vfsGroups: [],
-		defaultGroups: [],
-		requiredGroups: [],
-		requireAllGroups: false,
-		denyUsers: []
-	},
-	mime: {
-		filenames: {
-			// "filename": "mime/type"
-			"Makefile": "text/x-makefile",
-			".gitignore": "text/plain"
-		},
-		define: {
-			// "mime/type": ["ext"]
-			"text/x-lilypond": ["ly", "ily"],
-			"text/x-python": ["py"],
-			"application/tar+gzip": ["tgz"]
-		}
-	},
-	session: {
-		store: {
-			module: require.resolve("connect-loki"),
-			options: {
-				autosave: true
-				//ttl: maxAge
-			}
-		},
-		options: {
-			name: "osjs.sid",
-			secret: "osjs",
-			rolling: true,
-			resave: false,
-			saveUninitialized: false,
-			cookie: {
-				secure: "auto",
-				maxAge: 1000 * maxAge
-			}
-		}
-	},
-	packages: {
-		// Resolves to root by default
-		discovery: "packages.json",
+  development: !(process.env.NODE_ENV || '').match(/^prod/i),
+  logging: true,
+  index: 'index.html',
+  bind: '0.0.0.0',
+  port: 8000,
+  public: null,
+  morgan: 'tiny',
+  express: {
+    maxFieldsSize: mb(20),
+    maxFileSize: mb(200),
+    maxBodySize: '100kb'
+  },
+  https: {
+    enabled: false,
+    options: {
+      key: null,
+      cert: null
+    }
+  },
+  ws: {
+    port: null,
+    ping: 30 * 1000
+  },
+  proxy: [
+    /*
+    {
+      source: 'pattern',
+      destination: 'pattern',
+      options: {}
+    }
+    */
+  ],
+  auth: {
+    vfsGroups: [],
+    defaultGroups: [],
+    requiredGroups: [],
+    requireAllGroups: false,
+    denyUsers: []
+  },
+  mime: {
+    filenames: {
+      // 'filename': 'mime/type'
+      'Makefile': 'text/x-makefile',
+      '.gitignore': 'text/plain'
+    },
+    define: {
+      // 'mime/type': ['ext']
+      'text/x-lilypond': ['ly', 'ily'],
+      'text/x-python': ['py'],
+      'application/tar+gzip': ['tgz']
+    }
+  },
+  session: {
+    store: {
+      module: require.resolve('connect-loki'),
+      options: {
+        autosave: true
+        //ttl: maxAge
+      }
+    },
+    options: {
+      name: 'osjs.sid',
+      secret: 'osjs',
+      rolling: true,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        secure: 'auto',
+        maxAge: 1000 * maxAge
+      }
+    }
+  },
+  packages: {
+    // Resolves to root by default
+    discovery: 'packages.json',
 
-		// Resolves to dist/ by default
-		metadata: "metadata.json"
-	},
+    // Resolves to dist/ by default
+    metadata: 'metadata.json'
+  },
 
-	vfs: {
-		watch: false,
-		root: path.join(process.cwd(), "vfs"),
+  vfs: {
+    watch: false,
+    root: path.join(process.cwd(), 'vfs'),
 
-		mountpoints: [{
-			name: "osjs",
-			attributes: {
-				root: "{root}/dist",
-				readOnly: true
-			}
-		}, {
-			name: "home",
-			attributes: {
-				root: "{vfs}/{username}"
-			}
-		}]
-	}
+    mountpoints: [{
+      name: 'osjs',
+      attributes: {
+        root: '{root}/dist',
+        readOnly: true
+      }
+    }, {
+      name: 'home',
+      attributes: {
+        root: '{vfs}/{username}'
+      }
+    }]
+  }
 };
 
 module.exports = {
-	defaultConfiguration
+  defaultConfiguration
 };
 

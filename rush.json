@@ -481,6 +481,10 @@
       "packageName": "@aaronmeese.com/server",
       "projectFolder": "server"
     },
+		{
+			"packageName": "@aaronmeese.com/terminal",
+			"projectFolder": "apps/terminal"
+		},
     {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"

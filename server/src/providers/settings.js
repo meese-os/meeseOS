@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-const Settings = require("../settings");
-const {ServiceProvider} = require("@osjs/common");
+const Settings = require('../settings');
+const {ServiceProvider} = require('@osjs/common');
 
 /**
  * OS.js Settings Service Provider
@@ -48,11 +48,11 @@ class SettingsServiceProvider extends ServiceProvider {
   }
 
   async init() {
-    this.core.make("osjs/express")
-      .routeAuthenticated("post", "/settings", (req, res) => this.settings.save(req, res));
+    this.core.make('osjs/express')
+      .routeAuthenticated('post', '/settings', (req, res) => this.settings.save(req, res));
 
-    this.core.make("osjs/express")
-      .routeAuthenticated("get", "/settings", (req, res) => this.settings.load(req, res));
+    this.core.make('osjs/express')
+      .routeAuthenticated('get', '/settings', (req, res) => this.settings.load(req, res));
 
     return this.settings.init();
   }

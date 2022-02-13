@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-const path = require("path");
-const chokidar = require("chokidar");
+const path = require('path');
+const chokidar = require('chokidar');
 
 /**
  * TODO: typedef
@@ -48,131 +48,131 @@ const chokidar = require("chokidar");
  */
 class Package {
 
-	/**
-	 * Create new instance
-	 * @param {Core} core Core reference
-	 * @param {PackageOptions} [options] Instance options
-	 */
-	constructor(core, options = {}) {
-		/**
-		 * @type {Core}
-		 */
-		this.core = core;
+  /**
+   * Create new instance
+   * @param {Core} core Core reference
+   * @param {PackageOptions} [options] Instance options
+   */
+  constructor(core, options = {}) {
+    /**
+     * @type {Core}
+     */
+    this.core = core;
 
-		this.script = options.metadata.server
-			? path.resolve(path.dirname(options.filename), options.metadata.server)
-			: null;
+    this.script = options.metadata.server
+      ? path.resolve(path.dirname(options.filename), options.metadata.server)
+      : null;
 
-		/**
-		 * @type {string}
-		 */
-		this.filename = options.filename;
+    /**
+     * @type {string}
+     */
+    this.filename = options.filename;
 
-		/**
-		 * @type {PackageMetadata}
-		 */
-		this.metadata = options.metadata;
+    /**
+     * @type {PackageMetadata}
+     */
+    this.metadata = options.metadata;
 
-		this.handler = null;
+    this.handler = null;
 
-		this.watcher = null;
-	}
+    this.watcher = null;
+  }
 
-	/**
-	 * Destroys instance
-	 */
-	async destroy() {
-		this.action("destroy");
+  /**
+   * Destroys instance
+   */
+  async destroy() {
+    this.action('destroy');
 
-		if (this.watcher) {
-			await this.watcher.close();
-			this.watcher = null;
-		}
-	}
+    if (this.watcher) {
+      await this.watcher.close();
+      this.watcher = null;
+    }
+  }
 
-	/**
-	 * Run method on package script
-	 * @param {string} method Method name
-	 * @param {*} [...args] Pass arguments
-	 * @return {boolean}
-	 */
-	action(method, ...args) {
-		try {
-			if (this.handler && typeof this.handler[method] === "function") {
-				this.handler[method](...args);
+  /**
+   * Run method on package script
+   * @param {string} method Method name
+   * @param {*} [...args] Pass arguments
+   * @return {boolean}
+   */
+  action(method, ...args) {
+    try {
+      if (this.handler && typeof this.handler[method] === 'function') {
+        this.handler[method](...args);
 
-				return true;
-			}
-		} catch (e) {
-			this.core.logger.warn(e);
-		}
+        return true;
+      }
+    } catch (e) {
+      this.core.logger.warn(e);
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	/**
-	 * Validates this package
-	 * @param {PackageMetadata[]} manifest Global manifest
-	 * @return {boolean}
-	 */
-	validate(manifest) {
-		return this.script &&
-			this.metadata &&
-			!!manifest.find(iter => iter.name === this.metadata.name);
-	}
+  /**
+   * Validates this package
+   * @param {PackageMetadata[]} manifest Global manifest
+   * @return {boolean}
+   */
+  validate(manifest) {
+    return this.script &&
+      this.metadata &&
+      !!manifest.find(iter => iter.name === this.metadata.name);
+  }
 
-	/**
-	 * Initializes this package
-	 * @return {Promise<undefined>}
-	 */
-	init() {
-		const mod = require(this.script);
-		const handler = typeof mod.default === "function" ? mod.default : mod;
+  /**
+   * Initializes this package
+   * @return {Promise<undefined>}
+   */
+  init() {
+    const mod = require(this.script);
+    const handler = typeof mod.default === 'function' ? mod.default : mod;
 
-		this.handler = handler(this.core, this);
+    this.handler = handler(this.core, this);
 
-		if (typeof this.handler.init === "function") {
-			return this.handler.init();
-		}
+    if (typeof this.handler.init === 'function') {
+      return this.handler.init();
+    }
 
-		return Promise.resolve();
-	}
+    return Promise.resolve();
+  }
 
-	/**
-	 * Starts server scripts
-	 * @return {Promise<undefined>}
-	 */
-	start() {
-		return this.action("start");
-	}
+  /**
+   * Starts server scripts
+   * @return {Promise<undefined>}
+   */
+  start() {
+    return this.action('start');
+  }
 
-	/**
-	 * Creates a watch in package dist
-	 * @param {Function} cb Callback function on watch changes
-	 * @return {string} Watched path
-	 */
-	watch(cb) {
-		const pub = this.core.config("public");
-		const dist = path.join(pub, "apps", this.metadata.name);
+  /**
+   * Creates a watch in package dist
+   * @param {Function} cb Callback function on watch changes
+   * @return {string} Watched path
+   */
+  watch(cb) {
+    const pub = this.core.config('public');
+    const dist = path.join(pub, 'apps', this.metadata.name);
 
-		this.watcher = chokidar.watch(dist);
-		this.watcher.on("change", () => cb(this.metadata));
+    this.watcher = chokidar.watch(dist);
+    this.watcher.on('change', () => cb(this.metadata));
 
-		return dist;
-	}
+    return dist;
+  }
 
-	/**
-	 * Resolve an URL for resource
-	 * @param {string} path Input path
-	 * @return {string}
-	 */
-	resource(path) {
-		if (path.substr(0, 1) !== "/") {
-			path = "/" + path;
-		}
+  /**
+   * Resolve an URL for resource
+   * @param {string} path Input path
+   * @return {string}
+   */
+  resource(path) {
+    if (path.substr(0, 1) !== '/') {
+      path = '/' + path;
+    }
 
-		return `/apps/${this.metadata.name}${path}`;
-	}
+    return `/apps/${this.metadata.name}${path}`;
+  }
 }
 
 module.exports = Package;

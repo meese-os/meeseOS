@@ -28,22 +28,22 @@
  * @licence Simplified BSD License
  */
 
-const express_session = require("express-session");
-const express_ws = require("express-ws");
+const express_session = require('express-session');
+const express_ws = require('express-ws');
 
 /*
  * Converts an input argument to configuration entry
  * Overrides the user-created configuration file
  */
 module.exports.argvToConfig = {
-  "logging": logging => ({logging}),
-  "development": development => ({development}),
-  "port": port => ({port}),
-  "ws-port": port => ({ws: {port}}),
-  "secret": secret => ({session: {options: {secret}}}),
-  "morgan": morgan => ({morgan}),
-  "discovery": discovery => ({packages: {discovery}}),
-  "manifest": manifest => ({packages: {manifest}})
+  'logging': logging => ({logging}),
+  'development': development => ({development}),
+  'port': port => ({port}),
+  'ws-port': port => ({ws: {port}}),
+  'secret': secret => ({session: {options: {secret}}}),
+  'morgan': morgan => ({morgan}),
+  'discovery': discovery => ({packages: {discovery}}),
+  'manifest': manifest => ({packages: {manifest}})
 };
 
 /*
@@ -91,7 +91,7 @@ const validateGroups = (req, groups, all) => {
   if (groups instanceof Array && groups.length) {
     const userGroups = req.session.user.groups;
 
-    const method = all ? "every" : "some";
+    const method = all ? 'every' : 'some';
 
     return groups[method](g => userGroups.indexOf(g) !== -1);
   }
@@ -109,7 +109,7 @@ module.exports.isAuthenticated = (groups = [], all = false) => (req, res, next) 
 
   return res
     .status(403)
-    .send("Access denied");
+    .send('Access denied');
 };
 
 /**
