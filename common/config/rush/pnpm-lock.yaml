@@ -30,11 +30,11 @@ importers:
       webpack: ^4.44.2
       webpack-cli: ^3.3.12
     dependencies:
-      '@aaronmeese.com/gui': link:../../gui
+      '@aaronmeese.com/gui': link:../../frontend/gui
       hyperapp: 1.2.10
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../../config/stylelint
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.2
       '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
@@ -92,8 +92,8 @@ importers:
       xterm-addon-attach: 0.5.0_xterm@4.17.0
       xterm-addon-fit: 0.3.0_xterm@4.17.0
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../../config/stylelint
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.2
       '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
@@ -138,11 +138,11 @@ importers:
       webpack: ^4.44.2
       webpack-cli: ^3.3.12
     dependencies:
-      '@aaronmeese.com/gui': link:../../gui
+      '@aaronmeese.com/gui': link:../../frontend/gui
       hyperapp: 1.2.10
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../../config/stylelint
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.2
       '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
@@ -162,158 +162,7 @@ importers:
       webpack: 4.46.0_webpack-cli@3.3.12
       webpack-cli: 3.3.12_webpack@4.46.0
 
-  ../../cli:
-    specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      commander: ^4.1.1
-      consola: ^2.15.0
-      eslint: ^7.17.0
-      fs-extra: ^9.0.1
-      getopts: ^2.2.5
-      globby: ^11.0.2
-      inquirer: ^7.3.3
-      temp: ^0.9.4
-      which: ^2.0.2
-    dependencies:
-      commander: 4.1.1
-      consola: 2.15.3
-      fs-extra: 9.1.0
-      getopts: 2.3.0
-      globby: 11.1.0
-      inquirer: 7.3.3
-      temp: 0.9.4
-      which: 2.0.2
-    devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
-      eslint: 7.32.0
-
-  ../../client:
-    specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/event-emitter': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
-      '@babel/core': ^7.12.9
-      '@babel/plugin-transform-runtime': ^7.12.1
-      '@babel/preset-env': ^7.12.7
-      '@babel/runtime': ^7.12.5
-      '@osjs/common': ^3.0.12
-      babel-loader: ^8.2.1
-      copy-webpack-plugin: ^6.3.2
-      css-loader: ^5.0.1
-      css-mediaquery: ^0.1.2
-      dateformat: ^3.0.3
-      deepmerge: ^4.2.2
-      eslint: ^7.14.0
-      file-loader: ^5.1.0
-      hyperapp: ^1.2.10
-      js-cookie: ^2.2.1
-      mini-css-extract-plugin: ^1.3.1
-      optimize-css-assets-webpack-plugin: ^5.0.4
-      sass: ^1.49.7
-      sass-loader: ^10.1.0
-      simplejsonconf: ^2.0.7
-      stylelint: ^13.8.0
-      stylelint-config-standard: ^20.0.0
-      stylelint-scss: ^3.18.0
-      webpack: ^4.44.2
-      webpack-cli: ^3.3.12
-    dependencies:
-      '@aaronmeese.com/event-emitter': link:../event-emitter
-      '@osjs/common': 3.0.12
-      css-mediaquery: 0.1.2
-      dateformat: 3.0.3
-      deepmerge: 4.2.2
-      hyperapp: 1.2.10
-      js-cookie: 2.2.1
-      simplejsonconf: 2.0.7
-    devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../config/stylelint
-      '@babel/core': 7.17.2
-      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
-      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
-      '@babel/runtime': 7.17.2
-      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
-      copy-webpack-plugin: 6.4.1_webpack@4.46.0
-      css-loader: 5.2.7_webpack@4.46.0
-      eslint: 7.32.0
-      file-loader: 5.1.0_webpack@4.46.0
-      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
-      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
-      sass: 1.49.7
-      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
-      stylelint: 13.13.1
-      stylelint-config-standard: 20.0.0_stylelint@13.13.1
-      stylelint-scss: 3.21.0_stylelint@13.13.1
-      webpack: 4.46.0_webpack-cli@3.3.12
-      webpack-cli: 3.3.12_webpack@4.46.0
-
-  ../../config/eslint:
-    specifiers:
-      eslint: ^7
-    dependencies:
-      eslint: 7.32.0
-
-  ../../config/stylelint:
-    specifiers:
-      stylelint: ^13.8.0
-    dependencies:
-      stylelint: 13.13.1
-
-  ../../dialogs:
-    specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
-      '@babel/core': ^7.12.9
-      '@babel/plugin-transform-runtime': ^7.12.1
-      '@babel/preset-env': ^7.12.7
-      '@babel/runtime': ^7.12.5
-      babel-loader: ^8.2.1
-      copy-webpack-plugin: ^6.3.2
-      css-loader: ^5.0.1
-      deepmerge: ^2.2.1
-      eslint: ^7.14.0
-      file-loader: ^5.1.0
-      hyperapp: ^1.2.10
-      is-plain-object: ^2.0.4
-      mini-css-extract-plugin: ^1.3.1
-      optimize-css-assets-webpack-plugin: ^5.0.4
-      sass: ^1.49.7
-      sass-loader: ^10.1.0
-      stylelint: ^13.8.0
-      stylelint-config-standard: ^20.0.0
-      stylelint-scss: ^3.18.0
-      webpack: ^4.44.2
-      webpack-cli: ^3.3.12
-    dependencies:
-      '@aaronmeese.com/gui': link:../gui
-      deepmerge: 2.2.1
-      hyperapp: 1.2.10
-      is-plain-object: 2.0.4
-    devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../config/stylelint
-      '@babel/core': 7.17.2
-      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
-      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
-      '@babel/runtime': 7.17.2
-      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
-      copy-webpack-plugin: 6.4.1_webpack@4.46.0
-      css-loader: 5.2.7_webpack@4.46.0
-      eslint: 7.32.0
-      file-loader: 5.1.0_webpack@4.46.0
-      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
-      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
-      sass: 1.49.7
-      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
-      stylelint: 13.13.1
-      stylelint-config-standard: 20.0.0_stylelint@13.13.1
-      stylelint-scss: 3.21.0_stylelint@13.13.1
-      webpack: 4.46.0_webpack-cli@3.3.12
-      webpack-cli: 3.3.12_webpack@4.46.0
-
-  ../../event-emitter:
+  ../../backend/event-emitter:
     specifiers:
       '@aaronmeese.com/eslint-config': workspace:*
       '@babel/core': ^7.12.9
@@ -325,7 +174,7 @@ importers:
       webpack: ^4.44.2
       webpack-cli: ^3.3.12
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
       '@babel/core': 7.17.2
       '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
@@ -335,117 +184,7 @@ importers:
       webpack: 4.46.0_webpack-cli@3.3.12
       webpack-cli: 3.3.12_webpack@4.46.0
 
-  ../../gui:
-    specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
-      '@babel/core': ^7.12.9
-      '@babel/plugin-transform-runtime': ^7.12.1
-      '@babel/preset-env': ^7.12.7
-      '@babel/runtime': ^7.12.5
-      babel-loader: ^8.2.1
-      copy-webpack-plugin: ^6.3.2
-      css-loader: ^5.0.1
-      eslint: ^7.14.0
-      file-loader: ^5.1.0
-      hyperapp: ^1.2.10
-      hyperapp-nestable: ^1.0.0
-      mini-css-extract-plugin: ^1.3.1
-      optimize-css-assets-webpack-plugin: ^5.0.4
-      rollup: ^1.32.1
-      rollup-plugin-babel: ^4.4.0
-      rollup-plugin-babel-minify: ^9.1.1
-      rollup-plugin-commonjs: ^10.1.0
-      rollup-plugin-node-resolve: ^5.2.0
-      rollup-plugin-uglify: ^6.0.4
-      sass: ^1.49.7
-      sass-loader: ^10.1.0
-      stylelint: ^13.8.0
-      stylelint-config-standard: ^20.0.0
-      stylelint-scss: ^3.18.0
-      webpack: ^4.44.2
-      webpack-cli: ^3.3.12
-    dependencies:
-      hyperapp: 1.2.10
-      hyperapp-nestable: 1.1.0_hyperapp@1.2.10
-    devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../config/stylelint
-      '@babel/core': 7.17.2
-      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
-      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
-      '@babel/runtime': 7.17.2
-      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
-      copy-webpack-plugin: 6.4.1_webpack@4.46.0
-      css-loader: 5.2.7_webpack@4.46.0
-      eslint: 7.32.0
-      file-loader: 5.1.0_webpack@4.46.0
-      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
-      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
-      rollup: 1.32.1
-      rollup-plugin-babel: 4.4.0_@babel+core@7.17.2+rollup@1.32.1
-      rollup-plugin-babel-minify: 9.1.1_rollup@1.32.1
-      rollup-plugin-commonjs: 10.1.0_rollup@1.32.1
-      rollup-plugin-node-resolve: 5.2.0_rollup@1.32.1
-      rollup-plugin-uglify: 6.0.4_rollup@1.32.1
-      sass: 1.49.7
-      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
-      stylelint: 13.13.1
-      stylelint-config-standard: 20.0.0_stylelint@13.13.1
-      stylelint-scss: 3.21.0_stylelint@13.13.1
-      webpack: 4.46.0_webpack-cli@3.3.12
-      webpack-cli: 3.3.12_webpack@4.46.0
-
-  ../../panels:
-    specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/event-emitter': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
-      '@babel/core': ^7.12.9
-      '@babel/plugin-transform-runtime': ^7.12.1
-      '@babel/preset-env': ^7.12.7
-      '@babel/runtime': ^7.12.5
-      babel-loader: ^8.2.1
-      copy-webpack-plugin: ^6.3.2
-      css-loader: ^5.0.1
-      eslint: ^7.14.0
-      file-loader: ^5.1.0
-      hyperapp: ^1.2.10
-      mini-css-extract-plugin: ^1.3.1
-      optimize-css-assets-webpack-plugin: ^5.0.4
-      sass: ^1.49.7
-      sass-loader: ^10.1.0
-      stylelint: ^13.8.0
-      stylelint-config-standard: ^20.0.0
-      stylelint-scss: ^3.18.0
-      webpack: ^4.44.2
-      webpack-cli: ^3.3.12
-    dependencies:
-      '@aaronmeese.com/event-emitter': link:../event-emitter
-      hyperapp: 1.2.10
-    devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../config/stylelint
-      '@babel/core': 7.17.2
-      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
-      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
-      '@babel/runtime': 7.17.2
-      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
-      copy-webpack-plugin: 6.4.1_webpack@4.46.0
-      css-loader: 5.2.7_webpack@4.46.0
-      eslint: 7.32.0
-      file-loader: 5.1.0_webpack@4.46.0
-      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
-      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
-      sass: 1.49.7
-      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
-      stylelint: 13.13.1
-      stylelint-config-standard: 20.0.0_stylelint@13.13.1
-      stylelint-scss: 3.21.0_stylelint@13.13.1
-      webpack: 4.46.0_webpack-cli@3.3.12
-      webpack-cli: 3.3.12_webpack@4.46.0
-
-  ../../server:
+  ../../backend/server:
     specifiers:
       '@aaronmeese.com/eslint-config': workspace:*
       '@osjs/common': ^3.0.12
@@ -493,10 +232,318 @@ importers:
       sanitize-filename: 1.6.3
       uuid: 8.3.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
       eslint: 7.32.0
       jest-express: 1.12.0
       temp: 0.9.4
+
+  ../../development/cli:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      commander: ^4.1.1
+      consola: ^2.15.0
+      eslint: ^7.17.0
+      fs-extra: ^9.0.1
+      getopts: ^2.2.5
+      globby: ^11.0.2
+      inquirer: ^7.3.3
+      temp: ^0.9.4
+      which: ^2.0.2
+    dependencies:
+      commander: 4.1.1
+      consola: 2.15.3
+      fs-extra: 9.1.0
+      getopts: 2.3.0
+      globby: 11.1.0
+      inquirer: 7.3.3
+      temp: 0.9.4
+      which: 2.0.2
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../eslint
+      eslint: 7.32.0
+
+  ../../development/eslint:
+    specifiers:
+      eslint: ^7
+    dependencies:
+      eslint: 7.32.0
+
+  ../../development/stylelint:
+    specifiers:
+      stylelint: ^13.8.0
+    dependencies:
+      stylelint: 13.13.1
+
+  ../../frontend/client:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      '@aaronmeese.com/event-emitter': workspace:*
+      '@aaronmeese.com/stylelint-config': workspace:*
+      '@babel/core': ^7.12.9
+      '@babel/plugin-transform-runtime': ^7.12.1
+      '@babel/preset-env': ^7.12.7
+      '@babel/runtime': ^7.12.5
+      '@osjs/common': ^3.0.12
+      babel-loader: ^8.2.1
+      copy-webpack-plugin: ^6.3.2
+      css-loader: ^5.0.1
+      css-mediaquery: ^0.1.2
+      dateformat: ^3.0.3
+      deepmerge: ^4.2.2
+      eslint: ^7.14.0
+      file-loader: ^5.1.0
+      hyperapp: ^1.2.10
+      js-cookie: ^2.2.1
+      mini-css-extract-plugin: ^1.3.1
+      optimize-css-assets-webpack-plugin: ^5.0.4
+      sass: ^1.49.7
+      sass-loader: ^10.1.0
+      simplejsonconf: ^2.0.7
+      stylelint: ^13.8.0
+      stylelint-config-standard: ^20.0.0
+      stylelint-scss: ^3.18.0
+      webpack: ^4.44.2
+      webpack-cli: ^3.3.12
+    dependencies:
+      '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
+      '@osjs/common': 3.0.12
+      css-mediaquery: 0.1.2
+      dateformat: 3.0.3
+      deepmerge: 4.2.2
+      hyperapp: 1.2.10
+      js-cookie: 2.2.1
+      simplejsonconf: 2.0.7
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
+      '@babel/runtime': 7.17.2
+      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
+      copy-webpack-plugin: 6.4.1_webpack@4.46.0
+      css-loader: 5.2.7_webpack@4.46.0
+      eslint: 7.32.0
+      file-loader: 5.1.0_webpack@4.46.0
+      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      sass: 1.49.7
+      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
+      stylelint: 13.13.1
+      stylelint-config-standard: 20.0.0_stylelint@13.13.1
+      stylelint-scss: 3.21.0_stylelint@13.13.1
+      webpack: 4.46.0_webpack-cli@3.3.12
+      webpack-cli: 3.3.12_webpack@4.46.0
+
+  ../../frontend/dialogs:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      '@aaronmeese.com/gui': workspace:*
+      '@aaronmeese.com/stylelint-config': workspace:*
+      '@babel/core': ^7.12.9
+      '@babel/plugin-transform-runtime': ^7.12.1
+      '@babel/preset-env': ^7.12.7
+      '@babel/runtime': ^7.12.5
+      babel-loader: ^8.2.1
+      copy-webpack-plugin: ^6.3.2
+      css-loader: ^5.0.1
+      deepmerge: ^2.2.1
+      eslint: ^7.14.0
+      file-loader: ^5.1.0
+      hyperapp: ^1.2.10
+      is-plain-object: ^2.0.4
+      mini-css-extract-plugin: ^1.3.1
+      optimize-css-assets-webpack-plugin: ^5.0.4
+      sass: ^1.49.7
+      sass-loader: ^10.1.0
+      stylelint: ^13.8.0
+      stylelint-config-standard: ^20.0.0
+      stylelint-scss: ^3.18.0
+      webpack: ^4.44.2
+      webpack-cli: ^3.3.12
+    dependencies:
+      '@aaronmeese.com/gui': link:../gui
+      deepmerge: 2.2.1
+      hyperapp: 1.2.10
+      is-plain-object: 2.0.4
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
+      '@babel/runtime': 7.17.2
+      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
+      copy-webpack-plugin: 6.4.1_webpack@4.46.0
+      css-loader: 5.2.7_webpack@4.46.0
+      eslint: 7.32.0
+      file-loader: 5.1.0_webpack@4.46.0
+      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      sass: 1.49.7
+      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
+      stylelint: 13.13.1
+      stylelint-config-standard: 20.0.0_stylelint@13.13.1
+      stylelint-scss: 3.21.0_stylelint@13.13.1
+      webpack: 4.46.0_webpack-cli@3.3.12
+      webpack-cli: 3.3.12_webpack@4.46.0
+
+  ../../frontend/gui:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      '@aaronmeese.com/stylelint-config': workspace:*
+      '@babel/core': ^7.12.9
+      '@babel/plugin-transform-runtime': ^7.12.1
+      '@babel/preset-env': ^7.12.7
+      '@babel/runtime': ^7.12.5
+      babel-loader: ^8.2.1
+      copy-webpack-plugin: ^6.3.2
+      css-loader: ^5.0.1
+      eslint: ^7.14.0
+      file-loader: ^5.1.0
+      hyperapp: ^1.2.10
+      hyperapp-nestable: ^1.0.0
+      mini-css-extract-plugin: ^1.3.1
+      optimize-css-assets-webpack-plugin: ^5.0.4
+      rollup: ^1.32.1
+      rollup-plugin-babel: ^4.4.0
+      rollup-plugin-babel-minify: ^9.1.1
+      rollup-plugin-commonjs: ^10.1.0
+      rollup-plugin-node-resolve: ^5.2.0
+      rollup-plugin-uglify: ^6.0.4
+      sass: ^1.49.7
+      sass-loader: ^10.1.0
+      stylelint: ^13.8.0
+      stylelint-config-standard: ^20.0.0
+      stylelint-scss: ^3.18.0
+      webpack: ^4.44.2
+      webpack-cli: ^3.3.12
+    dependencies:
+      hyperapp: 1.2.10
+      hyperapp-nestable: 1.1.0_hyperapp@1.2.10
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
+      '@babel/runtime': 7.17.2
+      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
+      copy-webpack-plugin: 6.4.1_webpack@4.46.0
+      css-loader: 5.2.7_webpack@4.46.0
+      eslint: 7.32.0
+      file-loader: 5.1.0_webpack@4.46.0
+      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      rollup: 1.32.1
+      rollup-plugin-babel: 4.4.0_@babel+core@7.17.2+rollup@1.32.1
+      rollup-plugin-babel-minify: 9.1.1_rollup@1.32.1
+      rollup-plugin-commonjs: 10.1.0_rollup@1.32.1
+      rollup-plugin-node-resolve: 5.2.0_rollup@1.32.1
+      rollup-plugin-uglify: 6.0.4_rollup@1.32.1
+      sass: 1.49.7
+      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
+      stylelint: 13.13.1
+      stylelint-config-standard: 20.0.0_stylelint@13.13.1
+      stylelint-scss: 3.21.0_stylelint@13.13.1
+      webpack: 4.46.0_webpack-cli@3.3.12
+      webpack-cli: 3.3.12_webpack@4.46.0
+
+  ../../frontend/panels:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      '@aaronmeese.com/event-emitter': workspace:*
+      '@aaronmeese.com/stylelint-config': workspace:*
+      '@babel/core': ^7.12.9
+      '@babel/plugin-transform-runtime': ^7.12.1
+      '@babel/preset-env': ^7.12.7
+      '@babel/runtime': ^7.12.5
+      babel-loader: ^8.2.1
+      copy-webpack-plugin: ^6.3.2
+      css-loader: ^5.0.1
+      eslint: ^7.14.0
+      file-loader: ^5.1.0
+      hyperapp: ^1.2.10
+      mini-css-extract-plugin: ^1.3.1
+      optimize-css-assets-webpack-plugin: ^5.0.4
+      sass: ^1.49.7
+      sass-loader: ^10.1.0
+      stylelint: ^13.8.0
+      stylelint-config-standard: ^20.0.0
+      stylelint-scss: ^3.18.0
+      webpack: ^4.44.2
+      webpack-cli: ^3.3.12
+    dependencies:
+      '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
+      hyperapp: 1.2.10
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
+      '@babel/runtime': 7.17.2
+      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
+      copy-webpack-plugin: 6.4.1_webpack@4.46.0
+      css-loader: 5.2.7_webpack@4.46.0
+      eslint: 7.32.0
+      file-loader: 5.1.0_webpack@4.46.0
+      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      sass: 1.49.7
+      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
+      stylelint: 13.13.1
+      stylelint-config-standard: 20.0.0_stylelint@13.13.1
+      stylelint-scss: 3.21.0_stylelint@13.13.1
+      webpack: 4.46.0_webpack-cli@3.3.12
+      webpack-cli: 3.3.12_webpack@4.46.0
+
+  ../../frontend/widgets:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      '@aaronmeese.com/stylelint-config': workspace:*
+      '@babel/core': ^7.12.9
+      '@babel/plugin-transform-runtime': ^7.12.1
+      '@babel/preset-env': ^7.12.7
+      '@babel/runtime': ^7.12.5
+      babel-loader: ^8.2.1
+      copy-webpack-plugin: ^6.3.2
+      css-loader: ^5.0.1
+      deepmerge: ^4.2.2
+      eslint: ^7.14.0
+      file-loader: ^5.1.0
+      mini-css-extract-plugin: ^1.3.1
+      optimize-css-assets-webpack-plugin: ^5.0.4
+      sass: ^1.49.7
+      sass-loader: ^10.1.0
+      stylelint: ^13.8.0
+      stylelint-config-standard: ^20.0.0
+      stylelint-scss: ^3.18.0
+      webpack: ^4.44.2
+      webpack-cli: ^3.3.12
+    dependencies:
+      deepmerge: 4.2.2
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
+      '@babel/runtime': 7.17.2
+      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
+      copy-webpack-plugin: 6.4.1_webpack@4.46.0
+      css-loader: 5.2.7_webpack@4.46.0
+      eslint: 7.32.0
+      file-loader: 5.1.0_webpack@4.46.0
+      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      sass: 1.49.7
+      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
+      stylelint: 13.13.1
+      stylelint-config-standard: 20.0.0_stylelint@13.13.1
+      stylelint-scss: 3.21.0_stylelint@13.13.1
+      webpack: 4.46.0_webpack-cli@3.3.12
+      webpack-cli: 3.3.12_webpack@4.46.0
 
   ../../website:
     specifiers:
@@ -540,16 +587,16 @@ importers:
       webpack: ^4.44.2
       webpack-cli: ^3.3.12
     dependencies:
-      '@aaronmeese.com/cli': link:../cli
-      '@aaronmeese.com/client': link:../client
-      '@aaronmeese.com/dialogs': link:../dialogs
+      '@aaronmeese.com/cli': link:../development/cli
+      '@aaronmeese.com/client': link:../frontend/client
+      '@aaronmeese.com/dialogs': link:../frontend/dialogs
       '@aaronmeese.com/filemanager': link:../apps/filemanager
-      '@aaronmeese.com/gui': link:../gui
-      '@aaronmeese.com/panels': link:../panels
-      '@aaronmeese.com/server': link:../server
+      '@aaronmeese.com/gui': link:../frontend/gui
+      '@aaronmeese.com/panels': link:../frontend/panels
+      '@aaronmeese.com/server': link:../backend/server
       '@aaronmeese.com/terminal': link:../apps/terminal
       '@aaronmeese.com/textpad': link:../apps/textpad
-      '@aaronmeese.com/widgets': link:../widgets
+      '@aaronmeese.com/widgets': link:../frontend/widgets
       '@osjs/freedesktop-sounds': 3.0.3
       '@osjs/gnome-icons': 4.0.5
       '@osjs/standard-theme': 4.0.9
@@ -557,8 +604,8 @@ importers:
       hyperapp: 1.2.10
       typeface-roboto: 0.0.75
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../config/stylelint
+      '@aaronmeese.com/eslint-config': link:../development/eslint
+      '@aaronmeese.com/stylelint-config': link:../development/stylelint
       '@babel/core': 7.17.2
       '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
@@ -575,53 +622,6 @@ importers:
       sass: 1.49.7
       sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
       source-map-loader: 0.2.4
-      stylelint: 13.13.1
-      stylelint-config-standard: 20.0.0_stylelint@13.13.1
-      stylelint-scss: 3.21.0_stylelint@13.13.1
-      webpack: 4.46.0_webpack-cli@3.3.12
-      webpack-cli: 3.3.12_webpack@4.46.0
-
-  ../../widgets:
-    specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
-      '@babel/core': ^7.12.9
-      '@babel/plugin-transform-runtime': ^7.12.1
-      '@babel/preset-env': ^7.12.7
-      '@babel/runtime': ^7.12.5
-      babel-loader: ^8.2.1
-      copy-webpack-plugin: ^6.3.2
-      css-loader: ^5.0.1
-      deepmerge: ^4.2.2
-      eslint: ^7.14.0
-      file-loader: ^5.1.0
-      mini-css-extract-plugin: ^1.3.1
-      optimize-css-assets-webpack-plugin: ^5.0.4
-      sass: ^1.49.7
-      sass-loader: ^10.1.0
-      stylelint: ^13.8.0
-      stylelint-config-standard: ^20.0.0
-      stylelint-scss: ^3.18.0
-      webpack: ^4.44.2
-      webpack-cli: ^3.3.12
-    dependencies:
-      deepmerge: 4.2.2
-    devDependencies:
-      '@aaronmeese.com/eslint-config': link:../config/eslint
-      '@aaronmeese.com/stylelint-config': link:../config/stylelint
-      '@babel/core': 7.17.2
-      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
-      '@babel/preset-env': 7.16.11_@babel+core@7.17.2
-      '@babel/runtime': 7.17.2
-      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
-      copy-webpack-plugin: 6.4.1_webpack@4.46.0
-      css-loader: 5.2.7_webpack@4.46.0
-      eslint: 7.32.0
-      file-loader: 5.1.0_webpack@4.46.0
-      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
-      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
-      sass: 1.49.7
-      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
       stylelint: 13.13.1
       stylelint-config-standard: 20.0.0_stylelint@13.13.1
       stylelint-scss: 3.21.0_stylelint@13.13.1

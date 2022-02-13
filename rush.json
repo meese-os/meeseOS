@@ -459,23 +459,23 @@
     // }
     {
       "packageName": "@aaronmeese.com/cli",
-      "projectFolder": "cli"
+      "projectFolder": "development/cli"
     },
     {
       "packageName": "@aaronmeese.com/client",
-      "projectFolder": "client"
+      "projectFolder": "frontend/client"
     },
     {
       "packageName": "@aaronmeese.com/dialogs",
-      "projectFolder": "dialogs"
+      "projectFolder": "frontend/dialogs"
     },
     {
       "packageName": "@aaronmeese.com/eslint-config",
-      "projectFolder": "config/eslint"
+      "projectFolder": "development/eslint"
     },
-		{
+    {
       "packageName": "@aaronmeese.com/event-emitter",
-      "projectFolder": "event-emitter"
+      "projectFolder": "backend/event-emitter"
     },
     {
       "packageName": "@aaronmeese.com/filemanager",
@@ -483,19 +483,23 @@
     },
     {
       "packageName": "@aaronmeese.com/gui",
-      "projectFolder": "gui"
+      "projectFolder": "frontend/gui"
     },
-		{
+    /*{
+      "packageName": "@aaronmeese.com/old-site",
+      "projectFolder": "apps/old-site"
+    },*/
+    {
       "packageName": "@aaronmeese.com/panels",
-      "projectFolder": "panels"
+      "projectFolder": "frontend/panels"
     },
     {
       "packageName": "@aaronmeese.com/server",
-      "projectFolder": "server"
+      "projectFolder": "backend/server"
     },
-		{
+    {
       "packageName": "@aaronmeese.com/stylelint-config",
-      "projectFolder": "config/stylelint"
+      "projectFolder": "development/stylelint"
     },
     {
       "packageName": "@aaronmeese.com/terminal",
@@ -511,7 +515,7 @@
     },
     {
       "packageName": "@aaronmeese.com/widgets",
-      "projectFolder": "widgets"
+      "projectFolder": "frontend/widgets"
     }
   ]
 }
