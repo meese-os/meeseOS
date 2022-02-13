@@ -1,4 +1,4 @@
-/*!
+/**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,49 +28,8 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the client bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
-
-import {
-  Core,
-  CoreServiceProvider,
-  DesktopServiceProvider,
-  VFSServiceProvider,
-  NotificationServiceProvider,
-  SettingsServiceProvider,
-  AuthServiceProvider
-} from '@aaronmeese.com/client';
-
-import {PanelServiceProvider} from '@osjs/panels';
-import {GUIServiceProvider} from '@aaronmeese.com/gui';
-import {DialogServiceProvider} from '@aaronmeese.com/dialogs';
-import {WidgetServiceProvider} from '@aaronmeese.com/widgets';
-import config from './config.js';
 import './index.scss';
 
-const init = () => {
-  const osjs = new Core(config, {});
-
-  // Register your service providers
-  osjs.register(CoreServiceProvider);
-  osjs.register(DesktopServiceProvider);
-  osjs.register(VFSServiceProvider);
-  osjs.register(NotificationServiceProvider);
-  osjs.register(SettingsServiceProvider, {before: true});
-  osjs.register(AuthServiceProvider, {before: true});
-  osjs.register(PanelServiceProvider);
-  osjs.register(DialogServiceProvider);
-  osjs.register(GUIServiceProvider);
-  osjs.register(WidgetServiceProvider);
-
-  osjs.boot();
-};
-
-window.addEventListener('DOMContentLoaded', () => init());
+export {default as WidgetServiceProvider} from './src/provider';
+export {default as Widget} from './src/widget';
+export {default as DigitalClockWidget} from './src/items/digitalclock';

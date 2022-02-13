@@ -488,6 +488,10 @@
     {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"
+    },
+		{
+      "packageName": "@aaronmeese.com/widgets",
+      "projectFolder": "widgets"
     }
   ]
 }
