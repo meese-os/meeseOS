@@ -19,7 +19,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@osjs/eslint-config"
+    "extends": "@aaronmeese.com/eslint-config"
   },
   "babel": {
     "presets": [

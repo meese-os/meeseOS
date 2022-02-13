@@ -42,7 +42,7 @@
     "uuid": "^8.3.1"
   },
   "devDependencies": {
-    "@osjs/eslint-config": "^2.0.1",
+    "@aaronmeese.com/eslint-config": "workspace:*",
     "eslint": "^7.14.0",
     "jest-express": "^1.12.0",
     "temp": "^0.9.4"
@@ -55,7 +55,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@osjs/eslint-config"
+    "extends": "@aaronmeese.com/eslint-config"
   },
   "esdoc": {
     "source": "./src",

@@ -469,31 +469,35 @@
       "packageName": "@aaronmeese.com/dialogs",
       "projectFolder": "dialogs"
     },
-		{
+    {
+      "packageName": "@aaronmeese.com/eslint-config",
+      "projectFolder": "config/eslint"
+    },
+    {
       "packageName": "@aaronmeese.com/filemanager",
       "projectFolder": "apps/filemanager"
     },
-		{
+    {
       "packageName": "@aaronmeese.com/gui",
       "projectFolder": "gui"
     },
-		{
+    {
       "packageName": "@aaronmeese.com/server",
       "projectFolder": "server"
     },
-		{
-			"packageName": "@aaronmeese.com/terminal",
-			"projectFolder": "apps/terminal"
-		},
-		{
-			"packageName": "@aaronmeese.com/textpad",
-			"projectFolder": "apps/textpad"
-		},
+    {
+      "packageName": "@aaronmeese.com/terminal",
+      "projectFolder": "apps/terminal"
+    },
+    {
+      "packageName": "@aaronmeese.com/textpad",
+      "projectFolder": "apps/textpad"
+    },
     {
       "packageName": "@aaronmeese.com/website",
       "projectFolder": "website"
     },
-		{
+    {
       "packageName": "@aaronmeese.com/widgets",
       "projectFolder": "widgets"
     }

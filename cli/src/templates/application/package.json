@@ -20,7 +20,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@osjs/eslint-config"
+    "extends": "@aaronmeese.com/eslint-config"
   },
   "stylelint": {
     "extends": "@osjs/stylelint-config"

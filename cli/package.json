@@ -34,7 +34,7 @@
     "which": "^2.0.2"
   },
   "devDependencies": {
-    "@osjs/eslint-config": "^2.0.1",
+    "@aaronmeese.com/eslint-config": "workspace:*",
     "eslint": "^7.17.0"
   },
   "eslintConfig": {
@@ -49,7 +49,7 @@
         "experimentalObjectRestSpread": true
       }
     },
-    "extends": "@osjs/eslint-config"
+    "extends": "@aaronmeese.com/eslint-config"
   },
   "jest": {
     "collectCoverage": true,
