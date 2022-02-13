@@ -485,6 +485,10 @@
       "packageName": "@aaronmeese.com/server",
       "projectFolder": "server"
     },
+		{
+      "packageName": "@aaronmeese.com/stylelint-config",
+      "projectFolder": "config/stylelint"
+    },
     {
       "packageName": "@aaronmeese.com/terminal",
       "projectFolder": "apps/terminal"

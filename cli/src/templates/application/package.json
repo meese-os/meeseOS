@@ -23,7 +23,7 @@
     "extends": "@aaronmeese.com/eslint-config"
   },
   "stylelint": {
-    "extends": "@osjs/stylelint-config"
+    "extends": "@aaronmeese.com/stylelint-config"
   },
   "babel": {
     "presets": [
