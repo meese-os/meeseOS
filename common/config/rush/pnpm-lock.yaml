@@ -454,25 +454,24 @@ importers:
       '@aaronmeese.com/eslint-config': workspace:*
       '@aaronmeese.com/event-emitter': workspace:*
       '@aaronmeese.com/stylelint-config': workspace:*
-      '@babel/core': ^7.12.9
-      '@babel/plugin-transform-runtime': ^7.12.1
-      '@babel/preset-env': ^7.12.7
-      '@babel/runtime': ^7.12.5
-      babel-loader: ^8.2.1
-      copy-webpack-plugin: ^6.3.2
-      css-loader: ^5.0.1
-      eslint: ^7.14.0
-      file-loader: ^5.1.0
+      '@babel/core': ^7.17.2
+      '@babel/plugin-transform-runtime': ^7.17.0
+      '@babel/preset-env': ^7.16.11
+      '@babel/runtime': ^7.17.2
+      babel-loader: ^8.2.3
+      copy-webpack-plugin: ^10.2.4
+      css-loader: ^6.6.0
+      css-minimizer-webpack-plugin: ^3.4.1
+      eslint: ^8.9.0
       hyperapp: ^1.2.10
-      mini-css-extract-plugin: ^1.3.1
-      optimize-css-assets-webpack-plugin: ^5.0.4
+      mini-css-extract-plugin: ^2.5.3
       sass: ^1.49.7
-      sass-loader: ^10.1.0
-      stylelint: ^13.8.0
-      stylelint-config-standard: ^20.0.0
-      stylelint-scss: ^3.18.0
-      webpack: ^4.44.2
-      webpack-cli: ^3.3.12
+      sass-loader: ^12.5.0
+      stylelint: ^14.5.0
+      stylelint-config-standard: ^25.0.0
+      stylelint-scss: ^4.1.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
     dependencies:
       '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
       hyperapp: 1.2.10
@@ -483,20 +482,19 @@ importers:
       '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
       '@babel/runtime': 7.17.2
-      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
-      copy-webpack-plugin: 6.4.1_webpack@4.46.0
-      css-loader: 5.2.7_webpack@4.46.0
-      eslint: 7.32.0
-      file-loader: 5.1.0_webpack@4.46.0
-      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
-      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      babel-loader: 8.2.3_900eac683bef8a6b239b47efcf24e8a9
+      copy-webpack-plugin: 10.2.4_webpack@5.68.0
+      css-loader: 6.6.0_webpack@5.68.0
+      css-minimizer-webpack-plugin: 3.4.1_webpack@5.68.0
+      eslint: 8.9.0
+      mini-css-extract-plugin: 2.5.3_webpack@5.68.0
       sass: 1.49.7
-      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
-      stylelint: 13.13.1
-      stylelint-config-standard: 20.0.0_stylelint@13.13.1
-      stylelint-scss: 3.21.0_stylelint@13.13.1
-      webpack: 4.46.0_webpack-cli@3.3.12
-      webpack-cli: 3.3.12_webpack@4.46.0
+      sass-loader: 12.5.0_sass@1.49.7+webpack@5.68.0
+      stylelint: 14.5.0
+      stylelint-config-standard: 25.0.0_stylelint@14.5.0
+      stylelint-scss: 4.1.0_stylelint@14.5.0
+      webpack: 5.68.0_webpack-cli@4.9.2
+      webpack-cli: 4.9.2_webpack@5.68.0
 
   ../../frontend/standard-theme:
     specifiers:

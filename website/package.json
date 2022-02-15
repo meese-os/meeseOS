@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/website",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "aaronmeese.com, implemented in OS.js",
   "main": "index.js",
   "scripts": {
