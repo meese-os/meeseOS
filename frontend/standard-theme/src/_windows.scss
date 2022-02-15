@@ -116,9 +116,9 @@
 }
 
 .osjs-window-header {
-  padding: $base-margin / 2;
+  padding: calc($base-margin / 2);
 }
 
 .osjs-window-icon {
-  margin-right: $base-margin /  2;
+  margin-right: calc($base-margin / 2);
 }
