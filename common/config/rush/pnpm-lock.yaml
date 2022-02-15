@@ -279,39 +279,38 @@ importers:
       '@aaronmeese.com/eslint-config': workspace:*
       '@aaronmeese.com/event-emitter': workspace:*
       '@aaronmeese.com/stylelint-config': workspace:*
-      '@babel/core': ^7.12.9
-      '@babel/plugin-transform-runtime': ^7.12.1
-      '@babel/preset-env': ^7.12.7
-      '@babel/runtime': ^7.12.5
+      '@babel/core': ^7.17.2
+      '@babel/plugin-transform-runtime': ^7.17.0
+      '@babel/preset-env': ^7.16.11
+      '@babel/runtime': ^7.17.2
       '@osjs/common': ^3.0.12
-      babel-loader: ^8.2.1
-      copy-webpack-plugin: ^6.3.2
-      css-loader: ^5.0.1
+      babel-loader: ^8.2.3
+      copy-webpack-plugin: ^10.2.4
+      css-loader: ^6.6.0
       css-mediaquery: ^0.1.2
-      dateformat: ^3.0.3
+      css-minimizer-webpack-plugin: ^3.4.1
+      dateformat: ^5.0.2
       deepmerge: ^4.2.2
-      eslint: ^7.14.0
-      file-loader: ^5.1.0
+      eslint: ^8.9.0
       hyperapp: ^1.2.10
-      js-cookie: ^2.2.1
-      mini-css-extract-plugin: ^1.3.1
-      optimize-css-assets-webpack-plugin: ^5.0.4
+      js-cookie: ^3.0.1
+      mini-css-extract-plugin: ^2.5.3
       sass: ^1.49.7
-      sass-loader: ^10.1.0
+      sass-loader: ^12.5.0
       simplejsonconf: ^2.0.7
-      stylelint: ^13.8.0
-      stylelint-config-standard: ^20.0.0
-      stylelint-scss: ^3.18.0
-      webpack: ^4.44.2
-      webpack-cli: ^3.3.12
+      stylelint: ^14.5.0
+      stylelint-config-standard: ^25.0.0
+      stylelint-scss: ^4.1.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
     dependencies:
       '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
       '@osjs/common': 3.0.12
       css-mediaquery: 0.1.2
-      dateformat: 3.0.3
+      dateformat: 5.0.2
       deepmerge: 4.2.2
       hyperapp: 1.2.10
-      js-cookie: 2.2.1
+      js-cookie: 3.0.1
       simplejsonconf: 2.0.7
     devDependencies:
       '@aaronmeese.com/eslint-config': link:../../development/eslint
@@ -320,20 +319,19 @@ importers:
       '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
       '@babel/runtime': 7.17.2
-      babel-loader: 8.2.3_60b7ed408fec1293d95f86d9ceaa88ca
-      copy-webpack-plugin: 6.4.1_webpack@4.46.0
-      css-loader: 5.2.7_webpack@4.46.0
-      eslint: 7.32.0
-      file-loader: 5.1.0_webpack@4.46.0
-      mini-css-extract-plugin: 1.6.2_webpack@4.46.0
-      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.46.0
+      babel-loader: 8.2.3_900eac683bef8a6b239b47efcf24e8a9
+      copy-webpack-plugin: 10.2.4_webpack@5.68.0
+      css-loader: 6.6.0_webpack@5.68.0
+      css-minimizer-webpack-plugin: 3.4.1_webpack@5.68.0
+      eslint: 8.9.0
+      mini-css-extract-plugin: 2.5.3_webpack@5.68.0
       sass: 1.49.7
-      sass-loader: 10.2.1_sass@1.49.7+webpack@4.46.0
-      stylelint: 13.13.1
-      stylelint-config-standard: 20.0.0_stylelint@13.13.1
-      stylelint-scss: 3.21.0_stylelint@13.13.1
-      webpack: 4.46.0_webpack-cli@3.3.12
-      webpack-cli: 3.3.12_webpack@4.46.0
+      sass-loader: 12.5.0_sass@1.49.7+webpack@5.68.0
+      stylelint: 14.5.0
+      stylelint-config-standard: 25.0.0_stylelint@14.5.0
+      stylelint-scss: 4.1.0_stylelint@14.5.0
+      webpack: 5.68.0_webpack-cli@4.9.2
+      webpack-cli: 4.9.2_webpack@5.68.0
 
   ../../frontend/dialogs:
     specifiers:
@@ -3962,8 +3960,9 @@ packages:
     resolution: {integrity: sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=}
     dev: true
 
-  /dateformat/3.0.3:
-    resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
+  /dateformat/5.0.2:
+    resolution: {integrity: sha512-h9vywpuz+ReixnJTwFx5JLtZpS8eLCbRm8shwwKkCKOZA547N6yoMtD3W91Z6+NFZ8wOaZlcaCcK/w+kELhSVg==}
+    engines: {node: '>=12.20'}
     dev: false
 
   /debug/2.6.9:
@@ -5908,8 +5907,9 @@ packages:
       supports-color: 8.1.1
     dev: true
 
-  /js-cookie/2.2.1:
-    resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
     dev: false
 
   /js-tokens/4.0.0:
