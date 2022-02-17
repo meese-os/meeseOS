@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/cli",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "aaronmeese.com CLI",
   "main": "index.js",
   "files": [
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@aaronmeese.com/eslint-config": "workspace:*",
-    "eslint": "^7.17.0",
+    "eslint": "^8.9.0",
     "jest": "^26.0.0"
   },
   "dependencies": {

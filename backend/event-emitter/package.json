@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/event-emitter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple event emitter",
   "main": "dist/main.js",
   "typings": "index.d.ts",
@@ -26,7 +26,9 @@
     "babel-loader": "^8.2.3",
     "eslint": "^8.9.0",
     "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+
+    "jest": "^26.0.0"
   },
   "dependencies": {},
   "jest": {
