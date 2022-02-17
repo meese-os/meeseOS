@@ -59,8 +59,8 @@ import {
  * @property {string} [server] Server script filename
  * @property {string[]} [groups] Only available for users in this group
  * @property {Object[]|string[]} [files] Files to preload
- * @property {{key: string}} title A map of locales and titles
- * @property {{key: string}} description A map of locales and titles
+ * @property {string} title String title of package
+ * @property {string} description String description of package
  */
 
 /**
@@ -176,10 +176,9 @@ export default class Packages {
   launch(name, args = {}, options = {}) {
     logger.debug('Packages::launch()', name, args, options);
 
-    const _ = this.core.make('osjs/locale').translate;
     const metadata = this.metadata.find(pkg => pkg.name === name);
     if (!metadata) {
-      throw new Error(_('ERR_PACKAGE_NOT_FOUND', name));
+      throw new Error(`Package Metadata \'${name}\' not found`);
     }
 
     if (['theme', 'icons', 'sounds'].indexOf(metadata.type) !== -1) {
@@ -283,19 +282,19 @@ export default class Packages {
    * @return {Promise<Application>}
    */
   _launch(name, metadata, args, options) {
-    const _ = this.core.make('osjs/locale').translate;
     const canLaunch = createPackageAvailabilityCheck(this.core);
 
     const dialog = e => {
+      const exception = `An exception occured in \'${name}\'`;
       if (this.core.has('osjs/dialog')) {
         this.core.make('osjs/dialog', 'alert', {
           type: 'error',
-          title: _('ERR_PACKAGE_EXCEPTION', name),
-          message: _('ERR_PACKAGE_EXCEPTION', name),
+          title: exception,
+          message: exception,
           error: e
         }, () => { /* noop */});
       } else {
-        alert(`${_('ERR_PACKAGE_EXCEPTION', name)}: ${e.stack || e}`);
+        alert(`${exception}: ${e.stack || e}`);
       }
     };
 
@@ -341,18 +340,19 @@ export default class Packages {
     };
 
     if (!canLaunch(metadata)) {
-      fail(_('ERR_PACKAGE_PERMISSION_DENIED', name));
+      fail(`You are not permitted to run \'${name}\'`);
     }
 
     return this.preloader.load(preloads, options.forcePreload === true)
       .then(({errors}) => {
         if (errors.length) {
-          fail(_('ERR_PACKAGE_LOAD', name, errors.join(', ')));
+
+          fail(`Package Loading \'${name}\' failed: ${errors.join(', ')}`);
         }
 
         const found = this.packages.find(pkg => pkg.metadata.name === name);
         if (!found) {
-          fail(_('ERR_PACKAGE_NO_RUNTIME', name));
+          fail(`Package Runtime \'${name}\' not found`);
         }
 
         return create(found);
@@ -384,10 +384,11 @@ export default class Packages {
   register(name, callback) {
     logger.debug('Packages::register()', name);
 
-    const _ = this.core.make('osjs/locale').translate;
     const metadata = this.metadata.find(pkg => pkg.name === name);
     if (!metadata) {
-      throw new Error(_('ERR_PACKAGE_NO_METADATA', name));
+      throw new Error(
+        `Metadata not found for \'${name}\'. Is it in the manifest?`
+      );
     }
 
     const foundIndex = this.packages.findIndex(pkg => pkg.metadata.name === name);

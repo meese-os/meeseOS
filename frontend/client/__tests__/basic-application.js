@@ -20,9 +20,7 @@ describe('BasicApplication', () => {
         }
       },
       metadata: {
-        title: {
-          en_EN: 'Test'
-        },
+        title: 'Test',
         description: {}
       }
     });

@@ -88,8 +88,7 @@ export default class Tray {
    * @return {TrayEntry}
    */
   create(options, handler) {
-    const defaultTitle = this.core.make('osjs/locale')
-      .translate('LBL_TRAY');
+    const defaultTitle = "Tray Entry";
 
     handler = handler || (() => {});
 

@@ -17,6 +17,7 @@ importers:
       babel-loader: ^8.2.1
       copy-webpack-plugin: ^6.3.2
       css-loader: ^5.0.1
+      dateformat: ^3.0.3
       eslint: ^7.14.0
       file-loader: ^5.1.0
       hyperapp: ^1.2.10
@@ -31,6 +32,7 @@ importers:
       webpack-cli: ^3.3.12
     dependencies:
       '@aaronmeese.com/gui': link:../../frontend/gui
+      dateformat: 3.0.3
       hyperapp: 1.2.10
     devDependencies:
       '@aaronmeese.com/eslint-config': link:../../development/eslint
@@ -202,6 +204,7 @@ importers:
       filehound: ^1.17.4
       formidable: ^1.2.2
       fs-extra: ^9.0.1
+      jest: ^26.0.0
       jest-express: ^1.12.0
       mime: ^2.4.6
       minimist: ^1.2.5
@@ -234,6 +237,7 @@ importers:
     devDependencies:
       '@aaronmeese.com/eslint-config': link:../../development/eslint
       eslint: 7.32.0
+      jest: 26.6.3
       jest-express: 1.12.0
       temp: 0.9.4
 
@@ -247,6 +251,7 @@ importers:
       getopts: ^2.2.5
       globby: ^11.0.2
       inquirer: ^7.3.3
+      jest: ^26.0.0
       temp: ^0.9.4
       which: ^2.0.2
     dependencies:
@@ -261,6 +266,7 @@ importers:
     devDependencies:
       '@aaronmeese.com/eslint-config': link:../eslint
       eslint: 7.32.0
+      jest: 26.6.3
 
   ../../development/eslint:
     specifiers:
@@ -288,7 +294,6 @@ importers:
       copy-webpack-plugin: ^6.3.2
       css-loader: ^5.0.1
       css-mediaquery: ^0.1.2
-      dateformat: ^3.0.3
       deepmerge: ^4.2.2
       eslint: ^7.14.0
       file-loader: ^5.1.0
@@ -309,7 +314,6 @@ importers:
       '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
       '@osjs/common': 3.0.12
       css-mediaquery: 0.1.2
-      dateformat: 3.0.3
       deepmerge: 4.2.2
       hyperapp: 1.2.10
       js-cookie: 2.2.1
@@ -462,6 +466,7 @@ importers:
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
+      dateformat: ^3.0.3
       eslint: ^8.9.0
       hyperapp: ^1.2.10
       mini-css-extract-plugin: ^2.5.3
@@ -474,6 +479,7 @@ importers:
       webpack-cli: ^4.9.2
     dependencies:
       '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
+      dateformat: 3.0.3
       hyperapp: 1.2.10
     devDependencies:
       '@aaronmeese.com/eslint-config': link:../../development/eslint

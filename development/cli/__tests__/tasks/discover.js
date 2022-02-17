@@ -4,11 +4,12 @@ const temp = require('temp');
 const fs = require('fs-extra');
 const utils = require('../../src/utils.js');
 const task = require('../../src/tasks/discover.js');
+const {createPath} = require('../../src/createPath.js');
 
 // FIXME: Memory fs
 describe('task > package:discover', () => {
   const root = temp.mkdirSync('meese-cli-jest');
-  const fname = str => path.resolve(root, str);
+  const fname = str => createPath(root, str);
 
   afterAll(() => fs.removeSync(root));
 
@@ -17,8 +18,8 @@ describe('task > package:discover', () => {
 
     const options =  utils.resolveOptions(defaults, {
       discover: [
-        path.resolve(__dirname, '../../__mocks__/packages'),
-        path.resolve(__dirname, '../../__mocks__/packages')
+        createPath(__dirname, '../../__mocks__/packages'),
+        createPath(__dirname, '../../__mocks__/packages')
       ]
     });
 

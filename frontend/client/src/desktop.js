@@ -187,7 +187,6 @@ export default class Desktop extends EventEmitter {
     this.initGlobalKeyboardEvents();
     this.initMouseEvents();
     this.initBaseEvents();
-    this.initLocales();
     this.initDeveloperTray();
   }
 
@@ -198,10 +197,9 @@ export default class Desktop extends EventEmitter {
     this.core.on('osjs/core:disconnect', ev => {
       logger.warn('Connection closed', ev);
 
-      const _ = this.core.make('osjs/locale').translate;
       this.core.make('osjs/notification', {
-        title: _('LBL_CONNECTION_LOST'),
-        message: _('LBL_CONNECTION_LOST_MESSAGE')
+        title: "Connection Lost",
+        message: "The connection was lost. Reconnecting..."
       });
     });
 
@@ -209,10 +207,9 @@ export default class Desktop extends EventEmitter {
       logger.debug('Connection opened');
 
       if (reconnected) {
-        const _ = this.core.make('osjs/locale').translate;
         this.core.make('osjs/notification', {
-          title: _('LBL_CONNECTION_RESTORED'),
-          message: _('LBL_CONNECTION_RESTORED_MESSAGE')
+          title: "Connection Restored",
+          message: "The connection to the server was restored."
         });
       }
     });
@@ -220,10 +217,9 @@ export default class Desktop extends EventEmitter {
     this.core.on('osjs/core:connection-failed', (ev) => {
       logger.warn('Connection failed');
 
-      const _ = this.core.make('osjs/locale').translate;
       this.core.make('osjs/notification', {
-        title: _('LBL_CONNECTION_FAILED'),
-        message: _('LBL_CONNECTION_FAILED_MESSAGE')
+        title: "Connection Failed",
+        message: "The connection could not be established. Some features might not work properly."
       });
     });
   }
@@ -437,26 +433,6 @@ export default class Desktop extends EventEmitter {
 
     // Prevents background scrolling on iOS
     this.core.$root.addEventListener('touchmove', e => e.preventDefault());
-  }
-
-  /**
-   * Initializes locales
-   */
-  initLocales() {
-    // Right-to-left support triggers
-    const rtls = this.core.config('locale.rtl');
-    const checkRTL = () => {
-      const locale = this.core.make('osjs/locale')
-        .getLocale()
-        .split('_')[0]
-        .toLowerCase();
-
-      const isRtl = rtls.indexOf(locale) !== -1;
-      this.core.$root.setAttribute('data-dir', isRtl ? 'rtl' : 'ltr');
-    };
-    this.core.on('osjs/settings:load', checkRTL);
-    this.core.on('osjs/settings:save', checkRTL);
-    this.core.on('osjs/core:started', checkRTL);
   }
 
   /**
@@ -691,7 +667,6 @@ export default class Desktop extends EventEmitter {
    * @return {Object[]}
    */
   createDropContextMenu(data) {
-    const _ = this.core.make('osjs/locale').translate;
     const settings = this.core.make('osjs/settings');
     const desktop = this.core.make('osjs/desktop');
     const droppedImage = isDroppingImage(data);
@@ -704,7 +679,7 @@ export default class Desktop extends EventEmitter {
 
     if (droppedImage) {
       menu.push({
-        label: _('LBL_DESKTOP_SET_AS_WALLPAPER'),
+        label: "Set as wallpaper",
         onclick: setWallpaper
       });
     }
@@ -717,7 +692,6 @@ export default class Desktop extends EventEmitter {
    * @param {Event} ev
    */
   onDeveloperMenu(ev) {
-    const _ = this.core.make('osjs/locale').translate;
     const s = this.core.make('osjs/settings').get();
 
     const storageItems = Object.keys(s)
@@ -734,20 +708,20 @@ export default class Desktop extends EventEmitter {
       position: ev,
       menu: [
         {
-          label: _('LBL_KILL_ALL'),
+          label: "Kill all",
           onclick: () => Application.destroyAll()
         },
         {
-          label: _('LBL_APPLICATIONS'),
+          label: "Applications",
           items: Application.getApplications().map(proc => ({
             label: `${proc.metadata.name} (${proc.pid})`,
             items: [
               {
-                label: _('LBL_KILL'),
+                label: "Kill",
                 onclick: () => proc.destroy()
               },
               {
-                label: _('LBL_RELOAD'),
+                label: "Reload",
                 onclick: () => proc.relaunch()
               }
             ]
@@ -791,14 +765,11 @@ export default class Desktop extends EventEmitter {
 
     const useDefaults = config === true || config.defaults; // NOTE: Backward compability
 
-    const _ = this.core.make('osjs/locale').translate;
-    const __ = this.core.make('osjs/locale').translatableFlat;
-
     const themes = this.core.make('osjs/packages')
       .getPackages(p => p.type === 'theme');
 
     const defaultItems = lockSettings ? [] : [{
-      label: _('LBL_DESKTOP_SELECT_WALLPAPER'),
+      label: "Select wallpaper",
       onclick: () => {
         this.core.make('osjs/dialog', 'file', {
           mime: ['^image']
@@ -809,18 +780,18 @@ export default class Desktop extends EventEmitter {
         });
       }
     }, {
-      label: _('LBL_DESKTOP_SELECT_THEME'),
-      items: themes.map(t => ({
-        label: __(t.title, t.name),
+      label: "Select theme",
+      items: themes.map(theme => ({
+        label: theme.title,
         onclick: () => {
-          this._applySettingsByKey('theme', t.name);
+          this._applySettingsByKey('theme', theme.name);
         }
       }))
     }];
 
     if (hasIconview && this.iconview) {
       defaultItems.push({
-        label: _('LBL_REFRESH'),
+        label: "Refresh",
         onclick: () => this.iconview.iconview.reload()
       });
     }

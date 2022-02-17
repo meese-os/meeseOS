@@ -16,10 +16,6 @@
   "osjs": {
     "type": "package"
   },
-  "dependencies": {
-    "@aaronmeese.com/gui": "workspace:*",
-    "hyperapp": "^1.2.10"
-  },
   "devDependencies": {
 		"@aaronmeese.com/eslint-config": "workspace:*",
     "@babel/core": "^7.12.9",
@@ -41,6 +37,11 @@
     "stylelint-scss": "^3.18.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "@aaronmeese.com/gui": "workspace:*",
+    "dateformat": "^3.0.3",
+    "hyperapp": "^1.2.10"
   },
   "eslintConfig": {
     "env": {

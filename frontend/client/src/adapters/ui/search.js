@@ -31,7 +31,7 @@
 import {h, app} from 'hyperapp';
 import {EventEmitter} from '@aaronmeese.com/event-emitter';
 
-const createView = (core, fs, icon, _) => {
+const createView = (core, fs, icon) => {
   const resultView = ({results, index}, actions) => results.map((r, i) => h('li', {
     onclick: () => actions.open(i),
     onupdate: el => {
@@ -56,7 +56,7 @@ const createView = (core, fs, icon, _) => {
   }, [
     h('input', {
       type: 'text',
-      placeholder: _('LBL_SEARCH_PLACEHOLDER'),
+      placeholder: "Search filesystems...",
       class: 'osjs-search-input',
       value: state.query,
       onblur: () => {
@@ -108,10 +108,9 @@ const createView = (core, fs, icon, _) => {
  * Search UI Adapter
  */
 const create = (core, $element) => {
-  const _ = core.make('osjs/locale').translate;
   const fs = core.make('osjs/fs');
   const {icon} = core.make('osjs/theme');
-  const view = createView(core, fs, icon, _);
+  const view = createView(core, fs, icon);
   const ee = new EventEmitter('SearchUI');
 
   const hyperapp = app({
@@ -125,7 +124,7 @@ const create = (core, $element) => {
     search: query => {
       ee.emit('search', query);
 
-      return {status: _('LBL_SEARCH_WAIT')};
+      return {status: "Searching..."};
     },
     open: index => (state, actions) => {
       const iter = state.results[index];
@@ -152,7 +151,7 @@ const create = (core, $element) => {
     setResults: results => () => ({
       results,
       index: -1,
-      status: _('LBL_SEARCH_RESULT', results.length),
+      status: `Showing ${results.length} results`,
     }),
     setQuery: query => () => ({
       query

@@ -37,8 +37,6 @@ import Tray from '../tray';
 import Websocket from '../websocket';
 import Clipboard from '../clipboard';
 import Middleware from '../middleware';
-import * as translations from '../locale';
-import {format, translatable, translatableFlat, getLocale} from '../utils/locale';
 import {style, script, playSound} from '../utils/dom';
 import {resourceResolver} from '../utils/desktop';
 import * as dnd from '../utils/dnd';
@@ -46,19 +44,6 @@ import {BasicApplication} from '../basic-application.js';
 import {ServiceProvider} from '@osjs/common';
 import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import logger from '../logger';
-import merge from 'deepmerge';
-
-/**
- * Core Provider Locale Contract
- * TODO: typedef
- * @typedef {Object} CoreProviderLocaleContract
- * @property {Function} format
- * @property {Function} translate
- * @property {Function} translatable
- * @property {Function} translatableFlat
- * @property {Function} getLocale
- * @property {Function} setLocale
- */
 
 /**
  * Core Provider Window Contract
@@ -153,7 +138,6 @@ import merge from 'deepmerge';
  * Core Provider Options
  * @typedef {Object} CoreProviderOptions
  * @property {Function} [windowBehavior] Custom Window Behavior
- * @property {Object} [locales] Override locales
  */
 
 /**
@@ -218,7 +202,6 @@ export default class CoreServiceProvider extends ServiceProvider {
       'osjs/clipboard',
       'osjs/middleware',
       'osjs/tray',
-      'osjs/locale',
       'osjs/packages',
       'osjs/websocket',
       'osjs/session',
@@ -285,7 +268,6 @@ export default class CoreServiceProvider extends ServiceProvider {
     this.core.instance('osjs/event-emitter', name => new EventEmitter(name));
 
     this.core.singleton('osjs/windows', () => this.createWindowContract());
-    this.core.singleton('osjs/locale', () => this.createLocaleContract());
     this.core.singleton('osjs/dnd', () => this.createDnDContract());
     this.core.singleton('osjs/dom', () => this.createDOMContract());
     this.core.singleton('osjs/theme', () => this.createThemeContract());
@@ -383,32 +365,6 @@ export default class CoreServiceProvider extends ServiceProvider {
     Application.getApplications()
       .filter(proc => proc.metadata.name === name)
       .forEach(proc => proc.relaunch());
-  }
-
-  /**
-   * Provides localization contract
-   * @return {CoreProviderLocaleContract}
-   */
-  createLocaleContract() {
-    const strs = merge(translations, this.options.locales || {});
-    const translate = translatable(this.core)(strs);
-
-    return {
-      format: format(this.core),
-      translate,
-      translatable: translatable(this.core),
-      translatableFlat: translatableFlat(this.core),
-      getLocale: (key = 'language') => {
-        const ref = getLocale(this.core, key);
-        return ref.userLocale || ref.defaultLocale;
-      },
-      setLocale: name => name in strs
-        ? this.core.make('osjs/settings')
-          .set('osjs/locale', 'language', name)
-          .save()
-          .then(() => this.core.emit('osjs/locale:change', name))
-        : Promise.reject(translate('ERR_INVALID_LOCALE', name))
-    };
   }
 
   /**

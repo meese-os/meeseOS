@@ -30,7 +30,6 @@
 
 import {h} from 'hyperapp';
 import PanelItem from '../panel-item';
-import * as languages from '../locales';
 
 const mapWindow = win => {
   return {
@@ -143,35 +142,29 @@ export default class WindowsPanelItem extends PanelItem {
   }
 
   render(state, actions) {
-    const __ = this.core.has('osjs/locale')
-      ? this.core.make('osjs/locale').translatable(languages)
-      : s => s;
-
     const windows = state.windows.map(w => h('div', {
       'data-has-image': w.icon ? true : undefined,
       'data-focused': w.focused ? 'true' : 'false',
       onclick: () => w.raise(),
       oncontextmenu: ev => {
-        const _ = this.core.make('osjs/locale').translate;
-
         ev.stopPropagation();
         ev.preventDefault();
         this.core.make('osjs/contextmenu').show({
           position: ev.target,
           menu: [
             {
-              label: w.state.maximized ? _('LBL_RESTORE') : _('LBL_MAXIMIZE'),
+              label: w.state.maximized ? "Restore" : "Maximize",
               onclick: () => w.attributes.maximizable ? (w.state.maximized ? w.restore() : w.maximize()) : null,
               disabled: !w.attributes.maximizable
             },
             {
-              label: w.state.minimized ? _('LBL_RAISE') : _('LBL_MINIMIZE'),
+              label: w.state.minimized ? "Raise" : "Minimize",
               onclick: () => w.attributes.minimizable ? (w.state.minimized ? w.raise() : w.minimize()) : null,
               disabled: !w.attributes.minimizable
             },
             {type: 'separator'},
             {
-              label: _('LBL_CLOSE'),
+              label: "Close",
               onclick: () => w.attributes.closeable ? w.close() : null,
               disabled: !w.attributes.closeable
             }
@@ -188,7 +181,7 @@ export default class WindowsPanelItem extends PanelItem {
     ]));
 
     const special = state.launchers.map(name => h('div', {
-    }, h('span', {}, __('LBL_LAUNCHING', name))));
+    }, h('span', {}, `Launching \'${name}\'`)));
 
     const children = [...windows, ...special];
 

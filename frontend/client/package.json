@@ -28,7 +28,6 @@
     "@aaronmeese.com/event-emitter": "workspace:*",
     "@osjs/common": "^3.0.12",
     "css-mediaquery": "^0.1.2",
-    "dateformat": "^3.0.3",
     "deepmerge": "^4.2.2",
     "hyperapp": "^1.2.10",
     "js-cookie": "^2.2.1",
@@ -129,8 +128,7 @@
     "coveragePathIgnorePatterns": [
       "src/config.js",
       "src/providers",
-      "/node_modules/",
-      "/locale/"
+      "/node_modules/"
     ]
   }
 }

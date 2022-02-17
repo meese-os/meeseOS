@@ -1140,10 +1140,6 @@ declare class Desktop extends EventEmitter {
 	 */
 	initBaseEvents(): void;
 	/**
-	 * Initializes locales
-	 */
-	initLocales(): void;
-	/**
 	 * Starts desktop services
 	 */
 	start(): void;
@@ -1753,17 +1749,13 @@ export type PackageMetadata = {
 	 */
 	files?: Array<object | string>;
 	/**
-	 * A map of locales and titles
+	 * A string package title
 	 */
-	title: {
-		key: string;
-	};
+	title: string;
 	/**
-	 * A map of locales and titles
+	 * A string description of a package
 	 */
-	description: {
-		key: string;
-	};
+	description:  string;
 };
 /**
  * Package Launch Options
@@ -1883,10 +1875,6 @@ declare class CoreServiceProvider extends ServiceProvider {
 	 */
 	private _onPackageChanged;
 	/**
-	 * Provides localization contract
-	 */
-	createLocaleContract(): CoreProviderLocaleContract;
-	/**
 	 * Provides window contract
 	 */
 	createWindowContract(): CoreProviderWindowContract;
@@ -1927,17 +1915,6 @@ declare class CoreServiceProvider extends ServiceProvider {
 	 */
 	createTrayContract(): CoreProviderTrayContract;
 }
-/**
- * Core Provider Locale Contract
- */
-export type CoreProviderLocaleContract = {
-	format: Function;
-	translate: Function;
-	translatable: Function;
-	translatableFlat: Function;
-	getLocale: Function;
-	setLocale: Function;
-};
 /**
  * Core Provider Window Contract
  */
@@ -2026,10 +2003,6 @@ export type CoreProviderOptions = {
 	 * Custom Window Behavior
 	 */
 	windowBehavior?: Function;
-	/**
-	 * Override locales
-	 */
-	locales?: any;
 };
 declare class DesktopServiceProvider extends ServiceProvider {
 	/**

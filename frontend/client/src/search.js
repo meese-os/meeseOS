@@ -81,13 +81,12 @@ export default class Search {
    */
   init() {
     const {icon} = this.core.make('osjs/theme');
-    const _ = this.core.make('osjs/locale').translate;
 
     this.$element.className = 'osjs-search';
     this.core.$root.appendChild(this.$element);
 
     this.core.make('osjs/tray').create({
-      title: _('LBL_SEARCH_TOOLTOP', 'F3'),
+      title: "Search Filesystem (F3)",
       icon: icon('system-search.png')
     }, () => this.show());
 

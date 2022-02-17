@@ -249,15 +249,13 @@ export default class Filesystem extends EventEmitter {
   _mountAction(name, unmount) {
     return Promise.resolve(this.mounts.find(m => m.name === name))
       .then(found => {
-        const _ = this.core.make('osjs/locale').translate;
-
         // FIXME: Add already mounting state
         if (!found) {
-          throw new Error(_('ERR_VFS_MOUNT_NOT_FOUND', name));
+          throw new Error(`Filesystem \'${name}\' not found`);
         } else if (unmount && !found.mounted) {
-          throw new Error(_('ERR_VFS_MOUNT_NOT_MOUNTED', name));
+          throw new Error(`Filesystem \'${name}\' not mounted`);
         } else if (!unmount && found.mounted) {
-          throw new Error(_('ERR_VFS_MOUNT_ALREADY_MOUNTED', name));
+          throw new Error(`Filesystem \'${name}\' already mounted`);
         }
 
         return this._mountpointAction(found, unmount);
@@ -374,16 +372,15 @@ export default class Filesystem extends EventEmitter {
   getMountpointFromPath(file) {
     const path = typeof file === 'string' ? file : file.path;
     const prefix = parseMontpointPrefix(path);
-    const _ = this.core.make('osjs/locale').translate;
 
     if (!prefix) {
-      throw new Error(_('ERR_VFS_PATH_FORMAT_INVALID', path));
+      throw new Error(`Given path \'${path}\' does not match \'name:/path\'`);
     }
 
     const found = this.mounts.find(m => m.name === prefix);
 
     if (!found) {
-      throw new Error(_('ERR_VFS_MOUNT_NOT_FOUND_FOR', `${prefix}:`));
+      throw new Error(`Filesystem not found for \'${prefix}\':`);
     }
 
     return found;

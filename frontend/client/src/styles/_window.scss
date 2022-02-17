@@ -142,13 +142,6 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   }
 }
 
-.osjs-root[data-dir="rtl"] {
-  .osjs-window-button:not(:last-child) {
-    margin-right: 0;
-    margin-left: calc($base-margin / 4);
-  }
-}
-
 .osjs-window-content {
   box-sizing: border-box;
   position: relative;

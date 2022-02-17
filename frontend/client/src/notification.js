@@ -57,8 +57,7 @@ export default class Notification {
    * @param {NotificationOptions} options Options
    */
   constructor(core, root, options = {}) {
-    const defaultLabel = core.make('osjs/locale')
-      .translate('LBL_NOTIFICATION');
+    const defaultLabel = "Notification";
 
     /**
      * Core instance reference

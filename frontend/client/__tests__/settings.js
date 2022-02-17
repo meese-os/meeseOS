@@ -47,7 +47,6 @@ describe('Settings', () => {
     expect(settings.get()).toEqual({
       'osjs/default-application': {},
       'osjs/desktop': {},
-      'osjs/locale': {},
       'osjs/session': [],
       'osjs/jest': {
         foo: 'Hello World'
