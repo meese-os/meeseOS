@@ -25,86 +25,63 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @license Simplified BSD License
- */
-
-import {ServiceProvider} from '@aaronmeese.com/common';
-import Auth from '../auth';
-
-/**
- * Auth Service Contract
- * TODO: typedef
- * @typedef {Object} AuthProviderContract
- * @property {Function} show
- * @property {Function} login
- * @property {Function} logout
- * @property {Function} user
+ * @licence Simplified BSD License
  */
 
 /**
- * Auth Service Options
- * @typedef {Object} AuthServiceOptions
- */
-
-/**
- * OS.js Auth Service Provider
+ * Service Provider Interface
  *
- * Creates the login prompt and handles authentication flow
+ * @desc Provides a basic Service Provider interface for OS.js
+ *
+ * @interface
  */
-export default class AuthServiceProvider extends ServiceProvider {
+export class ServiceProvider {
 
   /**
-   * @param {Core} core OS.js Core
-   * @param {AuthServiceOptions} [options={}]
+   * Constructor
+   * @param {Core} core Core reference
    */
   constructor(core, options = {}) {
-    super(core);
-
     /**
-     * @type {Auth}
-     * @readonly
+     * Core instance reference
+     * @type {Core}
      */
-    this.auth = new Auth(core, options);
+    this.core = core;
+    this.options = options;
   }
 
   /**
-   * Initializes authentication
-   * @return {Promise<undefined>}
-   */
-  init() {
-    this.core.singleton('osjs/auth', () => this.createAuthContract());
-
-    return this.auth.init();
-  }
-
-  /**
-   * Destroys authentication
-   */
-  destroy() {
-    this.auth.destroy();
-
-    return super.destroy();
-  }
-
-  /**
-   * Get a list of services this provider registers
+   * A list of services this provider can create
    * @return {string[]}
    */
   provides() {
-    return [
-      'osjs/auth'
-    ];
+    return [];
   }
 
   /**
-   * @return {AuthProviderContract}
+   * A list of services this provider depends on
+   * @return {string[]}
    */
-  createAuthContract() {
-    return {
-      show: (cb) => this.auth.show(cb),
-      login: (values) => this.auth.login(values),
-      logout: (reload) => this.auth.logout(reload),
-      user: () => this.core.getUser()
-    };
+  depends() {
+    return [];
   }
+
+  /**
+   * Initializes provider
+   */
+  async init() {
+  }
+
+  /**
+   * Starts provider
+   */
+  start() {
+  }
+
+  /**
+   * Destroys provider
+   */
+  destroy() {
+  }
+
 }

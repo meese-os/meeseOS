@@ -27,7 +27,7 @@
     "jest": "^26.0.0"
   },
   "dependencies": {
-    "@osjs/common": "^3.0.12",
+    "@aaronmeese.com/common": "workspace:*",
     "body-parser": "^1.19.1",
     "chokidar": "^3.5.3",
     "connect-loki": "^1.2.0",

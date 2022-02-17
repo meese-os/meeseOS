@@ -3,7 +3,7 @@ import CoreServiceProvider from '../src/providers/core';
 import SettingsServiceProvider from '../src/providers/settings';
 import * as config from '../src/config';
 import merge from 'deepmerge';
-import {ServiceProvider} from '@osjs/common';
+import {ServiceProvider} from '@aaronmeese.com/common';
 
 class MockDesktopServiceProvider extends ServiceProvider {
   provides() {

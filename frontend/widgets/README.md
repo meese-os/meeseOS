@@ -17,7 +17,7 @@ This is the Widgets module for OS.js
 First, install the module:
 
 ```bash
-npm install @osjs/widgets
+npm install @aaronmeese.com/widgets
 ```
 
 In your client bootstrap (`src/client/index.js`):

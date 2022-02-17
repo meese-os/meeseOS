@@ -31,7 +31,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const chokidar = require('chokidar');
-const {ServiceProvider} = require('@osjs/common');
+const {ServiceProvider} = require('@aaronmeese.com/common');
 const Packages = require('../packages');
 const {closeWatches} = require('../utils/core');
 

@@ -13,6 +13,6 @@ This is the Textpad Application for OS.js v3
 ## Installation
 
 ```bash
-npm install @osjs/textpad-application
+npm install @aaronmeese.com/textpad-application
 npm run package:discover
 ```

@@ -29,7 +29,7 @@
  */
 
 import Notifications from '../notifications';
-import {ServiceProvider} from '@osjs/common';
+import {ServiceProvider} from '@aaronmeese.com/common';
 
 /**
  * OS.js Notification Service Provider

@@ -29,7 +29,7 @@
  */
 
 const Settings = require('../settings');
-const {ServiceProvider} = require('@osjs/common');
+const {ServiceProvider} = require('@aaronmeese.com/common');
 
 /**
  * OS.js Settings Service Provider

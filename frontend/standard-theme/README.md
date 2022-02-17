@@ -11,6 +11,6 @@ This is the Default Theme module for OS.js v3
 ## Installation
 
 ```bash
-npm install @osjs/standard-theme
+npm install @aaronmeese.com/standard-theme
 npm run package:discover
 ```

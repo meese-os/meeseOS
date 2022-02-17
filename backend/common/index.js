@@ -1,4 +1,4 @@
-/*
+/**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,35 +28,6 @@
  * @licence Simplified BSD License
  */
 
-const {ServiceProvider} = require('@aaronmeese.com/common');
-const Auth = require('../auth.js');
-
-/**
- * OS.js Auth Service Provider
- */
-class AuthServiceProvider extends ServiceProvider {
-
-  constructor(core, options) {
-    super(core, options);
-
-    this.auth = new Auth(core, options);
-  }
-
-  destroy() {
-    this.auth.destroy();
-
-    super.destroy();
-  }
-
-  async init() {
-    const {route, routeAuthenticated} = this.core.make('osjs/express');
-
-    route('post', '/register', (req, res) => this.auth.register(req, res));
-    route('post', '/login', (req, res) => this.auth.login(req, res));
-    routeAuthenticated('post', '/logout', (req, res) => this.auth.logout(req, res));
-
-    await this.auth.init();
-  }
-}
-
-module.exports = AuthServiceProvider;
+export * from './src/core.js';
+export * from './src/service-provider.js';
+export {EventHandler as EventEmitter} from '@aaronmeese.com/event-emitter';

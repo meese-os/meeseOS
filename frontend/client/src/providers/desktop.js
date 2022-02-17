@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import {ServiceProvider} from '@osjs/common';
+import {ServiceProvider} from '@aaronmeese.com/common';
 import Desktop from '../desktop';
 
 /**

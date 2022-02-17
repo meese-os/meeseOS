@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-const {ServiceProvider} = require('@osjs/common');
+const {ServiceProvider} = require('@aaronmeese.com/common');
 const Filesystem = require('../filesystem');
 
 /**

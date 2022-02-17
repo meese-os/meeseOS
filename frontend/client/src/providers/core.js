@@ -41,7 +41,7 @@ import {style, script, playSound} from '../utils/dom';
 import {resourceResolver} from '../utils/desktop';
 import * as dnd from '../utils/dnd';
 import {BasicApplication} from '../basic-application.js';
-import {ServiceProvider} from '@osjs/common';
+import {ServiceProvider} from '@aaronmeese.com/common';
 import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import logger from '../logger';
 

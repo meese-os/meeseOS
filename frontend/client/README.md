@@ -18,13 +18,13 @@ Contains base services, virtual filesystem, panels and other core services requi
 ### ESM, Webpack, etc.
 
 ```javascript
-import { Core /*, ... */ } from '@osjs/client';
+import { Core /*, ... */ } from '@aaronmeese.com/client';
 ```
 
 ### UMD
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@osjs/client/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@aaronmeese.com/client/dist/main.js"></script>
 ```
 
 ```javascript
