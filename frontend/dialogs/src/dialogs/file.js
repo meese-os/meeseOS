@@ -88,10 +88,9 @@ export default class FileDialog extends Dialog {
       console.warn(e);
     }
 
-    const _ = core.make('osjs/locale').translate;
     const title = args.title
       ? args.title
-      : (args.type === 'open' ? _('LBL_OPEN') : _('LBL_SAVE'));
+      : (args.type === 'open' ? "Open" : "Save");
 
     super(core, args, {
       className: 'file',

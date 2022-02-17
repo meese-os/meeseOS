@@ -28,7 +28,6 @@
  * @license Simplified BSD License
  */
 
-import {clientLocale} from './utils/locale.js';
 import defaultWallpaper from './styles/wallpaper.png';
 import defaultIcon from './styles/logo-blue-32x32.png';
 
@@ -85,49 +84,48 @@ export const defaultConfiguration = {
     overrideMetadata: {}
   },
 
-  // FIXME: Move into packages above ?!
   application: {
     pinned: [],
     autostart: [],
     categories: {
       development: {
-        label: 'LBL_APP_CAT_DEVELOPMENT',
+        label: 'Development',
         icon: 'applications-development'
       },
       science: {
-        label: 'LBL_APP_CAT_SCIENCE',
+        label: 'Science',
         icon: 'applications-science'
       },
       games: {
-        label: 'LBL_APP_CAT_GAMES',
+        label: 'Games',
         icon: 'applications-games'
       },
       graphics: {
-        label: 'LBL_APP_CAT_GRAPHICS',
+        label: 'Graphics',
         icon: 'applications-graphics'
       },
       network: {
-        label: 'LBL_APP_CAT_NETWORK',
+        label: 'Network',
         icon: 'applications-internet'
       },
       multimedia: {
-        label: 'LBL_APP_CAT_MULTIMEDIA',
+        label: 'Multimedia',
         icon: 'applications-multimedia'
       },
       office: {
-        label: 'LBL_APP_CAT_OFFICE',
+        label: 'Office',
         icon: 'applications-office'
       },
       system: {
-        label: 'LBL_APP_CAT_SYSTEM',
+        label: 'System',
         icon: 'applications-system'
       },
       utilities: {
-        label: 'LBL_APP_CAT_UTILITIES',
+        label: 'Utilities',
         icon: 'applications-utilities'
       },
       other: {
-        label: 'LBL_APP_CAT_OTHER',
+        label: 'Other',
         icon: 'applications-other'
       }
     },
@@ -175,8 +173,7 @@ export const defaultConfiguration = {
     defaults: {
       'osjs/default-application': {},
       'osjs/session': [],
-      'osjs/desktop': {},
-      'osjs/locale': {}
+      'osjs/desktop': {}
     }
   },
 
@@ -229,19 +226,6 @@ export const defaultConfiguration = {
         fontColorStyle: 'system',
         fontColor: '#ffffff'
       }
-    }
-  },
-
-  locale: {
-    language: clientLocale('en_EN', Object.keys(languages)),
-    rtl: ['az', 'fa', 'he', 'uz', 'ar'],
-    format: {
-      shortDate: 'yyyy-mm-dd',
-      mediumDate: 'dS mmm yyyy',
-      longDate: 'dS mmmm yyyy',
-      fullDate: 'dddd dS mmmm yyyy',
-      shortTime: 'HH:MM',
-      longTime: 'HH:MM:ss'
     }
   },
 

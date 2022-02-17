@@ -120,6 +120,9 @@ describe('utils', () => {
 
   describe('spawnAsync', () => {
     test('should exit with correct code', () => {
+      // If you get the error message `spawn sh ENOENT` on Windows,
+      // add `C:\Program Files\Git\bin` to your PATH environment variable.
+      // You'll then need to restart your editor/terminal to apply the changes.
       return expect(utils.spawnAsync('sh', ['-c', 'exit 123']))
         .rejects
         .toBe(123);

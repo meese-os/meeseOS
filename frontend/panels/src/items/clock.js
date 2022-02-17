@@ -30,6 +30,7 @@
 
 import {h} from 'hyperapp';
 import PanelItem from '../panel-item';
+import dateformat from 'dateformat';
 
 /**
  * Clock
@@ -39,8 +40,7 @@ import PanelItem from '../panel-item';
 export default class ClockPanelItem extends PanelItem {
 
   init() {
-    const {format} = this.core.make('osjs/locale');
-    const date = () => format(new Date(), 'longTime');
+    const date = () => dateformat(new Date(), 'HH:MM:ss');
 
     if (this.inited) {
       return;

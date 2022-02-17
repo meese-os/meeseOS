@@ -43,13 +43,14 @@
     "stylelint-config-standard": "^25.0.0",
     "stylelint-scss": "^4.1.0",
     "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    
+    "jest": "^26.0.0"
   },
   "dependencies": {
     "@aaronmeese.com/event-emitter": "workspace:*",
     "@osjs/common": "^3.0.12",
     "css-mediaquery": "^0.1.2",
-    "dateformat": "^5.0.2",
     "deepmerge": "^4.2.2",
     "hyperapp": "^1.2.10",
     "js-cookie": "^3.0.1",
@@ -126,8 +127,7 @@
     "coveragePathIgnorePatterns": [
       "src/config.js",
       "src/providers",
-      "/node_modules/",
-      "/locale/"
+      "/node_modules/"
     ]
   }
 }

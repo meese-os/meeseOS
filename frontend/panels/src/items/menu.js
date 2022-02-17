@@ -30,15 +30,13 @@
 
 import {h} from 'hyperapp';
 import PanelItem from '../panel-item';
-import * as languages from '../locales';
 import defaultIcon from '../logo-blue-32x32.png';
 
 const sortBy = fn => (a, b) => -(fn(a) < fn(b)) || +(fn(a) > fn(b));
 const sortByLabel = iter => String(iter.label).toLowerCase();
 
-const makeTree = (core, icon, __) => {
+const makeTree = (core, icon) => {
   const configuredCategories = core.config('application.categories');
-  const locale = core.make('osjs/locale');
 
   const getIcon = (m, fallbackIcon) => m.icon
     ? (m.icon.match(/^(https?:)\//)
@@ -46,23 +44,17 @@ const makeTree = (core, icon, __) => {
       : core.url(m.icon, {}, m))
     : fallbackIcon;
 
-  const getTitle = (item) => locale
-    .translatableFlat(item.title, item.name);
-
-  const getCategory = (cat) => locale
-    .translate(cat);
-
-  const createCategory = c => ({
-    icon: c.icon ? {name: c.icon} : icon,
-    label: getCategory(c.label),
+  const createCategory = category => ({
+    icon: category.icon ? {name: category.icon} : icon,
+    label: category.label,
     items: []
   });
 
-  const createItem = m => ({
-    icon: getIcon(m, icon),
-    label: getTitle(m),
+  const createItem = item => ({
+    icon: getIcon(item, icon),
+    label: item.title,
     data: {
-      name: m.name
+      name: item.name
     }
   });
 
@@ -117,13 +109,13 @@ const makeTree = (core, icon, __) => {
     type: 'separator'
   }, {
     icon,
-    label: __('LBL_SAVE_AND_LOG_OUT'),
+    label: "Save Session & Log Out",
     data: {
       action: 'saveAndLogOut'
     }
   }, {
     icon,
-    label: __('LBL_LOG_OUT'),
+    label: "Log Out",
     data: {
       action: 'logOut'
     }
@@ -150,8 +142,6 @@ const makeTree = (core, icon, __) => {
 export default class MenuPanelItem extends PanelItem {
 
   render(state, actions) {
-    const _ = this.core.make('osjs/locale').translate;
-    const __ = this.core.make('osjs/locale').translatable(languages);
     const icon = this.options.icon || defaultIcon;
 
     const logout = async (save) => {
@@ -162,7 +152,7 @@ export default class MenuPanelItem extends PanelItem {
       this.core.make('osjs/auth').logout();
     };
 
-    const makeMenu = makeTree(this.core, icon, __);
+    const makeMenu = makeTree(this.core, icon);
 
     const onclick = (ev) => {
       const packages = this.core.make('osjs/packages')
@@ -201,9 +191,9 @@ export default class MenuPanelItem extends PanelItem {
       }, [
         h('img', {
           src: icon,
-          alt: _('LBL_MENU')
+          alt: "Menu"
         }),
-        h('span', {}, _('LBL_MENU'))
+        h('span', {}, "Menu")
       ])
     ]);
   }

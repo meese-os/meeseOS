@@ -146,7 +146,7 @@ export default class DigitalClockWidget extends Widget {
   static metadata() {
     return {
       ...super.metadata(),
-      title: 'WIDGET_DIGITALCLOCK'
+      title: 'Digital Clock'
     };
   }
 }

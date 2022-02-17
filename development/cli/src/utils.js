@@ -33,6 +33,7 @@ const globby = require('globby');
 const path = require('path');
 const {spawn} = require('child_process');
 const commander = require('commander');
+const {createPath} = require('../src/createPath.js');
 
 const npmPackages = async (root) => {
   const globs = await globby(root.replace(/\\/g, '/') + '/**/package.json', {deep: 3});
@@ -75,9 +76,9 @@ const loadTasks = async (defaults, includes, options) => {
 
 const createOptions = options => ({
   production: !!(process.env.NODE_ENV || 'development').match(/^prod/),
-  cli: path.resolve(options.root, 'src/cli'),
-  npm: path.resolve(options.root, 'package.json'),
-  packages: path.resolve(options.root, 'packages.json'),
+  cli: createPath(options.root, 'src/cli'),
+  npm: createPath(options.root, 'package.json'),
+  packages: createPath(options.root, 'packages.json'),
   config: {
     tasks: [],
     discover: [],
@@ -85,16 +86,16 @@ const createOptions = options => ({
   },
   dist: () => {
     const root = commander.dist
-      ? path.resolve(commander.dist)
-      : path.resolve(options.root, 'dist');
+      ? createPath(commander.dist)
+      : createPath(options.root, 'dist');
 
     return {
       root,
-      themes: path.resolve(root, 'themes'),
-      sounds: path.resolve(root, 'sounds'),
-      icons: path.resolve(root, 'icons'),
-      packages: path.resolve(root, 'apps'),
-      metadata: path.resolve(root, 'metadata.json')
+      themes: createPath(root, 'themes'),
+      sounds: createPath(root, 'sounds'),
+      icons: createPath(root, 'icons'),
+      packages: createPath(root, 'apps'),
+      metadata: createPath(root, 'metadata.json')
     };
   },
   ...options
@@ -105,7 +106,7 @@ const resolveOptions = (options, include) => {
 
   const config = {
     discover: [
-      path.resolve(newOptions.root, 'node_modules')
+      createPath(newOptions.root, 'node_modules')
     ],
     ...newOptions.config,
     ...include
@@ -113,9 +114,9 @@ const resolveOptions = (options, include) => {
 
   newOptions.config = config;
   newOptions.config.discover = [
-    path.resolve(newOptions.root, 'node_modules'),
+    createPath(newOptions.root, 'node_modules'),
     ...newOptions.config.discover
-  ].map(d => path.resolve(d));
+  ].map(d => createPath(d));
 
   return newOptions;
 };

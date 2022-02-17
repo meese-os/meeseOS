@@ -349,20 +349,6 @@ export default class Core extends CoreBase {
         }, pingTime);
       }
     });
-
-    const updateRootLocale = () => {
-      try {
-        const s = this.make('osjs/settings');
-        const l = s.get('osjs/locale', 'language');
-        this.$root.setAttribute('data-locale', l);
-      } catch (e) {
-        console.warn(e);
-      }
-    };
-
-    this.on('osjs/locale:change', updateRootLocale);
-    this.on('osjs/settings:load', updateRootLocale);
-    this.on('osjs/settings:save', updateRootLocale);
   }
 
   /**
@@ -481,12 +467,10 @@ export default class Core extends CoreBase {
    * @return {*}
    */
   request(url, options = {}, type = null, force = false) {
-    const _ = this.has('osjs/locale')
-      ? this.make('osjs/locale').translate
-      : t => t;
-
     if (this.config('standalone') && !force) {
-      return Promise.reject(new Error(_('ERR_REQUEST_STANDALONE')));
+      return Promise.reject(new Error(
+				"Cannot make requests in standalone mode."
+			));
     }
 
     if (!url.match(/^((http|ws|ftp)s?:)/i)) {
@@ -502,7 +486,9 @@ export default class Core extends CoreBase {
       .catch(error => {
         logger.warn(error);
 
-        throw new Error(_('ERR_REQUEST_NOT_OK', error));
+        throw new Error(
+					`An error occured while performing a request: ${error}`
+				);
       });
   }
 
@@ -561,7 +547,6 @@ export default class Core extends CoreBase {
    * @private
    */
   _openApplicationDialog(options, compatible, file, run) {
-    const _ = this.make('osjs/locale').translate;
     const useDefault = options.useDefault && this.has('osjs/settings');
     const setDefault = name => this.make('osjs/settings')
       .set('osjs/default-application', file.mime, name)
@@ -576,8 +561,8 @@ export default class Core extends CoreBase {
       : 'choice';
 
     const args = {
-      title: _('LBL_LAUNCH_SELECT'),
-      message: _('LBL_LAUNCH_SELECT_MESSAGE', file.path),
+      title: "Select application",
+      message: `Select application for \'${file.path}\'`,
       choices: compatible.reduce((o, i) => ({...o, [i.name]: i.name}), {}),
       value
     };

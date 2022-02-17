@@ -162,8 +162,7 @@ export class BasicApplication extends EventEmitter {
    */
   updateWindowTitle() {
     if (this.win) {
-      const {translatableFlat} = this.core.make('osjs/locale');
-      const prefix = translatableFlat(this.proc.metadata.title);
+      const prefix = this.proc.metadata.title;
       const title = this._createTitle(prefix);
 
       this.win.setTitle(title);

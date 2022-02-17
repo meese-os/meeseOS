@@ -319,18 +319,16 @@ export class DesktopIconView extends EventEmitter {
   }
 
   createFileContextMenu(ev, entry) {
-    const _ = this.core.make('osjs/locale').translate;
-
     this.core.make('osjs/contextmenu', {
       position: ev,
       menu: [{
-        label: _('LBL_OPEN'),
+        label: "Open",
         onclick: () => this.iconview.openEntry({entry, forceDialog: false})
       }, {
-        label: _('LBL_OPEN_WITH'),
+        label: "Open with...",
         onclick: () => this.iconview.openEntry({entry, forceDialog: true})
       }, {
-        label: entry.shortcut !== false ? _('LBL_REMOVE_SHORTCUT') : _('LBL_DELETE'),
+        label: entry.shortcut !== false ? "Remove shortcut" : "Delete",
         onclick: () => this.iconview.removeEntry(entry)
       }]
     });
@@ -338,15 +336,13 @@ export class DesktopIconView extends EventEmitter {
 
   createDropContextMenu(ev, data, files) {
     const desktop = this.core.make('osjs/desktop');
-    const _ = this.core.make('osjs/locale').translate;
-
     const action = shortcut => onDropAction(this.iconview)(ev, data, files, shortcut);
 
     const menu = [{
-      label: _('LBL_COPY'),
+      label: "Copy",
       onclick: () => action(false)
     }, {
-      label: _('LBL_CREATE_SHORTCUT'),
+      label: "Create shortcut",
       onclick: () => action(true)
     }, ...desktop.createDropContextMenu(data)];
 

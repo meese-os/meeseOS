@@ -29,7 +29,6 @@
  */
 
 import DigitalClock from './items/digitalclock';
-import * as translations from './locales';
 
 /**
  * Widget Service Provider

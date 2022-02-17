@@ -361,20 +361,19 @@ export default class WindowBehavior {
   iconClick(ev, win) {
     const {minimized, maximized} = win.state;
     const {minimizable, maximizable, closeable} = win.attributes;
-    const _ = this.core.make('osjs/locale').translate;
 
     this.core.make('osjs/contextmenu', {
       position: ev,
       menu: [{
-        label: minimized ? _('LBL_RAISE') : _('LBL_MINIMIZE'),
+        label: minimized ? "Raise" : "Minimize",
         disabled: !minimizable,
         onclick: () => minimized ? win.raise() : win.minimize()
       }, {
-        label: maximized ? _('LBL_RESTORE') : _('LBL_MAXIMIZE'),
+        label: maximized ? "Restore" : "Maximize",
         disabled: !maximizable,
         onclick: () => maximized ? win.restore() : win.maximize()
       }, {
-        label: _('LBL_CLOSE'),
+        label: "Close",
         disabled: !closeable,
         onclick: () => win.close()
       }]

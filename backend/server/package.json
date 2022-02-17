@@ -21,9 +21,10 @@
   },
   "devDependencies": {
     "@aaronmeese.com/eslint-config": "workspace:*",
-    "eslint": "^8.9.0",
+    "eslint": "^7.14.0",
     "jest-express": "^1.12.0",
-    "temp": "^0.9.4"
+    "temp": "^0.9.4",
+    "jest": "^26.0.0"
   },
   "dependencies": {
     "@osjs/common": "^3.0.12",

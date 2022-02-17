@@ -29,7 +29,6 @@
  */
 
 import PanelItem from './panel-item';
-import * as languages from './locales';
 import {EventEmitter} from '@aaronmeese.com/event-emitter';
 
 /**
@@ -104,9 +103,6 @@ export default class Panel extends EventEmitter {
     this.destroyed = false;
     this.inited = true;
 
-    const _ = this.core.make('osjs/locale').translate;
-    const __ = this.core.make('osjs/locale').translatable(languages);
-
     this.$element = document.createElement('div');
     this.$element.classList.add('osjs-panel');
     this.$element.classList.add('osjs__contextmenu');
@@ -123,12 +119,12 @@ export default class Panel extends EventEmitter {
       this.core.make('osjs/contextmenu').show({
         position: ev,
         menu: [{
-          label: __('LBL_PANEL_POSITION'),
+          label: "Panel Position",
           items: [{
-            label: _('LBL_TOP'),
+            label: "Top",
             onclick: () => this.setPosition('top')
           }, {
-            label: _('LBL_BOTTOM'),
+            label: "Bottom",
             onclick: () => this.setPosition('bottom')
           }]
         }]

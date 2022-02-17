@@ -191,7 +191,7 @@ const action = async ({logger, options, args, commander}) => {
 
 module.exports = {
   'package:discover': {
-    description: 'Discovers all installed OS.js packages',
+    description: 'Discovers all installed MeeseOS packages',
     options: {
       '--copy': 'Copy files instead of creating symlinks',
       '--relative': 'Use relative paths for symlinks',

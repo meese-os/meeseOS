@@ -328,9 +328,7 @@ export default class Application extends EventEmitter {
   createWindow(options = {}) {
     const found = this.windows.find(w => w.id === options.id);
     if (found) {
-      const msg = this.core.make('osjs/locale')
-        .translate('ERR_WINDOW_ID_EXISTS', options.id);
-
+      const msg = `Window with ID \'${options.id}\' already exists`
       throw new Error(msg);
     }
 
