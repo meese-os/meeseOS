@@ -1,0 +1,1124 @@
+.osjs-icon {
+  &[data-icon="address-book-new"] {
+    background-image: url("src/icons/actions/address-book-new.png");
+  }
+  &[data-icon="application-exit"] {
+    background-image: url("src/icons/actions/application-exit.png");
+  }
+  &[data-icon="appointment-new"] {
+    background-image: url("src/icons/actions/appointment-new.png");
+  }
+  &[data-icon="bookmark-new"] {
+    background-image: url("src/icons/actions/bookmark-new.png");
+  }
+  &[data-icon="call-start"] {
+    background-image: url("src/icons/actions/call-start.png");
+  }
+  &[data-icon="call-stop"] {
+    background-image: url("src/icons/actions/call-stop.png");
+  }
+  &[data-icon="contact-new"] {
+    background-image: url("src/icons/actions/contact-new.png");
+  }
+  &[data-icon="document-new"] {
+    background-image: url("src/icons/actions/document-new.png");
+  }
+  &[data-icon="document-open-recent"] {
+    background-image: url("src/icons/actions/document-open-recent.png");
+  }
+  &[data-icon="document-open"] {
+    background-image: url("src/icons/actions/document-open.png");
+  }
+  &[data-icon="document-page-setup"] {
+    background-image: url("src/icons/actions/document-page-setup.png");
+  }
+  &[data-icon="document-print-preview"] {
+    background-image: url("src/icons/actions/document-print-preview.png");
+  }
+  &[data-icon="document-print"] {
+    background-image: url("src/icons/actions/document-print.png");
+  }
+  &[data-icon="document-properties"] {
+    background-image: url("src/icons/actions/document-properties.png");
+  }
+  &[data-icon="document-revert-rtl"] {
+    background-image: url("src/icons/actions/document-revert-rtl.png");
+  }
+  &[data-icon="document-revert"] {
+    background-image: url("src/icons/actions/document-revert.png");
+  }
+  &[data-icon="document-save-as"] {
+    background-image: url("src/icons/actions/document-save-as.png");
+  }
+  &[data-icon="document-save"] {
+    background-image: url("src/icons/actions/document-save.png");
+  }
+  &[data-icon="document-send"] {
+    background-image: url("src/icons/actions/document-send.png");
+  }
+  &[data-icon="edit-clear-all"] {
+    background-image: url("src/icons/actions/edit-clear-all.png");
+  }
+  &[data-icon="edit-clear-rtl"] {
+    background-image: url("src/icons/actions/edit-clear-rtl.png");
+  }
+  &[data-icon="edit-clear"] {
+    background-image: url("src/icons/actions/edit-clear.png");
+  }
+  &[data-icon="edit-copy"] {
+    background-image: url("src/icons/actions/edit-copy.png");
+  }
+  &[data-icon="edit-cut"] {
+    background-image: url("src/icons/actions/edit-cut.png");
+  }
+  &[data-icon="edit-delete"] {
+    background-image: url("src/icons/actions/edit-delete.png");
+  }
+  &[data-icon="edit-find-replace"] {
+    background-image: url("src/icons/actions/edit-find-replace.png");
+  }
+  &[data-icon="edit-find"] {
+    background-image: url("src/icons/actions/edit-find.png");
+  }
+  &[data-icon="edit-paste"] {
+    background-image: url("src/icons/actions/edit-paste.png");
+  }
+  &[data-icon="edit-redo-rtl"] {
+    background-image: url("src/icons/actions/edit-redo-rtl.png");
+  }
+  &[data-icon="edit-redo"] {
+    background-image: url("src/icons/actions/edit-redo.png");
+  }
+  &[data-icon="edit-select-all"] {
+    background-image: url("src/icons/actions/edit-select-all.png");
+  }
+  &[data-icon="edit-undo-rtl"] {
+    background-image: url("src/icons/actions/edit-undo-rtl.png");
+  }
+  &[data-icon="edit-undo"] {
+    background-image: url("src/icons/actions/edit-undo.png");
+  }
+  &[data-icon="folder-new"] {
+    background-image: url("src/icons/actions/folder-new.png");
+  }
+  &[data-icon="format-indent-less-rtl"] {
+    background-image: url("src/icons/actions/format-indent-less-rtl.png");
+  }
+  &[data-icon="format-indent-less"] {
+    background-image: url("src/icons/actions/format-indent-less.png");
+  }
+  &[data-icon="format-indent-more-rtl"] {
+    background-image: url("src/icons/actions/format-indent-more-rtl.png");
+  }
+  &[data-icon="format-indent-more"] {
+    background-image: url("src/icons/actions/format-indent-more.png");
+  }
+  &[data-icon="format-justify-center"] {
+    background-image: url("src/icons/actions/format-justify-center.png");
+  }
+  &[data-icon="format-justify-fill"] {
+    background-image: url("src/icons/actions/format-justify-fill.png");
+  }
+  &[data-icon="format-justify-left"] {
+    background-image: url("src/icons/actions/format-justify-left.png");
+  }
+  &[data-icon="format-justify-right"] {
+    background-image: url("src/icons/actions/format-justify-right.png");
+  }
+  &[data-icon="format-text-bold"] {
+    background-image: url("src/icons/actions/format-text-bold.png");
+  }
+  &[data-icon="format-text-direction-ltr"] {
+    background-image: url("src/icons/actions/format-text-direction-ltr.png");
+  }
+  &[data-icon="format-text-direction-rtl"] {
+    background-image: url("src/icons/actions/format-text-direction-rtl.png");
+  }
+  &[data-icon="format-text-italic"] {
+    background-image: url("src/icons/actions/format-text-italic.png");
+  }
+  &[data-icon="format-text-strikethrough"] {
+    background-image: url("src/icons/actions/format-text-strikethrough.png");
+  }
+  &[data-icon="format-text-underline"] {
+    background-image: url("src/icons/actions/format-text-underline.png");
+  }
+  &[data-icon="go-bottom"] {
+    background-image: url("src/icons/actions/go-bottom.png");
+  }
+  &[data-icon="go-down"] {
+    background-image: url("src/icons/actions/go-down.png");
+  }
+  &[data-icon="go-first-rtl"] {
+    background-image: url("src/icons/actions/go-first-rtl.png");
+  }
+  &[data-icon="go-first"] {
+    background-image: url("src/icons/actions/go-first.png");
+  }
+  &[data-icon="go-home"] {
+    background-image: url("src/icons/actions/go-home.png");
+  }
+  &[data-icon="go-jump"] {
+    background-image: url("src/icons/actions/go-jump.png");
+  }
+  &[data-icon="go-last-rtl"] {
+    background-image: url("src/icons/actions/go-last-rtl.png");
+  }
+  &[data-icon="go-last"] {
+    background-image: url("src/icons/actions/go-last.png");
+  }
+  &[data-icon="go-next-rtl"] {
+    background-image: url("src/icons/actions/go-next-rtl.png");
+  }
+  &[data-icon="go-next"] {
+    background-image: url("src/icons/actions/go-next.png");
+  }
+  &[data-icon="go-previous-rtl"] {
+    background-image: url("src/icons/actions/go-previous-rtl.png");
+  }
+  &[data-icon="go-previous"] {
+    background-image: url("src/icons/actions/go-previous.png");
+  }
+  &[data-icon="go-top"] {
+    background-image: url("src/icons/actions/go-top.png");
+  }
+  &[data-icon="go-up"] {
+    background-image: url("src/icons/actions/go-up.png");
+  }
+  &[data-icon="help-about"] {
+    background-image: url("src/icons/actions/help-about.png");
+  }
+  &[data-icon="help-contents"] {
+    background-image: url("src/icons/actions/help-contents.png");
+  }
+  &[data-icon="help-faq"] {
+    background-image: url("src/icons/actions/help-faq.png");
+  }
+  &[data-icon="insert-image"] {
+    background-image: url("src/icons/actions/insert-image.png");
+  }
+  &[data-icon="insert-link"] {
+    background-image: url("src/icons/actions/insert-link.png");
+  }
+  &[data-icon="insert-object"] {
+    background-image: url("src/icons/actions/insert-object.png");
+  }
+  &[data-icon="insert-text"] {
+    background-image: url("src/icons/actions/insert-text.png");
+  }
+  &[data-icon="list-add"] {
+    background-image: url("src/icons/actions/list-add.png");
+  }
+  &[data-icon="list-remove"] {
+    background-image: url("src/icons/actions/list-remove.png");
+  }
+  &[data-icon="mail-forward"] {
+    background-image: url("src/icons/actions/mail-forward.png");
+  }
+  &[data-icon="mail-mark-important"] {
+    background-image: url("src/icons/actions/mail-mark-important.png");
+  }
+  &[data-icon="mail-mark-junk"] {
+    background-image: url("src/icons/actions/mail-mark-junk.png");
+  }
+  &[data-icon="mail-mark-notjunk"] {
+    background-image: url("src/icons/actions/mail-mark-notjunk.png");
+  }
+  &[data-icon="mail-mark-read"] {
+    background-image: url("src/icons/actions/mail-mark-read.png");
+  }
+  &[data-icon="mail-mark-unread"] {
+    background-image: url("src/icons/actions/mail-mark-unread.png");
+  }
+  &[data-icon="mail-message-new"] {
+    background-image: url("src/icons/actions/mail-message-new.png");
+  }
+  &[data-icon="mail-reply-all"] {
+    background-image: url("src/icons/actions/mail-reply-all.png");
+  }
+  &[data-icon="mail-reply-sender"] {
+    background-image: url("src/icons/actions/mail-reply-sender.png");
+  }
+  &[data-icon="mail-send-receive"] {
+    background-image: url("src/icons/actions/mail-send-receive.png");
+  }
+  &[data-icon="mail-send"] {
+    background-image: url("src/icons/actions/mail-send.png");
+  }
+  &[data-icon="mark-location"] {
+    background-image: url("src/icons/actions/mark-location.png");
+  }
+  &[data-icon="media-eject"] {
+    background-image: url("src/icons/actions/media-eject.png");
+  }
+  &[data-icon="media-playback-pause"] {
+    background-image: url("src/icons/actions/media-playback-pause.png");
+  }
+  &[data-icon="media-playback-start-rtl"] {
+    background-image: url("src/icons/actions/media-playback-start-rtl.png");
+  }
+  &[data-icon="media-playback-start"] {
+    background-image: url("src/icons/actions/media-playback-start.png");
+  }
+  &[data-icon="media-playback-stop"] {
+    background-image: url("src/icons/actions/media-playback-stop.png");
+  }
+  &[data-icon="media-record"] {
+    background-image: url("src/icons/actions/media-record.png");
+  }
+  &[data-icon="media-seek-backward-rtl"] {
+    background-image: url("src/icons/actions/media-seek-backward-rtl.png");
+  }
+  &[data-icon="media-seek-backward"] {
+    background-image: url("src/icons/actions/media-seek-backward.png");
+  }
+  &[data-icon="media-seek-forward-rtl"] {
+    background-image: url("src/icons/actions/media-seek-forward-rtl.png");
+  }
+  &[data-icon="media-seek-forward"] {
+    background-image: url("src/icons/actions/media-seek-forward.png");
+  }
+  &[data-icon="media-skip-backward-rtl"] {
+    background-image: url("src/icons/actions/media-skip-backward-rtl.png");
+  }
+  &[data-icon="media-skip-backward"] {
+    background-image: url("src/icons/actions/media-skip-backward.png");
+  }
+  &[data-icon="media-skip-forward-rtl"] {
+    background-image: url("src/icons/actions/media-skip-forward-rtl.png");
+  }
+  &[data-icon="media-skip-forward"] {
+    background-image: url("src/icons/actions/media-skip-forward.png");
+  }
+  &[data-icon="object-flip-horizontal"] {
+    background-image: url("src/icons/actions/object-flip-horizontal.png");
+  }
+  &[data-icon="object-flip-vertical"] {
+    background-image: url("src/icons/actions/object-flip-vertical.png");
+  }
+  &[data-icon="object-rotate-left"] {
+    background-image: url("src/icons/actions/object-rotate-left.png");
+  }
+  &[data-icon="object-rotate-right"] {
+    background-image: url("src/icons/actions/object-rotate-right.png");
+  }
+  &[data-icon="process-stop"] {
+    background-image: url("src/icons/actions/process-stop.png");
+  }
+  &[data-icon="system-lock-screen"] {
+    background-image: url("src/icons/actions/system-lock-screen.png");
+  }
+  &[data-icon="system-log-out"] {
+    background-image: url("src/icons/actions/system-log-out.png");
+  }
+  &[data-icon="system-run"] {
+    background-image: url("src/icons/actions/system-run.png");
+  }
+  &[data-icon="system-search"] {
+    background-image: url("src/icons/actions/system-search.png");
+  }
+  &[data-icon="system-shutdown"] {
+    background-image: url("src/icons/actions/system-shutdown.png");
+  }
+  &[data-icon="tools-check-spelling"] {
+    background-image: url("src/icons/actions/tools-check-spelling.png");
+  }
+  &[data-icon="view-fullscreen"] {
+    background-image: url("src/icons/actions/view-fullscreen.png");
+  }
+  &[data-icon="view-refresh"] {
+    background-image: url("src/icons/actions/view-refresh.png");
+  }
+  &[data-icon="view-restore"] {
+    background-image: url("src/icons/actions/view-restore.png");
+  }
+  &[data-icon="view-sort-ascending"] {
+    background-image: url("src/icons/actions/view-sort-ascending.png");
+  }
+  &[data-icon="view-sort-descending"] {
+    background-image: url("src/icons/actions/view-sort-descending.png");
+  }
+  &[data-icon="window-close"] {
+    background-image: url("src/icons/actions/window-close.png");
+  }
+  &[data-icon="window-new"] {
+    background-image: url("src/icons/actions/window-new.png");
+  }
+  &[data-icon="zoom-fit-best"] {
+    background-image: url("src/icons/actions/zoom-fit-best.png");
+  }
+  &[data-icon="zoom-in"] {
+    background-image: url("src/icons/actions/zoom-in.png");
+  }
+  &[data-icon="zoom-original"] {
+    background-image: url("src/icons/actions/zoom-original.png");
+  }
+  &[data-icon="zoom-out"] {
+    background-image: url("src/icons/actions/zoom-out.png");
+  }
+  &[data-icon="accessories-calculator"] {
+    background-image: url("src/icons/apps/accessories-calculator.png");
+  }
+  &[data-icon="accessories-character-map"] {
+    background-image: url("src/icons/apps/accessories-character-map.png");
+  }
+  &[data-icon="accessories-dictionary"] {
+    background-image: url("src/icons/apps/accessories-dictionary.png");
+  }
+  &[data-icon="accessories-text-editor"] {
+    background-image: url("src/icons/apps/accessories-text-editor.png");
+  }
+  &[data-icon="applets-screenshooter"] {
+    background-image: url("src/icons/apps/applets-screenshooter.png");
+  }
+  &[data-icon="help-browser"] {
+    background-image: url("src/icons/apps/help-browser.png");
+  }
+  &[data-icon="multimedia-volume-control"] {
+    background-image: url("src/icons/apps/multimedia-volume-control.png");
+  }
+  &[data-icon="preferences-desktop-accessibility"] {
+    background-image: url("src/icons/apps/preferences-desktop-accessibility.png");
+  }
+  &[data-icon="preferences-desktop-display"] {
+    background-image: url("src/icons/apps/preferences-desktop-display.png");
+  }
+  &[data-icon="preferences-desktop-font"] {
+    background-image: url("src/icons/apps/preferences-desktop-font.png");
+  }
+  &[data-icon="preferences-desktop-keyboard-shortcuts"] {
+    background-image: url("src/icons/apps/preferences-desktop-keyboard-shortcuts.png");
+  }
+  &[data-icon="preferences-desktop-keyboard"] {
+    background-image: url("src/icons/apps/preferences-desktop-keyboard.png");
+  }
+  &[data-icon="preferences-desktop-locale"] {
+    background-image: url("src/icons/apps/preferences-desktop-locale.png");
+  }
+  &[data-icon="preferences-desktop-remote-desktop"] {
+    background-image: url("src/icons/apps/preferences-desktop-remote-desktop.png");
+  }
+  &[data-icon="preferences-desktop-screensaver"] {
+    background-image: url("src/icons/apps/preferences-desktop-screensaver.png");
+  }
+  &[data-icon="preferences-desktop-theme"] {
+    background-image: url("src/icons/apps/preferences-desktop-theme.png");
+  }
+  &[data-icon="preferences-desktop-wallpaper"] {
+    background-image: url("src/icons/apps/preferences-desktop-wallpaper.png");
+  }
+  &[data-icon="preferences-system-notifications"] {
+    background-image: url("src/icons/apps/preferences-system-notifications.png");
+  }
+  &[data-icon="preferences-system-privacy"] {
+    background-image: url("src/icons/apps/preferences-system-privacy.png");
+  }
+  &[data-icon="preferences-system-search"] {
+    background-image: url("src/icons/apps/preferences-system-search.png");
+  }
+  &[data-icon="preferences-system-sharing"] {
+    background-image: url("src/icons/apps/preferences-system-sharing.png");
+  }
+  &[data-icon="preferences-system-windows"] {
+    background-image: url("src/icons/apps/preferences-system-windows.png");
+  }
+  &[data-icon="system-file-manager"] {
+    background-image: url("src/icons/apps/system-file-manager.png");
+  }
+  &[data-icon="system-software-install"] {
+    background-image: url("src/icons/apps/system-software-install.png");
+  }
+  &[data-icon="system-software-update"] {
+    background-image: url("src/icons/apps/system-software-update.png");
+  }
+  &[data-icon="system-users"] {
+    background-image: url("src/icons/apps/system-users.png");
+  }
+  &[data-icon="user-info"] {
+    background-image: url("src/icons/apps/user-info.png");
+  }
+  &[data-icon="utilities-system-monitor"] {
+    background-image: url("src/icons/apps/utilities-system-monitor.png");
+  }
+  &[data-icon="utilities-terminal"] {
+    background-image: url("src/icons/apps/utilities-terminal.png");
+  }
+  &[data-icon="web-browser"] {
+    background-image: url("src/icons/apps/web-browser.png");
+  }
+  &[data-icon="applications-accessories"] {
+    background-image: url("src/icons/categories/applications-accessories.png");
+  }
+  &[data-icon="applications-development"] {
+    background-image: url("src/icons/categories/applications-development.png");
+  }
+  &[data-icon="applications-engineering"] {
+    background-image: url("src/icons/categories/applications-engineering.png");
+  }
+  &[data-icon="applications-games"] {
+    background-image: url("src/icons/categories/applications-games.png");
+  }
+  &[data-icon="applications-graphics"] {
+    background-image: url("src/icons/categories/applications-graphics.png");
+  }
+  &[data-icon="applications-internet"] {
+    background-image: url("src/icons/categories/applications-internet.png");
+  }
+  &[data-icon="applications-multimedia"] {
+    background-image: url("src/icons/categories/applications-multimedia.png");
+  }
+  &[data-icon="applications-office"] {
+    background-image: url("src/icons/categories/applications-office.png");
+  }
+  &[data-icon="applications-other"] {
+    background-image: url("src/icons/categories/applications-other.png");
+  }
+  &[data-icon="applications-science"] {
+    background-image: url("src/icons/categories/applications-science.png");
+  }
+  &[data-icon="applications-system"] {
+    background-image: url("src/icons/categories/applications-system.png");
+  }
+  &[data-icon="applications-utilities"] {
+    background-image: url("src/icons/categories/applications-utilities.png");
+  }
+  &[data-icon="preferences-desktop-peripherals"] {
+    background-image: url("src/icons/categories/preferences-desktop-peripherals.png");
+  }
+  &[data-icon="preferences-desktop-personal"] {
+    background-image: url("src/icons/categories/preferences-desktop-personal.png");
+  }
+  &[data-icon="preferences-desktop"] {
+    background-image: url("src/icons/categories/preferences-desktop.png");
+  }
+  &[data-icon="preferences-other"] {
+    background-image: url("src/icons/categories/preferences-other.png");
+  }
+  &[data-icon="preferences-system-network"] {
+    background-image: url("src/icons/categories/preferences-system-network.png");
+  }
+  &[data-icon="preferences-system"] {
+    background-image: url("src/icons/categories/preferences-system.png");
+  }
+  &[data-icon="system-help"] {
+    background-image: url("src/icons/categories/system-help.png");
+  }
+  &[data-icon="ac-adapter"] {
+    background-image: url("src/icons/devices/ac-adapter.png");
+  }
+  &[data-icon="audio-card"] {
+    background-image: url("src/icons/devices/audio-card.png");
+  }
+  &[data-icon="audio-headphones"] {
+    background-image: url("src/icons/devices/audio-headphones.png");
+  }
+  &[data-icon="audio-headset"] {
+    background-image: url("src/icons/devices/audio-headset.png");
+  }
+  &[data-icon="audio-input-microphone"] {
+    background-image: url("src/icons/devices/audio-input-microphone.png");
+  }
+  &[data-icon="audio-speakers"] {
+    background-image: url("src/icons/devices/audio-speakers.png");
+  }
+  &[data-icon="battery"] {
+    background-image: url("src/icons/devices/battery.png");
+  }
+  &[data-icon="camera-photo"] {
+    background-image: url("src/icons/devices/camera-photo.png");
+  }
+  &[data-icon="camera-video"] {
+    background-image: url("src/icons/devices/camera-video.png");
+  }
+  &[data-icon="camera-web"] {
+    background-image: url("src/icons/devices/camera-web.png");
+  }
+  &[data-icon="computer"] {
+    background-image: url("src/icons/devices/computer.png");
+  }
+  &[data-icon="drive-harddisk"] {
+    background-image: url("src/icons/devices/drive-harddisk.png");
+  }
+  &[data-icon="drive-multidisk"] {
+    background-image: url("src/icons/devices/drive-multidisk.png");
+  }
+  &[data-icon="drive-optical"] {
+    background-image: url("src/icons/devices/drive-optical.png");
+  }
+  &[data-icon="drive-removable-media"] {
+    background-image: url("src/icons/devices/drive-removable-media.png");
+  }
+  &[data-icon="ebook-reader"] {
+    background-image: url("src/icons/devices/ebook-reader.png");
+  }
+  &[data-icon="input-dialpad"] {
+    background-image: url("src/icons/devices/input-dialpad.png");
+  }
+  &[data-icon="input-gaming"] {
+    background-image: url("src/icons/devices/input-gaming.png");
+  }
+  &[data-icon="input-keyboard"] {
+    background-image: url("src/icons/devices/input-keyboard.png");
+  }
+  &[data-icon="input-mouse"] {
+    background-image: url("src/icons/devices/input-mouse.png");
+  }
+  &[data-icon="input-tablet"] {
+    background-image: url("src/icons/devices/input-tablet.png");
+  }
+  &[data-icon="input-touchpad"] {
+    background-image: url("src/icons/devices/input-touchpad.png");
+  }
+  &[data-icon="media-flash"] {
+    background-image: url("src/icons/devices/media-flash.png");
+  }
+  &[data-icon="media-floppy"] {
+    background-image: url("src/icons/devices/media-floppy.png");
+  }
+  &[data-icon="media-optical"] {
+    background-image: url("src/icons/devices/media-optical.png");
+  }
+  &[data-icon="media-removable"] {
+    background-image: url("src/icons/devices/media-removable.png");
+  }
+  &[data-icon="media-tape"] {
+    background-image: url("src/icons/devices/media-tape.png");
+  }
+  &[data-icon="modem"] {
+    background-image: url("src/icons/devices/modem.png");
+  }
+  &[data-icon="multimedia-player"] {
+    background-image: url("src/icons/devices/multimedia-player.png");
+  }
+  &[data-icon="network-vpn"] {
+    background-image: url("src/icons/devices/network-vpn.png");
+  }
+  &[data-icon="network-wired"] {
+    background-image: url("src/icons/devices/network-wired.png");
+  }
+  &[data-icon="network-wireless"] {
+    background-image: url("src/icons/devices/network-wireless.png");
+  }
+  &[data-icon="pda"] {
+    background-image: url("src/icons/devices/pda.png");
+  }
+  &[data-icon="phone"] {
+    background-image: url("src/icons/devices/phone.png");
+  }
+  &[data-icon="printer-network"] {
+    background-image: url("src/icons/devices/printer-network.png");
+  }
+  &[data-icon="printer"] {
+    background-image: url("src/icons/devices/printer.png");
+  }
+  &[data-icon="scanner"] {
+    background-image: url("src/icons/devices/scanner.png");
+  }
+  &[data-icon="uninterruptible-power-supply"] {
+    background-image: url("src/icons/devices/uninterruptible-power-supply.png");
+  }
+  &[data-icon="video-display"] {
+    background-image: url("src/icons/devices/video-display.png");
+  }
+  &[data-icon="emblem-default"] {
+    background-image: url("src/icons/emblems/emblem-default.png");
+  }
+  &[data-icon="emblem-desktop"] {
+    background-image: url("src/icons/emblems/emblem-desktop.png");
+  }
+  &[data-icon="emblem-documents"] {
+    background-image: url("src/icons/emblems/emblem-documents.png");
+  }
+  &[data-icon="emblem-downloads"] {
+    background-image: url("src/icons/emblems/emblem-downloads.png");
+  }
+  &[data-icon="emblem-favorite"] {
+    background-image: url("src/icons/emblems/emblem-favorite.png");
+  }
+  &[data-icon="emblem-generic"] {
+    background-image: url("src/icons/emblems/emblem-generic.png");
+  }
+  &[data-icon="emblem-important"] {
+    background-image: url("src/icons/emblems/emblem-important.png");
+  }
+  &[data-icon="emblem-mail"] {
+    background-image: url("src/icons/emblems/emblem-mail.png");
+  }
+  &[data-icon="emblem-new"] {
+    background-image: url("src/icons/emblems/emblem-new.png");
+  }
+  &[data-icon="emblem-package"] {
+    background-image: url("src/icons/emblems/emblem-package.png");
+  }
+  &[data-icon="emblem-photos"] {
+    background-image: url("src/icons/emblems/emblem-photos.png");
+  }
+  &[data-icon="emblem-readonly"] {
+    background-image: url("src/icons/emblems/emblem-readonly.png");
+  }
+  &[data-icon="emblem-shared"] {
+    background-image: url("src/icons/emblems/emblem-shared.png");
+  }
+  &[data-icon="emblem-symbolic-link"] {
+    background-image: url("src/icons/emblems/emblem-symbolic-link.png");
+  }
+  &[data-icon="emblem-synchronizing"] {
+    background-image: url("src/icons/emblems/emblem-synchronizing.png");
+  }
+  &[data-icon="emblem-system"] {
+    background-image: url("src/icons/emblems/emblem-system.png");
+  }
+  &[data-icon="emblem-unreadable"] {
+    background-image: url("src/icons/emblems/emblem-unreadable.png");
+  }
+  &[data-icon="emblem-urgent"] {
+    background-image: url("src/icons/emblems/emblem-urgent.png");
+  }
+  &[data-icon="emblem-web"] {
+    background-image: url("src/icons/emblems/emblem-web.png");
+  }
+  &[data-icon="emote-love"] {
+    background-image: url("src/icons/emotes/emote-love.png");
+  }
+  &[data-icon="face-angel"] {
+    background-image: url("src/icons/emotes/face-angel.png");
+  }
+  &[data-icon="face-angry"] {
+    background-image: url("src/icons/emotes/face-angry.png");
+  }
+  &[data-icon="face-cool"] {
+    background-image: url("src/icons/emotes/face-cool.png");
+  }
+  &[data-icon="face-crying"] {
+    background-image: url("src/icons/emotes/face-crying.png");
+  }
+  &[data-icon="face-devilish"] {
+    background-image: url("src/icons/emotes/face-devilish.png");
+  }
+  &[data-icon="face-embarrassed"] {
+    background-image: url("src/icons/emotes/face-embarrassed.png");
+  }
+  &[data-icon="face-glasses"] {
+    background-image: url("src/icons/emotes/face-glasses.png");
+  }
+  &[data-icon="face-kiss"] {
+    background-image: url("src/icons/emotes/face-kiss.png");
+  }
+  &[data-icon="face-laugh"] {
+    background-image: url("src/icons/emotes/face-laugh.png");
+  }
+  &[data-icon="face-monkey"] {
+    background-image: url("src/icons/emotes/face-monkey.png");
+  }
+  &[data-icon="face-plain"] {
+    background-image: url("src/icons/emotes/face-plain.png");
+  }
+  &[data-icon="face-raspberry"] {
+    background-image: url("src/icons/emotes/face-raspberry.png");
+  }
+  &[data-icon="face-sad"] {
+    background-image: url("src/icons/emotes/face-sad.png");
+  }
+  &[data-icon="face-sick"] {
+    background-image: url("src/icons/emotes/face-sick.png");
+  }
+  &[data-icon="face-smile-big"] {
+    background-image: url("src/icons/emotes/face-smile-big.png");
+  }
+  &[data-icon="face-smile"] {
+    background-image: url("src/icons/emotes/face-smile.png");
+  }
+  &[data-icon="face-smirk"] {
+    background-image: url("src/icons/emotes/face-smirk.png");
+  }
+  &[data-icon="face-surprise"] {
+    background-image: url("src/icons/emotes/face-surprise.png");
+  }
+  &[data-icon="face-tired"] {
+    background-image: url("src/icons/emotes/face-tired.png");
+  }
+  &[data-icon="face-uncertain"] {
+    background-image: url("src/icons/emotes/face-uncertain.png");
+  }
+  &[data-icon="face-wink"] {
+    background-image: url("src/icons/emotes/face-wink.png");
+  }
+  &[data-icon="face-worried"] {
+    background-image: url("src/icons/emotes/face-worried.png");
+  }
+  &[data-icon="application-certificate"] {
+    background-image: url("src/icons/mimetypes/application-certificate.png");
+  }
+  &[data-icon="application-x-addon"] {
+    background-image: url("src/icons/mimetypes/application-x-addon.png");
+  }
+  &[data-icon="application-x-executable"] {
+    background-image: url("src/icons/mimetypes/application-x-executable.png");
+  }
+  &[data-icon="application-x-firmware"] {
+    background-image: url("src/icons/mimetypes/application-x-firmware.png");
+  }
+  &[data-icon="audio-x-generic"] {
+    background-image: url("src/icons/mimetypes/audio-x-generic.png");
+  }
+  &[data-icon="font-x-generic"] {
+    background-image: url("src/icons/mimetypes/font-x-generic.png");
+  }
+  &[data-icon="image-x-generic"] {
+    background-image: url("src/icons/mimetypes/image-x-generic.png");
+  }
+  &[data-icon="package-x-generic"] {
+    background-image: url("src/icons/mimetypes/package-x-generic.png");
+  }
+  &[data-icon="text-html"] {
+    background-image: url("src/icons/mimetypes/text-html.png");
+  }
+  &[data-icon="text-x-generic-template"] {
+    background-image: url("src/icons/mimetypes/text-x-generic-template.png");
+  }
+  &[data-icon="text-x-generic"] {
+    background-image: url("src/icons/mimetypes/text-x-generic.png");
+  }
+  &[data-icon="text-x-preview"] {
+    background-image: url("src/icons/mimetypes/text-x-preview.png");
+  }
+  &[data-icon="text-x-script"] {
+    background-image: url("src/icons/mimetypes/text-x-script.png");
+  }
+  &[data-icon="video-x-generic"] {
+    background-image: url("src/icons/mimetypes/video-x-generic.png");
+  }
+  &[data-icon="x-office-address-book"] {
+    background-image: url("src/icons/mimetypes/x-office-address-book.png");
+  }
+  &[data-icon="x-office-calendar"] {
+    background-image: url("src/icons/mimetypes/x-office-calendar.png");
+  }
+  &[data-icon="x-office-document-template"] {
+    background-image: url("src/icons/mimetypes/x-office-document-template.png");
+  }
+  &[data-icon="x-office-document"] {
+    background-image: url("src/icons/mimetypes/x-office-document.png");
+  }
+  &[data-icon="x-office-drawing-template"] {
+    background-image: url("src/icons/mimetypes/x-office-drawing-template.png");
+  }
+  &[data-icon="x-office-drawing"] {
+    background-image: url("src/icons/mimetypes/x-office-drawing.png");
+  }
+  &[data-icon="x-office-presentation-template"] {
+    background-image: url("src/icons/mimetypes/x-office-presentation-template.png");
+  }
+  &[data-icon="x-office-presentation"] {
+    background-image: url("src/icons/mimetypes/x-office-presentation.png");
+  }
+  &[data-icon="x-office-spreadsheet-template"] {
+    background-image: url("src/icons/mimetypes/x-office-spreadsheet-template.png");
+  }
+  &[data-icon="x-office-spreadsheet"] {
+    background-image: url("src/icons/mimetypes/x-office-spreadsheet.png");
+  }
+  &[data-icon="x-package-repository"] {
+    background-image: url("src/icons/mimetypes/x-package-repository.png");
+  }
+  &[data-icon="folder-documents"] {
+    background-image: url("src/icons/places/folder-documents.png");
+  }
+  &[data-icon="folder-download"] {
+    background-image: url("src/icons/places/folder-download.png");
+  }
+  &[data-icon="folder-music"] {
+    background-image: url("src/icons/places/folder-music.png");
+  }
+  &[data-icon="folder-pictures"] {
+    background-image: url("src/icons/places/folder-pictures.png");
+  }
+  &[data-icon="folder-publicshare"] {
+    background-image: url("src/icons/places/folder-publicshare.png");
+  }
+  &[data-icon="folder-remote"] {
+    background-image: url("src/icons/places/folder-remote.png");
+  }
+  &[data-icon="folder-saved-search"] {
+    background-image: url("src/icons/places/folder-saved-search.png");
+  }
+  &[data-icon="folder-templates"] {
+    background-image: url("src/icons/places/folder-templates.png");
+  }
+  &[data-icon="folder-videos"] {
+    background-image: url("src/icons/places/folder-videos.png");
+  }
+  &[data-icon="folder"] {
+    background-image: url("src/icons/places/folder.png");
+  }
+  &[data-icon="network-server"] {
+    background-image: url("src/icons/places/network-server.png");
+  }
+  &[data-icon="network-workgroup"] {
+    background-image: url("src/icons/places/network-workgroup.png");
+  }
+  &[data-icon="start-here"] {
+    background-image: url("src/icons/places/start-here.png");
+  }
+  &[data-icon="user-bookmarks"] {
+    background-image: url("src/icons/places/user-bookmarks.png");
+  }
+  &[data-icon="user-desktop"] {
+    background-image: url("src/icons/places/user-desktop.png");
+  }
+  &[data-icon="user-home"] {
+    background-image: url("src/icons/places/user-home.png");
+  }
+  &[data-icon="user-trash"] {
+    background-image: url("src/icons/places/user-trash.png");
+  }
+  &[data-icon="appointment-missed"] {
+    background-image: url("src/icons/status/appointment-missed.png");
+  }
+  &[data-icon="appointment-soon"] {
+    background-image: url("src/icons/status/appointment-soon.png");
+  }
+  &[data-icon="audio-volume-high"] {
+    background-image: url("src/icons/status/audio-volume-high.png");
+  }
+  &[data-icon="audio-volume-low"] {
+    background-image: url("src/icons/status/audio-volume-low.png");
+  }
+  &[data-icon="audio-volume-medium"] {
+    background-image: url("src/icons/status/audio-volume-medium.png");
+  }
+  &[data-icon="audio-volume-muted"] {
+    background-image: url("src/icons/status/audio-volume-muted.png");
+  }
+  &[data-icon="avatar-default"] {
+    background-image: url("src/icons/status/avatar-default.png");
+  }
+  &[data-icon="battery-caution-charging"] {
+    background-image: url("src/icons/status/battery-caution-charging.png");
+  }
+  &[data-icon="battery-caution"] {
+    background-image: url("src/icons/status/battery-caution.png");
+  }
+  &[data-icon="battery-empty"] {
+    background-image: url("src/icons/status/battery-empty.png");
+  }
+  &[data-icon="battery-full-charged"] {
+    background-image: url("src/icons/status/battery-full-charged.png");
+  }
+  &[data-icon="battery-full-charging"] {
+    background-image: url("src/icons/status/battery-full-charging.png");
+  }
+  &[data-icon="battery-full"] {
+    background-image: url("src/icons/status/battery-full.png");
+  }
+  &[data-icon="battery-good-charging"] {
+    background-image: url("src/icons/status/battery-good-charging.png");
+  }
+  &[data-icon="battery-good"] {
+    background-image: url("src/icons/status/battery-good.png");
+  }
+  &[data-icon="battery-low-charging"] {
+    background-image: url("src/icons/status/battery-low-charging.png");
+  }
+  &[data-icon="battery-low"] {
+    background-image: url("src/icons/status/battery-low.png");
+  }
+  &[data-icon="battery-missing"] {
+    background-image: url("src/icons/status/battery-missing.png");
+  }
+  &[data-icon="changes-allow"] {
+    background-image: url("src/icons/status/changes-allow.png");
+  }
+  &[data-icon="changes-prevent"] {
+    background-image: url("src/icons/status/changes-prevent.png");
+  }
+  &[data-icon="computer-fail"] {
+    background-image: url("src/icons/status/computer-fail.png");
+  }
+  &[data-icon="dialog-error"] {
+    background-image: url("src/icons/status/dialog-error.png");
+  }
+  &[data-icon="dialog-information"] {
+    background-image: url("src/icons/status/dialog-information.png");
+  }
+  &[data-icon="dialog-password"] {
+    background-image: url("src/icons/status/dialog-password.png");
+  }
+  &[data-icon="dialog-question"] {
+    background-image: url("src/icons/status/dialog-question.png");
+  }
+  &[data-icon="dialog-warning"] {
+    background-image: url("src/icons/status/dialog-warning.png");
+  }
+  &[data-icon="folder-drag-accept"] {
+    background-image: url("src/icons/status/folder-drag-accept.png");
+  }
+  &[data-icon="folder-open"] {
+    background-image: url("src/icons/status/folder-open.png");
+  }
+  &[data-icon="folder-visiting"] {
+    background-image: url("src/icons/status/folder-visiting.png");
+  }
+  &[data-icon="image-loading"] {
+    background-image: url("src/icons/status/image-loading.png");
+  }
+  &[data-icon="image-missing"] {
+    background-image: url("src/icons/status/image-missing.png");
+  }
+  &[data-icon="mail-attachment"] {
+    background-image: url("src/icons/status/mail-attachment.png");
+  }
+  &[data-icon="mail-read"] {
+    background-image: url("src/icons/status/mail-read.png");
+  }
+  &[data-icon="mail-replied"] {
+    background-image: url("src/icons/status/mail-replied.png");
+  }
+  &[data-icon="mail-unread"] {
+    background-image: url("src/icons/status/mail-unread.png");
+  }
+  &[data-icon="media-playlist-repeat"] {
+    background-image: url("src/icons/status/media-playlist-repeat.png");
+  }
+  &[data-icon="media-playlist-shuffle"] {
+    background-image: url("src/icons/status/media-playlist-shuffle.png");
+  }
+  &[data-icon="microphone-sensitivity-high"] {
+    background-image: url("src/icons/status/microphone-sensitivity-high.png");
+  }
+  &[data-icon="microphone-sensitivity-low"] {
+    background-image: url("src/icons/status/microphone-sensitivity-low.png");
+  }
+  &[data-icon="microphone-sensitivity-medium"] {
+    background-image: url("src/icons/status/microphone-sensitivity-medium.png");
+  }
+  &[data-icon="microphone-sensitivity-muted"] {
+    background-image: url("src/icons/status/microphone-sensitivity-muted.png");
+  }
+  &[data-icon="network-cellular-connected"] {
+    background-image: url("src/icons/status/network-cellular-connected.png");
+  }
+  &[data-icon="network-error"] {
+    background-image: url("src/icons/status/network-error.png");
+  }
+  &[data-icon="network-idle"] {
+    background-image: url("src/icons/status/network-idle.png");
+  }
+  &[data-icon="network-offline"] {
+    background-image: url("src/icons/status/network-offline.png");
+  }
+  &[data-icon="network-receive"] {
+    background-image: url("src/icons/status/network-receive.png");
+  }
+  &[data-icon="network-transmit-receive"] {
+    background-image: url("src/icons/status/network-transmit-receive.png");
+  }
+  &[data-icon="network-transmit"] {
+    background-image: url("src/icons/status/network-transmit.png");
+  }
+  &[data-icon="network-wired-disconnected"] {
+    background-image: url("src/icons/status/network-wired-disconnected.png");
+  }
+  &[data-icon="non-starred"] {
+    background-image: url("src/icons/status/non-starred.png");
+  }
+  &[data-icon="printer-error"] {
+    background-image: url("src/icons/status/printer-error.png");
+  }
+  &[data-icon="printer-printing"] {
+    background-image: url("src/icons/status/printer-printing.png");
+  }
+  &[data-icon="security-high"] {
+    background-image: url("src/icons/status/security-high.png");
+  }
+  &[data-icon="security-low"] {
+    background-image: url("src/icons/status/security-low.png");
+  }
+  &[data-icon="security-medium"] {
+    background-image: url("src/icons/status/security-medium.png");
+  }
+  &[data-icon="semi-starred-rtl"] {
+    background-image: url("src/icons/status/semi-starred-rtl.png");
+  }
+  &[data-icon="semi-starred"] {
+    background-image: url("src/icons/status/semi-starred.png");
+  }
+  &[data-icon="software-update-available"] {
+    background-image: url("src/icons/status/software-update-available.png");
+  }
+  &[data-icon="software-update-urgent"] {
+    background-image: url("src/icons/status/software-update-urgent.png");
+  }
+  &[data-icon="starred"] {
+    background-image: url("src/icons/status/starred.png");
+  }
+  &[data-icon="task-due"] {
+    background-image: url("src/icons/status/task-due.png");
+  }
+  &[data-icon="task-past-due"] {
+    background-image: url("src/icons/status/task-past-due.png");
+  }
+  &[data-icon="trophy-bronze"] {
+    background-image: url("src/icons/status/trophy-bronze.png");
+  }
+  &[data-icon="trophy-gold"] {
+    background-image: url("src/icons/status/trophy-gold.png");
+  }
+  &[data-icon="trophy-silver"] {
+    background-image: url("src/icons/status/trophy-silver.png");
+  }
+  &[data-icon="user-available"] {
+    background-image: url("src/icons/status/user-available.png");
+  }
+  &[data-icon="user-away"] {
+    background-image: url("src/icons/status/user-away.png");
+  }
+  &[data-icon="user-busy"] {
+    background-image: url("src/icons/status/user-busy.png");
+  }
+  &[data-icon="user-idle"] {
+    background-image: url("src/icons/status/user-idle.png");
+  }
+  &[data-icon="user-invisible"] {
+    background-image: url("src/icons/status/user-invisible.png");
+  }
+  &[data-icon="user-offline"] {
+    background-image: url("src/icons/status/user-offline.png");
+  }
+  &[data-icon="user-trash-full"] {
+    background-image: url("src/icons/status/user-trash-full.png");
+  }
+  &[data-icon="weather-clear-night"] {
+    background-image: url("src/icons/status/weather-clear-night.png");
+  }
+  &[data-icon="weather-clear"] {
+    background-image: url("src/icons/status/weather-clear.png");
+  }
+  &[data-icon="weather-few-clouds-night"] {
+    background-image: url("src/icons/status/weather-few-clouds-night.png");
+  }
+  &[data-icon="weather-few-clouds"] {
+    background-image: url("src/icons/status/weather-few-clouds.png");
+  }
+  &[data-icon="weather-fog"] {
+    background-image: url("src/icons/status/weather-fog.png");
+  }
+  &[data-icon="weather-overcast"] {
+    background-image: url("src/icons/status/weather-overcast.png");
+  }
+  &[data-icon="weather-severe-alert"] {
+    background-image: url("src/icons/status/weather-severe-alert.png");
+  }
+  &[data-icon="weather-showers-scattered"] {
+    background-image: url("src/icons/status/weather-showers-scattered.png");
+  }
+  &[data-icon="weather-showers"] {
+    background-image: url("src/icons/status/weather-showers.png");
+  }
+  &[data-icon="weather-snow"] {
+    background-image: url("src/icons/status/weather-snow.png");
+  }
+  &[data-icon="weather-storm"] {
+    background-image: url("src/icons/status/weather-storm.png");
+  }
+}
