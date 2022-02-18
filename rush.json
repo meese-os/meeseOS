@@ -469,10 +469,6 @@
       "packageName": "@aaronmeese.com/common",
       "projectFolder": "backend/common"
     },
-    /*{
-      "packageName": "@aaronmeese.com/desktop-sounds",
-      "projectFolder": "frontend/desktop-sounds"
-    },*/
     {
       "packageName": "@aaronmeese.com/dialogs",
       "projectFolder": "frontend/dialogs"
@@ -504,6 +500,10 @@
     {
       "packageName": "@aaronmeese.com/server",
       "projectFolder": "backend/server"
+    },
+    {
+      "packageName": "@aaronmeese.com/sounds",
+      "projectFolder": "frontend/sounds"
     },
     {
       "packageName": "@aaronmeese.com/standard-theme",

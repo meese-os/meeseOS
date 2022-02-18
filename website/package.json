@@ -58,7 +58,7 @@
     "@aaronmeese.com/terminal": "workspace:*",
     "@aaronmeese.com/textpad": "workspace:*",
     "@aaronmeese.com/widgets": "workspace:*",
-    "@osjs/freedesktop-sounds": "^3.0.3",
+    "@aaronmeese.com/sounds": "workspace:*",
     "@osjs/gnome-icons": "^4.0.5",
     "dotenv": "^16.0.0",
     "hyperapp": "^1.2.10",
