@@ -45,12 +45,11 @@ function initElement(element) {
 }
 
 function render(element, image, prev) {
-	// TODO: Handle resizing a little more elegantly
 	const appWindow = document.getElementsByClassName("Window_old-website")[0];
 	if (!appWindow) return;
 
-	// TODO: Cap width accurately according to container size
-	const newWidth = parseInt(appWindow.clientWidth * 0.9);
+	const parentElement = window.getComputedStyle(element.parentNode, null);
+	const newWidth = parseInt(parentElement.width);
 	if (element.hasAttribute("data-lettercrap-aspect-ratio")) {
 		const aspect = parseFloat(element.getAttribute("data-lettercrap-aspect-ratio"));
 		element.style.height = newWidth * aspect + "px";
