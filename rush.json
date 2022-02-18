@@ -493,10 +493,10 @@
       "packageName": "@aaronmeese.com/gui",
       "projectFolder": "frontend/gui"
     },
-    /*{
+    {
       "packageName": "@aaronmeese.com/old-site",
       "projectFolder": "apps/old-site"
-    },*/
+    },
     {
       "packageName": "@aaronmeese.com/panels",
       "projectFolder": "frontend/panels"

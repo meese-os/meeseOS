@@ -1,0 +1,12 @@
+{
+  "type": "application",
+	"name": "old-website",
+	"title": "Old Website",
+  "description": "My previous website design",
+  "category": null,
+  "server": "server.js",
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

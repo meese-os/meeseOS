@@ -52,6 +52,7 @@
     "@aaronmeese.com/dialogs": "workspace:*",
     "@aaronmeese.com/filemanager": "workspace:*",
     "@aaronmeese.com/gui": "workspace:*",
+    "@aaronmeese.com/old-site": "workspace:*",
     "@aaronmeese.com/panels": "workspace:*",
     "@aaronmeese.com/server": "workspace:*",
     "@aaronmeese.com/standard-theme": "workspace:*",
@@ -83,10 +84,7 @@
   },
   "babel": {
     "presets": [
-      [
-        "@babel/preset-env",
-        {}
-      ]
+      "@babel/preset-env"
     ],
     "plugins": [
       "@babel/plugin-transform-runtime"
