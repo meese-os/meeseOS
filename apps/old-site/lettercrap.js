@@ -1,27 +1,11 @@
 // Customized from https://github.com/ajmeese7/lettercrap
 export function createLettercrap() {
-	// https://davidwalsh.name/document-readystate
-	if (document.readyState === "complete") {
-		loadLettercrap();
-	} else {
-		// The events fire strangely with OS.js, so this hacky workaround is needed
-		var interval = setInterval(function() {
-			if (document.readyState === "complete") {
-				clearInterval(interval);
-				loadLettercrap();
-			}
-		}, 50);
-	}
+	const lettercrapElement = document.querySelector(".lettercrap");
+	const text = lettercrapElement.getAttribute("data-lettercrap-text");
+	const imageURL = createImageURL(text);
+	lettercrapElement.setAttribute("data-letter-crap", imageURL);
 
-	// TODO: Test if I can get rid of the hack now
-	function loadLettercrap() {
-		const lettercrapElement = document.querySelector(".lettercrap");
-		const text = lettercrapElement.getAttribute("data-lettercrap-text");
-		const imageURL = createImageURL(text);
-		lettercrapElement.setAttribute("data-letter-crap", imageURL);
-
-		initElement(lettercrapElement);
-	}
+	initElement(lettercrapElement);
 }
 
 const charWidth = 6;
