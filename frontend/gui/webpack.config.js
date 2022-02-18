@@ -21,7 +21,7 @@ module.exports = {
 		path.resolve(__dirname, "src/umd.js")
 	],
 	output: {
-		library: "osjsGui",
+		library: "meeseOSGui",
 		libraryTarget: "umd",
 		umdNamedDefine: true,
 		sourceMapFilename: "[file].map",

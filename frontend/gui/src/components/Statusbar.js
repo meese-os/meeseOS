@@ -39,5 +39,5 @@ import {Element} from './Element';
  */
 export const Statusbar = (props, children) =>
   h(Element, Object.assign({}, props.box || {}, {
-    class: ['osjs-gui-statusbar', props.class]
+    class: ['meeseOS-gui-statusbar', props.class]
   }), children);

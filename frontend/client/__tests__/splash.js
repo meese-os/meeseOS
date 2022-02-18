@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Splash from '../src/splash.js';
 
 describe('Splash', () => {

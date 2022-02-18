@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-field {
+.meeseOS-gui-field {
   position: relative;
 
   select,
@@ -54,7 +54,7 @@
   }
 }
 
-.osjs-gui-textarea-field {
+.meeseOS-gui-textarea-field {
   flex-direction: column;
 
   & > textarea {
@@ -62,7 +62,7 @@
   }
 }
 
-.osjs-gui-select-field {
+.meeseOS-gui-select-field {
   & > div {
     position: relative;
     flex-basis: 100%;
@@ -86,7 +86,7 @@
   }
 }
 
-.osjs-gui-toggle-field {
+.meeseOS-gui-toggle-field {
   & > label {
     position: relative;
     user-select: none !important;
@@ -109,7 +109,7 @@
       }
     }
 
-    & > .osjs-toggle-input {
+    & > .meeseOS-toggle-input {
       position: relative;
       display: inline-block;
       width: 1em;
@@ -139,7 +139,7 @@
       }
     }
 
-    & > .osjs-toggle-label {
+    & > .meeseOS-toggle-label {
       display: block;
       flex-grow: 1;
       position: relative;
@@ -148,7 +148,7 @@
   }
 }
 
-.osjs-gui-field-label {
+.meeseOS-gui-field-label {
   $half-margin: calc($base-margin / 2);
 
   display: flex;
@@ -159,11 +159,11 @@
     display: block;
   }
 
-  & > .osjs-gui {
+  & > .meeseOS-gui {
     margin: 0;
   }
 
-  &.osjs-gui-field-label-on-top {
+  &.meeseOS-gui-field-label-on-top {
     flex-direction: column;
 
     & > label {
@@ -171,7 +171,7 @@
     }
   }
 
-  &.osjs-gui-field-label-on-bottom {
+  &.meeseOS-gui-field-label-on-bottom {
     flex-direction: column-reverse;
 
     & > label {
@@ -179,7 +179,7 @@
     }
   }
 
-  &.osjs-gui-field-label-on-left {
+  &.meeseOS-gui-field-label-on-left {
     flex-direction: row;
     align-items: center;
 
@@ -187,7 +187,7 @@
       margin-right: $half-margin;
     }
 
-    & > .osjs-gui {
+    & > .meeseOS-gui {
       flex: 1 1;
     }
   }

@@ -39,7 +39,7 @@ const chokidar = require('chokidar');
 const createFileIter = (core, realRoot, file) => {
   const filename = path.basename(file);
   const realPath = path.join(realRoot, filename);
-  const {mime} = core.make('osjs/vfs');
+  const {mime} = core.make('meeseOS/vfs');
 
   const createStat = stat => ({
     isDirectory: stat.isDirectory(),

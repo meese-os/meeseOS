@@ -14,7 +14,7 @@ describe('draggable', () => {
 
     expect(el.getAttribute('draggable')).toBe('true');
     expect(el.getAttribute('aria-grabbed')).toBe('false');
-    expect(el.classList.contains('osjs__draggable')).toBe(true);
+    expect(el.classList.contains('meeseOS__draggable')).toBe(true);
     expect(typeof dragger.destroy).toBe('function');
   });
 
@@ -53,7 +53,7 @@ describe('droppable', () => {
       ondragleave
     });
 
-    expect(el.classList.contains('osjs__droppable')).toBe(true);
+    expect(el.classList.contains('meeseOS__droppable')).toBe(true);
     expect(el.getAttribute('aria-dropeffect')).toBe('move');
     expect(typeof dropper.destroy).toBe('function');
   });
@@ -70,7 +70,7 @@ describe('droppable', () => {
     ev.dataTransfer = {};
     el.dispatchEvent(ev);
     expect(ondragover).toBeCalled();
-    expect(el.classList.contains('osjs__drop')).toBe(true);
+    expect(el.classList.contains('meeseOS__drop')).toBe(true);
   });
 
   test('dragleave', () => {

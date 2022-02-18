@@ -85,7 +85,7 @@ class Packages {
    * Initializes packages
    */
   init() {
-    this.core.on('osjs/application:socket:message', (ws, ...params) => {
+    this.core.on('meeseOS/application:socket:message', (ws, ...params) => {
       this.handleMessage(ws, params);
     });
 
@@ -150,7 +150,7 @@ class Packages {
 
     this.hotReloading[pkg.metadata.name] = setTimeout(() => {
       logger.debug('Sending reload signal for', pkg.metadata.name);
-      this.core.broadcast('osjs/packages:package:changed', [pkg.metadata.name]);
+      this.core.broadcast('meeseOS/packages:package:changed', [pkg.metadata.name]);
     }, 500);
   }
 
@@ -239,7 +239,7 @@ class Packages {
       const {handler} = this.packages[found];
       if (handler && typeof handler.onmessage === 'function') {
         const respond = (...respondParams) => ws.send(JSON.stringify({
-          name: 'osjs/application:socket:message',
+          name: 'meeseOS/application:socket:message',
           params: [{
             pid,
             args: respondParams

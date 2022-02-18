@@ -28,21 +28,21 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-toolbar {
+.meeseOS-gui-toolbar {
   display: flex;
 
-  & > .osjs-gui {
+  & > .meeseOS-gui {
     flex-shrink: 0;
   }
 
-  &.osjs-gui-vertical {
-    & > .osjs-gui:not(:last-child) {
+  &.meeseOS-gui-vertical {
+    & > .meeseOS-gui:not(:last-child) {
       margin-right: $base-margin;
     }
   }
 
-  &.osjs-gui-horizontal {
-    & > .osjs-gui:not(:last-child) {
+  &.meeseOS-gui-horizontal {
+    & > .meeseOS-gui:not(:last-child) {
       margin-bottom: $base-margin;
     }
   }

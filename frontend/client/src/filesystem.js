@@ -179,7 +179,6 @@ export default class Filesystem extends EventEmitter {
    */
   addMountpoint(props, automount = true) {
     const mount = this.createMountpoint(props);
-
     this.mounts.push(mount);
 
     if (automount) {
@@ -191,16 +190,16 @@ export default class Filesystem extends EventEmitter {
 
   /**
    * Mount given mountpoint
-   * @param {string|FilesystemMountpoint} m Mountpoint name or object
+   * @param {string|FilesystemMountpoint} mountpoint Mountpoint name or object
    * @throws {Error} On invalid name or if already mounted
    * @return {Promise<boolean>}
    */
-  mount(m) {
-    if (typeof m === 'string') {
-      return this._mountAction(m, false);
+  mount(mountpoint) {
+    if (typeof mountpoint === 'string') {
+      return this._mountAction(mountpoint, false);
     }
 
-    return this.addMountpoint(m);
+    return this.addMountpoint(mountpoint);
   }
 
   /**
@@ -231,7 +230,7 @@ export default class Filesystem extends EventEmitter {
           mountpoint.mounted = !unmount;
 
           this.emit(eventName, mountpoint);
-          this.core.emit('osjs/fs:' + coreEventName);
+          this.core.emit('meeseOS/fs:' + coreEventName);
         }
 
         return result;
@@ -280,7 +279,7 @@ export default class Filesystem extends EventEmitter {
    * @return {*}
    */
   _request(method, ...args) {
-    const ev = `osjs/vfs:${method}`;
+    const ev = `meeseOS/vfs:${method}`;
 
     const done = (error) => {
       this.core.emit(`${ev}:done`, ...args);
@@ -321,6 +320,7 @@ export default class Filesystem extends EventEmitter {
       if (!sameAdapter) {
         return VFS.readfile(srcMount._adapter, srcMount)(src)
           .then(ab => VFS.writefile(destMount._adapter, destMount)(dest, ab))
+          // TODO
           .then(result => {
             return method === 'rename'
               ? VFS.unlink(srcMount._adapter, srcMount)(src).then(() => result)
@@ -392,7 +392,7 @@ export default class Filesystem extends EventEmitter {
    */
   getMounts(all = false) {
     const user = this.core.getUser();
-    const theme = this.core.make('osjs/theme');
+    const theme = this.core.make('meeseOS/theme');
     const icon = str => str
       ? (typeof str === 'string' ? str : theme.icon(str.name))
       : theme.icon('drive-harddisk');

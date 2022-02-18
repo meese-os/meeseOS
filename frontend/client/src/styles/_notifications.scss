@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-.osjs-notifications {
+.meeseOS-notifications {
   position: absolute;
   top: 0;
   right: 0;
@@ -39,7 +39,7 @@
   overflow: visible;
 }
 
-.osjs-notification {
+.meeseOS-notification {
   padding: $base-margin;
   box-sizing: border-box;
   pointer-events: all;
@@ -47,7 +47,7 @@
   margin-bottom: $base-margin;
 }
 
-.osjs-notification-wrapper {
+.meeseOS-notification-wrapper {
   background-size: 3em;
   background-repeat: no-repeat;
 

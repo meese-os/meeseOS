@@ -21,7 +21,7 @@ module.exports = {
 		path.resolve(__dirname, "index.js"),
 	],
 	output: {
-		library: "osjsDialogs",
+		library: "meeseOSDialogs",
 		libraryTarget: "umd",
 		umdNamedDefine: true,
 		sourceMapFilename: "[file].map",
@@ -59,7 +59,7 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!@osjs)/,
+				exclude: /node_modules\/(?!@meeseOS)/,
 				use: {
 					loader: "babel-loader"
 				}

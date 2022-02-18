@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Application from '../src/application.js';
 import {BasicApplication} from '../src/basic-application.js';
 

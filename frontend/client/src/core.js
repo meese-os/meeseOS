@@ -81,7 +81,7 @@ export default class Core extends CoreBase {
    */
   constructor(config = {}, options = {}) {
     options = {
-      classNames: ['osjs-root'],
+      classNames: ['meeseOS-root'],
       root: document.body,
       ...options || {}
     };
@@ -89,7 +89,7 @@ export default class Core extends CoreBase {
     super(defaultConfiguration, config, options);
 
     const $contents = document.createElement('div');
-    $contents.className = 'osjs-contents';
+    $contents.className = 'meeseOS-contents';
 
     this.logger = logger;
 
@@ -175,7 +175,7 @@ export default class Core extends CoreBase {
       return Promise.resolve();
     }
 
-    this.emit('osjs/core:destroy');
+    this.emit('meeseOS/core:destroy');
 
     this.ping = clearInterval(this.ping);
 
@@ -220,22 +220,22 @@ export default class Core extends CoreBase {
 
     this.$root.appendChild(this.$contents);
     this._attachEvents();
-    this.emit('osjs/core:boot');
+    this.emit('meeseOS/core:boot');
 
     return super.boot()
       .then(() => {
-        this.emit('osjs/core:booted');
+        this.emit('meeseOS/core:booted');
 
-        if (this.has('osjs/auth')) {
-          return this.make('osjs/auth').show(user => {
+        if (this.has('meeseOS/auth')) {
+          return this.make('meeseOS/auth').show(user => {
             const defaultData = this.config('auth.defaultUserData');
             this.user = {
               ...defaultData,
               ...user
             };
 
-            if (this.has('osjs/settings')) {
-              this.make('osjs/settings').load()
+            if (this.has('meeseOS/settings')) {
+              this.make('meeseOS/settings').load()
                 .then(() => done())
                 .catch(() => done());
             } else {
@@ -268,7 +268,7 @@ export default class Core extends CoreBase {
     });
 
     const done = (err) => {
-      this.emit('osjs/core:started');
+      this.emit('meeseOS/core:started');
 
       if (err) {
         logger.warn('Error while starting', err);
@@ -285,7 +285,7 @@ export default class Core extends CoreBase {
 
     console.group('Core::start()');
 
-    this.emit('osjs/core:start');
+    this.emit('meeseOS/core:start');
 
     this._createListeners();
 
@@ -309,20 +309,20 @@ export default class Core extends CoreBase {
    */
   _attachEvents() {
     // Attaches sounds for certain events
-    this.on('osjs/core:started', () => {
-      if (this.has('osjs/sounds')) {
-        this.make('osjs/sounds').play('service-login');
+    this.on('meeseOS/core:started', () => {
+      if (this.has('meeseOS/sounds')) {
+        this.make('meeseOS/sounds').play('service-login');
       }
     });
 
-    this.on('osjs/core:destroy', () => {
-      if (this.has('osjs/sounds')) {
-        this.make('osjs/sounds').play('service-logout');
+    this.on('meeseOS/core:destroy', () => {
+      if (this.has('meeseOS/sounds')) {
+        this.make('meeseOS/sounds').play('service-logout');
       }
     });
 
     // Forwards messages to an application from internal websocket
-    this.on('osjs/application:socket:message', ({pid, args}) => {
+    this.on('meeseOS/application:socket:message', ({pid, args}) => {
       const found = Application.getApplications()
         .find(proc => proc && proc.pid === pid);
 
@@ -332,7 +332,7 @@ export default class Core extends CoreBase {
     });
 
     // Sets up a server ping
-    this.on('osjs/core:connected', config => {
+    this.on('meeseOS/core:connected', config => {
       const enabled = this.config('http.ping');
 
       if (enabled) {
@@ -381,18 +381,18 @@ export default class Core extends CoreBase {
     });
 
     this.ws.on('connected', (ev, reconnected) => {
-      this.emit('osjs/core:connect', ev, reconnected);
+      this.emit('meeseOS/core:connect', ev, reconnected);
     });
 
     this.ws.once('failed', ev => {
       if (!wasConnected) {
         cb(new Error('Connection closed'));
-        this.emit('osjs/core:connection-failed', ev);
+        this.emit('meeseOS/core:connection-failed', ev);
       }
     });
 
     this.ws.on('disconnected', ev => {
-      this.emit('osjs/core:disconnect', ev);
+      this.emit('meeseOS/core:disconnect', ev);
     });
 
     this.ws.on('message', ev => {
@@ -430,7 +430,7 @@ export default class Core extends CoreBase {
 
     window.addEventListener('message', ev => {
       const message = ev.data || {};
-      if (message && message.name === 'osjs/iframe:message') {
+      if (message && message.name === 'meeseOS/iframe:message') {
         handle(...(message.params || []));
       }
     });
@@ -469,8 +469,8 @@ export default class Core extends CoreBase {
   request(url, options = {}, type = null, force = false) {
     if (this.config('standalone') && !force) {
       return Promise.reject(new Error(
-				"Cannot make requests in standalone mode."
-			));
+        "Cannot make requests in standalone mode."
+      ));
     }
 
     if (!url.match(/^((http|ws|ftp)s?:)/i)) {
@@ -482,13 +482,16 @@ export default class Core extends CoreBase {
       };
     }
 
+    // TODO: Fix this:
+		// Error: An error occured while performing a request: SyntaxError: Unexpected end of JSON input
+		// for terminal
     return fetch(url, options, type)
       .catch(error => {
         logger.warn(error);
 
         throw new Error(
-					`An error occured while performing a request: ${error}`
-				);
+          `An error occured while performing a request: ${error}`
+        );
       });
   }
 
@@ -504,7 +507,7 @@ export default class Core extends CoreBase {
   run(name, args = {}, options = {}) {
     logger.debug('Core::run()', name, args, options);
 
-    return this.make('osjs/packages').launch(name, args, options);
+    return this.make('meeseOS/packages').launch(name, args, options);
   }
 
   /**
@@ -514,13 +517,13 @@ export default class Core extends CoreBase {
    * @return {Boolean|Application}
    */
   open(file, options = {}) {
-    if (file.mime === 'osjs/application') {
+    if (file.mime === 'meeseOS/application') {
       return this.run(file.path.split('/').pop());
     }
 
     const run = app => this.run(app, {file}, options);
 
-    const compatible = this.make('osjs/packages')
+    const compatible = this.make('meeseOS/packages')
       .getCompatiblePackages(file.mime);
 
     if (compatible.length > 0) {
@@ -547,13 +550,13 @@ export default class Core extends CoreBase {
    * @private
    */
   _openApplicationDialog(options, compatible, file, run) {
-    const useDefault = options.useDefault && this.has('osjs/settings');
-    const setDefault = name => this.make('osjs/settings')
-      .set('osjs/default-application', file.mime, name)
+    const useDefault = options.useDefault && this.has('meeseOS/settings');
+    const setDefault = name => this.make('meeseOS/settings')
+      .set('meeseOS/default-application', file.mime, name)
       .save();
 
     const value = useDefault
-      ? this.make('osjs/settings').get('osjs/default-application', file.mime)
+      ? this.make('meeseOS/settings').get('meeseOS/default-application', file.mime)
       : null;
 
     const type = useDefault
@@ -570,7 +573,7 @@ export default class Core extends CoreBase {
     if (value && !options.forceDialog) {
       run(value);
     } else {
-      this.make('osjs/dialog', type, args, (btn, choice) => {
+      this.make('meeseOS/dialog', type, args, (btn, choice) => {
         if (btn === 'ok') {
           if (type === 'defaultApplication') {
             if (useDefault) {
@@ -594,7 +597,7 @@ export default class Core extends CoreBase {
    * @return {Core} this
    */
   off(name, callback = null, force = false) {
-    if (name.match(/^osjs\//) && typeof callback !== 'function') {
+    if (name.match(/^meeseOS\//) && typeof callback !== 'function') {
       throw new TypeError('The callback must be a function');
     }
 
@@ -663,7 +666,7 @@ export default class Core extends CoreBase {
    * @param {Function} callback Middleware function to add
    */
   middleware(group, callback) {
-    return this.make('osjs/middleware').add(group, callback);
+    return this.make('meeseOS/middleware').add(group, callback);
   }
 
 }

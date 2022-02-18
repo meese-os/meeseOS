@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Middleware from '../src/middleware.js';
 
 describe('Middleware', () => {
@@ -60,9 +60,9 @@ describe('Middleware', () => {
 
   test('#core middleware', () => {
     const callback = () => {};
-    core.middleware('osjs/service', callback);
+    core.middleware('meeseOS/service', callback);
 
-    const middleware = core.make('osjs/middleware').get('osjs/service');
+    const middleware = core.make('meeseOS/middleware').get('meeseOS/service');
 
     expect(middleware[0]).toEqual(callback);
   });

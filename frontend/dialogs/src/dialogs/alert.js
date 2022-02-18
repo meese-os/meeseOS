@@ -79,7 +79,7 @@ export default class AlertDialog extends Dialog {
   render(options) {
     super.render(options, ($content) => {
       const children = [
-        h('div', {class: 'osjs-dialog-message'}, String(this.args.message))
+        h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message))
       ];
 
       if (this.args.type === 'error') {

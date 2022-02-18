@@ -72,12 +72,12 @@ export const Element = (props, children = []) => {
     : [props.class];
 
   const classNames = [
-    'osjs-gui',
+    'meeseOS-gui',
     ...givenClassNames
   ];
 
   if (props.orientation) {
-    classNames.push('osjs-gui-' + props.orientation);
+    classNames.push('meeseOS-gui-' + props.orientation);
   }
 
   const defaultStyle = typeof props.style === 'string'

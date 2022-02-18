@@ -72,7 +72,7 @@ export default class ConfirmDialog extends Dialog {
     super.render(options, ($content) => {
       app({}, {}, (state, actions) => this.createView([
         h(Box, {grow: 1}, [
-          h('div', {class: 'osjs-dialog-message'}, String(this.args.message))
+          h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message))
         ])
       ]), $content);
     });

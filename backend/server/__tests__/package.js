@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-const osjs = require('osjs');
+const meeseOS = require('meeseOS');
 const path = require('path');
 const Package = require('../src/package.js');
 
@@ -36,7 +36,7 @@ describe('Package', () => {
   let core;
   let pkg;
 
-  beforeAll(() => osjs().then(c => (core = c)));
+  beforeAll(() => meeseOS().then(c => (core = c)));
   afterAll(() => core.destroy());
 
   test('#constructor', () => {

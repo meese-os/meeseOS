@@ -62,7 +62,7 @@ export default class Panel extends EventEmitter {
 
     this.options.items
       .forEach(({name, options}) => {
-        const c = core.make('osjs/panels').get(name);
+        const c = core.make('meeseOS/panels').get(name);
         this.addItem(new c(this.core, this, options || {}));
       });
   }
@@ -87,7 +87,7 @@ export default class Panel extends EventEmitter {
     this.destroyed = true;
     this.inited = false;
     this.emit('destroy');
-    this.core.emit('osjs/panel:destroy', this);
+    this.core.emit('meeseOS/panel:destroy', this);
 
     this.$element.remove();
     this.$element = null;
@@ -104,8 +104,8 @@ export default class Panel extends EventEmitter {
     this.inited = true;
 
     this.$element = document.createElement('div');
-    this.$element.classList.add('osjs-panel');
-    this.$element.classList.add('osjs__contextmenu');
+    this.$element.classList.add('meeseOS-panel');
+    this.$element.classList.add('meeseOS__contextmenu');
     this.$element.addEventListener('contextmenu', ev => {
       ev.preventDefault();
 
@@ -116,7 +116,7 @@ export default class Panel extends EventEmitter {
         return;
       }
 
-      this.core.make('osjs/contextmenu').show({
+      this.core.make('meeseOS/contextmenu').show({
         position: ev,
         menu: [{
           label: "Panel Position",
@@ -159,9 +159,9 @@ export default class Panel extends EventEmitter {
   setPosition(position) {
     this.options.position = position;
 
-    return this.core.make('osjs/panels').save()
+    return this.core.make('meeseOS/panels').save()
       .then(() => {
-        const desktop = this.core.make('osjs/desktop');
+        const desktop = this.core.make('meeseOS/desktop');
         return desktop.applySettings();
       });
   }

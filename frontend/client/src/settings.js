@@ -146,7 +146,7 @@ export default class Settings {
         setTimeout(() => {
           this.adapter.save(this.settings)
             .then((...args) => {
-              this.core.emit('osjs/settings:save');
+              this.core.emit('meeseOS/settings:save');
 
               resolve(...args);
             }).catch(reject);
@@ -168,7 +168,7 @@ export default class Settings {
           arrayMerge: (dest, source) => source
         });
 
-        this.core.emit('osjs/settings:load');
+        this.core.emit('meeseOS/settings:load');
 
         return true;
       }).catch(e => {

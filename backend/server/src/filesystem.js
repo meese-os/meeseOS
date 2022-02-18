@@ -316,15 +316,15 @@ class Filesystem {
       const keys = Object.keys(args);
       const filter = keys.length === 0
         ? () => true
-        : ws => keys.every(k => ws._osjs_client[k] === args[k]);
+        : ws => keys.every(k => ws._meeseOS_client[k] === args[k]);
 
-      this.core.emit('osjs/vfs:watch:change', {
+      this.core.emit('meeseOS/vfs:watch:change', {
         mountpoint,
         target,
         type
       });
 
-      this.core.broadcast('osjs/vfs:watch:change', [{
+      this.core.broadcast('meeseOS/vfs:watch:change', [{
         path: target,
         type
       }, args], filter);

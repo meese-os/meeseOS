@@ -78,8 +78,8 @@ export default class ProgressDialog extends Dialog {
         setStatus: status => state => ({status})
       }, (state, actions) => this.createView([
         h(Box, {grow: 1, shrink: 1}, [
-          h('div', {class: 'osjs-dialog-message'}, String(this.args.message)),
-          h('div', {class: 'osjs-dialog-status'}, String(state.status)),
+          h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message)),
+          h('div', {class: 'meeseOS-dialog-status'}, String(state.status)),
           h(Progressbar, {value: state.progress})
         ])
       ]), $content);

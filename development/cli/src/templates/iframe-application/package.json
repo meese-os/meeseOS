@@ -47,7 +47,7 @@
       "@babel/plugin-transform-runtime"
     ]
   },
-  "osjs": {
+  "meeseOS": {
     "type": "package"
   }
 }

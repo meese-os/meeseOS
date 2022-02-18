@@ -37,10 +37,7 @@ module.exports = {
 				type: "asset/resource",
 				exclude: /node_modules/,
 				generator: {
-					filename: file => {
-						return file.replace(/\\/g, "/")
-							.match(/src\/icons/) ? "icons/[name].[ext]" : "[hash].[ext]";
-					}
+					filename: "icons/[name][ext]"
 				},
 			},
 			{

@@ -27,7 +27,7 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-export as namespace osjs__common;
+export as namespace meeseOS__common;
 
 import { EventEmitter } from '@aaronmeese.com/event-emitter';
 

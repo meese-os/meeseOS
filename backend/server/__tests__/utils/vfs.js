@@ -16,8 +16,8 @@ const checkMountpointGroupPermission = (
   }, {}, 'readdir', false, strict);
 
   const mount = {
-    name: 'osjs',
-    root: 'osjs:/',
+    name: 'meeseOS',
+    root: 'meeseOS:/',
     attributes: {
       readOnly: true,
       groups: mountpointGroups
@@ -61,7 +61,7 @@ describe('VFS Utils', () => {
 
     expect(utils.streamFromRequest({
       files: {
-        upload: temp.openSync('osjs-jest-file-upload')
+        upload: temp.openSync('meeseOS-jest-file-upload')
       }
     })).toBeInstanceOf(Readable);
   });
@@ -128,8 +128,8 @@ describe('VFS Utils', () => {
     }, {}, 'writefile', true);
 
     const mount = {
-      name: 'osjs',
-      root: 'osjs:/',
+      name: 'meeseOS',
+      root: 'meeseOS:/',
       attributes: {
         readOnly: true
       }
@@ -137,7 +137,7 @@ describe('VFS Utils', () => {
 
     return expect(check({mount}))
       .rejects
-      .toThrowError('Mountpoint \'osjs\' is read-only');
+      .toThrowError('Mountpoint \'meeseOS\' is read-only');
   });
 
   test('checkMountpointPermission - groups', async () => {
@@ -146,21 +146,21 @@ describe('VFS Utils', () => {
       ['required']
     ))
       .rejects
-      .toThrowError('Permission was denied for \'readdir\' in \'osjs\'');
+      .toThrowError('Permission was denied for \'readdir\' in \'meeseOS\'');
 
     await expect(checkMountpointGroupPermission(
       ['missing'],
       ['required']
     ))
       .rejects
-      .toThrowError('Permission was denied for \'readdir\' in \'osjs\'');
+      .toThrowError('Permission was denied for \'readdir\' in \'meeseOS\'');
 
     await expect(checkMountpointGroupPermission(
       ['required'],
       ['required', 'some-other']
     ))
       .rejects
-      .toThrowError('Permission was denied for \'readdir\' in \'osjs\'');
+      .toThrowError('Permission was denied for \'readdir\' in \'meeseOS\'');
 
     await expect(checkMountpointGroupPermission(
       ['required'],
@@ -189,8 +189,8 @@ describe('VFS Utils', () => {
     }, {}, 'writefile', false);
 
     const mount = {
-      name: 'osjs',
-      root: 'osjs:/',
+      name: 'meeseOS',
+      root: 'meeseOS:/',
       attributes: {}
     };
 

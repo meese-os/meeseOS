@@ -72,8 +72,8 @@ export default class Login extends EventEmitter {
      * @readonly
      */
     this.options = {
-      id: 'osjs-login',
-      title: 'Welcome to OS.js',
+      id: 'meeseOS-login',
+      title: 'Welcome to MeeseOS',
       stamp: core.config('version'),
       logo: {
         position: 'top',
@@ -110,7 +110,7 @@ export default class Login extends EventEmitter {
   init(startHidden) {
     this.$container = document.createElement('div');
     this.$container.id = this.options.id;
-    this.$container.className = 'osjs-login-base';
+    this.$container.className = 'meeseOS-login-base';
     this.core.$root.classList.add('login');
     this.core.$root.appendChild(this.$container);
 

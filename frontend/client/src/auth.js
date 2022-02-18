@@ -171,7 +171,7 @@ export default class Auth {
       logger.warn('Exception on destruction', e);
     }
 
-    this.core.emit('osjs/core:logged-out');
+    this.core.emit('meeseOS/core:logged-out');
 
     if (reload) {
       setTimeout(() => {
@@ -233,7 +233,7 @@ export default class Auth {
           this.ui.destroy();
           this.callback(response);
 
-          this.core.emit('osjs/core:logged-in');
+          this.core.emit('meeseOS/core:logged-in');
           this.ui.emit('login:stop', response);
 
           return true;

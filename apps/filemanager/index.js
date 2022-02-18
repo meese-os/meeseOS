@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import osjs from 'osjs';
+import meeseOS from 'meeseOS';
 import {h, app} from 'hyperapp';
 import dateformat from 'dateformat';
 
@@ -145,7 +145,7 @@ const formatStatusMessage = (core) => {
  * Mount view rows Factory
  */
 const mountViewRowsFactory = (core) => {
-  const fs = core.make('osjs/fs');
+  const fs = core.make('meeseOS/fs');
   const getMountpoints = () => fs.mountpoints(true);
 
   return () => getMountpoints().map(m => ({
@@ -197,7 +197,7 @@ const listViewColumnFactory = (core, proc) => {
  * File view rows Factory
  */
 const listViewRowFactory = (core, proc) => {
-  const fs = core.make('osjs/fs');
+  const fs = core.make('meeseOS/fs');
   const getFileIcon = file => file.icon || fs.icon(file);
 
   const formattedDate = f => {
@@ -242,8 +242,8 @@ const listViewRowFactory = (core, proc) => {
  * VFS action Factory
  */
 const vfsActionFactory = (core, proc, win, dialog, state) => {
-  const vfs = core.make('osjs/vfs');
-  const {pathJoin} = core.make('osjs/fs');
+  const vfs = core.make('meeseOS/vfs');
+  const {pathJoin} = core.make('meeseOS/fs');
 
   const refresh = (fileOrWatch) => {
     // FIXME This should be implemented a bit better
@@ -380,7 +380,7 @@ const vfsActionFactory = (core, proc, win, dialog, state) => {
  * Clipboard action Factory
  */
 const clipboardActionFactory = (core, state, vfs) => {
-  const clipboard = core.make('osjs/clipboard');
+  const clipboard = core.make('meeseOS/clipboard');
 
   const set = item => clipboard.set(({item}), 'filemanager:copy');
 
@@ -404,10 +404,10 @@ const clipboardActionFactory = (core, state, vfs) => {
  * Dialog Factory
  */
 const dialogFactory = (core, proc, win) => {
-  const vfs = core.make('osjs/vfs');
-  const {pathJoin} = core.make('osjs/fs');
+  const vfs = core.make('meeseOS/vfs');
+  const {pathJoin} = core.make('meeseOS/fs');
 
-  const dialog = (name, args, cb, modal = true) => core.make('osjs/dialog', name, args, {
+  const dialog = (name, args, cb, modal = true) => core.make('meeseOS/dialog', name, args, {
     parent: win,
     attributes: {modal}
   }, cb);
@@ -468,19 +468,19 @@ const dialogFactory = (core, proc, win) => {
  * Creates Menus
  */
 const menuFactory = (core, proc, win) => {
-  const fs = core.make('osjs/fs');
-  const clipboard = core.make('osjs/clipboard');
-  const contextmenu = core.make('osjs/contextmenu');
+  const fs = core.make('meeseOS/fs');
+  const clipboard = core.make('meeseOS/clipboard');
+  const contextmenu = core.make('meeseOS/contextmenu');
 
   const getMountpoints = () => fs.mountpoints(true);
 
   const menuItemsFromMiddleware = async (type, middlewareArgs) => {
-    if (!core.has('osjs/middleware')) {
+    if (!core.has('meeseOS/middleware')) {
       return [];
     }
 
-    const items = core.make('osjs/middleware')
-      .get(`osjs/filemanager:menu:${type}`);
+    const items = core.make('meeseOS/middleware')
+      .get(`meeseOS/filemanager:menu:${type}`);
 
     const promises = items.map(fn => fn(middlewareArgs));
 
@@ -602,7 +602,7 @@ const menuFactory = (core, proc, win) => {
  * Creates a new FileManager user interface view
  */
 const createView = (core, proc, win) => {
-  const {icon} = core.make('osjs/theme');
+  const {icon} = core.make('meeseOS/theme');
 
   const onMenuClick = (name, args) => ev => win.emit('filemanager:menu', {ev, name}, args);
   const onInputEnter = (ev, value) => win.emit('filemanager:navigate', {path: value});
@@ -615,7 +615,7 @@ const createView = (core, proc, win) => {
     const MountView = listView.component(state.mountview, actions.mountview);
 
     return h(Box, {
-      class: state.minimalistic ? 'osjs-filemanager-minimalistic' : ''
+      class: state.minimalistic ? 'meeseOS-filemanager-minimalistic' : ''
     }, [
       h(Menubar, {}, [
         h(MenubarItem, {onclick: onMenuClick('file')}, "File"),
@@ -663,7 +663,7 @@ const createApplication = (core, proc) => {
   const createColumns = listViewColumnFactory(core, proc);
   const createRows = listViewRowFactory(core, proc);
   const createMounts = mountViewRowsFactory(core);
-  const {draggable} = core.make('osjs/dnd');
+  const {draggable} = core.make('meeseOS/dnd');
   const statusMessage = formatStatusMessage(core);
 
   const initialState = {
@@ -677,7 +677,7 @@ const createApplication = (core, proc) => {
     },
 
     mountview: listView.state({
-      class: 'osjs-gui-fill',
+      class: 'meeseOS-gui-fill',
       columns: ['Name'],
       hideColumns: true,
       rows: createMounts()
@@ -856,7 +856,7 @@ const createWindow = (core, proc) => {
  * Launches the OS.js application process
  */
 const createProcess = (core, args, options, metadata) => {
-  const proc = core.make('osjs/application', {
+  const proc = core.make('meeseOS/application', {
     args,
     metadata,
     options: Object.assign({}, options, {
@@ -876,11 +876,11 @@ const createProcess = (core, args, options, metadata) => {
     onSettingsUpdate({[key]: value});
 
     proc.saveSettings()
-      .then(() => emitter('osjs:filemanager:remote', proc.settings))
+      .then(() => emitter('meeseOS:filemanager:remote', proc.settings))
       .catch(error => console.warn(error));
   };
 
-  proc.on('osjs:filemanager:remote', onSettingsUpdate);
+  proc.on('meeseOS:filemanager:remote', onSettingsUpdate);
   proc.on('filemanager:setting', onSetting);
 
   const listener = (args) => {
@@ -895,10 +895,10 @@ const createProcess = (core, args, options, metadata) => {
     }
   };
 
-  core.on('osjs/vfs:directoryChanged', listener);
-  proc.on('destroy', () => core.off('osjs/vfs:directoryChanged', listener));
+  core.on('meeseOS/vfs:directoryChanged', listener);
+  proc.on('destroy', () => core.off('meeseOS/vfs:directoryChanged', listener));
 
   return proc;
 };
 
-osjs.register(applicationName, createProcess);
+meeseOS.register(applicationName, createProcess);

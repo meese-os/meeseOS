@@ -257,7 +257,7 @@ module.exports = core => {
   const router = express.Router();
   const methods = vfs(core);
   const middleware = createMiddleware(core);
-  const {isAuthenticated} = core.make('osjs/express');
+  const {isAuthenticated} = core.make('meeseOS/express');
   const vfsGroups = core.config('auth.vfsGroups', []);
   const logEnabled = core.config('development');
 

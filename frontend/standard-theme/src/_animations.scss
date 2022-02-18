@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-window {
+.meeseOS-window {
   &[data-minimized="true"] {
     opacity: 0;
     pointer-events: none;
@@ -44,6 +44,6 @@
   }
 }
 
-.osjs-panel-item[data-name="windows"] > div {
+.meeseOS-panel-item[data-name="windows"] > div {
   transition: all ease-in-out 0.1s;
 }

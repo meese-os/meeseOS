@@ -59,7 +59,7 @@
     "@aaronmeese.com/textpad": "workspace:*",
     "@aaronmeese.com/widgets": "workspace:*",
     "@aaronmeese.com/sounds": "workspace:*",
-    "@osjs/gnome-icons": "^4.0.5",
+    "@aaronmeese.com/gnome-icons": "workspace:*",
     "dotenv": "^16.0.0",
     "hyperapp": "^1.2.10",
     "typeface-roboto": "1.1.13"

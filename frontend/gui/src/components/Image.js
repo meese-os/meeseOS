@@ -44,7 +44,7 @@ import {h} from 'hyperapp';
  */
 export const Image = (props, children) =>
   h('div', {
-    class: 'osjs-gui osjs-gui-image',
+    class: 'meeseOS-gui meeseOS-gui-image',
     style: {
       width: props.width ? String(props.width) + 'px' : undefined,
       height: props.height ? String(props.height) + 'px' : undefined

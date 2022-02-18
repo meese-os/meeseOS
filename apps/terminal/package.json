@@ -24,7 +24,7 @@
     "xterm-addon-attach": "^0.5.0",
     "xterm-addon-fit": "^0.3.0"
   },
-  "osjs": {
+  "meeseOS": {
     "type": "package"
   },
   "devDependencies": {

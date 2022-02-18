@@ -28,19 +28,19 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-box {
+.meeseOS-gui-box {
   display: flex;
   overflow: hidden;
 
-  & > .osjs-gui-menubar,
-  & > .osjs-gui-toolbar,
-  & > .osjs-gui-statusbar {
+  & > .meeseOS-gui-menubar,
+  & > .meeseOS-gui-toolbar,
+  & > .meeseOS-gui-statusbar {
     flex-shrink: 0;
   }
 }
 
-.osjs-gui-box > .osjs-gui,
-.osjs-gui-box-container {
+.meeseOS-gui-box > .meeseOS-gui,
+.meeseOS-gui-box-container {
   margin: calc($base-margin / 2);
   flex-shrink: 0;
 }

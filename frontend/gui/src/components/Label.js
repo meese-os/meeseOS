@@ -45,7 +45,7 @@ export const Label = (props = {}, children = []) => {
   const text = props.text || '';
 
   const elementProps = Object.assign({
-    class: ['osjs-gui-field-label', 'osjs-gui-field-label-on-' + placement]
+    class: ['meeseOS-gui-field-label', 'meeseOS-gui-field-label-on-' + placement]
   }, props.box || {});
 
   return h(Element, elementProps, [

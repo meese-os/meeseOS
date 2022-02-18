@@ -45,11 +45,11 @@ const onDropAction = actions => (ev, data, files, shortcut = true) => {
 };
 
 const isRootElement = ev =>
-  ev.target && ev.target.classList.contains('osjs-desktop-iconview__wrapper');
+  ev.target && ev.target.classList.contains('meeseOS-desktop-iconview__wrapper');
 
 const view = (fileIcon, themeIcon, droppable) => (state, actions) =>
   h('div', {
-    class: 'osjs-desktop-iconview__wrapper',
+    class: 'meeseOS-desktop-iconview__wrapper',
     oncontextmenu: ev => {
       if (isRootElement(ev)) {
         actions.openContextMenu({ev});
@@ -75,9 +75,9 @@ const view = (fileIcon, themeIcon, droppable) => (state, actions) =>
     }
   }, state.entries.map((entry, index) => {
     return h('div', {
-      class: 'osjs-desktop-iconview__entry' + (
+      class: 'meeseOS-desktop-iconview__entry' + (
         state.selected === index
-          ? ' osjs-desktop-iconview__entry--selected'
+          ? ' meeseOS-desktop-iconview__entry--selected'
           : ''
       ),
       oncontextmenu: ev => actions.openContextMenu({ev, entry, index}),
@@ -86,24 +86,24 @@ const view = (fileIcon, themeIcon, droppable) => (state, actions) =>
       onclick: ev => actions.selectEntry({ev, entry, index})
     }, [
       h('div', {
-        class: 'osjs-desktop-iconview__entry__inner'
+        class: 'meeseOS-desktop-iconview__entry__inner'
       }, [
         h('div', {
-          class: 'osjs-desktop-iconview__entry__icon'
+          class: 'meeseOS-desktop-iconview__entry__icon'
         }, [
           h('img', {
             src: entry.icon ? entry.icon : themeIcon(fileIcon(entry).name),
-            class: 'osjs-desktop-iconview__entry__icon__icon'
+            class: 'meeseOS-desktop-iconview__entry__icon__icon'
           }),
           entry.shortcut !== false
             ? h('img', {
               src: themeIcon('emblem-symbolic-link'),
-              class: 'osjs-desktop-iconview__entry__icon__shortcut'
+              class: 'meeseOS-desktop-iconview__entry__icon__shortcut'
             })
             : null
         ]),
         h('div', {
-          class: 'osjs-desktop-iconview__entry__label'
+          class: 'meeseOS-desktop-iconview__entry__label'
         }, entry.filename)
       ])
     ]);
@@ -212,13 +212,13 @@ export class DesktopIconView extends EventEmitter {
     }
 
     this.$root = document.createElement('div');
-    this.$root.className = 'osjs-desktop-iconview';
+    this.$root.className = 'meeseOS-desktop-iconview';
     this.core.$contents.appendChild(this.$root);
 
-    const {droppable} = this.core.make('osjs/dnd');
-    const {icon: fileIcon} = this.core.make('osjs/fs');
-    const {icon: themeIcon} = this.core.make('osjs/theme');
-    const {copy, readdir, readfile, writefile, unlink, mkdir} = this.core.make('osjs/vfs');
+    const {droppable} = this.core.make('meeseOS/dnd');
+    const {icon: fileIcon} = this.core.make('meeseOS/fs');
+    const {icon: themeIcon} = this.core.make('meeseOS/theme');
+    const {copy, readdir, readfile, writefile, unlink, mkdir} = this.core.make('meeseOS/vfs');
     const error = err => console.error(err);
     const shortcuts = createShortcuts(root, readfile, writefile);
     const read = readDesktopFolder(root, readdir, shortcuts);
@@ -250,7 +250,7 @@ export class DesktopIconView extends EventEmitter {
           this.core.run('FileManager', {
             path: entry
           });
-        } else if (entry.mime === 'osjs/application') {
+        } else if (entry.mime === 'meeseOS/application') {
           this.core.run(entry.filename);
         } else {
           this.core.open(entry, {
@@ -274,7 +274,7 @@ export class DesktopIconView extends EventEmitter {
         mkdir(root)
           .catch(() => true)
           .then(() => {
-            if (shortcut || entry.mime === 'osjs/application') {
+            if (shortcut || entry.mime === 'meeseOS/application') {
               return shortcuts.add(entry);
             }
 
@@ -319,7 +319,7 @@ export class DesktopIconView extends EventEmitter {
   }
 
   createFileContextMenu(ev, entry) {
-    this.core.make('osjs/contextmenu', {
+    this.core.make('meeseOS/contextmenu', {
       position: ev,
       menu: [{
         label: "Open",
@@ -335,7 +335,7 @@ export class DesktopIconView extends EventEmitter {
   }
 
   createDropContextMenu(ev, data, files) {
-    const desktop = this.core.make('osjs/desktop');
+    const desktop = this.core.make('meeseOS/desktop');
     const action = shortcut => onDropAction(this.iconview)(ev, data, files, shortcut);
 
     const menu = [{
@@ -346,14 +346,14 @@ export class DesktopIconView extends EventEmitter {
       onclick: () => action(true)
     }, ...desktop.createDropContextMenu(data)];
 
-    this.core.make('osjs/contextmenu', {
+    this.core.make('meeseOS/contextmenu', {
       position: ev,
       menu
     });
   }
 
   createRootContextMenu(ev) {
-    this.core.make('osjs/desktop')
+    this.core.make('meeseOS/desktop')
       .openContextMenu(ev);
   }
 
@@ -366,8 +366,8 @@ export class DesktopIconView extends EventEmitter {
       }
     };
 
-    this.core.on('osjs/vfs:directoryChanged', listener);
-    this.on('destroy', () => this.core.off('osjs/vfs:directoryChanged', listener));
+    this.core.on('meeseOS/vfs:directoryChanged', listener);
+    this.on('destroy', () => this.core.off('meeseOS/vfs:directoryChanged', listener));
   }
 
   applySettings() {
@@ -376,19 +376,19 @@ export class DesktopIconView extends EventEmitter {
     }
 
     const settings = this.core
-      .make('osjs/settings');
+      .make('meeseOS/settings');
 
     const defaults = this.core
       .config('desktop.settings');
 
     const fontColorStyle = settings
-      .get('osjs/desktop', 'iconview.fontColorStyle', defaults.iconview.fontColorStyle);
+      .get('meeseOS/desktop', 'iconview.fontColorStyle', defaults.iconview.fontColorStyle);
 
     const fontColor = settings
-      .get('osjs/desktop', 'iconview.fontColor', '#ffffff', defaults.iconview.fontColor);
+      .get('meeseOS/desktop', 'iconview.fontColor', '#ffffff', defaults.iconview.fontColor);
 
     const backgroundColor = settings
-      .get('osjs/desktop', 'background.color', defaults.background.color);
+      .get('meeseOS/desktop', 'background.color', defaults.background.color);
 
     const styles = {
       system: 'inherit',

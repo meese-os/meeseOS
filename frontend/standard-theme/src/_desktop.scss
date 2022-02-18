@@ -32,17 +32,17 @@
 // Panel
 //
 
-.osjs-panel {
+.meeseOS-panel {
   @include panel;
 }
 
-.osjs-panel-item[data-name=windows] {
+.meeseOS-panel-item[data-name=windows] {
   & > div[data-focused=false] > * {
     opacity: 0.5;
   }
 }
 
-.osjs-panel-item--clickable {
+.meeseOS-panel-item--clickable {
   cursor: pointer;
   transition: all $transition-duration $transition-timing-function;
 
@@ -57,14 +57,14 @@
 // Search
 //
 
-.osjs-search-input {
+.meeseOS-search-input {
   border: 0 none;
   background-color: #fff;
 }
 
-.osjs-search-result {
+.meeseOS-search-result {
   &:hover,
-  &.osjs__active {
+  &.meeseOS__active {
     background-color: #fff;
     color: #000;
   }
@@ -74,7 +74,7 @@
 // Iconview
 //
 
-.osjs-desktop-iconview {
+.meeseOS-desktop-iconview {
   &__entry {
     $self: &;
 

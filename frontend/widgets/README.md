@@ -25,7 +25,7 @@ In your client bootstrap (`src/client/index.js`):
 ```javascript
 import {WidgetServiceProvider} from '@aaronmeese.com/widgets';
 
-osjs.register(WidgetServiceProvider);
+meeseOS.register(WidgetServiceProvider);
 ```
 
 And in your stylesheet (`src/client/index.scss`):

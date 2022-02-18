@@ -61,7 +61,7 @@ const createFields = (props, fields, disabled) => {
   };
 
   return fields.map(f => h('div', {
-    class: 'osjs-login-field osjs-login-field-' + f.tagName
+    class: 'meeseOS-login-field meeseOS-login-field-' + f.tagName
   }, h(f.tagName, createAttributes(props, f, disabled), children(f))));
 };
 
@@ -70,7 +70,7 @@ const createView = (options) => {
 
   const logo = () =>
     h('div', {
-      class: 'osjs-login-logo',
+      class: 'meeseOS-login-logo',
       'data-position': position,
       style: {
         backgroundImage: `url('${src}')`
@@ -86,7 +86,7 @@ const createView = (options) => {
 
     if (options.stamp) {
       result.push(h('div', {
-        class: 'osjs-login-stamp'
+        class: 'meeseOS-login-stamp'
       }, options.stamp));
     }
 
@@ -98,7 +98,7 @@ const createView = (options) => {
 
     if (options.title) {
       header.push(h('div', {
-        class: 'osjs-login-header'
+        class: 'meeseOS-login-header'
       }, h('span', {}, options.title)));
     }
 
@@ -116,7 +116,7 @@ const createView = (options) => {
 
     const left = () => createSide('left');
     const right = () => createSide('right');
-    const middle = () => h('div', {class: 'osjs-login-content'}, children);
+    const middle = () => h('div', {class: 'meeseOS-login-content'}, children);
 
     const formFields = fields(state);
 
@@ -124,7 +124,7 @@ const createView = (options) => {
       ...header,
 
       h('div', {
-        class: 'osjs-login-error',
+        class: 'meeseOS-login-error',
         style: {display: state.error ? 'block' : 'none'}
       }, h('span', {}, state.error)),
       h('form', {
@@ -137,7 +137,7 @@ const createView = (options) => {
     ];
 
     return h('div', {
-      class: 'osjs-login',
+      class: 'meeseOS-login',
       id: options.id,
       style: {display: state.hidden ? 'none' : undefined}
     }, [left(), middle(), right()].filter(el => !!el));

@@ -44,19 +44,19 @@ export default class TrayPanelItem extends PanelItem {
     }
 
     const actions = super.init({
-      tray: this.core.make('osjs/tray').list()
+      tray: this.core.make('meeseOS/tray').list()
     }, {
       setTray: tray => state => ({tray})
     });
 
-    this.core.on('osjs/tray:update', list => actions.setTray(list));
+    this.core.on('meeseOS/tray:update', list => actions.setTray(list));
   }
 
   render(state, actions) {
     const child = entry => h('div', {
       onclick: ev => entry.onclick(ev, entry),
       oncontextmenu: ev => entry.oncontextmenu(ev, entry),
-      className: 'osjs-panel-item--clickable osjs-panel-item--icon'
+      className: 'meeseOS-panel-item--clickable meeseOS-panel-item--icon'
     }, h('img', {
       src: entry.icon,
       title: entry.title

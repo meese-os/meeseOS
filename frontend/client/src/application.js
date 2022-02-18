@@ -38,7 +38,7 @@ const applications = [];
 let applicationCount = 0;
 
 const getSettingsKey = metadata =>
-  'osjs/application/' + metadata.name;
+  'meeseOS/application/' + metadata.name;
 
 /**
  * Application Options
@@ -164,7 +164,7 @@ export default class Application extends EventEmitter {
      * Application settings
      * @type {{foo: *}}
      */
-    this.settings = core.make('osjs/settings')
+    this.settings = core.make('meeseOS/settings')
       .get(getSettingsKey(this.metadata), null, defaultSettings);
 
     /**
@@ -183,7 +183,7 @@ export default class Application extends EventEmitter {
     applications.push(this);
     applicationCount++;
 
-    this.core.emit('osjs/application:create', this);
+    this.core.emit('meeseOS/application:create', this);
   }
 
   /**
@@ -196,7 +196,7 @@ export default class Application extends EventEmitter {
     this.destroyed = true;
 
     this.emit('destroy');
-    this.core.emit('osjs/application:destroy', this);
+    this.core.emit('meeseOS/application:destroy', this);
 
     const destroy = (list, fn) => {
       try {
@@ -295,7 +295,7 @@ export default class Application extends EventEmitter {
    * @param {*} ...args Arguments to pass to message
    */
   send(...args) {
-    this.core.send('osjs/application:socket:message', {
+    this.core.send('meeseOS/application:socket:message', {
       pid: this.pid,
       name: this.metadata.name,
       args
@@ -429,7 +429,7 @@ export default class Application extends EventEmitter {
    * @return {Promise<boolean>}
    */
   saveSettings() {
-    const service = this.core.make('osjs/settings');
+    const service = this.core.make('meeseOS/settings');
     const name = getSettingsKey(this.metadata);
 
     service.set(name, null, this.settings);

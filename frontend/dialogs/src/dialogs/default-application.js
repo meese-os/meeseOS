@@ -87,7 +87,7 @@ export default class DefaultApplicationDialog extends Dialog {
         setChecked: checked => state => setLocalState(state, {checked})
       }, (state, actions) => this.createView([
         h(Box, {grow: 1}, [
-          h('div', {class: 'osjs-dialog-message'}, String(this.args.message)),
+          h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message)),
           h(SelectField, {
             choices: this.args.choices,
             value: state.value,

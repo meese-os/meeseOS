@@ -62,7 +62,7 @@ export default class NotificationServiceProvider extends ServiceProvider {
    */
   provides() {
     return [
-      'osjs/notification'
+      'meeseOS/notification'
     ];
   }
 
@@ -71,7 +71,7 @@ export default class NotificationServiceProvider extends ServiceProvider {
    * @return {Promise<undefined>}
    */
   init() {
-    this.core.instance('osjs/notification', (options) => {
+    this.core.instance('meeseOS/notification', (options) => {
       return this.notifications.create(options);
     });
 

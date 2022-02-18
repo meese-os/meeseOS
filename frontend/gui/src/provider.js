@@ -56,7 +56,7 @@ export class GUIServiceProvider {
   }
 
   destroy() {
-    const menu = document.getElementById('osjs-context-menu');
+    const menu = document.getElementById('meeseOS-context-menu');
     if (menu) {
       menu.remove();
     }
@@ -70,7 +70,7 @@ export class GUIServiceProvider {
       hide: (...args) => this.contextmenu.hide(...args)
     };
 
-    this.core.instance('osjs/contextmenu', (...args) => {
+    this.core.instance('meeseOS/contextmenu', (...args) => {
       if (args.length) {
         return contextmenuApi.show(...args);
       }
@@ -90,7 +90,7 @@ export class GUIServiceProvider {
 
   start() {
     const callback = ev => {
-      const menu = document.getElementById('osjs-context-menu');
+      const menu = document.getElementById('meeseOS-context-menu');
       const hit = menu && menu.contains(ev.target);
 
       if (!hit && this.contextmenu) {

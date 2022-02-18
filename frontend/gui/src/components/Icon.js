@@ -48,7 +48,7 @@ export const Icon = (props, children) => {
 
   return h('i', {
     'data-icon': n,
-    class: 'osjs-icon',
+    class: 'meeseOS-icon',
     style: {
       backgroundImage: typeof props === 'string' ? `url(${i})` : undefined
     }

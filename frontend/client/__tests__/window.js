@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Window from '../src/window.js';
 
 describe('Window', () => {

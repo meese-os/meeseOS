@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-window-button {
+.meeseOS-window-button {
   & > div {
     &::before,
     &::after {
@@ -57,7 +57,7 @@
   }
 }
 
-.osjs-window {
+.meeseOS-window {
   @include window;
 
   &[data-focused=false] {
@@ -74,7 +74,7 @@
 
   &[data-focused=true] {
     /* stylelint-disable no-descending-specificity */
-    .osjs-window-button {
+    .meeseOS-window-button {
       &[data-action=close] {
         & > div::before {
           @include window-button(#e56c5c, #f09c8d);
@@ -111,14 +111,14 @@
   }
 }
 
-.osjs-window-title {
+.meeseOS-window-title {
   text-align: center;
 }
 
-.osjs-window-header {
+.meeseOS-window-header {
   padding: calc($base-margin / 2);
 }
 
-.osjs-window-icon {
+.meeseOS-window-icon {
   margin-right: calc($base-margin / 2);
 }

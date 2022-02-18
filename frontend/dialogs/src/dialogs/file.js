@@ -39,7 +39,7 @@ import {
 const getMountpoint = str => str
   .split(':')[0] + ':/';
 
-const getMountpoints = core => core.make('osjs/fs')
+const getMountpoints = core => core.make('meeseOS/fs')
   .mountpoints(true)
   .filter(mount => {
     return !(mount.attributes.readOnly && mount.attributes.visibility === 'restricted');
@@ -109,7 +109,7 @@ export default class FileDialog extends Dialog {
   }
 
   render(options) {
-    const getFileIcon = file => this.core.make('osjs/fs').icon(file);
+    const getFileIcon = file => this.core.make('meeseOS/fs').icon(file);
     const startingLocation = this.args.path;
 
     super.render(options, ($content) => {
@@ -156,7 +156,7 @@ export default class FileDialog extends Dialog {
         },
 
         setPath: file => async (state, actions) => {
-          const files = await this.core.make('osjs/vfs')
+          const files = await this.core.make('meeseOS/vfs')
             .readdir(file, {
               filter: (item) => {
                 if (this.args.filetype === 'directory') {
@@ -238,9 +238,9 @@ export default class FileDialog extends Dialog {
     const next = () => super.emitCallback(name, ev, close);
     const isSave = this.args.type === 'save';
     const buttonCancel = name === 'cancel';
-    const hasVfs = this.core.has('osjs/vfs');
+    const hasVfs = this.core.has('meeseOS/vfs');
 
-    const confirm = callback => this.core.make('osjs/dialog', 'confirm', {
+    const confirm = callback => this.core.make('meeseOS/dialog', 'confirm', {
       message: `Do you want to overwrite ${file.path}?`
     }, {
       parent: this.win,
@@ -253,7 +253,7 @@ export default class FileDialog extends Dialog {
 
     if (file && isSave && hasVfs && !buttonCancel) {
       this.core
-        .make('osjs/vfs')
+        .make('meeseOS/vfs')
         .exists(file)
         .then(exists => {
           if (exists) {

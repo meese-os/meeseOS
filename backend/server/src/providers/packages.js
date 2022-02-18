@@ -55,12 +55,12 @@ class PackageServiceProvider extends ServiceProvider {
 
   provides() {
     return [
-      'osjs/packages'
+      'meeseOS/packages'
     ];
   }
 
   init() {
-    this.core.singleton('osjs/packages', () => this.packages);
+    this.core.singleton('meeseOS/packages', () => this.packages);
 
     return this.packages.init();
   }
@@ -88,7 +88,7 @@ class PackageServiceProvider extends ServiceProvider {
     if (fs.existsSync(manifestFile)) {
       const watcher = chokidar.watch(manifestFile);
       watcher.on('change', () => {
-        this.core.broadcast('osjs/packages:metadata:changed');
+        this.core.broadcast('meeseOS/packages:metadata:changed');
       });
       this.watches.push(watcher);
     }

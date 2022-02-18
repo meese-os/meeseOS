@@ -60,7 +60,7 @@ export default class DialogServiceProvider {
   }
 
   async init() {
-    this.core.instance('osjs/dialog', (name, args = {}, ...eargs) => {
+    this.core.instance('meeseOS/dialog', (name, args = {}, ...eargs) => {
       const options = eargs.length > 1 ? eargs[0] : {};
       const callback = eargs[eargs.length > 1 ? 1 : 0];
 
@@ -77,7 +77,7 @@ export default class DialogServiceProvider {
       return instance;
     });
 
-    this.core.singleton('osjs/dialogs', () => ({
+    this.core.singleton('meeseOS/dialogs', () => ({
       create: (options, valueCallback, callback) => {
         return new CustomDialog(this.core, options, valueCallback, callback);
       },

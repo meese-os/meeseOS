@@ -21,7 +21,7 @@ module.exports = {
 		path.resolve(__dirname, "index.js"),
 	],
 	output: {
-		library: "osjsWidgets",
+		library: "meeseOSWidgets",
 		libraryTarget: "umd",
 		umdNamedDefine: true,
 		sourceMapFilename: "[file].map",

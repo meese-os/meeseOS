@@ -1,4 +1,4 @@
-const osjs = require('osjs');
+const meeseOS = require('meeseOS');
 const Auth = require('../src/auth.js');
 const {Response} = require('jest-express/lib/response');
 const {Request} = require('jest-express/lib/request');
@@ -31,7 +31,7 @@ describe('Authentication', () => {
     response.resetMocked();
   });
 
-  beforeAll(() => osjs().then(c => (core = c)));
+  beforeAll(() => meeseOS().then(c => (core = c)));
   afterAll(() => core.destroy());
 
   test('#constructor', () => {

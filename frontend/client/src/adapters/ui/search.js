@@ -40,8 +40,8 @@ const createView = (core, fs, icon) => {
       }
     },
     class: [
-      'osjs-search-result',
-      index === i ? 'osjs__active' : ''
+      'meeseOS-search-result',
+      index === i ? 'meeseOS__active' : ''
     ].join(' ')
   }, [
     h('img', {src: icon(fs.icon(r).name + '.png')}),
@@ -49,7 +49,7 @@ const createView = (core, fs, icon) => {
   ]));
 
   return (state, actions) => h('div', {
-    class: 'osjs-search-container osjs-notification',
+    class: 'meeseOS-search-container meeseOS-notification',
     style: {
       display: state.visible ? undefined : 'none'
     }
@@ -57,7 +57,7 @@ const createView = (core, fs, icon) => {
     h('input', {
       type: 'text',
       placeholder: "Search filesystems...",
-      class: 'osjs-search-input',
+      class: 'meeseOS-search-input',
       value: state.query,
       onblur: () => {
         if (!state.value) {
@@ -90,13 +90,13 @@ const createView = (core, fs, icon) => {
     }),
     h('div', {
       'data-error': !!state.error,
-      class: 'osjs-search-message',
+      class: 'meeseOS-search-message',
       style: {
         display: (state.error || state.status) ? 'block' : 'none'
       }
     }, state.error || state.status),
     h('ol', {
-      class: 'osjs-search-results',
+      class: 'meeseOS-search-results',
       style: {
         display: state.results.length ? undefined : 'none'
       }
@@ -108,8 +108,8 @@ const createView = (core, fs, icon) => {
  * Search UI Adapter
  */
 const create = (core, $element) => {
-  const fs = core.make('osjs/fs');
-  const {icon} = core.make('osjs/theme');
+  const fs = core.make('meeseOS/fs');
+  const {icon} = core.make('meeseOS/theme');
   const view = createView(core, fs, icon);
   const ee = new EventEmitter('SearchUI');
 
@@ -173,7 +173,7 @@ const create = (core, $element) => {
   ee.on('success', results => hyperapp.setResults(results));
   ee.on('toggle', toggle => hyperapp.toggle(toggle));
   ee.on('focus', () => {
-    const el = $element.querySelector('.osjs-search-input');
+    const el = $element.querySelector('.meeseOS-search-input');
     if (el) {
       el.focus();
     }

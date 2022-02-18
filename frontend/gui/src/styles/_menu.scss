@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-menubar {
+.meeseOS-gui-menubar {
   margin: 0 !important;
 
   & > div {
@@ -42,7 +42,7 @@
   }
 }
 
-.osjs-gui-menu {
+.meeseOS-gui-menu {
   position: absolute;
   z-index: 9999999999;
 
@@ -80,7 +80,7 @@
   }
 }
 
-.osjs-gui-menu-separator {
+.meeseOS-gui-menu-separator {
   height: 1px;
   display: block;
   padding: calc($base-margin / 2);
@@ -94,7 +94,7 @@
   }
 }
 
-.osjs-gui-menu-label {
+.meeseOS-gui-menu-label {
   display: flex;
   padding: calc($base-margin / 2);
   padding-right: 1.5em;
@@ -105,11 +105,11 @@
   min-height: 1rem;
   align-items: center;
 
-  & > .osjs-icon {
+  & > .meeseOS-icon {
     margin-right: calc($base-margin / 2);
   }
 
-  & > .osjs-gui-menu-checkbox {
+  & > .meeseOS-gui-menu-checkbox {
     margin-right: calc($base-margin / 2);
 
     &::after {
@@ -127,8 +127,8 @@
   }
 }
 
-.osjs-gui-menu-container {
-  &[data-has-children] > .osjs-gui-menu-label {
+.meeseOS-gui-menu-container {
+  &[data-has-children] > .meeseOS-gui-menu-label {
     &::after {
       content: '\25B6';
       position: absolute;

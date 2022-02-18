@@ -28,13 +28,13 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-panes {
+.meeseOS-gui-panes {
   height: 100%;
   overflow: hidden;
   position: relative;
 }
 
-.osjs-gui-panes-inner {
+.meeseOS-gui-panes-inner {
   position: absolute;
   top: 0;
   left: 0;
@@ -42,12 +42,12 @@
   bottom: 0;
   display: flex;
 
-  &.osjs-gui-vertical {
-    & > .osjs-gui-panes-pane > .osjs-gui {
+  &.meeseOS-gui-vertical {
+    & > .meeseOS-gui-panes-pane > .meeseOS-gui {
       width: 100%;
     }
 
-    & > .osjs-gui-panes-spacer {
+    & > .meeseOS-gui-panes-spacer {
       height: 100%;
       width: calc($base-margin / 2);
       min-width: calc($base-margin / 2);
@@ -55,12 +55,12 @@
     }
   }
 
-  &.osjs-gui-horizontal {
-    & > .osjs-gui-panes-pane > .osjs-gui {
+  &.meeseOS-gui-horizontal {
+    & > .meeseOS-gui-panes-pane > .meeseOS-gui {
       height: 100%;
     }
 
-    & > .osjs-gui-panes-spacer {
+    & > .meeseOS-gui-panes-spacer {
       width: 100%;
       height: calc($base-margin / 2);
       min-height: calc($base-margin / 2);
@@ -69,7 +69,7 @@
   }
 }
 
-.osjs-gui-panes-pane {
+.meeseOS-gui-panes-pane {
   position: relative;
   margin: calc($base-margin / 2);
   box-sizing: border-box;

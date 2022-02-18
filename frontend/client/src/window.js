@@ -132,32 +132,32 @@ let lastWindow = null;
 /*
  * Default window template
  */
-const TEMPLATE = `<div class="osjs-window-inner">
-  <div class="osjs-window-header">
-    <div class="osjs-window-icon">
+const TEMPLATE = `<div class="meeseOS-window-inner">
+  <div class="meeseOS-window-header">
+    <div class="meeseOS-window-icon">
       <div></div>
     </div>
-    <div class="osjs-window-title"></div>
-    <div class="osjs-window-button" data-action="minimize">
+    <div class="meeseOS-window-title"></div>
+    <div class="meeseOS-window-button" data-action="minimize">
       <div></div>
     </div>
-    <div class="osjs-window-button" data-action="maximize">
+    <div class="meeseOS-window-button" data-action="maximize">
       <div></div>
     </div>
-    <div class="osjs-window-button" data-action="close">
+    <div class="meeseOS-window-button" data-action="close">
       <div></div>
     </div>
   </div>
-  <div class="osjs-window-content">
+  <div class="meeseOS-window-content">
   </div>
-  <div class="osjs-window-resize" data-direction="n"></div>
-  <div class="osjs-window-resize" data-direction="nw"></div>
-  <div class="osjs-window-resize" data-direction="w"></div>
-  <div class="osjs-window-resize" data-direction="sw"></div>
-  <div class="osjs-window-resize" data-direction="s"></div>
-  <div class="osjs-window-resize" data-direction="se"></div>
-  <div class="osjs-window-resize" data-direction="e"></div>
-  <div class="osjs-window-resize" data-direction="ne"></div>
+  <div class="meeseOS-window-resize" data-direction="n"></div>
+  <div class="meeseOS-window-resize" data-direction="nw"></div>
+  <div class="meeseOS-window-resize" data-direction="w"></div>
+  <div class="meeseOS-window-resize" data-direction="sw"></div>
+  <div class="meeseOS-window-resize" data-direction="s"></div>
+  <div class="meeseOS-window-resize" data-direction="se"></div>
+  <div class="meeseOS-window-resize" data-direction="e"></div>
+  <div class="meeseOS-window-resize" data-direction="ne"></div>
 </div>`.replace(/\n\s+/g, '').trim();
 
 /**
@@ -341,9 +341,7 @@ export default class Window extends EventEmitter {
    * Destroy window
    */
   destroy() {
-    if (this.destroyed) {
-      return;
-    }
+    if (this.destroyed) return;
 
     if (typeof this._ondestroy === 'function' && this._ondestroy() === false) {
       return;
@@ -354,7 +352,7 @@ export default class Window extends EventEmitter {
     logger.debug('Window::destroy()');
 
     this.emit('destroy', this);
-    this.core.emit('osjs/window:destroy', this);
+    this.core.emit('meeseOS/window:destroy', this);
 
     this.children.forEach(w => w.destroy());
 
@@ -408,7 +406,7 @@ export default class Window extends EventEmitter {
 
     this.inited = true;
     this.emit('init', this);
-    this.core.emit('osjs/window:create', this);
+    this.core.emit('meeseOS/window:create', this);
 
     return this;
   }
@@ -427,10 +425,10 @@ export default class Window extends EventEmitter {
       this.$element.innerHTML = tpl;
     }
 
-    this.$content = this.$element.querySelector('.osjs-window-content');
-    this.$header = this.$element.querySelector('.osjs-window-header');
-    this.$icon = this.$element.querySelector('.osjs-window-icon > div');
-    this.$title = this.$element.querySelector('.osjs-window-title');
+    this.$content = this.$element.querySelector('.meeseOS-window-content');
+    this.$header = this.$element.querySelector('.meeseOS-window-header');
+    this.$icon = this.$element.querySelector('.meeseOS-window-icon > div');
+    this.$title = this.$element.querySelector('.meeseOS-window-title');
   }
 
   /**
@@ -439,15 +437,15 @@ export default class Window extends EventEmitter {
    */
   _initBehavior() {
     // Transform percentages in dimension to pixels etc
-    if (this.core.has('osjs/desktop')) {
-      const rect = this.core.make('osjs/desktop').getRect();
+    if (this.core.has('meeseOS/desktop')) {
+      const rect = this.core.make('meeseOS/desktop').getRect();
       const {dimension, position} = transformVectors(rect, this.state.dimension, this.state.position);
       this.state.dimension = dimension;
       this.state.position = position;
     }
 
     // Behavior
-    const behavior = this.core.make('osjs/window-behavior');
+    const behavior = this.core.make('meeseOS/window-behavior');
     if (behavior) {
       behavior.init(this);
     }
@@ -486,7 +484,7 @@ export default class Window extends EventEmitter {
    * @private
    */
   _setClassNames() {
-    const classNames = ['osjs-window', ...this.attributes.classNames];
+    const classNames = ['meeseOS-window', ...this.attributes.classNames];
     if (this.id) {
       classNames.push(`Window_${this.id}`);
     }
@@ -535,7 +533,7 @@ export default class Window extends EventEmitter {
 
     setTimeout(() => {
       this.emit('render', this);
-      this.core.emit('osjs/window:render', this);
+      this.core.emit('meeseOS/window:render', this);
     }, 1);
 
     return this;
@@ -592,9 +590,7 @@ export default class Window extends EventEmitter {
   blur() {
     // Forces blur-ing of browser input element belonging to this window
     const activeElement = getActiveElement(this.$element);
-    if (activeElement) {
-      activeElement.blur();
-    }
+    if (activeElement) activeElement.blur();
 
     return this._toggleState('focused', false, 'blur');
   }
@@ -676,8 +672,8 @@ export default class Window extends EventEmitter {
     container = container || this.$content.firstChild;
 
     if (container) {
-      const rect = this.core.has('osjs/desktop')
-        ? this.core.make('osjs/desktop').getRect()
+      const rect = this.core.has('meeseOS/desktop')
+        ? this.core.make('meeseOS/desktop').getRect(/* n00b */)
         : null;
 
       const {width, height} = dimensionFromElement(this, rect, container);
@@ -692,11 +688,9 @@ export default class Window extends EventEmitter {
    * @param {boolean} [update=true] Update DOM
    */
   clampToViewport(update = true) {
-    if (!this.core.has('osjs/desktop')) {
-      return;
-    }
+    if (!this.core.has('meeseOS/desktop')) return;
 
-    const rect = this.core.make('osjs/desktop').getRect();
+    const rect = this.core.make('meeseOS/desktop').getRect();
 
     this.state.position = {
       ...this.state.position,
@@ -724,10 +718,9 @@ export default class Window extends EventEmitter {
    */
   setTitle(title) {
     this.state.title = title || '';
-
     this._updateTitle();
 
-    this.core.emit('osjs/window:change', this, 'title', title);
+    this.core.emit('meeseOS/window:change', this, 'title', title);
   }
 
   /**
@@ -814,11 +807,9 @@ export default class Window extends EventEmitter {
    * @param {string} gravity Gravity
    */
   gravitate(gravity) {
-    if (!this.core.has('osjs/desktop')) {
-      return;
-    }
+    if (!this.core.has('meeseOS/desktop')) return;
 
-    const rect = this.core.make('osjs/desktop').getRect();
+    const rect = this.core.make('meeseOS/desktop').getRect();
     const position = positionFromGravity(this, rect, gravity);
 
     this.setPosition(position);
@@ -898,15 +889,14 @@ export default class Window extends EventEmitter {
    * @param {boolean} [update=true] Update the DOM
    */
   _toggleState(name, value, eventName, update = true) {
-    if (this.state[name] === value) {
+    if (this.state[name] === value)
       return false;
-    }
 
     logger.debug('Window::_toggleState()', name, value, eventName, update);
 
     this.state[name] = value;
     this.emit(eventName, this);
-    this.core.emit('osjs/window:change', this, name, value);
+    this.core.emit('meeseOS/window:change', this, name, value);
 
     if (update) {
       this._updateAttributes();
@@ -952,7 +942,7 @@ export default class Window extends EventEmitter {
    */
   _updateButtons() {
     const hideButton = action =>
-      this.$header.querySelector(`.osjs-window-button[data-action=${action}]`)
+      this.$header.querySelector(`.meeseOS-window-button[data-action=${action}]`)
         .style.display = 'none';
 
     const buttonmap = {
@@ -969,7 +959,7 @@ export default class Window extends EventEmitter {
           }
         });
     } else {
-      Array.from(this.$header.querySelectorAll('.osjs-window-button'))
+      Array.from(this.$header.querySelectorAll('.meeseOS-window-button'))
         .forEach(el => el.style.display = 'none');
     }
   }
@@ -979,11 +969,11 @@ export default class Window extends EventEmitter {
    * @private
    */
   _updateTitle() {
-    if (this.$title) {
-      const escapedTitle = escapeHtml(this.state.title);
-      if (this.$title.innerHTML !== escapedTitle) {
-        this.$title.innerHTML = escapedTitle;
-      }
+    if (!this.$title) return;
+
+    const escapedTitle = escapeHtml(this.state.title);
+    if (this.$title.innerHTML !== escapedTitle) {
+      this.$title.innerHTML = escapedTitle;
     }
   }
 
@@ -992,11 +982,11 @@ export default class Window extends EventEmitter {
    * @private
    */
   _updateIconStyles() {
-    if (this.$icon) {
-      const iconSource = `url(${this.state.icon})`;
-      if (this.$icon.style.backgroundImage !== iconSource) {
-        this.$icon.style.backgroundImage = iconSource;
-      }
+    if (!this.$icon) return;
+
+    const iconSource = `url(${this.state.icon})`;
+    if (this.$icon.style.backgroundImage !== iconSource) {
+      this.$icon.style.backgroundImage = iconSource;
     }
   }
 
@@ -1005,11 +995,11 @@ export default class Window extends EventEmitter {
    * @private
    */
   _updateHeaderStyles() {
-    if (this.$header) {
-      const headerDisplay = this.attributes.header ? undefined : 'none';
-      if (this.$header.style.display !== headerDisplay) {
-        this.$header.style.display = headerDisplay;
-      }
+    if (!this.$header) return;
+
+    const headerDisplay = this.attributes.header ? undefined : 'none';
+    if (this.$header.style.display !== headerDisplay) {
+      this.$header.style.display = headerDisplay;
     }
   }
 
@@ -1018,14 +1008,14 @@ export default class Window extends EventEmitter {
    * @private
    */
   _updateAttributes() {
-    if (this.$element) {
-      const attrs = createDOMAttributes(this.id, this.state, this.attributes);
-      const applyAttrs = Object.keys(attrs).filter(k => attrs[k] !== this._lastAttributes[k]);
+    if (!this.$element) return;
 
-      if (applyAttrs.length > 0) {
-        applyAttrs.forEach(a => this.$element.setAttribute(`data-${a}`, String(attrs[a])));
-        this._lastAttributes = attrs;
-      }
+    const attrs = createDOMAttributes(this.id, this.state, this.attributes);
+    const applyAttrs = Object.keys(attrs).filter(k => attrs[k] !== this._lastAttributes[k]);
+
+    if (applyAttrs.length > 0) {
+      applyAttrs.forEach(a => this.$element.setAttribute(`data-${a}`, String(attrs[a])));
+      this._lastAttributes = attrs;
     }
   }
 
@@ -1034,12 +1024,12 @@ export default class Window extends EventEmitter {
    * @private
    */
   _updateStyles() {
-    if (this.$element) {
-      const cssText = createCssText(createDOMStyles(this.state, this.attributes));
-      if (cssText !== this._lastCssText) {
-        this.$element.style.cssText = cssText;
-        this._lastCssText = cssText;
-      }
+    if (!this.$element) return;
+
+    const cssText = createCssText(createDOMStyles(this.state, this.attributes));
+    if (cssText !== this._lastCssText) {
+      this.$element.style.cssText = cssText;
+      this._lastCssText = cssText;
     }
   }
 }

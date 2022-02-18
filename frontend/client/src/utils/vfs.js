@@ -369,13 +369,13 @@ export const createWatchEvents = (method, args) => {
       pid: options.pid
     };
 
-    events.push(['osjs/vfs:directoryChanged', {
+    events.push(['meeseOS/vfs:directoryChanged', {
       ...obj,
       path: pathname(path(args[0])),
     }]);
 
     if (movement) {
-      events.push(['osjs/vfs:directoryChanged', {
+      events.push(['meeseOS/vfs:directoryChanged', {
         ...obj,
         path: pathname(path(args[1]))
       }]);

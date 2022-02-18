@@ -34,7 +34,7 @@
  * @param {object} [options] Adapter options
  */
 const adapter = (core) => {
-  const pkgs = core.make('osjs/packages');
+  const pkgs = core.make('meeseOS/packages');
 
   return {
     readdir: ({path}, options) => {
@@ -43,7 +43,7 @@ const adapter = (core) => {
           isDirectory: false,
           isFile: true,
           filename: pkg.name,
-          mime: 'osjs/application',
+          mime: 'meeseOS/application',
           path: `${path.replace(/(\/+)?$/, '/')}${pkg.name}`,
           size: 0,
           stat: {},

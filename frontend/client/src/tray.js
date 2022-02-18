@@ -106,15 +106,15 @@ export default class Tray {
 
     this.entries.push(entry);
 
-    this.core.emit('osjs/tray:create', entry);
-    this.core.emit('osjs/tray:update', this.entries);
+    this.core.emit('meeseOS/tray:create', entry);
+    this.core.emit('meeseOS/tray:update', this.entries);
 
     const obj = {
       entry,
       update: u => {
         Object.keys(u).forEach(k => (entry[k] = u[k]));
 
-        this.core.emit('osjs/tray:update', this.entries);
+        this.core.emit('meeseOS/tray:update', this.entries);
       },
       destroy: () => this.remove(entry)
     };
@@ -131,8 +131,8 @@ export default class Tray {
     if (foundIndex !== -1) {
       this.entries.splice(foundIndex, 1);
 
-      this.core.emit('osjs/tray:remove', entry);
-      this.core.emit('osjs/tray:update', this.entries);
+      this.core.emit('meeseOS/tray:remove', entry);
+      this.core.emit('meeseOS/tray:update', this.entries);
     }
   }
 

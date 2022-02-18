@@ -178,8 +178,8 @@ export class BasicApplication extends EventEmitter {
   createDialog(type, cb, options = {}) {
     const [args, opts] = this.getDialogOptions(type, options);
 
-    if (this.core.has('osjs/dialog')) {
-      this.core.make('osjs/dialog', 'file', args, opts, (btn, item) => {
+    if (this.core.has('meeseOS/dialog')) {
+      this.core.make('meeseOS/dialog', 'file', args, opts, (btn, item) => {
         if (btn === 'ok') {
           cb(item);
         }

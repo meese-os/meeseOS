@@ -24,7 +24,7 @@ module.exports = {
 		minimize,
 	},
 	externals: {
-		osjs: "OSjs"
+		meeseOS: "MeeseOS"
 	},
 	plugins: [
 		new CopyWebpackPlugin({

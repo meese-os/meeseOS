@@ -41,7 +41,7 @@ const isNull = val => typeof val === 'undefined' || val === null;
 const getPosition = (core, position, nullValue = null) => {
   const rect = core.destroyed
     ? {}
-    : core.make('osjs/desktop').getRect();
+    : core.make('meeseOS/desktop').getRect();
 
   let {top, left, right, bottom} = position;
 
@@ -95,7 +95,7 @@ const onmousedown = (ev, $root, widget) => {
     top: widget.$element.offsetTop
   };
   const startDimension = {...widget.options.dimension};
-  const resize = ev.target.classList.contains('osjs-widget-resize');
+  const resize = ev.target.classList.contains('meeseOS-widget-resize');
   const {minDimension, maxDimension} = widget.attributes;
 
   const mousemove = ev => {
@@ -275,12 +275,12 @@ export default class Widget {
   init() {
     const $root = this.core.$contents;
     const resizer = document.createElement('div');
-    resizer.classList.add('osjs-widget-resize');
+    resizer.classList.add('meeseOS-widget-resize');
 
     this.$element.appendChild(resizer);
     this.$element.addEventListener('mousedown', ev => onmousedown(ev, $root, this));
     this.$element.addEventListener('contextmenu', ev => this.onContextMenu(ev));
-    this.$element.classList.add('osjs-widget');
+    this.$element.classList.add('meeseOS-widget');
     $root.appendChild(this.$element);
 
     if (this.attributes.canvas) {
@@ -318,7 +318,7 @@ export default class Widget {
 
   saveSettings() {
     this.saveDebounce = clearTimeout(this.saveDebounce);
-    this.saveDebounce = setTimeout(() => this.core.make('osjs/widgets').save(), 100);
+    this.saveDebounce = setTimeout(() => this.core.make('meeseOS/widgets').save(), 100);
   }
 
   getContextMenu() {
@@ -340,16 +340,16 @@ export default class Widget {
       {
         label: 'Remove Widget',
         onclick: () => {
-          this.core.make('osjs/widgets')
+          this.core.make('meeseOS/widgets')
             .remove(this);
 
-          this.core.make('osjs/widgets')
+          this.core.make('meeseOS/widgets')
             .save();
         }
       }
     ];
 
-    this.core.make('osjs/contextmenu').show({
+    this.core.make('meeseOS/contextmenu').show({
       position: ev,
       menu
     });
@@ -372,7 +372,7 @@ export default class Widget {
       window: options || {}
     };
 
-    this.dialog = this.core.make('osjs/dialogs')
+    this.dialog = this.core.make('meeseOS/dialogs')
       .create(dialogOptions, callbackValue, callbackButton)
       .render(callbackRender);
 
@@ -383,7 +383,7 @@ export default class Widget {
 
   clampToViewport() {
     const {top, left} = this.options.position;
-    const rect = this.core.make('osjs/desktop').getRect();
+    const rect = this.core.make('meeseOS/desktop').getRect();
     const pos = clampPosition(rect, this.options);
 
     if (pos.left !== left || pos.top !== top) {

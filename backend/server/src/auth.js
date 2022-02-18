@@ -132,7 +132,7 @@ class Auth {
         await this.createHomeDirectory(profile, req, res);
         req.session.user = profile;
         req.session.save(() => {
-          this.core.emit('osjs/core:logged-in', Object.freeze({
+          this.core.emit('meeseOS/core:logged-in', Object.freeze({
             ...req.session
           }));
 
@@ -153,7 +153,7 @@ class Auth {
    * @return {Promise<undefined>}
    */
   async logout(req, res) {
-    this.core.emit('osjs/core:logging-out', Object.freeze({
+    this.core.emit('meeseOS/core:logging-out', Object.freeze({
       ...req.session
     }));
 
@@ -249,7 +249,7 @@ class Auth {
     try {
       const homeDir = await this
         .core
-        .make('osjs/vfs')
+        .make('meeseOS/vfs')
         .realpath('home:/', profile);
 
       await fs.ensureDir(homeDir);

@@ -28,18 +28,18 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-tabs {
+.meeseOS-gui-tabs {
   display: flex;
   flex: 1 1;
 }
 
-.osjs-gui-tabs-wrapper {
+.meeseOS-gui-tabs-wrapper {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
 }
 
-.osjs-gui-tabs-header {
+.meeseOS-gui-tabs-header {
   display: flex;
   flex-shrink: 0;
 
@@ -52,7 +52,7 @@
   }
 }
 
-.osjs-gui-tabs-panes {
+.meeseOS-gui-tabs-panes {
   position: relative;
   z-index: 1;
   flex-grow: 1;
@@ -65,7 +65,7 @@
     width: 100%;
     overflow: auto;
 
-    &.osjs__active {
+    &.meeseOS__active {
       display: flex;
       flex-grow: 1;
       flex-shrink: 1;

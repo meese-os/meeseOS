@@ -15,9 +15,9 @@ const {
 } = require('../index.js');
 
 module.exports = (options = {}) => {
-  const tempPath = temp.mkdirSync('osjs-vfs');
+  const tempPath = temp.mkdirSync('meeseOS-vfs');
 
-  const osjs = new Core(Object.assign({
+  const meeseOS = new Core(Object.assign({
     tempPath,
     development: false,
     port: 0,
@@ -36,18 +36,18 @@ module.exports = (options = {}) => {
     kill: false
   });
 
-  osjs.configuration.vfs.mountpoints[1].attributes.chokidar = {
+  meeseOS.configuration.vfs.mountpoints[1].attributes.chokidar = {
     persistent: false
   };
-  osjs.configuration.vfs.mountpoints[1].attributes.watch = true;
+  meeseOS.configuration.vfs.mountpoints[1].attributes.watch = true;
 
-  osjs.register(CoreServiceProvider, {before: true});
-  osjs.register(PackageServiceProvider);
-  osjs.register(VFSServiceProvider);
-  osjs.register(AuthServiceProvider);
-  osjs.register(SettingsServiceProvider);
+  meeseOS.register(CoreServiceProvider, {before: true});
+  meeseOS.register(PackageServiceProvider);
+  meeseOS.register(VFSServiceProvider);
+  meeseOS.register(AuthServiceProvider);
+  meeseOS.register(SettingsServiceProvider);
 
-  return osjs.boot()
-    .then(() => osjs);
+  return meeseOS.boot()
+    .then(() => meeseOS);
 };
 

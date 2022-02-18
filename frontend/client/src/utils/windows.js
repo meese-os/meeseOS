@@ -239,7 +239,7 @@ export const positionFromGravity = (win, rect, gravity) => {
  * Gets new dimension based on container
  */
 export const dimensionFromElement = (win, rect, container) => {
-  const innerBox = (container.parentNode.classList.contains('osjs-gui')
+  const innerBox = (container.parentNode.classList.contains('meeseOS-gui')
     ? container.parentNode
     : container).getBoundingClientRect();
 

@@ -9,7 +9,7 @@ module.exports = {
 		path.resolve(__dirname, "index.js"),
 	],
 	output: {
-		library: "osjsEventEmitter",
+		library: "meeseOSEventEmitter",
 		libraryTarget: "umd"
 	},
 	optimization: {

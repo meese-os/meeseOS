@@ -41,7 +41,7 @@ const clampSubMenu = (root, ev) => {
   }
 
   // FIXME: Safari reports wrong item
-  if (ul.classList.contains('osjs-gui-menu-container')) {
+  if (ul.classList.contains('meeseOS-gui-menu-container')) {
     ul = ul.parentNode.parentNode;
   }
 
@@ -123,7 +123,7 @@ export class ContextMenu {
   init() {
     let clampTimeout;
 
-    this.$element.className = 'osjs-system-context-menu';
+    this.$element.className = 'meeseOS-system-context-menu';
     this.core.$root.appendChild(this.$element);
 
     let isActive = false;
@@ -137,7 +137,7 @@ export class ContextMenu {
       }
     }, {
       clamp: (el) => props => {
-        el = el || document.querySelector('#osjs-context-menu');
+        el = el || document.querySelector('#meeseOS-context-menu');
         clearTimeout(clampTimeout);
 
         if (el) {

@@ -24,7 +24,7 @@ module.exports = {
 		minimize,
 	},
 	externals: {
-		osjs: "OSjs"
+		meeseOS: "MeeseOS"
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
@@ -35,17 +35,6 @@ module.exports = {
 	],
 	module: {
 		rules: [
-			{
-				test: /\.(svg|png|jpe?g|gif|webp)$/,
-				type: "asset/resource",
-				exclude: /node_modules/,
-				generator: {
-					filename: file => {
-						return file.replace(/\\/g, "/")
-							.match(/src\/icons/) ? "icons/[name].[ext]" : "[hash].[ext]";
-					}
-				},
-			},
 			{
 				test: /\.(sa|sc|c)ss$/,
 				exclude: /node_modules/,

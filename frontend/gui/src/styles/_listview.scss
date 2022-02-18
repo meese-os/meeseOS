@@ -28,15 +28,15 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-list-view {
+.meeseOS-gui-list-view {
   overflow: hidden;
 
-  .osjs-icon {
+  .meeseOS-icon {
     margin-right: calc($base-margin / 2);
   }
 }
 
-.osjs-gui-list-view-wrapper {
+.meeseOS-gui-list-view-wrapper {
   min-height: 4em;
   display: flex;
   flex-basis: 100%;
@@ -45,7 +45,7 @@
   position: relative;
 }
 
-.osjs-gui-list-view-pane {
+.meeseOS-gui-list-view-pane {
   min-width: 1em;
   min-height: 1em;
   position: relative;
@@ -56,8 +56,8 @@
   }
 }
 
-.osjs-gui-list-view-cell,
-.osjs-gui-list-view-header {
+.meeseOS-gui-list-view-cell,
+.meeseOS-gui-list-view-header {
   position: relative;
   padding: calc($base-margin / 2);
   flex-shrink: 0;
@@ -75,7 +75,7 @@
   }
 }
 
-.osjs-gui-list-view-header {
+.meeseOS-gui-list-view-header {
   z-index: 10;
   position: sticky;
   top: 0;

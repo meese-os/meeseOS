@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-progressbar-wrapper {
+.meeseOS-gui-progressbar-wrapper {
   display: flex;
   z-index: 1;
   width: 100%;
@@ -41,7 +41,7 @@
   flex-grow: 1;
 }
 
-.osjs-gui-progressbar-value {
+.meeseOS-gui-progressbar-value {
   position: absolute;
   top: 0;
   left: 0;
@@ -50,7 +50,7 @@
   z-index: 2;
 }
 
-.osjs-gui-progressbar-label {
+.meeseOS-gui-progressbar-label {
   z-index: 3;
   position: absolute;
   top: 0;

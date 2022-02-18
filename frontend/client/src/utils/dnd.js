@@ -181,14 +181,14 @@ export const draggable = (el, options = {}) => {
     el.removeAttribute('aria-grabbed');
     el.removeEventListener('dragstart', dragstart);
     el.removeEventListener('dragend', dragend);
-    el.classList.remove('osjs__draggable');
+    el.classList.remove('meeseOS__draggable');
   };
 
   el.setAttribute('draggable', 'true');
   el.setAttribute('aria-grabbed', 'false');
   el.addEventListener('dragstart', dragstart);
   el.addEventListener('dragend', dragend);
-  el.classList.add('osjs__draggable');
+  el.classList.add('meeseOS__draggable');
 
   return {destroy};
 };
@@ -214,7 +214,7 @@ export const droppable = (el, options = {}) => {
   const dragenter = ev => ondragenter(ev);
 
   const dragleave = ev => {
-    el.classList.remove('osjs__drop');
+    el.classList.remove('meeseOS__drop');
 
     return retval(ondragleave, ev);
   };
@@ -225,13 +225,13 @@ export const droppable = (el, options = {}) => {
     const inside = el.contains(ev.target);
 
     if (!inside) {
-      el.classList.remove('osjs__drop');
+      el.classList.remove('meeseOS__drop');
       return false;
     }
 
     ev.stopPropagation();
     ev.dataTransfer.dropEffect = effect;
-    el.classList.add('osjs__drop');
+    el.classList.add('meeseOS__drop');
 
     return retval(ondragover, ev);
   };
@@ -245,7 +245,7 @@ export const droppable = (el, options = {}) => {
 
     ev.stopPropagation();
     ev.preventDefault();
-    el.classList.remove('osjs__drop');
+    el.classList.remove('meeseOS__drop');
 
     return retval(ondrop, ev, data, files);
   };
@@ -256,7 +256,7 @@ export const droppable = (el, options = {}) => {
     el.removeEventListener('dragover', dragover);
     el.removeEventListener('dragleave', dragleave);
     el.removeEventListener('drop', drop);
-    el.classList.remove('osjs__droppable');
+    el.classList.remove('meeseOS__droppable');
   };
 
   el.setAttribute('aria-dropeffect', effect);
@@ -264,7 +264,7 @@ export const droppable = (el, options = {}) => {
   el.addEventListener('dragover', dragover);
   el.addEventListener('dragleave', dragleave);
   el.addEventListener('drop', drop);
-  el.classList.add('osjs__droppable');
+  el.classList.add('meeseOS__droppable');
 
   return {destroy};
 };

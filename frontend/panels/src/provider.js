@@ -59,7 +59,7 @@ export default class PanelServiceProvider {
   }
 
   async init() {
-    this.core.singleton('osjs/panels', () => ({
+    this.core.singleton('meeseOS/panels', () => ({
       register: (name, classRef) => {
         if (this.registry[name]) {
           console.warn('Overwriting previously registered panel item', name);
@@ -89,9 +89,9 @@ export default class PanelServiceProvider {
 
         this.panels.push(panel);
 
-        panel.on('destroy', () => this.core.emit('osjs/panel:destroy', panel, this.panels));
+        panel.on('destroy', () => this.core.emit('meeseOS/panel:destroy', panel, this.panels));
         panel.on('create', () => setTimeout(() => {
-          this.core.emit('osjs/panel:create', panel, this.panels);
+          this.core.emit('meeseOS/panel:create', panel, this.panels);
         }, 1));
 
         if (this.inited) {
@@ -100,10 +100,10 @@ export default class PanelServiceProvider {
       },
 
       save: () => {
-        const settings = this.core.make('osjs/settings');
+        const settings = this.core.make('meeseOS/settings');
         const panels = this.panels.map(panel => panel.options);
 
-        return Promise.resolve(settings.set('osjs/desktop', 'panels', panels))
+        return Promise.resolve(settings.set('meeseOS/desktop', 'panels', panels))
           .then(() => settings.save());
       },
 

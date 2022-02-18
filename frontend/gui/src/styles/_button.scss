@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-button {
+.meeseOS-gui-button {
   & > button {
     cursor: pointer;
     display: block;
@@ -50,7 +50,7 @@
       padding: 0;
     }
 
-    & > .osjs-icon + .osjs-label {
+    & > .meeseOS-icon + .meeseOS-label {
       margin-left: calc($base-margin / 2);
     }
 

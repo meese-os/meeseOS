@@ -136,14 +136,14 @@ describe('utils', () => {
         .resolves
         .toMatchObject([{
           json: {
-            osjs: {type: 'package'}
+            meeseOS: {type: 'package'}
           },
           meta: {
             name: 'Application'
           }
         }, {
           json: {
-            osjs: {type: 'package'}
+            meeseOS: {type: 'package'}
           },
           meta: {
             name: 'Theme'

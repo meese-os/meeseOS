@@ -75,7 +75,7 @@ export default class WindowBehavior {
      * @readonly
      */
     this.$lofi = document.createElement('div');
-    this.$lofi.className = 'osjs-window-behavior-lofi';
+    this.$lofi.className = 'meeseOS-window-behavior-lofi';
   }
 
   /**
@@ -106,7 +106,7 @@ export default class WindowBehavior {
         win.emit('transitionend');
       }
 
-      this.core.emit('osjs/window:transitionend', ev, win);
+      this.core.emit('meeseOS/window:transitionend', ev, win);
     };
 
     win.$element.addEventListener('touchstart', ontouchstart, touchArg);
@@ -157,7 +157,7 @@ export default class WindowBehavior {
     }
 
     const target = ev.target;
-    const hitButton = target.classList.contains('osjs-window-button');
+    const hitButton = target.classList.contains('meeseOS-window-button');
 
     if (hitButton) {
       const action =  ev.target.getAttribute('data-action');
@@ -176,7 +176,7 @@ export default class WindowBehavior {
     }
 
     const target = ev.target;
-    const hitTitle = target.classList.contains('osjs-window-header');
+    const hitTitle = target.classList.contains('meeseOS-window-header');
 
     if (hitTitle) {
       if (win.state.maximized) {
@@ -204,13 +204,13 @@ export default class WindowBehavior {
 
     const checkMove = matchKeyCombo(moveKeybinding, ev)
       ? win.$element.contains(target)
-      : target.classList.contains('osjs-window-header');
+      : target.classList.contains('meeseOS-window-header');
 
-    const rect = this.core.has('osjs/desktop')
-      ? this.core.make('osjs/desktop').getRect()
+    const rect = this.core.has('meeseOS/desktop')
+      ? this.core.make('meeseOS/desktop').getRect()
       : {top: 0, left: 0};
 
-    const resize = target.classList.contains('osjs-window-resize')
+    const resize = target.classList.contains('meeseOS-window-resize')
       ? resizer(win, target)
       : null;
 
@@ -327,8 +327,8 @@ export default class WindowBehavior {
 
     this.lastAction = null;
 
-    if (this.core.has('osjs/contextmenu')) {
-      this.core.make('osjs/contextmenu').hide();
+    if (this.core.has('meeseOS/contextmenu')) {
+      this.core.make('meeseOS/contextmenu').hide();
     }
 
     if (lofi) {
@@ -362,7 +362,7 @@ export default class WindowBehavior {
     const {minimized, maximized} = win.state;
     const {minimizable, maximizable, closeable} = win.attributes;
 
-    this.core.make('osjs/contextmenu', {
+    this.core.make('meeseOS/contextmenu', {
       position: ev,
       menu: [{
         label: minimized ? "Raise" : "Minimize",

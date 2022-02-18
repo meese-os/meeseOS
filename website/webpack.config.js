@@ -1,13 +1,10 @@
 const path = require("path");
 const mode = process.env.NODE_ENV || "development";
 const minimize = mode === "production";
-const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {DefinePlugin} = webpack;
 const NodemonPlugin = require("nodemon-webpack-plugin");
-const npm = require("./package.json");
 const plugins = [];
 
 if (mode === "production") {
@@ -23,7 +20,7 @@ module.exports = {
 	mode,
 	devtool: "source-map",
 	entry: {
-		osjs: path.resolve(__dirname, "src/client/index.js")
+		meeseOS: path.resolve(__dirname, "src/client/index.js")
 	},
 	performance: {
 		maxEntrypointSize: 500 * 1024,
@@ -40,9 +37,6 @@ module.exports = {
 		}
 	},
 	plugins: [
-		new DefinePlugin({
-			OSJS_VERSION: npm.version
-		}),
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src/client/index.ejs"),
 			favicon: path.resolve(__dirname, "src/client/favicon.png"),

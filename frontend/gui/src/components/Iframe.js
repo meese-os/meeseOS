@@ -40,7 +40,7 @@ import {Element} from './Element';
  */
 export const Iframe = (props, children = []) =>
   h(Element, Object.assign({}, props.box || {}, {
-    class: ['osjs-gui-iframe', props.class]
+    class: ['meeseOS-gui-iframe', props.class]
   }), [
     h('iframe', Object.assign({
       frameborder: 0

@@ -1,4 +1,4 @@
-const osjs = require('osjs');
+const meeseOS = require('meeseOS');
 const path = require('path');
 const Packages = require('../src/packages.js');
 
@@ -6,7 +6,7 @@ describe('Packages', () => {
   let core;
   let packages;
 
-  beforeAll(() => osjs().then(c => (core = c)));
+  beforeAll(() => meeseOS().then(c => (core = c)));
   afterAll(() => core.destroy());
 
   test('#constructor', () => {
@@ -39,7 +39,7 @@ describe('Packages', () => {
     packages.handleMessage(ws, params);
 
     expect(ws.send).toBeCalledWith(JSON.stringify({
-      name: 'osjs/application:socket:message',
+      name: 'meeseOS/application:socket:message',
       params: [{
         pid: 1,
         args: ['Pong']

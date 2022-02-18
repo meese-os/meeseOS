@@ -74,7 +74,7 @@ export default class DesktopServiceProvider extends ServiceProvider {
    */
   provides() {
     return [
-      'osjs/desktop'
+      'meeseOS/desktop'
     ];
   }
 
@@ -85,9 +85,9 @@ export default class DesktopServiceProvider extends ServiceProvider {
   init() {
     this.desktop.init();
 
-    this.core.singleton('osjs/desktop', () => this.createDesktopContract());
+    this.core.singleton('meeseOS/desktop', () => this.createDesktopContract());
 
-    this.core.on('osjs/core:started', () => {
+    this.core.on('meeseOS/core:started', () => {
       this.desktop.applySettings();
     });
   }

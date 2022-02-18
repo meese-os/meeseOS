@@ -205,6 +205,7 @@ export default class Websocket extends EventEmitter {
    * Wrapper for sending data
    */
   send(...args) {
+		// TODO: Fix problem here after closing terminal window
     return this.connection.send(...args);
   }
 

@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Notification from '../src/notification.js';
 
 describe('Notification', () => {
@@ -15,7 +15,7 @@ describe('Notification', () => {
 
   test('#constructor', () => {
     const ev = jest.fn(() => {});
-    core.on('osjs/notification:create', ev);
+    core.on('meeseOS/notification:create', ev);
 
     notification = new Notification(core, root, {
       title: 'Jest',
@@ -30,14 +30,14 @@ describe('Notification', () => {
 
     expect(root.children.length).toBe(1);
     setTimeout(() => {
-      expect(root.querySelector('osjs-notification-title').textContent).toBe('Jest');
-      expect(root.querySelector('osjs-notification-message').textContent).toBe('Jest');
+      expect(root.querySelector('meeseOS-notification-title').textContent).toBe('Jest');
+      expect(root.querySelector('meeseOS-notification-message').textContent).toBe('Jest');
     }, 10);
   });
 
   test('#destroy', () => {
     const ev = jest.fn(() => {});
-    core.on('osjs/notification:destroy', ev);
+    core.on('meeseOS/notification:destroy', ev);
     notification.destroy();
 
     expect(ev).toBeCalled();

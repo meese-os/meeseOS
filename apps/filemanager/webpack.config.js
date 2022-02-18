@@ -22,7 +22,7 @@ module.exports = {
 		path.resolve(__dirname, "index.js"),
 	],
 	externals: {
-		osjs: "OSjs"
+		meeseOS: "MeeseOS"
 	},
 	optimization: {
 		minimize,
@@ -62,7 +62,7 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!@osjs)/,
+				exclude: /node_modules\/(?!@meeseOS)/,
 				use: {
 					loader: "babel-loader"
 				}

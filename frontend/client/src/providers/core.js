@@ -182,7 +182,7 @@ export default class CoreServiceProvider extends ServiceProvider {
      */
     this.middleware = new Middleware();
 
-    window.OSjs = this.createGlobalApi();
+    window.MeeseOS = this.createGlobalApi();
   }
 
   /**
@@ -191,22 +191,22 @@ export default class CoreServiceProvider extends ServiceProvider {
    */
   provides() {
     return [
-      'osjs/application',
-      'osjs/basic-application',
-      'osjs/window',
-      'osjs/windows',
-      'osjs/event-handler',
-      'osjs/window-behaviour',
-      'osjs/dnd',
-      'osjs/dom',
-      'osjs/clipboard',
-      'osjs/middleware',
-      'osjs/tray',
-      'osjs/packages',
-      'osjs/websocket',
-      'osjs/session',
-      'osjs/theme',
-      'osjs/sounds'
+      'meeseOS/application',
+      'meeseOS/basic-application',
+      'meeseOS/window',
+      'meeseOS/windows',
+      'meeseOS/event-handler',
+      'meeseOS/window-behaviour',
+      'meeseOS/dnd',
+      'meeseOS/dom',
+      'meeseOS/clipboard',
+      'meeseOS/middleware',
+      'meeseOS/tray',
+      'meeseOS/packages',
+      'meeseOS/websocket',
+      'meeseOS/session',
+      'meeseOS/theme',
+      'meeseOS/sounds'
     ];
   }
 
@@ -230,7 +230,7 @@ export default class CoreServiceProvider extends ServiceProvider {
   init() {
     this.registerContracts();
 
-    this.core.on('osjs/core:started', () => {
+    this.core.on('meeseOS/core:started', () => {
       this.session.load();
     });
 
@@ -243,16 +243,16 @@ export default class CoreServiceProvider extends ServiceProvider {
    */
   start() {
     if (this.core.config('development')) {
-      this.core.on('osjs/dist:changed', filename => {
+      this.core.on('meeseOS/dist:changed', filename => {
         this._onDistChanged(filename);
       });
 
-      this.core.on('osjs/packages:package:changed', name => {
+      this.core.on('meeseOS/packages:package:changed', name => {
         this._onPackageChanged(name);
       });
     }
 
-    this.core.on('osjs/packages:metadata:changed', () => {
+    this.core.on('meeseOS/packages:metadata:changed', () => {
       this.pm.init();
     });
   }
@@ -261,26 +261,26 @@ export default class CoreServiceProvider extends ServiceProvider {
    * Registers contracts
    */
   registerContracts() {
-    this.core.instance('osjs/window', (options = {}) => new Window(this.core, options));
-    this.core.instance('osjs/application', (data = {}) => new Application(this.core, data));
-    this.core.instance('osjs/basic-application', (proc, win, options = {}) => new BasicApplication(this.core, proc, win, options));
-    this.core.instance('osjs/websocket', (name, uri, options = {}) => new Websocket(name, uri, options));
-    this.core.instance('osjs/event-emitter', name => new EventEmitter(name));
+    this.core.instance('meeseOS/window', (options = {}) => new Window(this.core, options));
+    this.core.instance('meeseOS/application', (data = {}) => new Application(this.core, data));
+    this.core.instance('meeseOS/basic-application', (proc, win, options = {}) => new BasicApplication(this.core, proc, win, options));
+    this.core.instance('meeseOS/websocket', (name, uri, options = {}) => new Websocket(name, uri, options));
+    this.core.instance('meeseOS/event-emitter', name => new EventEmitter(name));
 
-    this.core.singleton('osjs/windows', () => this.createWindowContract());
-    this.core.singleton('osjs/dnd', () => this.createDnDContract());
-    this.core.singleton('osjs/dom', () => this.createDOMContract());
-    this.core.singleton('osjs/theme', () => this.createThemeContract());
-    this.core.singleton('osjs/sounds', () => this.createSoundsContract());
-    this.core.singleton('osjs/session', () => this.createSessionContract());
-    this.core.singleton('osjs/packages', () => this.createPackagesContract());
-    this.core.singleton('osjs/clipboard', () => this.createClipboardContract());
-    this.core.singleton('osjs/middleware', () => this.createMiddlewareContract());
+    this.core.singleton('meeseOS/windows', () => this.createWindowContract());
+    this.core.singleton('meeseOS/dnd', () => this.createDnDContract());
+    this.core.singleton('meeseOS/dom', () => this.createDOMContract());
+    this.core.singleton('meeseOS/theme', () => this.createThemeContract());
+    this.core.singleton('meeseOS/sounds', () => this.createSoundsContract());
+    this.core.singleton('meeseOS/session', () => this.createSessionContract());
+    this.core.singleton('meeseOS/packages', () => this.createPackagesContract());
+    this.core.singleton('meeseOS/clipboard', () => this.createClipboardContract());
+    this.core.singleton('meeseOS/middleware', () => this.createMiddlewareContract());
 
-    this.core.instance('osjs/tray', (options, handler) => {
+    this.core.instance('meeseOS/tray', (options, handler) => {
       if (typeof options !== 'undefined') {
         // FIXME: Use contract instead
-        logger.warn('osjs/tray usage without .create() is deprecated');
+        logger.warn('meeseOS/tray usage without .create() is deprecated');
         return this.tray.create(options, handler);
       }
 
@@ -288,13 +288,13 @@ export default class CoreServiceProvider extends ServiceProvider {
     });
 
     // FIXME: Remove this from public usage
-    this.core.singleton('osjs/window-behavior', () => typeof this.options.windowBehavior === 'function'
+    this.core.singleton('meeseOS/window-behavior', () => typeof this.options.windowBehavior === 'function'
       ? this.options.windowBehavior(this.core)
       : new WindowBehavior(this.core));
 
     // FIXME: deprecated
-    this.core.instance('osjs/event-handler', (...args) => {
-      logger.warn('osjs/event-handler is deprecated, use osjs/event-emitter');
+    this.core.instance('meeseOS/event-handler', (...args) => {
+      logger.warn('meeseOS/event-handler is deprecated, use meeseOS/event-emitter');
       return new EventEmitter(...args);
     });
   }

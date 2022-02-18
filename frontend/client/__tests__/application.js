@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Application from '../src/application.js';
 import Window from '../src/window.js';
 import Websocket from '../src/websocket.js';
@@ -131,7 +131,7 @@ describe('Application', () => {
     const onGlobalDestroy = jest.fn(() => {});
 
     application.on('destroy', onLocalDestroy);
-    core.on('osjs/application:destroy', onGlobalDestroy);
+    core.on('meeseOS/application:destroy', onGlobalDestroy);
 
     application.destroy();
     application.destroy();

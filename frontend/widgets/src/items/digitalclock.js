@@ -119,7 +119,7 @@ export default class DigitalClockWidget extends Widget {
   }
 
   createFontDialog() {
-    this.core.make('osjs/dialog', 'font', {
+    this.core.make('meeseOS/dialog', 'font', {
       name: this.options.fontFamily,
       controls: ['name']
     }, (btn, value) => {
@@ -132,7 +132,7 @@ export default class DigitalClockWidget extends Widget {
   }
 
   createColorDialog() {
-    this.core.make('osjs/dialog', 'color', {
+    this.core.make('meeseOS/dialog', 'color', {
       color: this.options.fontColor
     }, (btn, value) => {
       if (btn === 'ok') {

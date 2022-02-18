@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Filesystem from '../src/filesystem.js';
 
 describe('Filesystem', () => {
@@ -42,18 +42,18 @@ describe('Filesystem', () => {
   });
 
   test('#getMountpointFromPath', () => {
-    expect(fs.getMountpointFromPath('osjs:/file.name'))
-      .toMatchObject({name: 'osjs'});
+    expect(fs.getMountpointFromPath('meeseOS:/file.name'))
+      .toMatchObject({name: 'meeseOS'});
   });
 
   test('#mount - failure', () => {
-    return expect(fs.mount('osjs'))
+    return expect(fs.mount('meeseOS'))
       .rejects
       .toBeInstanceOf(Error);
   });
 
   test('#unmount', () => {
-    return expect(fs.unmount('osjs'))
+    return expect(fs.unmount('meeseOS'))
       .resolves
       .toEqual(true);
   });
@@ -71,19 +71,19 @@ describe('Filesystem', () => {
   });
 
   test('#unmount - failure', () => {
-    return expect(fs.unmount('osjs'))
+    return expect(fs.unmount('meeseOS'))
       .rejects
       .toBeInstanceOf(Error);
   });
 
   test('#mount - remount', () => {
-    return expect(fs.mount('osjs'))
+    return expect(fs.mount('meeseOS'))
       .resolves
       .toEqual(true);
   });
 
   test('#mount - fail at already mounted', () => {
-    return expect(fs.mount('osjs'))
+    return expect(fs.mount('meeseOS'))
       .rejects
       .toBeInstanceOf(Error);
   });

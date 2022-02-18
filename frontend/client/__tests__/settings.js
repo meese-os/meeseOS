@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Settings from '../src/settings.js';
 
 describe('Settings', () => {
@@ -28,27 +28,27 @@ describe('Settings', () => {
   });
 
   test('#set', () => {
-    expect(() => settings.set('osjs/locked', 'foo', 'Hello World'))
+    expect(() => settings.set('meeseOS/locked', 'foo', 'Hello World'))
       .not
       .toThrow();
 
-    expect(() => settings.set('osjs/jest', 'foo', 'Hello World'))
+    expect(() => settings.set('meeseOS/jest', 'foo', 'Hello World'))
       .not
       .toThrow();
   });
 
   test('#get', () => {
-    expect(settings.get('osjs/jest', 'foo')).toBe('Hello World');
-    expect(settings.get('osjs/jest', 'bar')).toBe(undefined);
-    expect(settings.get('osjs/jest', 'baz', 'default')).toBe('default');
-    expect(settings.get('osjs/jest')).toEqual({
+    expect(settings.get('meeseOS/jest', 'foo')).toBe('Hello World');
+    expect(settings.get('meeseOS/jest', 'bar')).toBe(undefined);
+    expect(settings.get('meeseOS/jest', 'baz', 'default')).toBe('default');
+    expect(settings.get('meeseOS/jest')).toEqual({
       foo: 'Hello World'
     });
     expect(settings.get()).toEqual({
-      'osjs/default-application': {},
-      'osjs/desktop': {},
-      'osjs/session': [],
-      'osjs/jest': {
+      'meeseOS/default-application': {},
+      'meeseOS/desktop': {},
+      'meeseOS/session': [],
+      'meeseOS/jest': {
         foo: 'Hello World'
       }
     });
@@ -61,10 +61,10 @@ describe('Settings', () => {
   });
 
   test('#clear', () => {
-    return settings.clear('osjs/jest')
+    return settings.clear('meeseOS/jest')
       .then(result => {
         expect(result).toBe(true);
-        expect(settings.get('osjs/jest', 'foo')).toBe(undefined);
+        expect(settings.get('meeseOS/jest', 'foo')).toBe(undefined);
       });
   });
 });

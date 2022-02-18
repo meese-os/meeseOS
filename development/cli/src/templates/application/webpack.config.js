@@ -20,7 +20,7 @@ module.exports = {
   devtool: 'source-map',
   entry: path.resolve(__dirname, 'index.js'),
   externals: {
-    osjs: 'OSjs'
+    meeseOS: 'MeeseOS'
   },
   optimization: {
     minimize,

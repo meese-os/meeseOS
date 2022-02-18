@@ -30,7 +30,7 @@
 
 import {h, app} from 'hyperapp';
 import {Box, TextareaField, Menubar, MenubarItem} from '@aaronmeese.com/gui';
-import osjs from 'osjs';
+import meeseOS from 'meeseOS';
 import {name as applicationName} from './metadata.json';
 
 // File menu
@@ -44,8 +44,8 @@ const createMenu = (current, actions) => ([
 
 // OS.js application
 const createApplication = (core, proc, win, $content) => {
-  const vfs = core.make('osjs/vfs');
-  const basic = core.make('osjs/basic-application', proc, win, {
+  const vfs = core.make('meeseOS/vfs');
+  const basic = core.make('meeseOS/basic-application', proc, win, {
     defaultFilename: 'New File.txt'
   });
 
@@ -69,7 +69,7 @@ const createApplication = (core, proc, win, $content) => {
     },
 
     menu: ev => (state, actions) => {
-      core.make('osjs/contextmenu').show({
+      core.make('meeseOS/contextmenu').show({
         position: ev.target,
         menu: createMenu(proc.args.file, actions)
       });
@@ -124,9 +124,9 @@ const createMainWindow = (core, proc) => {
 };
 
 const createProcess = (core, args, options, metadata) => {
-  const proc = core.make('osjs/application', {args, options, metadata});
+  const proc = core.make('meeseOS/application', {args, options, metadata});
   createMainWindow(core, proc);
   return proc;
 };
 
-osjs.register(applicationName, createProcess);
+meeseOS.register(applicationName, createProcess);

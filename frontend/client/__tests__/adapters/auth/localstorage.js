@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import adapter from '../../../src/adapters/auth/localstorage.js';
 
 describe('LocalStorage Auth Adapter', () => {

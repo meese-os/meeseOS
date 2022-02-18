@@ -146,19 +146,19 @@ export default class MenuPanelItem extends PanelItem {
 
     const logout = async (save) => {
       if (save) {
-        await this.core.make('osjs/session').save();
+        await this.core.make('meeseOS/session').save();
       }
 
-      this.core.make('osjs/auth').logout();
+      this.core.make('meeseOS/auth').logout();
     };
 
     const makeMenu = makeTree(this.core, icon);
 
     const onclick = (ev) => {
-      const packages = this.core.make('osjs/packages')
+      const packages = this.core.make('meeseOS/packages')
         .getPackages(m => (!m.type || m.type === 'application'));
 
-      this.core.make('osjs/contextmenu').show({
+      this.core.make('meeseOS/contextmenu').show({
         menu: makeMenu([].concat(packages)),
         position: ev.target,
         callback: (item) => {
@@ -177,17 +177,17 @@ export default class MenuPanelItem extends PanelItem {
     };
 
     const onmenuopen = () => {
-      const els = Array.from(this.panel.$element.querySelectorAll('.osjs-panel-item[data-name="menu"]'));
-      els.forEach(el => el.querySelector('.osjs-panel-item--icon').click());
+      const els = Array.from(this.panel.$element.querySelectorAll('.meeseOS-panel-item[data-name="menu"]'));
+      els.forEach(el => el.querySelector('.meeseOS-panel-item--icon').click());
     };
 
-    this.core.on('osjs/desktop:keybinding:open-application-menu', onmenuopen);
-    this.on('destroy', () => this.core.off('osjs/desktop:keybinding:open-application-menu', onmenuopen));
+    this.core.on('meeseOS/desktop:keybinding:open-application-menu', onmenuopen);
+    this.on('destroy', () => this.core.off('meeseOS/desktop:keybinding:open-application-menu', onmenuopen));
 
     return super.render('menu', [
       h('div', {
         onclick,
-        className: 'osjs-panel-item--clickable osjs-panel-item--icon'
+        className: 'meeseOS-panel-item--clickable meeseOS-panel-item--icon'
       }, [
         h('img', {
           src: icon,

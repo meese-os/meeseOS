@@ -38,13 +38,13 @@ const path = require('path');
 module.exports = (core, options) => {
   const fsOptions = {
     system: false,
-    path: 'home:/.osjs/settings.json',
+    path: 'home:/.meeseOS/settings.json',
     ...options || {}
   };
 
   const getRealFilename = (req) => fsOptions.system
     ? Promise.resolve(fsOptions.path)
-    : core.make('osjs/vfs')
+    : core.make('meeseOS/vfs')
       .realpath(fsOptions.path, req.session.user);
 
   const before = req => getRealFilename(req)

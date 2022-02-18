@@ -77,7 +77,7 @@ export default class PromptDialog extends Dialog {
         }
       }, (state, actions) => this.createView([
         h(Box, {grow: 1, padding: false}, [
-          h(Box, {class: 'osjs-dialog-message'}, String(this.args.message)),
+          h(Box, {class: 'meeseOS-dialog-message'}, String(this.args.message)),
           h(TextField, {
             value: state.value,
             placeholder: this.args.placeholder,

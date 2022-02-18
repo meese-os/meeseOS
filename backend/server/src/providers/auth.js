@@ -49,7 +49,7 @@ class AuthServiceProvider extends ServiceProvider {
   }
 
   async init() {
-    const {route, routeAuthenticated} = this.core.make('osjs/express');
+    const {route, routeAuthenticated} = this.core.make('meeseOS/express');
 
     route('post', '/register', (req, res) => this.auth.register(req, res));
     route('post', '/login', (req, res) => this.auth.login(req, res));

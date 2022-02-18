@@ -205,7 +205,7 @@ export default class ColorDialog extends Dialog {
         h(Box, {orientation: 'vertical', grow: 1, shrink: 1}, [
           h(BoxContainer, {orientation: 'horizontal'}, [
             h('div', {
-              class: 'osjs-gui-border',
+              class: 'meeseOS-gui-border',
               style: {display: 'inline-block'},
               oncreate: el => el.appendChild(canvas)
             }),

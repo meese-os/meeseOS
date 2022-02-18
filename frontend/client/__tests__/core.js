@@ -13,12 +13,12 @@ describe('Core', () => {
   afterAll(() => core.destroy());
 
   test('#off - fail unregister event', () => {
-    return expect(() => core.off('osjs/fail'))
+    return expect(() => core.off('meeseOS/fail'))
       .toThrow(TypeError);
   });
 
   test('#off - unregister event', () => {
-    return expect(() => core.off('osjs/fail', () => {}))
+    return expect(() => core.off('meeseOS/fail', () => {}))
       .not
       .toThrow(TypeError);
   });
@@ -119,7 +119,7 @@ describe('Core', () => {
   test('#open - not try to open application for mime', () => {
     return expect(core
       .open({
-        mime: 'osjs/application',
+        mime: 'meeseOS/application',
         path: 'apps:/ValidApplication'
       }))
       .resolves
@@ -139,7 +139,7 @@ describe('Core', () => {
   test('#getUser', () => {
     expect(core.getUser()).toEqual({
       id: null,
-      username: 'osjs',
+      username: 'meeseOS',
       groups: []
     });
   });
@@ -179,14 +179,14 @@ describe('Core', () => {
       });
   });
 
-  test('event: osjs/application:socket:message', () => {
+  test('event: meeseOS/application:socket:message', () => {
     const fn = jest.fn();
 
     return core.run('ValidApplication')
       .then(app => {
         app.on('ws:message', fn);
 
-        core.emit('osjs/application:socket:message', {
+        core.emit('meeseOS/application:socket:message', {
           pid: app.pid,
           args: [1, 2, 3]
         });
@@ -197,7 +197,7 @@ describe('Core', () => {
       });
   });
 
-  test('event: osjs/iframe:message', () => {
+  test('event: meeseOS/iframe:message', () => {
     const fn = jest.fn();
 
     return core.run('ValidApplication')
@@ -207,7 +207,7 @@ describe('Core', () => {
 
         const event = new MessageEvent('message', {
           data: {
-            name: 'osjs/iframe:message',
+            name: 'meeseOS/iframe:message',
             params: [{
               pid: app.pid,
               wid: win.wid,

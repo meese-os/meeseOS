@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Notification from '../src/notification.js';
 import Notifications from '../src/notifications.js';
 

@@ -49,14 +49,14 @@ class VFSServiceProvider extends ServiceProvider {
 
   depends() {
     return [
-      'osjs/express'
+      'meeseOS/express'
     ];
   }
 
   provides() {
     return [
-      'osjs/fs',
-      'osjs/vfs'
+      'meeseOS/fs',
+      'meeseOS/vfs'
     ];
   }
 
@@ -65,9 +65,9 @@ class VFSServiceProvider extends ServiceProvider {
 
     await filesystem.init();
 
-    this.core.singleton('osjs/fs', () => this.filesystem);
+    this.core.singleton('meeseOS/fs', () => this.filesystem);
 
-    this.core.singleton('osjs/vfs', () => ({
+    this.core.singleton('meeseOS/vfs', () => ({
       realpath: (...args) => this.filesystem.realpath(...args),
       request: (...args) => this.filesystem.request(...args),
       call: (...args) => this.filesystem.call(...args),

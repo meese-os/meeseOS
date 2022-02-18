@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui {
+.meeseOS-gui {
   display: flex;
   position: relative;
   min-width: 1em;
@@ -36,7 +36,7 @@
   box-sizing: border-box;
 }
 
-.osjs-window-content > .osjs-gui-box:only-child {
+.meeseOS-window-content > .meeseOS-gui-box:only-child {
   position: absolute;
   top: 0;
   left: 0;
@@ -44,15 +44,15 @@
   bottom: 0;
 }
 
-.osjs-gui-horizontal {
+.meeseOS-gui-horizontal {
   flex-direction: column;
 }
 
-.osjs-gui-vertical {
+.meeseOS-gui-vertical {
   flex-direction: row;
 }
 
-.osjs-icon {
+.meeseOS-icon {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-color: transparent;

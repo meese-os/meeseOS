@@ -34,7 +34,7 @@ import * as clipboard from 'clipboard-polyfill';
 import {AttachAddon} from './attach.js';
 
 import './index.scss';
-import osjs from 'osjs';
+import meeseOS from 'meeseOS';
 import {name as applicationName} from './metadata.json';
 
 /*
@@ -143,7 +143,7 @@ const createTerminal = (core, proc, index) => {
     $content.addEventListener('contextmenu', ev => {
       ev.preventDefault();
 
-      core.make('osjs/contextmenu', {
+      core.make('meeseOS/contextmenu', {
         position: ev,
         menu: [{
           label: 'Copy text selection',
@@ -181,8 +181,8 @@ const createTerminal = (core, proc, index) => {
 //
 // Callback for launching application
 //
-osjs.register(applicationName, (core, args, options, metadata) => {
-  const proc = core.make('osjs/application', {
+meeseOS.register(applicationName, (core, args, options, metadata) => {
+  const proc = core.make('meeseOS/application', {
     args,
     options,
     metadata
@@ -196,11 +196,11 @@ osjs.register(applicationName, (core, args, options, metadata) => {
 
   const createWindow = () => createTerminal(core, proc, proc.windows.length);
 
-  if (core.has('osjs/tray')) {
-    const tray = core.make('osjs/tray').create({
+  if (core.has('meeseOS/tray')) {
+    const tray = core.make('meeseOS/tray').create({
       icon: proc.resource(metadata.icon),
     }, (ev) => {
-      core.make('osjs/contextmenu').show({
+      core.make('meeseOS/contextmenu').show({
         position: ev,
         menu: [
           {label: 'New terminal', onclick: () => createWindow()}

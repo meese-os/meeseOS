@@ -41,5 +41,5 @@ export const Box = (props, children) =>
   h(Element, Object.assign({
     orientation: 'horizontal'
   }, props, {
-    class: ['osjs-gui-box', props.class],
+    class: ['meeseOS-gui-box', props.class],
   }), children);

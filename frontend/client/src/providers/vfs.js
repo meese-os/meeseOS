@@ -101,8 +101,8 @@ export default class VFSServiceProvider extends ServiceProvider {
    */
   provides() {
     return [
-      'osjs/vfs',
-      'osjs/fs'
+      'meeseOS/vfs',
+      'meeseOS/fs'
     ];
   }
 
@@ -111,8 +111,8 @@ export default class VFSServiceProvider extends ServiceProvider {
    * @return {Promise<undefined>}
    */
   init() {
-    this.core.singleton('osjs/vfs', () => this.createVFSContract());
-    this.core.singleton('osjs/fs', () => this.createFilesystemContract());
+    this.core.singleton('meeseOS/vfs', () => this.createVFSContract());
+    this.core.singleton('meeseOS/fs', () => this.createFilesystemContract());
 
     return this.fs.mountAll(false);
   }

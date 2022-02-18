@@ -117,7 +117,7 @@ class Core extends CoreBase {
       return;
     }
 
-    this.emit('osjs/core:destroy');
+    this.emit('meeseOS/core:destroy');
 
     logger.info('Shutting down...');
 
@@ -172,7 +172,7 @@ class Core extends CoreBase {
       return true;
     }
 
-    this.emit('osjs/core:start');
+    this.emit('meeseOS/core:start');
 
     if (this.configuration.logging) {
       this.wss.on('connection', (c) => {
@@ -191,7 +191,7 @@ class Core extends CoreBase {
     await super.boot();
     this.emit('init');
     await this.start();
-    this.emit('osjs/core:started');
+    this.emit('meeseOS/core:started');
 
     return true;
   }
@@ -248,7 +248,7 @@ class Core extends CoreBase {
     if (this.ws) {
       this.wss.clients // This is a Set
         .forEach(client => {
-          if (!client._osjs_client) {
+          if (!client._meeseOS_client) {
             return;
           }
 
@@ -279,7 +279,7 @@ class Core extends CoreBase {
    */
   broadcastUser(username, name, ...params) {
     return this.broadcast(name, params, client => {
-      return client._osjs_client.username === username;
+      return client._meeseOS_client.username === username;
     });
   }
 

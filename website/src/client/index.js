@@ -56,21 +56,21 @@ import config from './config.js';
 import './index.scss';
 
 const init = () => {
-  const osjs = new Core(config, {});
+  const meeseOS = new Core(config, {});
 
   // Register your service providers
-  osjs.register(CoreServiceProvider);
-  osjs.register(DesktopServiceProvider);
-  osjs.register(VFSServiceProvider);
-  osjs.register(NotificationServiceProvider);
-  osjs.register(SettingsServiceProvider, {before: true});
-  osjs.register(AuthServiceProvider, {before: true});
-  osjs.register(PanelServiceProvider);
-  osjs.register(DialogServiceProvider);
-  osjs.register(GUIServiceProvider);
-  osjs.register(WidgetServiceProvider);
+  meeseOS.register(CoreServiceProvider);
+  meeseOS.register(DesktopServiceProvider);
+  meeseOS.register(VFSServiceProvider);
+  meeseOS.register(NotificationServiceProvider);
+  meeseOS.register(SettingsServiceProvider, {before: true});
+  meeseOS.register(AuthServiceProvider, {before: true});
+  meeseOS.register(PanelServiceProvider);
+  meeseOS.register(DialogServiceProvider);
+  meeseOS.register(GUIServiceProvider);
+  meeseOS.register(WidgetServiceProvider);
 
-  osjs.boot();
+  meeseOS.boot();
 };
 
 window.addEventListener('DOMContentLoaded', () => init());

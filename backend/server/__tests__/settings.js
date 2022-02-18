@@ -1,4 +1,4 @@
-const osjs = require('osjs');
+const meeseOS = require('meeseOS');
 const Settings = require('../src/settings.js');
 const {Response} = require('jest-express/lib/response');
 const {Request} = require('jest-express/lib/request');
@@ -19,7 +19,7 @@ describe('Settings', () => {
     response.resetMocked();
   });
 
-  beforeAll(() => osjs().then(c => (core = c)));
+  beforeAll(() => meeseOS().then(c => (core = c)));
   afterAll(() => core.destroy());
 
   test('#constructor', () => {

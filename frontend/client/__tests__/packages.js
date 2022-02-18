@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import {EventEmitter} from '@aaronmeese.com/event-emitter';
 import Packages from '../src/packages.js';
 
@@ -119,7 +119,7 @@ describe('Packages', () =>  {
   });
 
   test('#launch - application', () => {
-    const cb = jest.fn((() => core.make('osjs/application')));
+    const cb = jest.fn((() => core.make('meeseOS/application')));
     packages.register('Package2', cb);
 
     return packages.launch('Package2')
@@ -138,7 +138,7 @@ describe('Packages', () =>  {
   });
 
   test('#launch - singleton', () => {
-    packages.register('Package4', (() => core.make('osjs/application', {
+    packages.register('Package4', (() => core.make('meeseOS/application', {
       metadata: {
         name: 'Package4'
       }
@@ -175,7 +175,7 @@ describe('Packages', () =>  {
     pkgs._running = [name];
 
     setTimeout(() => {
-      core.emit(`osjs/application:${name}:launched`, fakeApp);
+      core.emit(`meeseOS/application:${name}:launched`, fakeApp);
     }, 25);
 
     return pkgs.launch(name)

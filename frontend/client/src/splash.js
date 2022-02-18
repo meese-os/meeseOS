@@ -50,12 +50,12 @@ export default class Splash {
      * @readonly
      */
     this.$loading = document.createElement('div');
-    this.$loading.className = 'osjs-boot-splash';
+    this.$loading.className = 'meeseOS-boot-splash';
 
-    core.on('osjs/core:boot', () => this.show());
-    core.on('osjs/core:booted', () => this.destroy());
-    core.on('osjs/core:logged-in', () => this.show());
-    core.on('osjs/core:started', () => this.destroy());
+    core.on('meeseOS/core:boot', () => this.show());
+    core.on('meeseOS/core:booted', () => this.destroy());
+    core.on('meeseOS/core:logged-in', () => this.show());
+    core.on('meeseOS/core:started', () => this.destroy());
   }
 
   /**

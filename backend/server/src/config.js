@@ -94,8 +94,8 @@ const defaultConfiguration = {
       }
     },
     options: {
-      name: 'osjs.sid',
-      secret: 'osjs',
+      name: 'meeseOS.sid',
+      secret: 'meeseOS',
       rolling: true,
       resave: false,
       saveUninitialized: false,
@@ -118,7 +118,7 @@ const defaultConfiguration = {
     root: path.join(process.cwd(), 'vfs'),
 
     mountpoints: [{
-      name: 'osjs',
+      name: 'meeseOS',
       attributes: {
         root: '{root}/dist',
         readOnly: true

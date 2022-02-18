@@ -21,7 +21,7 @@ module.exports = {
 		path.resolve(__dirname, "index.js"),
 	],
 	output: {
-		library: "osjsPanels",
+		library: "meeseOSPanels",
 		libraryTarget: "umd",
 		umdNamedDefine: true,
 		sourceMapFilename: "[file].map",

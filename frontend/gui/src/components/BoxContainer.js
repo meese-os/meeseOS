@@ -39,5 +39,5 @@ import {Element} from './Element';
  */
 export const BoxContainer = (props, children) =>
   h(Element, Object.assign({}, props, {
-    class: ['osjs-gui-box-container', props.class]
+    class: ['meeseOS-gui-box-container', props.class]
   }), children);

@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Tray from '../src/tray.js';
 
 describe('Tray', () => {
@@ -9,7 +9,7 @@ describe('Tray', () => {
 
   test('#create', () => {
     let createEventEmitted = false;
-    core.once('osjs/tray:create', () => (createEventEmitted = true));
+    core.once('meeseOS/tray:create', () => (createEventEmitted = true));
 
     const tray = new Tray(core);
     const item = tray.create({
@@ -27,7 +27,7 @@ describe('Tray', () => {
 
   test('#update', () => {
     let updateEventEmitted = false;
-    core.once('osjs/tray:update', () => (updateEventEmitted = true));
+    core.once('meeseOS/tray:update', () => (updateEventEmitted = true));
 
     const tray = new Tray(core);
     const item = tray.create();
@@ -44,7 +44,7 @@ describe('Tray', () => {
 
   test('#remove', () => {
     let removeEventEmitted = false;
-    core.once('osjs/tray:remove', () => (removeEventEmitted = true));
+    core.once('meeseOS/tray:remove', () => (removeEventEmitted = true));
 
     const tray = new Tray(core);
     const item = tray.create();

@@ -80,12 +80,12 @@ export default class Search {
    * Initializes Search Service
    */
   init() {
-    const {icon} = this.core.make('osjs/theme');
+    const {icon} = this.core.make('meeseOS/theme');
 
-    this.$element.className = 'osjs-search';
+    this.$element.className = 'meeseOS-search';
     this.core.$root.appendChild(this.$element);
 
-    this.core.make('osjs/tray').create({
+    this.core.make('meeseOS/tray').create({
       title: "Search Filesystem (F3)",
       icon: icon('system-search.png')
     }, () => this.show());
@@ -106,8 +106,8 @@ export default class Search {
    * @return {Promise<FileMetadata[]>}
    */
   search(pattern) {
-    const vfs = this.core.make('osjs/vfs');
-    const promises = this.core.make('osjs/fs')
+    const vfs = this.core.make('meeseOS/vfs');
+    const promises = this.core.make('meeseOS/fs')
       .mountpoints()
       .map(mount => `${mount.name}:/`)
       .map(path => {

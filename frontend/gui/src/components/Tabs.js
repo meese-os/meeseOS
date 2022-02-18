@@ -33,7 +33,7 @@ import nestable from 'hyperapp-nestable';
 
 const headers = ({labels, onchange, oncontextmenu}, state, actions) => (labels || [])
   .map((label, index) => h('div', {
-    class: state.selectedIndex === index ? 'osjs__active' : '',
+    class: state.selectedIndex === index ? 'meeseOS__active' : '',
     oncontextmenu: ev => {
       (oncontextmenu || function() {})(ev, index, label);
     },
@@ -45,7 +45,7 @@ const headers = ({labels, onchange, oncontextmenu}, state, actions) => (labels |
 
 const panes = (state, children) => children
   .map((child, index) => h('div', {
-    class: state.selectedIndex === index ? 'osjs__active' : ''
+    class: state.selectedIndex === index ? 'meeseOS__active' : ''
   }, child));
 
 const view = nestable({
@@ -56,10 +56,10 @@ const view = nestable({
   }),
   setSelectedIndex: selectedIndex => state => ({selectedIndex})
 }, (state, actions) => (props, children) => h('div', {
-  class: 'osjs-gui-tabs-wrapper'
+  class: 'meeseOS-gui-tabs-wrapper'
 }, [
-  h('div', {class: 'osjs-gui-tabs-header'}, headers(props, state, actions)),
-  h('div', {class: 'osjs-gui-tabs-panes'}, panes(state, children))
+  h('div', {class: 'meeseOS-gui-tabs-header'}, headers(props, state, actions)),
+  h('div', {class: 'meeseOS-gui-tabs-panes'}, panes(state, children))
 ]), 'div');
 
 /**
@@ -69,5 +69,5 @@ const view = nestable({
  * @param {h[]} children Tabs
  */
 export const Tabs = (props, children) => h(view, Object.assign({
-  class: 'osjs-gui osjs-gui-tabs ' + (props.class || '')
+  class: 'meeseOS-gui meeseOS-gui-tabs ' + (props.class || '')
 }, props), children);

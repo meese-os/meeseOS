@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const osjs = require('osjs');
+const meeseOS = require('meeseOS');
 const path = require('path');
 const Filesystem = require('../src/filesystem.js');
 const {Response} = require('jest-express/lib/response');
@@ -10,9 +10,9 @@ describe('Filesystem', () => {
   let filesystem;
   let mountpoint;
 
-  beforeAll(() => osjs().then(c => {
+  beforeAll(() => meeseOS().then(c => {
     core = c;
-    filesystem = c.make('osjs/fs');
+    filesystem = c.make('meeseOS/fs');
   }));
 
   afterAll(() => core.destroy());
@@ -119,7 +119,7 @@ describe('Filesystem', () => {
     const filename =  path.join(core.config('tempPath'), 'jest/watch.txt');
     const cb = jest.fn();
 
-    core.on('osjs/vfs:watch:change', cb);
+    core.on('meeseOS/vfs:watch:change', cb);
     fs.ensureDirSync(path.dirname(filename));
     fs.writeFileSync(filename, 'testing');
 

@@ -59,10 +59,10 @@ export const ToggleField = (props = {}, children = []) =>
   }, [
     h('input', fieldProps),
     h('span', {
-      class: 'osjs-toggle-input'
+      class: 'meeseOS-toggle-input'
     }),
     h('span', {
-      class: 'osjs-toggle-label'
+      class: 'meeseOS-toggle-label'
     }, [
       props.label || '',
       ...children

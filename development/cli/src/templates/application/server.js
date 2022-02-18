@@ -1,5 +1,5 @@
 module.exports = (core, proc) => {
-  const {routeAuthenticated} = core.make('osjs/express');
+  const {routeAuthenticated} = core.make('meeseOS/express');
 
   return {
     // When server initializes

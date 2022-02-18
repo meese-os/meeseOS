@@ -69,7 +69,7 @@ class CoreServiceProvider extends ServiceProvider {
 
   provides() {
     return [
-      'osjs/express'
+      'meeseOS/express'
     ];
   }
 
@@ -85,7 +85,7 @@ class CoreServiceProvider extends ServiceProvider {
       routeAuthenticated: []
     };
 
-    this.core.singleton('osjs/express', () => ({
+    this.core.singleton('meeseOS/express', () => ({
       isAuthenticated,
 
       call: (method, ...args) => app[method](...args),
@@ -165,7 +165,7 @@ class CoreServiceProvider extends ServiceProvider {
 
     // Internal ping
     app.get('/ping', (req, res) => {
-      this.core.emit('osjs/core:ping', req);
+      this.core.emit('meeseOS/core:ping', req);
 
       try {
         req.session.touch();
@@ -185,13 +185,13 @@ class CoreServiceProvider extends ServiceProvider {
 
     app.ws('/', (ws, req) => {
       ws.upgradeReq = ws.upgradeReq || req;
-      ws._osjs_client = {...req.session.user};
+      ws._meeseOS_client = {...req.session.user};
 
       const interval = this.core.config('ws.ping', 0);
 
       const pingInterval = interval ? setInterval(() => {
         ws.send(JSON.stringify({
-          name: 'osjs/core:ping'
+          name: 'meeseOS/core:ping'
         }));
       }, interval) : undefined;
 
@@ -205,7 +205,7 @@ class CoreServiceProvider extends ServiceProvider {
 
           if (typeof name === 'string' && params instanceof Array) {
             // We don't wanna allow any internal signals from the outside!
-            if (name.match(/^osjs/) && name !== 'osjs/application:socket:message') {
+            if (name.match(/^meeseOS/) && name !== 'meeseOS/application:socket:message') {
               return;
             }
 
@@ -217,7 +217,7 @@ class CoreServiceProvider extends ServiceProvider {
       });
 
       ws.send(JSON.stringify({
-        name: 'osjs/core:connected',
+        name: 'meeseOS/core:connected',
         params: [{
           cookie: {
             maxAge: this.core.config('session.options.cookie.maxAge')
@@ -262,7 +262,7 @@ class CoreServiceProvider extends ServiceProvider {
         }
 
         const relative = filename.replace(watchdir, '');
-        this.core.broadcast('osjs/dist:changed', [relative]);
+        this.core.broadcast('meeseOS/dist:changed', [relative]);
       });
 
       this.watches.push(watcher);

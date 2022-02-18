@@ -100,7 +100,7 @@
       "lcov"
     ],
     "moduleNameMapper": {
-      "^osjs$": "<rootDir>/__mocks__/core.js"
+      "^meeseOS$": "<rootDir>/__mocks__/core.js"
     },
     "coveragePathIgnorePatterns": [
       "src/esdoc.js",

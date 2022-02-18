@@ -103,7 +103,7 @@ export default class Notification {
       ...options
     };
 
-    this.core.emit('osjs/notification:create', this);
+    this.core.emit('meeseOS/notification:create', this);
   }
 
   /**
@@ -115,7 +115,7 @@ export default class Notification {
     }
 
     this.destroyed = true;
-    this.core.emit('osjs/notification:destroy', this);
+    this.core.emit('meeseOS/notification:destroy', this);
 
     this.$element.remove();
     this.$element = null;
@@ -131,17 +131,17 @@ export default class Notification {
 
     const renderCustom = () => {
       const view = state => h('div', {
-        class: 'osjs-notification-wrapper',
+        class: 'meeseOS-notification-wrapper',
         'data-has-icon': !!state.icon,
         style: {
           backgroundImage: state.icon ? `url(${state.icon})` : undefined
         }
       }, [
-        h('div', {class: 'osjs-notification-title'}, state.title),
-        h('div', {class: 'osjs-notification-message'}, state.message),
+        h('div', {class: 'meeseOS-notification-title'}, state.title),
+        h('div', {class: 'meeseOS-notification-message'}, state.message),
       ]);
 
-      this.$element.classList.add('osjs-notification');
+      this.$element.classList.add('meeseOS-notification');
       if (this.options.className) {
         this.$element.classList.add(this.options.className);
       }
@@ -168,7 +168,7 @@ export default class Notification {
     }
 
     if (this.options.sound) {
-      this.core.make('osjs/sounds')
+      this.core.make('meeseOS/sounds')
         .play(this.options.sound);
     }
 

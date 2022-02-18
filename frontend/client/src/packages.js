@@ -144,7 +144,7 @@ export default class Packages {
     logger.debug('Packages::init()');
 
     if (!this.inited) {
-      this.core.on('osjs/core:started', () => this._autostart());
+      this.core.on('meeseOS/core:started', () => this._autostart());
     }
 
     this.metadata = this.core.config('packages.metadata', [])
@@ -216,7 +216,7 @@ export default class Packages {
 
       if (found.length > 0) {
         return new Promise((resolve, reject) => {
-          this.core.once(`osjs/application:${name}:launched`, a => {
+          this.core.once(`meeseOS/application:${name}:launched`, a => {
             if (signaled) {
               resolve(a);
             } else {
@@ -228,7 +228,7 @@ export default class Packages {
       }
     }
 
-    this.core.emit('osjs/application:launch', name, args, options);
+    this.core.emit('meeseOS/application:launch', name, args, options);
 
     this._running.push(name);
 
@@ -286,8 +286,8 @@ export default class Packages {
 
     const dialog = e => {
       const exception = `An exception occured in \'${name}\'`;
-      if (this.core.has('osjs/dialog')) {
-        this.core.make('osjs/dialog', 'alert', {
+      if (this.core.has('meeseOS/dialog')) {
+        this.core.make('meeseOS/dialog', 'alert', {
           type: 'error',
           title: exception,
           message: exception,
@@ -299,8 +299,8 @@ export default class Packages {
     };
 
     const fail = err => {
-      this.core.emit('osjs/application:launched', name, false);
-      this.core.emit(`osjs/application:${name}:launched`, false);
+      this.core.emit('meeseOS/application:launched', name, false);
+      this.core.emit(`meeseOS/application:${name}:launched`, false);
 
       dialog(err);
 
@@ -331,8 +331,8 @@ export default class Packages {
 
         logger.warn('Exception when launching', name, e);
       } finally {
-        this.core.emit('osjs/application:launched', name, app);
-        this.core.emit(`osjs/application:${name}:launched`, app);
+        this.core.emit('meeseOS/application:launched', name, app);
+        this.core.emit(`meeseOS/application:${name}:launched`, app);
         console.groupEnd();
       }
 

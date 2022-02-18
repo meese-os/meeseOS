@@ -18,13 +18,13 @@ describe('Core', () => {
     const clients = [{
       terminate: () => {},
       send: jest.fn(),
-      _osjs_client: {
+      _meeseOS_client: {
         username: 'jest'
       }
     }, {
       terminate: () => {},
       send: jest.fn(),
-      _osjs_client: {
+      _meeseOS_client: {
         username: 'julenissen'
       }
     }, {
@@ -92,7 +92,7 @@ describe('Core', () => {
 
   test('#destroy', async () => {
     const cb = jest.fn();
-    core.on('osjs/core:destroy', cb);
+    core.on('meeseOS/core:destroy', cb);
     await core.destroy();
     await core.destroy();
     expect(cb).toHaveBeenCalledTimes(1);

@@ -44,25 +44,9 @@ const pathname = createUri(window.location.pathname);
 
 const href = createUri(window.location.href);
 
-const languages = {
-  en_EN: 'English',
-  nb_NO: 'Norwegian, Norsk (bokmål)',
-  vi_VN: 'Vietnamese, Vietnamese',
-  fr_FR: 'French',
-  de_DE: 'German',
-  sl_SI: 'Slovenian, Slovenščina',
-  zh_CN: 'Chinese (simplified)',
-  fa_FA: 'Persian',
-  pt_BR: 'Português (Brasil)',
-  ru_RU: 'Русский (Russian)',
-  tr_TR: 'Türkçe (Turkish)',
-  sv_SE: 'Svenska (Swedish)'
-};
-
 export const defaultConfiguration = {
   development: !(process.env.NODE_ENV || '').match(/^prod/i),
   standalone: false,
-  languages,
 
   http: {
     ping: true,
@@ -148,7 +132,7 @@ export const defaultConfiguration = {
     ui: {},
 
     cookie: {
-      name: 'osjs.auth',
+      name: 'meeseOS.auth',
       expires: 7,
       enabled: false,
       secure: false
@@ -162,7 +146,8 @@ export const defaultConfiguration = {
     // NOTE: These are the fallback default values
     defaultUserData: {
       id: null,
-      username: 'osjs',
+			// TODO: Create myself an admin user with special permissions
+      username: 'meeseOS',
       groups: []
     }
   },
@@ -171,9 +156,9 @@ export const defaultConfiguration = {
     lock: [],
 
     defaults: {
-      'osjs/default-application': {},
-      'osjs/session': [],
-      'osjs/desktop': {}
+      'meeseOS/default-application': {},
+      'meeseOS/session': [],
+      'meeseOS/desktop': {}
     }
   },
 
@@ -252,8 +237,8 @@ export const defaultConfiguration = {
         readOnly: true
       }
     }, {
-      name: 'osjs',
-      label: 'OS.js',
+      name: 'meeseOS',
+      label: 'MeeseOS',
       adapter: 'system',
       icon: {name: 'folder-publicshare'}
     }, {
@@ -285,9 +270,9 @@ export const defaultConfiguration = {
 
   providers: {
     globalBlacklist: [
-      'osjs/websocket',
-      'osjs/clipboard',
-      'osjs/gapi'
+      'meeseOS/websocket',
+      'meeseOS/clipboard',
+      'meeseOS/gapi'
     ],
     globalWhitelist: []
   }

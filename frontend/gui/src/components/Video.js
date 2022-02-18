@@ -50,7 +50,7 @@ const isTrue = v => typeof v === 'undefined' || v === true;
  */
 export const Video = (props, children) =>
   h('div', {
-    class: 'osjs-gui osjs-gui-video',
+    class: 'meeseOS-gui meeseOS-gui-video',
     style: {
       width: props.width ? String(props.width) + 'px' : undefined,
       height: props.height ? String(props.height) + 'px' : undefined

@@ -486,6 +486,10 @@
       "projectFolder": "apps/filemanager"
     },
     {
+      "packageName": "@aaronmeese.com/gnome-icons",
+      "projectFolder": "frontend/gnome-icons"
+    },
+    {
       "packageName": "@aaronmeese.com/gui",
       "projectFolder": "frontend/gui"
     },

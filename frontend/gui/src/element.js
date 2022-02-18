@@ -60,6 +60,6 @@ export const createField = (name, props, defaultProps, cb, cbInput) => {
   );
 
   return h(Element, Object.assign({}, props.box || {}, {
-    class: 'osjs-gui-field osjs-gui-' + name
+    class: 'meeseOS-gui-field meeseOS-gui-' + name
   }), cb(fieldProps));
 };

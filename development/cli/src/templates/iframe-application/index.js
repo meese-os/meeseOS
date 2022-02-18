@@ -1,10 +1,10 @@
-import osjs from 'osjs';
+import meeseOS from 'meeseOS';
 import {name as applicationName} from './metadata.json';
 
 // Our launcher
 const register = (core, args, options, metadata) => {
   // Create a new Application instance
-  const proc = core.make('osjs/application', {args, options, metadata});
+  const proc = core.make('meeseOS/application', {args, options, metadata});
 
   // Create  a new Window instance
   proc
@@ -29,4 +29,4 @@ const register = (core, args, options, metadata) => {
 };
 
 // Creates the internal callback function when OS.js launches an application
-osjs.register(applicationName, register);
+meeseOS.register(applicationName, register);

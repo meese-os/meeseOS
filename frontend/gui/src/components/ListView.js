@@ -51,7 +51,7 @@ const createView = props => {
     return h('div', {
       key: row.key,
       'data-has-icon': col.icon ? true : undefined,
-      class: 'osjs-gui-list-view-cell' + (selected ? ' osjs__active' : ''),
+      class: 'meeseOS-gui-list-view-cell' + (selected ? ' meeseOS__active' : ''),
       ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: row.data, index: rowIndex, ev})),
       ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
       onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
@@ -61,11 +61,11 @@ const createView = props => {
   };
 
   const pane = (index, col) => h('div', {
-    class: 'osjs-gui-list-view-pane',
+    class: 'meeseOS-gui-list-view-pane',
     style: col.style || {}
   }, [
     h('div', {
-      class: 'osjs-gui-list-view-header',
+      class: 'meeseOS-gui-list-view-header',
       style: {
         display: props.hideColumns ? 'none' : undefined
       }
@@ -77,7 +77,7 @@ const createView = props => {
   ]);
 
   return h('div', {
-    class: 'osjs-gui-list-view-wrapper',
+    class: 'meeseOS-gui-list-view-wrapper',
     onscroll: ev => {
       debounceScroll = clearTimeout(debounceScroll);
       debounceScroll = setTimeout(() => {
@@ -94,7 +94,7 @@ const createView = props => {
 };
 
 export const ListView = props => h(Element, Object.assign({
-  class: 'osjs-gui-list-view'
+  class: 'meeseOS-gui-list-view'
 }, props.box || {}), createView(filteredProps(props, ['box'])));
 
 export const listView = ({

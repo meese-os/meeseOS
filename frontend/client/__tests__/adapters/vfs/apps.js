@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import appAdapter from '../../../src/adapters/vfs/apps.js';
 
 describe('Apps VFS Adapter', () => {
@@ -22,7 +22,7 @@ describe('Apps VFS Adapter', () => {
         icon: null,
         isDirectory: false,
         isFile: true,
-        mime: 'osjs/application',
+        mime: 'meeseOS/application',
         path: 'apps:/ValidApplication', // FIXME
         size: 0,
         stat: {}

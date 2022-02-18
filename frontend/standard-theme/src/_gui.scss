@@ -28,14 +28,14 @@
  * @licence Simplified BSD License
  */
 
-.osjs-gui-button {
+.meeseOS-gui-button {
   & > button {
     @include button;
   }
 }
 
-.osjs-gui-input,
-.osjs-gui-field {
+.meeseOS-gui-input,
+.meeseOS-gui-field {
   select,
   textarea,
   input {
@@ -46,32 +46,32 @@
   }
 }
 
-.osjs-gui-tabs-header {
+.meeseOS-gui-tabs-header {
   & > div {
     @include view;
 
-    &.osjs__active {
+    &.meeseOS__active {
       border-bottom-color: $window-background;
       background-color: transparent;
     }
   }
 }
 
-.osjs-gui-tabs-panes {
+.meeseOS-gui-tabs-panes {
   margin-top: -1px;
 
   & > div {
     @include view;
 
-    &.osjs__active {
+    &.meeseOS__active {
       background-color: transparent;
     }
   }
 }
 
-.osjs-gui-toggle-field {
+.meeseOS-gui-toggle-field {
   & > label {
-    & > span.osjs-toggle-input {
+    & > span.meeseOS-toggle-input {
       &::before {
         @include button;
       }
@@ -81,13 +81,13 @@
       }
     }
 
-    & > input[type=radio] + span.osjs-toggle-input::before {
+    & > input[type=radio] + span.meeseOS-toggle-input::before {
       border-radius: 100%;
     }
   }
 }
 
-.osjs-gui-range-field > input[type=range] {
+.meeseOS-gui-range-field > input[type=range] {
   @include range-slider-input();
 
   width: 100%;
@@ -131,17 +131,17 @@
   }
 }
 
-.osjs-gui-icon-view-wrapper {
+.meeseOS-gui-icon-view-wrapper {
   @include input;
 
-  .osjs__active .osjs__label,
-  .osjs__active .osjs__image {
+  .meeseOS__active .meeseOS__label,
+  .meeseOS__active .meeseOS__image {
     background: $active-background;
     color: $active-foreground;
   }
 }
 
-.osjs-gui-menu {
+.meeseOS-gui-menu {
   ul {
     @include panel;
     // @include window;
@@ -152,12 +152,12 @@
     color: #000;
   }
 
-  .osjs__disabled {
+  .meeseOS__disabled {
     opacity: 0.5;
   }
 }
 
-.osjs-gui-menubar {
+.meeseOS-gui-menubar {
   & > div {
     cursor: pointer;
 
@@ -168,54 +168,54 @@
   }
 }
 
-.osjs-notification {
+.meeseOS-notification {
   @include panel;
 
-  .osjs-notification-title {
+  .meeseOS-notification-title {
     font-weight: bold;
   }
 
-  .osjs-notification-message {
+  .meeseOS-notification-message {
     margin-top: 1em;
   }
 }
 
-.osjs-gui-progressbar-wrapper {
+.meeseOS-gui-progressbar-wrapper {
   @include view;
 
   color: $progress-foreground;
 }
 
-.osjs-gui-progressbar-value {
+.meeseOS-gui-progressbar-value {
   background: $progress-background;
 }
 
-.osjs-gui-list-view {
-  .osjs__active {
+.meeseOS-gui-list-view {
+  .meeseOS__active {
     background: $active-background;
     color: $active-foreground;
   }
 
-  .rows:not([data-zebra="false"]) > div:nth-child(2n+1):not(.osjs__active) {
+  .rows:not([data-zebra="false"]) > div:nth-child(2n+1):not(.meeseOS__active) {
     background-color: $zebra-background;
   }
 }
 
-.osjs-gui-list-view-wrapper {
+.meeseOS-gui-list-view-wrapper {
   @include input;
 }
 
-.osjs-gui-list-view-header {
+.meeseOS-gui-list-view-header {
   @include view;
 
   border: 0 none;
 }
 
-.osjs-gui-box-styled {
+.meeseOS-gui-box-styled {
   @include input;
 }
 
-.osjs-gui-expander {
+.meeseOS-gui-expander {
   &-header {
     @include view;
 

@@ -38,7 +38,7 @@ const ul = (props, children = [], level = 0) => {
 
     if (child.type === 'checkbox' || typeof child.checked === 'boolean') {
       children.push(h('span', {
-        class: 'osjs-gui-menu-checkbox ' + (child.checked ? 'active' : '')
+        class: 'meeseOS-gui-menu-checkbox ' + (child.checked ? 'active' : '')
       }));
     } else if (child.icon) {
       children.push(h(Icon, child.icon));
@@ -55,8 +55,8 @@ const ul = (props, children = [], level = 0) => {
     }
 
     const className = child.type === 'separator'
-      ? 'osjs-gui-menu-separator'
-      : 'osjs-gui-menu-label ' + (child.disabled ? 'osjs__disabled' : '');
+      ? 'meeseOS-gui-menu-separator'
+      : 'meeseOS-gui-menu-label ' + (child.disabled ? 'meeseOS__disabled' : '');
 
     const children = [
       h('span', {class: className}, label(child))
@@ -73,10 +73,10 @@ const ul = (props, children = [], level = 0) => {
     class: ''
   }, children.map(
     child => h('li', {
-      class: 'osjs-gui-menu-entry'
+      class: 'meeseOS-gui-menu-entry'
     }, [
       h('div', {
-        class: 'osjs-gui-menu-container',
+        class: 'meeseOS-gui-menu-container',
         'data-has-image': child.icon ? true : undefined,
         'data-has-children': child.items ? true : undefined,
         onmouseover: child.items ? props.onshow : undefined,
@@ -119,8 +119,8 @@ const ul = (props, children = [], level = 0) => {
  * @param {MenuItems} [props.menu] Menu items
  */
 export const Menu = (props) => h('div', {
-  id: 'osjs-context-menu',
-  className: 'osjs-gui osjs-gui-menu',
+  id: 'meeseOS-context-menu',
+  className: 'meeseOS-gui meeseOS-gui-menu',
   oncreate: props.oncreate,
   onupdate: props.onupdate,
   style: {

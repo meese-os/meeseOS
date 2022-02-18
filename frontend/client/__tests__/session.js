@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Session from '../src/session.js';
 
 describe('Session', () => {

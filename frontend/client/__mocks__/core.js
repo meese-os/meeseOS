@@ -7,11 +7,11 @@ import {ServiceProvider} from '@aaronmeese.com/common';
 
 class MockDesktopServiceProvider extends ServiceProvider {
   provides() {
-    return ['osjs/desktop'];
+    return ['meeseOS/desktop'];
   }
 
   init() {
-    this.core.singleton('osjs/desktop', () => ({
+    this.core.singleton('meeseOS/desktop', () => ({
       getRect() {
         return {
           top: 0,
@@ -27,7 +27,7 @@ class MockDesktopServiceProvider extends ServiceProvider {
 export const createInstance = () => {
   const core = new Core(merge(config, {
     settings: {
-      lock: ['osjs/locked']
+      lock: ['meeseOS/locked']
     },
     auth: {
       username: 'jest',
@@ -49,8 +49,8 @@ export const createInstance = () => {
 
   return core.boot()
     .then(() => {
-      core.make('osjs/packages').register('ValidApplication', (core, args, options, metadata) => {
-        return core.make('osjs/application', {args, options, metadata});
+      core.make('meeseOS/packages').register('ValidApplication', (core, args, options, metadata) => {
+        return core.make('meeseOS/application', {args, options, metadata});
       });
 
       return core;

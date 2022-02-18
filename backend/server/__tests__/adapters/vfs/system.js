@@ -1,4 +1,4 @@
-const osjs = require('osjs');
+const meeseOS = require('meeseOS');
 const path = require('path');
 const stream = require('stream');
 const systemAdapter = require('../../../src/adapters/vfs/system.js');
@@ -7,7 +7,7 @@ describe('VFS System adapter', () => {
   let core;
   let adapter;
 
-  beforeAll(() => osjs().then(c => {
+  beforeAll(() => meeseOS().then(c => {
     core = c;
     adapter = systemAdapter(core);
   }));

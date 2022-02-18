@@ -35,7 +35,7 @@
   font-weight: bold;
 }
 
-.osjs-root.login {
+.meeseOS-root.login {
   &::after {
     position: absolute;
     top: 0;
@@ -48,7 +48,7 @@
   }
 }
 
-.osjs-login {
+.meeseOS-login {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -56,7 +56,7 @@
   transform: translate(-50%, -50%);
   display: flex;
 
-  .osjs-login-field {
+  .meeseOS-login-field {
     position: relative;
   }
 
@@ -80,12 +80,12 @@
   }
 }
 
-#osjs-login {
+#meeseOS-login {
   font-family: Roboto, sans-serif;
   max-width: 400px;
   width: 80%;
 
-  .osjs-login-header {
+  .meeseOS-login-header {
     text-align: center;
     font-weight: 300;
     font-weight: bold;
@@ -96,7 +96,7 @@
     line-height: 1.5;
   }
 
-  .osjs-login-logo {
+  .meeseOS-login-logo {
     min-width: 1em;
     min-height: 1em;
     height: 100%;
@@ -131,17 +131,17 @@
     }
   }
 
-  .osjs-login-content {
+  .meeseOS-login-content {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
 
-  .osjs-login-field {
+  .meeseOS-login-field {
     margin-top: $base-margin * 2;
   }
 
-  .osjs-login-field-select {
+  .meeseOS-login-field-select {
     position: relative;
 
     &::after {
@@ -154,7 +154,7 @@
     }
   }
 
-  .osjs-login-error {
+  .meeseOS-login-error {
     background: rgba(255, 0, 0, 0.8);
     color: #fff;
     text-align: center;
@@ -163,7 +163,7 @@
     margin-top: $base-margin * 2;
   }
 
-  .osjs-login-stamp {
+  .meeseOS-login-stamp {
     margin-top: $base-margin * 2;
     font-size: 80%;
     text-align: right;

@@ -13,7 +13,7 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && rm ./dist/* && NODE_ENV=production npm run build"
   },
-  "osjs": {
+  "meeseOS": {
     "type": "package"
   },
   "dependencies": {

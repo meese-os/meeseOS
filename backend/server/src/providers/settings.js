@@ -48,10 +48,10 @@ class SettingsServiceProvider extends ServiceProvider {
   }
 
   async init() {
-    this.core.make('osjs/express')
+    this.core.make('meeseOS/express')
       .routeAuthenticated('post', '/settings', (req, res) => this.settings.save(req, res));
 
-    this.core.make('osjs/express')
+    this.core.make('meeseOS/express')
       .routeAuthenticated('get', '/settings', (req, res) => this.settings.load(req, res));
 
     return this.settings.init();

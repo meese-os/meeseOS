@@ -40,18 +40,18 @@ export const IconViewEntry = (entry, index, props) => () => {
   const selected = props.selectedIndex === index;
 
   return h('div', {
-    class: 'osjs-gui-icon-view-entry' + (selected ? ' osjs__active' : ''),
+    class: 'meeseOS-gui-icon-view-entry' + (selected ? ' meeseOS__active' : ''),
     ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: entry.data, index, ev})),
     ondblclick: (ev) => props.onactivate({data: entry.data, index, ev}),
     onclick: (ev) => props.onselect({data: entry.data, index, ev}),
     oncontextmenu: (ev) => props.oncontextmenu({data: entry.data, index, ev}),
     oncreate: (el) => props.oncreate({data: entry.data, index, el})
   }, [
-    h('div', {class: 'osjs__container'}, [
-      h('div', {class: 'osjs__image'}, [
+    h('div', {class: 'meeseOS__container'}, [
+      h('div', {class: 'meeseOS__image'}, [
         h(Icon, icon)
       ]),
-      h('div', {class: 'osjs__label'}, [
+      h('div', {class: 'meeseOS__label'}, [
         h('span', {}, entry.label)
       ])
     ])
@@ -60,7 +60,7 @@ export const IconViewEntry = (entry, index, props) => () => {
 
 export const IconView = (props) => {
   const inner = h('div', {
-    class: 'osjs-gui-icon-view-wrapper',
+    class: 'meeseOS-gui-icon-view-wrapper',
     oncreate: el => (el.scrollTop = props.scrollTop),
     onupdate: el => {
       if (props.selectedIndex < 0) {
@@ -72,7 +72,7 @@ export const IconView = (props) => {
   }));
 
   return h(Element, Object.assign({
-    class: 'osjs-gui-icon-view'
+    class: 'meeseOS-gui-icon-view'
   }, props.box || {}), inner);
 };
 

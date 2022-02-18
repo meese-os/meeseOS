@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-.osjs-panel {
+.meeseOS-panel {
   display: flex;
   min-height: 1em;
   align-items: center;
@@ -50,14 +50,14 @@
     bottom: 0;
   }
 
-  & > .osjs-panel-item {
+  & > .meeseOS-panel-item {
     min-height: 1em;
     position: relative;
     box-sizing: border-box;
     padding: calc($base-margin / 1.5);
   }
 
-  .osjs-panel-item--icon {
+  .meeseOS-panel-item--icon {
     display: flex;
     align-items: center;
 

@@ -49,7 +49,7 @@ export const Button = (props = {}, children = []) =>
     }
 
     if (typeof props.label === 'string') {
-      inner.push(h('span', {class: 'osjs-label'}, props.label));
+      inner.push(h('span', {class: 'meeseOS-label'}, props.label));
     }
 
     return h('button', fieldProps, [

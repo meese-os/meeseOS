@@ -13,7 +13,7 @@ module.exports = {
 		minimize,
 	},
 	externals: {
-		osjs: "OSjs"
+		meeseOS: "MeeseOS"
 	},
 	plugins: [
 		new CopyWebpackPlugin({
@@ -26,7 +26,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!@osjs)/,
+				exclude: /node_modules\/(?!@meeseOS)/,
 				use: {
 					loader: "babel-loader"
 				}

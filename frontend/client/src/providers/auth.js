@@ -72,7 +72,7 @@ export default class AuthServiceProvider extends ServiceProvider {
    * @return {Promise<undefined>}
    */
   init() {
-    this.core.singleton('osjs/auth', () => this.createAuthContract());
+    this.core.singleton('meeseOS/auth', () => this.createAuthContract());
 
     return this.auth.init();
   }
@@ -92,7 +92,7 @@ export default class AuthServiceProvider extends ServiceProvider {
    */
   provides() {
     return [
-      'osjs/auth'
+      'meeseOS/auth'
     ];
   }
 

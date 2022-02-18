@@ -92,20 +92,20 @@ export default class WidgetServiceProvider {
       list: () => Object.keys(this.registry),
 
       save: () => {
-        const settings = this.core.make('osjs/settings');
+        const settings = this.core.make('meeseOS/settings');
         const widgets = this.widgets.map(({name, widget}) => ({
           name,
           options: widget.options
         }));
 
-        return Promise.resolve(settings.set('osjs/desktop', 'widgets', widgets))
+        return Promise.resolve(settings.set('meeseOS/desktop', 'widgets', widgets))
           .then(() => settings.save());
       }
     };
 
-    this.core.singleton('osjs/widgets', () => iface);
+    this.core.singleton('meeseOS/widgets', () => iface);
 
-    this.core.on('osjs/desktop:transform', () => {
+    this.core.on('meeseOS/desktop:transform', () => {
       this.widgets.forEach(({widget}) => widget.updatePosition(true));
     });
   }
@@ -113,7 +113,7 @@ export default class WidgetServiceProvider {
   start() {
     this.inited = true;
     this.widgets.forEach(({widget}) => widget.init());
-    const desktop = this.core.make('osjs/desktop');
+    const desktop = this.core.make('meeseOS/desktop');
 
     let resizeDebounce;
     window.addEventListener('resize', () => {
@@ -123,7 +123,7 @@ export default class WidgetServiceProvider {
 
     if (typeof desktop.addContextMenuEntries === 'function') {
       desktop.addContextMenuEntries(() => {
-        const widgets = this.core.make('osjs/widgets');
+        const widgets = this.core.make('meeseOS/widgets');
 
         return [{
           label: 'Add Widget',

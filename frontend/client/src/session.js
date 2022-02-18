@@ -66,8 +66,8 @@ export default class Session {
 
     const session = apps.map(app => app.getSession());
 
-    return this.core.make('osjs/settings')
-      .set('osjs/session', null, session)
+    return this.core.make('meeseOS/settings')
+      .set('meeseOS/session', null, session)
       .save();
   }
 
@@ -81,8 +81,8 @@ export default class Session {
       Application.destroyAll();
     }
 
-    let session = this.core.make('osjs/settings')
-      .get('osjs/session');
+    let session = this.core.make('meeseOS/settings')
+      .get('meeseOS/session');
 
     if (session && !(session instanceof Array)) {
       session = Object.values(session);

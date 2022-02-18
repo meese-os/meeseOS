@@ -77,7 +77,7 @@ export const applyBackgroundStyles = (core, background) => {
     } else if (typeof background.src === 'string') {
       styles.backgroundImage = `url(${background.src})`;
     } else if (background.src) {
-      core.make('osjs/vfs')
+      core.make('meeseOS/vfs')
         .url(background.src)
         .then(src => {
           setTimeout(() => ($root.style.backgroundImage = `url(${src})`), 1);
@@ -119,7 +119,7 @@ export const resourceResolver = (core) => {
 
   const getThemeName = (type) => {
     const defaultTheme = core.config('desktop.settings.' + type);
-    return core.make('osjs/settings').get('osjs/desktop', type, defaultTheme);
+    return core.make('meeseOS/settings').get('meeseOS/desktop', type, defaultTheme);
   };
 
   const themeResource = path => {

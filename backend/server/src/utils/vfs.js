@@ -156,7 +156,7 @@ const createError = (code, message) => {
  * Resolves a mountpoint
  */
 const mountpointResolver = core => async (path) => {
-  const {adapters, mountpoints} = core.make('osjs/vfs');
+  const {adapters, mountpoints} = core.make('meeseOS/vfs');
   const prefix = getPrefix(path);
   const mount = mountpoints.find(m => m.name === prefix);
 

@@ -30,19 +30,19 @@
 
 $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
 
-@mixin osjs-window-maximized {
+@mixin meeseOS-window-maximized {
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
 }
 
-.osjs-window-behavior-lofi {
+.meeseOS-window-behavior-lofi {
   position: absolute;
   border: 2px solid #000;
 }
 
-.osjs-window-resize {
+.meeseOS-window-resize {
   z-index: 10;
   position: absolute;
   min-width: 1em;
@@ -83,7 +83,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   }
 }
 
-.osjs-window-inner {
+.meeseOS-window-inner {
   position: relative;
   z-index: 1;
   display: flex;
@@ -92,7 +92,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   flex-direction: column;
 }
 
-.osjs-window-header {
+.meeseOS-window-header {
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -104,7 +104,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   }
 }
 
-.osjs-window-icon {
+.meeseOS-window-icon {
   & > div {
     width: $base-margin;
     height: $base-margin;
@@ -114,7 +114,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   }
 }
 
-.osjs-window-title {
+.meeseOS-window-title {
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -122,7 +122,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   pointer-events: none;
 }
 
-.osjs-window-button {
+.meeseOS-window-button {
   cursor: pointer;
   min-width: 1em;
   position: relative;
@@ -142,7 +142,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   }
 }
 
-.osjs-window-content {
+.meeseOS-window-content {
   box-sizing: border-box;
   position: relative;
   z-index: 1;
@@ -154,7 +154,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   user-select: auto;
 }
 
-.osjs-window {
+.meeseOS-window {
   position: absolute;
   box-sizing: border-box;
   user-select: none;
@@ -184,9 +184,9 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   }
 
   &[data-maximized=true] {
-    @include osjs-window-maximized();
+    @include meeseOS-window-maximized();
 
-    .osjs-window-resize {
+    .meeseOS-window-resize {
       cursor: inherit !important;
     }
   }
@@ -209,20 +209,20 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
     display: block;
   }
 
-  &.osjs__drop {
+  &.meeseOS__drop {
     outline: 2px solid #000;
   }
 
-  &[data-minimizable=false] .osjs-window-button[data-action=minimize],
-  &[data-maximizable=false] .osjs-window-button[data-action=maximize],
-  &[data-closable=false] .osjs-window-button[data-action=close],
-  &[data-resizable=false] .osjs-window-resize {
+  &[data-minimizable=false] .meeseOS-window-button[data-action=minimize],
+  &[data-maximizable=false] .meeseOS-window-button[data-action=maximize],
+  &[data-closable=false] .meeseOS-window-button[data-action=close],
+  &[data-resizable=false] .meeseOS-window-resize {
     display: none;
   }
 }
 
-.osjs-root[data-window-action="true"] {
-  .osjs-window {
+.meeseOS-root[data-window-action="true"] {
+  .meeseOS-window {
     /* FIXME: Maybe limit this as to increase perf ? */
     * {
       pointer-events: none;
@@ -230,13 +230,13 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
   }
 }
 
-.osjs-root[data-mobile="true"] {
-  .osjs-window {
-    @include osjs-window-maximized();
+.meeseOS-root[data-mobile="true"] {
+  .meeseOS-window {
+    @include meeseOS-window-maximized();
 
     opacity: 1;
 
-    .osjs-window-button[data-action=maximize] {
+    .meeseOS-window-button[data-action=maximize] {
       display: none;
     }
   }

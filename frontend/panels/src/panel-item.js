@@ -89,7 +89,7 @@ export default class PanelItem extends EventEmitter {
    */
   render(name, children = []) {
     return h('div', {
-      className: 'osjs-panel-item',
+      className: 'meeseOS-panel-item',
       'data-name': name
     }, children);
   }

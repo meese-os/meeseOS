@@ -43,15 +43,15 @@ export const Progressbar = (props, children = []) => {
     ? Math.min(100, Math.max(0, Math.abs(props.value)))
     : 0;
 
-  const c = h('div', {class: 'osjs-gui-progressbar-wrapper'}, [
+  const c = h('div', {class: 'meeseOS-gui-progressbar-wrapper'}, [
     h('div', {
-      className: 'osjs-gui-progressbar-value',
+      className: 'meeseOS-gui-progressbar-value',
       style: {
         width: String(value) + '%'
       }
     }),
     h('div', {
-      className: 'osjs-gui-progressbar-label',
+      className: 'meeseOS-gui-progressbar-label',
     }, [
       h('span', {}, [
         String(value) + '%'
@@ -60,7 +60,7 @@ export const Progressbar = (props, children = []) => {
   ]);
 
   return h(Element, Object.assign({}, props.box || {}, {
-    class: ['osjs-gui-progressbar', props.class]
+    class: ['meeseOS-gui-progressbar', props.class]
   }), [
     c,
     ...children

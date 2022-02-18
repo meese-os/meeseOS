@@ -67,7 +67,7 @@ export default class WindowsPanelItem extends PanelItem {
 
     const actions = super.init({
       launchers: [],
-      windows: this.core.make('osjs/windows').list()
+      windows: this.core.make('meeseOS/windows').list()
         .filter(win => win.inited || win.rendered)
         .filter(filterVisibility)
         .map(mapWindow)
@@ -126,18 +126,18 @@ export default class WindowsPanelItem extends PanelItem {
     const oncreate = (win) => actions.add(mapWindow(win));
     const onchange = (win) => actions.change(mapWindow(win));
 
-    this.core.on('osjs/application:launch', onlaunch);
-    this.core.on('osjs/application:launched', onlaunched);
-    this.core.on('osjs/window:destroy', ondestroy);
-    this.core.on('osjs/window:render', oncreate);
-    this.core.on('osjs/window:change', onchange);
+    this.core.on('meeseOS/application:launch', onlaunch);
+    this.core.on('meeseOS/application:launched', onlaunched);
+    this.core.on('meeseOS/window:destroy', ondestroy);
+    this.core.on('meeseOS/window:render', oncreate);
+    this.core.on('meeseOS/window:change', onchange);
 
     this.on('destroy', () => {
-      this.core.off('osjs/application:launch', onlaunch);
-      this.core.off('osjs/application:launched', onlaunched);
-      this.core.off('osjs/window:destroy', ondestroy);
-      this.core.off('osjs/window:render', oncreate);
-      this.core.off('osjs/window:change', onchange);
+      this.core.off('meeseOS/application:launch', onlaunch);
+      this.core.off('meeseOS/application:launched', onlaunched);
+      this.core.off('meeseOS/window:destroy', ondestroy);
+      this.core.off('meeseOS/window:render', oncreate);
+      this.core.off('meeseOS/window:change', onchange);
     });
   }
 
@@ -149,7 +149,7 @@ export default class WindowsPanelItem extends PanelItem {
       oncontextmenu: ev => {
         ev.stopPropagation();
         ev.preventDefault();
-        this.core.make('osjs/contextmenu').show({
+        this.core.make('meeseOS/contextmenu').show({
           position: ev.target,
           menu: [
             {
@@ -171,7 +171,7 @@ export default class WindowsPanelItem extends PanelItem {
           ]
         });
       },
-      className: 'osjs-panel-item--clickable osjs-panel-item--icon'
+      className: 'meeseOS-panel-item--clickable meeseOS-panel-item--icon'
     }, [
       h('img', {
         src: w.icon,

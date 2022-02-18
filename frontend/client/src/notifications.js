@@ -66,10 +66,10 @@ export default class Notifications {
    */
   init() {
     this.$element = document.createElement('div');
-    this.$element.classList.add('osjs-notifications');
+    this.$element.classList.add('meeseOS-notifications');
     this.core.$root.appendChild(this.$element);
 
-    this.core.on('osjs/desktop:applySettings', () => {
+    this.core.on('meeseOS/desktop:applySettings', () => {
       this.setElementStyles();
     });
 
@@ -107,8 +107,8 @@ export default class Notifications {
     const defaultPosition = this.core
       .config('desktop.settings.notifications.position', 'top-right');
 
-    const position = this.core.make('osjs/settings')
-      .get('osjs/desktop', 'notifications.position', defaultPosition);
+    const position = this.core.make('meeseOS/settings')
+      .get('meeseOS/desktop', 'notifications.position', defaultPosition);
 
     if (position.split('-').length !== 2) {
       return {};

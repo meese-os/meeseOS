@@ -76,7 +76,7 @@ export default class SettingsServiceProvider extends ServiceProvider {
    */
   provides() {
     return [
-      'osjs/settings'
+      'meeseOS/settings'
     ];
   }
 
@@ -85,7 +85,7 @@ export default class SettingsServiceProvider extends ServiceProvider {
    * @return {Promise<undefined>}
    */
   init() {
-    this.core.singleton('osjs/settings', () => this.createSettingsContract());
+    this.core.singleton('meeseOS/settings', () => this.createSettingsContract());
 
     return this.settings.init();
   }

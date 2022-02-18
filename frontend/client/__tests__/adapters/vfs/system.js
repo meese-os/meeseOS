@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import systemAdapter from '../../../src/adapters/vfs/system.js';
 
 describe('System VFS Adapter', () => {

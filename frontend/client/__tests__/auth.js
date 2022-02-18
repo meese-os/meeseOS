@@ -1,4 +1,4 @@
-import {createInstance} from 'osjs';
+import {createInstance} from 'meeseOS';
 import Core from '../src/core.js';
 import Auth from '../src/auth.js';
 
@@ -73,12 +73,12 @@ describe('Auth', () => {
       .toBe(true);
   });
 
-  test('event: osjs/core:logged-in', () => {
+  test('event: meeseOS/core:logged-in', () => {
     const c = new Core();
     const a = new Auth(c);
     const fn = jest.fn();
 
-    c.on('osjs/core:logged-in', fn);
+    c.on('meeseOS/core:logged-in', fn);
 
     a.ui.emit('login:post', {
       username: 'test',

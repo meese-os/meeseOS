@@ -194,30 +194,30 @@ export default class Desktop extends EventEmitter {
    * Initializes connection events
    */
   initConnectionEvents() {
-    this.core.on('osjs/core:disconnect', ev => {
+    this.core.on('meeseOS/core:disconnect', ev => {
       logger.warn('Connection closed', ev);
 
-      this.core.make('osjs/notification', {
+      this.core.make('meeseOS/notification', {
         title: "Connection Lost",
         message: "The connection was lost. Reconnecting..."
       });
     });
 
-    this.core.on('osjs/core:connect', (ev, reconnected) => {
+    this.core.on('meeseOS/core:connect', (ev, reconnected) => {
       logger.debug('Connection opened');
 
       if (reconnected) {
-        this.core.make('osjs/notification', {
+        this.core.make('meeseOS/notification', {
           title: "Connection Restored",
           message: "The connection to the server was restored."
         });
       }
     });
 
-    this.core.on('osjs/core:connection-failed', (ev) => {
+    this.core.on('meeseOS/core:connection-failed', (ev) => {
       logger.warn('Connection failed');
 
-      this.core.make('osjs/notification', {
+      this.core.make('meeseOS/notification', {
         title: "Connection Failed",
         message: "The connection could not be established. Some features might not work properly."
       });
@@ -228,7 +228,7 @@ export default class Desktop extends EventEmitter {
    * Initializes user interface events
    */
   initUIEvents() {
-    this.core.on(['osjs/panel:create', 'osjs/panel:destroy'], (panel, panels = []) => {
+    this.core.on(['meeseOS/panel:create', 'meeseOS/panel:destroy'], (panel, panels = []) => {
       this.subtract = createPanelSubtraction(panel, panels);
 
       try {
@@ -238,14 +238,14 @@ export default class Desktop extends EventEmitter {
         logger.warn('Panel event error', e);
       }
 
-      this.core.emit('osjs/desktop:transform', this.getRect());
+      this.core.emit('meeseOS/desktop:transform', this.getRect());
     });
 
-    this.core.on('osjs/window:transitionend', (...args) => {
+    this.core.on('meeseOS/window:transitionend', (...args) => {
       this.emit('theme:window:transitionend', ...args);
     });
 
-    this.core.on('osjs/window:change', (...args) => {
+    this.core.on('meeseOS/window:change', (...args) => {
       this.emit('theme:window:change', ...args);
     });
   }
@@ -259,7 +259,7 @@ export default class Desktop extends EventEmitter {
     }
 
     // Creates tray
-    const tray = this.core.make('osjs/tray').create({
+    const tray = this.core.make('meeseOS/tray').create({
       title: 'OS.js developer tools'
     }, (ev) => this.onDeveloperMenu(ev));
 
@@ -270,7 +270,7 @@ export default class Desktop extends EventEmitter {
    * Initializes drag-and-drop events
    */
   initDragEvents() {
-    const {droppable} = this.core.make('osjs/dnd');
+    const {droppable} = this.core.make('meeseOS/dnd');
 
     droppable(this.core.$contents, {
       strict: true,
@@ -347,8 +347,8 @@ export default class Desktop extends EventEmitter {
     const defaults = this.core.config('desktop.settings.keybindings', {});
 
     const reload = () => {
-      keybindings = this.core.make('osjs/settings')
-        .get('osjs/desktop', 'keybindings', defaults);
+      keybindings = this.core.make('meeseOS/settings')
+        .get('meeseOS/desktop', 'keybindings', defaults);
     };
 
     window.addEventListener('keydown', ev => {
@@ -356,16 +356,16 @@ export default class Desktop extends EventEmitter {
         const combo = keybindings[eventName];
         const result = matchKeyCombo(combo, ev);
         if (result) {
-          this.core.emit('osjs/desktop:keybinding:' + eventName, ev);
+          this.core.emit('meeseOS/desktop:keybinding:' + eventName, ev);
         }
       });
     });
 
-    this.core.on('osjs/settings:load', reload);
-    this.core.on('osjs/settings:save', reload);
-    this.core.on('osjs/core:started', reload);
+    this.core.on('meeseOS/settings:load', reload);
+    this.core.on('meeseOS/settings:save', reload);
+    this.core.on('meeseOS/core:started', reload);
 
-    const closeBindingName = 'osjs/desktop:keybinding:close-window';
+    const closeBindingName = 'meeseOS/desktop:keybinding:close-window';
     const closeBindingCallback = () => {
       const w = Window.lastWindow();
       if (isVisible(w)) {
@@ -494,7 +494,7 @@ export default class Desktop extends EventEmitter {
     } else {
       const userSettings = settings
         ? settings
-        : this.core.make('osjs/settings').get('osjs/desktop');
+        : this.core.make('meeseOS/settings').get('meeseOS/desktop');
 
       newSettings = merge(defaultSettings, userSettings, {
         arrayMerge: (dest, source) => source
@@ -519,15 +519,15 @@ export default class Desktop extends EventEmitter {
     applyCss(newSettings);
 
     // TODO: Multiple panels
-    applyOverlays('osjs/panels', (newSettings.panels || []).slice(-1));
-    applyOverlays('osjs/widgets', newSettings.widgets);
+    applyOverlays('meeseOS/panels', (newSettings.panels || []).slice(-1));
+    applyOverlays('meeseOS/widgets', newSettings.widgets);
 
     this.applyTheme(newSettings.theme);
     this.applyIcons(newSettings.icons);
 
     this.applyIconView(newSettings.iconview);
 
-    this.core.emit('osjs/desktop:applySettings');
+    this.core.emit('meeseOS/desktop:applySettings');
 
     return {...newSettings};
   }
@@ -636,7 +636,7 @@ export default class Desktop extends EventEmitter {
    * @return {Promise<undefined>}
    */
   _applyTheme(name) {
-    return this.core.make('osjs/packages')
+    return this.core.make('meeseOS/packages')
       .launch(name)
       .then(result => {
         if (result.errors.length) {
@@ -655,8 +655,8 @@ export default class Desktop extends EventEmitter {
    * @return {Promise<boolean>}
    */
   _applySettingsByKey(k, v) {
-    return this.core.make('osjs/settings')
-      .set('osjs/desktop', k, v)
+    return this.core.make('meeseOS/settings')
+      .set('meeseOS/desktop', k, v)
       .save()
       .then(() => this.applySettings());
   }
@@ -667,13 +667,13 @@ export default class Desktop extends EventEmitter {
    * @return {Object[]}
    */
   createDropContextMenu(data) {
-    const settings = this.core.make('osjs/settings');
-    const desktop = this.core.make('osjs/desktop');
+    const settings = this.core.make('meeseOS/settings');
+    const desktop = this.core.make('meeseOS/desktop');
     const droppedImage = isDroppingImage(data);
     const menu = [];
 
     const setWallpaper = () => settings
-      .set('osjs/desktop', 'background.src', data)
+      .set('meeseOS/desktop', 'background.src', data)
       .save()
       .then(() => desktop.applySettings());
 
@@ -692,19 +692,19 @@ export default class Desktop extends EventEmitter {
    * @param {Event} ev
    */
   onDeveloperMenu(ev) {
-    const s = this.core.make('osjs/settings').get();
+    const s = this.core.make('meeseOS/settings').get();
 
     const storageItems = Object.keys(s)
       .map(k => ({
         label: k,
         onclick: () => {
-          this.core.make('osjs/settings')
+          this.core.make('meeseOS/settings')
             .clear(k)
             .then(() => this.applySettings());
         }
       }));
 
-    this.core.make('osjs/contextmenu').show({
+    this.core.make('meeseOS/contextmenu').show({
       position: ev,
       menu: [
         {
@@ -743,7 +743,7 @@ export default class Desktop extends EventEmitter {
   onDropContextMenu(ev, data) {
     const menu = this.createDropContextMenu(data);
 
-    this.core.make('osjs/contextmenu', {
+    this.core.make('meeseOS/contextmenu', {
       position: ev,
       menu
     });
@@ -757,7 +757,7 @@ export default class Desktop extends EventEmitter {
     const lockSettings = this.core.config('desktop.lock');
     const extras = [].concat(...this.contextmenuEntries.map(e => typeof e === 'function' ? e() : e));
     const config = this.core.config('desktop.contextmenu');
-    const hasIconview = this.core.make('osjs/settings').get('osjs/desktop', 'iconview.enabled');
+    const hasIconview = this.core.make('meeseOS/settings').get('meeseOS/desktop', 'iconview.enabled');
 
     if (config === false || config.enabled === false) {
       return;
@@ -765,13 +765,13 @@ export default class Desktop extends EventEmitter {
 
     const useDefaults = config === true || config.defaults; // NOTE: Backward compability
 
-    const themes = this.core.make('osjs/packages')
+    const themes = this.core.make('meeseOS/packages')
       .getPackages(p => p.type === 'theme');
 
     const defaultItems = lockSettings ? [] : [{
       label: "Select wallpaper",
       onclick: () => {
-        this.core.make('osjs/dialog', 'file', {
+        this.core.make('meeseOS/dialog', 'file', {
           mime: ['^image']
         }, (btn, file) => {
           if (btn === 'ok') {
@@ -811,7 +811,7 @@ export default class Desktop extends EventEmitter {
     ];
 
     if (menu.length) {
-      this.core.make('osjs/contextmenu').show({
+      this.core.make('meeseOS/contextmenu').show({
         menu,
         position: ev
       });

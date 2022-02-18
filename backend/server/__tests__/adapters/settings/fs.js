@@ -1,11 +1,11 @@
-const osjs = require('osjs')
+const meeseOS = require('meeseOS')
 const fsAdapter = require('../../../src/adapters/settings/fs.js');
 
 describe('settings fs adapter', () => {
   let core;
   let adapter;
 
-  beforeAll(() => osjs().then(c => (core = c)));
+  beforeAll(() => meeseOS().then(c => (core = c)));
   afterAll(() => core.destroy());
 
   test('should create new instance', () => {

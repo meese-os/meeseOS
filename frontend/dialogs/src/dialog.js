@@ -80,8 +80,8 @@ const createOptions = (options, args) =>
         minimizable: false,
         sessionable: false,
         classNames: [
-          'osjs-dialog',
-          `osjs-${options.className || 'unknown'}-dialog`
+          'meeseOS-dialog',
+          `meeseOS-${options.className || 'unknown'}-dialog`
         ],
         minDimension: {
           width: 300,
@@ -149,7 +149,7 @@ export default class Dialog {
       isMergeableObject: plain
     });
 
-    this.win = this.core.make('osjs/window', opts);
+    this.win = this.core.make('meeseOS/window', opts);
 
     this.win.on('keydown', (ev, win) => {
       if (ev.keyCode === 27) {
@@ -198,7 +198,7 @@ export default class Dialog {
   createView(children, state = {}) {
     return h(Box, {grow: 1, shrink: 1}, [
       ...children,
-      h(Toolbar, {class: 'osjs-dialog-buttons'}, [
+      h(Toolbar, {class: 'meeseOS-dialog-buttons'}, [
         ...this.createButtons(state.buttons || {})
       ])
     ]);
@@ -244,10 +244,10 @@ export default class Dialog {
   /**
    */
   playSound() {
-    if (this.core.has('osjs/sounds')) {
+    if (this.core.has('meeseOS/sounds')) {
       const snd = this.options.sound;
       if (snd) {
-        this.core.make('osjs/sounds').play(snd);
+        this.core.make('meeseOS/sounds').play(snd);
 
         return true;
       }

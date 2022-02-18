@@ -28,11 +28,11 @@
  * @licence Simplified BSD License
  */
 
-.osjs-widget {
+.meeseOS-widget {
   position: absolute;
   z-index: 2;
 
-  & > .osjs-widget-resize {
+  & > .meeseOS-widget-resize {
     display: none;
     position: absolute;
     bottom: 0;
@@ -46,7 +46,7 @@
   &:hover {
     background-color: rgba(0, 0, 0, 0.5);
 
-    & > .osjs-widget-resize {
+    & > .meeseOS-widget-resize {
       display: block !important;
     }
   }

@@ -75,7 +75,7 @@ const panes = (state, actions, children, orientation) => {
   const spacers = Array(Math.ceil(children.length / 2))
     .fill(null)
     .map(() => h('div', {
-      class: 'osjs-gui-panes-spacer',
+      class: 'meeseOS-gui-panes-spacer',
       onmousedown: ev => onmousedown(ev, actions, orientation)
     }));
 
@@ -83,7 +83,7 @@ const panes = (state, actions, children, orientation) => {
     const w = state.sizes[i] ? String(state.sizes[i]) + 'px' : undefined;
 
     return h('div', {
-      class: 'osjs-gui-panes-pane',
+      class: 'meeseOS-gui-panes-pane',
       style: {
         flex: w ? `0 0 ${w}` : w
       }
@@ -102,7 +102,7 @@ const view = (state, actions) => (props, children) => {
 
   return h(Element, {
     orientation,
-    class: 'osjs-gui-panes-inner'
+    class: 'meeseOS-gui-panes-inner'
   }, panes(state, actions, children, orientation));
 };
 
@@ -125,5 +125,5 @@ const inner = nestable({
  * @param {h[]} children Children
  */
 export const Panes = (props, children) => h(inner, {
-  class: 'osjs-gui-panes'
+  class: 'meeseOS-gui-panes'
 }, children);

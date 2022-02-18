@@ -45,7 +45,7 @@ const npmPackages = async (root) => {
   const results = await Promise.all(promises);
 
   const packages = results.filter(
-    ({json}) => !!json.osjs && json.osjs.type === 'package'
+    ({json}) => !!json.meeseOS && json.meeseOS.type === 'package'
   );
 
   const list = await Promise.all(packages.map(
