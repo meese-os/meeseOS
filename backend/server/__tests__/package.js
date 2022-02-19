@@ -28,75 +28,70 @@
  * @licence Simplified BSD License
  */
 
-const meeseOS = require('meeseOS');
-const path = require('path');
-const Package = require('../src/package.js');
+const meeseOS = require("meeseOS");
+const path = require("path");
+const Package = require("../src/package.js");
 
-describe('Package', () => {
-  let core;
-  let pkg;
+describe("Package", () => {
+	let core;
+	let pkg;
 
-  beforeAll(() => meeseOS().then(c => (core = c)));
-  afterAll(() => core.destroy());
+	beforeAll(() => meeseOS().then((c) => (core = c)));
+	afterAll(() => core.destroy());
 
-  test('#constructor', () => {
-    const filename = path.resolve(core.configuration.root, 'packages/JestTest/metadata.json');
-    const metadata = require(filename);
+	test("#constructor", () => {
+		const filename = path.resolve(
+			core.configuration.root,
+			"packages/JestTest/metadata.json"
+		);
+		const metadata = require(filename);
 
-    pkg = new Package(core, {
-      filename,
-      metadata
-    });
-  });
+		pkg = new Package(core, {
+			filename,
+			metadata,
+		});
+	});
 
-  test('#init', () => {
-    return expect(pkg.init())
-      .resolves
-      .toBe(undefined);
-  });
+	test("#init", () => {
+		return expect(pkg.init()).resolves.toBe(undefined);
+	});
 
-  test('#validate', () => {
-    const manifest = require(
-      path.resolve(core.configuration.public, 'metadata.json')
-    );
+	test("#validate", () => {
+		const manifest = require(path.resolve(
+			core.configuration.public,
+			"metadata.json"
+		));
 
-    expect(pkg.validate(manifest))
-      .toBe(true);
+		expect(pkg.validate(manifest)).toBe(true);
 
-    expect(pkg.validate([]))
-      .toBe(false);
-  });
+		expect(pkg.validate([])).toBe(false);
+	});
 
-  test('#start', () => {
-    expect(pkg.start())
-      .toBe(true);
-  });
+	test("#start", () => {
+		expect(pkg.start()).toBe(true);
+	});
 
-  test('#action', () => {
-    expect(pkg.action('init'))
-      .toBe(true);
+	test("#action", () => {
+		expect(pkg.action("init")).toBe(true);
 
-    expect(pkg.action('invalid'))
-      .toBe(false);
+		expect(pkg.action("invalid")).toBe(false);
 
-    expect(pkg.action('test'))
-      .toBe(false);
-  });
+		expect(pkg.action("test")).toBe(false);
+	});
 
-  test('#resource', () => {
-    expect(pkg.resource('test'))
-      .toBe('/apps/JestTest/test');
+	test("#resource", () => {
+		expect(pkg.resource("test")).toBe("/apps/JestTest/test");
 
-    expect(pkg.resource('/test'))
-      .toBe('/apps/JestTest/test');
-  });
+		expect(pkg.resource("/test")).toBe("/apps/JestTest/test");
+	});
 
-  test('#watch', () => {
-    expect(pkg.watch(jest.fn()))
-      .toBe(path.resolve(core.configuration.public, 'apps/JestTest'));
-  });
+	test("#watch", () => {
+		expect(pkg.watch(jest.fn())).toBe(
+			path.resolve(core.configuration.public, "apps/JestTest")
+		);
+	});
 
-  test('#destroy', async () => {
-    await pkg.destroy();
-  });
+	test("#destroy", async () => {
+		await pkg.destroy();
+	});
 });

@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {filteredProps} from '../utils';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import { filteredProps } from "../utils";
+import { Element } from "./Element";
 
 /**
  * A iframe
@@ -39,11 +39,21 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Iframe = (props, children = []) =>
-  h(Element, Object.assign({}, props.box || {}, {
-    class: ['meeseOS-gui-iframe', props.class]
-  }), [
-    h('iframe', Object.assign({
-      frameborder: 0
-    }, filteredProps(props, ['box']))),
-    ...children
-  ]);
+	h(
+		Element,
+		Object.assign({}, props.box || {}, {
+			class: ["meeseOS-gui-iframe", props.class],
+		}),
+		[
+			h(
+				"iframe",
+				Object.assign(
+					{
+						frameborder: 0,
+					},
+					filteredProps(props, ["box"])
+				)
+			),
+			...children,
+		]
+	);

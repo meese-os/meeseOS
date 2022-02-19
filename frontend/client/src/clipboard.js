@@ -40,70 +40,69 @@
  * Clipboard Manager
  */
 export default class Clipboard {
+	/**
+	 * Create new clipboard
+	 */
+	constructor() {
+		/**
+		 * @type {ClipboardData}
+		 */
+		this.clipboard = undefined;
 
-  /**
-   * Create new clipboard
-   */
-  constructor() {
-    /**
-     * @type {ClipboardData}
-     */
-    this.clipboard = undefined;
+		this.clear();
+	}
 
-    this.clear();
-  }
+	/**
+	 * Destroy clipboard
+	 */
+	destroy() {
+		this.clear();
+	}
 
-  /**
-   * Destroy clipboard
-   */
-  destroy() {
-    this.clear();
-  }
+	/**
+	 * Clear clipboard
+	 */
+	clear() {
+		this.clipboard = { data: undefined, type: undefined };
+	}
 
-  /**
-   * Clear clipboard
-   */
-  clear() {
-    this.clipboard = {data: undefined, type: undefined};
-  }
+	/**
+	 * Set clipboard data
+	 * @param {*} data Clipboard data. For async data, provide a function that returns a promise
+	 * @param {string} [type] Optional type used by applications for identifying content
+	 */
+	set(data, type) {
+		this.clipboard = { data, type };
+	}
 
-  /**
-   * Set clipboard data
-   * @param {*} data Clipboard data. For async data, provide a function that returns a promise
-   * @param {string} [type] Optional type used by applications for identifying content
-   */
-  set(data, type) {
-    this.clipboard = {data, type};
-  }
+	/**
+	 * Checks if current clipboard data has this type
+	 * @param {string|RegExp} type Data type
+	 * @return {boolean}
+	 */
+	has(type) {
+		if (type instanceof RegExp) {
+			return (
+				typeof this.clipboard.type === "string" &&
+				!!this.clipboard.type.match(type)
+			);
+		}
+		return this.clipboard.type === type;
+	}
 
-  /**
-   * Checks if current clipboard data has this type
-   * @param {string|RegExp} type Data type
-   * @return {boolean}
-   */
-  has(type) {
-    if (type instanceof RegExp) {
-      return typeof this.clipboard.type === 'string' &&
-        !!this.clipboard.type.match(type);
-    }
-    return this.clipboard.type === type;
-  }
+	/**
+	 * Gets clipboard data
+	 * @param {boolean} [clear=false] Clear clipboard
+	 * @return {Promise<*>}
+	 */
+	get(clear = false) {
+		const { data } = this.clipboard;
+		const result = typeof data === "function" ? data() : data;
 
-  /**
-   * Gets clipboard data
-   * @param {boolean} [clear=false] Clear clipboard
-   * @return {Promise<*>}
-   */
-  get(clear = false) {
-    const {data} = this.clipboard;
-    const result = typeof data === 'function'
-      ? data()
-      : data;
+		if (clear) {
+			this.clear();
+		}
 
-    if (clear) {
-      this.clear();
-    }
-
-    return Promise.resolve(result);
-  }
+		return Promise.resolve(result);
+	}
 }

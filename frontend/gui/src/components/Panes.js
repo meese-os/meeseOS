@@ -28,94 +28,111 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import nestable from 'hyperapp-nestable';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import nestable from "hyperapp-nestable";
+import { Element } from "./Element";
 
 const onmousedown = (ev, actions, orientation) => {
-  const {target, clientX, clientY} = ev;
-  const pane = target.previousSibling;
-  const {offsetWidth, offsetHeight} = pane;
-  const index = Array.from(target.parentNode.children).indexOf(pane);
-  const maxWidth = pane.parentNode.offsetWidth * 0.8;
-  const maxHeight = pane.parentNode.offsetHeight * 0.8;
+	const { target, clientX, clientY } = ev;
+	const pane = target.previousSibling;
+	const { offsetWidth, offsetHeight } = pane;
+	const index = Array.from(target.parentNode.children).indexOf(pane);
+	const maxWidth = pane.parentNode.offsetWidth * 0.8;
+	const maxHeight = pane.parentNode.offsetHeight * 0.8;
 
-  if (index < 0) {
-    return;
-  }
+	if (index < 0) {
+		return;
+	}
 
-  const mousemove = ev => {
-    ev.preventDefault();
+	const mousemove = (ev) => {
+		ev.preventDefault();
 
-    let size = orientation === 'vertical' ? offsetWidth : offsetHeight;
+		let size = orientation === "vertical" ? offsetWidth : offsetHeight;
 
-    if (orientation === 'vertical') {
-      const diffX = ev.clientX - clientX;
-      size = Math.min(maxWidth, size + diffX);
-    } else {
-      const diffY = ev.clientY - clientY;
-      size = Math.min(maxHeight, size + diffY);
-    }
+		if (orientation === "vertical") {
+			const diffX = ev.clientX - clientX;
+			size = Math.min(maxWidth, size + diffX);
+		} else {
+			const diffY = ev.clientY - clientY;
+			size = Math.min(maxHeight, size + diffY);
+		}
 
-    actions.setSize({index, size});
-  };
+		actions.setSize({ index, size });
+	};
 
-  const mouseup = ev => {
-    ev.preventDefault();
-    document.removeEventListener('mousemove', mousemove);
-    document.removeEventListener('mouseup', mouseup);
-  };
+	const mouseup = (ev) => {
+		ev.preventDefault();
+		document.removeEventListener("mousemove", mousemove);
+		document.removeEventListener("mouseup", mouseup);
+	};
 
-  ev.preventDefault();
-  document.addEventListener('mousemove', mousemove);
-  document.addEventListener('mouseup', mouseup);
+	ev.preventDefault();
+	document.addEventListener("mousemove", mousemove);
+	document.addEventListener("mouseup", mouseup);
 };
 
 const panes = (state, actions, children, orientation) => {
-  const spacers = Array(Math.ceil(children.length / 2))
-    .fill(null)
-    .map(() => h('div', {
-      class: 'meeseOS-gui-panes-spacer',
-      onmousedown: ev => onmousedown(ev, actions, orientation)
-    }));
+	const spacers = Array(Math.ceil(children.length / 2))
+		.fill(null)
+		.map(() =>
+			h("div", {
+				class: "meeseOS-gui-panes-spacer",
+				onmousedown: (ev) => onmousedown(ev, actions, orientation),
+			})
+		);
 
-  const child = (c, i) => {
-    const w = state.sizes[i] ? String(state.sizes[i]) + 'px' : undefined;
+	const child = (c, i) => {
+		const w = state.sizes[i] ? String(state.sizes[i]) + "px" : undefined;
 
-    return h('div', {
-      class: 'meeseOS-gui-panes-pane',
-      style: {
-        flex: w ? `0 0 ${w}` : w
-      }
-    }, c);
-  };
+		return h(
+			"div",
+			{
+				class: "meeseOS-gui-panes-pane",
+				style: {
+					flex: w ? `0 0 ${w}` : w,
+				},
+			},
+			c
+		);
+	};
 
-  return children
-    .map(child)
-    .map((v, i) => [v, spacers[i]])
-    .reduce((a, b) => a.concat(b))
-    .filter(v => typeof v !== 'undefined');
+	return children
+		.map(child)
+		.map((v, i) => [v, spacers[i]])
+		.reduce((a, b) => a.concat(b))
+		.filter((v) => typeof v !== "undefined");
 };
 
 const view = (state, actions) => (props, children) => {
-  const orientation = props.orientation || 'vertical';
+	const orientation = props.orientation || "vertical";
 
-  return h(Element, {
-    orientation,
-    class: 'meeseOS-gui-panes-inner'
-  }, panes(state, actions, children, orientation));
+	return h(
+		Element,
+		{
+			orientation,
+			class: "meeseOS-gui-panes-inner",
+		},
+		panes(state, actions, children, orientation)
+	);
 };
 
-const inner = nestable({
-  sizes: []
-}, {
-  init: props => ({sizes: props.sizes || [150]}),
-  setSize: ({index, size}) => state => {
-    const sizes = [].concat(state.sizes);
-    sizes[index] = size;
-    return {sizes};
-  }
-}, view, 'div');
+const inner = nestable(
+	{
+		sizes: [],
+	},
+	{
+		init: (props) => ({ sizes: props.sizes || [150] }),
+		setSize:
+			({ index, size }) =>
+			(state) => {
+				const sizes = [].concat(state.sizes);
+				sizes[index] = size;
+				return { sizes };
+			},
+	},
+	view,
+	"div"
+);
 
 /**
  * Resizable panes
@@ -124,6 +141,11 @@ const inner = nestable({
  * @param {number[]} [props.sizes] Pane sizes
  * @param {h[]} children Children
  */
-export const Panes = (props, children) => h(inner, {
-  class: 'meeseOS-gui-panes'
-}, children);
+export const Panes = (props, children) =>
+	h(
+		inner,
+		{
+			class: "meeseOS-gui-panes",
+		},
+		children
+	);

@@ -34,9 +34,8 @@
  * @param {object} [options] Adapter options
  */
 module.exports = (core, options) => ({
-  init: async () => true,
-  destroy: async () => true,
-  save: async () => true,
-  load: async () => ({})
+	init: async () => true,
+	destroy: async () => true,
+	save: async () => true,
+	load: async () => ({}),
 });
-

@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import logger from './logger';
-import defaultIcon from './styles/logo-blue-32x32.png';
+import logger from "./logger";
+import defaultIcon from "./styles/logo-blue-32x32.png";
 
 /**
  * Tray Icon Data
@@ -53,101 +53,99 @@ import defaultIcon from './styles/logo-blue-32x32.png';
  * Tray Handler
  */
 export default class Tray {
+	/**
+	 * Creates the Tray Handler
+	 *
+	 * @param {Core} core Core reference
+	 */
+	constructor(core) {
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
 
-  /**
-   * Creates the Tray Handler
-   *
-   * @param {Core} core Core reference
-   */
-  constructor(core) {
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
+		/**
+		 * All Tray entries
+		 * @type {TrayEntry[]}
+		 */
+		this.entries = [];
+	}
 
-    /**
-     * All Tray entries
-     * @type {TrayEntry[]}
-     */
-    this.entries = [];
-  }
+	/**
+	 * Destroys instance
+	 */
+	destroy() {
+		this.entries = [];
+	}
 
-  /**
-   * Destroys instance
-   */
-  destroy() {
-    this.entries = [];
-  }
+	/**
+	 * Creates a new Tray entry
+	 * @param {TrayEntryData} options Options
+	 * @param {Function} [handler] The callback function for all events
+	 * @return {TrayEntry}
+	 */
+	create(options, handler) {
+		const defaultTitle = "Tray Entry";
 
-  /**
-   * Creates a new Tray entry
-   * @param {TrayEntryData} options Options
-   * @param {Function} [handler] The callback function for all events
-   * @return {TrayEntry}
-   */
-  create(options, handler) {
-    const defaultTitle = "Tray Entry";
+		handler = handler || (() => {});
 
-    handler = handler || (() => {});
+		const entry = {
+			key: null,
+			icon: defaultIcon,
+			title: defaultTitle,
+			onclick: handler,
+			oncontextmenu: handler,
+			handler,
+			...options,
+		};
 
-    const entry = {
-      key: null,
-      icon: defaultIcon,
-      title: defaultTitle,
-      onclick: handler,
-      oncontextmenu: handler,
-      handler,
-      ...options
-    };
+		logger.debug("Created new tray entry", entry);
 
-    logger.debug('Created new tray entry', entry);
+		this.entries.push(entry);
 
-    this.entries.push(entry);
+		this.core.emit("meeseOS/tray:create", entry);
+		this.core.emit("meeseOS/tray:update", this.entries);
 
-    this.core.emit('meeseOS/tray:create', entry);
-    this.core.emit('meeseOS/tray:update', this.entries);
+		const obj = {
+			entry,
+			update: (u) => {
+				Object.keys(u).forEach((k) => (entry[k] = u[k]));
 
-    const obj = {
-      entry,
-      update: u => {
-        Object.keys(u).forEach(k => (entry[k] = u[k]));
+				this.core.emit("meeseOS/tray:update", this.entries);
+			},
+			destroy: () => this.remove(entry),
+		};
 
-        this.core.emit('meeseOS/tray:update', this.entries);
-      },
-      destroy: () => this.remove(entry)
-    };
+		return obj;
+	}
 
-    return obj;
-  }
+	/**
+	 * Removes a Tray entry
+	 * @param {TrayEntry} entry The tray entry
+	 */
+	remove(entry) {
+		const foundIndex = this.entries.findIndex((e) => e === entry);
+		if (foundIndex !== -1) {
+			this.entries.splice(foundIndex, 1);
 
-  /**
-   * Removes a Tray entry
-   * @param {TrayEntry} entry The tray entry
-   */
-  remove(entry) {
-    const foundIndex = this.entries.findIndex(e => e === entry);
-    if (foundIndex !== -1) {
-      this.entries.splice(foundIndex, 1);
+			this.core.emit("meeseOS/tray:remove", entry);
+			this.core.emit("meeseOS/tray:update", this.entries);
+		}
+	}
 
-      this.core.emit('meeseOS/tray:remove', entry);
-      this.core.emit('meeseOS/tray:update', this.entries);
-    }
-  }
+	/**
+	 * @return {TrayEntry[]}
+	 */
+	list() {
+		return this.entries;
+	}
 
-  /**
-   * @return {TrayEntry[]}
-   */
-  list() {
-    return this.entries;
-  }
-
-  /**
-   * @return {Boolean}
-   */
-  has(key) {
-    return this.entries.findIndex(entry => entry.key === key) !== -1;
-  }
-
+	/**
+	 * @return {Boolean}
+	 */
+	has(key) {
+		return this.entries.findIndex((entry) => entry.key === key) !== -1;
+	}
 }

@@ -10,7 +10,5 @@
   "description": {
     "en_EN": "___NAME___"
   },
-  "files": [
-    "main.js"
-  ]
+  "files": ["main.js"]
 }

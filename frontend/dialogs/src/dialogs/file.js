@@ -28,268 +28,321 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import Dialog from '../dialog';
-import {
-  TextField,
-  SelectField,
-  listView
-} from '@aaronmeese.com/gui';
+import { h, app } from "hyperapp";
+import Dialog from "../dialog";
+import { TextField, SelectField, listView } from "@aaronmeese.com/gui";
 
-const getMountpoint = str => str
-  .split(':')[0] + ':/';
+const getMountpoint = (str) => str.split(":")[0] + ":/";
 
-const getMountpoints = core => core.make('meeseOS/fs')
-  .mountpoints(true)
-  .filter(mount => {
-    return !(mount.attributes.readOnly && mount.attributes.visibility === 'restricted');
-  })
-  .reduce((mounts, iter) => Object.assign(mounts, {
-    [iter.root]: iter.label
-  }), {});
+const getMountpoints = (core) =>
+	core
+		.make("meeseOS/fs")
+		.mountpoints(true)
+		.filter((mount) => {
+			return !(
+				mount.attributes.readOnly &&
+				mount.attributes.visibility === "restricted"
+			);
+		})
+		.reduce(
+			(mounts, iter) =>
+				Object.assign(mounts, {
+					[iter.root]: iter.label,
+				}),
+			{}
+		);
 
 /**
  * Default OS.js File Dialog
  */
 export default class FileDialog extends Dialog {
+	/**
+	 * Constructor
+	 * @param {Core} core OS.js Core reference
+	 * @param {Object} args Arguments given from service creation
+	 * @param {String} [args.title] Dialog title
+	 * @param {String} [args.type='open'] Dialog type (open/save)
+	 * @param {String} [args.path] Current path
+	 * @param {String} [args.filetype='file'] Dialog filetype (file/directory)
+	 * @param {String} [args.filename] Current filename
+	 * @param {String[]} [args.mime] Mime filter
+	 * @param {Function} callback The callback function
+	 */
+	constructor(core, args, callback) {
+		args = Object.assign(
+			{},
+			{
+				title: null,
+				type: "open",
+				filetype: "file",
+				path: core.config("vfs.defaultPath"),
+				filename: null,
+				mime: [],
+			},
+			args
+		);
 
-  /**
-   * Constructor
-   * @param {Core} core OS.js Core reference
-   * @param {Object} args Arguments given from service creation
-   * @param {String} [args.title] Dialog title
-   * @param {String} [args.type='open'] Dialog type (open/save)
-   * @param {String} [args.path] Current path
-   * @param {String} [args.filetype='file'] Dialog filetype (file/directory)
-   * @param {String} [args.filename] Current filename
-   * @param {String[]} [args.mime] Mime filter
-   * @param {Function} callback The callback function
-   */
-  constructor(core, args, callback) {
-    args = Object.assign({}, {
-      title: null,
-      type: 'open',
-      filetype: 'file',
-      path: core.config('vfs.defaultPath'),
-      filename: null,
-      mime: []
-    }, args);
+		if (typeof args.path === "string") {
+			args.path = { path: args.path };
+		}
 
-    if (typeof args.path === 'string') {
-      args.path = {path: args.path};
-    }
+		try {
+			args.path = Object.assign(
+				{
+					isDirectory: true,
+					filename: args.path.path.split(":/")[1].split("/").pop() || "",
+				},
+				args.path
+			);
+		} catch (e) {
+			console.warn(e);
+		}
 
-    try {
-      args.path = Object.assign({
-        isDirectory: true,
-        filename: args.path.path.split(':/')[1].split('/').pop() || ''
-      }, args.path);
-    } catch (e) {
-      console.warn(e);
-    }
+		const title = args.title
+			? args.title
+			: args.type === "open"
+			? "Open"
+			: "Save";
 
-    const title = args.title
-      ? args.title
-      : (args.type === 'open' ? "Open" : "Save");
+		super(
+			core,
+			args,
+			{
+				className: "file",
+				window: {
+					title,
+					attributes: {
+						resizable: true,
+					},
+					dimension: {
+						width: 400,
+						height: 400,
+					},
+				},
+				buttons: ["ok", "cancel"],
+			},
+			callback
+		);
+	}
 
-    super(core, args, {
-      className: 'file',
-      window: {
-        title,
-        attributes: {
-          resizable: true
-        },
-        dimension: {
-          width: 400,
-          height: 400
-        }
-      },
-      buttons: ['ok', 'cancel']
-    }, callback);
-  }
+	render(options) {
+		const getFileIcon = (file) => this.core.make("meeseOS/fs").icon(file);
+		const startingLocation = this.args.path;
 
-  render(options) {
-    const getFileIcon = file => this.core.make('meeseOS/fs').icon(file);
-    const startingLocation = this.args.path;
+		super.render(options, ($content) => {
+			const a = app(
+				{
+					mount: startingLocation ? getMountpoint(startingLocation.path) : null,
+					filename: this.args.filename,
+					listview: listView.state({
+						columns: [
+							{
+								label: "Name",
+							},
+							{
+								label: "Type",
+							},
+							{
+								label: "Size",
+							},
+						],
+					}),
+					buttons: {
+						ok:
+							this.args.filetype === "directory" ? true : !!this.args.filename,
+					},
+				},
+				{
+					_readdir:
+						({ path, files }) =>
+						(state, actions) => {
+							const listview = state.listview;
+							listview.selectedIndex = -1;
+							listview.rows = files.map((file) => ({
+								columns: [
+									{
+										label: file.filename,
+										icon: getFileIcon(file),
+									},
+									file.mime,
+									file.humanSize,
+								],
+								data: file,
+							}));
 
-    super.render(options, ($content) => {
-      const a = app({
-        mount: startingLocation ? getMountpoint(startingLocation.path) : null,
-        filename: this.args.filename,
-        listview: listView.state({
-          columns: [{
-            label: 'Name'
-          }, {
-            label: 'Type'
-          }, {
-            label: 'Size'
-          }]
-        }),
-        buttons: {
-          ok: this.args.filetype === 'directory'
-            ? true
-            : !!this.args.filename
-        }
-      }, {
-        _readdir: ({path, files}) => (state, actions) => {
-          const listview = state.listview;
-          listview.selectedIndex = -1;
-          listview.rows = files.map(file => ({
-            columns: [{
-              label: file.filename,
-              icon: getFileIcon(file)
-            }, file.mime, file.humanSize],
-            data: file
-          }));
+							return { path, listview };
+						},
 
-          return {path, listview};
-        },
+					setButtonState: (btn) => (state) => ({
+						buttons: Object.assign({}, state.buttons, btn),
+					}),
 
-        setButtonState: btn => state => ({
-          buttons: Object.assign({}, state.buttons, btn)
-        }),
+					setMountpoint: (mount) => (state, actions) => {
+						actions.setPath({ path: mount });
 
-        setMountpoint: mount => (state, actions) => {
-          actions.setPath({path: mount});
+						return { mount };
+					},
 
-          return {mount};
-        },
+					setPath: (file) => async (state, actions) => {
+						const files = await this.core.make("meeseOS/vfs").readdir(file, {
+							filter: (item) => {
+								if (this.args.filetype === "directory") {
+									return item.isDirectory === true;
+								} else if (this.args.mime.length) {
+									return item.mime
+										? this.args.mime.some((test) =>
+												new RegExp(test).test(item.mime)
+										  )
+										: true;
+								}
 
-        setPath: file => async (state, actions) => {
-          const files = await this.core.make('meeseOS/vfs')
-            .readdir(file, {
-              filter: (item) => {
-                if (this.args.filetype === 'directory') {
-                  return item.isDirectory === true;
-                } else if (this.args.mime.length) {
-                  return item.mime
-                    ? this.args.mime.some(test => (new RegExp(test)).test(item.mime))
-                    : true;
-                }
+								return true;
+							},
+						});
 
-                return true;
-              }
-            });
+						this.args.path = file;
 
-          this.args.path = file;
+						actions._readdir({ path: file.path, files });
 
-          actions._readdir({path: file.path, files});
+						if (this.args.filetype === "file") {
+							actions.setButtonState({
+								ok: this.args.type === "save" ? !!this.args.filename : false,
+							});
+						}
+					},
 
-          if (this.args.filetype === 'file') {
-            actions.setButtonState({ok: this.args.type === 'save' ? !!this.args.filename : false});
-          }
-        },
+					setFilename: (filename) => (state) => ({ filename }),
 
-        setFilename: filename => state => ({filename}),
+					listview: listView.actions({
+						select: ({ data }) => {
+							a.setFilename(data.isFile ? data.filename : null);
+							this.value = data.isFile ? data : null;
 
-        listview: listView.actions({
-          select: ({data}) => {
-            a.setFilename(data.isFile ? data.filename : null);
-            this.value = data.isFile ? data : null;
+							if (this.args.filetype === "file" && data.isFile) {
+								a.setButtonState({ ok: true });
+							}
+						},
+						activate: ({ data, ev }) => {
+							if (data.isDirectory) {
+								a.setFilename(null);
+								a.setPath(data);
+							} else {
+								this.value = data.isFile ? data : null;
+								this.emitCallback(this.getPositiveButton(), ev, true);
+							}
+						},
+					}),
+				},
+				(state, actions) =>
+					this.createView(
+						[
+							h(SelectField, {
+								choices: getMountpoints(this.core),
+								onchange: (ev, val) => a.setMountpoint(val),
+								value: state.mount,
+							}),
+							h(
+								listView.component(
+									Object.assign(
+										{
+											box: { grow: 1, shrink: 1 },
+										},
+										state.listview
+									),
+									actions.listview
+								)
+							),
+							h(TextField, {
+								placeholder: "Filename",
+								value: state.filename,
+								onenter: (ev, value) =>
+									this.emitCallback(this.getPositiveButton(), ev, true),
+								oninput: (ev) => {
+									const filename = ev.target.value;
+									actions.setButtonState({ ok: !!filename });
+									actions.setFilename(filename);
+								},
+								box: {
+									style: { display: this.args.type === "save" ? null : "none" },
+								},
+							}),
+						],
+						state
+					),
+				$content
+			);
 
-            if (this.args.filetype === 'file' && data.isFile) {
-              a.setButtonState({ok: true});
-            }
-          },
-          activate: ({data, ev}) => {
-            if (data.isDirectory) {
-              a.setFilename(null);
-              a.setPath(data);
-            } else {
-              this.value = data.isFile ? data : null;
-              this.emitCallback(this.getPositiveButton(), ev, true);
-            }
-          },
-        })
-      }, (state, actions) => this.createView([
-        h(SelectField, {
-          choices: getMountpoints(this.core),
-          onchange: (ev, val) => a.setMountpoint(val),
-          value: state.mount
-        }),
-        h(listView.component(Object.assign({
-          box: {grow: 1, shrink: 1}
-        }, state.listview), actions.listview)),
-        h(TextField, {
-          placeholder: 'Filename',
-          value: state.filename,
-          onenter: (ev, value) => this.emitCallback(this.getPositiveButton(), ev, true),
-          oninput: (ev) => {
-            const filename = ev.target.value;
-            actions.setButtonState({ok: !!filename});
-            actions.setFilename(filename);
-          },
-          box: {
-            style: {display: this.args.type === 'save' ? null : 'none'}
-          }
-        })
-      ], state), $content);
+			a.setPath(startingLocation);
+		});
+	}
 
-      a.setPath(startingLocation);
-    });
-  }
+	emitCallback(name, ev, close = false) {
+		if (this.calledBack) {
+			return;
+		}
 
-  emitCallback(name, ev, close = false) {
-    if (this.calledBack) {
-      return;
-    }
+		const file = this.getValue();
+		const next = () => super.emitCallback(name, ev, close);
+		const isSave = this.args.type === "save";
+		const buttonCancel = name === "cancel";
+		const hasVfs = this.core.has("meeseOS/vfs");
 
-    const file = this.getValue();
-    const next = () => super.emitCallback(name, ev, close);
-    const isSave = this.args.type === 'save';
-    const buttonCancel = name === 'cancel';
-    const hasVfs = this.core.has('meeseOS/vfs');
+		const confirm = (callback) =>
+			this.core.make(
+				"meeseOS/dialog",
+				"confirm",
+				{
+					message: `Do you want to overwrite ${file.path}?`,
+				},
+				{
+					parent: this.win,
+					attributes: { modal: true },
+				},
+				(btn) => {
+					if (btn === "yes") {
+						callback();
+					}
+				}
+			);
 
-    const confirm = callback => this.core.make('meeseOS/dialog', 'confirm', {
-      message: `Do you want to overwrite ${file.path}?`
-    }, {
-      parent: this.win,
-      attributes: {modal: true}
-    }, (btn) => {
-      if (btn === 'yes') {
-        callback();
-      }
-    });
+		if (file && isSave && hasVfs && !buttonCancel) {
+			this.core
+				.make("meeseOS/vfs")
+				.exists(file)
+				.then((exists) => {
+					if (exists) {
+						confirm(() => next());
+					} else {
+						next();
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+					next();
+				});
+		} else {
+			next();
+		}
+	}
 
-    if (file && isSave && hasVfs && !buttonCancel) {
-      this.core
-        .make('meeseOS/vfs')
-        .exists(file)
-        .then(exists => {
-          if (exists) {
-            confirm(() => next());
-          } else {
-            next();
-          }
-        })
-        .catch(error => {
-          console.error(error);
-          next();
-        });
-    } else {
-      next();
-    }
-  }
+	getValue() {
+		if (this.args.type === "save") {
+			const { path } = this.args.path;
+			const filename =
+				this.win.$content.querySelector("input[type=text]").value;
 
-  getValue() {
-    if (this.args.type === 'save') {
-      const {path} = this.args.path;
-      const filename = this.win.$content.querySelector('input[type=text]')
-        .value;
+			return filename
+				? Object.assign({}, this.args.path, {
+						filename,
+						path: path.replace(/\/?$/, "/") + filename,
+				  })
+				: undefined;
+		} else {
+			if (this.args.filetype === "directory") {
+				return this.args.path;
+			}
+		}
 
-      return filename
-        ? Object.assign({}, this.args.path, {
-          filename,
-          path: path.replace(/\/?$/, '/') + filename
-        })
-        : undefined;
-    } else {
-      if (this.args.filetype === 'directory') {
-        return this.args.path;
-      }
-    }
-
-    return super.getValue();
-  }
-
+		return super.getValue();
+	}
 }

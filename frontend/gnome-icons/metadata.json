@@ -3,7 +3,5 @@
   "name": "GnomeIcons",
   "title": "Gnome Icons",
   "description": "Gnome Icons",
-  "files": [
-    "main.css"
-  ]
+  "files": ["main.css"]
 }

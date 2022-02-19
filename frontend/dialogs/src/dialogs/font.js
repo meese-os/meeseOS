@@ -28,144 +28,171 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import Dialog from '../dialog';
-import {
-  Toolbar,
-  SelectField,
-  TextareaField
-} from '@aaronmeese.com/gui';
+import { h, app } from "hyperapp";
+import Dialog from "../dialog";
+import { Toolbar, SelectField, TextareaField } from "@aaronmeese.com/gui";
 
 /**
  * Default OS.js Font Dialog
  */
 export default class FontDialog extends Dialog {
+	/**
+	 * Constructor
+	 * @param {Core} core OS.js Core reference
+	 * @param {Object} args Arguments given from service creation
+	 * @param {number} [args.minSize=6] Minimum size
+	 * @param {number} [args.maxSize] Maximum size
+	 * @param {string} [args.unit=px] Unit
+	 * @param {string} [args.name] Initial font name
+	 * @param {number} [args.size] Initial font size
+	 * @param {string} [args.text] What text to preview
+	 * @param {string[]} [args.controls] What controls to show
+	 * @param {string[]} [args.fonts] List of fonts
+	 * @param {Function} callback The callback function
+	 */
+	constructor(core, args, callback) {
+		args = Object.assign(
+			{},
+			{
+				title: "Chose Font",
+				minSize: 6,
+				maxSize: 48,
+				unit: "px",
+				name: "Roboto",
+				size: 10,
+				style: "regular",
+				text: "The quick brown fox jumps over the lazy dog",
+				controls: ["size", "name", "style"],
+				fonts: ["Roboto", "arial", "sans-serif", "monospace"],
+			},
+			args
+		);
 
-  /**
-   * Constructor
-   * @param {Core} core OS.js Core reference
-   * @param {Object} args Arguments given from service creation
-   * @param {number} [args.minSize=6] Minimum size
-   * @param {number} [args.maxSize] Maximum size
-   * @param {string} [args.unit=px] Unit
-   * @param {string} [args.name] Initial font name
-   * @param {number} [args.size] Initial font size
-   * @param {string} [args.text] What text to preview
-   * @param {string[]} [args.controls] What controls to show
-   * @param {string[]} [args.fonts] List of fonts
-   * @param {Function} callback The callback function
-   */
-  constructor(core, args, callback) {
-    args = Object.assign({}, {
-      title: 'Chose Font',
-      minSize: 6,
-      maxSize: 48,
-      unit: 'px',
-      name: 'Roboto',
-      size: 10,
-      style: 'regular',
-      text: 'The quick brown fox jumps over the lazy dog',
-      controls: ['size', 'name', 'style'],
-      fonts: [
-        'Roboto',
-        'arial',
-        'sans-serif',
-        'monospace'
-      ]
-    }, args);
+		super(
+			core,
+			args,
+			{
+				className: "info",
+				window: {
+					title: args.title,
+					attributes: {
+						minDimension: {
+							width: 400,
+							height: 200,
+						},
+					},
+				},
+				buttons: ["ok", "cancel"],
+			},
+			callback
+		);
 
-    super(core, args, {
-      className: 'info',
-      window: {
-        title: args.title,
-        attributes: {
-          minDimension: {
-            width: 400,
-            height: 200
-          }
-        }
-      },
-      buttons: ['ok', 'cancel']
-    }, callback);
+		this.value = {
+			name: this.args.name,
+			size: this.args.size,
+			style: this.args.style,
+		};
+	}
 
-    this.value = {
-      name: this.args.name,
-      size: this.args.size,
-      style: this.args.style
-    };
-  }
+	render(options) {
+		const fontSizes = Array(this.args.maxSize - this.args.minSize)
+			.fill(0)
+			.map((v, i) => this.args.minSize + i)
+			.reduce((o, i) => Object.assign(o, { [i]: i }), {});
 
-  render(options) {
-    const fontSizes = Array(this.args.maxSize - this.args.minSize)
-      .fill(0)
-      .map((v, i) => this.args.minSize + i)
-      .reduce((o, i) => Object.assign(o, {[i]: i}), {});
+		const fontNames = this.args.fonts.reduce((o, i) => {
+			const k = i.toLowerCase();
+			return Object.assign(o, { [k]: i });
+		}, {});
 
-    const fontNames = this.args.fonts
-      .reduce((o, i) => {
-        const k = i.toLowerCase();
-        return Object.assign(o, {[k]: i});
-      }, {});
+		const fontStyles = {
+			regular: "Regular",
+			bold: "Bold",
+			italic: "Italic",
+		};
 
-    const fontStyles = {
-      'regular': 'Regular',
-      'bold': 'Bold',
-      'italic': 'Italic'
-    };
+		const initialState = Object.assign({}, this.value);
+		const initialActions = {
+			setSize: (size) => (state) => {
+				this.value.size = size;
+				return { size };
+			},
+			setFont: (name) => (state) => {
+				this.value.name = name;
+				return { name };
+			},
+			setStyle: (style) => (state) => {
+				this.value.style = style;
+				return { style };
+			},
+		};
 
-    const initialState = Object.assign({}, this.value);
-    const initialActions = {
-      setSize: size => state => {
-        this.value.size = size;
-        return {size};
-      },
-      setFont: name => state => {
-        this.value.name = name;
-        return {name};
-      },
-      setStyle: style => state => {
-        this.value.style = style;
-        return {style};
-      }
-    };
-
-    super.render(options, ($content) => {
-      app(initialState, initialActions, (state, actions) => this.createView([
-        h(Toolbar, {}, [
-          h(SelectField, {
-            box: {grow: 1, style: {display: this.args.controls.indexOf('size') !== -1 ? 'flex' : 'none'}},
-            value: state.size,
-            choices: fontSizes,
-            onchange: (ev, v) => actions.setSize(v)
-          }),
-          h(SelectField, {
-            box: {grow: 1, style: {display: this.args.controls.indexOf('name') !== -1 ? 'flex' : 'none'}},
-            value: state.name.toLowerCase(),
-            choices: fontNames,
-            onchange: (ev, v) => actions.setFont(v)
-          }),
-          h(SelectField, {
-            box: {grow: 1, style: {display: this.args.controls.indexOf('style') !== -1 ? 'flex' : 'none'}},
-            value: state.size,
-            choices: fontStyles,
-            onchange: (ev, v) => actions.setStyle(v)
-          })
-        ]),
-        h(TextareaField, {
-          box: {grow: 1},
-          value: this.args.text,
-          style: {
-            fontFamily: state.name,
-            fontSize: `${state.size}${this.args.unit}`,
-            fontWeight: state.style === 'bold' ? 'bold' : 'normal',
-            fontStyle: state.style !== 'bold' ? state.style : 'normal',
-            height: '4rem',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap'
-          }
-        })
-      ]), $content);
-    });
-  }
-
+		super.render(options, ($content) => {
+			app(
+				initialState,
+				initialActions,
+				(state, actions) =>
+					this.createView([
+						h(Toolbar, {}, [
+							h(SelectField, {
+								box: {
+									grow: 1,
+									style: {
+										display:
+											this.args.controls.indexOf("size") !== -1
+												? "flex"
+												: "none",
+									},
+								},
+								value: state.size,
+								choices: fontSizes,
+								onchange: (ev, v) => actions.setSize(v),
+							}),
+							h(SelectField, {
+								box: {
+									grow: 1,
+									style: {
+										display:
+											this.args.controls.indexOf("name") !== -1
+												? "flex"
+												: "none",
+									},
+								},
+								value: state.name.toLowerCase(),
+								choices: fontNames,
+								onchange: (ev, v) => actions.setFont(v),
+							}),
+							h(SelectField, {
+								box: {
+									grow: 1,
+									style: {
+										display:
+											this.args.controls.indexOf("style") !== -1
+												? "flex"
+												: "none",
+									},
+								},
+								value: state.size,
+								choices: fontStyles,
+								onchange: (ev, v) => actions.setStyle(v),
+							}),
+						]),
+						h(TextareaField, {
+							box: { grow: 1 },
+							value: this.args.text,
+							style: {
+								fontFamily: state.name,
+								fontSize: `${state.size}${this.args.unit}`,
+								fontWeight: state.style === "bold" ? "bold" : "normal",
+								fontStyle: state.style !== "bold" ? state.style : "normal",
+								height: "4rem",
+								overflow: "hidden",
+								whiteSpace: "nowrap",
+							},
+						}),
+					]),
+				$content
+			);
+		});
+	}
 }

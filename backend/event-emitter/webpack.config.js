@@ -5,24 +5,22 @@ module.exports = {
 	mode,
 	devtool: "source-map",
 	target: "node",
-	entry: [
-		path.resolve(__dirname, "index.js"),
-	],
+	entry: [path.resolve(__dirname, "index.js")],
 	output: {
 		library: "meeseOSEventEmitter",
-		libraryTarget: "umd"
+		libraryTarget: "umd",
 	},
 	optimization: {
-		minimize: mode === "production"
+		minimize: mode === "production",
 	},
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				use: {
-					loader: "babel-loader"
-				}
-			}
-		]
-	}
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
 };

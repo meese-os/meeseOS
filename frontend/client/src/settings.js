@@ -28,32 +28,32 @@
  * @license Simplified BSD License
  */
 
-import merge from 'deepmerge';
-import simplejsonconf from 'simplejsonconf';
-import localStorageSettings from './adapters/settings/localstorage';
-import serverSettings from './adapters/settings/server';
-import logger from './logger';
+import merge from "deepmerge";
+import simplejsonconf from "simplejsonconf";
+import localStorageSettings from "./adapters/settings/localstorage";
+import serverSettings from "./adapters/settings/server";
+import logger from "./logger";
 
 const defaultAdapters = {
-  server: serverSettings,
-  localStorage: localStorageSettings
+	server: serverSettings,
+	localStorage: localStorageSettings,
 };
 
 const createAdapter = (core, options) => {
-  const adapter = core.config('standalone')
-    ? localStorageSettings
-    : typeof options.adapter === 'function'
-      ? options.adapter
-      : defaultAdapters[options.adapter || 'localStorage'];
+	const adapter = core.config("standalone")
+		? localStorageSettings
+		: typeof options.adapter === "function"
+		? options.adapter
+		: defaultAdapters[options.adapter || "localStorage"];
 
-  return {
-    load: () => Promise.reject(new Error('Not implemented')),
-    save: () => Promise.reject(new Error('Not implemented')),
-    init: () => Promise.resolve(true),
-    clear: () => Promise.resolve(true),
-    destroy: () => {},
-    ...adapter(core, options.config)
-  };
+	return {
+		load: () => Promise.reject(new Error("Not implemented")),
+		save: () => Promise.reject(new Error("Not implemented")),
+		init: () => Promise.resolve(true),
+		clear: () => Promise.resolve(true),
+		destroy: () => {},
+		...adapter(core, options.config),
+	};
 };
 
 /**
@@ -84,170 +84,168 @@ const createAdapter = (core, options) => {
  * OS.js Settings Manager
  */
 export default class Settings {
+	// TODO: Destroy method
 
-  // TODO: Destroy method
+	/**
+	 * Create application
+	 *
+	 * @param {Core} core Core reference
+	 * @param {SettingsOptions} options Options
+	 */
+	constructor(core, options) {
+		/**
+		 * The settings adapter
+		 * @type {SettingsAdapter}
+		 * @readonly
+		 */
+		this.adapter = createAdapter(core, options);
 
-  /**
-   * Create application
-   *
-   * @param {Core} core Core reference
-   * @param {SettingsOptions} options Options
-   */
-  constructor(core, options) {
+		/**
+		 * Internal timeout reference used for debouncing
+		 * @type {object}
+		 */
+		this.debounce = null;
 
-    /**
-     * The settings adapter
-     * @type {SettingsAdapter}
-     * @readonly
-     */
-    this.adapter = createAdapter(core, options);
+		/**
+		 * The settings tree
+		 * @type {{name: *}}
+		 */
+		this.settings = {};
 
-    /**
-     * Internal timeout reference used for debouncing
-     * @type {object}
-     */
-    this.debounce = null;
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
+	}
 
-    /**
-     * The settings tree
-     * @type {{name: *}}
-     */
-    this.settings = {};
+	/**
+	 * Initializes settings adapter
+	 */
+	init() {
+		return this.adapter.init();
+	}
 
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
-  }
+	/**
+	 * Saves settings
+	 * @return {Promise<boolean>}
+	 */
+	save() {
+		return new Promise((resolve, reject) => {
+			if (this.debounce) {
+				const [promise, timer] = this.debounce;
+				promise.resolve(false);
+				this.debounce = clearTimeout(timer);
+			}
 
-  /**
-   * Initializes settings adapter
-   */
-  init() {
-    return this.adapter.init();
-  }
+			this.debounce = [
+				{ resolve, reject },
+				setTimeout(() => {
+					this.adapter
+						.save(this.settings)
+						.then((...args) => {
+							this.core.emit("meeseOS/settings:save");
 
-  /**
-   * Saves settings
-   * @return {Promise<boolean>}
-   */
-  save() {
-    return new Promise((resolve, reject) => {
-      if (this.debounce) {
-        const [promise, timer] = this.debounce;
-        promise.resolve(false);
-        this.debounce = clearTimeout(timer);
-      }
+							resolve(...args);
+						})
+						.catch(reject);
+				}, 100),
+			];
+		});
+	}
 
-      this.debounce = [
-        {resolve, reject},
-        setTimeout(() => {
-          this.adapter.save(this.settings)
-            .then((...args) => {
-              this.core.emit('meeseOS/settings:save');
+	/**
+	 * Loads settings
+	 * @return {Promise<boolean>}
+	 */
+	load() {
+		const defaults = this.core.config("settings.defaults", {});
 
-              resolve(...args);
-            }).catch(reject);
-        }, 100)
-      ];
-    });
-  }
+		return this.adapter
+			.load()
+			.then((settings) => {
+				this.settings = merge(defaults, settings, {
+					arrayMerge: (dest, source) => source,
+				});
 
-  /**
-   * Loads settings
-   * @return {Promise<boolean>}
-   */
-  load() {
-    const defaults = this.core.config('settings.defaults', {});
+				this.core.emit("meeseOS/settings:load");
 
-    return this.adapter.load()
-      .then(settings => {
-        this.settings = merge(defaults, settings, {
-          arrayMerge: (dest, source) => source
-        });
+				return true;
+			})
+			.catch((e) => {
+				logger.warn("Failed to set settings", e);
+				this.settings = defaults;
 
-        this.core.emit('meeseOS/settings:load');
+				return false;
+			});
+	}
 
-        return true;
-      }).catch(e => {
-        logger.warn('Failed to set settings', e);
-        this.settings = defaults;
+	/**
+	 * Gets a settings entry by key (cached)
+	 *
+	 * @param {string} [ns] The namespace
+	 * @param {string} [key] The key to get the value from
+	 * @param {*} [defaultValue] If result is undefined, return this instead
+	 * @return {*}
+	 */
+	get(ns, key, defaultValue) {
+		if (typeof ns === "undefined") {
+			return { ...this.settings };
+		} else if (typeof this.settings[ns] === "undefined") {
+			return key ? defaultValue : defaultValue || {};
+		}
 
-        return false;
-      });
-  }
+		const tree = simplejsonconf(this.settings[ns]);
 
-  /**
-   * Gets a settings entry by key (cached)
-   *
-   * @param {string} [ns] The namespace
-   * @param {string} [key] The key to get the value from
-   * @param {*} [defaultValue] If result is undefined, return this instead
-   * @return {*}
-   */
-  get(ns, key, defaultValue) {
-    if (typeof ns === 'undefined') {
-      return {...this.settings};
-    } else if (typeof this.settings[ns] === 'undefined') {
-      return key ? defaultValue : defaultValue || {};
-    }
+		return key ? tree.get(key, defaultValue) : tree.get() || defaultValue;
+	}
 
-    const tree = simplejsonconf(this.settings[ns]);
+	/**
+	 * Sets a settings entry by root key (but does not save).
+	 *
+	 * @param {string} ns The namespace
+	 * @param {string} [key] The key to set
+	 * @param {*} [value] The value to set
+	 * @return {Settings} This
+	 */
+	set(ns, key, value) {
+		const lock = this.core.config("settings.lock", []);
+		if (lock.indexOf(ns) !== -1) {
+			return this;
+		}
 
-    return key
-      ? tree.get(key, defaultValue)
-      : tree.get() || defaultValue;
-  }
+		if (typeof this.settings[ns] === "undefined") {
+			this.settings[ns] = {};
+		}
 
-  /**
-   * Sets a settings entry by root key (but does not save).
-   *
-   * @param {string} ns The namespace
-   * @param {string} [key] The key to set
-   * @param {*} [value] The value to set
-   * @return {Settings} This
-   */
-  set(ns, key, value) {
-    const lock = this.core.config('settings.lock', []);
-    if (lock.indexOf(ns) !== -1) {
-      return this;
-    }
+		if (key) {
+			try {
+				const sjc = simplejsonconf(this.settings[ns]);
+				sjc.set(key, value);
+				this.settings[ns] = sjc.get();
+			} catch (e) {
+				logger.warn("Error while setting settings for", key, e);
+			}
+		} else {
+			this.settings[ns] = { ...value };
+		}
 
-    if (typeof this.settings[ns] === 'undefined') {
-      this.settings[ns] = {};
-    }
+		return this;
+	}
 
-    if (key) {
-      try {
-        const sjc = simplejsonconf(this.settings[ns]);
-        sjc.set(key, value);
-        this.settings[ns] = sjc.get();
-      } catch (e) {
-        logger.warn('Error while setting settings for', key, e);
-      }
-    } else {
-      this.settings[ns] = {...value};
-    }
+	/**
+	 * Clears a namespace by root key
+	 * @param {string} ns The namespace
+	 * @return {Promise<boolean>}
+	 */
+	clear(ns) {
+		return this.adapter.clear(ns).then((result) => {
+			if (result && this.settings[ns]) {
+				delete this.settings[ns];
+			}
 
-    return this;
-  }
-
-  /**
-   * Clears a namespace by root key
-   * @param {string} ns The namespace
-   * @return {Promise<boolean>}
-   */
-  clear(ns) {
-    return this.adapter.clear(ns)
-      .then(result => {
-        if (result && this.settings[ns]) {
-          delete this.settings[ns];
-        }
-
-        return result;
-      });
-  }
-
+			return result;
+		});
+	}
 }

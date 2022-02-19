@@ -8,9 +8,9 @@
 
 This is the Widgets module for OS.js
 
-* https://manual.os-js.org/v3/install/
-* https://manual.os-js.org/v3/guide/provider/
-* https://manual.os-js.org/v3/tutorial/widget/
+- https://manual.os-js.org/v3/install/
+- https://manual.os-js.org/v3/guide/provider/
+- https://manual.os-js.org/v3/tutorial/widget/
 
 ## Installation
 
@@ -23,7 +23,7 @@ npm install @aaronmeese.com/widgets
 In your client bootstrap (`src/client/index.js`):
 
 ```javascript
-import {WidgetServiceProvider} from '@aaronmeese.com/widgets';
+import { WidgetServiceProvider } from "@aaronmeese.com/widgets";
 
 meeseOS.register(WidgetServiceProvider);
 ```
@@ -38,13 +38,15 @@ To set up a default set of widgets in the user settings, modify your client conf
 
 ```javascript
 {
-  desktop: {
-    settings: {
-      widgets: [{
-        name: 'digitalclock'
-      }]
-    }
-  }
+	desktop: {
+		settings: {
+			widgets: [
+				{
+					name: "digitalclock",
+				},
+			];
+		}
+	}
 }
 ```
 

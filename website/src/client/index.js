@@ -39,38 +39,38 @@
 //
 
 import {
-  Core,
-  CoreServiceProvider,
-  DesktopServiceProvider,
-  VFSServiceProvider,
-  NotificationServiceProvider,
-  SettingsServiceProvider,
-  AuthServiceProvider
-} from '@aaronmeese.com/client';
+	Core,
+	CoreServiceProvider,
+	DesktopServiceProvider,
+	VFSServiceProvider,
+	NotificationServiceProvider,
+	SettingsServiceProvider,
+	AuthServiceProvider,
+} from "@aaronmeese.com/client";
 
-import {PanelServiceProvider} from '@aaronmeese.com/panels';
-import {GUIServiceProvider} from '@aaronmeese.com/gui';
-import {DialogServiceProvider} from '@aaronmeese.com/dialogs';
-import {WidgetServiceProvider} from '@aaronmeese.com/widgets';
-import config from './config.js';
-import './index.scss';
+import { PanelServiceProvider } from "@aaronmeese.com/panels";
+import { GUIServiceProvider } from "@aaronmeese.com/gui";
+import { DialogServiceProvider } from "@aaronmeese.com/dialogs";
+import { WidgetServiceProvider } from "@aaronmeese.com/widgets";
+import config from "./config.js";
+import "./index.scss";
 
 const init = () => {
-  const meeseOS = new Core(config, {});
+	const meeseOS = new Core(config, {});
 
-  // Register your service providers
-  meeseOS.register(CoreServiceProvider);
-  meeseOS.register(DesktopServiceProvider);
-  meeseOS.register(VFSServiceProvider);
-  meeseOS.register(NotificationServiceProvider);
-  meeseOS.register(SettingsServiceProvider, {before: true});
-  meeseOS.register(AuthServiceProvider, {before: true});
-  meeseOS.register(PanelServiceProvider);
-  meeseOS.register(DialogServiceProvider);
-  meeseOS.register(GUIServiceProvider);
-  meeseOS.register(WidgetServiceProvider);
+	// Register your service providers
+	meeseOS.register(CoreServiceProvider);
+	meeseOS.register(DesktopServiceProvider);
+	meeseOS.register(VFSServiceProvider);
+	meeseOS.register(NotificationServiceProvider);
+	meeseOS.register(SettingsServiceProvider, { before: true });
+	meeseOS.register(AuthServiceProvider, { before: true });
+	meeseOS.register(PanelServiceProvider);
+	meeseOS.register(DialogServiceProvider);
+	meeseOS.register(GUIServiceProvider);
+	meeseOS.register(WidgetServiceProvider);
 
-  meeseOS.boot();
+	meeseOS.boot();
 };
 
-window.addEventListener('DOMContentLoaded', () => init());
+window.addEventListener("DOMContentLoaded", () => init());

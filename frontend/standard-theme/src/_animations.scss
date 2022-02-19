@@ -29,21 +29,21 @@
  */
 
 .meeseOS-window {
-  &[data-minimized="true"] {
-    opacity: 0;
-    pointer-events: none;
-    display: block; /* We'll do this with JS */
-  }
+	&[data-minimized="true"] {
+		opacity: 0;
+		pointer-events: none;
+		display: block; /* We'll do this with JS */
+	}
 
-  &[data-minimized="false"] {
-    display: block;
-  }
+	&[data-minimized="false"] {
+		display: block;
+	}
 
-  &:not([data-moving="true"]):not([data-resizing="true"]) {
-    transition: all ease-in-out 0.1s;
-  }
+	&:not([data-moving="true"]):not([data-resizing="true"]) {
+		transition: all ease-in-out 0.1s;
+	}
 }
 
 .meeseOS-panel-item[data-name="windows"] > div {
-  transition: all ease-in-out 0.1s;
+	transition: all ease-in-out 0.1s;
 }

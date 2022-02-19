@@ -28,18 +28,18 @@
  * @licence Simplified BSD License
  */
 
-.meeseOS-panel-item[data-name=tray] {
-  display: flex;
-  padding: 0;
+.meeseOS-panel-item[data-name="tray"] {
+	display: flex;
+	padding: 0;
 
-  & > div {
-    flex: 1 1;
-    padding: calc($base-margin / 1.5) calc($base-margin / 3);
+	& > div {
+		flex: 1 1;
+		padding: calc($base-margin / 1.5) calc($base-margin / 3);
 
-    & > img {
-      margin-left: 0 !important;
-      margin-right: 0;
-      vertical-align: middle;
-    }
-  }
+		& > img {
+			margin-left: 0 !important;
+			margin-right: 0;
+			vertical-align: middle;
+		}
+	}
 }

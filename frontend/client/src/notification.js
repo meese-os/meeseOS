@@ -28,9 +28,9 @@
  * @license Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import {createNativeNotification} from './utils/dom';
-import logger from './logger';
+import { h, app } from "hyperapp";
+import { createNativeNotification } from "./utils/dom";
+import logger from "./logger";
 
 /**
  * Notification Options
@@ -48,131 +48,132 @@ import logger from './logger';
  * Notification Implementation
  */
 export default class Notification {
+	/**
+	 * Create notification
+	 *
+	 * @param {Core} core Core reference
+	 * @param {Element} root Root DOM element
+	 * @param {NotificationOptions} options Options
+	 */
+	constructor(core, root, options = {}) {
+		const defaultLabel = "Notification";
 
-  /**
-   * Create notification
-   *
-   * @param {Core} core Core reference
-   * @param {Element} root Root DOM element
-   * @param {NotificationOptions} options Options
-   */
-  constructor(core, root, options = {}) {
-    const defaultLabel = "Notification";
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
 
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
+		/**
+		 * Root node reference
+		 * @type {Element}
+		 * @readonly
+		 */
+		this.$root = root;
 
-    /**
-     * Root node reference
-     * @type {Element}
-     * @readonly
-     */
-    this.$root = root;
+		/**
+		 * Notification DOM node
+		 * @type {Element}
+		 * @readonly
+		 */
+		this.$element = document.createElement("div");
 
-    /**
-     * Notification DOM node
-     * @type {Element}
-     * @readonly
-     */
-    this.$element = document.createElement('div');
+		/**
+		 * The notification destruction state
+		 * @type {Boolean}
+		 * @readonly
+		 */
+		this.destroyed = false;
 
-    /**
-     * The notification destruction state
-     * @type {Boolean}
-     * @readonly
-     */
-    this.destroyed = false;
+		/**
+		 * Options
+		 * @type {NotificationOptions}
+		 * @readonly
+		 */
+		this.options = {
+			icon: null,
+			title: defaultLabel,
+			message: defaultLabel,
+			timeout: 5000,
+			native: core.config("notifications.native", false),
+			sound: "message",
+			className: "",
+			...options,
+		};
 
-    /**
-     * Options
-     * @type {NotificationOptions}
-     * @readonly
-     */
-    this.options = {
-      icon: null,
-      title: defaultLabel,
-      message: defaultLabel,
-      timeout: 5000,
-      native: core.config('notifications.native', false),
-      sound: 'message',
-      className: '',
-      ...options
-    };
+		this.core.emit("meeseOS/notification:create", this);
+	}
 
-    this.core.emit('meeseOS/notification:create', this);
-  }
+	/**
+	 * Destroy notification
+	 */
+	destroy() {
+		if (this.destroyed) {
+			return;
+		}
 
-  /**
-   * Destroy notification
-   */
-  destroy() {
-    if (this.destroyed) {
-      return;
-    }
+		this.destroyed = true;
+		this.core.emit("meeseOS/notification:destroy", this);
 
-    this.destroyed = true;
-    this.core.emit('meeseOS/notification:destroy', this);
+		this.$element.remove();
+		this.$element = null;
+		this.$root = null;
+	}
 
-    this.$element.remove();
-    this.$element = null;
-    this.$root = null;
-  }
+	/**
+	 * Render notification
+	 * @return {Promise<boolean>}
+	 */
+	render() {
+		const onclick = () => this.destroy();
 
-  /**
-   * Render notification
-   * @return {Promise<boolean>}
-   */
-  render() {
-    const onclick = () => this.destroy();
+		const renderCustom = () => {
+			const view = (state) =>
+				h(
+					"div",
+					{
+						class: "meeseOS-notification-wrapper",
+						"data-has-icon": !!state.icon,
+						style: {
+							backgroundImage: state.icon ? `url(${state.icon})` : undefined,
+						},
+					},
+					[
+						h("div", { class: "meeseOS-notification-title" }, state.title),
+						h("div", { class: "meeseOS-notification-message" }, state.message),
+					]
+				);
 
-    const renderCustom = () => {
-      const view = state => h('div', {
-        class: 'meeseOS-notification-wrapper',
-        'data-has-icon': !!state.icon,
-        style: {
-          backgroundImage: state.icon ? `url(${state.icon})` : undefined
-        }
-      }, [
-        h('div', {class: 'meeseOS-notification-title'}, state.title),
-        h('div', {class: 'meeseOS-notification-message'}, state.message),
-      ]);
+			this.$element.classList.add("meeseOS-notification");
+			if (this.options.className) {
+				this.$element.classList.add(this.options.className);
+			}
 
-      this.$element.classList.add('meeseOS-notification');
-      if (this.options.className) {
-        this.$element.classList.add(this.options.className);
-      }
+			if (this.options.timeout) {
+				setTimeout(() => this.destroy(), this.options.timeout);
+			}
 
-      if (this.options.timeout) {
-        setTimeout(() => this.destroy(), this.options.timeout);
-      }
+			this.$element.addEventListener("click", onclick);
 
-      this.$element.addEventListener('click', onclick);
+			this.$root.appendChild(this.$element);
 
-      this.$root.appendChild(this.$element);
+			app(this.options, {}, view, this.$element);
 
-      app(this.options, {}, view, this.$element);
+			return Promise.resolve(true);
+		};
 
-      return Promise.resolve(true);
-    };
+		if (this.options.native) {
+			return createNativeNotification(this.options, onclick).catch((err) => {
+				logger.warn("Error on native notification", err);
+				return renderCustom();
+			});
+		}
 
-    if (this.options.native) {
-      return createNativeNotification(this.options, onclick)
-        .catch(err => {
-          logger.warn('Error on native notification', err);
-          return renderCustom();
-        });
-    }
+		if (this.options.sound) {
+			this.core.make("meeseOS/sounds").play(this.options.sound);
+		}
 
-    if (this.options.sound) {
-      this.core.make('meeseOS/sounds')
-        .play(this.options.sound);
-    }
-
-    return renderCustom();
-  }
-
+		return renderCustom();
+	}
 }

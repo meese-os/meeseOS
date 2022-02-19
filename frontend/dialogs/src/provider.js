@@ -28,72 +28,70 @@
  * @licence Simplified BSD License
  */
 
-import AlertDialog from './dialogs/alert';
-import ConfirmDialog from './dialogs/confirm';
-import PromptDialog from './dialogs/prompt';
-import ProgressDialog from './dialogs/progress';
-import ColorDialog from './dialogs/color';
-import FontDialog from './dialogs/font';
-import FileDialog from './dialogs/file';
-import ChoiceDialog from './dialogs/choice';
-import DefaultApplicationDialog from './dialogs/default-application';
-import CustomDialog from './dialogs/custom';
+import AlertDialog from "./dialogs/alert";
+import ConfirmDialog from "./dialogs/confirm";
+import PromptDialog from "./dialogs/prompt";
+import ProgressDialog from "./dialogs/progress";
+import ColorDialog from "./dialogs/color";
+import FontDialog from "./dialogs/font";
+import FileDialog from "./dialogs/file";
+import ChoiceDialog from "./dialogs/choice";
+import DefaultApplicationDialog from "./dialogs/default-application";
+import CustomDialog from "./dialogs/custom";
 
 export default class DialogServiceProvider {
+	constructor(core, args = {}) {
+		this.core = core;
+		this.registry = Object.assign(
+			{
+				alert: AlertDialog,
+				confirm: ConfirmDialog,
+				prompt: PromptDialog,
+				progress: ProgressDialog,
+				color: ColorDialog,
+				font: FontDialog,
+				file: FileDialog,
+				choice: ChoiceDialog,
+				defaultApplication: DefaultApplicationDialog,
+			},
+			args.registry || {}
+		);
+	}
 
-  constructor(core, args = {}) {
-    this.core = core;
-    this.registry = Object.assign({
-      alert: AlertDialog,
-      confirm: ConfirmDialog,
-      prompt: PromptDialog,
-      progress: ProgressDialog,
-      color: ColorDialog,
-      font: FontDialog,
-      file: FileDialog,
-      choice: ChoiceDialog,
-      defaultApplication: DefaultApplicationDialog
-    }, args.registry || {});
-  }
+	destroy() {}
 
-  destroy() {
-  }
+	async init() {
+		this.core.instance("meeseOS/dialog", (name, args = {}, ...eargs) => {
+			const options = eargs.length > 1 ? eargs[0] : {};
+			const callback = eargs[eargs.length > 1 ? 1 : 0];
 
-  async init() {
-    this.core.instance('meeseOS/dialog', (name, args = {}, ...eargs) => {
-      const options = eargs.length > 1 ? eargs[0] : {};
-      const callback = eargs[eargs.length > 1 ? 1 : 0];
+			if (!this.registry[name]) {
+				throw new Error(`Dialog '${name}' does not exist`);
+			}
 
-      if (!this.registry[name]) {
-        throw new Error(`Dialog '${name}' does not exist`);
-      }
+			if (typeof callback !== "function") {
+				throw new Error("Dialog requires a callback");
+			}
 
-      if (typeof callback !== 'function') {
-        throw new Error('Dialog requires a callback');
-      }
+			const instance = new this.registry[name](this.core, args, callback);
+			instance.render(options);
+			return instance;
+		});
 
-      const instance = new this.registry[name](this.core, args, callback);
-      instance.render(options);
-      return instance;
-    });
+		this.core.singleton("meeseOS/dialogs", () => ({
+			create: (options, valueCallback, callback) => {
+				return new CustomDialog(this.core, options, valueCallback, callback);
+			},
 
-    this.core.singleton('meeseOS/dialogs', () => ({
-      create: (options, valueCallback, callback) => {
-        return new CustomDialog(this.core, options, valueCallback, callback);
-      },
+			register: (name, classRef) => {
+				if (this.registry[name]) {
+					console.warn("Overwriting previously registered dialog", name);
+				}
 
-      register: (name, classRef) => {
-        if (this.registry[name]) {
-          console.warn('Overwriting previously registered dialog', name);
-        }
+				this.registry[name] = classRef;
+			},
+		}));
+	}
 
-        this.registry[name] = classRef;
-      }
-    }));
-  }
-
-  start() {
-  }
-
+	start() {}
 }
-

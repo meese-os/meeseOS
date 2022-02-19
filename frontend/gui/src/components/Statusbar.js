@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import { Element } from "./Element";
 
 /**
  * A status bar
@@ -38,6 +38,10 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Statusbar = (props, children) =>
-  h(Element, Object.assign({}, props.box || {}, {
-    class: ['meeseOS-gui-statusbar', props.class]
-  }), children);
+	h(
+		Element,
+		Object.assign({}, props.box || {}, {
+			class: ["meeseOS-gui-statusbar", props.class],
+		}),
+		children
+	);

@@ -7,28 +7,28 @@ const minimize = mode === "production";
 const plugins = [];
 
 if (mode === "production") {
-	plugins.push(new CssMinimizerPlugin({
-		minimizerOptions: {
-			preset: [ "advanced" ],
-		},
-	}));
+	plugins.push(
+		new CssMinimizerPlugin({
+			minimizerOptions: {
+				preset: ["advanced"],
+			},
+		})
+	);
 }
 
 module.exports = {
 	mode,
 	devtool: "source-map",
-	entry: [
-		path.resolve(__dirname, "index.js"),
-	],
+	entry: [path.resolve(__dirname, "index.js")],
 	optimization: {
 		minimize,
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
-			chunkFilename: "[id].css"
+			chunkFilename: "[id].css",
 		}),
-		...plugins
+		...plugins,
 	],
 	module: {
 		rules: [
@@ -37,7 +37,7 @@ module.exports = {
 				type: "asset/resource",
 				exclude: /node_modules/,
 				generator: {
-					filename: "icons/[name][ext]"
+					filename: "icons/[name][ext]",
 				},
 			},
 			{
@@ -48,24 +48,24 @@ module.exports = {
 					{
 						loader: "css-loader",
 						options: {
-							sourceMap: true
-						}
+							sourceMap: true,
+						},
 					},
 					{
 						loader: "sass-loader",
 						options: {
-							sourceMap: true
-						}
-					}
-				]
+							sourceMap: true,
+						},
+					},
+				],
 			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
-					loader: "babel-loader"
-				}
-			}
-		]
-	}
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
 };

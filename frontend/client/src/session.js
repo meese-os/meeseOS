@@ -28,84 +28,83 @@
  * @license Simplified BSD License
  */
 
-import Application from './application';
-import logger from './logger';
+import Application from "./application";
+import logger from "./logger";
 
 /**
  * Session Handler
  */
 export default class Session {
+	/**
+	 * Creates the Session Handler
+	 *
+	 * @param {Core} core Core reference
+	 */
+	constructor(core) {
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
+	}
 
-  /**
-   * Creates the Session Handler
-   *
-   * @param {Core} core Core reference
-   */
-  constructor(core) {
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
-  }
+	/**
+	 * Destroys instance
+	 */
+	destroy() {}
 
-  /**
-   * Destroys instance
-   */
-  destroy() {
-  }
+	/**
+	 * Saves session
+	 * @return {Promise<boolean>}
+	 */
+	save() {
+		const apps = Application.getApplications().filter(
+			(a) => a.options.sessionable !== false
+		);
 
-  /**
-   * Saves session
-   * @return {Promise<boolean>}
-   */
-  save() {
-    const apps = Application.getApplications()
-      .filter(a => a.options.sessionable !== false);
+		const session = apps.map((app) => app.getSession());
 
-    const session = apps.map(app => app.getSession());
+		return this.core
+			.make("meeseOS/settings")
+			.set("meeseOS/session", null, session)
+			.save();
+	}
 
-    return this.core.make('meeseOS/settings')
-      .set('meeseOS/session', null, session)
-      .save();
-  }
+	/**
+	 * Loads session
+	 * @param {boolean} [fresh=false] Kill all current applications first
+	 * @return {Promise<boolean>}
+	 */
+	load(fresh = false) {
+		if (fresh) {
+			Application.destroyAll();
+		}
 
-  /**
-   * Loads session
-   * @param {boolean} [fresh=false] Kill all current applications first
-   * @return {Promise<boolean>}
-   */
-  load(fresh = false) {
-    if (fresh) {
-      Application.destroyAll();
-    }
+		let session = this.core.make("meeseOS/settings").get("meeseOS/session");
 
-    let session = this.core.make('meeseOS/settings')
-      .get('meeseOS/session');
+		if (session && !(session instanceof Array)) {
+			session = Object.values(session);
+		}
 
-    if (session && !(session instanceof Array)) {
-      session = Object.values(session);
-    }
+		if (session) {
+			console.group("Session::load()");
 
-    if (session) {
-      console.group('Session::load()');
+			session.forEach((app) => {
+				try {
+					this.core.run(app.name, app.args, {
+						restore: {
+							windows: app.windows,
+						},
+					});
+				} catch (e) {
+					logger.warn("Error while loading session entry", e);
+				}
+			});
 
-      session.forEach(app => {
-        try {
-          this.core.run(app.name, app.args, {
-            restore: {
-              windows: app.windows
-            }
-          });
-        } catch (e) {
-          logger.warn('Error while loading session entry', e);
-        }
-      });
+			console.groupEnd();
+		}
 
-      console.groupEnd();
-    }
-
-    return Promise.resolve(true);
-  }
+		return Promise.resolve(true);
+	}
 }

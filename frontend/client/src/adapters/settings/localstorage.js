@@ -28,43 +28,45 @@
  * @license Simplified BSD License
  */
 
-import logger from '../../logger';
+import logger from "../../logger";
 
 /**
  * LocalStorage Settings adapter
  * @param {Core} core Core reference
  * @param {object} [options] Adapter options
  */
-const localStorageSettings = core => ({
-  clear: ns => {
-    if (ns) {
-      localStorage.removeItem(ns);
-    } else {
-      localStorage.clear();
-    }
+const localStorageSettings = (core) => ({
+	clear: (ns) => {
+		if (ns) {
+			localStorage.removeItem(ns);
+		} else {
+			localStorage.clear();
+		}
 
-    return Promise.resolve(true);
-  },
+		return Promise.resolve(true);
+	},
 
-  save: settings => {
-    Object.keys(settings).forEach((k) => {
-      localStorage.setItem(k, JSON.stringify(settings[k]));
-    });
+	save: (settings) => {
+		Object.keys(settings).forEach((k) => {
+			localStorage.setItem(k, JSON.stringify(settings[k]));
+		});
 
-    return Promise.resolve(true);
-  },
+		return Promise.resolve(true);
+	},
 
-  load: () => Promise.resolve(Object.keys(localStorage).reduce((o, v) => {
-    let value = localStorage.getItem(v);
-    try {
-      value = JSON.parse(value);
-    } catch (e) {
-      logger.warn('localStorageAdapter parse error', e);
-    }
+	load: () =>
+		Promise.resolve(
+			Object.keys(localStorage).reduce((o, v) => {
+				let value = localStorage.getItem(v);
+				try {
+					value = JSON.parse(value);
+				} catch (e) {
+					logger.warn("localStorageAdapter parse error", e);
+				}
 
-    return Object.assign(o, {[v]: value});
-  }, {}))
+				return Object.assign(o, { [v]: value });
+			}, {})
+		),
 });
-
 
 export default localStorageSettings;

@@ -28,35 +28,36 @@
  * @licence Simplified BSD License
  */
 
-const {ServiceProvider} = require('@aaronmeese.com/common');
-const Auth = require('../auth.js');
+const { ServiceProvider } = require("@aaronmeese.com/common");
+const Auth = require("../auth.js");
 
 /**
  * OS.js Auth Service Provider
  */
 class AuthServiceProvider extends ServiceProvider {
+	constructor(core, options) {
+		super(core, options);
 
-  constructor(core, options) {
-    super(core, options);
+		this.auth = new Auth(core, options);
+	}
 
-    this.auth = new Auth(core, options);
-  }
+	destroy() {
+		this.auth.destroy();
 
-  destroy() {
-    this.auth.destroy();
+		super.destroy();
+	}
 
-    super.destroy();
-  }
+	async init() {
+		const { route, routeAuthenticated } = this.core.make("meeseOS/express");
 
-  async init() {
-    const {route, routeAuthenticated} = this.core.make('meeseOS/express');
+		route("post", "/register", (req, res) => this.auth.register(req, res));
+		route("post", "/login", (req, res) => this.auth.login(req, res));
+		routeAuthenticated("post", "/logout", (req, res) =>
+			this.auth.logout(req, res)
+		);
 
-    route('post', '/register', (req, res) => this.auth.register(req, res));
-    route('post', '/login', (req, res) => this.auth.login(req, res));
-    routeAuthenticated('post', '/logout', (req, res) => this.auth.logout(req, res));
-
-    await this.auth.init();
-  }
+		await this.auth.init();
+	}
 }
 
 module.exports = AuthServiceProvider;

@@ -35,14 +35,19 @@
  * @return {Object}
  */
 export const filteredProps = (props, filterKeys) => {
-  const keys = Object.keys(props);
-  const filter = k => filterKeys.indexOf(k) === -1;
+	const keys = Object.keys(props);
+	const filter = (k) => filterKeys.indexOf(k) === -1;
 
-  return keys
-    .filter(filter)
-    .reduce((result, k) => Object.assign({
-      [k]: props[k]
-    }, result), {});
+	return keys.filter(filter).reduce(
+		(result, k) =>
+			Object.assign(
+				{
+					[k]: props[k],
+				},
+				result
+			),
+		{}
+	);
 };
 
 /**
@@ -51,20 +56,20 @@ export const filteredProps = (props, filterKeys) => {
  * @return {Function} Handler with => (ev, cb)
  */
 export const doubleTap = (timeout = 250) => {
-  let tapped = false;
-  let timer;
+	let tapped = false;
+	let timer;
 
-  return (ev, cb) => {
-    timer = clearTimeout(timer);
-    timer = setTimeout(() => (tapped = false), timeout);
+	return (ev, cb) => {
+		timer = clearTimeout(timer);
+		timer = setTimeout(() => (tapped = false), timeout);
 
-    if (tapped) {
-      ev.preventDefault();
-      return cb(ev);
-    }
+		if (tapped) {
+			ev.preventDefault();
+			return cb(ev);
+		}
 
-    tapped = true;
+		tapped = true;
 
-    return false;
-  };
+		return false;
+	};
 };

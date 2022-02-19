@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Icon} from './Icon';
-import {createField} from '../element';
+import { h } from "hyperapp";
+import { Icon } from "./Icon";
+import { createField } from "../element";
 
 /**
  * A button
@@ -41,19 +41,15 @@ import {createField} from '../element';
  * @param {h[]} children Children
  */
 export const Button = (props = {}, children = []) =>
-  createField('button', props, {
-  }, (fieldProps) => {
-    const inner = [];
-    if (props.icon) {
-      inner.push(h(Icon, props.icon));
-    }
+	createField("button", props, {}, (fieldProps) => {
+		const inner = [];
+		if (props.icon) {
+			inner.push(h(Icon, props.icon));
+		}
 
-    if (typeof props.label === 'string') {
-      inner.push(h('span', {class: 'meeseOS-label'}, props.label));
-    }
+		if (typeof props.label === "string") {
+			inner.push(h("span", { class: "meeseOS-label" }, props.label));
+		}
 
-    return h('button', fieldProps, [
-      ...inner,
-      ...children
-    ]);
-  });
+		return h("button", fieldProps, [...inner, ...children]);
+	});

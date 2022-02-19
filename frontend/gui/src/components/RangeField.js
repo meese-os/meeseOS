@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {createField} from '../element';
+import { h } from "hyperapp";
+import { createField } from "../element";
 
 /**
  * A range field
@@ -41,6 +41,11 @@ import {createField} from '../element';
  * @param {h[]} children Children
  */
 export const RangeField = (props = {}, children = []) =>
-  createField('range-field', props, {
-    type: 'range'
-  }, (fieldProps) => h('input', fieldProps));
+	createField(
+		"range-field",
+		props,
+		{
+			type: "range",
+		},
+		(fieldProps) => h("input", fieldProps)
+	);

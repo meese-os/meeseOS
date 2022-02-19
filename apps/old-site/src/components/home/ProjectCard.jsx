@@ -12,7 +12,7 @@ const ProjectCard = ({ value, index }) => {
 
 			if (hours < 24) {
 				if (hours < 1) return setUpdatedAt("just now");
-				let measurement = hours === 1 ? "hour" : "hours";
+				const measurement = hours === 1 ? "hour" : "hours";
 				return setUpdatedAt(`${hours.toString()} ${measurement} ago`);
 			} else {
 				const monthNames = [
@@ -27,7 +27,7 @@ const ProjectCard = ({ value, index }) => {
 					"September",
 					"October",
 					"November",
-					"December"
+					"December",
 				];
 				const day = date.getDate();
 				const monthIndex = date.getMonth();
@@ -79,24 +79,27 @@ const ProjectCard = ({ value, index }) => {
 const Languages = ({ value, svn_url }) => {
 	const [data, setData] = useState([]);
 
-	const getLanguages = useCallback((e) => {
-		axios
-			.get(value, {
-				auth: {
-					username: process.env.GH_USERNAME,
-					password: process.env.GH_PAT
-				}
-			})
-			.then(response => setData(response.data))
-			.catch(error => console.error(error.message))
-			.finally(() => {});
-	}, [value]);
+	const getLanguages = useCallback(
+		(e) => {
+			axios
+				.get(value, {
+					auth: {
+						username: process.env.GH_USERNAME,
+						password: process.env.GH_PAT,
+					},
+				})
+				.then((response) => setData(response.data))
+				.catch((error) => console.error(error.message))
+				.finally(() => {});
+		},
+		[value]
+	);
 
 	useEffect(() => getLanguages(), [getLanguages]);
 
 	const array = [];
 	let total_count = 0;
-	for (let index in data) {
+	for (const index in data) {
 		array.push(index);
 		total_count += data[index];
 	}

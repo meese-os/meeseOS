@@ -28,86 +28,107 @@
  * @license Simplified BSD License
  */
 
-const getters = ['exists', 'stat', 'readdir', 'readfile'];
+const getters = ["exists", "stat", "readdir", "readfile"];
 
-const requester = core => (fn, body, type, options = {}) =>
-  core.request(`/vfs/${fn}`, {
-    body,
-    method: getters.indexOf(fn) !== -1 ? 'get' : 'post',
-    ...options
-  }, type)
-    .then(response => {
-      if (type === 'json') {
-        return {mime: 'application/json', body: response};
-      } else if (fn === 'writefile') {
-        return response.json();
-      }
+const requester =
+	(core) =>
+	(fn, body, type, options = {}) =>
+		core
+			.request(
+				`/vfs/${fn}`,
+				{
+					body,
+					method: getters.indexOf(fn) !== -1 ? "get" : "post",
+					...options,
+				},
+				type
+			)
+			.then((response) => {
+				if (type === "json") {
+					return { mime: "application/json", body: response };
+				} else if (fn === "writefile") {
+					return response.json();
+				}
 
-      const contentType = response.headers.get('content-type') || 'application/octet-stream';
+				const contentType =
+					response.headers.get("content-type") || "application/octet-stream";
 
-      return response.arrayBuffer().then(result => ({
-        mime: contentType,
-        body: result
-      }));
-    });
+				return response.arrayBuffer().then((result) => ({
+					mime: contentType,
+					body: result,
+				}));
+			});
 
 const methods = (core, request) => {
-  const passthrough = (name) => ({path}, options) =>
-    request(name, {path, options}, 'json')
-      .then(({body}) => body);
+	const passthrough =
+		(name) =>
+		({ path }, options) =>
+			request(name, { path, options }, "json").then(({ body }) => body);
 
-  return {
-    readdir: ({path}, options) => request('readdir', {
-      path,
-      options: {}
-    }, 'json').then(({body}) => body),
+	return {
+		readdir: ({ path }, options) =>
+			request(
+				"readdir",
+				{
+					path,
+					options: {},
+				},
+				"json"
+			).then(({ body }) => body),
 
-    readfile: ({path}, type, options) =>
-      request('readfile', {path, options}),
+		readfile: ({ path }, type, options) =>
+			request("readfile", { path, options }),
 
-    writefile: ({path}, data, options = {}) => {
-      const formData = new FormData();
-      formData.append('upload', data);
-      formData.append('path', path);
-      formData.append('options', options);
+		writefile: ({ path }, data, options = {}) => {
+			const formData = new FormData();
+			formData.append("upload", data);
+			formData.append("path", path);
+			formData.append("options", options);
 
-      return request('writefile', formData, undefined, {
-        onProgress: options.onProgress,
-        xhr: !!options.onProgress
-      });
-    },
+			return request("writefile", formData, undefined, {
+				onProgress: options.onProgress,
+				xhr: !!options.onProgress,
+			});
+		},
 
-    copy: (from, to, options) =>
-      request('copy', {from: from.path, to: to.path, options}, 'json').then(({body}) => body),
+		copy: (from, to, options) =>
+			request("copy", { from: from.path, to: to.path, options }, "json").then(
+				({ body }) => body
+			),
 
-    rename: (from, to, options) =>
-      request('rename', {from: from.path, to: to.path, options}, 'json').then(({body}) => body),
+		rename: (from, to, options) =>
+			request("rename", { from: from.path, to: to.path, options }, "json").then(
+				({ body }) => body
+			),
 
-    mkdir: passthrough('mkdir'),
-    unlink: passthrough('unlink'),
-    exists: passthrough('exists'),
-    stat: passthrough('stat'),
+		mkdir: passthrough("mkdir"),
+		unlink: passthrough("unlink"),
+		exists: passthrough("exists"),
+		stat: passthrough("stat"),
 
-    url: ({path}, options) => Promise.resolve(
-      core.url(`/vfs/readfile?path=${encodeURIComponent(path)}`)
-    ),
+		url: ({ path }, options) =>
+			Promise.resolve(
+				core.url(`/vfs/readfile?path=${encodeURIComponent(path)}`)
+			),
 
-    search: ({path}, pattern, options) =>
-      request('search', {root: path, pattern, options}, 'json')
-        .then(({body}) => body),
+		search: ({ path }, pattern, options) =>
+			request("search", { root: path, pattern, options }, "json").then(
+				({ body }) => body
+			),
 
-    touch: ({path}, options) =>
-      request('touch', {path, options}, 'json').then(({body}) => body),
+		touch: ({ path }, options) =>
+			request("touch", { path, options }, "json").then(({ body }) => body),
 
-    download: ({path}, options = {}) => {
-      const json = encodeURIComponent(JSON.stringify({download: true}));
+		download: ({ path }, options = {}) => {
+			const json = encodeURIComponent(JSON.stringify({ download: true }));
 
-      return Promise.resolve(`/vfs/readfile?options=${json}&path=` + encodeURIComponent(path))
-        .then(url => {
-          return (options.target || window).open(url);
-        });
-    }
-  };
+			return Promise.resolve(
+				`/vfs/readfile?options=${json}&path=` + encodeURIComponent(path)
+			).then((url) => {
+				return (options.target || window).open(url);
+			});
+		},
+	};
 };
 
 /**
@@ -116,9 +137,9 @@ const methods = (core, request) => {
  * @param {object} [options] Adapter options
  */
 const adapter = (core) => {
-  const request = requester(core);
+	const request = requester(core);
 
-  return methods(core, request);
+	return methods(core, request);
 };
 
 export default adapter;

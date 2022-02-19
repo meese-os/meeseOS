@@ -31,213 +31,213 @@
 $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
 
 @mixin meeseOS-window-maximized {
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
 }
 
 .meeseOS-window-behavior-lofi {
-  position: absolute;
-  border: 2px solid #000;
+	position: absolute;
+	border: 2px solid #000;
 }
 
 .meeseOS-window-resize {
-  z-index: 10;
-  position: absolute;
-  min-width: 1em;
-  min-height: 1em;
+	z-index: 10;
+	position: absolute;
+	min-width: 1em;
+	min-height: 1em;
 
-  &[data-direction^="n"] {
-    top: -$resize-handle-size;
-  }
+	&[data-direction^="n"] {
+		top: -$resize-handle-size;
+	}
 
-  &[data-direction^="s"] {
-    bottom: -$resize-handle-size;
-  }
+	&[data-direction^="s"] {
+		bottom: -$resize-handle-size;
+	}
 
-  &[data-direction$="w"] {
-    left: -$resize-handle-size;
-  }
+	&[data-direction$="w"] {
+		left: -$resize-handle-size;
+	}
 
-  &[data-direction$="e"] {
-    right: -$resize-handle-size;
-  }
+	&[data-direction$="e"] {
+		right: -$resize-handle-size;
+	}
 
-  @each $d in $direction-list {
-    &[data-direction="#{$d}"] {
-      cursor: #{$d}-resize;
-    }
-  }
+	@each $d in $direction-list {
+		&[data-direction="#{$d}"] {
+			cursor: #{$d}-resize;
+		}
+	}
 
-  &[data-direction="s"],
-  &[data-direction="n"] {
-    left: $resize-handle-size;
-    right: $resize-handle-size;
-  }
+	&[data-direction="s"],
+	&[data-direction="n"] {
+		left: $resize-handle-size;
+		right: $resize-handle-size;
+	}
 
-  &[data-direction="e"],
-  &[data-direction="w"] {
-    top: $resize-handle-size;
-    bottom: $resize-handle-size;
-  }
+	&[data-direction="e"],
+	&[data-direction="w"] {
+		top: $resize-handle-size;
+		bottom: $resize-handle-size;
+	}
 }
 
 .meeseOS-window-inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
+	position: relative;
+	z-index: 1;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
 }
 
 .meeseOS-window-header {
-  display: flex;
-  position: relative;
-  box-sizing: border-box;
-  flex: 0 0;
-  min-height: 2.2em;
+	display: flex;
+	position: relative;
+	box-sizing: border-box;
+	flex: 0 0;
+	min-height: 2.2em;
 
-  & > div {
-    height: 100%;
-  }
+	& > div {
+		height: 100%;
+	}
 }
 
 .meeseOS-window-icon {
-  & > div {
-    width: $base-margin;
-    height: $base-margin;
-    background: url('src/styles/logo-blue-32x32.png') no-repeat 50% 50%;
-    background-size: cover;
-    cursor: pointer;
-  }
+	& > div {
+		width: $base-margin;
+		height: $base-margin;
+		background: url("src/styles/logo-blue-32x32.png") no-repeat 50% 50%;
+		background-size: cover;
+		cursor: pointer;
+	}
 }
 
 .meeseOS-window-title {
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  pointer-events: none;
+	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	pointer-events: none;
 }
 
 .meeseOS-window-button {
-  cursor: pointer;
-  min-width: 1em;
-  position: relative;
-  flex-basis: 1em;
+	cursor: pointer;
+	min-width: 1em;
+	position: relative;
+	flex-basis: 1em;
 
-  * {
-    pointer-events: none;
-  }
+	* {
+		pointer-events: none;
+	}
 
-  & > div {
-    width: $base-margin;
-    height: $base-margin;
-  }
+	& > div {
+		width: $base-margin;
+		height: $base-margin;
+	}
 
-  &:not(:last-child) {
-    margin-right: calc($base-margin / 4);
-  }
+	&:not(:last-child) {
+		margin-right: calc($base-margin / 4);
+	}
 }
 
 .meeseOS-window-content {
-  box-sizing: border-box;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  flex: 1 1;
-  user-select: auto;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	flex: 1 1;
+	user-select: auto;
 }
 
 .meeseOS-window {
-  position: absolute;
-  box-sizing: border-box;
-  user-select: none;
-  visibility: visible;
-  touch-action: none;
+	position: absolute;
+	box-sizing: border-box;
+	user-select: none;
+	visibility: visible;
+	touch-action: none;
 
-  /* This actually increases performance */
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  perspective: 1000;
+	/* This actually increases performance */
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	perspective: 1000;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9999999999;
-    display: none;
-  }
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 9999999999;
+		display: none;
+	}
 
-  &[data-maximized=true] {
-    @include meeseOS-window-maximized();
+	&[data-maximized="true"] {
+		@include meeseOS-window-maximized();
 
-    .meeseOS-window-resize {
-      cursor: inherit !important;
-    }
-  }
+		.meeseOS-window-resize {
+			cursor: inherit !important;
+		}
+	}
 
-  &[data-minimized=true] {
-    display: none;
-    visibility: hidden;
-  }
+	&[data-minimized="true"] {
+		display: none;
+		visibility: hidden;
+	}
 
-  &[data-focused=false] iframe {
-    pointer-events: none;
-  }
+	&[data-focused="false"] iframe {
+		pointer-events: none;
+	}
 
-  &[data-resizing=true],
-  &[data-moving=true] {
-    cursor: move;
-  }
+	&[data-resizing="true"],
+	&[data-moving="true"] {
+		cursor: move;
+	}
 
-  &[data-loading=true]::after {
-    display: block;
-  }
+	&[data-loading="true"]::after {
+		display: block;
+	}
 
-  &.meeseOS__drop {
-    outline: 2px solid #000;
-  }
+	&.meeseOS__drop {
+		outline: 2px solid #000;
+	}
 
-  &[data-minimizable=false] .meeseOS-window-button[data-action=minimize],
-  &[data-maximizable=false] .meeseOS-window-button[data-action=maximize],
-  &[data-closable=false] .meeseOS-window-button[data-action=close],
-  &[data-resizable=false] .meeseOS-window-resize {
-    display: none;
-  }
+	&[data-minimizable="false"] .meeseOS-window-button[data-action="minimize"],
+	&[data-maximizable="false"] .meeseOS-window-button[data-action="maximize"],
+	&[data-closable="false"] .meeseOS-window-button[data-action="close"],
+	&[data-resizable="false"] .meeseOS-window-resize {
+		display: none;
+	}
 }
 
 .meeseOS-root[data-window-action="true"] {
-  .meeseOS-window {
-    /* FIXME: Maybe limit this as to increase perf ? */
-    * {
-      pointer-events: none;
-    }
-  }
+	.meeseOS-window {
+		/* FIXME: Maybe limit this as to increase perf ? */
+		* {
+			pointer-events: none;
+		}
+	}
 }
 
 .meeseOS-root[data-mobile="true"] {
-  .meeseOS-window {
-    @include meeseOS-window-maximized();
+	.meeseOS-window {
+		@include meeseOS-window-maximized();
 
-    opacity: 1;
+		opacity: 1;
 
-    .meeseOS-window-button[data-action=maximize] {
-      display: none;
-    }
-  }
+		.meeseOS-window-button[data-action="maximize"] {
+			display: none;
+		}
+	}
 }

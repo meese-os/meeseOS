@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import logger from '../logger';
+import logger from "../logger";
 
 /**
  * @callback DraggableEvent
@@ -78,72 +78,70 @@ import logger from '../logger';
  */
 
 const retval = (fn, ...args) => {
-  try {
-    const result = fn(...args);
-    if (typeof result === 'boolean') {
-      return result;
-    }
-  } catch (e) {
-    logger.warn('droppable value parsing error', e);
-  }
+	try {
+		const result = fn(...args);
+		if (typeof result === "boolean") {
+			return result;
+		}
+	} catch (e) {
+		logger.warn("droppable value parsing error", e);
+	}
 
-  return true;
+	return true;
 };
 
 const getDataTransfer = (ev, type) => {
-  let files = [];
-  let data;
+	let files = [];
+	let data;
 
-  if (ev.dataTransfer) {
-    files = ev.dataTransfer.files
-      ? Array.from(ev.dataTransfer.files)
-      : [];
+	if (ev.dataTransfer) {
+		files = ev.dataTransfer.files ? Array.from(ev.dataTransfer.files) : [];
 
-    try {
-      const transfer = ev.dataTransfer.getData(type);
+		try {
+			const transfer = ev.dataTransfer.getData(type);
 
-      try {
-        if (type === 'application/json') {
-          data = typeof transfer === 'undefined' ? transfer : JSON.parse(transfer);
-        } else {
-          data = transfer;
-        }
-      } catch (e) {
-        data = transfer;
-        logger.warn('droppable dataTransfer parsing error', e);
-      }
-    } catch (e) {
-      logger.warn('droppable dataTransfer parsing error', e);
-    }
-  }
+			try {
+				if (type === "application/json") {
+					data =
+						typeof transfer === "undefined" ? transfer : JSON.parse(transfer);
+				} else {
+					data = transfer;
+				}
+			} catch (e) {
+				data = transfer;
+				logger.warn("droppable dataTransfer parsing error", e);
+			}
+		} catch (e) {
+			logger.warn("droppable dataTransfer parsing error", e);
+		}
+	}
 
-  return {files, data};
+	return { files, data };
 };
 
 const setDataTransfer = (type, effect, data, setDragImage) => {
-  const hasDragImage = typeof setDragImage === 'function';
-  const transferData = type === 'application/json'
-    ? JSON.stringify(data)
-    : data;
+	const hasDragImage = typeof setDragImage === "function";
+	const transferData =
+		type === "application/json" ? JSON.stringify(data) : data;
 
-  return (ev, el, options) => {
-    if (ev.dataTransfer) {
-      if (ev.dataTransfer.setDragImage && hasDragImage) {
-        try {
-          setDragImage(ev, el, options);
-        } catch (e) {
-          logger.warn('draggable dragstart setDragImage error', e);
-        }
-      }
+	return (ev, el, options) => {
+		if (ev.dataTransfer) {
+			if (ev.dataTransfer.setDragImage && hasDragImage) {
+				try {
+					setDragImage(ev, el, options);
+				} catch (e) {
+					logger.warn("draggable dragstart setDragImage error", e);
+				}
+			}
 
-      try {
-        ev.dataTransfer.effectAllowed = effect;
-        ev.dataTransfer.setData(type, transferData);
-      } catch (e) {
-        logger.warn('draggable dragstart dataTransfer error', e);
-      }
-    }
-  };
+			try {
+				ev.dataTransfer.effectAllowed = effect;
+				ev.dataTransfer.setData(type, transferData);
+			} catch (e) {
+				logger.warn("draggable dragstart dataTransfer error", e);
+			}
+		}
+	};
 };
 
 /**
@@ -153,44 +151,44 @@ const setDataTransfer = (type, effect, data, setDragImage) => {
  * @return {DraggableInstance}
  */
 export const draggable = (el, options = {}) => {
-  const {type, effect, data, ondragstart, ondragend, setDragImage} = {
-    type: 'application/json',
-    effect: 'move',
-    ondragstart: () => true,
-    ondragend: () => true,
-    setDragImage: null,
-    ...options
-  };
+	const { type, effect, data, ondragstart, ondragend, setDragImage } = {
+		type: "application/json",
+		effect: "move",
+		ondragstart: () => true,
+		ondragend: () => true,
+		setDragImage: null,
+		...options,
+	};
 
-  const setter = setDataTransfer(type, effect, data, setDragImage);
+	const setter = setDataTransfer(type, effect, data, setDragImage);
 
-  const dragstart = ev => {
-    el.setAttribute('aria-grabbed', 'true');
-    setter(ev, el, options);
-    return ondragstart(ev);
-  };
+	const dragstart = (ev) => {
+		el.setAttribute("aria-grabbed", "true");
+		setter(ev, el, options);
+		return ondragstart(ev);
+	};
 
-  const dragend = ev => {
-    el.setAttribute('aria-grabbed', 'false');
+	const dragend = (ev) => {
+		el.setAttribute("aria-grabbed", "false");
 
-    return ondragend(ev);
-  };
+		return ondragend(ev);
+	};
 
-  const destroy = () => {
-    el.removeAttribute('draggable');
-    el.removeAttribute('aria-grabbed');
-    el.removeEventListener('dragstart', dragstart);
-    el.removeEventListener('dragend', dragend);
-    el.classList.remove('meeseOS__draggable');
-  };
+	const destroy = () => {
+		el.removeAttribute("draggable");
+		el.removeAttribute("aria-grabbed");
+		el.removeEventListener("dragstart", dragstart);
+		el.removeEventListener("dragend", dragend);
+		el.classList.remove("meeseOS__draggable");
+	};
 
-  el.setAttribute('draggable', 'true');
-  el.setAttribute('aria-grabbed', 'false');
-  el.addEventListener('dragstart', dragstart);
-  el.addEventListener('dragend', dragend);
-  el.classList.add('meeseOS__draggable');
+	el.setAttribute("draggable", "true");
+	el.setAttribute("aria-grabbed", "false");
+	el.addEventListener("dragstart", dragstart);
+	el.addEventListener("dragend", dragend);
+	el.classList.add("meeseOS__draggable");
 
-  return {destroy};
+	return { destroy };
 };
 
 /**
@@ -200,71 +198,72 @@ export const draggable = (el, options = {}) => {
  * @return {DroppableInstance}
  */
 export const droppable = (el, options = {}) => {
-  const {strict, type, effect, ondragenter, ondragover, ondragleave, ondrop} = {
-    type: 'application/json',
-    effect: 'move',
-    ondragenter: () => true,
-    ondragover: () => true,
-    ondragleave: () => true,
-    ondrop: () => true,
-    strict: false,
-    ...options
-  };
+	const { strict, type, effect, ondragenter, ondragover, ondragleave, ondrop } =
+		{
+			type: "application/json",
+			effect: "move",
+			ondragenter: () => true,
+			ondragover: () => true,
+			ondragleave: () => true,
+			ondrop: () => true,
+			strict: false,
+			...options,
+		};
 
-  const dragenter = ev => ondragenter(ev);
+	const dragenter = (ev) => ondragenter(ev);
 
-  const dragleave = ev => {
-    el.classList.remove('meeseOS__drop');
+	const dragleave = (ev) => {
+		el.classList.remove("meeseOS__drop");
 
-    return retval(ondragleave, ev);
-  };
+		return retval(ondragleave, ev);
+	};
 
-  const dragover = ev => {
-    ev.preventDefault();
+	const dragover = (ev) => {
+		ev.preventDefault();
 
-    const inside = el.contains(ev.target);
+		const inside = el.contains(ev.target);
 
-    if (!inside) {
-      el.classList.remove('meeseOS__drop');
-      return false;
-    }
+		if (!inside) {
+			el.classList.remove("meeseOS__drop");
+			return false;
+		}
 
-    ev.stopPropagation();
-    ev.dataTransfer.dropEffect = effect;
-    el.classList.add('meeseOS__drop');
+		ev.stopPropagation();
+		ev.dataTransfer.dropEffect = effect;
+		el.classList.add("meeseOS__drop");
 
-    return retval(ondragover, ev);
-  };
+		return retval(ondragover, ev);
+	};
 
-  const drop = ev => {
-    if (strict && ev.target !== el) {
-      return false;
-    }
+	const drop = (ev) => {
+		if (strict && ev.target !== el) {
+			return false;
+		}
 
-    const {files, data} = getDataTransfer(ev, type);
+		const { files, data } = getDataTransfer(ev, type);
 
-    ev.stopPropagation();
-    ev.preventDefault();
-    el.classList.remove('meeseOS__drop');
+		ev.stopPropagation();
+		ev.preventDefault();
+		el.classList.remove("meeseOS__drop");
 
-    return retval(ondrop, ev, data, files);
-  };
+		return retval(ondrop, ev, data, files);
+	};
 
-  const destroy = () => {
-    el.removeAttribute('aria-dropeffect', effect);
-    el.removeEventListener('dragenter', dragenter);
-    el.removeEventListener('dragover', dragover);
-    el.removeEventListener('dragleave', dragleave);
-    el.removeEventListener('drop', drop);
-    el.classList.remove('meeseOS__droppable');
-  };
+	const destroy = () => {
+		el.removeAttribute("aria-dropeffect", effect);
+		el.removeEventListener("dragenter", dragenter);
+		el.removeEventListener("dragover", dragover);
+		el.removeEventListener("dragleave", dragleave);
+		el.removeEventListener("drop", drop);
+		el.classList.remove("meeseOS__droppable");
+	};
 
-  el.setAttribute('aria-dropeffect', effect);
-  el.addEventListener('dragenter', dragenter);
-  el.addEventListener('dragover', dragover);
-  el.addEventListener('dragleave', dragleave);
-  el.addEventListener('drop', drop);
-  el.classList.add('meeseOS__droppable');
+	el.setAttribute("aria-dropeffect", effect);
+	el.addEventListener("dragenter", dragenter);
+	el.addEventListener("dragover", dragover);
+	el.addEventListener("dragleave", dragleave);
+	el.addEventListener("drop", drop);
+	el.classList.add("meeseOS__droppable");
 
-  return {destroy};
+	return { destroy };
 };

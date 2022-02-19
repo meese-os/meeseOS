@@ -29,54 +29,54 @@
  */
 
 .meeseOS-gui-list-view {
-  overflow: hidden;
+	overflow: hidden;
 
-  .meeseOS-icon {
-    margin-right: calc($base-margin / 2);
-  }
+	.meeseOS-icon {
+		margin-right: calc($base-margin / 2);
+	}
 }
 
 .meeseOS-gui-list-view-wrapper {
-  min-height: 4em;
-  display: flex;
-  flex-basis: 100%;
-  overflow: auto;
-  align-items: flex-start;
-  position: relative;
+	min-height: 4em;
+	display: flex;
+	flex-basis: 100%;
+	overflow: auto;
+	align-items: flex-start;
+	position: relative;
 }
 
 .meeseOS-gui-list-view-pane {
-  min-width: 1em;
-  min-height: 1em;
-  position: relative;
-  flex: 1 1;
+	min-width: 1em;
+	min-height: 1em;
+	position: relative;
+	flex: 1 1;
 
-  &:last-child {
-    flex-grow: 1;
-  }
+	&:last-child {
+		flex-grow: 1;
+	}
 }
 
 .meeseOS-gui-list-view-cell,
 .meeseOS-gui-list-view-header {
-  position: relative;
-  padding: calc($base-margin / 2);
-  flex-shrink: 0;
-  z-index: 1;
-  min-height: 1em;
-  display: flex;
+	position: relative;
+	padding: calc($base-margin / 2);
+	flex-shrink: 0;
+	z-index: 1;
+	min-height: 1em;
+	display: flex;
 
-  & > span {
-    min-height: 1rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    flex: 1 1;
-    line-height: 1;
-  }
+	& > span {
+		min-height: 1rem;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		flex: 1 1;
+		line-height: 1;
+	}
 }
 
 .meeseOS-gui-list-view-header {
-  z-index: 10;
-  position: sticky;
-  top: 0;
+	z-index: 10;
+	position: sticky;
+	top: 0;
 }

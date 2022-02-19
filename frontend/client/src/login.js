@@ -27,8 +27,8 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import {EventEmitter} from '@aaronmeese.com/event-emitter';
-import createUI from './adapters/ui/login';
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import createUI from "./adapters/ui/login";
 
 /**
  * Login Options
@@ -42,107 +42,109 @@ import createUI from './adapters/ui/login';
  * OS.js Login UI
  */
 export default class Login extends EventEmitter {
+	/**
+	 * Create authentication handler
+	 *
+	 * @param {Core} core Core reference
+	 * @param {LoginOptions} [options] Options
+	 */
+	constructor(core, options) {
+		super("Login");
 
-  /**
-   * Create authentication handler
-   *
-   * @param {Core} core Core reference
-   * @param {LoginOptions} [options] Options
-   */
-  constructor(core, options) {
-    super('Login');
+		/**
+		 * Login root DOM element
+		 * @type {Element}
+		 */
+		this.$container = null;
 
-    /**
-     * Login root DOM element
-     * @type {Element}
-     */
-    this.$container = null;
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
 
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
+		/**
+		 * Login options
+		 * TODO: typedef
+		 * @type {Object}
+		 * @readonly
+		 */
+		this.options = {
+			id: "meeseOS-login",
+			title: "Welcome to MeeseOS",
+			stamp: core.config("version"),
+			logo: {
+				position: "top",
+				src: null,
+			},
+			fields: [
+				{
+					tagName: "input",
+					attributes: {
+						name: "username",
+						type: "text",
+						placeholder: "Username",
+					},
+				},
+				{
+					tagName: "input",
+					attributes: {
+						name: "password",
+						type: "password",
+						placeholder: "Password",
+					},
+				},
+				{
+					tagName: "input",
+					attributes: {
+						type: "submit",
+						value: "Login",
+					},
+				},
+			],
+			...options,
+		};
+	}
 
-    /**
-     * Login options
-     * TODO: typedef
-     * @type {Object}
-     * @readonly
-     */
-    this.options = {
-      id: 'meeseOS-login',
-      title: 'Welcome to MeeseOS',
-      stamp: core.config('version'),
-      logo: {
-        position: 'top',
-        src: null
-      },
-      fields: [{
-        tagName: 'input',
-        attributes: {
-          name: 'username',
-          type: 'text',
-          placeholder: 'Username'
-        }
-      }, {
-        tagName: 'input',
-        attributes: {
-          name: 'password',
-          type: 'password',
-          placeholder: 'Password'
-        }
-      }, {
-        tagName: 'input',
-        attributes: {
-          type: 'submit',
-          value: 'Login'
-        }
-      }],
-      ...options
-    };
-  }
+	/**
+	 * Initializes the UI
+	 */
+	init(startHidden) {
+		this.$container = document.createElement("div");
+		this.$container.id = this.options.id;
+		this.$container.className = "meeseOS-login-base";
+		this.core.$root.classList.add("login");
+		this.core.$root.appendChild(this.$container);
 
-  /**
-   * Initializes the UI
-   */
-  init(startHidden) {
-    this.$container = document.createElement('div');
-    this.$container.id = this.options.id;
-    this.$container.className = 'meeseOS-login-base';
-    this.core.$root.classList.add('login');
-    this.core.$root.appendChild(this.$container);
+		this.render(startHidden);
+	}
 
-    this.render(startHidden);
-  }
+	/**
+	 * Destroys the UI
+	 */
+	destroy() {
+		this.core.$root.classList.remove("login");
 
-  /**
-   * Destroys the UI
-   */
-  destroy() {
-    this.core.$root.classList.remove('login');
+		if (this.$container) {
+			this.$container.remove();
+			this.$container = null;
+		}
 
-    if (this.$container) {
-      this.$container.remove();
-      this.$container = null;
-    }
+		super.destroy();
+	}
 
-    super.destroy();
-  }
+	/**
+	 * Renders the UI
+	 */
+	render(startHidden) {
+		const login = this.core.config("auth.login", {});
+		const ui = createUI(this.options, login, startHidden, this.$container);
 
-  /**
-   * Renders the UI
-   */
-  render(startHidden) {
-    const login = this.core.config('auth.login', {});
-    const ui = createUI(this.options, login, startHidden, this.$container);
-
-    ui.on('register:post', values => this.emit('register:post', values));
-    ui.on('login:post', values => this.emit('login:post', values));
-    this.on('login:start', () => ui.emit('login:start'));
-    this.on('login:stop', () => ui.emit('login:stop'));
-    this.on('login:error', err => ui.emit('login:error', err));
-  }
-
+		ui.on("register:post", (values) => this.emit("register:post", values));
+		ui.on("login:post", (values) => this.emit("login:post", values));
+		this.on("login:start", () => ui.emit("login:start"));
+		this.on("login:stop", () => ui.emit("login:stop"));
+		this.on("login:error", (err) => ui.emit("login:error", err));
+	}
 }

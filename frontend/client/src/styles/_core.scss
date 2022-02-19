@@ -29,61 +29,61 @@
  */
 
 .meeseOS-root {
-  overflow: hidden;
-  line-height: normal;
-  font-size: 13px;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-image: url('src/styles/wallpaper.png');
-  position: fixed;
-  top: 0;
-  left: 0;
-  touch-action: none;
+	overflow: hidden;
+	line-height: normal;
+	font-size: 13px;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-image: url("src/styles/wallpaper.png");
+	position: fixed;
+	top: 0;
+	left: 0;
+	touch-action: none;
 
-  textarea,
-  input,
-  label {
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-  }
+	textarea,
+	input,
+	label {
+		-webkit-user-select: text;
+		-moz-user-select: text;
+		-ms-user-select: text;
+		user-select: text;
+	}
 
-  &[data-mousemove="true"] {
-    iframe {
-      pointer-events: none;
-    }
-  }
+	&[data-mousemove="true"] {
+		iframe {
+			pointer-events: none;
+		}
+	}
 }
 
 .meeseOS-boot-splash {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999999999;
-  background-color: #000;
-  color: #fff;
-  font-size: 120%;
-  font-family: sans-serif;
-  padding: $base-margin;
-  text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999999999;
+	background-color: #000;
+	color: #fff;
+	font-size: 120%;
+	font-family: sans-serif;
+	padding: $base-margin;
+	text-align: center;
 }
 
 .meeseOS-contents {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
 }

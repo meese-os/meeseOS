@@ -28,53 +28,50 @@
  * @license Simplified BSD License
  */
 
-import Notifications from '../notifications';
-import {ServiceProvider} from '@aaronmeese.com/common';
+import Notifications from "../notifications";
+import { ServiceProvider } from "@aaronmeese.com/common";
 
 /**
  * OS.js Notification Service Provider
  */
 export default class NotificationServiceProvider extends ServiceProvider {
+	/**
+	 * @param {Core} core OS.js Core
+	 */
+	constructor(core) {
+		super(core);
 
-  /**
-   * @param {Core} core OS.js Core
-   */
-  constructor(core) {
-    super(core);
+		/**
+		 * @type {Notifications}
+		 * @readonly
+		 */
+		this.notifications = new Notifications(core);
+	}
 
-    /**
-     * @type {Notifications}
-     * @readonly
-     */
-    this.notifications = new Notifications(core);
-  }
+	/**
+	 * Destroys notifications
+	 */
+	destroy() {
+		this.notifications.destroy();
+	}
 
-  /**
-   * Destroys notifications
-   */
-  destroy() {
-    this.notifications.destroy();
-  }
+	/**
+	 * Get a list of services this provider registers
+	 * @return {string[]}
+	 */
+	provides() {
+		return ["meeseOS/notification"];
+	}
 
-  /**
-   * Get a list of services this provider registers
-   * @return {string[]}
-   */
-  provides() {
-    return [
-      'meeseOS/notification'
-    ];
-  }
+	/**
+	 * Initializes authentication
+	 * @return {Promise<undefined>}
+	 */
+	init() {
+		this.core.instance("meeseOS/notification", (options) => {
+			return this.notifications.create(options);
+		});
 
-  /**
-   * Initializes authentication
-   * @return {Promise<undefined>}
-   */
-  init() {
-    this.core.instance('meeseOS/notification', (options) => {
-      return this.notifications.create(options);
-    });
-
-    return this.notifications.init();
-  }
+		return this.notifications.init();
+	}
 }

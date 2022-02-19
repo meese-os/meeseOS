@@ -29,25 +29,25 @@
  */
 
 .meeseOS-widget {
-  position: absolute;
-  z-index: 2;
+	position: absolute;
+	z-index: 2;
 
-  & > .meeseOS-widget-resize {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 1em;
-    height: 1em;
-    background-color: rgba(255, 255, 255, 0.5);
-  }
+	& > .meeseOS-widget-resize {
+		display: none;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 1em;
+		height: 1em;
+		background-color: rgba(255, 255, 255, 0.5);
+	}
 
-  &.active,
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+	&.active,
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.5);
 
-    & > .meeseOS-widget-resize {
-      display: block !important;
-    }
-  }
+		& > .meeseOS-widget-resize {
+			display: block !important;
+		}
+	}
 }

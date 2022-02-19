@@ -29,196 +29,200 @@
  */
 
 @mixin placeholder-effect {
-  color: #fff;
-  text-transform: uppercase;
-  font-family: inherit;
-  font-weight: bold;
+	color: #fff;
+	text-transform: uppercase;
+	font-family: inherit;
+	font-weight: bold;
 }
 
 .meeseOS-root.login {
-  &::after {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    content: '';
-    z-index: 1000;
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.65) 100%);
-  }
+	&::after {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		content: "";
+		z-index: 1000;
+		background: radial-gradient(
+			ellipse at center,
+			rgba(0, 0, 0, 0.2) 0%,
+			rgba(0, 0, 0, 0.65) 100%
+		);
+	}
 }
 
 .meeseOS-login {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  display: flex;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 99999;
+	transform: translate(-50%, -50%);
+	display: flex;
 
-  .meeseOS-login-field {
-    position: relative;
-  }
+	.meeseOS-login-field {
+		position: relative;
+	}
 
-  input,
-  select,
-  button {
-    padding: calc($base-margin / 2);
-    display: block;
-    width: 100%;
-    border-radius: 0;
-    border: 0 none;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    box-sizing: border-box;
-  }
+	input,
+	select,
+	button {
+		padding: calc($base-margin / 2);
+		display: block;
+		width: 100%;
+		border-radius: 0;
+		border: 0 none;
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		box-sizing: border-box;
+	}
 
-  input[type=submit],
-  button {
-    cursor: pointer;
-  }
+	input[type="submit"],
+	button {
+		cursor: pointer;
+	}
 }
 
 #meeseOS-login {
-  font-family: Roboto, sans-serif;
-  max-width: 400px;
-  width: 80%;
+	font-family: Roboto, sans-serif;
+	max-width: 400px;
+	width: 80%;
 
-  .meeseOS-login-header {
-    text-align: center;
-    font-weight: 300;
-    font-weight: bold;
-    font-size: 2em;
-    text-transform: uppercase;
-    color: #fff;
-    letter-spacing: 4px;
-    line-height: 1.5;
-  }
+	.meeseOS-login-header {
+		text-align: center;
+		font-weight: 300;
+		font-weight: bold;
+		font-size: 2em;
+		text-transform: uppercase;
+		color: #fff;
+		letter-spacing: 4px;
+		line-height: 1.5;
+	}
 
-  .meeseOS-login-logo {
-    min-width: 1em;
-    min-height: 1em;
-    height: 100%;
-    width: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
+	.meeseOS-login-logo {
+		min-width: 1em;
+		min-height: 1em;
+		height: 100%;
+		width: 100%;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
 
-    &[data-position=bottom],
-    &[data-position=top],
-    &[data-position=middle] {
-      min-height: 4em;
-    }
+		&[data-position="bottom"],
+		&[data-position="top"],
+		&[data-position="middle"] {
+			min-height: 4em;
+		}
 
-    &[data-position=left],
-    &[data-position=right] {
-      min-width: 4em;
-    }
+		&[data-position="left"],
+		&[data-position="right"] {
+			min-width: 4em;
+		}
 
-    &[data-position=bottom] {
-      margin-top: 2em;
-    }
-  }
+		&[data-position="bottom"] {
+			margin-top: 2em;
+		}
+	}
 
-  & > div {
-    &[data-position=left] {
-      margin-right: 2em;
-    }
+	& > div {
+		&[data-position="left"] {
+			margin-right: 2em;
+		}
 
-    &[data-position=right] {
-      margin-left: 2em;
-    }
-  }
+		&[data-position="right"] {
+			margin-left: 2em;
+		}
+	}
 
-  .meeseOS-login-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+	.meeseOS-login-content {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
 
-  .meeseOS-login-field {
-    margin-top: $base-margin * 2;
-  }
+	.meeseOS-login-field {
+		margin-top: $base-margin * 2;
+	}
 
-  .meeseOS-login-field-select {
-    position: relative;
+	.meeseOS-login-field-select {
+		position: relative;
 
-    &::after {
-      content: '\21B4';
-      position: absolute;
-      top: 50%;
-      right: calc($base-margin / 2);
-      transform: translate(-50%, -50%);
-      color: #fff;
-    }
-  }
+		&::after {
+			content: "\21B4";
+			position: absolute;
+			top: 50%;
+			right: calc($base-margin / 2);
+			transform: translate(-50%, -50%);
+			color: #fff;
+		}
+	}
 
-  .meeseOS-login-error {
-    background: rgba(255, 0, 0, 0.8);
-    color: #fff;
-    text-align: center;
-    text-decoration: uppercase;
-    padding: $base-margin;
-    margin-top: $base-margin * 2;
-  }
+	.meeseOS-login-error {
+		background: rgba(255, 0, 0, 0.8);
+		color: #fff;
+		text-align: center;
+		text-decoration: uppercase;
+		padding: $base-margin;
+		margin-top: $base-margin * 2;
+	}
 
-  .meeseOS-login-stamp {
-    margin-top: $base-margin * 2;
-    font-size: 80%;
-    text-align: right;
-    color: rgba(255, 255, 255, 0.5);
-  }
+	.meeseOS-login-stamp {
+		margin-top: $base-margin * 2;
+		font-size: 80%;
+		text-align: right;
+		color: rgba(255, 255, 255, 0.5);
+	}
 
-  input {
-    outline: 1px solid rgba(255, 255, 255, 0.5);
+	input {
+		outline: 1px solid rgba(255, 255, 255, 0.5);
 
-    &:focus,
-    &:active {
-      box-shadow: 0 0 0.5em rgba(255, 255, 255, 0.8);
-    }
-  }
+		&:focus,
+		&:active {
+			box-shadow: 0 0 0.5em rgba(255, 255, 255, 0.8);
+		}
+	}
 
-  input[type=submit],
-  button {
-    padding: $base-margin;
-    background-color: #fff;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+	input[type="submit"],
+	button {
+		padding: $base-margin;
+		background-color: #fff;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
 
-  select,
-  input[type=password],
-  input[type=text] {
-    padding: $base-margin;
-    background: rgba(255, 255, 255, 0.5);
-    color: #fff;
-    letter-spacing: 1px;
-  }
+	select,
+	input[type="password"],
+	input[type="text"] {
+		padding: $base-margin;
+		background: rgba(255, 255, 255, 0.5);
+		color: #fff;
+		letter-spacing: 1px;
+	}
 
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
 
-    option {
-      color: #000;
-    }
-  }
+		option {
+			color: #000;
+		}
+	}
 
-  ::-webkit-input-placeholder {
-    @include placeholder-effect;
-  }
+	::-webkit-input-placeholder {
+		@include placeholder-effect;
+	}
 
-  ::-moz-placeholder {
-    @include placeholder-effect;
-  }
+	::-moz-placeholder {
+		@include placeholder-effect;
+	}
 
-  :-ms-input-placeholder {
-    @include placeholder-effect;
-  }
+	:-ms-input-placeholder {
+		@include placeholder-effect;
+	}
 
-  :-moz-placeholder {
-    @include placeholder-effect;
-  }
+	:-moz-placeholder {
+		@include placeholder-effect;
+	}
 }

@@ -29,96 +29,96 @@
  */
 
 .meeseOS-window-button {
-  & > div {
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      display: block;
-      width: 1em;
-      height: 1em;
-      border-radius: 100%;
-      box-sizing: border-box;
-      transform: translate(-50%, -50%);
-    }
+	& > div {
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			display: block;
+			width: 1em;
+			height: 1em;
+			border-radius: 100%;
+			box-sizing: border-box;
+			transform: translate(-50%, -50%);
+		}
 
-    &::before {
-      background: #bababa;
-      background: linear-gradient(to bottom, #bababa 0%, #d9d9d9 100%);
-      z-index: 1;
-    }
+		&::before {
+			background: #bababa;
+			background: linear-gradient(to bottom, #bababa 0%, #d9d9d9 100%);
+			z-index: 1;
+		}
 
-    &::after {
-      border: 1px solid rgba(102, 102, 102, 0.5);
-      z-index: 2;
-    }
-  }
+		&::after {
+			border: 1px solid rgba(102, 102, 102, 0.5);
+			z-index: 2;
+		}
+	}
 }
 
 .meeseOS-window {
-  @include window;
+	@include window;
 
-  &[data-focused=false] {
-    opacity: 0.5;
-  }
+	&[data-focused="false"] {
+		opacity: 0.5;
+	}
 
-  &[data-loading=true] {
-    pointer-events: none;
+	&[data-loading="true"] {
+		pointer-events: none;
 
-    &::after {
-      background: rgba(0, 0, 0, 0.5);
-    }
-  }
+		&::after {
+			background: rgba(0, 0, 0, 0.5);
+		}
+	}
 
-  &[data-focused=true] {
-    /* stylelint-disable no-descending-specificity */
-    .meeseOS-window-button {
-      &[data-action=close] {
-        & > div::before {
-          @include window-button(#e56c5c, #f09c8d);
-        }
+	&[data-focused="true"] {
+		/* stylelint-disable no-descending-specificity */
+		.meeseOS-window-button {
+			&[data-action="close"] {
+				& > div::before {
+					@include window-button(#e56c5c, #f09c8d);
+				}
 
-        &:hover > div::before,
-        &:active > div::before {
-          @include window-button(#f09c8d, #e56c5c);
-        }
-      }
+				&:hover > div::before,
+				&:active > div::before {
+					@include window-button(#f09c8d, #e56c5c);
+				}
+			}
 
-      &[data-action=maximize] {
-        & > div::before {
-          @include window-button(#8dd22b, #b1ec70);
-        }
+			&[data-action="maximize"] {
+				& > div::before {
+					@include window-button(#8dd22b, #b1ec70);
+				}
 
-        &:hover > div::before,
-        &:active > div::before {
-          @include window-button(#b1ec70, #8dd22b);
-        }
-      }
+				&:hover > div::before,
+				&:active > div::before {
+					@include window-button(#b1ec70, #8dd22b);
+				}
+			}
 
-      &[data-action=minimize] {
-        & > div::before {
-          @include window-button(#f9c435, #fdd675);
-        }
+			&[data-action="minimize"] {
+				& > div::before {
+					@include window-button(#f9c435, #fdd675);
+				}
 
-        &:hover > div::before,
-        &:active > div::before {
-          @include window-button(#fdd675, #f9c435);
-        }
-      }
-    }
-  }
+				&:hover > div::before,
+				&:active > div::before {
+					@include window-button(#fdd675, #f9c435);
+				}
+			}
+		}
+	}
 }
 
 .meeseOS-window-title {
-  text-align: center;
+	text-align: center;
 }
 
 .meeseOS-window-header {
-  padding: calc($base-margin / 2);
+	padding: calc($base-margin / 2);
 }
 
 .meeseOS-window-icon {
-  margin-right: calc($base-margin / 2);
+	margin-right: calc($base-margin / 2);
 }

@@ -29,107 +29,107 @@
  */
 
 @mixin shadowed {
-  box-shadow: 0 0 $base-margin rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 $base-margin rgba(0, 0, 0, 0.5);
 }
 
 @mixin focusable {
-  &:focus {
-    outline: $outline;
-  }
+	&:focus {
+		outline: $outline;
+	}
 
-  &:disabled {
-    opacity: 0.8;
-  }
+	&:disabled {
+		opacity: 0.8;
+	}
 }
 
 @mixin panel {
-  @include shadowed;
+	@include shadowed;
 
-  background: $panel-background;
-  color: $panel-foreground;
+	background: $panel-background;
+	color: $panel-foreground;
 }
 
 @mixin button {
-  @include focusable;
+	@include focusable;
 
-  border: $button-border;
-  background: $button-background-fallback;
-  background: $button-background;
-  color: $button-foreground;
+	border: $button-border;
+	background: $button-background-fallback;
+	background: $button-background;
+	color: $button-foreground;
 
-  &[active=true],
-  &:active {
-    border: $button-border-active;
-    background: $button-background-active;
-    outline: 0 none;
-  }
+	&[active="true"],
+	&:active {
+		border: $button-border-active;
+		background: $button-background-active;
+		outline: 0 none;
+	}
 
-  &:disabled {
-    color: lighten($button-foreground, 50%);
-  }
+	&:disabled {
+		color: lighten($button-foreground, 50%);
+	}
 }
 
 @mixin input {
-  @include focusable;
+	@include focusable;
 
-  border: $input-border;
-  background: $input-background;
-  color: $input-foreground;
+	border: $input-border;
+	background: $input-background;
+	color: $input-foreground;
 
-  &:disabled {
-    color: lighten($input-foreground, 50%);
-  }
+	&:disabled {
+		color: lighten($input-foreground, 50%);
+	}
 }
 
 @mixin view {
-  border: $view-border;
-  background: $view-background;
+	border: $view-border;
+	background: $view-background;
 }
 
 @mixin window-button($from, $to) {
-  background: $from;
-  background: linear-gradient(to bottom, $from 0%, $to 100%);
+	background: $from;
+	background: linear-gradient(to bottom, $from 0%, $to 100%);
 }
 
 @mixin window {
-  border: $window-border;
-  background: $window-background;
-  border-radius: 4px;
+	border: $window-border;
+	background: $window-background;
+	border-radius: 4px;
 
-  @include shadowed;
+	@include shadowed;
 }
 
 @mixin range-slider-input {
-  background: transparent;
-  border: 0 none;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  height: $range-slider-height;
-  -webkit-appearance: none;
+	background: transparent;
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+	height: $range-slider-height;
+	-webkit-appearance: none;
 }
 
 @mixin range-slider-track {
-  width: $range-slider-track-width;
-  height: $range-slider-track-height;
-  background: $view-background;
-  border-radius: $range-slider-track-border-radius;
-  border: 0 none;
-  cursor: pointer;
+	width: $range-slider-track-width;
+	height: $range-slider-track-height;
+	background: $view-background;
+	border-radius: $range-slider-track-border-radius;
+	border: 0 none;
+	cursor: pointer;
 }
 
 @mixin range-slider-button {
-  border: $button-border;
-  height: $range-slider-button-height;
-  width: $range-slider-button-width;
-  border-radius: $range-slider-button-border-radius;
-  background: $button-background;
-  margin-top: -$range-slider-track-height / 2;
-  cursor: pointer;
+	border: $button-border;
+	height: $range-slider-button-height;
+	width: $range-slider-button-width;
+	border-radius: $range-slider-button-border-radius;
+	background: $button-background;
+	margin-top: -$range-slider-track-height / 2;
+	cursor: pointer;
 }
 
 @mixin range-slider-ms-fill {
-  background: $view-background;
-  border: $input-border;
-  border-radius: $range-slider-track-border-radius;
+	background: $view-background;
+	border: $input-border;
+	border-radius: $range-slider-track-border-radius;
 }

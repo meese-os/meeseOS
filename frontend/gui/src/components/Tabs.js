@@ -28,39 +28,65 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import nestable from 'hyperapp-nestable';
+import { h } from "hyperapp";
+import nestable from "hyperapp-nestable";
 
-const headers = ({labels, onchange, oncontextmenu}, state, actions) => (labels || [])
-  .map((label, index) => h('div', {
-    class: state.selectedIndex === index ? 'meeseOS__active' : '',
-    oncontextmenu: ev => {
-      (oncontextmenu || function() {})(ev, index, label);
-    },
-    onclick: ev => {
-      actions.setSelectedIndex(index);
-      (onchange || function() {})(ev, index, label);
-    }
-  }, h('span', {}, label)));
+const headers = ({ labels, onchange, oncontextmenu }, state, actions) =>
+	(labels || []).map((label, index) =>
+		h(
+			"div",
+			{
+				class: state.selectedIndex === index ? "meeseOS__active" : "",
+				oncontextmenu: (ev) => {
+					(oncontextmenu || function () {})(ev, index, label);
+				},
+				onclick: (ev) => {
+					actions.setSelectedIndex(index);
+					(onchange || function () {})(ev, index, label);
+				},
+			},
+			h("span", {}, label)
+		)
+	);
 
-const panes = (state, children) => children
-  .map((child, index) => h('div', {
-    class: state.selectedIndex === index ? 'meeseOS__active' : ''
-  }, child));
+const panes = (state, children) =>
+	children.map((child, index) =>
+		h(
+			"div",
+			{
+				class: state.selectedIndex === index ? "meeseOS__active" : "",
+			},
+			child
+		)
+	);
 
-const view = nestable({
-  selectedIndex: 0
-}, {
-  init: props => ({
-    selectedIndex: props.selectedIndex || 0
-  }),
-  setSelectedIndex: selectedIndex => state => ({selectedIndex})
-}, (state, actions) => (props, children) => h('div', {
-  class: 'meeseOS-gui-tabs-wrapper'
-}, [
-  h('div', {class: 'meeseOS-gui-tabs-header'}, headers(props, state, actions)),
-  h('div', {class: 'meeseOS-gui-tabs-panes'}, panes(state, children))
-]), 'div');
+const view = nestable(
+	{
+		selectedIndex: 0,
+	},
+	{
+		init: (props) => ({
+			selectedIndex: props.selectedIndex || 0,
+		}),
+		setSelectedIndex: (selectedIndex) => (state) => ({ selectedIndex }),
+	},
+	(state, actions) => (props, children) =>
+		h(
+			"div",
+			{
+				class: "meeseOS-gui-tabs-wrapper",
+			},
+			[
+				h(
+					"div",
+					{ class: "meeseOS-gui-tabs-header" },
+					headers(props, state, actions)
+				),
+				h("div", { class: "meeseOS-gui-tabs-panes" }, panes(state, children)),
+			]
+		),
+	"div"
+);
 
 /**
  * A tab container
@@ -68,6 +94,14 @@ const view = nestable({
  * @param {String[]} props.labels Labels
  * @param {h[]} children Tabs
  */
-export const Tabs = (props, children) => h(view, Object.assign({
-  class: 'meeseOS-gui meeseOS-gui-tabs ' + (props.class || '')
-}, props), children);
+export const Tabs = (props, children) =>
+	h(
+		view,
+		Object.assign(
+			{
+				class: "meeseOS-gui meeseOS-gui-tabs " + (props.class || ""),
+			},
+			props
+		),
+		children
+	);

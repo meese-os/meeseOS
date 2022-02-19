@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import {style, script} from './dom';
-import logger from '../logger';
+import { style, script } from "./dom";
+import logger from "../logger";
 
 /**
  * @typedef {HTMLScriptElement|HTMLLinkElement} PreloaderEntryElement
@@ -53,76 +53,75 @@ import logger from '../logger';
  * The Preloader loads styles and scripts
  */
 export default class Preloader {
+	constructor(root) {
+		/**
+		 * A list of cached preloads
+		 * @type {String[]}
+		 */
+		this.loaded = [];
 
-  constructor(root) {
-    /**
-     * A list of cached preloads
-     * @type {String[]}
-     */
-    this.loaded = [];
+		/**
+		 * @type {Element}
+		 */
+		this.$root = root;
+	}
 
-    /**
-     * @type {Element}
-     */
-    this.$root = root;
-  }
+	destroy() {
+		this.loaded = [];
+	}
 
-  destroy() {
-    this.loaded = [];
-  }
+	/**
+	 * Loads all resources required for a package
+	 * @param {string[]} list A list of resources
+	 * @param {boolean} [force=false] Force loading even though previously cached
+	 * @return {Promise<PreloaderResult>} A list of failed resources
+	 */
+	load(list, force = false) {
+		const cached = (entry) =>
+			force ? false : this.loaded.find((src) => src === entry);
 
-  /**
-   * Loads all resources required for a package
-   * @param {string[]} list A list of resources
-   * @param {boolean} [force=false] Force loading even though previously cached
-   * @return {Promise<PreloaderResult>} A list of failed resources
-   */
-  load(list, force = false) {
-    const cached = entry => force
-      ? false
-      : this.loaded.find(src => src === entry);
+		const promises = list
+			.filter((entry) => !cached(entry))
+			.map((entry) => {
+				logger.debug("Packages::preload()", entry);
 
-    const promises = list
-      .filter(entry => !cached(entry))
-      .map(entry => {
-        logger.debug('Packages::preload()', entry);
+				const p = entry.match(/\.js$/)
+					? script(this.$root, entry)
+					: style(this.$root, entry);
 
-        const p = entry.match(/\.js$/)
-          ? script(this.$root, entry)
-          : style(this.$root, entry);
+				return p
+					.then((el) => ({ success: true, entry, el }))
+					.catch((error) => ({ success: false, entry, error }));
+			});
 
-        return p
-          .then(el => ({success: true, entry, el}))
-          .catch(error => ({success: false, entry, error}));
-      });
+		return Promise.all(promises).then((results) => this._load(results, cached));
+	}
 
-    return Promise.all(promises)
-      .then(results => this._load(results, cached));
-  }
+	/**
+	 * Checks the loaded list
+	 * @private
+	 * @param {Object[]} results Preload results
+	 * @param {string[]} cached Already cached preloads
+	 * @return {PreloaderResult}
+	 */
+	_load(results, cached) {
+		const successes = results.filter((res) => res.success);
+		successes.forEach((entry) => {
+			if (!cached(entry)) {
+				this.loaded.push(entry);
+			}
+		});
 
-  /**
-   * Checks the loaded list
-   * @private
-   * @param {Object[]} results Preload results
-   * @param {string[]} cached Already cached preloads
-   * @return {PreloaderResult}
-   */
-  _load(results, cached) {
-    const successes = results.filter(res => res.success);
-    successes.forEach(entry => {
-      if (!cached(entry)) {
-        this.loaded.push(entry);
-      }
-    });
+		const failed = results.filter((res) => !res.success);
+		failed.forEach((failed) =>
+			logger.warn("Failed loading", failed.entry, failed.error)
+		);
 
-    const failed = results.filter(res => !res.success);
-    failed.forEach(failed => logger.warn('Failed loading', failed.entry, failed.error));
-
-    return {
-      errors: failed.map(failed => failed.entry),
-      elements: successes.reduce((result, iter) => {
-        return {...result, [iter.entry]: iter.el};
-      }, {})
-    };
-  }
+		return {
+			errors: failed.map((failed) => failed.entry),
+			elements: successes.reduce((result, iter) => {
+				return { ...result, [iter.entry]: iter.el };
+			}, {}),
+		};
+	}
 }

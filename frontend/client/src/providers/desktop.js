@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import {ServiceProvider} from '@aaronmeese.com/common';
-import Desktop from '../desktop';
+import { ServiceProvider } from "@aaronmeese.com/common";
+import Desktop from "../desktop";
 
 /**
  * Desktop Service Contract
@@ -47,70 +47,67 @@ import Desktop from '../desktop';
  * OS.js Desktop Service Provider
  */
 export default class DesktopServiceProvider extends ServiceProvider {
+	/**
+	 * @param {Core} core OS.js Core
+	 */
+	constructor(core, options = {}) {
+		super(core, options || {});
 
-  /**
-   * @param {Core} core OS.js Core
-   */
-  constructor(core, options = {}) {
-    super(core, options || {});
+		/**
+		 * @type {Desktop}
+		 * @readonly
+		 */
+		this.desktop = new Desktop(this.core, this.options);
+	}
 
-    /**
-     * @type {Desktop}
-     * @readonly
-     */
-    this.desktop = new Desktop(this.core, this.options);
-  }
+	/**
+	 * Destroys instance
+	 */
+	destroy() {
+		this.desktop = this.desktop.destroy();
+	}
 
-  /**
-   * Destroys instance
-   */
-  destroy() {
-    this.desktop = this.desktop.destroy();
-  }
+	/**
+	 * Get a list of services this provider registers
+	 * @return {string[]}
+	 */
+	provides() {
+		return ["meeseOS/desktop"];
+	}
 
-  /**
-   * Get a list of services this provider registers
-   * @return {string[]}
-   */
-  provides() {
-    return [
-      'meeseOS/desktop'
-    ];
-  }
+	/**
+	 * Initializes desktop
+	 * @return {Promise<undefined>}
+	 */
+	init() {
+		this.desktop.init();
 
-  /**
-   * Initializes desktop
-   * @return {Promise<undefined>}
-   */
-  init() {
-    this.desktop.init();
+		this.core.singleton("meeseOS/desktop", () => this.createDesktopContract());
 
-    this.core.singleton('meeseOS/desktop', () => this.createDesktopContract());
+		this.core.on("meeseOS/core:started", () => {
+			this.desktop.applySettings();
+		});
+	}
 
-    this.core.on('meeseOS/core:started', () => {
-      this.desktop.applySettings();
-    });
-  }
+	/**
+	 * Starts desktop
+	 * @return {Promise<undefined>}
+	 */
+	start() {
+		this.desktop.start();
+	}
 
-  /**
-   * Starts desktop
-   * @return {Promise<undefined>}
-   */
-  start() {
-    this.desktop.start();
-  }
-
-  /**
-   * @return {DeskopProviderContract}
-   */
-  createDesktopContract() {
-    return {
-      setKeyboardContext: ctx => this.desktop.setKeyboardContext(ctx),
-      openContextMenu: ev => this.desktop.onContextMenu(ev),
-      addContextMenuEntries: entries => this.desktop.addContextMenu(entries),
-      applySettings: settings => this.desktop.applySettings(settings),
-      createDropContextMenu: data => this.desktop.createDropContextMenu(data),
-      getRect: () => this.desktop.getRect()
-    };
-  }
+	/**
+	 * @return {DeskopProviderContract}
+	 */
+	createDesktopContract() {
+		return {
+			setKeyboardContext: (ctx) => this.desktop.setKeyboardContext(ctx),
+			openContextMenu: (ev) => this.desktop.onContextMenu(ev),
+			addContextMenuEntries: (entries) => this.desktop.addContextMenu(entries),
+			applySettings: (settings) => this.desktop.applySettings(settings),
+			createDropContextMenu: (data) => this.desktop.createDropContextMenu(data),
+			getRect: () => this.desktop.getRect(),
+		};
+	}
 }

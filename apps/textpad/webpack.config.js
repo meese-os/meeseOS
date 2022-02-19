@@ -6,21 +6,17 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
 	mode,
 	devtool: "source-map",
-	entry: [
-		path.resolve(__dirname, "index.js"),
-	],
+	entry: [path.resolve(__dirname, "index.js")],
 	optimization: {
 		minimize,
 	},
 	externals: {
-		meeseOS: "MeeseOS"
+		meeseOS: "MeeseOS",
 	},
 	plugins: [
 		new CopyWebpackPlugin({
-			patterns: [
-				{ from: "icon.png" },
-			],
-		})
+			patterns: [{ from: "icon.png" }],
+		}),
 	],
 	module: {
 		rules: [
@@ -28,9 +24,9 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules\/(?!@meeseOS)/,
 				use: {
-					loader: "babel-loader"
-				}
-			}
-		]
-	}
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
 };

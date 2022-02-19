@@ -28,74 +28,92 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import {SelectField, Box} from '@aaronmeese.com/gui';
-import Dialog from '../dialog';
+import { h, app } from "hyperapp";
+import { SelectField, Box } from "@aaronmeese.com/gui";
+import Dialog from "../dialog";
 
 /**
  * Default OS.js Choice Dialog
  */
 export default class ChoiceDialog extends Dialog {
+	/**
+	 * Constructor
+	 * @param {Core} core OS.js Core reference
+	 * @param {Object} args Arguments given from service creation
+	 * @param {String} [args.title] Dialog title
+	 * @param {String} [args.message] Dialog message
+	 * @param {String} [args.value] Set default selected value
+	 * @param {Map<String,*>} [args.choices] Choice map
+	 * @param {Function} callback The callback function
+	 */
+	constructor(core, args, callback) {
+		args = Object.assign(
+			{},
+			{
+				title: "Choice",
+				message: "",
+				value: undefined,
+				choices: {},
+			},
+			args
+		);
 
-  /**
-   * Constructor
-   * @param {Core} core OS.js Core reference
-   * @param {Object} args Arguments given from service creation
-   * @param {String} [args.title] Dialog title
-   * @param {String} [args.message] Dialog message
-   * @param {String} [args.value] Set default selected value
-   * @param {Map<String,*>} [args.choices] Choice map
-   * @param {Function} callback The callback function
-   */
-  constructor(core, args, callback) {
-    args = Object.assign({}, {
-      title: 'Choice',
-      message: '',
-      value: undefined,
-      choices: {}
-    }, args);
+		super(
+			core,
+			args,
+			{
+				className: "alert",
+				window: {
+					title: args.title,
+					attributes: {
+						ontop: args.type === "error",
+					},
+					dimension: {
+						width: 400,
+						height: 200,
+					},
+				},
+				buttons: ["ok", "close"],
+			},
+			callback
+		);
 
-    super(core, args, {
-      className: 'alert',
-      window: {
-        title: args.title,
-        attributes: {
-          ontop: args.type === 'error'
-        },
-        dimension: {
-          width: 400,
-          height: 200
-        }
-      },
-      buttons: ['ok', 'close']
-    }, callback);
+		this.value =
+			typeof args.value !== "undefined"
+				? this.args.value
+				: Object.keys(this.args.choices)[0];
+	}
 
-    this.value = typeof args.value !== 'undefined'
-      ? this.args.value
-      : Object.keys(this.args.choices)[0];
-  }
+	render(options) {
+		super.render(options, ($content) => {
+			app(
+				{
+					current: this.value,
+				},
+				{
+					setCurrent: (current) => (state) => {
+						this.value = current;
 
-  render(options) {
-    super.render(options, ($content) => {
-      app({
-        current: this.value
-      }, {
-        setCurrent: current => state => {
-          this.value = current;
-
-          return {current};
-        }
-      }, (state, actions) => this.createView([
-        h(Box, {grow: 1}, [
-          h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message)),
-          h(SelectField, {
-            choices: this.args.choices,
-            value: state.current,
-            onchange: (ev, val) => actions.setCurrent(val)
-          })
-        ])
-      ]), $content);
-    });
-  }
-
+						return { current };
+					},
+				},
+				(state, actions) =>
+					this.createView([
+						h(Box, { grow: 1 }, [
+							h(
+								"div",
+								{ class: "meeseOS-dialog-message" },
+								String(this.args.message)
+							),
+							h(SelectField, {
+								choices: this.args.choices,
+								value: state.current,
+								onchange: (ev, val) => actions.setCurrent(val),
+							}),
+						]),
+					]),
+				$content
+			);
+		});
+	}
 }

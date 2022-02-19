@@ -28,51 +28,73 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Element} from './Element';
-import nestable from 'hyperapp-nestable';
+import { h } from "hyperapp";
+import { Element } from "./Element";
+import nestable from "hyperapp-nestable";
 
 const view = (state, actions) => (props, children) => {
-  return h(Element, Object.assign({}, props.box || {}, {
-    class: ['meeseOS-gui-expander-wrapper']
-  }), [
-    h('div', {
-      class: 'meeseOS-gui-expander-header',
-      onclick: ev => actions.ontoggle({
-        ev,
-        active: !state.active,
-        ontoggle: props.ontoggle
-      })
-    }, [
-      h('div', {
-        class: 'meeseOS-gui-expander-header-icon',
-        'data-active': String(state.active)
-      }),
-      h('div', {
-        class: 'meeseOS-gui-expander-header-label'
-      }, props.label)
-    ]),
-    h('div', {
-      class: 'meeseOS-gui-expander-content',
-      style: {
-        display: state.active === false ? 'none' : undefined
-      }
-    }, children)
-  ]);
+	return h(
+		Element,
+		Object.assign({}, props.box || {}, {
+			class: ["meeseOS-gui-expander-wrapper"],
+		}),
+		[
+			h(
+				"div",
+				{
+					class: "meeseOS-gui-expander-header",
+					onclick: (ev) =>
+						actions.ontoggle({
+							ev,
+							active: !state.active,
+							ontoggle: props.ontoggle,
+						}),
+				},
+				[
+					h("div", {
+						class: "meeseOS-gui-expander-header-icon",
+						"data-active": String(state.active),
+					}),
+					h(
+						"div",
+						{
+							class: "meeseOS-gui-expander-header-label",
+						},
+						props.label
+					),
+				]
+			),
+			h(
+				"div",
+				{
+					class: "meeseOS-gui-expander-content",
+					style: {
+						display: state.active === false ? "none" : undefined,
+					},
+				},
+				children
+			),
+		]
+	);
 };
 
-const inner = nestable({
-  active: true
-}, {
-  init: props => ({
-    ative: props.active !== false
-  }),
-  ontoggle: ({ev, active, ontoggle}) => {
-    const cb = ontoggle || function() {};
-    cb(ev, active);
-    return {active};
-  }
-}, view, 'div');
+const inner = nestable(
+	{
+		active: true,
+	},
+	{
+		init: (props) => ({
+			ative: props.active !== false,
+		}),
+		ontoggle: ({ ev, active, ontoggle }) => {
+			const cb = ontoggle || function () {};
+			cb(ev, active);
+			return { active };
+		},
+	},
+	view,
+	"div"
+);
 
 /**
  * A status bar
@@ -83,6 +105,10 @@ const inner = nestable({
  * @param {h[]} children Children
  */
 export const Expander = (props, children) =>
-  h(inner, Object.assign({}, props, {
-    class: 'meeseOS-gui meeseOS-gui-expander'
-  }), children);
+	h(
+		inner,
+		Object.assign({}, props, {
+			class: "meeseOS-gui meeseOS-gui-expander",
+		}),
+		children
+	);

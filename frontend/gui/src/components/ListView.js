@@ -28,119 +28,169 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {filteredProps, doubleTap} from '../utils';
-import {Element} from './Element';
-import {Icon} from './Icon';
+import { h } from "hyperapp";
+import { filteredProps, doubleTap } from "../utils";
+import { Element } from "./Element";
+import { Icon } from "./Icon";
 
 const tapper = doubleTap();
 
-const createView = props => {
-  let debounceScroll;
+const createView = (props) => {
+	let debounceScroll;
 
-  const cols = (paneIndex) => (row, rowIndex) => {
-    const col = row.columns[paneIndex] || {};
-    const selected = props.selectedIndex === rowIndex;
-    const colIcon = col.icon ? h(Icon, col.icon) : null;
-    const children = [h('span', {}, [typeof col === 'object' ? col.label : col])];
+	const cols = (paneIndex) => (row, rowIndex) => {
+		const col = row.columns[paneIndex] || {};
+		const selected = props.selectedIndex === rowIndex;
+		const colIcon = col.icon ? h(Icon, col.icon) : null;
+		const children = [
+			h("span", {}, [typeof col === "object" ? col.label : col]),
+		];
 
-    if (colIcon) {
-      children.unshift(colIcon);
-    }
+		if (colIcon) {
+			children.unshift(colIcon);
+		}
 
-    return h('div', {
-      key: row.key,
-      'data-has-icon': col.icon ? true : undefined,
-      class: 'meeseOS-gui-list-view-cell' + (selected ? ' meeseOS__active' : ''),
-      ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: row.data, index: rowIndex, ev})),
-      ondblclick: (ev) => props.onactivate({data: row.data, index: rowIndex, ev}),
-      onclick: (ev) => props.onselect({data: row.data, index: rowIndex, ev}),
-      oncontextmenu: (ev) => props.oncontextmenu({data: row.data, index: rowIndex, ev}),
-      oncreate: (el) => props.oncreate({data: row.data, index: rowIndex, el})
-    }, children);
-  };
+		return h(
+			"div",
+			{
+				key: row.key,
+				"data-has-icon": col.icon ? true : undefined,
+				class:
+					"meeseOS-gui-list-view-cell" + (selected ? " meeseOS__active" : ""),
+				ontouchstart: (ev) =>
+					tapper(ev, () =>
+						props.onactivate({ data: row.data, index: rowIndex, ev })
+					),
+				ondblclick: (ev) =>
+					props.onactivate({ data: row.data, index: rowIndex, ev }),
+				onclick: (ev) =>
+					props.onselect({ data: row.data, index: rowIndex, ev }),
+				oncontextmenu: (ev) =>
+					props.oncontextmenu({ data: row.data, index: rowIndex, ev }),
+				oncreate: (el) =>
+					props.oncreate({ data: row.data, index: rowIndex, el }),
+			},
+			children
+		);
+	};
 
-  const pane = (index, col) => h('div', {
-    class: 'meeseOS-gui-list-view-pane',
-    style: col.style || {}
-  }, [
-    h('div', {
-      class: 'meeseOS-gui-list-view-header',
-      style: {
-        display: props.hideColumns ? 'none' : undefined
-      }
-    }, h('span', {}, typeof col === 'object' ? col.label : col)),
-    h('div', {
-      class: 'rows',
-      'data-zebra': String(props.zebra)
-    }, props.rows.map(cols(index)))
-  ]);
+	const pane = (index, col) =>
+		h(
+			"div",
+			{
+				class: "meeseOS-gui-list-view-pane",
+				style: col.style || {},
+			},
+			[
+				h(
+					"div",
+					{
+						class: "meeseOS-gui-list-view-header",
+						style: {
+							display: props.hideColumns ? "none" : undefined,
+						},
+					},
+					h("span", {}, typeof col === "object" ? col.label : col)
+				),
+				h(
+					"div",
+					{
+						class: "rows",
+						"data-zebra": String(props.zebra),
+					},
+					props.rows.map(cols(index))
+				),
+			]
+		);
 
-  return h('div', {
-    class: 'meeseOS-gui-list-view-wrapper',
-    onscroll: ev => {
-      debounceScroll = clearTimeout(debounceScroll);
-      debounceScroll = setTimeout(() => {
-        props.onscroll(ev);
-      }, 100);
-    },
-    oncreate: el => (el.scrollTop = props.scrollTop),
-    onupdate: el => {
-      if (props.selectedIndex < 0) {
-        el.scrollTop = props.scrollTop;
-      }
-    }
-  }, props.columns.map((c, i) => pane(i, c)));
+	return h(
+		"div",
+		{
+			class: "meeseOS-gui-list-view-wrapper",
+			onscroll: (ev) => {
+				debounceScroll = clearTimeout(debounceScroll);
+				debounceScroll = setTimeout(() => {
+					props.onscroll(ev);
+				}, 100);
+			},
+			oncreate: (el) => (el.scrollTop = props.scrollTop),
+			onupdate: (el) => {
+				if (props.selectedIndex < 0) {
+					el.scrollTop = props.scrollTop;
+				}
+			},
+		},
+		props.columns.map((c, i) => pane(i, c))
+	);
 };
 
-export const ListView = props => h(Element, Object.assign({
-  class: 'meeseOS-gui-list-view'
-}, props.box || {}), createView(filteredProps(props, ['box'])));
+export const ListView = (props) =>
+	h(
+		Element,
+		Object.assign(
+			{
+				class: "meeseOS-gui-list-view",
+			},
+			props.box || {}
+		),
+		createView(filteredProps(props, ["box"]))
+	);
 
-export const listView = ({
-  component: (state, actions) => {
-    const newProps = Object.assign({
-      zebra: true,
-      columns: [],
-      rows: [],
-      onselect: ({data, index, ev}) => {
-        actions.select({data, index, ev});
-        actions.setSelectedIndex(index);
-      },
-      onactivate: ({data, index, ev}) => {
-        actions.activate({data, index, ev});
-        actions.setSelectedIndex(-1);
-      },
-      oncontextmenu: ({data, index, ev}) => {
-        actions.select({data, index, ev});
-        actions.contextmenu({data, index, ev});
-        actions.setSelectedIndex(index);
-      },
-      oncreate: (args) => {
-        actions.created(args);
-      },
-      onscroll: (ev) => {
-        actions.scroll(ev);
-      }
-    }, state);
+export const listView = {
+	component: (state, actions) => {
+		const newProps = Object.assign(
+			{
+				zebra: true,
+				columns: [],
+				rows: [],
+				onselect: ({ data, index, ev }) => {
+					actions.select({ data, index, ev });
+					actions.setSelectedIndex(index);
+				},
+				onactivate: ({ data, index, ev }) => {
+					actions.activate({ data, index, ev });
+					actions.setSelectedIndex(-1);
+				},
+				oncontextmenu: ({ data, index, ev }) => {
+					actions.select({ data, index, ev });
+					actions.contextmenu({ data, index, ev });
+					actions.setSelectedIndex(index);
+				},
+				oncreate: (args) => {
+					actions.created(args);
+				},
+				onscroll: (ev) => {
+					actions.scroll(ev);
+				},
+			},
+			state
+		);
 
-    return (props = {}) => ListView(Object.assign(newProps, props));
-  },
+		return (props = {}) => ListView(Object.assign(newProps, props));
+	},
 
-  state: state => Object.assign({
-    selectedIndex: -1,
-    scrollTop: 0
-  }, state),
+	state: (state) =>
+		Object.assign(
+			{
+				selectedIndex: -1,
+				scrollTop: 0,
+			},
+			state
+		),
 
-  actions: actions => Object.assign({
-    select: () => () => ({}),
-    activate: () => () => ({}),
-    contextmenu: () => () => ({}),
-    created: () => () => ({}),
-    scroll: () => state => state,
-    setRows: rows => ({rows}),
-    setColumns: columns => ({columns}),
-    setScrollTop: scrollTop => state => ({scrollTop}),
-    setSelectedIndex: selectedIndex => state => ({selectedIndex})
-  }, actions || {})
-});
+	actions: (actions) =>
+		Object.assign(
+			{
+				select: () => () => ({}),
+				activate: () => () => ({}),
+				contextmenu: () => () => ({}),
+				created: () => () => ({}),
+				scroll: () => (state) => state,
+				setRows: (rows) => ({ rows }),
+				setColumns: (columns) => ({ columns }),
+				setScrollTop: (scrollTop) => (state) => ({ scrollTop }),
+				setSelectedIndex: (selectedIndex) => (state) => ({ selectedIndex }),
+			},
+			actions || {}
+		),
+};

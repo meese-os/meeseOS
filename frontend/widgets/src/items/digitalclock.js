@@ -28,125 +28,139 @@
  * @licence Simplified BSD License
  */
 
-import Widget from '../widget';
+import Widget from "../widget";
 
-const getFont = (fontFamily, size) => String(size) + 'px ' + fontFamily;
+const getFont = (fontFamily, size) => String(size) + "px " + fontFamily;
 
-const getTime = now => [
-  now.getHours(),
-  now.getMinutes(),
-  now.getSeconds()
-]
-  .map(int => String(int).padStart(2, '0'))
-  .join(':');
+const getTime = (now) =>
+	[now.getHours(), now.getMinutes(), now.getSeconds()]
+		.map((int) => String(int).padStart(2, "0"))
+		.join(":");
 
 const getFontSize = (fontFamily, initialSize, maxWidth, context) => {
-  const txt = '99:99:99';
+	const txt = "99:99:99";
 
-  let size = initialSize;
-  while (size > 0) {
-    context.font = getFont(fontFamily, size);
+	let size = initialSize;
+	while (size > 0) {
+		context.font = getFont(fontFamily, size);
 
-    const measuredWidth = context.measureText(txt).width;
-    if (measuredWidth < maxWidth) {
-      break;
-    }
+		const measuredWidth = context.measureText(txt).width;
+		if (measuredWidth < maxWidth) {
+			break;
+		}
 
-    size--;
-  }
+		size--;
+	}
 
-  return size;
+	return size;
 };
 
 export default class DigitalClockWidget extends Widget {
+	constructor(core, options) {
+		super(
+			core,
+			options,
+			{
+				dimension: {
+					width: 300,
+					height: 50,
+				},
+			},
+			{
+				fontFamily: "Monospace",
+				fontColor: "#ffffff",
+			}
+		);
 
-  constructor(core, options) {
-    super(core, options, {
-      dimension: {
-        width: 300,
-        height: 50
-      }
-    }, {
-      fontFamily: 'Monospace',
-      fontColor: '#ffffff'
-    });
+		this.$tmpCanvas = document.createElement("canvas");
+		this.tmpContext = this.$tmpCanvas.getContext("2d");
+	}
 
-    this.$tmpCanvas = document.createElement('canvas');
-    this.tmpContext = this.$tmpCanvas.getContext('2d');
-  }
+	compute() {
+		const { fontFamily, fontColor } = this.options;
+		const { width, height } = this.$canvas;
+		const { $tmpCanvas, tmpContext } = this;
+		const size = getFontSize(fontFamily, height, width, tmpContext);
 
-  compute() {
-    const {fontFamily, fontColor} = this.options;
-    const {width, height} = this.$canvas;
-    const {$tmpCanvas, tmpContext} = this;
-    const size = getFontSize(fontFamily, height, width, tmpContext);
+		$tmpCanvas.width = width;
+		$tmpCanvas.height = size;
 
-    $tmpCanvas.width = width;
-    $tmpCanvas.height = size;
+		tmpContext.font = getFont(fontFamily, size);
+		tmpContext.fillStyle = fontColor;
+		tmpContext.textAlign = "center";
+		tmpContext.textBaseline = "middle";
+	}
 
-    tmpContext.font = getFont(fontFamily, size);
-    tmpContext.fillStyle = fontColor;
-    tmpContext.textAlign = 'center';
-    tmpContext.textBaseline = 'middle';
-  }
+	onResize() {
+		this.compute();
+	}
 
-  onResize() {
-    this.compute();
-  }
+	render({ context, width, height }) {
+		const { $tmpCanvas, tmpContext } = this;
+		const tmpWidth = $tmpCanvas.width;
+		const tmpHeight = $tmpCanvas.height;
+		const x = width / 2 - tmpWidth / 2;
+		const y = height / 2 - tmpHeight / 2;
+		const text = getTime(new Date());
 
-  render({context, width, height}) {
-    const {$tmpCanvas, tmpContext} = this;
-    const tmpWidth = $tmpCanvas.width;
-    const tmpHeight = $tmpCanvas.height;
-    const x = (width / 2) - (tmpWidth / 2);
-    const y = (height / 2) - (tmpHeight / 2);
-    const text = getTime(new Date());
+		tmpContext.clearRect(0, 0, tmpWidth, tmpHeight);
+		tmpContext.fillText(text, tmpWidth / 2, tmpHeight / 2);
+		context.clearRect(0, 0, width, height);
+		context.drawImage($tmpCanvas, x, y, tmpWidth, tmpHeight);
+	}
 
-    tmpContext.clearRect(0, 0, tmpWidth, tmpHeight);
-    tmpContext.fillText(text, tmpWidth / 2, tmpHeight / 2);
-    context.clearRect(0, 0, width, height);
-    context.drawImage($tmpCanvas, x, y, tmpWidth, tmpHeight);
-  }
+	getContextMenu() {
+		return [
+			{
+				label: "Set Color",
+				onclick: () => this.createColorDialog(),
+			},
+			{
+				label: "Set Font",
+				onclick: () => this.createFontDialog(),
+			},
+		];
+	}
 
-  getContextMenu() {
-    return [{
-      label: 'Set Color',
-      onclick: () => this.createColorDialog()
-    }, {
-      label: 'Set Font',
-      onclick: () => this.createFontDialog()
-    }];
-  }
+	createFontDialog() {
+		this.core.make(
+			"meeseOS/dialog",
+			"font",
+			{
+				name: this.options.fontFamily,
+				controls: ["name"],
+			},
+			(btn, value) => {
+				if (btn === "ok") {
+					this.options.fontFamily = value.name;
+					this.compute();
+					this.saveSettings();
+				}
+			}
+		);
+	}
 
-  createFontDialog() {
-    this.core.make('meeseOS/dialog', 'font', {
-      name: this.options.fontFamily,
-      controls: ['name']
-    }, (btn, value) => {
-      if (btn === 'ok') {
-        this.options.fontFamily = value.name;
-        this.compute();
-        this.saveSettings();
-      }
-    });
-  }
+	createColorDialog() {
+		this.core.make(
+			"meeseOS/dialog",
+			"color",
+			{
+				color: this.options.fontColor,
+			},
+			(btn, value) => {
+				if (btn === "ok") {
+					this.options.fontColor = value.hex;
+					this.compute();
+					this.saveSettings();
+				}
+			}
+		);
+	}
 
-  createColorDialog() {
-    this.core.make('meeseOS/dialog', 'color', {
-      color: this.options.fontColor
-    }, (btn, value) => {
-      if (btn === 'ok') {
-        this.options.fontColor = value.hex;
-        this.compute();
-        this.saveSettings();
-      }
-    });
-  }
-
-  static metadata() {
-    return {
-      ...super.metadata(),
-      title: 'Digital Clock'
-    };
-  }
+	static metadata() {
+		return {
+			...super.metadata(),
+			title: "Digital Clock",
+		};
+	}
 }

@@ -27,9 +27,9 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-import {h} from 'hyperapp';
-import {filteredProps} from './utils';
-import {Element} from './components/Element';
+import { h } from "hyperapp";
+import { filteredProps } from "./utils";
+import { Element } from "./components/Element";
 
 /**
  * Creates a new field Element wrapper
@@ -39,27 +39,31 @@ import {Element} from './components/Element';
  * @param {Function} cb Callback to get value => (event)
  */
 export const createField = (name, props, defaultProps, cb, cbInput) => {
-  const oninput = props.oninput || function() {};
-  const onchange = props.onchange || function() {};
-  const onkeydown = props.onkeydown || function() {};
+	const oninput = props.oninput || function () {};
+	const onchange = props.onchange || function () {};
+	const onkeydown = props.onkeydown || function () {};
 
-  const getValue = cbInput || (ev => [ev.target.value]);
-  const fieldProps = Object.assign(
-    {
-      oninput: ev => oninput(ev, ...getValue(ev)),
-      onchange: ev => onchange(ev, ...getValue(ev)),
-      onkeydown: ev => {
-        if (ev.keyCode === 13 && props.onenter) {
-          props.onenter(ev, ...getValue(ev));
-        }
-        onkeydown(ev);
-      }
-    },
-    defaultProps,
-    filteredProps(props, ['choices', 'label', 'box', 'oninput', 'onchange'])
-  );
+	const getValue = cbInput || ((ev) => [ev.target.value]);
+	const fieldProps = Object.assign(
+		{
+			oninput: (ev) => oninput(ev, ...getValue(ev)),
+			onchange: (ev) => onchange(ev, ...getValue(ev)),
+			onkeydown: (ev) => {
+				if (ev.keyCode === 13 && props.onenter) {
+					props.onenter(ev, ...getValue(ev));
+				}
+				onkeydown(ev);
+			},
+		},
+		defaultProps,
+		filteredProps(props, ["choices", "label", "box", "oninput", "onchange"])
+	);
 
-  return h(Element, Object.assign({}, props.box || {}, {
-    class: 'meeseOS-gui-field meeseOS-gui-' + name
-  }), cb(fieldProps));
+	return h(
+		Element,
+		Object.assign({}, props.box || {}, {
+			class: "meeseOS-gui-field meeseOS-gui-" + name,
+		}),
+		cb(fieldProps)
+	);
 };

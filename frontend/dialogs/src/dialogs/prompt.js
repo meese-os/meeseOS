@@ -28,69 +28,86 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import Dialog from '../dialog';
-import {Box, TextField} from '@aaronmeese.com/gui';
+import { h, app } from "hyperapp";
+import Dialog from "../dialog";
+import { Box, TextField } from "@aaronmeese.com/gui";
 
 /**
  * Default OS.js Prompt Dialog
  */
 export default class PromptDialog extends Dialog {
+	/**
+	 * Constructor
+	 * @param {Core} core OS.js Core reference
+	 * @param {Object} args Arguments given from service creation
+	 * @param {String} [args.title] Dialog title
+	 * @param {String} [args.message] Dialog message
+	 * @param {Function} callback The callback function
+	 */
+	constructor(core, args, callback) {
+		super(
+			core,
+			Object.assign(
+				{},
+				{
+					value: "",
+					placeholder: "",
+				},
+				args
+			),
+			{
+				className: "prompt",
+				buttons: ["ok", "cancel"],
+				window: {
+					title: args.title || "Prompt",
+					attributes: {
+						minDimension: {
+							width: 500,
+							height: 200,
+						},
+					},
+				},
+			},
+			callback
+		);
 
-  /**
-   * Constructor
-   * @param {Core} core OS.js Core reference
-   * @param {Object} args Arguments given from service creation
-   * @param {String} [args.title] Dialog title
-   * @param {String} [args.message] Dialog message
-   * @param {Function} callback The callback function
-   */
-  constructor(core, args, callback) {
-    super(core, Object.assign({}, {
-      value: '',
-      placeholder: '',
-    }, args), {
-      className: 'prompt',
-      buttons: ['ok', 'cancel'],
-      window: {
-        title: args.title || 'Prompt',
-        attributes: {
-          minDimension: {
-            width: 500,
-            height: 200
-          }
-        }
-      }
-    }, callback);
+		this.value = this.args.value;
+	}
 
-    this.value = this.args.value;
-  }
+	render(options) {
+		super.render(options, ($content) => {
+			app(
+				{
+					value: this.args.value,
+				},
+				{
+					setValue: (value) => (state) => {
+						this.value = value;
+						return { value };
+					},
+				},
+				(state, actions) =>
+					this.createView([
+						h(Box, { grow: 1, padding: false }, [
+							h(
+								Box,
+								{ class: "meeseOS-dialog-message" },
+								String(this.args.message)
+							),
+							h(TextField, {
+								value: state.value,
+								placeholder: this.args.placeholder,
+								onenter: (ev, value) => {
+									actions.setValue(value);
 
-  render(options) {
-    super.render(options, ($content) => {
-      app({
-        value: this.args.value
-      }, {
-        setValue: value => state => {
-          this.value = value;
-          return {value};
-        }
-      }, (state, actions) => this.createView([
-        h(Box, {grow: 1, padding: false}, [
-          h(Box, {class: 'meeseOS-dialog-message'}, String(this.args.message)),
-          h(TextField, {
-            value: state.value,
-            placeholder: this.args.placeholder,
-            onenter: (ev, value) => {
-              actions.setValue(value);
-
-              this.emitCallback(this.getPositiveButton(), ev, true);
-            },
-            oninput: (ev, value) => actions.setValue(value)
-          })
-        ])
-      ]), $content);
-    });
-  }
-
+									this.emitCallback(this.getPositiveButton(), ev, true);
+								},
+								oninput: (ev, value) => actions.setValue(value),
+							}),
+						]),
+					]),
+				$content
+			);
+		});
+	}
 }
