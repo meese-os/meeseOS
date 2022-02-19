@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# Depending on the architecture of your server, you may need to change `arm`
+if command -v oh-my-posh >/dev/null 2>&1; then
+	echo "oh-my-posh is already installed..."
+	exit 0
+fi
+
+# Depending on the architecture of your server, you may need to change `arm`.
 # See all the available architectures here:
 # https://github.com/JanDeDobbeleer/oh-my-posh/releases
 sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-arm -O /usr/local/bin/oh-my-posh
