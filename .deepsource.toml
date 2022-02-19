@@ -11,6 +11,14 @@ enabled = true
 name = "docker"
 enabled = true
 
+[[analyzers]]
+name = "secrets"
+enabled = true
+
+[[analyzers]]
+name = "shell"
+enabled = true
+
 [[transformers]]
 name = "prettier"
 enabled = true
