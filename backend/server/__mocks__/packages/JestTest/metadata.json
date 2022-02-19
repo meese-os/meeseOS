@@ -9,8 +9,5 @@
   "description": {
     "en_EN": "Jest test"
   },
-  "files": [
-    "main.js",
-    "main.css"
-  ]
+  "files": ["main.js", "main.css"]
 }

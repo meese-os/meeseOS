@@ -1,12 +1,10 @@
-
 // Methods OS.js server requires
 module.exports = (core, proc) => ({
-
 	// When server initializes
 	init: async () => {
 		// HTTP Route example (see index.js)
 		core.app.post(proc.resource("/test"), (req, res) => {
-			res.json({hello: "World"});
+			res.json({ hello: "World" });
 		});
 
 		// WebSocket Route example (see index.js)
@@ -24,5 +22,5 @@ module.exports = (core, proc) => ({
 	// When using an internally bound websocket, messages comes here
 	onmessage: (ws, respond, args) => {
 		respond("Pong");
-	}
+	},
 });

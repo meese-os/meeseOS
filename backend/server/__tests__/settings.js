@@ -1,63 +1,59 @@
-const meeseOS = require('meeseOS');
-const Settings = require('../src/settings.js');
-const {Response} = require('jest-express/lib/response');
-const {Request} = require('jest-express/lib/request');
+const meeseOS = require("meeseOS");
+const Settings = require("../src/settings.js");
+const { Response } = require("jest-express/lib/response");
+const { Request } = require("jest-express/lib/request");
 
-describe('Settings', () => {
-  let core;
-  let settings;
-  let request;
-  let response;
+describe("Settings", () => {
+	let core;
+	let settings;
+	let request;
+	let response;
 
-  beforeEach(() => {
-    request = new Request();
-    response = new Response();
-  });
+	beforeEach(() => {
+		request = new Request();
+		response = new Response();
+	});
 
-  afterEach(() => {
-    request.resetMocked();
-    response.resetMocked();
-  });
+	afterEach(() => {
+		request.resetMocked();
+		response.resetMocked();
+	});
 
-  beforeAll(() => meeseOS().then(c => (core = c)));
-  afterAll(() => core.destroy());
+	beforeAll(() => meeseOS().then((c) => (core = c)));
+	afterAll(() => core.destroy());
 
-  test('#constructor', () => {
-    settings = new Settings(core);
-  });
+	test("#constructor", () => {
+		settings = new Settings(core);
+	});
 
-  test('#constructor - should fall back to null adapter', () => {
-    settings = new Settings(core, {
-      adapter: () => {
-        throw new Error('Simulated failure');
-      }
-    });
+	test("#constructor - should fall back to null adapter", () => {
+		settings = new Settings(core, {
+			adapter: () => {
+				throw new Error("Simulated failure");
+			},
+		});
 
-    expect(settings.adapter)
-      .not
-      .toBe(null);
-  });
+		expect(settings.adapter).not.toBe(null);
+	});
 
-  test('#init', () => {
-    return expect(settings.init())
-      .resolves
-      .toBe(true);
-  });
+	test("#init", () => {
+		return expect(settings.init()).resolves.toBe(true);
+	});
 
-  test('#save', async () => {
-    await settings.save(request, response);
+	test("#save", async () => {
+		await settings.save(request, response);
 
-    expect(response.json).toBeCalledWith(true);
-  });
+		expect(response.json).toBeCalledWith(true);
+	});
 
-  test('#load', async () => {
-    await settings.load(request, response);
+	test("#load", async () => {
+		await settings.load(request, response);
 
-    expect(response.json).toBeCalledWith({});
-  });
+		expect(response.json).toBeCalledWith({});
+	});
 
-  test('#destroy', async () => {
-    await settings.destroy();
-    settings = undefined;
-  });
+	test("#destroy", async () => {
+		await settings.destroy();
+		settings = undefined;
+	});
 });

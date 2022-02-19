@@ -27,40 +27,40 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import Cookies from 'js-cookie';
-import Login from './login';
-import serverAuth  from './adapters/auth/server';
-import localStorageAuth from './adapters/auth/localstorage';
-import logger from './logger';
+import Cookies from "js-cookie";
+import Login from "./login";
+import serverAuth from "./adapters/auth/server";
+import localStorageAuth from "./adapters/auth/localstorage";
+import logger from "./logger";
 
 const defaultAdapters = {
-  server: serverAuth,
-  localStorage: localStorageAuth
+	server: serverAuth,
+	localStorage: localStorageAuth,
 };
 
 const createUi = (core, options) => {
-  const defaultUi = core.config('auth.ui', {});
+	const defaultUi = core.config("auth.ui", {});
 
-  return options.login
-    ? options.login(core, options.config || {})
-    : new Login(core, options.ui || defaultUi);
+	return options.login
+		? options.login(core, options.config || {})
+		: new Login(core, options.ui || defaultUi);
 };
 
 const createAdapter = (core, options) => {
-  const adapter = core.config('standalone')
-    ? localStorageAuth
-    : typeof options.adapter === 'function'
-      ? options.adapter
-      : defaultAdapters[options.adapter || 'server'];
+	const adapter = core.config("standalone")
+		? localStorageAuth
+		: typeof options.adapter === "function"
+		? options.adapter
+		: defaultAdapters[options.adapter || "server"];
 
-  return {
-    login: () => Promise.reject(new Error('Not implemented')),
-    logout: () => Promise.reject(new Error('Not implemented')),
-    register: () => Promise.reject(new Error('Not implemented')),
-    init: () => Promise.resolve(true),
-    destroy: () => {},
-    ...adapter(core, options.config || {})
-  };
+	return {
+		login: () => Promise.reject(new Error("Not implemented")),
+		logout: () => Promise.reject(new Error("Not implemented")),
+		register: () => Promise.reject(new Error("Not implemented")),
+		init: () => Promise.resolve(true),
+		destroy: () => {},
+		...adapter(core, options.config || {}),
+	};
 };
 
 /**
@@ -108,200 +108,198 @@ const createAdapter = (core, options) => {
  * Handles Authentication
  */
 export default class Auth {
+	/**
+	 * @param {Core} core OS.js Core instance reference
+	 * @param {AuthSettings} [options={}] Auth Options
+	 */
+	constructor(core, options = {}) {
+		/**
+		 * Authentication UI
+		 * @type {Login}
+		 * @readonly
+		 */
+		this.ui = createUi(core, options);
 
-  /**
-   * @param {Core} core OS.js Core instance reference
-   * @param {AuthSettings} [options={}] Auth Options
-   */
-  constructor(core, options = {}) {
-    /**
-     * Authentication UI
-     * @type {Login}
-     * @readonly
-     */
-    this.ui = createUi(core, options);
+		/**
+		 * Authentication adapter
+		 * @type {AuthAdapter}
+		 * @readonly
+		 */
+		this.adapter = createAdapter(core, options);
 
-    /**
-     * Authentication adapter
-     * @type {AuthAdapter}
-     * @readonly
-     */
-    this.adapter = createAdapter(core, options);
+		/**
+		 * Authentication callback function
+		 * @type {AuthCallback}
+		 * @readonly
+		 */
+		this.callback = function () {};
 
-    /**
-     * Authentication callback function
-     * @type {AuthCallback}
-     * @readonly
-     */
-    this.callback = function() {};
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
+	}
 
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
-  }
+	/**
+	 * Initializes authentication handler
+	 */
+	init() {
+		this.ui.on("login:post", (values) => this.login(values));
+		this.ui.on("register:post", (values) => this.register(values));
 
-  /**
-   * Initializes authentication handler
-   */
-  init() {
-    this.ui.on('login:post', values => this.login(values));
-    this.ui.on('register:post', values => this.register(values));
+		return this.adapter.init();
+	}
 
-    return this.adapter.init();
-  }
+	/**
+	 * Destroy authentication handler
+	 */
+	destroy() {
+		this.ui.destroy();
+	}
 
-  /**
-   * Destroy authentication handler
-   */
-  destroy() {
-    this.ui.destroy();
-  }
+	/**
+	 * Run the shutdown procedure
+	 * @param {boolean} [reload] Reload afterwards
+	 */
+	shutdown(reload) {
+		try {
+			this.core.destroy();
+		} catch (e) {
+			logger.warn("Exception on destruction", e);
+		}
 
-  /**
-   * Run the shutdown procedure
-   * @param {boolean} [reload] Reload afterwards
-   */
-  shutdown(reload) {
-    try {
-      this.core.destroy();
-    } catch (e) {
-      logger.warn('Exception on destruction', e);
-    }
+		this.core.emit("meeseOS/core:logged-out");
 
-    this.core.emit('meeseOS/core:logged-out');
+		if (reload) {
+			setTimeout(() => {
+				window.location.reload();
+				// FIXME Reload, not refresh
+				// this.core.boot();
+			}, 1);
+		}
+	}
 
-    if (reload) {
-      setTimeout(() => {
-        window.location.reload();
-        // FIXME Reload, not refresh
-        // this.core.boot();
-      }, 1);
-    }
-  }
+	/**
+	 * Shows Login UI
+	 * @param {AuthCallback} cb Authentication callback
+	 * @return {Promise<boolean>}
+	 */
+	show(cb) {
+		const login = this.core.config("auth.login", {});
+		const autologin = login.username && login.password;
+		const settings = this.core.config("auth.cookie");
 
-  /**
-   * Shows Login UI
-   * @param {AuthCallback} cb Authentication callback
-   * @return {Promise<boolean>}
-   */
-  show(cb) {
-    const login = this.core.config('auth.login', {});
-    const autologin = login.username && login.password;
-    const settings = this.core.config('auth.cookie');
+		this.callback = cb;
+		this.ui.init(autologin);
 
-    this.callback = cb;
-    this.ui.init(autologin);
+		if (autologin) {
+			return this.login(login);
+		} else if (settings.enabled) {
+			const cookie = Cookies.get(settings.name);
+			console.warn(cookie);
+			if (cookie) {
+				return this.login(JSON.parse(cookie));
+			}
+		}
 
-    if (autologin) {
-      return this.login(login);
-    } else if (settings.enabled) {
-      const cookie = Cookies.get(settings.name);
-      console.warn(cookie);
-      if (cookie) {
-        return this.login(JSON.parse(cookie));
-      }
-    }
+		return Promise.resolve(true);
+	}
 
-    return Promise.resolve(true);
-  }
+	/**
+	 * Performs a login
+	 * @param {AuthForm} values Form values as JSON
+	 * @return {Promise<boolean>}
+	 */
+	login(values) {
+		this.ui.emit("login:start");
 
-  /**
-   * Performs a login
-   * @param {AuthForm} values Form values as JSON
-   * @return {Promise<boolean>}
-   */
-  login(values) {
-    this.ui.emit('login:start');
+		return this.adapter
+			.login(values)
+			.then((response) => {
+				if (response) {
+					const settings = this.core.config("auth.cookie");
+					if (settings.enabled) {
+						Cookies.set(settings.name, JSON.stringify(values), {
+							expires: settings.expires,
+							sameSite: "strict",
+						});
+					} else {
+						Cookies.remove(settings.name);
+					}
 
-    return this.adapter
-      .login(values)
-      .then(response => {
-        if (response) {
-          const settings = this.core.config('auth.cookie');
-          if (settings.enabled) {
-            Cookies.set(settings.name, JSON.stringify(values), {
-              expires: settings.expires,
-              sameSite: 'strict'
-            });
-          } else {
-            Cookies.remove(settings.name);
-          }
+					this.ui.destroy();
+					this.callback(response);
 
-          this.ui.destroy();
-          this.callback(response);
+					this.core.emit("meeseOS/core:logged-in");
+					this.ui.emit("login:stop", response);
 
-          this.core.emit('meeseOS/core:logged-in');
-          this.ui.emit('login:stop', response);
+					return true;
+				}
 
-          return true;
-        }
+				return false;
+			})
+			.catch((e) => {
+				if (this.core.config("development")) {
+					logger.warn("Exception on login", e);
+				}
 
-        return false;
-      })
-      .catch(e => {
-        if (this.core.config('development')) {
-          logger.warn('Exception on login', e);
-        }
+				this.ui.emit("login:error", "Login failed");
+				this.ui.emit("login:stop");
 
-        this.ui.emit('login:error', 'Login failed');
-        this.ui.emit('login:stop');
+				return false;
+			});
+	}
 
-        return false;
-      });
-  }
+	/**
+	 * Performs a logout
+	 * @param {boolean} [reload=true] Reload client afterwards
+	 * @return {Promise<boolean>}
+	 */
+	logout(reload = true) {
+		return this.adapter.logout(reload).then((response) => {
+			if (!response) {
+				return false;
+			}
 
-  /**
-   * Performs a logout
-   * @param {boolean} [reload=true] Reload client afterwards
-   * @return {Promise<boolean>}
-   */
-  logout(reload = true) {
-    return this.adapter.logout(reload)
-      .then(response => {
-        if (!response) {
-          return false;
-        }
+			const settings = this.core.config("auth.cookie");
+			Cookies.remove(settings.name);
 
-        const settings = this.core.config('auth.cookie');
-        Cookies.remove(settings.name);
+			this.shutdown(reload);
 
-        this.shutdown(reload);
+			return true;
+		});
+	}
 
-        return true;
-      });
-  }
+	/**
+	 * Performs a register call
+	 * @param {AuthForm} values Form values as JSON
+	 * @return {Promise<*>}
+	 */
+	register(values) {
+		this.ui.emit("register:start");
 
-  /**
-   * Performs a register call
-   * @param {AuthForm} values Form values as JSON
-   * @return {Promise<*>}
-   */
-  register(values) {
-    this.ui.emit('register:start');
+		return this.adapter
+			.register(values)
+			.then((response) => {
+				if (response) {
+					this.ui.emit("register:stop", response);
 
-    return this.adapter
-      .register(values)
-      .then(response => {
-        if (response) {
-          this.ui.emit('register:stop', response);
+					return response;
+				}
 
-          return response;
-        }
+				return false;
+			})
+			.catch((e) => {
+				if (this.core.config("development")) {
+					logger.warn("Exception on registration", e);
+				}
 
-        return false;
-      })
-      .catch(e => {
-        if (this.core.config('development')) {
-          logger.warn('Exception on registration', e);
-        }
+				this.ui.emit("register:error", "Registration failed");
+				this.ui.emit("register:stop");
 
-        this.ui.emit('register:error', 'Registration failed');
-        this.ui.emit('register:stop');
-
-        return false;
-      });
-  }
+				return false;
+			});
+	}
 }

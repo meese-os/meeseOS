@@ -6,8 +6,5 @@
   "title": "Xterm",
   "description": "Xterm remote shell",
   "server": "server.js",
-  "files": [
-    "main.js",
-    "main.css"
-  ]
+  "files": ["main.js", "main.css"]
 }

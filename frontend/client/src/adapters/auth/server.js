@@ -34,16 +34,21 @@
  * @param {object} [options] Adapter options
  */
 const serverAuth = (core, options) => {
-  const request = (endpoint, params = {}) => core.request(endpoint, {
-    method: 'POST',
-    body: JSON.stringify(params)
-  }, 'json');
+	const request = (endpoint, params = {}) =>
+		core.request(
+			endpoint,
+			{
+				method: "POST",
+				body: JSON.stringify(params),
+			},
+			"json"
+		);
 
-  return {
-    register: (values) => request('/register', values),
-    login: (values) => request('/login', values),
-    logout: () =>  request('/logout')
-  };
+	return {
+		register: (values) => request("/register", values),
+		login: (values) => request("/login", values),
+		logout: () => request("/logout"),
+	};
 };
 
 export default serverAuth;

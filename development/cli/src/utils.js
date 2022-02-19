@@ -28,103 +28,118 @@
  * @licence Simplified BSD License
  */
 
-const fs = require('fs-extra');
-const globby = require('globby');
-const path = require('path');
-const {spawn} = require('child_process');
-const commander = require('commander');
-const {createPath} = require('../src/createPath.js');
+const fs = require("fs-extra");
+const globby = require("globby");
+const path = require("path");
+const { spawn } = require("child_process");
+const commander = require("commander");
+const { createPath } = require("../src/createPath.js");
 
 const npmPackages = async (root) => {
-  const globs = await globby(root.replace(/\\/g, '/') + '/**/package.json', {deep: 3});
-  const metafilename = dir => path.resolve(dir, 'metadata.json');
+	const globs = await globby(root.replace(/\\/g, "/") + "/**/package.json", {
+		deep: 3,
+	});
+	const metafilename = (dir) => path.resolve(dir, "metadata.json");
 
-  const promises = globs.map(filename => fs.readJson(filename)
-    .then(json => ({filename: path.dirname(filename), json})));
+	const promises = globs.map((filename) =>
+		fs
+			.readJson(filename)
+			.then((json) => ({ filename: path.dirname(filename), json }))
+	);
 
-  const results = await Promise.all(promises);
+	const results = await Promise.all(promises);
 
-  const packages = results.filter(
-    ({json}) => !!json.meeseOS && json.meeseOS.type === 'package'
-  );
+	const packages = results.filter(
+		({ json }) => !!json.meeseOS && json.meeseOS.type === "package"
+	);
 
-  const list = await Promise.all(packages.map(
-    ({filename, json}) => fs.readJson(metafilename(filename))
-      .then(meta => ({meta, filename, json}))
-      .catch(error => console.warn(error))
-  ));
+	const list = await Promise.all(
+		packages.map(({ filename, json }) =>
+			fs
+				.readJson(metafilename(filename))
+				.then((meta) => ({ meta, filename, json }))
+				.catch((error) => console.warn(error))
+		)
+	);
 
-  return list.filter(res => !!res);
+	return list.filter((res) => !!res);
 };
 
-const spawnAsync = (cmd, args, options) => new Promise((resolve, reject) => {
-  const child = spawn(cmd, args, Object.assign({}, {
-    stdio: ['pipe', process.stdout, process.stderr]
-  }, options || {}));
-  child.on('close', code => code ? reject(code) : resolve(true));
-});
+const spawnAsync = (cmd, args, options) =>
+	new Promise((resolve, reject) => {
+		const child = spawn(
+			cmd,
+			args,
+			Object.assign(
+				{},
+				{
+					stdio: ["pipe", process.stdout, process.stderr],
+				},
+				options || {}
+			)
+		);
+		child.on("close", (code) => (code ? reject(code) : resolve(true)));
+	});
 
 const loadTasks = async (defaults, includes, options) => {
-  const tasks = {...defaults};
-  const promises = includes.map(fn => fn(options));
-  const results = await Promise.all(promises);
+	const tasks = { ...defaults };
+	const promises = includes.map((fn) => fn(options));
+	const results = await Promise.all(promises);
 
-  return results.reduce((list, iter) => {
-    return {...list, ...iter};
-  }, tasks);
+	return results.reduce((list, iter) => {
+		return { ...list, ...iter };
+	}, tasks);
 };
 
-const createOptions = options => ({
-  production: !!(process.env.NODE_ENV || 'development').match(/^prod/),
-  cli: createPath(options.root, 'src/cli'),
-  npm: createPath(options.root, 'package.json'),
-  packages: createPath(options.root, 'packages.json'),
-  config: {
-    tasks: [],
-    discover: [],
-    disabled: []
-  },
-  dist: () => {
-    const root = commander.dist
-      ? createPath(commander.dist)
-      : createPath(options.root, 'dist');
+const createOptions = (options) => ({
+	production: !!(process.env.NODE_ENV || "development").match(/^prod/),
+	cli: createPath(options.root, "src/cli"),
+	npm: createPath(options.root, "package.json"),
+	packages: createPath(options.root, "packages.json"),
+	config: {
+		tasks: [],
+		discover: [],
+		disabled: [],
+	},
+	dist: () => {
+		const root = commander.dist
+			? createPath(commander.dist)
+			: createPath(options.root, "dist");
 
-    return {
-      root,
-      themes: createPath(root, 'themes'),
-      sounds: createPath(root, 'sounds'),
-      icons: createPath(root, 'icons'),
-      packages: createPath(root, 'apps'),
-      metadata: createPath(root, 'metadata.json')
-    };
-  },
-  ...options
+		return {
+			root,
+			themes: createPath(root, "themes"),
+			sounds: createPath(root, "sounds"),
+			icons: createPath(root, "icons"),
+			packages: createPath(root, "apps"),
+			metadata: createPath(root, "metadata.json"),
+		};
+	},
+	...options,
 });
 
 const resolveOptions = (options, include) => {
-  const newOptions = {...options};
+	const newOptions = { ...options };
 
-  const config = {
-    discover: [
-      createPath(newOptions.root, 'node_modules')
-    ],
-    ...newOptions.config,
-    ...include
-  };
+	const config = {
+		discover: [createPath(newOptions.root, "node_modules")],
+		...newOptions.config,
+		...include,
+	};
 
-  newOptions.config = config;
-  newOptions.config.discover = [
-    createPath(newOptions.root, 'node_modules'),
-    ...newOptions.config.discover
-  ].map(d => createPath(d));
+	newOptions.config = config;
+	newOptions.config.discover = [
+		createPath(newOptions.root, "node_modules"),
+		...newOptions.config.discover,
+	].map((d) => createPath(d));
 
-  return newOptions;
+	return newOptions;
 };
 
 module.exports = {
-  resolveOptions,
-  createOptions,
-  npmPackages,
-  spawnAsync,
-  loadTasks
+	resolveOptions,
+	createOptions,
+	npmPackages,
+	spawnAsync,
+	loadTasks,
 };

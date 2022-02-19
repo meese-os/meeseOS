@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import { Element } from "./Element";
 
 /**
  * A styled flexbox container
@@ -37,6 +37,10 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const BoxStyled = (props, children) =>
-  h(Element, Object.assign({}, props, {
-    class: ['meeseOS-gui-box-styled', props.class]
-  }), children);
+	h(
+		Element,
+		Object.assign({}, props, {
+			class: ["meeseOS-gui-box-styled", props.class],
+		}),
+		children
+	);

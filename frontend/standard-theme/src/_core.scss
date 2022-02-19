@@ -29,8 +29,8 @@
  */
 
 .meeseOS-root {
-  font-family: $font-family;
-  color: $font-color;
+	font-family: $font-family;
+	color: $font-color;
 }
 
 //
@@ -38,36 +38,36 @@
 //
 
 ::-webkit-scrollbar {
-  width: 1em;
-  height: 1em;
+	width: 1em;
+	height: 1em;
 }
 
 ::-webkit-scrollbar-button {
-  background: $scrollbar-button-background;
-  color: $scrollbar-button-foreground;
-  width: 1em;
-  height: 1em;
-  display: none;
+	background: $scrollbar-button-background;
+	color: $scrollbar-button-foreground;
+	width: 1em;
+	height: 1em;
+	display: none;
 }
 
 ::-webkit-scrollbar-track {
-  border: $scrollbar-track-border;
-  background: $scrollbar-track-background;
+	border: $scrollbar-track-border;
+	background: $scrollbar-track-background;
 }
 
 ::-webkit-scrollbar-track-piece {
-  background: $scrollbar-track-background;
+	background: $scrollbar-track-background;
 }
 
 ::-webkit-scrollbar-thumb {
-  border: $scrollbar-button-border;
-  background: $scrollbar-button-background;
+	border: $scrollbar-button-border;
+	background: $scrollbar-button-background;
 }
 
 ::-webkit-scrollbar-corner {
-  background: $scrollbar-track-background;
+	background: $scrollbar-track-background;
 }
 
 ::-webkit-resizer {
-  background: $scrollbar-track-background;
+	background: $scrollbar-track-background;
 }

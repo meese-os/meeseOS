@@ -39,33 +39,33 @@
 //
 
 const {
-  Core,
-  CoreServiceProvider,
-  PackageServiceProvider,
-  VFSServiceProvider,
-  AuthServiceProvider,
-  SettingsServiceProvider
-} = require('@aaronmeese.com/server');
+	Core,
+	CoreServiceProvider,
+	PackageServiceProvider,
+	VFSServiceProvider,
+	AuthServiceProvider,
+	SettingsServiceProvider,
+} = require("@aaronmeese.com/server");
 
-const config = require('./config.js');
+const config = require("./config.js");
 const meeseOS = new Core(config, {});
 
-meeseOS.register(CoreServiceProvider, {before: true});
+meeseOS.register(CoreServiceProvider, { before: true });
 meeseOS.register(PackageServiceProvider);
 meeseOS.register(VFSServiceProvider);
 meeseOS.register(AuthServiceProvider);
 meeseOS.register(SettingsServiceProvider);
 
-const shutdown = signal => (error) => {
-  if (error instanceof Error) {
-    console.error(error);
-  }
+const shutdown = (signal) => (error) => {
+	if (error instanceof Error) {
+		console.error(error);
+	}
 
-  meeseOS.destroy(() => process.exit(signal));
+	meeseOS.destroy(() => process.exit(signal));
 };
 
-process.on('SIGTERM', shutdown(0));
-process.on('SIGINT', shutdown(0));
-process.on('exit', shutdown(0));
+process.on("SIGTERM", shutdown(0));
+process.on("SIGINT", shutdown(0));
+process.on("exit", shutdown(0));
 
 meeseOS.boot().catch(shutdown(1));

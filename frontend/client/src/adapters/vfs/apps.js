@@ -34,23 +34,24 @@
  * @param {object} [options] Adapter options
  */
 const adapter = (core) => {
-  const pkgs = core.make('meeseOS/packages');
+	const pkgs = core.make("meeseOS/packages");
 
-  return {
-    readdir: ({path}, options) => {
-      return Promise.resolve(pkgs.getPackages())
-        .then(pkgs => pkgs.map(pkg => ({
-          isDirectory: false,
-          isFile: true,
-          filename: pkg.name,
-          mime: 'meeseOS/application',
-          path: `${path.replace(/(\/+)?$/, '/')}${pkg.name}`,
-          size: 0,
-          stat: {},
-          icon: pkg.icon ? core.url(pkg.icon, {}, pkg) : null
-        })));
-    }
-  };
+	return {
+		readdir: ({ path }, options) => {
+			return Promise.resolve(pkgs.getPackages()).then((pkgs) =>
+				pkgs.map((pkg) => ({
+					isDirectory: false,
+					isFile: true,
+					filename: pkg.name,
+					mime: "meeseOS/application",
+					path: `${path.replace(/(\/+)?$/, "/")}${pkg.name}`,
+					size: 0,
+					stat: {},
+					icon: pkg.icon ? core.url(pkg.icon, {}, pkg) : null,
+				}))
+			);
+		},
+	};
 };
 
 export default adapter;

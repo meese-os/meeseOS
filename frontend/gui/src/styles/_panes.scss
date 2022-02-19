@@ -29,54 +29,54 @@
  */
 
 .meeseOS-gui-panes {
-  height: 100%;
-  overflow: hidden;
-  position: relative;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
 }
 
 .meeseOS-gui-panes-inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
 
-  &.meeseOS-gui-vertical {
-    & > .meeseOS-gui-panes-pane > .meeseOS-gui {
-      width: 100%;
-    }
+	&.meeseOS-gui-vertical {
+		& > .meeseOS-gui-panes-pane > .meeseOS-gui {
+			width: 100%;
+		}
 
-    & > .meeseOS-gui-panes-spacer {
-      height: 100%;
-      width: calc($base-margin / 2);
-      min-width: calc($base-margin / 2);
-      cursor: ew-resize;
-    }
-  }
+		& > .meeseOS-gui-panes-spacer {
+			height: 100%;
+			width: calc($base-margin / 2);
+			min-width: calc($base-margin / 2);
+			cursor: ew-resize;
+		}
+	}
 
-  &.meeseOS-gui-horizontal {
-    & > .meeseOS-gui-panes-pane > .meeseOS-gui {
-      height: 100%;
-    }
+	&.meeseOS-gui-horizontal {
+		& > .meeseOS-gui-panes-pane > .meeseOS-gui {
+			height: 100%;
+		}
 
-    & > .meeseOS-gui-panes-spacer {
-      width: 100%;
-      height: calc($base-margin / 2);
-      min-height: calc($base-margin / 2);
-      cursor: ns-resize;
-    }
-  }
+		& > .meeseOS-gui-panes-spacer {
+			width: 100%;
+			height: calc($base-margin / 2);
+			min-height: calc($base-margin / 2);
+			cursor: ns-resize;
+		}
+	}
 }
 
 .meeseOS-gui-panes-pane {
-  position: relative;
-  margin: calc($base-margin / 2);
-  box-sizing: border-box;
-  overflow: hidden;
-  display: flex;
+	position: relative;
+	margin: calc($base-margin / 2);
+	box-sizing: border-box;
+	overflow: hidden;
+	display: flex;
 
-  &:last-of-type {
-    flex-grow: 1;
-  }
+	&:last-of-type {
+		flex-grow: 1;
+	}
 }

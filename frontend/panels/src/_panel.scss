@@ -29,41 +29,41 @@
  */
 
 .meeseOS-panel {
-  display: flex;
-  min-height: 1em;
-  align-items: center;
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  right: 0;
-  line-height: normal;
+	display: flex;
+	min-height: 1em;
+	align-items: center;
+	box-sizing: border-box;
+	position: absolute;
+	left: 0;
+	right: 0;
+	line-height: normal;
 
-  &[data-ontop=true] {
-    z-index: 16777271;
-  }
+	&[data-ontop="true"] {
+		z-index: 16777271;
+	}
 
-  &[data-position=top] {
-    top: 0;
-  }
+	&[data-position="top"] {
+		top: 0;
+	}
 
-  &[data-position=bottom] {
-    bottom: 0;
-  }
+	&[data-position="bottom"] {
+		bottom: 0;
+	}
 
-  & > .meeseOS-panel-item {
-    min-height: 1em;
-    position: relative;
-    box-sizing: border-box;
-    padding: calc($base-margin / 1.5);
-  }
+	& > .meeseOS-panel-item {
+		min-height: 1em;
+		position: relative;
+		box-sizing: border-box;
+		padding: calc($base-margin / 1.5);
+	}
 
-  .meeseOS-panel-item--icon {
-    display: flex;
-    align-items: center;
+	.meeseOS-panel-item--icon {
+		display: flex;
+		align-items: center;
 
-    > img {
-      height: $base-margin;
-      margin-right: calc($base-margin / 2);
-    }
-  }
+		> img {
+			height: $base-margin;
+			margin-right: calc($base-margin / 2);
+		}
+	}
 }

@@ -33,24 +33,24 @@
 //
 
 .meeseOS-panel {
-  @include panel;
+	@include panel;
 }
 
-.meeseOS-panel-item[data-name=windows] {
-  & > div[data-focused=false] > * {
-    opacity: 0.5;
-  }
+.meeseOS-panel-item[data-name="windows"] {
+	& > div[data-focused="false"] > * {
+		opacity: 0.5;
+	}
 }
 
 .meeseOS-panel-item--clickable {
-  cursor: pointer;
-  transition: all $transition-duration $transition-timing-function;
+	cursor: pointer;
+	transition: all $transition-duration $transition-timing-function;
 
-  &:hover {
-    background-color: $panel-foreground;
-    color: $panel-background;
-    box-shadow: 0 0 $base-margin rgba($panel-foreground, 0.5);
-  }
+	&:hover {
+		background-color: $panel-foreground;
+		color: $panel-background;
+		box-shadow: 0 0 $base-margin rgba($panel-foreground, 0.5);
+	}
 }
 
 //
@@ -58,16 +58,16 @@
 //
 
 .meeseOS-search-input {
-  border: 0 none;
-  background-color: #fff;
+	border: 0 none;
+	background-color: #fff;
 }
 
 .meeseOS-search-result {
-  &:hover,
-  &.meeseOS__active {
-    background-color: #fff;
-    color: #000;
-  }
+	&:hover,
+	&.meeseOS__active {
+		background-color: #fff;
+		color: #000;
+	}
 }
 
 //
@@ -75,18 +75,18 @@
 //
 
 .meeseOS-desktop-iconview {
-  &__entry {
-    $self: &;
+	&__entry {
+		$self: &;
 
-    &--selected {
-      #{ $self }__icon {
-        background: $active-background;
-      }
+		&--selected {
+			#{ $self }__icon {
+				background: $active-background;
+			}
 
-      #{ $self }__label {
-        background: $active-background;
-        color: $active-foreground;
-      }
-    }
-  }
+			#{ $self }__label {
+				background: $active-background;
+				color: $active-foreground;
+			}
+		}
+	}
 }

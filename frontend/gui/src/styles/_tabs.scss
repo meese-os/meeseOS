@@ -29,46 +29,46 @@
  */
 
 .meeseOS-gui-tabs {
-  display: flex;
-  flex: 1 1;
+	display: flex;
+	flex: 1 1;
 }
 
 .meeseOS-gui-tabs-wrapper {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
 }
 
 .meeseOS-gui-tabs-header {
-  display: flex;
-  flex-shrink: 0;
+	display: flex;
+	flex-shrink: 0;
 
-  & > div {
-    padding: calc($base-margin / 2);
-    cursor: pointer;
-    position: relative;
-    z-index: 2;
-    white-space: nowrap;
-  }
+	& > div {
+		padding: calc($base-margin / 2);
+		cursor: pointer;
+		position: relative;
+		z-index: 2;
+		white-space: nowrap;
+	}
 }
 
 .meeseOS-gui-tabs-panes {
-  position: relative;
-  z-index: 1;
-  flex-grow: 1;
-  display: flex;
-  overflow: hidden;
+	position: relative;
+	z-index: 1;
+	flex-grow: 1;
+	display: flex;
+	overflow: hidden;
 
-  & > div {
-    display: none;
-    padding: calc($base-margin / 2);
-    width: 100%;
-    overflow: auto;
+	& > div {
+		display: none;
+		padding: calc($base-margin / 2);
+		width: 100%;
+		overflow: auto;
 
-    &.meeseOS__active {
-      display: flex;
-      flex-grow: 1;
-      flex-shrink: 1;
-    }
-  }
+		&.meeseOS__active {
+			display: flex;
+			flex-grow: 1;
+			flex-shrink: 1;
+		}
+	}
 }

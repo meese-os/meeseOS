@@ -7,25 +7,25 @@ const minimize = mode === "production";
 const plugins = [];
 
 if (mode === "production") {
-	plugins.push(new CssMinimizerPlugin({
-		minimizerOptions: {
-			preset: [ "advanced" ],
-		},
-	}));
+	plugins.push(
+		new CssMinimizerPlugin({
+			minimizerOptions: {
+				preset: ["advanced"],
+			},
+		})
+	);
 }
 
 module.exports = {
 	mode,
 	devtool: "source-map",
-	entry: [
-		path.resolve(__dirname, "index.js"),
-	],
+	entry: [path.resolve(__dirname, "index.js")],
 	output: {
 		library: "meeseOSDialogs",
 		libraryTarget: "umd",
 		umdNamedDefine: true,
 		sourceMapFilename: "[file].map",
-		filename: "[name].js"
+		filename: "[name].js",
 	},
 	optimization: {
 		minimize,
@@ -33,9 +33,9 @@ module.exports = {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
-			chunkFilename: "[id].css"
+			chunkFilename: "[id].css",
 		}),
-		...plugins
+		...plugins,
 	],
 	module: {
 		rules: [
@@ -46,24 +46,24 @@ module.exports = {
 					{
 						loader: "css-loader",
 						options: {
-							sourceMap: true
-						}
+							sourceMap: true,
+						},
 					},
 					{
 						loader: "sass-loader",
 						options: {
-							sourceMap: true
-						}
-					}
-				]
+							sourceMap: true,
+						},
+					},
+				],
 			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules\/(?!@meeseOS)/,
 				use: {
-					loader: "babel-loader"
-				}
-			}
-		]
-	}
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
 };

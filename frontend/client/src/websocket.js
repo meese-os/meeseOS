@@ -28,10 +28,10 @@
  * @license Simplified BSD License
  */
 
-import {EventEmitter} from '@aaronmeese.com/event-emitter';
-import logger from './logger';
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import logger from "./logger";
 
-const eventNames = ['open', 'close', 'message', 'error'];
+const eventNames = ["open", "close", "message", "error"];
 
 /**
  * Websocket options
@@ -48,174 +48,172 @@ const eventNames = ['open', 'close', 'message', 'error'];
  * Since this class implements the EventHandler, use the `.on('event')` pattern instead of `.onevent`.
  */
 export default class Websocket extends EventEmitter {
+	/**
+	 * Create a new Websocket
+	 * @param {string} name Instance name
+	 * @param {string} uri Connection URI
+	 * @param {WebsocketOptions} [options={}] Websocket options
+	 */
+	constructor(name, uri, options = {}) {
+		logger.debug("Websocket::constructor()", name, uri);
 
-  /**
-   * Create a new Websocket
-   * @param {string} name Instance name
-   * @param {string} uri Connection URI
-   * @param {WebsocketOptions} [options={}] Websocket options
-   */
-  constructor(name, uri, options = {}) {
-    logger.debug('Websocket::constructor()', name, uri);
+		super("Websocket@" + name);
 
-    super('Websocket@' + name);
+		/**
+		 * Socket URI
+		 * @type {string}
+		 * @readonly
+		 */
+		this.uri = uri;
 
-    /**
-     * Socket URI
-     * @type {string}
-     * @readonly
-     */
-    this.uri = uri;
+		/**
+		 * If socket is closed
+		 * @type {boolean}
+		 */
+		this.closed = false;
 
-    /**
-     * If socket is closed
-     * @type {boolean}
-     */
-    this.closed = false;
+		/**
+		 * If socket is connected
+		 * @type {boolean}
+		 */
+		this.connected = false;
 
-    /**
-     * If socket is connected
-     * @type {boolean}
-     */
-    this.connected = false;
+		/**
+		 * If socket is connecting
+		 * @type {boolean}
+		 */
+		this.connecting = false;
 
-    /**
-     * If socket is connecting
-     * @type {boolean}
-     */
-    this.connecting = false;
+		/**
+		 * If socket is reconnecting
+		 * @type {boolean}
+		 */
+		this.reconnecting = false;
 
-    /**
-     * If socket is reconnecting
-     * @type {boolean}
-     */
-    this.reconnecting = false;
+		/**
+		 * If socket failed to connect
+		 * @type {boolean}
+		 */
+		this.connectfailed = false;
 
-    /**
-     * If socket failed to connect
-     * @type {boolean}
-     */
-    this.connectfailed = false;
+		/**
+		 * Options
+		 * @type {WebsocketOptions}
+		 * @readonly
+		 */
+		this.options = {
+			reconnect: true,
+			interval: 1000,
+			open: true,
+			...options,
+		};
 
-    /**
-     * Options
-     * @type {WebsocketOptions}
-     * @readonly
-     */
-    this.options = {
-      reconnect: true,
-      interval: 1000,
-      open: true,
-      ...options
-    };
+		/**
+		 * The Websocket
+		 * @type {WebSocket}
+		 */
+		this.connection = null;
 
-    /**
-     * The Websocket
-     * @type {WebSocket}
-     */
-    this.connection = null;
+		this._attachEvents();
 
-    this._attachEvents();
+		if (this.options.open) {
+			this.open();
+		}
+	}
 
-    if (this.options.open) {
-      this.open();
-    }
-  }
+	/**
+	 * Destroys the current connection
+	 * @return {void}
+	 * @private
+	 */
+	_destroyConnection() {
+		if (!this.connection) {
+			return;
+		}
 
-  /**
-   * Destroys the current connection
-   * @return {void}
-   * @private
-   */
-  _destroyConnection() {
-    if (!this.connection) {
-      return;
-    }
+		eventNames.forEach((name) => {
+			this.connection[`on${name}`] = () => {};
+		});
 
-    eventNames.forEach(name => {
-      this.connection[`on${name}`] = () => {};
-    });
+		this.reconnecting = clearInterval(this.reconnecting);
+		this.connection = null;
+	}
 
-    this.reconnecting = clearInterval(this.reconnecting);
-    this.connection = null;
-  }
+	/**
+	 * Attaches internal events
+	 * @private
+	 */
+	_attachEvents() {
+		this.on("open", (ev) => {
+			const reconnected = !!this.reconnecting;
 
-  /**
-   * Attaches internal events
-   * @private
-   */
-  _attachEvents() {
-    this.on('open', ev => {
-      const reconnected = !!this.reconnecting;
+			this.connected = true;
+			this.reconnecting = false;
+			this.connectfailed = false;
+			this.reconnecting = clearInterval(this.reconnecting);
 
-      this.connected = true;
-      this.reconnecting = false;
-      this.connectfailed = false;
-      this.reconnecting = clearInterval(this.reconnecting);
+			this.emit("connected", ev, reconnected);
+		});
 
-      this.emit('connected', ev, reconnected);
-    });
+		this.on("close", (ev) => {
+			if (!this.connected && !this.connectfailed) {
+				this.emit("failed", ev);
 
-    this.on('close', ev => {
-      if (!this.connected && !this.connectfailed) {
-        this.emit('failed', ev);
+				this.connectfailed = true;
+			}
 
-        this.connectfailed = true;
-      }
+			clearInterval(this.reconnecting);
 
-      clearInterval(this.reconnecting);
+			this._destroyConnection();
 
-      this._destroyConnection();
+			this.connected = false;
 
-      this.connected = false;
+			if (this.options.reconnect) {
+				this.reconnecting = setInterval(() => {
+					if (!this.closed) {
+						this.open();
+					}
+				}, this.options.interval);
+			}
 
-      if (this.options.reconnect) {
-        this.reconnecting = setInterval(() => {
-          if (!this.closed) {
-            this.open();
-          }
-        }, this.options.interval);
-      }
+			this.emit("disconnected", ev, this.closed);
+		});
+	}
 
-      this.emit('disconnected', ev, this.closed);
-    });
-  }
+	/**
+	 * Opens the connection
+	 * @param {boolean} [reconnect=false] Force reconnection
+	 */
+	open(reconnect = false) {
+		if (this.connection && !reconnect) {
+			return;
+		}
 
-  /**
-   * Opens the connection
-   * @param {boolean} [reconnect=false] Force reconnection
-   */
-  open(reconnect = false) {
-    if (this.connection && !reconnect) {
-      return;
-    }
+		this._destroyConnection();
 
-    this._destroyConnection();
+		this.reconnecting = clearInterval(this.reconnecting);
+		this.connection = new WebSocket(this.uri);
+		this.closed = false;
 
-    this.reconnecting = clearInterval(this.reconnecting);
-    this.connection = new WebSocket(this.uri);
-    this.closed = false;
+		eventNames.forEach((name) => {
+			this.connection[`on${name}`] = (...args) => this.emit(name, ...args);
+		});
+	}
 
-    eventNames.forEach(name => {
-      this.connection[`on${name}`] = (...args) => this.emit(name, ...args);
-    });
-  }
-
-  /**
-   * Wrapper for sending data
-   */
-  send(...args) {
+	/**
+	 * Wrapper for sending data
+	 */
+	send(...args) {
 		// TODO: Fix problem here after closing terminal window
-    return this.connection.send(...args);
-  }
+		return this.connection.send(...args);
+	}
 
-  /**
-   * Wrapper for closing
-   */
-  close(...args) {
-    this.closed = true;
+	/**
+	 * Wrapper for closing
+	 */
+	close(...args) {
+		this.closed = true;
 
-    return this.connection.close(...args);
-  }
-
+		return this.connection.close(...args);
+	}
 }

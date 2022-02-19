@@ -28,79 +28,95 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import {SelectField, ToggleField, Box} from '@aaronmeese.com/gui';
-import Dialog from '../dialog';
+import { h, app } from "hyperapp";
+import { SelectField, ToggleField, Box } from "@aaronmeese.com/gui";
+import Dialog from "../dialog";
 
 /**
  * Default OS.js DefaultApplication Dialog
  */
 export default class DefaultApplicationDialog extends Dialog {
+	/**
+	 * Constructor
+	 * @param {Core} core OS.js Core reference
+	 * @param {Object} args Arguments given from service creation
+	 * @param {String} [args.title] Dialog title
+	 * @param {String} [args.message] Dialog message
+	 * @param {*} [args.checked] Default checked state
+	 * @param {*} [args.value] Default value
+	 * @param {Map<String,*>} [args.choices] DefaultApplication map
+	 * @param {Function} callback The callback function
+	 */
+	constructor(core, args, callback) {
+		args = Object.assign(
+			{},
+			{
+				title: "DefaultApplication",
+				message: "",
+				choices: {},
+			},
+			args
+		);
 
-  /**
-   * Constructor
-   * @param {Core} core OS.js Core reference
-   * @param {Object} args Arguments given from service creation
-   * @param {String} [args.title] Dialog title
-   * @param {String} [args.message] Dialog message
-   * @param {*} [args.checked] Default checked state
-   * @param {*} [args.value] Default value
-   * @param {Map<String,*>} [args.choices] DefaultApplication map
-   * @param {Function} callback The callback function
-   */
-  constructor(core, args, callback) {
-    args = Object.assign({}, {
-      title: 'DefaultApplication',
-      message: '',
-      choices: {}
-    }, args);
+		super(
+			core,
+			args,
+			{
+				className: "alert",
+				window: {
+					title: args.title,
+					dimension: {
+						width: 400,
+						height: 200,
+					},
+				},
+				buttons: ["ok", "close"],
+			},
+			callback
+		);
 
-    super(core, args, {
-      className: 'alert',
-      window: {
-        title: args.title,
-        dimension: {
-          width: 400,
-          height: 200
-        }
-      },
-      buttons: ['ok', 'close']
-    }, callback);
+		this.value = {
+			value: args.value || Object.keys(this.args.choices)[0],
+			checked: args.checked === true,
+		};
+	}
 
-    this.value = {
-      value: args.value || Object.keys(this.args.choices)[0],
-      checked: args.checked === true
-    };
+	render(options) {
+		const setLocalState = (oldState, newState) => {
+			const state = Object.assign({}, oldState, newState);
+			this.value = state;
+			return state;
+		};
 
-  }
-
-  render(options) {
-    const setLocalState = (oldState, newState) => {
-      const state = Object.assign({}, oldState, newState);
-      this.value = state;
-      return state;
-    };
-
-    super.render(options, ($content) => {
-      app(this.value, {
-        setValue: value => state => setLocalState(state, {value}),
-        setChecked: checked => state => setLocalState(state, {checked})
-      }, (state, actions) => this.createView([
-        h(Box, {grow: 1}, [
-          h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message)),
-          h(SelectField, {
-            choices: this.args.choices,
-            value: state.value,
-            onchange: (ev, val) => actions.setValue(val)
-          }),
-          h(ToggleField, {
-            label: this.args.label || 'Use as default',
-            checked: state.checked,
-            onchange: (ev, val) => actions.setChecked(val)
-          })
-        ])
-      ]), $content);
-    });
-  }
-
+		super.render(options, ($content) => {
+			app(
+				this.value,
+				{
+					setValue: (value) => (state) => setLocalState(state, { value }),
+					setChecked: (checked) => (state) => setLocalState(state, { checked }),
+				},
+				(state, actions) =>
+					this.createView([
+						h(Box, { grow: 1 }, [
+							h(
+								"div",
+								{ class: "meeseOS-dialog-message" },
+								String(this.args.message)
+							),
+							h(SelectField, {
+								choices: this.args.choices,
+								value: state.value,
+								onchange: (ev, val) => actions.setValue(val),
+							}),
+							h(ToggleField, {
+								label: this.args.label || "Use as default",
+								checked: state.checked,
+								onchange: (ev, val) => actions.setChecked(val),
+							}),
+						]),
+					]),
+				$content
+			);
+		});
+	}
 }

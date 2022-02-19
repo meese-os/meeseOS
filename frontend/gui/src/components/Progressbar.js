@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import { Element } from "./Element";
 
 /**
  * A progress bar
@@ -39,30 +39,32 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Progressbar = (props, children = []) => {
-  let value = typeof props.value === 'number'
-    ? Math.min(100, Math.max(0, Math.abs(props.value)))
-    : 0;
+	const value =
+		typeof props.value === "number"
+			? Math.min(100, Math.max(0, Math.abs(props.value)))
+			: 0;
 
-  const c = h('div', {class: 'meeseOS-gui-progressbar-wrapper'}, [
-    h('div', {
-      className: 'meeseOS-gui-progressbar-value',
-      style: {
-        width: String(value) + '%'
-      }
-    }),
-    h('div', {
-      className: 'meeseOS-gui-progressbar-label',
-    }, [
-      h('span', {}, [
-        String(value) + '%'
-      ])
-    ])
-  ]);
+	const c = h("div", { class: "meeseOS-gui-progressbar-wrapper" }, [
+		h("div", {
+			className: "meeseOS-gui-progressbar-value",
+			style: {
+				width: String(value) + "%",
+			},
+		}),
+		h(
+			"div",
+			{
+				className: "meeseOS-gui-progressbar-label",
+			},
+			[h("span", {}, [String(value) + "%"])]
+		),
+	]);
 
-  return h(Element, Object.assign({}, props.box || {}, {
-    class: ['meeseOS-gui-progressbar', props.class]
-  }), [
-    c,
-    ...children
-  ]);
+	return h(
+		Element,
+		Object.assign({}, props.box || {}, {
+			class: ["meeseOS-gui-progressbar", props.class],
+		}),
+		[c, ...children]
+	);
 };

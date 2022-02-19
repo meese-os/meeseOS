@@ -32,9 +32,8 @@
  * Gets an array of event names based in input,
  * be it array or a comma separated string.
  */
-const getEventNames = name => (name instanceof Array)
-  ? name
-  : String(name).replace(/\s+/g, '').split(',');
+const getEventNames = (name) =>
+	name instanceof Array ? name : String(name).replace(/\s+/g, "").split(",");
 
 /**
  * Event Emitter
@@ -42,135 +41,133 @@ const getEventNames = name => (name instanceof Array)
  * @desc A standards compatible event handler (observer) with some sugar.
  */
 export class EventEmitter {
+	/**
+	 * Create Event Handler
+	 * @param {string} [name] A name for logging
+	 */
+	constructor(name = "undefined") {
+		/**
+		 * The name of the handler
+		 * @type {string}
+		 */
+		this.name = name;
 
-  /**
-   * Create Event Handler
-   * @param {string} [name] A name for logging
-   */
-  constructor(name = 'undefined') {
-    /**
-     * The name of the handler
-     * @type {string}
-     */
-    this.name = name;
+		/**
+		 * Registered events
+		 * @type {object}
+		 */
+		this.events = {};
+	}
 
-    /**
-     * Registered events
-     * @type {object}
-     */
-    this.events = {};
-  }
+	/**
+	 * Destroys all events
+	 */
+	destroy() {
+		this.events = {};
+	}
 
-  /**
-   * Destroys all events
-   */
-  destroy() {
-    this.events = {};
-  }
+	/**
+	 * Add an event handler
+	 *
+	 * You can supply an array of event names or a comma separated list with a string
+	 *
+	 * @param {string|string[]} name Event name
+	 * @param {Function} callback Callback function
+	 * @param {object} [options] Options
+	 * @param {boolean} [options.persist] This even handler cannot be removed unless forced
+	 * @param {boolean} [options.once] Fire only once
+	 * @return {EventEmitter} Returns current instance
+	 */
+	on(name, callback, options = {}) {
+		options = options || {};
 
-  /**
-   * Add an event handler
-   *
-   * You can supply an array of event names or a comma separated list with a string
-   *
-   * @param {string|string[]} name Event name
-   * @param {Function} callback Callback function
-   * @param {object} [options] Options
-   * @param {boolean} [options.persist] This even handler cannot be removed unless forced
-   * @param {boolean} [options.once] Fire only once
-   * @return {EventEmitter} Returns current instance
-   */
-  on(name, callback, options = {}) {
-    options = options || {};
+		if (typeof callback !== "function") {
+			throw new TypeError("Invalid callback");
+		}
 
-    if (typeof callback !== 'function') {
-      throw new TypeError('Invalid callback');
-    }
+		getEventNames(name).forEach((n) => {
+			if (!this.events[n]) {
+				this.events[n] = [];
+			}
 
-    getEventNames(name).forEach(n => {
-      if (!this.events[n]) {
-        this.events[n] = [];
-      }
+			this.events[n].push({ callback, options });
+		});
 
-      this.events[n].push({callback, options});
-    });
+		return this;
+	}
 
-    return this;
-  }
+	/**
+	 * Adds an event handler that only fires once
+	 * @return {EventEmitter} Returns current instance
+	 */
+	once(name, callback) {
+		return this.on(name, callback, { once: true });
+	}
 
-  /**
-   * Adds an event handler that only fires once
-   * @return {EventEmitter} Returns current instance
-   */
-  once(name, callback) {
-    return this.on(name, callback, {once: true});
-  }
+	/**
+	 * Removes an event handler
+	 *
+	 * If no callback is provided, all events bound to given name will be removed.
+	 *
+	 * You can supply an array of event names or a comma separated list with a string
+	 *
+	 * @param {string|string[]} name Event name
+	 * @param {Function} [callback] Callback function
+	 * @param {boolean} [force=false] Forces removal even if set to persis
+	 * @return {EventEmitter} Returns current instance
+	 */
+	off(name, callback = null, force = false) {
+		getEventNames(name)
+			.filter((n) => !!this.events[n])
+			.forEach((n) => {
+				if (callback) {
+					let i = this.events[n].length;
+					while (i--) {
+						const ev = this.events[n][i];
+						const removable = !ev.options.persist || force;
+						if (removable && ev.callback === callback) {
+							this.events[n].splice(i, 1);
+						}
+					}
+				} else {
+					this.events[n] = force
+						? []
+						: this.events[n].filter(({ options }) => options.persist === true);
+				}
+			});
 
-  /**
-   * Removes an event handler
-   *
-   * If no callback is provided, all events bound to given name will be removed.
-   *
-   * You can supply an array of event names or a comma separated list with a string
-   *
-   * @param {string|string[]} name Event name
-   * @param {Function} [callback] Callback function
-   * @param {boolean} [force=false] Forces removal even if set to persis
-   * @return {EventEmitter} Returns current instance
-   */
-  off(name, callback = null, force = false) {
-    getEventNames(name)
-      .filter(n => !!this.events[n])
-      .forEach(n => {
-        if (callback) {
-          let i = this.events[n].length;
-          while (i--) {
-            const ev = this.events[n][i];
-            const removable = !ev.options.persist || force;
-            if (removable && ev.callback === callback) {
-              this.events[n].splice(i, 1);
-            }
-          }
-        } else {
-          this.events[n] = force
-            ? []
-            : this.events[n].filter(({options}) => options.persist === true);
-        }
-      });
+		return this;
+	}
 
-    return this;
-  }
+	/**
+	 * Emits an event
+	 *
+	 * You can supply an array of event names or a comma separated list with a string
+	 *
+	 * @param {string|string[]} name Event name
+	 * @param {*} [args] Arguments
+	 * @return {EventEmitter} Returns current instance
+	 */
+	emit(name, ...args) {
+		getEventNames(name).forEach((n) => {
+			if (this.events[n]) {
+				let i = this.events[n].length;
+				while (i--) {
+					const { options, callback } = this.events[n][i];
 
-  /**
-   * Emits an event
-   *
-   * You can supply an array of event names or a comma separated list with a string
-   *
-   * @param {string|string[]} name Event name
-   * @param {*} [args] Arguments
-   * @return {EventEmitter} Returns current instance
-   */
-  emit(name, ...args) {
-    getEventNames(name).forEach(n => {
-      if (this.events[n]) {
-        let i = this.events[n].length;
-        while (i--) {
-          const {options, callback} = this.events[n][i];
+					try {
+						callback(...args);
+					} catch (e) {
+						console.warn(e);
+					}
 
-          try {
-            callback(...args);
-          } catch (e) {
-            console.warn(e);
-          }
+					if (options && options.once) {
+						this.events[n].splice(i, 1);
+					}
+				}
+			}
+		});
 
-          if (options && options.once) {
-            this.events[n].splice(i, 1);
-          }
-        }
-      }
-    });
-
-    return this;
-  }
-
+		return this;
+	}
 }

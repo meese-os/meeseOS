@@ -27,135 +27,137 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import Window from './window';
-import createUI from './adapters/ui/search';
-import logger from './logger';
+import Window from "./window";
+import createUI from "./adapters/ui/search";
+import logger from "./logger";
 
 /**
  * Search Service
  */
 export default class Search {
-  /**
-   * Create Search instance
-   * @param {Core} core Core reference
-   */
-  constructor(core) {
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
+	/**
+	 * Create Search instance
+	 * @param {Core} core Core reference
+	 */
+	constructor(core) {
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
 
-    /**
-     * Wired actions
-     * @type {Object}
-     */
-    this.ui = null;
+		/**
+		 * Wired actions
+		 * @type {Object}
+		 */
+		this.ui = null;
 
-    /**
-     * Last focused window
-     * @type {Window}
-     */
-    this.focusLastWindow = null;
+		/**
+		 * Last focused window
+		 * @type {Window}
+		 */
+		this.focusLastWindow = null;
 
-    /**
-     * Search root DOM element
-     * @type {Element}
-     * @readonly
-     */
-    this.$element = document.createElement('div');
-  }
+		/**
+		 * Search root DOM element
+		 * @type {Element}
+		 * @readonly
+		 */
+		this.$element = document.createElement("div");
+	}
 
-  /**
-   * Destroy Search instance
-   */
-  destroy() {
-    if (this.ui) {
-      this.ui.destroy();
-    }
-  }
+	/**
+	 * Destroy Search instance
+	 */
+	destroy() {
+		if (this.ui) {
+			this.ui.destroy();
+		}
+	}
 
-  /**
-   * Initializes Search Service
-   */
-  init() {
-    const {icon} = this.core.make('meeseOS/theme');
+	/**
+	 * Initializes Search Service
+	 */
+	init() {
+		const { icon } = this.core.make("meeseOS/theme");
 
-    this.$element.className = 'meeseOS-search';
-    this.core.$root.appendChild(this.$element);
+		this.$element.className = "meeseOS-search";
+		this.core.$root.appendChild(this.$element);
 
-    this.core.make('meeseOS/tray').create({
-      title: "Search Filesystem (F3)",
-      icon: icon('system-search.png')
-    }, () => this.show());
+		this.core.make("meeseOS/tray").create(
+			{
+				title: "Search Filesystem (F3)",
+				icon: icon("system-search.png"),
+			},
+			() => this.show()
+		);
 
-    this.ui = createUI(this.core, this.$element);
-    this.ui.on('hide', () => this.hide());
-    this.ui.on('open', iter => this.core.open(iter));
-    this.ui.on('search', query => {
-      this.search(query)
-        .then(results => this.ui.emit('success', results))
-        .catch(error => this.ui.emit('error', error));
-    });
-  }
+		this.ui = createUI(this.core, this.$element);
+		this.ui.on("hide", () => this.hide());
+		this.ui.on("open", (iter) => this.core.open(iter));
+		this.ui.on("search", (query) => {
+			this.search(query)
+				.then((results) => this.ui.emit("success", results))
+				.catch((error) => this.ui.emit("error", error));
+		});
+	}
 
-  /**
-   * Performs a search across all mounts
-   * @param {string} pattern Search query
-   * @return {Promise<FileMetadata[]>}
-   */
-  search(pattern) {
-    const vfs = this.core.make('meeseOS/vfs');
-    const promises = this.core.make('meeseOS/fs')
-      .mountpoints()
-      .map(mount => `${mount.name}:/`)
-      .map(path => {
-        return vfs.search({path}, pattern)
-          .catch(error => {
-            logger.warn('Error while searching', error);
-            return [];
-          });
-      });
+	/**
+	 * Performs a search across all mounts
+	 * @param {string} pattern Search query
+	 * @return {Promise<FileMetadata[]>}
+	 */
+	search(pattern) {
+		const vfs = this.core.make("meeseOS/vfs");
+		const promises = this.core
+			.make("meeseOS/fs")
+			.mountpoints()
+			.map((mount) => `${mount.name}:/`)
+			.map((path) => {
+				return vfs.search({ path }, pattern).catch((error) => {
+					logger.warn("Error while searching", error);
+					return [];
+				});
+			});
 
-    return Promise.all(promises)
-      .then(lists => [].concat(...lists));
-  }
+		return Promise.all(promises).then((lists) => [].concat(...lists));
+	}
 
-  /**
-   * Focuses UI
-   */
-  focus() {
-    if (this.ui) {
-      this.ui.emit('focus');
-    }
-  }
+	/**
+	 * Focuses UI
+	 */
+	focus() {
+		if (this.ui) {
+			this.ui.emit("focus");
+		}
+	}
 
-  /**
-   * Hides UI
-   */
-  hide() {
-    if (this.ui) {
-      this.ui.emit('toggle', false);
+	/**
+	 * Hides UI
+	 */
+	hide() {
+		if (this.ui) {
+			this.ui.emit("toggle", false);
 
-      const win = Window.lastWindow();
-      if (this.focusLastWindow && win) {
-        win.focus();
-      }
-    }
-  }
+			const win = Window.lastWindow();
+			if (this.focusLastWindow && win) {
+				win.focus();
+			}
+		}
+	}
 
-  /**
-   * Shows UI
-   */
-  show() {
-    if (this.ui) {
-      const win = Window.lastWindow();
+	/**
+	 * Shows UI
+	 */
+	show() {
+		if (this.ui) {
+			const win = Window.lastWindow();
 
-      this.focusLastWindow = win && win.blur();
+			this.focusLastWindow = win && win.blur();
 
-      this.ui.emit('toggle', true);
-      setTimeout(() => this.focus(), 1);
-    }
-  }
+			this.ui.emit("toggle", true);
+			setTimeout(() => this.focus(), 1);
+		}
+	}
 }

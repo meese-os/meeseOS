@@ -28,9 +28,9 @@
  * @license Simplified BSD License
  */
 
-import logger from '../logger';
+import logger from "../logger";
 
-const supportsNativeNotification = 'Notification' in window;
+const supportsNativeNotification = "Notification" in window;
 
 /**
  * Creates a new CSS DOM element
@@ -38,18 +38,19 @@ const supportsNativeNotification = 'Notification' in window;
  * @param {string} src Source
  * @return {Promise<ScriptElement>}
  */
-export const style = (root, src) => new Promise((resolve, reject) => {
-  const el = document.createElement('link');
-  el.setAttribute('rel', 'stylesheet');
-  el.setAttribute('type', 'text/css');
-  el.onload = () => resolve(el);
-  el.onerror = (err) => reject(err);
-  el.setAttribute('href', src);
+export const style = (root, src) =>
+	new Promise((resolve, reject) => {
+		const el = document.createElement("link");
+		el.setAttribute("rel", "stylesheet");
+		el.setAttribute("type", "text/css");
+		el.onload = () => resolve(el);
+		el.onerror = (err) => reject(err);
+		el.setAttribute("href", src);
 
-  root.appendChild(el);
+		root.appendChild(el);
 
-  return el;
-});
+		return el;
+	});
 
 /**
  * Creates a new Script DOM element
@@ -57,22 +58,22 @@ export const style = (root, src) => new Promise((resolve, reject) => {
  * @param {string} src Source
  * @return {Promise<StyleElement>}
  */
-export const script = (root, src) => new Promise((resolve, reject) => {
-  const el = document.createElement('script');
-  el.onreadystatechange = function() {
-    if ((this.readyState === 'complete' || this.readyState === 'loaded')) {
-      resolve(el);
-    }
-  };
-  el.onerror = (err) => reject(err);
-  el.onload = () => resolve(el);
-  el.src = src;
+export const script = (root, src) =>
+	new Promise((resolve, reject) => {
+		const el = document.createElement("script");
+		el.onreadystatechange = function () {
+			if (this.readyState === "complete" || this.readyState === "loaded") {
+				resolve(el);
+			}
+		};
+		el.onerror = (err) => reject(err);
+		el.onload = () => resolve(el);
+		el.src = src;
 
-  root.appendChild(el);
+		root.appendChild(el);
 
-  return el;
-});
-
+		return el;
+	});
 
 /**
  * Escape text so it is "safe" for HTML usage
@@ -80,9 +81,9 @@ export const script = (root, src) => new Promise((resolve, reject) => {
  * @return {string}
  */
 export const escapeHtml = (text) => {
-  const div = document.createElement('div');
-  div.innerHTML = text;
-  return div.textContent;
+	const div = document.createElement("div");
+	div.innerHTML = text;
+	return div.textContent;
 };
 
 /**
@@ -90,27 +91,29 @@ export const escapeHtml = (text) => {
  * @param {object} obj Object
  * @return {string} CSS text
  */
-export const createCssText = (obj) => Object.keys(obj)
-  .map(k => [k, k.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()])
-  .map(k => `${k[1]}: ${obj[k[0]]}`)
-  .join(';');
+export const createCssText = (obj) =>
+	Object.keys(obj)
+		.map((k) => [k, k.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()])
+		.map((k) => `${k[1]}: ${obj[k[0]]}`)
+		.join(";");
 
 /**
  * Inserts a tab in the given event target
  * @param {Event} ev DOM Event
  */
-export const handleTabOnTextarea = ev => {
-  const input = ev.target;
-  let {selectionStart, selectionEnd, value} = input;
+export const handleTabOnTextarea = (ev) => {
+	const input = ev.target;
+	let { selectionStart, selectionEnd, value } = input;
 
-  input.value = value.substring(0, selectionStart)
-    + '\t'
-    + value.substring(selectionEnd, value.length);
+	input.value =
+		value.substring(0, selectionStart) +
+		"\t" +
+		value.substring(selectionEnd, value.length);
 
-  selectionStart++;
+	selectionStart++;
 
-  input.selectionStart = selectionStart;
-  input.selectionEnd = selectionStart;
+	input.selectionStart = selectionStart;
+	input.selectionEnd = selectionStart;
 };
 
 /*
@@ -119,13 +122,13 @@ export const handleTabOnTextarea = ev => {
  * @return {Element|null}
  */
 export const getActiveElement = (root) => {
-  if (root) {
-    const ae = document.activeElement;
+	if (root) {
+		const ae = document.activeElement;
 
-    return root.contains(ae) ? ae : null;
-  }
+		return root.contains(ae) ? ae : null;
+	}
 
-  return null;
+	return null;
 };
 
 /**
@@ -133,18 +136,20 @@ export const getActiveElement = (root) => {
  * @link https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
  * @return {boolean}
  */
-export const supportsPassive = (function() {
-  let supportsPassive = false;
-  try {
-    const opts = Object.defineProperty({}, 'passive', {
-      get: () => (supportsPassive = true)
-    });
+export const supportsPassive = (function () {
+	let supportsPassive = false;
+	try {
+		const opts = Object.defineProperty({}, "passive", {
+			get: () => (supportsPassive = true),
+		});
 
-    window.addEventListener('testPassive', null, opts);
-    window.removeEventListener('testPassive', null, opts);
-  } catch (e) {/* noop */}
+		window.addEventListener("testPassive", null, opts);
+		window.removeEventListener("testPassive", null, opts);
+	} catch (e) {
+		/* noop */
+	}
 
-  return () => supportsPassive;
+	return () => supportsPassive;
 })();
 
 /**
@@ -154,26 +159,27 @@ export const supportsPassive = (function() {
  * @return {Promise<HTMLAudioElement>}
  */
 export const playSound = (src, options = {}) => {
-  const opts = {
-    volume: 1.0,
-    ...options
-  };
+	const opts = {
+		volume: 1.0,
+		...options,
+	};
 
-  const audio = new Audio();
-  audio.voule = opts.volume;
-  audio.src = src;
+	const audio = new Audio();
+	audio.voule = opts.volume;
+	audio.src = src;
 
-  try {
-    const p = audio.play();
-    if (p instanceof Promise) {
-      return p.then(() => audio)
-        .catch(err => logger.warn('Failed to play sound', src, err));
-    }
-  } catch (e) {
-    logger.warn('Failed to play sound', src, e);
-  }
+	try {
+		const p = audio.play();
+		if (p instanceof Promise) {
+			return p
+				.then(() => audio)
+				.catch((err) => logger.warn("Failed to play sound", src, err));
+		}
+	} catch (e) {
+		logger.warn("Failed to play sound", src, e);
+	}
 
-  return Promise.resolve(audio);
+	return Promise.resolve(audio);
 };
 
 /**
@@ -181,41 +187,46 @@ export const playSound = (src, options = {}) => {
  * @return {object}
  */
 export const supportedMedia = () => {
-  const videoFormats = {
-    mp4: 'video/mp4',
-    ogv: 'video/ogg'
-  };
+	const videoFormats = {
+		mp4: "video/mp4",
+		ogv: "video/ogg",
+	};
 
-  const audioFormats = {
-    mp3: 'audio/mpeg',
-    mp4: 'audio/mp4',
-    oga: 'audio/ogg'
-  };
+	const audioFormats = {
+		mp3: "audio/mpeg",
+		mp4: "audio/mp4",
+		oga: "audio/ogg",
+	};
 
-  const reduce = (list, elem) => Object.keys(list)
-    .reduce((result, format) => {
-      return {
-        [format]: elem.canPlayType(list[format]) === 'probably',
-        ...result
-      };
-    }, {});
+	const reduce = (list, elem) =>
+		Object.keys(list).reduce((result, format) => {
+			return {
+				[format]: elem.canPlayType(list[format]) === "probably",
+				...result,
+			};
+		}, {});
 
-  return {
-    audio: reduce(audioFormats, document.createElement('audio')),
-    video: reduce(videoFormats, document.createElement('video'))
-  };
+	return {
+		audio: reduce(audioFormats, document.createElement("audio")),
+		video: reduce(videoFormats, document.createElement("video")),
+	};
 };
 
 /**
  * Gets if CSS transitions is supported
  * @return {boolean}
  */
-export const supportsTransition = (function() {
-  const el = document.createElement('div');
-  const tests = ['WebkitTransition', 'MozTransition', 'OTransition', 'transition'];
-  const supported = tests.some(name => typeof el.style[name] !== 'undefined');
+export const supportsTransition = (function () {
+	const el = document.createElement("div");
+	const tests = [
+		"WebkitTransition",
+		"MozTransition",
+		"OTransition",
+		"transition",
+	];
+	const supported = tests.some((name) => typeof el.style[name] !== "undefined");
 
-  return () => supported;
+	return () => supported;
 })();
 
 /**
@@ -225,33 +236,30 @@ export const supportsTransition = (function() {
  * @return {Promise<window.Notification>}
  */
 export const createNativeNotification = (options, onclick) => {
-  const Notif = window.Notification;
+	const Notif = window.Notification;
 
-  const create = () => {
-    const notification = new Notif(
-      options.title,
-      {
-        body: options.message,
-        icon: options.icon
-      }
-    );
+	const create = () => {
+		const notification = new Notif(options.title, {
+			body: options.message,
+			icon: options.icon,
+		});
 
-    notification.onclick = onclick;
+		notification.onclick = onclick;
 
-    return notification;
-  };
+		return notification;
+	};
 
-  if (supportsNativeNotification) {
-    if (Notif.permission === 'granted') {
-      return Promise.resolve(create());
-    } else if (Notif.permission !== 'denied') {
-      return new Promise((resolve, reject) => {
-        Notif.requestPermission(permission => {
-          return permission === 'granted' ? resolve(true) : reject(permission);
-        });
-      }).then(create);
-    }
-  }
+	if (supportsNativeNotification) {
+		if (Notif.permission === "granted") {
+			return Promise.resolve(create());
+		} else if (Notif.permission !== "denied") {
+			return new Promise((resolve, reject) => {
+				Notif.requestPermission((permission) => {
+					return permission === "granted" ? resolve(true) : reject(permission);
+				});
+			}).then(create);
+		}
+	}
 
-  return Promise.reject('Unsupported');
+	return Promise.reject("Unsupported");
 };

@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import PanelItem from '../panel-item';
-import dateformat from 'dateformat';
+import { h } from "hyperapp";
+import PanelItem from "../panel-item";
+import dateformat from "dateformat";
 
 /**
  * Clock
@@ -38,36 +38,35 @@ import dateformat from 'dateformat';
  * @desc Clock Panel Item
  */
 export default class ClockPanelItem extends PanelItem {
+	init() {
+		const date = () => dateformat(new Date(), "HH:MM:ss");
 
-  init() {
-    const date = () => dateformat(new Date(), 'HH:MM:ss');
+		if (this.inited) {
+			return;
+		}
 
-    if (this.inited) {
-      return;
-    }
+		const actions = super.init(
+			{
+				time: date(),
+			},
+			{
+				increment: () => (state) => {
+					return { time: date() };
+				},
+			}
+		);
 
-    const actions = super.init({
-      time: date()
-    }, {
-      increment: () => state => {
-        return {time: date()};
-      }
-    });
+		this.interval = setInterval(() => {
+			actions.increment();
+		}, 1000);
+	}
 
-    this.interval = setInterval(() => {
-      actions.increment();
-    }, 1000);
-  }
+	destroy() {
+		this.interval = clearInterval(this.interval);
+		super.destroy();
+	}
 
-  destroy() {
-    this.interval = clearInterval(this.interval);
-    super.destroy();
-  }
-
-  render(state, actions) {
-    return super.render('clock', [
-      h('span', {}, state.time)
-    ]);
-  }
-
+	render(state, actions) {
+		return super.render("clock", [h("span", {}, state.time)]);
+	}
 }

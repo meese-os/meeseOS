@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import DigitalClock from './items/digitalclock';
+import DigitalClock from "./items/digitalclock";
 
 /**
  * Widget Service Provider
@@ -36,121 +36,124 @@ import DigitalClock from './items/digitalclock';
  * @desc Provides methods to handle widgets on a desktop in OS.js
  */
 export default class WidgetServiceProvider {
+	constructor(core, args = {}) {
+		this.core = core;
+		this.widgets = [];
+		this.inited = false;
+		this.registry = { digitalclock: DigitalClock, ...(args.registry || {}) };
+	}
 
-  constructor(core, args = {}) {
-    this.core = core;
-    this.widgets = [];
-    this.inited = false;
-    this.registry = {digitalclock: DigitalClock, ...args.registry || {}};
-  }
+	destroy() {
+		this.widgets.forEach(({ widget }) => widget.destroy());
+		this.widgets = [];
+	}
 
-  destroy() {
-    this.widgets.forEach(({widget}) => widget.destroy());
-    this.widgets = [];
-  }
+	async init() {
+		const iface = {
+			register: (name, classRef) => {
+				if (this.registry[name]) {
+					console.warn("Overwriting previously registered widget item", name);
+				}
 
-  async init() {
-    const iface = {
-      register: (name, classRef) => {
-        if (this.registry[name]) {
-          console.warn('Overwriting previously registered widget item', name);
-        }
+				this.registry[name] = classRef;
+			},
 
-        this.registry[name] = classRef;
-      },
+			removeAll: () => {
+				this.widgets.forEach(({ widget }) => widget.destroy());
+				this.widgets = [];
+			},
 
-      removeAll: () => {
-        this.widgets.forEach(({widget}) => widget.destroy());
-        this.widgets = [];
-      },
+			remove: (widget) => {
+				const index =
+					typeof widget === "number"
+						? widget
+						: this.widgets.findIndex((w) => w.widget === widget);
 
-      remove: (widget) => {
-        const index = typeof widget === 'number'
-          ? widget
-          : this.widgets.findIndex(w => w.widget === widget);
+				if (index >= 0) {
+					this.widgets[index].widget.destroy();
+					this.widgets.splice(index, 1);
+				}
+			},
 
-        if (index >= 0) {
-          this.widgets[index].widget.destroy();
-          this.widgets.splice(index, 1);
-        }
-      },
+			create: (item) => {
+				const ClassRef = this.registry[item.name];
+				const widget = new ClassRef(this.core, item.options);
+				this.widgets.push({ name: item.name, widget });
 
-      create: (item) => {
-        const ClassRef = this.registry[item.name];
-        const widget = new ClassRef(this.core, item.options);
-        this.widgets.push({name: item.name, widget});
+				if (this.inited) {
+					widget.init();
+				}
 
-        if (this.inited) {
-          widget.init();
-        }
+				return widget;
+			},
 
-        return widget;
-      },
+			get: (name) => this.registry[name],
 
-      get: (name) => this.registry[name],
+			list: () => Object.keys(this.registry),
 
-      list: () => Object.keys(this.registry),
+			save: () => {
+				const settings = this.core.make("meeseOS/settings");
+				const widgets = this.widgets.map(({ name, widget }) => ({
+					name,
+					options: widget.options,
+				}));
 
-      save: () => {
-        const settings = this.core.make('meeseOS/settings');
-        const widgets = this.widgets.map(({name, widget}) => ({
-          name,
-          options: widget.options
-        }));
+				return Promise.resolve(
+					settings.set("meeseOS/desktop", "widgets", widgets)
+				).then(() => settings.save());
+			},
+		};
 
-        return Promise.resolve(settings.set('meeseOS/desktop', 'widgets', widgets))
-          .then(() => settings.save());
-      }
-    };
+		this.core.singleton("meeseOS/widgets", () => iface);
 
-    this.core.singleton('meeseOS/widgets', () => iface);
+		this.core.on("meeseOS/desktop:transform", () => {
+			this.widgets.forEach(({ widget }) => widget.updatePosition(true));
+		});
+	}
 
-    this.core.on('meeseOS/desktop:transform', () => {
-      this.widgets.forEach(({widget}) => widget.updatePosition(true));
-    });
-  }
+	start() {
+		this.inited = true;
+		this.widgets.forEach(({ widget }) => widget.init());
+		const desktop = this.core.make("meeseOS/desktop");
 
-  start() {
-    this.inited = true;
-    this.widgets.forEach(({widget}) => widget.init());
-    const desktop = this.core.make('meeseOS/desktop');
+		let resizeDebounce;
+		window.addEventListener("resize", () => {
+			clearTimeout(resizeDebounce);
+			resizeDebounce = setTimeout(() => this._clampWidgets(), 200);
+		});
 
-    let resizeDebounce;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeDebounce);
-      resizeDebounce = setTimeout(() => this._clampWidgets(), 200);
-    });
+		if (typeof desktop.addContextMenuEntries === "function") {
+			desktop.addContextMenuEntries(() => {
+				const widgets = this.core.make("meeseOS/widgets");
 
-    if (typeof desktop.addContextMenuEntries === 'function') {
-      desktop.addContextMenuEntries(() => {
-        const widgets = this.core.make('meeseOS/widgets');
+				return [
+					{
+						label: "Add Widget",
+						items: widgets.list().map((t) => {
+							const classRef = this.registry[t];
+							const metadata = classRef.metadata(this.core);
 
-        return [{
-          label: 'Add Widget',
-          items: widgets.list().map(t => {
-            const classRef = this.registry[t];
-            const metadata = classRef.metadata(this.core);
+							return {
+								label: metadata.title ? metadata.title : t,
+								onclick: () => {
+									widgets.create({ name: t });
+									widgets.save();
+								},
+							};
+						}),
+					},
+				];
+			});
+		}
 
-            return {
-              label: metadata.title ? metadata.title : t,
-              onclick: () => {
-                widgets.create({name: t});
-                widgets.save();
-              }
-            };
-          })
-        }];
-      });
-    }
+		this._clampWidgets();
+	}
 
-    this._clampWidgets();
-  }
+	_clampWidgets(resize) {
+		if (resize && !this.core.config("windows.clampToViewport")) {
+			return;
+		}
 
-  _clampWidgets(resize) {
-    if (resize && !this.core.config('windows.clampToViewport')) {
-      return;
-    }
-
-    this.widgets.forEach(w => w.widget.clampToViewport());
-  }
+		this.widgets.forEach((w) => w.widget.clampToViewport());
+	}
 }

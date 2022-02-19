@@ -29,18 +29,18 @@
  */
 
 .meeseOS-gui-box {
-  display: flex;
-  overflow: hidden;
+	display: flex;
+	overflow: hidden;
 
-  & > .meeseOS-gui-menubar,
-  & > .meeseOS-gui-toolbar,
-  & > .meeseOS-gui-statusbar {
-    flex-shrink: 0;
-  }
+	& > .meeseOS-gui-menubar,
+	& > .meeseOS-gui-toolbar,
+	& > .meeseOS-gui-statusbar {
+		flex-shrink: 0;
+	}
 }
 
 .meeseOS-gui-box > .meeseOS-gui,
 .meeseOS-gui-box-container {
-  margin: calc($base-margin / 2);
-  flex-shrink: 0;
+	margin: calc($base-margin / 2);
+	flex-shrink: 0;
 }

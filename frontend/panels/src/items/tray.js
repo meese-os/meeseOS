@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import PanelItem from '../panel-item';
+import { h } from "hyperapp";
+import PanelItem from "../panel-item";
 
 /**
  * Tray
@@ -37,33 +37,38 @@ import PanelItem from '../panel-item';
  * @desc Tray Panel Item
  */
 export default class TrayPanelItem extends PanelItem {
+	init() {
+		if (this.inited) {
+			return;
+		}
 
-  init() {
-    if (this.inited) {
-      return;
-    }
+		const actions = super.init(
+			{
+				tray: this.core.make("meeseOS/tray").list(),
+			},
+			{
+				setTray: (tray) => (state) => ({ tray }),
+			}
+		);
 
-    const actions = super.init({
-      tray: this.core.make('meeseOS/tray').list()
-    }, {
-      setTray: tray => state => ({tray})
-    });
+		this.core.on("meeseOS/tray:update", (list) => actions.setTray(list));
+	}
 
-    this.core.on('meeseOS/tray:update', list => actions.setTray(list));
-  }
+	render(state, actions) {
+		const child = (entry) =>
+			h(
+				"div",
+				{
+					onclick: (ev) => entry.onclick(ev, entry),
+					oncontextmenu: (ev) => entry.oncontextmenu(ev, entry),
+					className: "meeseOS-panel-item--clickable meeseOS-panel-item--icon",
+				},
+				h("img", {
+					src: entry.icon,
+					title: entry.title,
+				})
+			);
 
-  render(state, actions) {
-    const child = entry => h('div', {
-      onclick: ev => entry.onclick(ev, entry),
-      oncontextmenu: ev => entry.oncontextmenu(ev, entry),
-      className: 'meeseOS-panel-item--clickable meeseOS-panel-item--icon'
-    }, h('img', {
-      src: entry.icon,
-      title: entry.title
-    }));
-
-    return super.render('tray', state.tray.map(child));
-  }
-
+		return super.render("tray", state.tray.map(child));
+	}
 }
-

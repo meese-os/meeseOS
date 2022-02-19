@@ -29,7 +29,7 @@
  * @licence simplified bsd license
  */
 
-const {cli} = require('../index.js');
+const { cli } = require("../index.js");
 const root = process.cwd();
 
-cli(process.argv, {root});
+cli(process.argv, { root });

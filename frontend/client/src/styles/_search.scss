@@ -29,51 +29,51 @@
  */
 
 .meeseOS-search {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 999999999999999999;
-  width: 0;
-  height: 0;
-  overflow: visible;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 999999999999999999;
+	width: 0;
+	height: 0;
+	overflow: visible;
 }
 
 .meeseOS-search-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 50vw;
-  max-height: 80vh;
-  transform: translate(-50%, -50%);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 50vw;
+	max-height: 80vh;
+	transform: translate(-50%, -50%);
 }
 
 .meeseOS-search-input {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: $base-margin;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: $base-margin;
 }
 
 .meeseOS-search-message {
-  padding: $base-margin;
+	padding: $base-margin;
 }
 
 .meeseOS-search-results {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  overflow-x: hidden;
-  overflow-y: scroll;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 .meeseOS-search-result {
-  padding: 0;
-  margin: $base-margin;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+	padding: 0;
+	margin: $base-margin;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 
-  img {
-    margin-right: $base-margin;
-  }
+	img {
+		margin-right: $base-margin;
+	}
 }

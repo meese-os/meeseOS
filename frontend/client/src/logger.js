@@ -28,38 +28,38 @@
  * @license Simplified BSD License
  */
 
-const methods = ['debug', 'log', 'info', 'warn', 'error'];
+const methods = ["debug", "log", "info", "warn", "error"];
 let middleware = [];
 
-const reduce = (name, input) => middleware
-  .reduce((current, m) => m(name, ...current), input);
+const reduce = (name, input) =>
+	middleware.reduce((current, m) => m(name, ...current), input);
 
 const bind = (fn, thisArg) =>
-  typeof thisArg[fn].bind === 'function'
-    ? thisArg[fn].bind(thisArg)
-    : Function.prototype.bind.apply(thisArg[fn], thisArg);
+	typeof thisArg[fn].bind === "function"
+		? thisArg[fn].bind(thisArg)
+		: Function.prototype.bind.apply(thisArg[fn], thisArg);
 
-const bindMethod = fn => {
-  const log = bind(fn, console);
-  if (middleware.length > 0) {
-    return (...args) => log(...reduce(fn, args));
-  }
+const bindMethod = (fn) => {
+	const log = bind(fn, console);
+	if (middleware.length > 0) {
+		return (...args) => log(...reduce(fn, args));
+	}
 
-  return log;
+	return log;
 };
 
-const assignMethods = (thisArg) => methods
-  .forEach(m => thisArg[m] = bindMethod(m));
+const assignMethods = (thisArg) =>
+	methods.forEach((m) => (thisArg[m] = bindMethod(m)));
 
 const instance = {
-  addMiddleware: m => {
-    middleware.push(m);
-    assignMethods(instance);
-  },
-  clearMiddleware: () => {
-    middleware = [];
-    assignMethods(instance);
-  }
+	addMiddleware: (m) => {
+		middleware.push(m);
+		assignMethods(instance);
+	},
+	clearMiddleware: () => {
+		middleware = [];
+		assignMethods(instance);
+	},
 };
 
 assignMethods(instance);

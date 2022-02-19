@@ -39,62 +39,62 @@
  * Middleware Manager
  */
 export default class Middleware {
+	/**
+	 * Create new middleware
+	 */
+	constructor() {
+		/**
+		 * @type {MiddlewareData}
+		 */
+		this.middleware = {};
+	}
 
-  /**
-   * Create new middleware
-   */
-  constructor() {
-    /**
-     * @type {MiddlewareData}
-     */
-    this.middleware = {};
-  }
+	/**
+	 * Destroy middleware
+	 */
+	destroy() {
+		this.clear();
+	}
 
-  /**
-   * Destroy middleware
-   */
-  destroy() {
-    this.clear();
-  }
+	/**
+	 * Clear middleware
+	 */
+	clear() {
+		this.middleware = {};
+	}
 
-  /**
-   * Clear middleware
-   */
-  clear() {
-    this.middleware = {};
-  }
+	/**
+	 * Add middleware function to a group
+	 * @param {string} group Middleware group
+	 * @param {Function} callback Middleware function to add
+	 */
+	add(group, callback) {
+		if (!this.middleware[group]) {
+			this.middleware[group] = [];
+		}
 
-  /**
-   * Add middleware function to a group
-   * @param {string} group Middleware group
-   * @param {Function} callback Middleware function to add
-   */
-  add(group, callback) {
-    if (!this.middleware[group]) {
-      this.middleware[group] = [];
-    }
+		this.middleware[group].push(callback);
+	}
 
-    this.middleware[group].push(callback);
-  }
+	/**
+	 * Remove middleware function from a group
+	 * @param {string} group Middleware group
+	 * @param {Function} callback Middleware function to remove
+	 */
+	remove(group, callback) {
+		if (this.middleware[group]) {
+			this.middleware[group] = this.middleware[group].filter(
+				(cb) => cb !== callback
+			);
+		}
+	}
 
-  /**
-   * Remove middleware function from a group
-   * @param {string} group Middleware group
-   * @param {Function} callback Middleware function to remove
-   */
-  remove(group, callback) {
-    if (this.middleware[group]) {
-      this.middleware[group] =
-        this.middleware[group].filter(cb => cb !== callback);
-    }
-  }
-
-  /**
-   * Gets middleware functions for a group
-   * @param {string} group Middleware group
-   * @return {Function[]}
-   */
-  get(group) {
-    return this.middleware[group] || [];
-  }
+	/**
+	 * Gets middleware functions for a group
+	 * @param {string} group Middleware group
+	 * @return {Function[]}
+	 */
+	get(group) {
+		return this.middleware[group] || [];
+	}
 }

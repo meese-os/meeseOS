@@ -28,9 +28,9 @@
  * @license Simplified BSD License
  */
 
-import * as mediaQuery from 'css-mediaquery';
-import defaultIcon from '../styles/logo-blue-32x32.png';
-import logger from '../logger';
+import * as mediaQuery from "css-mediaquery";
+import defaultIcon from "../styles/logo-blue-32x32.png";
+import logger from "../logger";
 
 const CASCADE_DISTANCE = 10;
 const MINIMUM_WIDTH = 100;
@@ -41,66 +41,66 @@ const BOTTOM_ZINDEX = 10;
 /*
  * Creates window attributes from an object
  */
-export const createAttributes = attrs => ({
-  classNames: [],
-  modal: false,
-  ontop: false,
-  gravity: false,
-  moveable: true,
-  resizable: true,
-  focusable: true,
-  maximizable: true,
-  minimizable: true,
-  sessionable: true,
-  closeable: true,
-  header: true,
-  controls: true,
-  visibility: 'global',
-  shadowDOM: false,
-  clamp: true,
-  droppable: true,
-  mediaQueries: {
-    small: 'screen and (max-width: 640px)',
-    medium: 'screen and (min-width: 640px) and (max-width: 1024px)',
-    big: 'screen and (min-width: 1024px)'
-  },
-  minDimension: {
-    width: MINIMUM_WIDTH,
-    height: MINIMUM_HEIGHT
-  },
-  maxDimension: {
-    width: -1,
-    height: -1
-  },
-  ...attrs
+export const createAttributes = (attrs) => ({
+	classNames: [],
+	modal: false,
+	ontop: false,
+	gravity: false,
+	moveable: true,
+	resizable: true,
+	focusable: true,
+	maximizable: true,
+	minimizable: true,
+	sessionable: true,
+	closeable: true,
+	header: true,
+	controls: true,
+	visibility: "global",
+	shadowDOM: false,
+	clamp: true,
+	droppable: true,
+	mediaQueries: {
+		small: "screen and (max-width: 640px)",
+		medium: "screen and (min-width: 640px) and (max-width: 1024px)",
+		big: "screen and (min-width: 1024px)",
+	},
+	minDimension: {
+		width: MINIMUM_WIDTH,
+		height: MINIMUM_HEIGHT,
+	},
+	maxDimension: {
+		width: -1,
+		height: -1,
+	},
+	...attrs,
 });
 
 /*
  * Creates window state from an object
  */
 export const createState = (state, options, attrs) => ({
-  title: options.title || options.id,
-  icon: options.icon || defaultIcon,
-  media: null,
-  moving: false,
-  resizing: false,
-  loading: false,
-  focused: false,
-  maximized: false,
-  minimized: false,
-  zIndex: 1,
-  styles: {},
-  position: {
-    left: null,
-    top: null,
-    ...options.position
-  },
-  dimension: {
-    width: Math.max(attrs.minDimension.width, MINIMUM_WIDTH),
-    height: Math.max(attrs.minDimension.height, MINIMUM_HEIGHT),
-    ...options.dimension
-  },
-  ...state
+	title: options.title || options.id,
+	icon: options.icon || defaultIcon,
+	media: null,
+	moving: false,
+	resizing: false,
+	loading: false,
+	focused: false,
+	maximized: false,
+	minimized: false,
+	zIndex: 1,
+	styles: {},
+	position: {
+		left: null,
+		top: null,
+		...options.position,
+	},
+	dimension: {
+		width: Math.max(attrs.minDimension.width, MINIMUM_WIDTH),
+		height: Math.max(attrs.minDimension.height, MINIMUM_HEIGHT),
+		...options.dimension,
+	},
+	...state,
 });
 
 /**
@@ -111,20 +111,20 @@ export const createState = (state, options, attrs) => ({
  * @return {object}
  */
 export const createDOMAttributes = (id, state, attributes) => ({
-  id: id,
-  media: state.media,
-  moving: state.moving,
-  resizing: state.resizing,
-  loading: state.loading,
-  focused: state.focused,
-  maximized: state.maximized,
-  minimized: state.minimized,
-  modal: attributes.modal,
-  ontop: attributes.ontop,
-  resizable: attributes.resizable,
-  moveable: attributes.moveable,
-  maximizable: attributes.maximizable,
-  minimizable: attributes.minimizable
+	id: id,
+	media: state.media,
+	moving: state.moving,
+	resizing: state.resizing,
+	loading: state.loading,
+	focused: state.focused,
+	maximized: state.maximized,
+	minimized: state.minimized,
+	modal: attributes.modal,
+	ontop: attributes.ontop,
+	resizable: attributes.resizable,
+	moveable: attributes.moveable,
+	maximizable: attributes.maximizable,
+	minimizable: attributes.minimizable,
 });
 
 /**
@@ -134,291 +134,288 @@ export const createDOMAttributes = (id, state, attributes) => ({
  * @return {object}
  */
 export const createDOMStyles = (
-  {
-    zIndex,
-    styles,
-    position: {
-      top,
-      left
-    },
-    dimension: {
-      width,
-      height
-    }
-  },
-  {
-    ontop
-  }
+	{ zIndex, styles, position: { top, left }, dimension: { width, height } },
+	{ ontop }
 ) => ({
-  top: String(top) + 'px',
-  left: String(left) + 'px',
-  height: String(height) + 'px',
-  width: String(width) + 'px',
-  zIndex: BOTTOM_ZINDEX + (ontop ? ONTOP_ZINDEX : 0) + zIndex,
-  ...styles
+	top: String(top) + "px",
+	left: String(left) + "px",
+	height: String(height) + "px",
+	width: String(width) + "px",
+	zIndex: BOTTOM_ZINDEX + (ontop ? ONTOP_ZINDEX : 0) + zIndex,
+	...styles,
 });
 
 /*
  * Clamps position to viewport
  */
-export const clampPosition = (rect, {dimension, position}) => {
-  const maxLeft = rect.width - dimension.width;
-  const maxTop = rect.height - dimension.height + rect.top;
+export const clampPosition = (rect, { dimension, position }) => {
+	const maxLeft = rect.width - dimension.width;
+	const maxTop = rect.height - dimension.height + rect.top;
 
-  // TODO: Make these an argument ?!
-  const minLeft = 0;
-  const minTop = 0;
+	// TODO: Make these an argument ?!
+	const minLeft = 0;
+	const minTop = 0;
 
-  return {
-    left: Math.max(minLeft, Math.min(maxLeft, position.left)),
-    top: Math.max(minTop, Math.max(rect.top, Math.min(maxTop, position.top)))
-  };
+	return {
+		left: Math.max(minLeft, Math.min(maxLeft, position.left)),
+		top: Math.max(minTop, Math.max(rect.top, Math.min(maxTop, position.top))),
+	};
 };
 
 /*
  * Window rendering callback function
  */
 export const renderCallback = (win, callback) => {
-  if (typeof callback === 'function') {
-    if (win.attributes.shadowDOM) {
-      try {
-        const mode = typeof win.attributes.shadowDOM === 'string'
-          ? win.attributes.shadowDOM
-          : 'open';
+	if (typeof callback === "function") {
+		if (win.attributes.shadowDOM) {
+			try {
+				const mode =
+					typeof win.attributes.shadowDOM === "string"
+						? win.attributes.shadowDOM
+						: "open";
 
-        const shadow = win.$content.attachShadow({mode});
+				const shadow = win.$content.attachShadow({ mode });
 
-        callback(shadow, win);
+				callback(shadow, win);
 
-        return;
-      } catch (e) {
-        logger.warn('Shadow DOM not supported?', e);
-      }
-    }
+				return;
+			} catch (e) {
+				logger.warn("Shadow DOM not supported?", e);
+			}
+		}
 
-    callback(win.$content, win);
-  }
+		callback(win.$content, win);
+	}
 };
 
 /*
  * Gets new position based on "gravity"
  */
 export const positionFromGravity = (win, rect, gravity) => {
-  let {left, top} = win.state.position;
+	let { left, top } = win.state.position;
 
-  if (gravity === 'center') {
-    left = (rect.width / 2) - (win.state.dimension.width / 2);
-    top = (rect.height / 2) - (win.state.dimension.height / 2);
-  } else if (gravity) {
-    let hasVertical =  gravity.match(/top|bottom/);
-    let hasHorizontal = gravity.match(/left|rigth/);
+	if (gravity === "center") {
+		left = rect.width / 2 - win.state.dimension.width / 2;
+		top = rect.height / 2 - win.state.dimension.height / 2;
+	} else if (gravity) {
+		const hasVertical = gravity.match(/top|bottom/);
+		const hasHorizontal = gravity.match(/left|rigth/);
 
-    if (gravity.match(/top/)) {
-      top = rect.top;
-    } else if (gravity.match(/bottom/)) {
-      top = rect.height - (win.state.dimension.height) + rect.top;
-    }
+		if (gravity.match(/top/)) {
+			top = rect.top;
+		} else if (gravity.match(/bottom/)) {
+			top = rect.height - win.state.dimension.height + rect.top;
+		}
 
-    if (gravity.match(/left/)) {
-      left = rect.left;
-    } else if (gravity.match(/right/)) {
-      left = rect.width - (win.state.dimension.width);
-    }
+		if (gravity.match(/left/)) {
+			left = rect.left;
+		} else if (gravity.match(/right/)) {
+			left = rect.width - win.state.dimension.width;
+		}
 
-    if (!hasVertical && gravity.match(/center/)) {
-      top = (rect.height / 2) - (win.state.dimension.height / 2);
-    } else if (!hasHorizontal && gravity.match(/center/)) {
-      left = (rect.width / 2) - (win.state.dimension.width / 2);
-    }
-  }
+		if (!hasVertical && gravity.match(/center/)) {
+			top = rect.height / 2 - win.state.dimension.height / 2;
+		} else if (!hasHorizontal && gravity.match(/center/)) {
+			left = rect.width / 2 - win.state.dimension.width / 2;
+		}
+	}
 
-  return {left, top};
+	return { left, top };
 };
 
 /*
  * Gets new dimension based on container
  */
 export const dimensionFromElement = (win, rect, container) => {
-  const innerBox = (container.parentNode.classList.contains('meeseOS-gui')
-    ? container.parentNode
-    : container).getBoundingClientRect();
+	const innerBox = (
+		container.parentNode.classList.contains("meeseOS-gui")
+			? container.parentNode
+			: container
+	).getBoundingClientRect();
 
-  const outerBox = win.$content.getBoundingClientRect();
-  const diffY = Math.ceil(outerBox.height - innerBox.height);
-  const diffX = Math.ceil(outerBox.width - innerBox.width);
-  const topHeight = win.$header.offsetHeight;
+	const outerBox = win.$content.getBoundingClientRect();
+	const diffY = Math.ceil(outerBox.height - innerBox.height);
+	const diffX = Math.ceil(outerBox.width - innerBox.width);
+	const topHeight = win.$header.offsetHeight;
 
-  const {left, top} = win.state.position;
-  const min = win.attributes.minDimension;
-  const max = win.attributes.maxDimension;
+	const { left, top } = win.state.position;
+	const min = win.attributes.minDimension;
+	const max = win.attributes.maxDimension;
 
-  let width = Math.max(container.offsetWidth + diffX, min.width);
-  let height = Math.max(container.offsetHeight + diffY + topHeight, min.height);
+	let width = Math.max(container.offsetWidth + diffX, min.width);
+	let height = Math.max(container.offsetHeight + diffY + topHeight, min.height);
 
-  if (max.width > 0) {
-    width = Math.min(width, max.width);
-  }
+	if (max.width > 0) {
+		width = Math.min(width, max.width);
+	}
 
-  if (max.height > 0) {
-    height = Math.min(height, max.height);
-  }
+	if (max.height > 0) {
+		height = Math.min(height, max.height);
+	}
 
-  width = Math.max(width, container.offsetWidth);
-  height = Math.max(height, container.offsetHeight);
+	width = Math.max(width, container.offsetWidth);
+	height = Math.max(height, container.offsetHeight);
 
-  if (rect) {
-    width = Math.min(width, rect.width - left);
-    height = Math.min(height, rect.height - top);
-  }
+	if (rect) {
+		width = Math.min(width, rect.width - left);
+		height = Math.min(height, rect.height - top);
+	}
 
-  return {width, height};
+	return { width, height };
 };
 
 /*
  * Transforms vector values (ex float to integer)
  */
-export const transformVectors = (rect, {width, height}, {top, left}) => {
-  const transform = (val, attr) => {
-    if (!isNaN(val)) {
-      return val > 1 && Number.isInteger(val)
-        ? val
-        : Math.round(rect[attr] * parseFloat(val));
-    }
+export const transformVectors = (rect, { width, height }, { top, left }) => {
+	const transform = (val, attr) => {
+		if (!isNaN(val)) {
+			return val > 1 && Number.isInteger(val)
+				? val
+				: Math.round(rect[attr] * parseFloat(val));
+		}
 
-    return val;
-  };
+		return val;
+	};
 
-  return {
-    dimension: {
-      width: transform(width, 'width'),
-      height: transform(height, 'height')
-    },
-    position: {
-      top: transform(top, 'height'),
-      left: transform(left, 'width')
-    }
-  };
+	return {
+		dimension: {
+			width: transform(width, "width"),
+			height: transform(height, "height"),
+		},
+		position: {
+			top: transform(top, "height"),
+			left: transform(left, "width"),
+		},
+	};
 };
 
 /*
  * Creates a clamper for resize/move
  */
-const clamper = win => {
-  const {maxDimension, minDimension} = win.attributes;
-  const {position, dimension} = win.state;
+const clamper = (win) => {
+	const { maxDimension, minDimension } = win.attributes;
+	const { position, dimension } = win.state;
 
-  const maxPosition = {
-    left: position.left + dimension.width - minDimension.width,
-    top: position.top + dimension.height - minDimension.height
-  };
+	const maxPosition = {
+		left: position.left + dimension.width - minDimension.width,
+		top: position.top + dimension.height - minDimension.height,
+	};
 
-  const clamp = (min, max, current) => {
-    const value = min === -1 ? current : Math.max(min, current);
-    return max === -1 ? value : Math.min(max, value);
-  };
+	const clamp = (min, max, current) => {
+		const value = min === -1 ? current : Math.max(min, current);
+		return max === -1 ? value : Math.min(max, value);
+	};
 
-  return (width, height, top, left) => ({
-    width: clamp(minDimension.width, maxDimension.width, width),
-    height: clamp(minDimension.height, maxDimension.height, height),
-    top: clamp(-1, maxPosition.top, top),
-    left: clamp(-1, maxPosition.left, left)
-  });
+	return (width, height, top, left) => ({
+		width: clamp(minDimension.width, maxDimension.width, width),
+		height: clamp(minDimension.height, maxDimension.height, height),
+		top: clamp(-1, maxPosition.top, top),
+		left: clamp(-1, maxPosition.left, left),
+	});
 };
 
 /*
  * Creates a resize handler
  */
 export const resizer = (win, handle) => {
-  const clamp = clamper(win);
-  const {position, dimension} = win.state;
-  const directions = handle.getAttribute('data-direction').split('');
-  const going = dir => directions.indexOf(dir) !== -1;
-  const xDir = going('e') ? 1 : (going('w') ? -1 : 0);
-  const yDir = going('s') ? 1 : (going('n') ? -1 : 0);
+	const clamp = clamper(win);
+	const { position, dimension } = win.state;
+	const directions = handle.getAttribute("data-direction").split("");
+	const going = (dir) => directions.indexOf(dir) !== -1;
+	const xDir = going("e") ? 1 : going("w") ? -1 : 0;
+	const yDir = going("s") ? 1 : going("n") ? -1 : 0;
 
-  return (diffX, diffY) => {
-    const width = dimension.width + (diffX * xDir);
-    const height = dimension.height + (diffY * yDir);
-    const top = yDir === -1 ? position.top + diffY : position.top;
-    const left = xDir === -1 ? position.left + diffX : position.left;
+	return (diffX, diffY) => {
+		const width = dimension.width + diffX * xDir;
+		const height = dimension.height + diffY * yDir;
+		const top = yDir === -1 ? position.top + diffY : position.top;
+		const left = xDir === -1 ? position.left + diffX : position.left;
 
-    return clamp(width, height, top, left);
-  };
+		return clamp(width, height, top, left);
+	};
 };
 
 /*
  * Creates a movement handler
  */
 export const mover = (win, rect) => {
-  const {position} = win.state;
+	const { position } = win.state;
 
-  return (diffX, diffY) => {
-    const top = Math.max(position.top + diffY, rect.top);
-    const left = position.left + diffX;
+	return (diffX, diffY) => {
+		const top = Math.max(position.top + diffY, rect.top);
+		const left = position.left + diffX;
 
-    return {top, left};
-  };
+		return { top, left };
+	};
 };
 
 /*
  * Calculates a new initial position for window
  */
 export const getCascadePosition = (win, rect, pos) => {
-  const startX = CASCADE_DISTANCE + rect.left;
-  const startY = CASCADE_DISTANCE + rect.top;
-  const distance = CASCADE_DISTANCE;
-  const wrap = CASCADE_DISTANCE * 2;
+	const startX = CASCADE_DISTANCE + rect.left;
+	const startY = CASCADE_DISTANCE + rect.top;
+	const distance = CASCADE_DISTANCE;
+	const wrap = CASCADE_DISTANCE * 2;
 
-  const newX = startX + ((win.wid % wrap) * distance);
-  const newY = startY + ((win.wid % wrap) * distance);
-  const position = (key, value) => typeof pos[key] === 'number' && Number.isInteger(pos[key])
-    ? Math.max(rect[key], pos[key])
-    : value;
+	const newX = startX + (win.wid % wrap) * distance;
+	const newY = startY + (win.wid % wrap) * distance;
+	const position = (key, value) =>
+		typeof pos[key] === "number" && Number.isInteger(pos[key])
+			? Math.max(rect[key], pos[key])
+			: value;
 
-  return {top: position('top', newY), left: position('left', newX)};
+	return { top: position("top", newY), left: position("left", newX) };
 };
 
-const getScreenOrientation = screen => screen && screen.orientation
-  ? screen.orientation.type
-  : window.matchMedia('(orientation: portrait)') ? 'portrait' : 'landscape';
+const getScreenOrientation = (screen) =>
+	screen && screen.orientation
+		? screen.orientation.type
+		: window.matchMedia("(orientation: portrait)")
+		? "portrait"
+		: "landscape";
 
 /*
  * Gets a media query name from a map
  */
-export const getMediaQueryName = (win) => Object.keys(win.attributes.mediaQueries)
-  .filter(name => mediaQuery.match(win.attributes.mediaQueries[name], {
-    type: 'screen',
-    orientation: getScreenOrientation(window.screen),
-    width: win.$element.offsetWidth || win.state.dimension.width,
-    height: win.$element.offsetHeight || win.state.dimension.height
-  }))
-  .pop();
+export const getMediaQueryName = (win) =>
+	Object.keys(win.attributes.mediaQueries)
+		.filter((name) =>
+			mediaQuery.match(win.attributes.mediaQueries[name], {
+				type: "screen",
+				orientation: getScreenOrientation(window.screen),
+				width: win.$element.offsetWidth || win.state.dimension.width,
+				height: win.$element.offsetHeight || win.state.dimension.height,
+			})
+		)
+		.pop();
 
 /**
  * Loads [certain] window options from configuration
  */
 export const loadOptionsFromConfig = (config, appName, windowId) => {
-  const matchStringOrRegex = (str, matcher) => matcher instanceof RegExp
-    ? !!str.match(matcher)
-    : str === matcher;
+	const matchStringOrRegex = (str, matcher) =>
+		matcher instanceof RegExp ? !!str.match(matcher) : str === matcher;
 
-  const found = config.find(({application, window}) => {
-    if (!application && !window) {
-      return false;
-    } else if (application && !matchStringOrRegex(appName, application)) {
-      return false;
-    } else if (window && !matchStringOrRegex(windowId || '', window)) {
-      return false;
-    }
+	const found = config.find(({ application, window }) => {
+		if (!application && !window) {
+			return false;
+		} else if (application && !matchStringOrRegex(appName, application)) {
+			return false;
+		} else if (window && !matchStringOrRegex(windowId || "", window)) {
+			return false;
+		}
 
-    return true;
-  });
+		return true;
+	});
 
-  const foundOptions = found && found.options ? found.options : {};
-  const allowedProperties = ['position', 'dimension', 'attributes'];
+	const foundOptions = found && found.options ? found.options : {};
+	const allowedProperties = ["position", "dimension", "attributes"];
 
-  return allowedProperties.reduce((obj, key) => (foundOptions[key]
-    ? {...obj, [key]: foundOptions[key]}
-    : obj),
-  {});
+	return allowedProperties.reduce(
+		(obj, key) =>
+			foundOptions[key] ? { ...obj, [key]: foundOptions[key] } : obj,
+		{}
+	);
 };

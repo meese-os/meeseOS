@@ -29,166 +29,166 @@
  */
 
 .meeseOS-gui-field {
-  position: relative;
+	position: relative;
 
-  select,
-  textarea,
-  input {
-    display: block;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    padding: calc($base-margin / 2);
-    margin: 0;
-    background: transparent;
-    border: 0 none;
-    box-sizing: border-box;
-    resize: none;
-    font-family: inherit;
-    font-size: inherit;
-    border-radius: 0;
+	select,
+	textarea,
+	input {
+		display: block;
+		width: 100%;
+		height: 100%;
+		outline: none;
+		padding: calc($base-margin / 2);
+		margin: 0;
+		background: transparent;
+		border: 0 none;
+		box-sizing: border-box;
+		resize: none;
+		font-family: inherit;
+		font-size: inherit;
+		border-radius: 0;
 
-    /* NOTE: Why did I add  this ?! (#18)
+		/* NOTE: Why did I add  this ?! (#18)
     user-select: auto;
     */
-  }
+	}
 }
 
 .meeseOS-gui-textarea-field {
-  flex-direction: column;
+	flex-direction: column;
 
-  & > textarea {
-    flex-grow: 1;
-  }
+	& > textarea {
+		flex-grow: 1;
+	}
 }
 
 .meeseOS-gui-select-field {
-  & > div {
-    position: relative;
-    flex-basis: 100%;
+	& > div {
+		position: relative;
+		flex-basis: 100%;
 
-    & > select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-    }
+		& > select {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+		}
 
-    &::after {
-      content: '\21B4';
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      right: calc($base-margin / 2);
-    }
-  }
+		&::after {
+			content: "\21B4";
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			right: calc($base-margin / 2);
+		}
+	}
 }
 
 .meeseOS-gui-toggle-field {
-  & > label {
-    position: relative;
-    user-select: none !important;
-    display: flex;
+	& > label {
+		position: relative;
+		user-select: none !important;
+		display: flex;
 
-    & > input {
-      display: block;
-      position: absolute;
-      visibility: hidden;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+		& > input {
+			display: block;
+			position: absolute;
+			visibility: hidden;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
 
-      &:checked + span::after {
-        display: block;
-      }
-    }
+			&:checked + span::after {
+				display: block;
+			}
+		}
 
-    & > .meeseOS-toggle-input {
-      position: relative;
-      display: inline-block;
-      width: 1em;
-      height: 1em;
+		& > .meeseOS-toggle-input {
+			position: relative;
+			display: inline-block;
+			width: 1em;
+			height: 1em;
 
-      &::after,
-      &::before {
-        content: '';
-        position: absolute;
-        width: 1em;
-        height: 1em;
-        box-sizing: border-box;
-      }
+			&::after,
+			&::before {
+				content: "";
+				position: absolute;
+				width: 1em;
+				height: 1em;
+				box-sizing: border-box;
+			}
 
-      &::before {
-        z-index: 10;
-      }
+			&::before {
+				z-index: 10;
+			}
 
-      &::after {
-        content: '\274C';
-        display: none;
-        font-size: 80%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 20;
-      }
-    }
+			&::after {
+				content: "\274C";
+				display: none;
+				font-size: 80%;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 20;
+			}
+		}
 
-    & > .meeseOS-toggle-label {
-      display: block;
-      flex-grow: 1;
-      position: relative;
-      padding-left: calc($base-margin / 2);
-    }
-  }
+		& > .meeseOS-toggle-label {
+			display: block;
+			flex-grow: 1;
+			position: relative;
+			padding-left: calc($base-margin / 2);
+		}
+	}
 }
 
 .meeseOS-gui-field-label {
-  $half-margin: calc($base-margin / 2);
+	$half-margin: calc($base-margin / 2);
 
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: left;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: left;
 
-  & > label {
-    display: block;
-  }
+	& > label {
+		display: block;
+	}
 
-  & > .meeseOS-gui {
-    margin: 0;
-  }
+	& > .meeseOS-gui {
+		margin: 0;
+	}
 
-  &.meeseOS-gui-field-label-on-top {
-    flex-direction: column;
+	&.meeseOS-gui-field-label-on-top {
+		flex-direction: column;
 
-    & > label {
-      margin-bottom: $half-margin;
-    }
-  }
+		& > label {
+			margin-bottom: $half-margin;
+		}
+	}
 
-  &.meeseOS-gui-field-label-on-bottom {
-    flex-direction: column-reverse;
+	&.meeseOS-gui-field-label-on-bottom {
+		flex-direction: column-reverse;
 
-    & > label {
-      margin-top: $half-margin;
-    }
-  }
+		& > label {
+			margin-top: $half-margin;
+		}
+	}
 
-  &.meeseOS-gui-field-label-on-left {
-    flex-direction: row;
-    align-items: center;
+	&.meeseOS-gui-field-label-on-left {
+		flex-direction: row;
+		align-items: center;
 
-    & > label {
-      margin-right: $half-margin;
-    }
+		& > label {
+			margin-right: $half-margin;
+		}
 
-    & > .meeseOS-gui {
-      flex: 1 1;
-    }
-  }
+		& > .meeseOS-gui {
+			flex: 1 1;
+		}
+	}
 }

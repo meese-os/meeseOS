@@ -28,91 +28,116 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {doubleTap} from '../utils';
-import {Element} from './Element';
-import {Icon} from './Icon';
+import { h } from "hyperapp";
+import { doubleTap } from "../utils";
+import { Element } from "./Element";
+import { Icon } from "./Icon";
 
 const tapper = doubleTap();
 
 export const IconViewEntry = (entry, index, props) => () => {
-  const icon = entry.icon || {name: 'application-x-executable'};
-  const selected = props.selectedIndex === index;
+	const icon = entry.icon || { name: "application-x-executable" };
+	const selected = props.selectedIndex === index;
 
-  return h('div', {
-    class: 'meeseOS-gui-icon-view-entry' + (selected ? ' meeseOS__active' : ''),
-    ontouchstart: (ev) => tapper(ev, () => props.onactivate({data: entry.data, index, ev})),
-    ondblclick: (ev) => props.onactivate({data: entry.data, index, ev}),
-    onclick: (ev) => props.onselect({data: entry.data, index, ev}),
-    oncontextmenu: (ev) => props.oncontextmenu({data: entry.data, index, ev}),
-    oncreate: (el) => props.oncreate({data: entry.data, index, el})
-  }, [
-    h('div', {class: 'meeseOS__container'}, [
-      h('div', {class: 'meeseOS__image'}, [
-        h(Icon, icon)
-      ]),
-      h('div', {class: 'meeseOS__label'}, [
-        h('span', {}, entry.label)
-      ])
-    ])
-  ]);
+	return h(
+		"div",
+		{
+			class:
+				"meeseOS-gui-icon-view-entry" + (selected ? " meeseOS__active" : ""),
+			ontouchstart: (ev) =>
+				tapper(ev, () => props.onactivate({ data: entry.data, index, ev })),
+			ondblclick: (ev) => props.onactivate({ data: entry.data, index, ev }),
+			onclick: (ev) => props.onselect({ data: entry.data, index, ev }),
+			oncontextmenu: (ev) =>
+				props.oncontextmenu({ data: entry.data, index, ev }),
+			oncreate: (el) => props.oncreate({ data: entry.data, index, el }),
+		},
+		[
+			h("div", { class: "meeseOS__container" }, [
+				h("div", { class: "meeseOS__image" }, [h(Icon, icon)]),
+				h("div", { class: "meeseOS__label" }, [h("span", {}, entry.label)]),
+			]),
+		]
+	);
 };
 
 export const IconView = (props) => {
-  const inner = h('div', {
-    class: 'meeseOS-gui-icon-view-wrapper',
-    oncreate: el => (el.scrollTop = props.scrollTop),
-    onupdate: el => {
-      if (props.selectedIndex < 0) {
-        el.scrollTop = props.scrollTop;
-      }
-    }
-  }, props.entries.map((entry, index) => {
-    return h(IconViewEntry(entry, index, props));
-  }));
+	const inner = h(
+		"div",
+		{
+			class: "meeseOS-gui-icon-view-wrapper",
+			oncreate: (el) => (el.scrollTop = props.scrollTop),
+			onupdate: (el) => {
+				if (props.selectedIndex < 0) {
+					el.scrollTop = props.scrollTop;
+				}
+			},
+		},
+		props.entries.map((entry, index) => {
+			return h(IconViewEntry(entry, index, props));
+		})
+	);
 
-  return h(Element, Object.assign({
-    class: 'meeseOS-gui-icon-view'
-  }, props.box || {}), inner);
+	return h(
+		Element,
+		Object.assign(
+			{
+				class: "meeseOS-gui-icon-view",
+			},
+			props.box || {}
+		),
+		inner
+	);
 };
 
-export const iconView = ({
-  component: (state, actions) => {
-    const newProps = Object.assign({
-      entries: [],
-      onselect: ({data, index, ev}) => {
-        actions.select({data, index, ev});
-        actions.setSelectedIndex(index);
-      },
-      onactivate: ({data, index, ev}) => {
-        actions.activate({data, index, ev});
-        actions.setSelectedIndex(-1);
-      },
-      oncontextmenu: ({data, index, ev}) => {
-        actions.select({data, index, ev});
-        actions.contextmenu({data, index, ev});
-        actions.setSelectedIndex(index);
-      },
-      oncreate: (args) => {
-        actions.created(args);
-      }
-    }, state);
+export const iconView = {
+	component: (state, actions) => {
+		const newProps = Object.assign(
+			{
+				entries: [],
+				onselect: ({ data, index, ev }) => {
+					actions.select({ data, index, ev });
+					actions.setSelectedIndex(index);
+				},
+				onactivate: ({ data, index, ev }) => {
+					actions.activate({ data, index, ev });
+					actions.setSelectedIndex(-1);
+				},
+				oncontextmenu: ({ data, index, ev }) => {
+					actions.select({ data, index, ev });
+					actions.contextmenu({ data, index, ev });
+					actions.setSelectedIndex(index);
+				},
+				oncreate: (args) => {
+					actions.created(args);
+				},
+			},
+			state
+		);
 
-    return (props = {}) => IconView(Object.assign(newProps, props));
-  },
+		return (props = {}) => IconView(Object.assign(newProps, props));
+	},
 
-  state: state => Object.assign({
-    selectedIndex: -1,
-    scrollTop: 0
-  }, state),
+	state: (state) =>
+		Object.assign(
+			{
+				selectedIndex: -1,
+				scrollTop: 0,
+			},
+			state
+		),
 
-  actions: actions => Object.assign({
-    select: () => () => ({}),
-    activate: () => () => ({}),
-    contextmenu: () => () => ({}),
-    created: () => () => ({}),
-    setEntries: entries => () => ({entries}),
-    setScrollTop: scrollTop => state => ({scrollTop}),
-    setSelectedIndex: selectedIndex => state => ({selectedIndex}),
-  }, actions || {})
-});
+	actions: (actions) =>
+		Object.assign(
+			{
+				select: () => () => ({}),
+				activate: () => () => ({}),
+				contextmenu: () => () => ({}),
+				created: () => () => ({}),
+				setEntries: (entries) => () => ({ entries }),
+				setScrollTop: (scrollTop) => (state) => ({ scrollTop }),
+				setSelectedIndex: (selectedIndex) => (state) => ({ selectedIndex }),
+			},
+			actions || {}
+		),
+};

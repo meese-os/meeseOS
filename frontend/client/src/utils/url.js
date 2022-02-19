@@ -38,41 +38,44 @@
  * Resolves an URL
  * @param {CoreConfig} configuration
  */
-export const urlResolver = configuration => {
-  const {http, ws} = configuration;
+export const urlResolver = (configuration) => {
+	const { http, ws } = configuration;
 
-  /**
-   * @param {string} [endpoint='/']
-   * @param {URLResolverOptions} [options={}]
-   * @param {PackageMetadata} [metadata={}] Metadata for package resolving
-   */
-  return (endpoint = '/', options = {}, metadata = {}) => {
-    if (typeof endpoint !== 'string') {
-      return http.public;
-    } else if (endpoint.match(/^(http|ws|ftp)s?:/i)) {
-      return endpoint;
-    }
+	/**
+	 * @param {string} [endpoint='/']
+	 * @param {URLResolverOptions} [options={}]
+	 * @param {PackageMetadata} [metadata={}] Metadata for package resolving
+	 */
+	return (endpoint = "/", options = {}, metadata = {}) => {
+		if (typeof endpoint !== "string") {
+			return http.public;
+		} else if (endpoint.match(/^(http|ws|ftp)s?:/i)) {
+			return endpoint;
+		}
 
-    const {type, prefix} = {
-      type: null,
-      prefix: options.type === 'websocket',
-      ...options
-    };
+		const { type, prefix } = {
+			type: null,
+			prefix: options.type === "websocket",
+			...options,
+		};
 
-    const str = type === 'websocket' ? ws.uri : http.uri;
+		const str = type === "websocket" ? ws.uri : http.uri;
 
-    let url = endpoint.replace(/^\/+/, '');
-    if (metadata.type) {
-      const path = endpoint.replace(/^\/?/, '/');
-      const type = metadata.type === 'theme' ? 'themes' : (
-        metadata.type === 'icons' ? 'icons' : 'apps'
-      );
+		let url = endpoint.replace(/^\/+/, "");
+		if (metadata.type) {
+			const path = endpoint.replace(/^\/?/, "/");
+			const type =
+				metadata.type === "theme"
+					? "themes"
+					: metadata.type === "icons"
+					? "icons"
+					: "apps";
 
-      url = `${type}/${metadata.name}${path}`;
-    }
+			url = `${type}/${metadata.name}${path}`;
+		}
 
-    return prefix
-      ? str.replace(/\/$/, '') + url.replace(/^\/?/, '/')
-      : http.public.replace(/^\/?/, '/') + url;
-  };
+		return prefix
+			? str.replace(/\/$/, "") + url.replace(/^\/?/, "/")
+			: http.public.replace(/^\/?/, "/") + url;
+	};
 };

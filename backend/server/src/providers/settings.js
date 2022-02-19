@@ -28,34 +28,39 @@
  * @licence Simplified BSD License
  */
 
-const Settings = require('../settings');
-const {ServiceProvider} = require('@aaronmeese.com/common');
+const Settings = require("../settings");
+const { ServiceProvider } = require("@aaronmeese.com/common");
 
 /**
  * OS.js Settings Service Provider
  */
 class SettingsServiceProvider extends ServiceProvider {
+	constructor(core, options) {
+		super(core, options);
 
-  constructor(core, options) {
-    super(core, options);
+		this.settings = new Settings(core, options);
+	}
 
-    this.settings = new Settings(core, options);
-  }
+	destroy() {
+		super.destroy();
+		this.settings.destroy();
+	}
 
-  destroy() {
-    super.destroy();
-    this.settings.destroy();
-  }
+	async init() {
+		this.core
+			.make("meeseOS/express")
+			.routeAuthenticated("post", "/settings", (req, res) =>
+				this.settings.save(req, res)
+			);
 
-  async init() {
-    this.core.make('meeseOS/express')
-      .routeAuthenticated('post', '/settings', (req, res) => this.settings.save(req, res));
+		this.core
+			.make("meeseOS/express")
+			.routeAuthenticated("get", "/settings", (req, res) =>
+				this.settings.load(req, res)
+			);
 
-    this.core.make('meeseOS/express')
-      .routeAuthenticated('get', '/settings', (req, res) => this.settings.load(req, res));
-
-    return this.settings.init();
-  }
+		return this.settings.init();
+	}
 }
 
 module.exports = SettingsServiceProvider;

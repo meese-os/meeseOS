@@ -28,174 +28,173 @@
  * @licence Simplified BSD License
  */
 
-const path = require('path');
-const os = require('os');
-const pty = require('node-pty');
-const {v4: uuidv4} = require('uuid');
-require('dotenv').config({
-	path: path.resolve(__dirname, 'scripts/.env')
+const path = require("path");
+const os = require("os");
+const pty = require("node-pty");
+const { v4: uuidv4 } = require("uuid");
+require("dotenv").config({
+	path: path.resolve(__dirname, "scripts/.env"),
 });
 
-const windowsPlatform = os.platform() === 'win32';
-let connections = {};
+const windowsPlatform = os.platform() === "win32";
+const connections = {};
 let terminals = [];
 
 /**
  * Creates a new Terminal
  */
 const createTerminal = (core, ws, options = {}, args = []) => {
-  const hostname = core.config('xterm.hostname', 'localhost');
-  const username = process.env.USERNAME || options.username || 'root';
-  const password = process.env.PASSWORD || options.password || 'toor';
-  const sshCommand = `ssh -o StrictHostKeyChecking=no ${username}@${hostname}`;
-  let sshPassCommand = `sshpass -p ${password} ${sshCommand}`;
+	const hostname = core.config("xterm.hostname", "localhost");
+	const username = process.env.USERNAME || options.username || "root";
+	const password = process.env.PASSWORD || options.password || "toor";
+	const sshCommand = `ssh -o StrictHostKeyChecking=no ${username}@${hostname}`;
+	let sshPassCommand = `sshpass -p ${password} ${sshCommand}`;
 
-  // If you're on Windows, you have to run `sshpass` from your WSL distro.
-  // Make sure you have the sshpass binary installed.
-  if (windowsPlatform) sshPassCommand = `wsl -- ${sshPassCommand}`;
-  args = [...args, '-c', sshPassCommand];
+	// If you're on Windows, you have to run `sshpass` from your WSL distro.
+	// Make sure you have the sshpass binary installed.
+	if (windowsPlatform) sshPassCommand = `wsl -- ${sshPassCommand}`;
+	args = [...args, "-c", sshPassCommand];
 
-  // Logs on the server side (CLI), so does not pose a security threat
-  console.log('[Xterm]', 'Creating terminal...', {options, args});
+	// Logs on the server side (CLI), so does not pose a security threat
+	console.log("[Xterm]", "Creating terminal...", { options, args });
 
-  const shell = windowsPlatform ? 'powershell.exe' : 'bash';
-  const size = options.size || {cols: 80, rows: 24};
-  const term = pty.spawn(shell, args, {
-    cols: size.cols,
-    rows: size.rows,
-    name: 'xterm-color',
-    cwd: process.cwd(),
-    env: process.env
-  });
+	const shell = windowsPlatform ? "powershell.exe" : "bash";
+	const size = options.size || { cols: 80, rows: 24 };
+	const term = pty.spawn(shell, args, {
+		cols: size.cols,
+		rows: size.rows,
+		name: "xterm-color",
+		cwd: process.cwd(),
+		env: process.env,
+	});
 
-  const kill = () => {
-    console.log('[Xterm]', 'Closing terminal...');
-    term.kill();
+	const kill = () => {
+		console.log("[Xterm]", "Closing terminal...");
+		term.kill();
 
-    const foundIndex = terminals.findIndex(t => t.pid == term.pid);
-    if (foundIndex !== -1) {
-      terminals.splice(foundIndex, 1);
-    }
+		const foundIndex = terminals.findIndex((t) => t.pid == term.pid);
+		if (foundIndex !== -1) {
+			terminals.splice(foundIndex, 1);
+		}
 
-    if (connections[options.uuid]) {
-      delete connections[options.uuid];
-    }
-  };
+		if (connections[options.uuid]) {
+			delete connections[options.uuid];
+		}
+	};
 
-  term.onExit((ev) => {
-    try {
-      // This is a workaround for ping wrapper
-      ws.send(JSON.stringify({action: 'exit', event: ev}));
-    } catch (e) {
-      console.warn(e);
-    }
-  })
+	term.onExit((ev) => {
+		try {
+			// This is a workaround for ping wrapper
+			ws.send(JSON.stringify({ action: "exit", event: ev }));
+		} catch (e) {
+			console.warn(e);
+		}
+	});
 
-  term.onData((data) => {
-    try {
-      // This is a workaround for ping wrapper
-      ws.send(JSON.stringify({content: data}));
-    } catch (e) {
-      console.warn(e);
-    }
-  });
+	term.onData((data) => {
+		try {
+			// This is a workaround for ping wrapper
+			ws.send(JSON.stringify({ content: data }));
+		} catch (e) {
+			console.warn(e);
+		}
+	});
 
-  ws.on('message', (data) => {
-    // This is a workaround for ping wrapper
-    if (typeof data === 'string') {
-      const message = JSON.parse(data);
-      if (message.data) {
-        term.write(message.data);
-      }
-    } else {
-      term.write(data);
-    }
-  });
+	ws.on("message", (data) => {
+		// This is a workaround for ping wrapper
+		if (typeof data === "string") {
+			const message = JSON.parse(data);
+			if (message.data) {
+				term.write(message.data);
+			}
+		} else {
+			term.write(data);
+		}
+	});
 
-  ws.on('close', () => kill());
+	ws.on("close", () => kill());
 
-  terminals.push({
-    uuid: options.uuid,
-    terminal: term
-  });
+	terminals.push({
+		uuid: options.uuid,
+		terminal: term,
+	});
 
-  return term;
+	return term;
 };
 
 /**
  * Creates a new Terminal connection
  */
 const createConnection = (core, ws) => {
-  console.log('[Xterm]', 'Creating connection...');
-  let pinged = false;
+	console.log("[Xterm]", "Creating connection...");
+	let pinged = false;
 
-  ws.on('message', (uuid) => {
-    if (pinged) return;
-    try {
-      const term = createTerminal(core, ws, connections[uuid]);
-      ws.send(String(term.pid));
-      pinged = {uuid, pid: term.pid};
-    } catch (e) {
-      console.warn(e);
-    }
-  });
+	ws.on("message", (uuid) => {
+		if (pinged) return;
+		try {
+			const term = createTerminal(core, ws, connections[uuid]);
+			ws.send(String(term.pid));
+			pinged = { uuid, pid: term.pid };
+		} catch (e) {
+			console.warn(e);
+		}
+	});
 };
 
 /**
  * Add routes for application
  */
 const init = async (core, proc) => {
-  const {app} = core;
+	const { app } = core;
 
-  app.post(proc.resource('/create'), (req, res) => {
-    console.log('[Xterm]', 'Requested connection...');
+	app.post(proc.resource("/create"), (req, res) => {
+		console.log("[Xterm]", "Requested connection...");
 
-    const username = req.session.user.username;
-    const uuid = uuidv4();
+		const username = req.session.user.username;
+		const uuid = uuidv4();
 
-    connections[uuid] = {
-      options: req.body,
-      username,
-      uuid
-    };
+		connections[uuid] = {
+			options: req.body,
+			username,
+			uuid,
+		};
 
-    res.json({uuid});
-  });
+		res.json({ uuid });
+	});
 
-  app.post(proc.resource('/resize'), (req, res) => {
-    console.log('[Xterm]', 'Requested resize...');
+	app.post(proc.resource("/resize"), (req, res) => {
+		console.log("[Xterm]", "Requested resize...");
 
-    const {size, pid, uuid} = req.body;
-    const {cols, rows} = size;
+		const { size, pid, uuid } = req.body;
+		const { cols, rows } = size;
 
-    const found = terminals.find(iter => (
-      iter.terminal.pid === pid && iter.uuid === uuid
-    ));
+		const found = terminals.find(
+			(iter) => iter.terminal.pid === pid && iter.uuid === uuid
+		);
 
-    if (found) {
-      found.terminal.resize(cols, rows);
-    }
+		if (found) {
+			found.terminal.resize(cols, rows);
+		}
 
-    res.send();
-  });
+		res.send();
+	});
 
-  app.ws(proc.resource('/socket'), (ws, req) => {
-    createConnection(core, ws);
-  });
+	app.ws(proc.resource("/socket"), (ws, req) => {
+		createConnection(core, ws);
+	});
 };
-
 
 /**
  * Destroy the server
  */
 const destroy = () => {
-  terminals.forEach(iter => iter.terminal.kill());
-  terminals = [];
+	terminals.forEach((iter) => iter.terminal.kill());
+	terminals = [];
 };
 
 module.exports = (core, proc) => {
-  return {
-    init: () => init(core, proc),
-    destroy
-  };
+	return {
+		init: () => init(core, proc),
+		destroy,
+	};
 };

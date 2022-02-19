@@ -12,8 +12,8 @@ This is the Xterm Application for OS.js v3
 
 ## Requirements
 
-* `bash`
-* `ssh`
+- `bash`
+- `ssh`
 
 ## Installation
 
@@ -32,27 +32,27 @@ If you want to change this behavior, you can add this to your `src/server/config
 
 ```javascript
 module.exports = {
-  // ... append this to your export ...
-  xterm: {
-    // You can also set this as a string to force a username
-    login: false
-  }
-}
+	// ... append this to your export ...
+	xterm: {
+		// You can also set this as a string to force a username
+		login: false,
+	},
+};
 ```
 
 You can also change the connection arguments:
 
 ```javascript
 module.exports = {
-  // ... append this to your export ...
-  xterm: {
-    ssh: {
-      // Custom hostname
-      hostname: 'localhost',
+	// ... append this to your export ...
+	xterm: {
+		ssh: {
+			// Custom hostname
+			hostname: "localhost",
 
-      // Custom port
-      args: '-p 1022'
-    }
-  }
-}
+			// Custom port
+			args: "-p 1022",
+		},
+	},
+};
 ```

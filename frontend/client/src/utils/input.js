@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-const modifierNames =  ['ctrl', 'shift', 'alt', 'meta'];
+const modifierNames = ["ctrl", "shift", "alt", "meta"];
 
 /**
  * @typedef {Object} NormalizedEventPosition
@@ -45,13 +45,13 @@ const modifierNames =  ['ctrl', 'shift', 'alt', 'meta'];
  * @return {boolean}
  */
 export const matchKeyCombo = (combo, ev) => {
-  const checkKeys = String(combo).toLowerCase().split('+');
-  const keyName = String(ev.key).toLowerCase();
-  const validKeypress = checkKeys.every(k => modifierNames.indexOf(k) !== -1
-    ? ev[k + 'Key']
-    : keyName === k);
+	const checkKeys = String(combo).toLowerCase().split("+");
+	const keyName = String(ev.key).toLowerCase();
+	const validKeypress = checkKeys.every((k) =>
+		modifierNames.indexOf(k) !== -1 ? ev[k + "Key"] : keyName === k
+	);
 
-  return validKeypress;
+	return validKeypress;
 };
 
 /**
@@ -60,15 +60,15 @@ export const matchKeyCombo = (combo, ev) => {
  * @return {NormalizedEventPosition}
  */
 export const getEvent = (ev) => {
-  let {clientX, clientY, target} = ev;
-  const touch = ev.touches || ev.changedTouches || [];
+	let { clientX, clientY, target } = ev;
+	const touch = ev.touches || ev.changedTouches || [];
 
-  if (touch.length) {
-    clientX = touch[0].clientX;
-    clientY = touch[0].clientY;
-  }
+	if (touch.length) {
+		clientX = touch[0].clientX;
+		clientY = touch[0].clientY;
+	}
 
-  return {clientX, clientY, touch: touch.length > 0, target};
+	return { clientX, clientY, touch: touch.length > 0, target };
 };
 
 /**
@@ -77,20 +77,20 @@ export const getEvent = (ev) => {
  * @return {Function} Handler with => (ev, cb)
  */
 export const doubleTap = (timeout = 250) => {
-  let tapped = false;
-  let timer;
+	let tapped = false;
+	let timer;
 
-  return (ev, cb) => {
-    timer = clearTimeout(timer);
-    timer = setTimeout(() => (tapped = false), timeout);
+	return (ev, cb) => {
+		timer = clearTimeout(timer);
+		timer = setTimeout(() => (tapped = false), timeout);
 
-    if (tapped) {
-      ev.preventDefault();
-      return cb(ev);
-    }
+		if (tapped) {
+			ev.preventDefault();
+			return cb(ev);
+		}
 
-    tapped = true;
+		tapped = true;
 
-    return false;
-  };
+		return false;
+	};
 };

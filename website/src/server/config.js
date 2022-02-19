@@ -34,15 +34,15 @@
 // Complete config tree: https://github.com/os-js/osjs-server/blob/master/src/config.js
 //
 
-const path = require('path');
-const root = path.resolve(__dirname, '../../');
-const hostname = 'raspberrypi';
+const path = require("path");
+const root = path.resolve(__dirname, "../../");
+const hostname = "raspberrypi";
 
 module.exports = {
-  root,
-  port: 8000,
-  public: path.resolve(root, 'dist'),
-  xterm: {
+	root,
+	port: 8000,
+	public: path.resolve(root, "dist"),
+	xterm: {
 		hostname: hostname,
-  },
+	},
 };

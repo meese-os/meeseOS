@@ -28,55 +28,70 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import Dialog from '../dialog';
-import {Box} from '@aaronmeese.com/gui';
+import { h, app } from "hyperapp";
+import Dialog from "../dialog";
+import { Box } from "@aaronmeese.com/gui";
 
 /**
  * Default OS.js Confirm Dialog
  */
 export default class ConfirmDialog extends Dialog {
+	/**
+	 * Constructor
+	 * @param {Core} core OS.js Core reference
+	 * @param {Object} args Arguments given from service creation
+	 * @param {String} [args.title] Dialog title
+	 * @param {String} [args.message] Dialog message
+	 * @param {Boolean} [args.yesno=true] Yes/No or Ok/Cancel
+	 * @param {String[]} [args.buttons] Custom buttons
+	 * @param {Function} callback The callback function
+	 */
+	constructor(core, args, callback) {
+		const yesno = typeof args.yesno === "undefined" || args.yesno === true;
 
-  /**
-   * Constructor
-   * @param {Core} core OS.js Core reference
-   * @param {Object} args Arguments given from service creation
-   * @param {String} [args.title] Dialog title
-   * @param {String} [args.message] Dialog message
-   * @param {Boolean} [args.yesno=true] Yes/No or Ok/Cancel
-   * @param {String[]} [args.buttons] Custom buttons
-   * @param {Function} callback The callback function
-   */
-  constructor(core, args, callback) {
-    const yesno = typeof args.yesno === 'undefined' || args.yesno === true;
+		const buttons =
+			args.buttons instanceof Array
+				? args.buttons
+				: yesno
+				? ["yes", "no"]
+				: ["ok", "cancel"];
 
-    const buttons = args.buttons instanceof Array
-      ? args.buttons
-      : yesno ? ['yes', 'no'] : ['ok', 'cancel'];
+		super(
+			core,
+			args,
+			{
+				className: "confirm",
+				window: {
+					title: args.title || "Confirm",
+					attributes: {
+						minDimension: {
+							height: 140,
+						},
+					},
+				},
+				buttons,
+			},
+			callback
+		);
+	}
 
-    super(core, args, {
-      className: 'confirm',
-      window: {
-        title: args.title || 'Confirm',
-        attributes: {
-          minDimension: {
-            height: 140
-          }
-        }
-      },
-      buttons
-    }, callback);
-  }
-
-  render(options) {
-    super.render(options, ($content) => {
-      app({}, {}, (state, actions) => this.createView([
-        h(Box, {grow: 1}, [
-          h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message))
-        ])
-      ]), $content);
-    });
-  }
-
+	render(options) {
+		super.render(options, ($content) => {
+			app(
+				{},
+				{},
+				(state, actions) =>
+					this.createView([
+						h(Box, { grow: 1 }, [
+							h(
+								"div",
+								{ class: "meeseOS-dialog-message" },
+								String(this.args.message)
+							),
+						]),
+					]),
+				$content
+			);
+		});
+	}
 }
-

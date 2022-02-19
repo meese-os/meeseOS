@@ -29,112 +29,112 @@
  */
 
 .meeseOS-gui-menubar {
-  margin: 0 !important;
+	margin: 0 !important;
 
-  & > div {
-    box-sizing: border-box;
+	& > div {
+		box-sizing: border-box;
 
-    & > span {
-      margin: calc($base-margin / 2);
-      display: block;
-      pointer-events: none;
-    }
-  }
+		& > span {
+			margin: calc($base-margin / 2);
+			display: block;
+			pointer-events: none;
+		}
+	}
 }
 
 .meeseOS-gui-menu {
-  position: absolute;
-  z-index: 9999999999;
+	position: absolute;
+	z-index: 9999999999;
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
 
-    & > li {
-      margin: 0;
-      padding: 0;
+		& > li {
+			margin: 0;
+			padding: 0;
 
-      & > div {
-        position: relative;
-        cursor: pointer;
+			& > div {
+				position: relative;
+				cursor: pointer;
 
-        & > ul {
-          display: none;
-          position: absolute;
-          z-index: 10;
-          left: 100%;
-          top: 0;
+				& > ul {
+					display: none;
+					position: absolute;
+					z-index: 10;
+					left: 100%;
+					top: 0;
 
-          &.clamp-right {
-            left: auto;
-            right: 100%;
-          }
-        }
+					&.clamp-right {
+						left: auto;
+						right: 100%;
+					}
+				}
 
-        &:hover > ul {
-          display: block;
-        }
-      }
-    }
-  }
+				&:hover > ul {
+					display: block;
+				}
+			}
+		}
+	}
 }
 
 .meeseOS-gui-menu-separator {
-  height: 1px;
-  display: block;
-  padding: calc($base-margin / 2);
-  box-sizing: border-box;
+	height: 1px;
+	display: block;
+	padding: calc($base-margin / 2);
+	box-sizing: border-box;
 
-  &::after {
-    content: '';
-    display: block;
-    background: rgba(#fff, 0.5);
-    height: 1px;
-  }
+	&::after {
+		content: "";
+		display: block;
+		background: rgba(#fff, 0.5);
+		height: 1px;
+	}
 }
 
 .meeseOS-gui-menu-label {
-  display: flex;
-  padding: calc($base-margin / 2);
-  padding-right: 1.5em;
-  box-sizing: border-box;
-  position: relative;
-  pointer-events: none;
-  white-space: nowrap;
-  min-height: 1rem;
-  align-items: center;
+	display: flex;
+	padding: calc($base-margin / 2);
+	padding-right: 1.5em;
+	box-sizing: border-box;
+	position: relative;
+	pointer-events: none;
+	white-space: nowrap;
+	min-height: 1rem;
+	align-items: center;
 
-  & > .meeseOS-icon {
-    margin-right: calc($base-margin / 2);
-  }
+	& > .meeseOS-icon {
+		margin-right: calc($base-margin / 2);
+	}
 
-  & > .meeseOS-gui-menu-checkbox {
-    margin-right: calc($base-margin / 2);
+	& > .meeseOS-gui-menu-checkbox {
+		margin-right: calc($base-margin / 2);
 
-    &::after {
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      content: '\2713';
-      text-align: center;
-      display: none;
-    }
+		&::after {
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			content: "\2713";
+			text-align: center;
+			display: none;
+		}
 
-    &.active::after {
-      display: inline;
-    }
-  }
+		&.active::after {
+			display: inline;
+		}
+	}
 }
 
 .meeseOS-gui-menu-container {
-  &[data-has-children] > .meeseOS-gui-menu-label {
-    &::after {
-      content: '\25B6';
-      position: absolute;
-      right: calc($base-margin / 2);
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
+	&[data-has-children] > .meeseOS-gui-menu-label {
+		&::after {
+			content: "\25B6";
+			position: absolute;
+			right: calc($base-margin / 2);
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
 }

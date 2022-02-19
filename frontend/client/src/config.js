@@ -28,93 +28,92 @@
  * @license Simplified BSD License
  */
 
-import defaultWallpaper from './styles/wallpaper.png';
-import defaultIcon from './styles/logo-blue-32x32.png';
+import defaultWallpaper from "./styles/wallpaper.png";
+import defaultIcon from "./styles/logo-blue-32x32.png";
 
 /**
  * TODO: typedef
  * @typedef {Object} CoreConfig
  */
 
-const createUri = str => str
-  .replace(/(index\.(html?|php))$/, '')
-  .replace(/\/?$/, '/');
+const createUri = (str) =>
+	str.replace(/(index\.(html?|php))$/, "").replace(/\/?$/, "/");
 
 const pathname = createUri(window.location.pathname);
 
 const href = createUri(window.location.href);
 
 export const defaultConfiguration = {
-  development: !(process.env.NODE_ENV || '').match(/^prod/i),
-  standalone: false,
+	development: !(process.env.NODE_ENV || "").match(/^prod/i),
+	standalone: false,
 
-  http: {
-    ping: true,
-    public: pathname,
-    uri: href
-  },
+	http: {
+		ping: true,
+		public: pathname,
+		uri: href,
+	},
 
-  ws: {
-    connectInterval: 5000,
-    uri: href.replace(/^http/, 'ws'),
-    disabled: false
-  },
+	ws: {
+		connectInterval: 5000,
+		uri: href.replace(/^http/, "ws"),
+		disabled: false,
+	},
 
-  packages: {
-    manifest: '/metadata.json',
-    metadata: [],
-    hidden: [],
-    permissions: {},
-    overrideMetadata: {}
-  },
+	packages: {
+		manifest: "/metadata.json",
+		metadata: [],
+		hidden: [],
+		permissions: {},
+		overrideMetadata: {},
+	},
 
-  application: {
-    pinned: [],
-    autostart: [],
-    categories: {
-      development: {
-        label: 'Development',
-        icon: 'applications-development'
-      },
-      science: {
-        label: 'Science',
-        icon: 'applications-science'
-      },
-      games: {
-        label: 'Games',
-        icon: 'applications-games'
-      },
-      graphics: {
-        label: 'Graphics',
-        icon: 'applications-graphics'
-      },
-      network: {
-        label: 'Network',
-        icon: 'applications-internet'
-      },
-      multimedia: {
-        label: 'Multimedia',
-        icon: 'applications-multimedia'
-      },
-      office: {
-        label: 'Office',
-        icon: 'applications-office'
-      },
-      system: {
-        label: 'System',
-        icon: 'applications-system'
-      },
-      utilities: {
-        label: 'Utilities',
-        icon: 'applications-utilities'
-      },
-      other: {
-        label: 'Other',
-        icon: 'applications-other'
-      }
-    },
-    windows: [
-      /*
+	application: {
+		pinned: [],
+		autostart: [],
+		categories: {
+			development: {
+				label: "Development",
+				icon: "applications-development",
+			},
+			science: {
+				label: "Science",
+				icon: "applications-science",
+			},
+			games: {
+				label: "Games",
+				icon: "applications-games",
+			},
+			graphics: {
+				label: "Graphics",
+				icon: "applications-graphics",
+			},
+			network: {
+				label: "Network",
+				icon: "applications-internet",
+			},
+			multimedia: {
+				label: "Multimedia",
+				icon: "applications-multimedia",
+			},
+			office: {
+				label: "Office",
+				icon: "applications-office",
+			},
+			system: {
+				label: "System",
+				icon: "applications-system",
+			},
+			utilities: {
+				label: "Utilities",
+				icon: "applications-utilities",
+			},
+			other: {
+				label: "Other",
+				icon: "applications-other",
+			},
+		},
+		windows: [
+			/*
       {
         application: string | RegExp | undefined,
         window: string | RegExp | undefined,
@@ -125,155 +124,157 @@ export const defaultConfiguration = {
         }
       }
       */
-    ]
-  },
+		],
+	},
 
-  auth: {
-    ui: {},
+	auth: {
+		ui: {},
 
-    cookie: {
-      name: 'meeseOS.auth',
-      expires: 7,
-      enabled: false,
-      secure: false
-    },
+		cookie: {
+			name: "meeseOS.auth",
+			expires: 7,
+			enabled: false,
+			secure: false,
+		},
 
-    login: {
-      username: null,
-      password: null
-    },
+		login: {
+			username: null,
+			password: null,
+		},
 
-    // NOTE: These are the fallback default values
-    defaultUserData: {
-      id: null,
+		// NOTE: These are the fallback default values
+		defaultUserData: {
+			id: null,
 			// TODO: Create myself an admin user with special permissions
-      username: 'meeseOS',
-      groups: []
-    }
-  },
+			username: "meeseOS",
+			groups: [],
+		},
+	},
 
-  settings: {
-    lock: [],
+	settings: {
+		lock: [],
 
-    defaults: {
-      'meeseOS/default-application': {},
-      'meeseOS/session': [],
-      'meeseOS/desktop': {}
-    }
-  },
+		defaults: {
+			"meeseOS/default-application": {},
+			"meeseOS/session": [],
+			"meeseOS/desktop": {},
+		},
+	},
 
-  search: {
-    enabled: true
-  },
+	search: {
+		enabled: true,
+	},
 
-  notifications: {
-    native: false
-  },
+	notifications: {
+		native: false,
+	},
 
-  desktop: {
-    lock: false,
-    contextmenu: {
-      enabled: true,
-      defaults: true
-    },
+	desktop: {
+		lock: false,
+		contextmenu: {
+			enabled: true,
+			defaults: true,
+		},
 
-    settings: {
-      font: 'Roboto',
-      theme: 'StandardTheme',
-      sounds: 'Sounds',
-      icons: 'GnomeIcons',
-      animations: false,
-      panels: [{
-        position: 'top',
-        items: [
-          {name: 'menu'},
-          {name: 'windows'},
-          {name: 'tray'},
-          {name: 'clock'}
-        ]
-      }],
-      widgets: [],
-      keybindings: {
-        'open-application-menu': 'shift+alt+a',
-        'close-window': 'shift+alt+w'
-      },
-      notifications: {
-        position: 'top-right'
-      },
-      background: {
-        src: defaultWallpaper,
-        color: '#572a79',
-        style: 'cover'
-      },
-      iconview: {
-        enabled: true,
-        path: 'home:/.desktop',
-        fontColorStyle: 'system',
-        fontColor: '#ffffff'
-      }
-    }
-  },
+		settings: {
+			font: "Roboto",
+			theme: "StandardTheme",
+			sounds: "Sounds",
+			icons: "GnomeIcons",
+			animations: false,
+			panels: [
+				{
+					position: "top",
+					items: [
+						{ name: "menu" },
+						{ name: "windows" },
+						{ name: "tray" },
+						{ name: "clock" },
+					],
+				},
+			],
+			widgets: [],
+			keybindings: {
+				"open-application-menu": "shift+alt+a",
+				"close-window": "shift+alt+w",
+			},
+			notifications: {
+				position: "top-right",
+			},
+			background: {
+				src: defaultWallpaper,
+				color: "#572a79",
+				style: "cover",
+			},
+			iconview: {
+				enabled: true,
+				path: "home:/.desktop",
+				fontColorStyle: "system",
+				fontColor: "#ffffff",
+			},
+		},
+	},
 
-  windows: {
-    lofi: false,
-    mobile: false, // Trigger for setting mobile UI
-    template: null, // A string. See 'window.js' for example
-    clampToViewport: true, // Clamp windows to viewport on resize
-    moveKeybinding: 'ctrl'
-  },
+	windows: {
+		lofi: false,
+		mobile: false, // Trigger for setting mobile UI
+		template: null, // A string. See 'window.js' for example
+		clampToViewport: true, // Clamp windows to viewport on resize
+		moveKeybinding: "ctrl",
+	},
 
-  vfs: {
-    watch: true,
-    defaultPath: 'home:/',
-    defaultAdapter: 'system',
-    adapters: {},
-    mountpoints: [{
-      name: 'apps',
-      label: 'Applications',
-      adapter: 'apps',
-      icon: defaultIcon,
-      attributes: {
-        visibility: 'restricted',
-        readOnly: true
-      }
-    }, {
-      name: 'meeseOS',
-      label: 'MeeseOS',
-      adapter: 'system',
-      icon: {name: 'folder-publicshare'}
-    }, {
-      name: 'home',
-      label: 'Home',
-      adapter: 'system',
-      icon: {name: 'user-home'}
-    }],
-    icons: {
-      '^application/zip': {name: 'package-x-generic'},
-      '^application/javascript': {name: 'text-x-script'},
-      '^application/json': {name: 'text-x-script'},
-      '^application/x-python': {name: 'text-x-script'},
-      '^application/php': {name: 'text-x-script'},
-      '^application/pdf': {name: 'x-office-document'},
-      '^application/rtf': {name: 'x-office-document'},
-      '^application/msword': {name: 'x-office-document'},
-      '^application/(xz|tar|gzip)': {name: 'package-x-generic'},
-      '^text/css': {name: 'text-x-script'},
-      '^text/html': {name: 'text-html'},
-      '^(application|text)/xml': {name: 'text-html'},
-      '^application': {name: 'application-x-executable'},
-      '^text': {name: 'text-x-generic'},
-      '^audio': {name: 'audio-x-generic'},
-      '^video': {name: 'video-x-generic'},
-      '^image': {name: 'image-x-generic'}
-    }
-  },
+	vfs: {
+		watch: true,
+		defaultPath: "home:/",
+		defaultAdapter: "system",
+		adapters: {},
+		mountpoints: [
+			{
+				name: "apps",
+				label: "Applications",
+				adapter: "apps",
+				icon: defaultIcon,
+				attributes: {
+					visibility: "restricted",
+					readOnly: true,
+				},
+			},
+			{
+				name: "meeseOS",
+				label: "MeeseOS",
+				adapter: "system",
+				icon: { name: "folder-publicshare" },
+			},
+			{
+				name: "home",
+				label: "Home",
+				adapter: "system",
+				icon: { name: "user-home" },
+			},
+		],
+		icons: {
+			"^application/zip": { name: "package-x-generic" },
+			"^application/javascript": { name: "text-x-script" },
+			"^application/json": { name: "text-x-script" },
+			"^application/x-python": { name: "text-x-script" },
+			"^application/php": { name: "text-x-script" },
+			"^application/pdf": { name: "x-office-document" },
+			"^application/rtf": { name: "x-office-document" },
+			"^application/msword": { name: "x-office-document" },
+			"^application/(xz|tar|gzip)": { name: "package-x-generic" },
+			"^text/css": { name: "text-x-script" },
+			"^text/html": { name: "text-html" },
+			"^(application|text)/xml": { name: "text-html" },
+			"^application": { name: "application-x-executable" },
+			"^text": { name: "text-x-generic" },
+			"^audio": { name: "audio-x-generic" },
+			"^video": { name: "video-x-generic" },
+			"^image": { name: "image-x-generic" },
+		},
+	},
 
-  providers: {
-    globalBlacklist: [
-      'meeseOS/websocket',
-      'meeseOS/clipboard',
-      'meeseOS/gapi'
-    ],
-    globalWhitelist: []
-  }
+	providers: {
+		globalBlacklist: ["meeseOS/websocket", "meeseOS/clipboard", "meeseOS/gapi"],
+		globalWhitelist: [],
+	},
 };

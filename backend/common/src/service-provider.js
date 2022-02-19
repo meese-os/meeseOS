@@ -36,52 +36,47 @@
  * @interface
  */
 export class ServiceProvider {
+	/**
+	 * Constructor
+	 * @param {Core} core Core reference
+	 */
+	constructor(core, options = {}) {
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 */
+		this.core = core;
+		this.options = options;
+	}
 
-  /**
-   * Constructor
-   * @param {Core} core Core reference
-   */
-  constructor(core, options = {}) {
-    /**
-     * Core instance reference
-     * @type {Core}
-     */
-    this.core = core;
-    this.options = options;
-  }
+	/**
+	 * A list of services this provider can create
+	 * @return {string[]}
+	 */
+	provides() {
+		return [];
+	}
 
-  /**
-   * A list of services this provider can create
-   * @return {string[]}
-   */
-  provides() {
-    return [];
-  }
+	/**
+	 * A list of services this provider depends on
+	 * @return {string[]}
+	 */
+	depends() {
+		return [];
+	}
 
-  /**
-   * A list of services this provider depends on
-   * @return {string[]}
-   */
-  depends() {
-    return [];
-  }
+	/**
+	 * Initializes provider
+	 */
+	async init() {}
 
-  /**
-   * Initializes provider
-   */
-  async init() {
-  }
+	/**
+	 * Starts provider
+	 */
+	start() {}
 
-  /**
-   * Starts provider
-   */
-  start() {
-  }
-
-  /**
-   * Destroys provider
-   */
-  destroy() {
-  }
-
+	/**
+	 * Destroys provider
+	 */
+	destroy() {}
 }
