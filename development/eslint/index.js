@@ -45,7 +45,6 @@ module.exports = {
 		"no-return-await": 1,
 		"no-self-compare": 2,
 		"no-with": 2,
-		"no-multi-assign": 1,
 		"no-new-object": 2,
 		"no-trailing-spaces": 2,
 		"comma-spacing": ["error", { before: false, after: true }],
