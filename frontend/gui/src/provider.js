@@ -28,19 +28,20 @@
  * @licence Simplified BSD License
  */
 
-import {ContextMenu} from './contextmenu.js';
+import { ContextMenu } from "./contextmenu.js";
 
 /*
  * Check if a target allows for context menu
  */
-const validContextMenuTarget = ev => {
-  const target = ev.target;
-  let isValid = target.tagName === 'TEXTAREA';
-  if (!isValid && target.tagName === 'INPUT') {
-    isValid = ['text', 'password', 'number', 'email'].indexOf(target.type) !== -1;
-  }
+const validContextMenuTarget = (ev) => {
+	const target = ev.target;
+	let isValid = target.tagName === "TEXTAREA";
+	if (!isValid && target.tagName === "INPUT") {
+		isValid =
+			["text", "password", "number", "email"].indexOf(target.type) !== -1;
+	}
 
-  return isValid;
+	return isValid;
 };
 
 /**
@@ -49,60 +50,59 @@ const validContextMenuTarget = ev => {
  * @desc Provides wrapper services around GUI features
  */
 export class GUIServiceProvider {
+	constructor(core) {
+		this.core = core;
+		this.contextmenu = new ContextMenu(core);
+	}
 
-  constructor(core) {
-    this.core = core;
-    this.contextmenu = new ContextMenu(core);
-  }
+	destroy() {
+		const menu = document.getElementById("meeseOS-context-menu");
+		if (menu) {
+			menu.remove();
+		}
 
-  destroy() {
-    const menu = document.getElementById('meeseOS-context-menu');
-    if (menu) {
-      menu.remove();
-    }
+		this.contextmenu.destroy();
+	}
 
-    this.contextmenu.destroy();
-  }
+	async init() {
+		const contextmenuApi = {
+			show: (...args) => this.contextmenu.show(...args),
+			hide: (...args) => this.contextmenu.hide(...args),
+		};
 
-  async init() {
-    const contextmenuApi = {
-      show: (...args) => this.contextmenu.show(...args),
-      hide: (...args) => this.contextmenu.hide(...args)
-    };
+		this.core.instance("meeseOS/contextmenu", (...args) => {
+			if (args.length) {
+				return contextmenuApi.show(...args);
+			}
 
-    this.core.instance('meeseOS/contextmenu', (...args) => {
-      if (args.length) {
-        return contextmenuApi.show(...args);
-      }
+			return contextmenuApi;
+		});
 
-      return contextmenuApi;
-    });
+		this.core.$root.addEventListener("contextmenu", (ev) => {
+			if (validContextMenuTarget(ev)) {
+				return;
+			}
 
-    this.core.$root.addEventListener('contextmenu', (ev) => {
-      if (validContextMenuTarget(ev)) {
-        return;
-      }
+			ev.stopPropagation();
+			ev.preventDefault();
+		});
+	}
 
-      ev.stopPropagation();
-      ev.preventDefault();
-    });
-  }
+	start() {
+		const callback = (ev) => {
+			const menu = document.getElementById("meeseOS-context-menu");
+			const hit = menu && menu.contains(ev.target);
 
-  start() {
-    const callback = ev => {
-      const menu = document.getElementById('meeseOS-context-menu');
-      const hit = menu && menu.contains(ev.target);
+			if (!hit && this.contextmenu) {
+				this.contextmenu.hide();
+			}
+		};
 
-      if (!hit && this.contextmenu) {
-        this.contextmenu.hide();
-      }
-    };
+		this.core.$root.addEventListener("click", callback, true);
+		this.core.once("destroy", () => {
+			this.core.$root.removeEventListener("click", callback, true);
+		});
 
-    this.core.$root.addEventListener('click', callback, true);
-    this.core.once('destroy', () => {
-      this.core.$root.removeEventListener('click', callback, true);
-    });
-
-    this.contextmenu.init();
-  }
+		this.contextmenu.init();
+	}
 }

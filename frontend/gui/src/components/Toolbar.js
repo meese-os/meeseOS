@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import { Element } from "./Element";
 
 /**
  * A toolbar
@@ -39,8 +39,16 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Toolbar = (props, children) =>
-  h(Element, Object.assign({
-    orientation: 'vertical'
-  }, props, {
-    class: ['meeseOS-gui-toolbar', props.class]
-  }), children);
+	h(
+		Element,
+		Object.assign(
+			{
+				orientation: "vertical",
+			},
+			props,
+			{
+				class: ["meeseOS-gui-toolbar", props.class],
+			}
+		),
+		children
+	);

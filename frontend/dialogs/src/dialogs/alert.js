@@ -28,73 +28,96 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import {Box, TextareaField} from '@aaronmeese.com/gui';
-import Dialog from '../dialog';
+import { h, app } from "hyperapp";
+import { Box, TextareaField } from "@aaronmeese.com/gui";
+import Dialog from "../dialog";
 
 /**
  * Default OS.js Alert Dialog
  */
 export default class AlertDialog extends Dialog {
+	/**
+	 * Constructor
+	 * @param {Core} core OS.js Core reference
+	 * @param {Object} args Arguments given from service creation
+	 * @param {String} [args.title='Alert'] Dialog title
+	 * @param {String} [args.message=''] Dialog message
+	 * @param {String} [args.type='info'] Alert type (info/warning/error)
+	 * @param {String} [args.sound='bell'] Sound
+	 * @param {Error|*} [args.error] When 'alert' type is set this error stack or message will appear in a textbox
+	 * @param {Function} callback The callback function
+	 */
+	constructor(core, args, callback) {
+		args = Object.assign(
+			{},
+			{
+				title: "Alert",
+				type: "info",
+				message: "",
+			},
+			args
+		);
 
-  /**
-   * Constructor
-   * @param {Core} core OS.js Core reference
-   * @param {Object} args Arguments given from service creation
-   * @param {String} [args.title='Alert'] Dialog title
-   * @param {String} [args.message=''] Dialog message
-   * @param {String} [args.type='info'] Alert type (info/warning/error)
-   * @param {String} [args.sound='bell'] Sound
-   * @param {Error|*} [args.error] When 'alert' type is set this error stack or message will appear in a textbox
-   * @param {Function} callback The callback function
-   */
-  constructor(core, args, callback) {
-    args = Object.assign({}, {
-      title: 'Alert',
-      type: 'info',
-      message: ''
-    }, args);
+		if (typeof args.sound === "undefined") {
+			args.sound = args.type === "error" ? "bell" : "message";
+		}
 
-    if (typeof args.sound === 'undefined') {
-      args.sound = args.type === 'error' ? 'bell' : 'message';
-    }
+		super(
+			core,
+			args,
+			{
+				className: "alert",
+				sound: args.sound,
+				window: {
+					title: args.title,
+					attributes: {
+						ontop: args.type === "error",
+						minDimension: {
+							width: 400,
+							height: 220,
+						},
+					},
+				},
+				buttons: ["close"],
+			},
+			callback
+		);
+	}
 
-    super(core, args, {
-      className: 'alert',
-      sound: args.sound,
-      window: {
-        title: args.title,
-        attributes: {
-          ontop: args.type === 'error',
-          minDimension: {
-            width: 400,
-            height: 220
-          }
-        }
-      },
-      buttons: ['close']
-    }, callback);
-  }
+	render(options) {
+		super.render(options, ($content) => {
+			const children = [
+				h(
+					"div",
+					{ class: "meeseOS-dialog-message" },
+					String(this.args.message)
+				),
+			];
 
-  render(options) {
-    super.render(options, ($content) => {
-      const children = [
-        h('div', {class: 'meeseOS-dialog-message'}, String(this.args.message))
-      ];
+			if (this.args.type === "error") {
+				const { error } = this.args;
+				const msg =
+					error instanceof Error
+						? error.stack
+							? error.stack
+							: error
+						: String(error);
 
-      if (this.args.type === 'error') {
-        const {error} = this.args;
-        const msg = error instanceof Error
-          ? (error.stack ? error.stack : error)
-          : String(error);
+				children.push(
+					h(TextareaField, {
+						value: msg,
+						readonly: true,
+						placeholder: this.args.message,
+					})
+				);
+			}
 
-        children.push(h(TextareaField, {value: msg, readonly: true, placeholder: this.args.message}));
-      }
-
-      app({}, {}, (state, actions) => this.createView([
-        h(Box, {grow: 1}, children)
-      ]), $content);
-    });
-  }
-
+			app(
+				{},
+				{},
+				(state, actions) => this.createView([h(Box, { grow: 1 }, children)]),
+				$content
+			);
+		});
+	}
 }

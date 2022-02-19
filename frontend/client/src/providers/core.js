@@ -28,22 +28,22 @@
  * @license Simplified BSD License
  */
 
-import Application from '../application';
-import Window from '../window';
-import WindowBehavior from '../window-behavior';
-import Session from '../session';
-import Packages from '../packages';
-import Tray from '../tray';
-import Websocket from '../websocket';
-import Clipboard from '../clipboard';
-import Middleware from '../middleware';
-import {style, script, playSound} from '../utils/dom';
-import {resourceResolver} from '../utils/desktop';
-import * as dnd from '../utils/dnd';
-import {BasicApplication} from '../basic-application.js';
-import {ServiceProvider} from '@aaronmeese.com/common';
-import {EventEmitter} from '@aaronmeese.com/event-emitter';
-import logger from '../logger';
+import Application from "../application";
+import Window from "../window";
+import WindowBehavior from "../window-behavior";
+import Session from "../session";
+import Packages from "../packages";
+import Tray from "../tray";
+import Websocket from "../websocket";
+import Clipboard from "../clipboard";
+import Middleware from "../middleware";
+import { style, script, playSound } from "../utils/dom";
+import { resourceResolver } from "../utils/desktop";
+import * as dnd from "../utils/dnd";
+import { BasicApplication } from "../basic-application.js";
+import { ServiceProvider } from "@aaronmeese.com/common";
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import logger from "../logger";
 
 /**
  * Core Provider Window Contract
@@ -144,358 +144,393 @@ import logger from '../logger';
  * OS.js Core Service Provider
  */
 export default class CoreServiceProvider extends ServiceProvider {
+	/**
+	 * @param {Core} core OS.js Core
+	 * @param {CoreProviderOptions} [options={}] Arguments
+	 */
+	constructor(core, options = {}) {
+		super(core, options);
 
-  /**
-   * @param {Core} core OS.js Core
-   * @param {CoreProviderOptions} [options={}] Arguments
-   */
-  constructor(core, options = {}) {
-    super(core, options);
+		/**
+		 * @type {Session}
+		 * @readonly
+		 */
+		this.session = new Session(core);
 
-    /**
-     * @type {Session}
-     * @readonly
-     */
-    this.session = new Session(core);
+		/**
+		 * @type {Tray}
+		 * @readonly
+		 */
+		this.tray = new Tray(core);
 
-    /**
-     * @type {Tray}
-     * @readonly
-     */
-    this.tray = new Tray(core);
+		/**
+		 * @type {Packages}
+		 * @readonly
+		 */
+		this.pm = new Packages(core);
 
-    /**
-     * @type {Packages}
-     * @readonly
-     */
-    this.pm = new Packages(core);
+		/**
+		 * @type {Clipboard}
+		 * @readonly
+		 */
+		this.clipboard = new Clipboard();
 
-    /**
-     * @type {Clipboard}
-     * @readonly
-     */
-    this.clipboard = new Clipboard();
+		/**
+		 * @type {Middleware}
+		 * @readonly
+		 */
+		this.middleware = new Middleware();
 
-    /**
-     * @type {Middleware}
-     * @readonly
-     */
-    this.middleware = new Middleware();
+		window.MeeseOS = this.createGlobalApi();
+	}
 
-    window.MeeseOS = this.createGlobalApi();
-  }
+	/**
+	 * Get a list of services this provider registers
+	 * @return {string}
+	 */
+	provides() {
+		return [
+			"meeseOS/application",
+			"meeseOS/basic-application",
+			"meeseOS/window",
+			"meeseOS/windows",
+			"meeseOS/event-handler",
+			"meeseOS/window-behaviour",
+			"meeseOS/dnd",
+			"meeseOS/dom",
+			"meeseOS/clipboard",
+			"meeseOS/middleware",
+			"meeseOS/tray",
+			"meeseOS/packages",
+			"meeseOS/websocket",
+			"meeseOS/session",
+			"meeseOS/theme",
+			"meeseOS/sounds",
+		];
+	}
 
-  /**
-   * Get a list of services this provider registers
-   * @return {string}
-   */
-  provides() {
-    return [
-      'meeseOS/application',
-      'meeseOS/basic-application',
-      'meeseOS/window',
-      'meeseOS/windows',
-      'meeseOS/event-handler',
-      'meeseOS/window-behaviour',
-      'meeseOS/dnd',
-      'meeseOS/dom',
-      'meeseOS/clipboard',
-      'meeseOS/middleware',
-      'meeseOS/tray',
-      'meeseOS/packages',
-      'meeseOS/websocket',
-      'meeseOS/session',
-      'meeseOS/theme',
-      'meeseOS/sounds'
-    ];
-  }
+	/**
+	 * Destroys provider
+	 */
+	destroy() {
+		this.tray.destroy();
+		this.pm.destroy();
+		this.clipboard.destroy();
+		this.middleware.destroy();
+		this.session.destroy();
 
-  /**
-   * Destroys provider
-   */
-  destroy() {
-    this.tray.destroy();
-    this.pm.destroy();
-    this.clipboard.destroy();
-    this.middleware.destroy();
-    this.session.destroy();
+		super.destroy();
+	}
 
-    super.destroy();
-  }
+	/**
+	 * Initializes provider
+	 * @return {Promise<undefined>}
+	 */
+	init() {
+		this.registerContracts();
 
-  /**
-   * Initializes provider
-   * @return {Promise<undefined>}
-   */
-  init() {
-    this.registerContracts();
+		this.core.on("meeseOS/core:started", () => {
+			this.session.load();
+		});
 
-    this.core.on('meeseOS/core:started', () => {
-      this.session.load();
-    });
+		return this.pm.init();
+	}
 
-    return this.pm.init();
-  }
+	/**
+	 * Starts provider
+	 * @return {Promise<undefined>}
+	 */
+	start() {
+		if (this.core.config("development")) {
+			this.core.on("meeseOS/dist:changed", (filename) => {
+				this._onDistChanged(filename);
+			});
 
-  /**
-   * Starts provider
-   * @return {Promise<undefined>}
-   */
-  start() {
-    if (this.core.config('development')) {
-      this.core.on('meeseOS/dist:changed', filename => {
-        this._onDistChanged(filename);
-      });
+			this.core.on("meeseOS/packages:package:changed", (name) => {
+				this._onPackageChanged(name);
+			});
+		}
 
-      this.core.on('meeseOS/packages:package:changed', name => {
-        this._onPackageChanged(name);
-      });
-    }
+		this.core.on("meeseOS/packages:metadata:changed", () => {
+			this.pm.init();
+		});
+	}
 
-    this.core.on('meeseOS/packages:metadata:changed', () => {
-      this.pm.init();
-    });
-  }
+	/**
+	 * Registers contracts
+	 */
+	registerContracts() {
+		this.core.instance(
+			"meeseOS/window",
+			(options = {}) => new Window(this.core, options)
+		);
+		this.core.instance(
+			"meeseOS/application",
+			(data = {}) => new Application(this.core, data)
+		);
+		this.core.instance(
+			"meeseOS/basic-application",
+			(proc, win, options = {}) =>
+				new BasicApplication(this.core, proc, win, options)
+		);
+		this.core.instance(
+			"meeseOS/websocket",
+			(name, uri, options = {}) => new Websocket(name, uri, options)
+		);
+		this.core.instance(
+			"meeseOS/event-emitter",
+			(name) => new EventEmitter(name)
+		);
 
-  /**
-   * Registers contracts
-   */
-  registerContracts() {
-    this.core.instance('meeseOS/window', (options = {}) => new Window(this.core, options));
-    this.core.instance('meeseOS/application', (data = {}) => new Application(this.core, data));
-    this.core.instance('meeseOS/basic-application', (proc, win, options = {}) => new BasicApplication(this.core, proc, win, options));
-    this.core.instance('meeseOS/websocket', (name, uri, options = {}) => new Websocket(name, uri, options));
-    this.core.instance('meeseOS/event-emitter', name => new EventEmitter(name));
+		this.core.singleton("meeseOS/windows", () => this.createWindowContract());
+		this.core.singleton("meeseOS/dnd", () => this.createDnDContract());
+		this.core.singleton("meeseOS/dom", () => this.createDOMContract());
+		this.core.singleton("meeseOS/theme", () => this.createThemeContract());
+		this.core.singleton("meeseOS/sounds", () => this.createSoundsContract());
+		this.core.singleton("meeseOS/session", () => this.createSessionContract());
+		this.core.singleton("meeseOS/packages", () =>
+			this.createPackagesContract()
+		);
+		this.core.singleton("meeseOS/clipboard", () =>
+			this.createClipboardContract()
+		);
+		this.core.singleton("meeseOS/middleware", () =>
+			this.createMiddlewareContract()
+		);
 
-    this.core.singleton('meeseOS/windows', () => this.createWindowContract());
-    this.core.singleton('meeseOS/dnd', () => this.createDnDContract());
-    this.core.singleton('meeseOS/dom', () => this.createDOMContract());
-    this.core.singleton('meeseOS/theme', () => this.createThemeContract());
-    this.core.singleton('meeseOS/sounds', () => this.createSoundsContract());
-    this.core.singleton('meeseOS/session', () => this.createSessionContract());
-    this.core.singleton('meeseOS/packages', () => this.createPackagesContract());
-    this.core.singleton('meeseOS/clipboard', () => this.createClipboardContract());
-    this.core.singleton('meeseOS/middleware', () => this.createMiddlewareContract());
+		this.core.instance("meeseOS/tray", (options, handler) => {
+			if (typeof options !== "undefined") {
+				// FIXME: Use contract instead
+				logger.warn("meeseOS/tray usage without .create() is deprecated");
+				return this.tray.create(options, handler);
+			}
 
-    this.core.instance('meeseOS/tray', (options, handler) => {
-      if (typeof options !== 'undefined') {
-        // FIXME: Use contract instead
-        logger.warn('meeseOS/tray usage without .create() is deprecated');
-        return this.tray.create(options, handler);
-      }
+			return this.createTrayContract();
+		});
 
-      return this.createTrayContract();
-    });
+		// FIXME: Remove this from public usage
+		this.core.singleton("meeseOS/window-behavior", () =>
+			typeof this.options.windowBehavior === "function"
+				? this.options.windowBehavior(this.core)
+				: new WindowBehavior(this.core)
+		);
 
-    // FIXME: Remove this from public usage
-    this.core.singleton('meeseOS/window-behavior', () => typeof this.options.windowBehavior === 'function'
-      ? this.options.windowBehavior(this.core)
-      : new WindowBehavior(this.core));
+		// FIXME: deprecated
+		this.core.instance("meeseOS/event-handler", (...args) => {
+			logger.warn(
+				"meeseOS/event-handler is deprecated, use meeseOS/event-emitter"
+			);
+			return new EventEmitter(...args);
+		});
+	}
 
-    // FIXME: deprecated
-    this.core.instance('meeseOS/event-handler', (...args) => {
-      logger.warn('meeseOS/event-handler is deprecated, use meeseOS/event-emitter');
-      return new EventEmitter(...args);
-    });
-  }
+	/**
+	 * Expose some internals to global
+	 */
+	createGlobalApi() {
+		const globalBlacklist = this.core.config("providers.globalBlacklist", []);
+		const globalWhitelist = this.core.config("providers.globalWhitelist", []);
 
-  /**
-   * Expose some internals to global
-   */
-  createGlobalApi() {
-    const globalBlacklist = this.core.config('providers.globalBlacklist', []);
-    const globalWhitelist = this.core.config('providers.globalWhitelist', []);
+		const make = (name, ...args) => {
+			if (this.core.has(name)) {
+				const blacklisted =
+					globalBlacklist.length > 0 && globalBlacklist.indexOf(name) !== -1;
+				const notWhitelisted =
+					globalWhitelist.length > 0 && globalWhitelist.indexOf(name) === -1;
 
-    const make = (name, ...args) => {
-      if (this.core.has(name)) {
-        const blacklisted = globalBlacklist.length > 0 && globalBlacklist.indexOf(name) !== -1;
-        const notWhitelisted = globalWhitelist.length > 0 && globalWhitelist.indexOf(name) === -1;
+				if (blacklisted || notWhitelisted) {
+					throw new Error(
+						`The provider '${name}' cannot be used via global scope`
+					);
+				}
+			}
 
-        if (blacklisted || notWhitelisted) {
-          throw new Error(`The provider '${name}' cannot be used via global scope`);
-        }
-      }
+			return this.core.make(name, ...args);
+		};
 
-      return this.core.make(name, ...args);
-    };
+		return Object.freeze({
+			make,
+			register: (name, callback) => this.pm.register(name, callback),
+			url: (endpoint, options, metadata) =>
+				this.core.url(endpoint, options, metadata),
+			run: (name, args = {}, options = {}) =>
+				this.core.run(name, args, options),
+			open: (file, options = {}) => this.core.open(file, options),
+			request: (url, options, type) => this.core.request(url, options, type),
+			middleware: (group, callback) => this.middleware.add(group, callback),
+		});
+	}
 
-    return Object.freeze({
-      make,
-      register: (name, callback) => this.pm.register(name, callback),
-      url: (endpoint, options, metadata) => this.core.url(endpoint, options, metadata),
-      run: (name, args = {}, options = {}) => this.core.run(name, args, options),
-      open: (file, options = {}) => this.core.open(file, options),
-      request: (url, options, type) => this.core.request(url, options, type),
-      middleware: (group, callback) => this.middleware.add(group, callback)
-    });
-  }
+	/**
+	 * Event when dist changes from a build or deployment
+	 * @private
+	 * @param {string} filename The resource filename
+	 */
+	_onDistChanged(filename) {
+		const url = this.core.url(filename).replace(/^\//, "");
+		const found = this.core.$resourceRoot.querySelectorAll(
+			"link[rel=stylesheet]"
+		);
+		const map = Array.from(found).reduce((result, item) => {
+			const src = item.getAttribute("href").split("?")[0].replace(/^\//, "");
+			return {
+				[src]: item,
+				...result,
+			};
+		}, {});
 
-  /**
-   * Event when dist changes from a build or deployment
-   * @private
-   * @param {string} filename The resource filename
-   */
-  _onDistChanged(filename) {
-    const url = this.core.url(filename).replace(/^\//, '');
-    const found = this.core.$resourceRoot.querySelectorAll('link[rel=stylesheet]');
-    const map = Array.from(found).reduce((result, item) => {
-      const src = item.getAttribute('href').split('?')[0].replace(/^\//, '');
-      return {
-        [src]: item,
-        ...result
-      };
-    }, {});
+		if (map[url]) {
+			logger.debug("Hot-reloading", url);
 
-    if (map[url]) {
-      logger.debug('Hot-reloading', url);
+			setTimeout(() => {
+				map[url].setAttribute("href", url);
+			}, 100);
+		}
+	}
 
-      setTimeout(() => {
-        map[url].setAttribute('href', url);
-      }, 100);
-    }
-  }
+	/**
+	 * Event when package dist changes from a build or deployment
+	 * @private
+	 * @param {string} name The package name
+	 */
+	_onPackageChanged(name) {
+		// TODO: Reload themes as well
+		Application.getApplications()
+			.filter((proc) => proc.metadata.name === name)
+			.forEach((proc) => proc.relaunch());
+	}
 
-  /**
-   * Event when package dist changes from a build or deployment
-   * @private
-   * @param {string} name The package name
-   */
-  _onPackageChanged(name) {
-    // TODO: Reload themes as well
-    Application.getApplications()
-      .filter(proc => proc.metadata.name === name)
-      .forEach(proc => proc.relaunch());
-  }
+	/**
+	 * Provides window contract
+	 * @return {CoreProviderWindowContract}
+	 */
+	createWindowContract() {
+		return {
+			create: (options = {}) => new Window(this.core, options),
+			list: () => Window.getWindows(),
+			last: () => Window.lastWindow(),
+		};
+	}
 
-  /**
-   * Provides window contract
-   * @return {CoreProviderWindowContract}
-   */
-  createWindowContract() {
-    return {
-      create: (options = {}) => new Window(this.core, options),
-      list: () => Window.getWindows(),
-      last: () => Window.lastWindow()
-    };
-  }
+	/**
+	 * Provides DnD contract
+	 * @return {CoreProviderDnDContract}
+	 */
+	createDnDContract() {
+		return dnd;
+	}
 
-  /**
-   * Provides DnD contract
-   * @return {CoreProviderDnDContract}
-   */
-  createDnDContract() {
-    return dnd;
-  }
+	/**
+	 * Provides DOM contract
+	 * @return {CoreProviderDOMContract}
+	 */
+	createDOMContract() {
+		return {
+			script,
+			style,
+		};
+	}
 
-  /**
-   * Provides DOM contract
-   * @return {CoreProviderDOMContract}
-   */
-  createDOMContract() {
-    return {
-      script,
-      style
-    };
-  }
+	/**
+	 * Provides Theme contract
+	 * @return {CoreProviderThemeContract}
+	 */
+	createThemeContract() {
+		const { themeResource, icon } = resourceResolver(this.core);
 
-  /**
-   * Provides Theme contract
-   * @return {CoreProviderThemeContract}
-   */
-  createThemeContract() {
-    const {themeResource, icon} = resourceResolver(this.core);
+		return {
+			resource: themeResource,
+			icon: (name) => icon(name.replace(/(\.png)?$/, ".png")),
+		};
+	}
 
-    return {
-      resource: themeResource,
-      icon: name => icon(name.replace(/(\.png)?$/, '.png'))
-    };
-  }
+	/**
+	 * Provides Sounds contract
+	 * @return {CoreProviderSoundContract}
+	 */
+	createSoundsContract() {
+		const { soundResource, soundsEnabled } = resourceResolver(this.core);
 
-  /**
-   * Provides Sounds contract
-   * @return {CoreProviderSoundContract}
-   */
-  createSoundsContract() {
-    const {soundResource, soundsEnabled} = resourceResolver(this.core);
+		return {
+			resource: soundResource,
+			play: (src, options = {}) => {
+				if (soundsEnabled()) {
+					const absoluteSrc = src.match(/^(\/|https?:)/)
+						? src
+						: soundResource(src);
 
-    return {
-      resource: soundResource,
-      play: (src, options = {}) => {
-        if (soundsEnabled()) {
-          const absoluteSrc = src.match(/^(\/|https?:)/)
-            ? src
-            : soundResource(src);
+					if (absoluteSrc) {
+						return playSound(absoluteSrc, options);
+					}
+				}
 
-          if (absoluteSrc) {
-            return playSound(absoluteSrc, options);
-          }
-        }
+				return false;
+			},
+		};
+	}
 
-        return false;
-      }
-    };
-  }
+	/**
+	 * Provides Session contract
+	 * @return {CoreProviderSessionContract}
+	 */
+	createSessionContract() {
+		return {
+			save: () => this.session.save(),
+			load: (fresh = false) => this.session.load(fresh),
+		};
+	}
 
-  /**
-   * Provides Session contract
-   * @return {CoreProviderSessionContract}
-   */
-  createSessionContract() {
-    return {
-      save: () => this.session.save(),
-      load: (fresh = false) => this.session.load(fresh)
-    };
-  }
+	/**
+	 * Provides Packages contract
+	 * @return {CoreProviderPackagesContract}
+	 */
+	createPackagesContract() {
+		return {
+			launch: (name, args = {}, options = {}) =>
+				this.pm.launch(name, args, options),
+			register: (name, callback) => this.pm.register(name, callback),
+			addPackages: (list) => this.pm.addPackages(list),
+			getPackages: (filter) => this.pm.getPackages(filter),
+			getCompatiblePackages: (mimeType) =>
+				this.pm.getCompatiblePackages(mimeType),
+			running: () => this.pm.running(),
+		};
+	}
 
-  /**
-   * Provides Packages contract
-   * @return {CoreProviderPackagesContract}
-   */
-  createPackagesContract() {
-    return {
-      launch: (name, args = {}, options = {}) => this.pm.launch(name, args, options),
-      register: (name, callback) => this.pm.register(name, callback),
-      addPackages: list => this.pm.addPackages(list),
-      getPackages: filter => this.pm.getPackages(filter),
-      getCompatiblePackages: mimeType => this.pm.getCompatiblePackages(mimeType),
-      running: () => this.pm.running()
-    };
-  }
+	/**
+	 * Provides Clipboard contract
+	 * @return {CoreProviderClipboardContract}
+	 */
+	createClipboardContract() {
+		return {
+			clear: () => this.clipboard.clear(),
+			set: (data, type) => this.clipboard.set(data, type),
+			has: (type) => this.clipboard.has(type),
+			get: (clear = false) => this.clipboard.get(clear),
+		};
+	}
 
-  /**
-   * Provides Clipboard contract
-   * @return {CoreProviderClipboardContract}
-   */
-  createClipboardContract() {
-    return {
-      clear: () => this.clipboard.clear(),
-      set: (data, type) => this.clipboard.set(data, type),
-      has: type => this.clipboard.has(type),
-      get: (clear = false) => this.clipboard.get(clear)
-    };
-  }
+	/**
+	 * Provides Middleware contract
+	 * @return {CoreProviderMiddlewareContract}
+	 */
+	createMiddlewareContract() {
+		return {
+			add: (group, callback) => this.middleware.add(group, callback),
+			get: (group) => this.middleware.get(group),
+		};
+	}
 
-  /**
-   * Provides Middleware contract
-   * @return {CoreProviderMiddlewareContract}
-   */
-  createMiddlewareContract() {
-    return {
-      add: (group, callback) => this.middleware.add(group, callback),
-      get: group => this.middleware.get(group)
-    };
-  }
-
-  /**
-   * Provides Tray contract
-   * @return {CoreProviderTrayContract}
-   */
-  createTrayContract() {
-    return {
-      create: (options, handler) => this.tray.create(options, handler),
-      remove: entry => this.tray.remove(entry),
-      list: () => this.tray.list(),
-      has: key => this.tray.has(key)
-    };
-  }
+	/**
+	 * Provides Tray contract
+	 * @return {CoreProviderTrayContract}
+	 */
+	createTrayContract() {
+		return {
+			create: (options, handler) => this.tray.create(options, handler),
+			remove: (entry) => this.tray.remove(entry),
+			list: () => this.tray.list(),
+			has: (key) => this.tray.has(key),
+		};
+	}
 }

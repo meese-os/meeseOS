@@ -29,133 +29,137 @@
  */
 export as namespace meeseOS__common;
 
-import { EventEmitter } from '@aaronmeese.com/event-emitter';
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
 
 export interface ServiceProviderOptions {
-  before?: boolean;
-  args?: object;
+	before?: boolean;
+	args?: object;
 }
 
 export class ServiceProvider {
-  /**
-   * Core instance reference
-   */
-  readonly core: CoreBase;
+	/**
+	 * Core instance reference
+	 */
+	readonly core: CoreBase;
 
-  /**
-   * Provider options
-   */
-  readonly options: any;
+	/**
+	 * Provider options
+	 */
+	readonly options: any;
 
-  /**
-   * Constructor
-   */
-  constructor(core: CoreBase, options: any);
+	/**
+	 * Constructor
+	 */
+	constructor(core: CoreBase, options: any);
 
-  /**
-   * List of provided services
-   */
-  provides(): string[];
+	/**
+	 * List of provided services
+	 */
+	provides(): string[];
 
-  /**
-   * Initializes Provider
-   */
-  init(): Promise<any>;
+	/**
+	 * Initializes Provider
+	 */
+	init(): Promise<any>;
 
-  /**
-   * Starts Provider
-   */
-  start(): Promise<any>;
+	/**
+	 * Starts Provider
+	 */
+	start(): Promise<any>;
 
-  /**
-   * Destroys Provider
-   */
-  destroy(): void;
+	/**
+	 * Destroys Provider
+	 */
+	destroy(): void;
 }
 
 export class CoreBase extends EventEmitter {
-  /**
-   * Logger module
-   */
-  readonly logger: any;
+	/**
+	 * Logger module
+	 */
+	readonly logger: any;
 
-  /**
-   * Configuration Tree
-   */
-  readonly configuration: object;
+	/**
+	 * Configuration Tree
+	 */
+	readonly configuration: object;
 
-  /**
-   * Options
-   */
-  readonly options: object;
+	/**
+	 * Options
+	 */
+	readonly options: object;
 
-  /**
-   * Boot has been initiated
-   */
-  booted: boolean;
+	/**
+	 * Boot has been initiated
+	 */
+	booted: boolean;
 
-  /**
-   * Fully started
-   */
-  started: boolean;
+	/**
+	 * Fully started
+	 */
+	started: boolean;
 
-  /**
-   * Fully destroyped
-   */
-  destroyd: boolean;
+	/**
+	 * Fully destroyped
+	 */
+	destroyd: boolean;
 
-  /**
-   * Service Provider Handler
-   */
-  providers: any;
+	/**
+	 * Service Provider Handler
+	 */
+	providers: any;
 
-  /**
-   * Constructor
-   */
-  constructor(defaultConfiguration: object, configuration: object, options: object);
+	/**
+	 * Constructor
+	 */
+	constructor(
+		defaultConfiguration: object,
+		configuration: object,
+		options: object
+	);
 
-  /**
-   * Destroy core instance
-   */
-  destroy(): void;
+	/**
+	 * Destroy core instance
+	 */
+	destroy(): void;
 
-  /**
-   * Boots up OS.js
-   */
-  boot(): Promise<boolean>;
+	/**
+	 * Boots up OS.js
+	 */
+	boot(): Promise<boolean>;
 
-  /**
-   * Starts all core services
-   */
-  start(): Promise<boolean>;
+	/**
+	 * Starts all core services
+	 */
+	start(): Promise<boolean>;
 
-  /**
-   * Gets a configuration entry by key
-   */
-  config(key: string, defaultValue: any): any;
+	/**
+	 * Gets a configuration entry by key
+	 */
+	config(key: string, defaultValue: any): any;
 
-  /**
-   * Register a service provider
-   */
-  register(ref: typeof ServiceProvider, options: ServiceProviderOptions): void;
+	/**
+	 * Register a service provider
+	 */
+	register(ref: typeof ServiceProvider, options: ServiceProviderOptions): void;
 
-  /**
-   * Register a instanciator provider
-   */
-  instance(name: string, callback: Function): void;
+	/**
+	 * Register a instanciator provider
+	 */
+	instance(name: string, callback: Function): void;
 
-  /**
-   * Register a singleton provider
-   */
-  singleton(name: string, callback: Function): void;
+	/**
+	 * Register a singleton provider
+	 */
+	singleton(name: string, callback: Function): void;
 
-  /**
-   * Create an instance of a provided service
-   */
-  make<T>(name: string, ...args: any[]): T;
+	/**
+	 * Create an instance of a provided service
+	 */
+	make<T>(name: string, ...args: any[]): T;
 
-  /**
-   * Check if a service exists
-   */
-  has(name: string): boolean;
+	/**
+	 * Check if a service exists
+	 */
+	has(name: string): boolean;
 }

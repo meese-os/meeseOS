@@ -28,74 +28,75 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import {Menu} from './components/Menu';
+import { h, app } from "hyperapp";
+import { Menu } from "./components/Menu";
 
 /*
  * Makes sure sub-menus stays within viewport
  */
 const clampSubMenu = (root, ev) => {
-  let ul = ev.target.querySelector('ul');
-  if (!ul) {
-    return;
-  }
+	let ul = ev.target.querySelector("ul");
+	if (!ul) {
+		return;
+	}
 
-  // FIXME: Safari reports wrong item
-  if (ul.classList.contains('meeseOS-gui-menu-container')) {
-    ul = ul.parentNode.parentNode;
-  }
+	// FIXME: Safari reports wrong item
+	if (ul.classList.contains("meeseOS-gui-menu-container")) {
+		ul = ul.parentNode.parentNode;
+	}
 
-  if (!ul || !ul.offsetParent) {
-    return;
-  }
+	if (!ul || !ul.offsetParent) {
+		return;
+	}
 
-  ul.classList.remove('clamp-right');
+	ul.classList.remove("clamp-right");
 
-  const rect = ul.getBoundingClientRect();
-  if (rect.right > root.offsetWidth) {
-    ul.classList.add('clamp-right');
-  }
+	const rect = ul.getBoundingClientRect();
+	if (rect.right > root.offsetWidth) {
+		ul.classList.add("clamp-right");
+	}
 };
 
 /*
  * Makes sure menu stays within viewport
  */
 const clampMenu = (root, el, currentPosition) => {
-  const result = {};
-  const bottom = currentPosition.top + el.offsetHeight;
-  const right = currentPosition.left + el.offsetWidth;
-  const offY = root.offsetHeight - currentPosition.top;
-  const offX = root.offsetWidth - currentPosition.left;
-  const overflowRight = right > root.offsetWidth;
-  const overflowBottom = bottom > root.offsetHeight;
+	const result = {};
+	const bottom = currentPosition.top + el.offsetHeight;
+	const right = currentPosition.left + el.offsetWidth;
+	const offY = root.offsetHeight - currentPosition.top;
+	const offX = root.offsetWidth - currentPosition.left;
+	const overflowRight = right > root.offsetWidth;
+	const overflowBottom = bottom > root.offsetHeight;
 
-  if (overflowBottom) {
-    if (root.offsetHeight > el.offsetHeight) {
-      result.top = root.offsetHeight - el.offsetHeight - offY;
-    }
-  }
+	if (overflowBottom) {
+		if (root.offsetHeight > el.offsetHeight) {
+			result.top = root.offsetHeight - el.offsetHeight - offY;
+		}
+	}
 
-  if (overflowRight) {
-    result.left = root.offsetWidth - el.offsetWidth - offX;
-  }
+	if (overflowRight) {
+		result.left = root.offsetWidth - el.offsetWidth - offX;
+	}
 
-  return (overflowBottom || overflowRight) ? result : null;
+	return overflowBottom || overflowRight ? result : null;
 };
 
 /*
  * Context Menu view
  */
-const view = callback => (props, actions) => h(Menu, {
-  position: props.position,
-  visible: props.visible,
-  menu: props.menu,
-  onclick: callback,
-  onshow: actions.onshow
-});
+const view = (callback) => (props, actions) =>
+	h(Menu, {
+		position: props.position,
+		visible: props.visible,
+		menu: props.menu,
+		onclick: callback,
+		onshow: actions.onshow,
+	});
 
-const timeout = fn => {
-  fn();
-  return setTimeout(fn, 100);
+const timeout = (fn) => {
+	fn();
+	return setTimeout(fn, 100);
 };
 
 /**
@@ -104,122 +105,126 @@ const timeout = fn => {
  * @desc Handles a Menu/ContextMenu globally for OS.js
  */
 export class ContextMenu {
+	constructor(core) {
+		this.core = core;
+		this.callback = () => {};
+		this.actions = null;
+		this.$element = document.createElement("div");
+	}
 
-  constructor(core) {
-    this.core = core;
-    this.callback = () => {};
-    this.actions = null;
-    this.$element = document.createElement('div');
-  }
+	destroy() {
+		this.callback = null;
+		this.actions = null;
+	}
 
-  destroy() {
-    this.callback = null;
-    this.actions = null;
-  }
+	/**
+	 * Initializes the Menu Hyperapp
+	 */
+	init() {
+		let clampTimeout;
 
-  /**
-   * Initializes the Menu Hyperapp
-   */
-  init() {
-    let clampTimeout;
+		this.$element.className = "meeseOS-system-context-menu";
+		this.core.$root.appendChild(this.$element);
 
-    this.$element.className = 'meeseOS-system-context-menu';
-    this.core.$root.appendChild(this.$element);
+		let isActive = false;
 
-    let isActive = false;
+		this.actions = app(
+			{
+				visible: false,
+				menu: [],
+				position: {
+					top: 0,
+					left: 0,
+				},
+			},
+			{
+				clamp: (el) => (props) => {
+					el = el || document.querySelector("#meeseOS-context-menu");
+					clearTimeout(clampTimeout);
 
-    this.actions = app({
-      visible: false,
-      menu: [],
-      position: {
-        top: 0,
-        left: 0
-      }
-    }, {
-      clamp: (el) => props => {
-        el = el || document.querySelector('#meeseOS-context-menu');
-        clearTimeout(clampTimeout);
+					if (el) {
+						const root = this.core.$root;
+						const newPosition = clampMenu(root, el, props.position);
+						if (newPosition) {
+							return { position: newPosition };
+						}
+					}
 
-        if (el) {
-          const root = this.core.$root;
-          const newPosition = clampMenu(root, el, props.position);
-          if (newPosition) {
-            return {position: newPosition};
-          }
-        }
+					return {};
+				},
+				onshow: (ev) => (props) => {
+					clampTimeout = timeout(() => clampSubMenu(this.core.$root, ev));
+				},
+				show: (options) => (props, actions) => {
+					let { menu, position, toggle } = options;
+					if (toggle && isActive) {
+						return actions.hide();
+					} else if (position instanceof Event) {
+						position = { left: position.clientX, top: position.clientY };
+					} else if (position instanceof Element) {
+						const box = position.getBoundingClientRect();
+						position = {
+							left: box.left,
+							top: box.top + box.height,
+						};
+					}
 
-        return {};
-      },
-      onshow: (ev) => props => {
-        clampTimeout = timeout(() => clampSubMenu(this.core.$root, ev));
-      },
-      show: (options) => (props, actions) => {
-        let {menu, position, toggle} = options;
-        if (toggle && isActive) {
-          return actions.hide();
-        } else if (position instanceof Event) {
-          position = {left: position.clientX, top: position.clientY};
-        } else if (position instanceof Element) {
-          const box = position.getBoundingClientRect();
-          position = {
-            left: box.left,
-            top: box.top + box.height
-          };
-        }
+					this.callback = (child, ev, iter) => {
+						if (options.callback) {
+							options.callback(child, ev);
+						}
 
-        this.callback = (child, ev, iter) => {
-          if (options.callback) {
-            options.callback(child, ev);
-          }
+						if (iter.closeable !== false) {
+							actions.hide();
+						}
+					};
 
-          if (iter.closeable !== false) {
-            actions.hide();
-          }
-        };
+					isActive = true;
+					this.onclose = options.onclose;
 
-        isActive = true;
-        this.onclose = options.onclose;
+					timeout(() => actions.clamp());
 
-        timeout(() => actions.clamp());
+					return {
+						visible: true,
+						menu: menu || [],
+						position: position || { top: 0, left: 0 },
+					};
+				},
+				hide: () => (props) => {
+					if (isActive) {
+						setTimeout(() => (isActive = false), 0);
+					}
+					if (this.onclose) {
+						this.onclose();
+					}
+					this.onclose = null;
+					this.callback = null;
 
-        return {
-          visible: true,
-          menu: menu || [],
-          position: position || {top: 0, left: 0}
-        };
-      },
-      hide: () => props => {
-        if (isActive) {
-          setTimeout(() => (isActive = false), 0);
-        }
-        if (this.onclose) {
-          this.onclose();
-        }
-        this.onclose = null;
-        this.callback = null;
+					return { visible: false };
+				},
+			},
+			view((...args) => {
+				if (!this.core.destroyed) {
+					if (this.callback) {
+						this.callback(...args);
+					}
+				}
+			}),
+			this.$element
+		);
+	}
 
-        return {visible: false};
-      }
-    }, view((...args) => {
-      if (!this.core.destroyed) {
-        if (this.callback) {
-          this.callback(...args);
-        }
-      }
-    }), this.$element);
-  }
+	/**
+	 * Show the menu
+	 */
+	show(...args) {
+		return this.actions ? this.actions.show(...args) : null;
+	}
 
-  /**
-   * Show the menu
-   */
-  show(...args) {
-    return this.actions ? this.actions.show(...args) : null;
-  }
-
-  /**
-   * Hide the menu
-   */
-  hide(...args) {
-    return this.actions ? this.actions.hide(...args) : null;
-  }
+	/**
+	 * Hide the menu
+	 */
+	hide(...args) {
+		return this.actions ? this.actions.hide(...args) : null;
+	}
 }

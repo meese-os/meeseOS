@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import {ServiceProvider} from '@aaronmeese.com/common';
-import Settings from '../settings';
+import { ServiceProvider } from "@aaronmeese.com/common";
+import Settings from "../settings";
 
 /**
  * Settings Service Contract
@@ -52,54 +52,53 @@ import Settings from '../settings';
  * OS.js Settings Service Provider
  */
 export default class SettingsServiceProvider extends ServiceProvider {
+	/**
+	 * @param {Core} core OS.js Core
+	 * @param {SettingsServiceOptions} [options={}]
+	 */
+	constructor(core, options = {}) {
+		super(core);
 
-  /**
-   * @param {Core} core OS.js Core
-   * @param {SettingsServiceOptions} [options={}]
-   */
-  constructor(core, options = {}) {
-    super(core);
+		/**
+		 * @type {Settings}
+		 * @readonly
+		 */
+		this.settings = new Settings(core, {
+			config: {},
+			...options,
+		});
+	}
 
-    /**
-     * @type {Settings}
-     * @readonly
-     */
-    this.settings = new Settings(core, {
-      config: {},
-      ...options
-    });
-  }
+	/**
+	 * Get a list of services this provider registers
+	 * @return {string[]}
+	 */
+	provides() {
+		return ["meeseOS/settings"];
+	}
 
-  /**
-   * Get a list of services this provider registers
-   * @return {string[]}
-   */
-  provides() {
-    return [
-      'meeseOS/settings'
-    ];
-  }
+	/**
+	 * Initializes settings
+	 * @return {Promise<undefined>}
+	 */
+	init() {
+		this.core.singleton("meeseOS/settings", () =>
+			this.createSettingsContract()
+		);
 
-  /**
-   * Initializes settings
-   * @return {Promise<undefined>}
-   */
-  init() {
-    this.core.singleton('meeseOS/settings', () => this.createSettingsContract());
+		return this.settings.init();
+	}
 
-    return this.settings.init();
-  }
-
-  /**
-   * @return {SettingsProviderContract}
-   */
-  createSettingsContract() {
-    return {
-      save: () => this.settings.save(),
-      load: () => this.settings.load(),
-      clear: (ns) => this.settings.clear(ns),
-      get: (ns, key, defaultValue) => this.settings.get(ns, key, defaultValue),
-      set: (ns, key, value) => this.settings.set(ns, key, value)
-    };
-  }
+	/**
+	 * @return {SettingsProviderContract}
+	 */
+	createSettingsContract() {
+		return {
+			save: () => this.settings.save(),
+			load: () => this.settings.load(),
+			clear: (ns) => this.settings.clear(ns),
+			get: (ns, key, defaultValue) => this.settings.get(ns, key, defaultValue),
+			set: (ns, key, value) => this.settings.set(ns, key, value),
+		};
+	}
 }

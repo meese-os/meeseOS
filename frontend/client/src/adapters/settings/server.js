@@ -33,15 +33,25 @@
  * @param {Core} core Core reference
  * @param {object} [options] Adapter options
  */
-const serverSettings = core => ({
-  save: settings => core.request(core.url('/settings'), {
-    method: 'post',
-    body: settings
-  }, 'json'),
+const serverSettings = (core) => ({
+	save: (settings) =>
+		core.request(
+			core.url("/settings"),
+			{
+				method: "post",
+				body: settings,
+			},
+			"json"
+		),
 
-  load: () => core.request(core.url('/settings'), {
-    method: 'get'
-  }, 'json')
+	load: () =>
+		core.request(
+			core.url("/settings"),
+			{
+				method: "get",
+			},
+			"json"
+		),
 });
 
 export default serverSettings;

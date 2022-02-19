@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {createField} from '../element';
+import { h } from "hyperapp";
+import { createField } from "../element";
 
 /**
  * A text field
@@ -40,6 +40,11 @@ import {createField} from '../element';
  * @param {h[]} children Children
  */
 export const TextareaField = (props = {}, children = []) =>
-  createField('textarea-field', props, {
-    rows: 4
-  }, (fieldProps) => h('textarea', fieldProps, children));
+	createField(
+		"textarea-field",
+		props,
+		{
+			rows: 4,
+		},
+		(fieldProps) => h("textarea", fieldProps, children)
+	);

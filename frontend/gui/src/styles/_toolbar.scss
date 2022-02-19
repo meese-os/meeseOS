@@ -29,21 +29,21 @@
  */
 
 .meeseOS-gui-toolbar {
-  display: flex;
+	display: flex;
 
-  & > .meeseOS-gui {
-    flex-shrink: 0;
-  }
+	& > .meeseOS-gui {
+		flex-shrink: 0;
+	}
 
-  &.meeseOS-gui-vertical {
-    & > .meeseOS-gui:not(:last-child) {
-      margin-right: $base-margin;
-    }
-  }
+	&.meeseOS-gui-vertical {
+		& > .meeseOS-gui:not(:last-child) {
+			margin-right: $base-margin;
+		}
+	}
 
-  &.meeseOS-gui-horizontal {
-    & > .meeseOS-gui:not(:last-child) {
-      margin-bottom: $base-margin;
-    }
-  }
+	&.meeseOS-gui-horizontal {
+		& > .meeseOS-gui:not(:last-child) {
+			margin-bottom: $base-margin;
+		}
+	}
 }

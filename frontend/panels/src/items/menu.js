@@ -28,110 +28,110 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import PanelItem from '../panel-item';
-import defaultIcon from '../logo-blue-32x32.png';
+import { h } from "hyperapp";
+import PanelItem from "../panel-item";
+import defaultIcon from "../logo-blue-32x32.png";
 
-const sortBy = fn => (a, b) => -(fn(a) < fn(b)) || +(fn(a) > fn(b));
-const sortByLabel = iter => String(iter.label).toLowerCase();
+const sortBy = (fn) => (a, b) => -(fn(a) < fn(b)) || +(fn(a) > fn(b));
+const sortByLabel = (iter) => String(iter.label).toLowerCase();
 
 const makeTree = (core, icon) => {
-  const configuredCategories = core.config('application.categories');
+	const configuredCategories = core.config("application.categories");
 
-  const getIcon = (m, fallbackIcon) => m.icon
-    ? (m.icon.match(/^(https?:)\//)
-      ? m.icon
-      : core.url(m.icon, {}, m))
-    : fallbackIcon;
+	const getIcon = (m, fallbackIcon) =>
+		m.icon
+			? m.icon.match(/^(https?:)\//)
+				? m.icon
+				: core.url(m.icon, {}, m)
+			: fallbackIcon;
 
-  const createCategory = category => ({
-    icon: category.icon ? {name: category.icon} : icon,
-    label: category.label,
-    items: []
-  });
+	const createCategory = (category) => ({
+		icon: category.icon ? { name: category.icon } : icon,
+		label: category.label,
+		items: [],
+	});
 
-  const createItem = item => ({
-    icon: getIcon(item, icon),
-    label: item.title,
-    data: {
-      name: item.name
-    }
-  });
+	const createItem = (item) => ({
+		icon: getIcon(item, icon),
+		label: item.title,
+		data: {
+			name: item.name,
+		},
+	});
 
-  const createCategoryTree = (metadata) => {
-    const categories = {};
+	const createCategoryTree = (metadata) => {
+		const categories = {};
 
-    metadata
-      .filter(m => m.hidden !== true)
-      .forEach((m) => {
-        const cat = Object.keys(configuredCategories).find(c => c === m.category) || 'other';
-        const found = configuredCategories[cat];
+		metadata
+			.filter((m) => m.hidden !== true)
+			.forEach((m) => {
+				const cat =
+					Object.keys(configuredCategories).find((c) => c === m.category) ||
+					"other";
+				const found = configuredCategories[cat];
 
-        if (!categories[cat]) {
-          categories[cat] = createCategory(found);
-        }
+				if (!categories[cat]) {
+					categories[cat] = createCategory(found);
+				}
 
-        categories[cat].items.push(createItem(m));
-      });
+				categories[cat].items.push(createItem(m));
+			});
 
-    Object.keys(categories).forEach(k => {
-      categories[k].items.sort(sortBy(sortByLabel));
-    });
+		Object.keys(categories).forEach((k) => {
+			categories[k].items.sort(sortBy(sortByLabel));
+		});
 
-    const result = Object.values(categories);
-    result.sort(sortBy(sortByLabel));
+		const result = Object.values(categories);
+		result.sort(sortBy(sortByLabel));
 
-    return result;
-  };
+		return result;
+	};
 
-  const createFlatMenu = (metadata) => {
-    const pinned = [
-      ...core.config('application.pinned', [])
-      // TODO: User configurable pinned items
-    ];
+	const createFlatMenu = (metadata) => {
+		const pinned = [
+			...core.config("application.pinned", []),
+			// TODO: User configurable pinned items
+		];
 
-    const items = metadata
-      .filter(m => pinned.indexOf(m.name) !== -1)
-      .map(createItem);
+		const items = metadata
+			.filter((m) => pinned.indexOf(m.name) !== -1)
+			.map(createItem);
 
-    if (items.length) {
-      items.sort(sortBy(sortByLabel));
-      return [
-        {type: 'separator'},
-        ...items
-      ];
-    }
+		if (items.length) {
+			items.sort(sortBy(sortByLabel));
+			return [{ type: "separator" }, ...items];
+		}
 
-    return [];
-  };
+		return [];
+	};
 
-  const createSystemMenu = () => ([{
-    type: 'separator'
-  }, {
-    icon,
-    label: "Save Session & Log Out",
-    data: {
-      action: 'saveAndLogOut'
-    }
-  }, {
-    icon,
-    label: "Log Out",
-    data: {
-      action: 'logOut'
-    }
-  }]);
+	const createSystemMenu = () => [
+		{
+			type: "separator",
+		},
+		{
+			icon,
+			label: "Save Session & Log Out",
+			data: {
+				action: "saveAndLogOut",
+			},
+		},
+		{
+			icon,
+			label: "Log Out",
+			data: {
+				action: "logOut",
+			},
+		},
+	];
 
-  return (metadata) => {
-    const categories = createCategoryTree(metadata);
-    const flat = createFlatMenu(metadata);
-    const system = createSystemMenu();
+	return (metadata) => {
+		const categories = createCategoryTree(metadata);
+		const flat = createFlatMenu(metadata);
+		const system = createSystemMenu();
 
-    return [
-      ...categories,
-      ...flat,
-      ...system
-    ];
-  };
+		return [...categories, ...flat, ...system];
+	};
 };
 
 /**
@@ -140,62 +140,79 @@ const makeTree = (core, icon) => {
  * @desc Menu Panel Item
  */
 export default class MenuPanelItem extends PanelItem {
+	render(state, actions) {
+		const icon = this.options.icon || defaultIcon;
 
-  render(state, actions) {
-    const icon = this.options.icon || defaultIcon;
+		const logout = async (save) => {
+			if (save) {
+				await this.core.make("meeseOS/session").save();
+			}
 
-    const logout = async (save) => {
-      if (save) {
-        await this.core.make('meeseOS/session').save();
-      }
+			this.core.make("meeseOS/auth").logout();
+		};
 
-      this.core.make('meeseOS/auth').logout();
-    };
+		const makeMenu = makeTree(this.core, icon);
 
-    const makeMenu = makeTree(this.core, icon);
+		const onclick = (ev) => {
+			const packages = this.core
+				.make("meeseOS/packages")
+				.getPackages((m) => !m.type || m.type === "application");
 
-    const onclick = (ev) => {
-      const packages = this.core.make('meeseOS/packages')
-        .getPackages(m => (!m.type || m.type === 'application'));
+			this.core.make("meeseOS/contextmenu").show({
+				menu: makeMenu([].concat(packages)),
+				position: ev.target,
+				callback: (item) => {
+					const { name, action } = item.data || {};
 
-      this.core.make('meeseOS/contextmenu').show({
-        menu: makeMenu([].concat(packages)),
-        position: ev.target,
-        callback: (item) => {
-          const {name, action} = item.data || {};
+					if (name) {
+						this.core.run(name);
+					} else if (action === "saveAndLogOut") {
+						logout(true);
+					} else if (action === "logOut") {
+						logout(false);
+					}
+				},
+				toggle: true,
+			});
+		};
 
-          if (name) {
-            this.core.run(name);
-          } else if (action === 'saveAndLogOut') {
-            logout(true);
-          } else if (action === 'logOut') {
-            logout(false);
-          }
-        },
-        toggle: true
-      });
-    };
+		const onmenuopen = () => {
+			const els = Array.from(
+				this.panel.$element.querySelectorAll(
+					'.meeseOS-panel-item[data-name="menu"]'
+				)
+			);
+			els.forEach((el) =>
+				el.querySelector(".meeseOS-panel-item--icon").click()
+			);
+		};
 
-    const onmenuopen = () => {
-      const els = Array.from(this.panel.$element.querySelectorAll('.meeseOS-panel-item[data-name="menu"]'));
-      els.forEach(el => el.querySelector('.meeseOS-panel-item--icon').click());
-    };
+		this.core.on(
+			"meeseOS/desktop:keybinding:open-application-menu",
+			onmenuopen
+		);
+		this.on("destroy", () =>
+			this.core.off(
+				"meeseOS/desktop:keybinding:open-application-menu",
+				onmenuopen
+			)
+		);
 
-    this.core.on('meeseOS/desktop:keybinding:open-application-menu', onmenuopen);
-    this.on('destroy', () => this.core.off('meeseOS/desktop:keybinding:open-application-menu', onmenuopen));
-
-    return super.render('menu', [
-      h('div', {
-        onclick,
-        className: 'meeseOS-panel-item--clickable meeseOS-panel-item--icon'
-      }, [
-        h('img', {
-          src: icon,
-          alt: "Menu"
-        }),
-        h('span', {}, "Menu")
-      ])
-    ]);
-  }
-
+		return super.render("menu", [
+			h(
+				"div",
+				{
+					onclick,
+					className: "meeseOS-panel-item--clickable meeseOS-panel-item--icon",
+				},
+				[
+					h("img", {
+						src: icon,
+						alt: "Menu",
+					}),
+					h("span", {}, "Menu"),
+				]
+			),
+		]);
+	}
 }

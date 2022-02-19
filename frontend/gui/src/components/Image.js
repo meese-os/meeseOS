@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
+import { h } from "hyperapp";
 
 /**
  * A image
@@ -43,10 +43,14 @@ import {h} from 'hyperapp';
  * @param {Function} [props.ondestroy] Hyperapp ondestroy function
  */
 export const Image = (props, children) =>
-  h('div', {
-    class: 'meeseOS-gui meeseOS-gui-image',
-    style: {
-      width: props.width ? String(props.width) + 'px' : undefined,
-      height: props.height ? String(props.height) + 'px' : undefined
-    }
-  }, h('img', props));
+	h(
+		"div",
+		{
+			class: "meeseOS-gui meeseOS-gui-image",
+			style: {
+				width: props.width ? String(props.width) + "px" : undefined,
+				height: props.height ? String(props.height) + "px" : undefined,
+			},
+		},
+		h("img", props)
+	);

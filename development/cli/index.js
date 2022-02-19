@@ -28,6 +28,6 @@
  * @licence Simplified BSD License
  */
 
-const cli = require('./src/cli.js');
+const cli = require("./src/cli.js");
 
-module.exports = {cli};
+module.exports = { cli };

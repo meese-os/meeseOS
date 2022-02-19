@@ -1,28 +1,27 @@
-import {createInstance} from 'meeseOS';
-import Splash from '../src/splash.js';
+import { createInstance } from "meeseOS";
+import Splash from "../src/splash.js";
 
-describe('Splash', () => {
-  let core;
-  let splash;
+describe("Splash", () => {
+	let core;
+	let splash;
 
-  beforeAll(() => {
-    return createInstance()
-      .then(c => {
-        core = c;
-        splash = new Splash(core);
-      });
-  });
+	beforeAll(() => {
+		return createInstance().then((c) => {
+			core = c;
+			splash = new Splash(core);
+		});
+	});
 
-  afterAll(() => core.destroy());
+	afterAll(() => core.destroy());
 
-  // TODO: Check DOM node
-  // TODO: Check events ?
+	// TODO: Check DOM node
+	// TODO: Check events ?
 
-  test('#show', () => {
-    splash.show();
-  });
+	test("#show", () => {
+		splash.show();
+	});
 
-  test('#destroy', () => {
-    splash.destroy();
-  });
+	test("#destroy", () => {
+		splash.destroy();
+	});
 });

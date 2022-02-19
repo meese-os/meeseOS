@@ -28,44 +28,47 @@
  * @licence Simplified BSD License
  */
 
-import {app, h} from 'hyperapp';
-import Dialog from '../dialog';
+import { app, h } from "hyperapp";
+import Dialog from "../dialog";
 
 /**
  * Custom OS.js Dialog
  */
 export default class CustomDialog extends Dialog {
+	constructor(core, options, valueCallback, callback) {
+		super(core, {}, options, callback);
 
-  constructor(core, options, valueCallback, callback) {
-    super(core, {}, options, callback);
+		this.valueCallback = valueCallback;
+	}
 
-    this.valueCallback = valueCallback;
-  }
+	render(render) {
+		return super.render({}, ($content, win) => render($content, win, this));
+	}
 
-  render(render) {
-    return super.render({}, ($content, win) => render($content, win, this));
-  }
+	renderCustom(render, styles = {}) {
+		return this.render(($content, dialogWindow, dialog) => {
+			app(
+				{},
+				{},
+				() => {
+					return this.createView([
+						h("div", {
+							style: {
+								"flex-grow": 1,
+								"flex-shrink": 1,
+								position: "relative",
+								...styles,
+							},
+							oncreate: ($el) => render($el, dialogWindow, dialog),
+						}),
+					]);
+				},
+				$content
+			);
+		});
+	}
 
-  renderCustom(render, styles = {}) {
-    return this.render(($content, dialogWindow, dialog) => {
-      app({}, {}, () => {
-        return this.createView([
-          h('div', {
-            style: {
-              'flex-grow': 1,
-              'flex-shrink': 1,
-              position: 'relative',
-              ...styles
-            },
-            oncreate: $el => render($el, dialogWindow, dialog)
-          })
-        ]);
-      }, $content);
-    });
-  }
-
-  getValue() {
-    return this.valueCallback(this);
-  }
-
+	getValue() {
+		return this.valueCallback(this);
+	}
 }

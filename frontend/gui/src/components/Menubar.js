@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import { Element } from "./Element";
 
 /**
  * A menubar item
@@ -37,18 +37,25 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const MenubarItem = (props, children = []) => {
-  const {onclick, data} = props;
+	const { onclick, data } = props;
 
-  return h('div', {
-    onclick: (ev) => {
-      if (typeof onclick === 'function') {
-        const parentNode = ev.target.parentNode;
-        const index = Array.prototype.indexOf.call(parentNode.children, ev.target);
+	return h(
+		"div",
+		{
+			onclick: (ev) => {
+				if (typeof onclick === "function") {
+					const parentNode = ev.target.parentNode;
+					const index = Array.prototype.indexOf.call(
+						parentNode.children,
+						ev.target
+					);
 
-        onclick(ev, data || {}, index);
-      }
-    }
-  }, h('span', {}, children));
+					onclick(ev, data || {}, index);
+				}
+			},
+		},
+		h("span", {}, children)
+	);
 };
 
 /**
@@ -58,12 +65,22 @@ export const MenubarItem = (props, children = []) => {
  * @param {h[]} children Children
  */
 export const Menubar = (props, children = []) =>
-  h(Element, Object.assign({}, props, {
-    class: ['meeseOS-gui-menubar', props.class]
-  }), [
-    ...(props.items || []).map(item => h(MenubarItem, {
-      data: item.data,
-      onclick: (item.onclick || props.onclick)
-    }, item.label)),
-    ...children
-  ]);
+	h(
+		Element,
+		Object.assign({}, props, {
+			class: ["meeseOS-gui-menubar", props.class],
+		}),
+		[
+			...(props.items || []).map((item) =>
+				h(
+					MenubarItem,
+					{
+						data: item.data,
+						onclick: item.onclick || props.onclick,
+					},
+					item.label
+				)
+			),
+			...children,
+		]
+	);

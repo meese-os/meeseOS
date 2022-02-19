@@ -3,8 +3,5 @@
   "name": "StandardTheme",
   "title": "Standard Theme",
   "description": "Standard Theme",
-  "files": [
-    "main.js",
-    "main.css"
-  ]
+  "files": ["main.js", "main.css"]
 }

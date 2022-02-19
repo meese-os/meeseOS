@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import './index.scss';
-import meeseOS from 'meeseOS';
-import {name} from './metadata.json';
-import {register} from './src/theme.js';
+import "./index.scss";
+import meeseOS from "meeseOS";
+import { name } from "./metadata.json";
+import { register } from "./src/theme.js";
 
 meeseOS.register(name, register);

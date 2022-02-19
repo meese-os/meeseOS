@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
+import { h } from "hyperapp";
 
 /**
  * An icon
@@ -38,19 +38,15 @@ import {h} from 'hyperapp';
  * @param {h[]} children Children
  */
 export const Icon = (props, children) => {
-  const i = props && typeof props === 'object'
-    ? props.src
-    : props;
+	const i = props && typeof props === "object" ? props.src : props;
 
-  const n = props && typeof props === 'object'
-    ? props.name
-    : undefined;
+	const n = props && typeof props === "object" ? props.name : undefined;
 
-  return h('i', {
-    'data-icon': n,
-    class: 'meeseOS-icon',
-    style: {
-      backgroundImage: typeof props === 'string' ? `url(${i})` : undefined
-    }
-  });
+	return h("i", {
+		"data-icon": n,
+		class: "meeseOS-icon",
+		style: {
+			backgroundImage: typeof props === "string" ? `url(${i})` : undefined,
+		},
+	});
 };

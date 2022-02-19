@@ -28,196 +28,207 @@
  * @licence Simplified BSD License
  */
 
-import {Terminal} from 'xterm';
-import {FitAddon} from 'xterm-addon-fit';
-import * as clipboard from 'clipboard-polyfill';
-import {AttachAddon} from './attach.js';
+import { Terminal } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
+import * as clipboard from "clipboard-polyfill";
+import { AttachAddon } from "./attach.js";
 
-import './index.scss';
-import meeseOS from 'meeseOS';
-import {name as applicationName} from './metadata.json';
+import "./index.scss";
+import meeseOS from "meeseOS";
+import { name as applicationName } from "./metadata.json";
 
 /*
  * Creates a new Terminal connection
  */
 const createConnection = async (core, proc, win, term, fit) => {
-  const params = {
-    connection: {
-    },
-    size: {
-      cols: term.cols,
-      rows: term.rows
-    }
-  };
+	const params = {
+		connection: {},
+		size: {
+			cols: term.cols,
+			rows: term.rows,
+		},
+	};
 
-  term.clear();
-  term.writeln('Requesting connection....');
+	term.clear();
+	term.writeln("Requesting connection....");
 
-  const {uuid} = await proc.request('/create', {method: 'post', body: params});
-  const pingInterval = core.config('xterm.ping', 30000);
+	const { uuid } = await proc.request("/create", {
+		method: "post",
+		body: params,
+	});
+	const pingInterval = core.config("xterm.ping", 30000);
 
-  const ws = proc.socket('/socket', {
-    socket: {
-      reconnect: false
-    }
-  });
+	const ws = proc.socket("/socket", {
+		socket: {
+			reconnect: false,
+		},
+	});
 
-  const attachAddon = new AttachAddon(ws.connection);
-  term.loadAddon(attachAddon);
+	const attachAddon = new AttachAddon(ws.connection);
+	term.loadAddon(attachAddon);
 
-  let pinger;
-  let closed = false;
-  let pinged = false;
-  let pid = -1;
+	let pinger;
+	let closed = false;
+	let pinged = false;
+	let pid = -1;
 
-  ws.on('open', () => {
-    ws.send(uuid);
+	ws.on("open", () => {
+		ws.send(uuid);
 		term.clear();
 
-    pinger = setInterval(() => {
-      ws.send(JSON.stringify({action: 'ping'}));
-    }, pingInterval);
-  });
+		pinger = setInterval(() => {
+			ws.send(JSON.stringify({ action: "ping" }));
+		}, pingInterval);
+	});
 
-  ws.on('message', (ev) => {
-    if (pinged) {
-      const message = JSON.parse(ev.data);
-      if (message.action === 'exit' && message.event.exitCode === 0) {
-        win.close();
-      }
-    } else {
-      pinged = true;
-      pid = parseInt(ev.data, 10);
+	ws.on("message", (ev) => {
+		if (pinged) {
+			const message = JSON.parse(ev.data);
+			if (message.action === "exit" && message.event.exitCode === 0) {
+				win.close();
+			}
+		} else {
+			pinged = true;
+			pid = parseInt(ev.data, 10);
 
-      proc.request('/resize', {method: 'post', body: {size: params.size, pid, uuid}});
-      fit();
-    }
-  });
+			proc.request("/resize", {
+				method: "post",
+				body: { size: params.size, pid, uuid },
+			});
+			fit();
+		}
+	});
 
-  ws.on('close', () => {
-    term.writeln('... Disconnected. Press any key to close terminal ...');
-    closed = true;
-    clearInterval(pinger);
-  });
+	ws.on("close", () => {
+		term.writeln("... Disconnected. Press any key to close terminal ...");
+		closed = true;
+		clearInterval(pinger);
+	});
 
-  term.onKey(() => {
-    if (closed) {
-      win.destroy();
-    }
-  });
+	term.onKey(() => {
+		if (closed) {
+			win.destroy();
+		}
+	});
 
-  term.onResize((size) => {
-    const {cols, rows} = size;
-    proc.request('/resize', {method: 'post', body: {size: {cols, rows}, pid, uuid}});
-  });
+	term.onResize((size) => {
+		const { cols, rows } = size;
+		proc.request("/resize", {
+			method: "post",
+			body: { size: { cols, rows }, pid, uuid },
+		});
+	});
 
-  win.on('destroy', () => {
-    ws.destroy();
-    term.dispose();
-  });
+	win.on("destroy", () => {
+		ws.destroy();
+		term.dispose();
+	});
 
-  fit();
+	fit();
 };
 
 /*
  * Creates a new Terminal and Window
  */
 const createTerminal = (core, proc, index) => {
-  const term = new Terminal({
-    cols: 40,
-    rows: 30,
-  });
+	const term = new Terminal({
+		cols: 40,
+		rows: 30,
+	});
 
-  const fitAddon = new FitAddon();
-  term.loadAddon(fitAddon);
+	const fitAddon = new FitAddon();
+	term.loadAddon(fitAddon);
 
-  const fit = () => {
-    setTimeout(() => {
-      fitAddon.fit();
-      term.focus();
-      term.scrollToBottom();
-    }, 100);
-  };
+	const fit = () => {
+		setTimeout(() => {
+			fitAddon.fit();
+			term.focus();
+			term.scrollToBottom();
+		}, 100);
+	};
 
-  const render = ($content) => {
-    term.open($content);
-    fitAddon.fit();
-    term.focus();
+	const render = ($content) => {
+		term.open($content);
+		fitAddon.fit();
+		term.focus();
 
-    $content.addEventListener('contextmenu', ev => {
-      ev.preventDefault();
+		$content.addEventListener("contextmenu", (ev) => {
+			ev.preventDefault();
 
-      core.make('meeseOS/contextmenu', {
-        position: ev,
-        menu: [{
-          label: 'Copy text selection',
-          onclick: () => clipboard.writeText(
-            term.getSelection()
-          )
-        }, {
-          label: 'Paste from clipboard',
-          onclick: () => clipboard.readText()
-            .then(data => term.write(data))
-        }]
-      });
-    });
-  };
+			core.make("meeseOS/contextmenu", {
+				position: ev,
+				menu: [
+					{
+						label: "Copy text selection",
+						onclick: () => clipboard.writeText(term.getSelection()),
+					},
+					{
+						label: "Paste from clipboard",
+						onclick: () =>
+							clipboard.readText().then((data) => term.write(data)),
+					},
+				],
+			});
+		});
+	};
 
-  proc.createWindow({
-    id: 'Xterm_' + String(index),
-    title: proc.metadata.title.en_EN,
-    icon: proc.resource(proc.metadata.icon),
-    dimension: {width: 625, height: 360},
-    attributes: {
-      classNames: ['Window_Xterm']
-    }
-  })
-    .on('resized', fit)
-    .on('maximize', fit)
-    .on('restore', fit)
-    .on('moved', () => term.focus())
-    .on('focus', () => term.focus())
-    .on('blur', () => term.blur())
-    .on('render', (win) => createConnection(core, proc, win, term, fit))
-    .render(render);
+	proc
+		.createWindow({
+			id: "Xterm_" + String(index),
+			title: proc.metadata.title.en_EN,
+			icon: proc.resource(proc.metadata.icon),
+			dimension: { width: 625, height: 360 },
+			attributes: {
+				classNames: ["Window_Xterm"],
+			},
+		})
+		.on("resized", fit)
+		.on("maximize", fit)
+		.on("restore", fit)
+		.on("moved", () => term.focus())
+		.on("focus", () => term.focus())
+		.on("blur", () => term.blur())
+		.on("render", (win) => createConnection(core, proc, win, term, fit))
+		.render(render);
 };
 
 //
 // Callback for launching application
 //
 meeseOS.register(applicationName, (core, args, options, metadata) => {
-  const proc = core.make('meeseOS/application', {
-    args,
-    options,
-    metadata
-  });
+	const proc = core.make("meeseOS/application", {
+		args,
+		options,
+		metadata,
+	});
 
-  proc.on('destroy-window', () => {
-    if (!proc.windows.length) {
-      proc.destroy();
-    }
-  });
+	proc.on("destroy-window", () => {
+		if (!proc.windows.length) {
+			proc.destroy();
+		}
+	});
 
-  const createWindow = () => createTerminal(core, proc, proc.windows.length);
+	const createWindow = () => createTerminal(core, proc, proc.windows.length);
 
-  if (core.has('meeseOS/tray')) {
-    const tray = core.make('meeseOS/tray').create({
-      icon: proc.resource(metadata.icon),
-    }, (ev) => {
-      core.make('meeseOS/contextmenu').show({
-        position: ev,
-        menu: [
-          {label: 'New terminal', onclick: () => createWindow()}
-        ]
-      });
-    });
+	if (core.has("meeseOS/tray")) {
+		const tray = core.make("meeseOS/tray").create(
+			{
+				icon: proc.resource(metadata.icon),
+			},
+			(ev) => {
+				core.make("meeseOS/contextmenu").show({
+					position: ev,
+					menu: [{ label: "New terminal", onclick: () => createWindow() }],
+				});
+			}
+		);
 
-    proc.on('destroy', () => tray.destroy());
-  }
+		proc.on("destroy", () => tray.destroy());
+	}
 
-  createWindow();
+	createWindow();
 
-  proc.on('attention', () => createWindow());
+	proc.on("attention", () => createWindow());
 
-  return proc;
+	return proc;
 });

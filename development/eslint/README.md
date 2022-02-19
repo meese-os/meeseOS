@@ -18,6 +18,6 @@ In your eslint config:
 
 ```json
 {
-  "extends": "@aaronmeese.com/eslint-config"
+	"extends": "@aaronmeese.com/eslint-config"
 }
 ```

@@ -28,23 +28,23 @@
  * @licence Simplified BSD License
  */
 
-.meeseOS-panel-item[data-name=windows] {
-  display: flex;
-  flex: 1 1;
-  overflow: hidden;
-  padding: 0;
+.meeseOS-panel-item[data-name="windows"] {
+	display: flex;
+	flex: 1 1;
+	overflow: hidden;
+	padding: 0;
 
-  & > div {
-    cursor: pointer;
-    flex: initial;
-    padding: calc($base-margin / 1.5);
-    min-width: 4em;
+	& > div {
+		cursor: pointer;
+		flex: initial;
+		padding: calc($base-margin / 1.5);
+		min-width: 4em;
 
-    & > span {
-      display: block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
+		& > span {
+			display: block;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	}
 }

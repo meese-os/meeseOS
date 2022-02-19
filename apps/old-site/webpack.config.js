@@ -11,17 +11,19 @@ const plugins = [];
 const localhost = "localhost:8000";
 
 if (mode === "production") {
-	plugins.push(new CssMinimizerPlugin({
-		minimizerOptions: {
-			preset: [ "advanced" ],
-		},
-	}));
+	plugins.push(
+		new CssMinimizerPlugin({
+			minimizerOptions: {
+				preset: ["advanced"],
+			},
+		})
+	);
 }
 
 // Loaders
 const cssLoader = {
 	loader: "css-loader",
-	options: { sourceMap: minimize }
+	options: { sourceMap: minimize },
 };
 const postcssLoader = {
 	// Required for Bootstrap as per the following:
@@ -29,17 +31,17 @@ const postcssLoader = {
 	loader: "postcss-loader",
 	options: {
 		postcssOptions: {
-			plugins: [ "postcss-preset-env" ],
+			plugins: ["postcss-preset-env"],
 		},
 	},
 };
 const sassLoader = {
 	loader: "sass-loader",
-	options: { sourceMap: minimize }
+	options: { sourceMap: minimize },
 };
 const styleLoader = {
 	test: /\.css$/,
-	use: ["style-loader", cssLoader]
+	use: ["style-loader", cssLoader],
 };
 const jsxLoader = {
 	test: /\.jsx?$/,
@@ -53,28 +55,25 @@ const jsxLoader = {
 			options: {
 				presets: [
 					"@babel/preset-env",
-					[
-						"@babel/preset-react",
-						{ runtime: "automatic", },
-					],
+					["@babel/preset-react", { runtime: "automatic" }],
 				],
-				cacheDirectory: true
-			}
+				cacheDirectory: true,
+			},
 		},
-	]
+	],
 };
 const pdfLoader = {
 	test: /\.pdf$/,
-	type: "asset/resource"
+	type: "asset/resource",
 };
 const fontAwesomeLoader = {
 	test: /\.(ttf|eot|svg|woff(2)?)$/,
 	include: path.resolve(__dirname, "node_modules/font-awesome/fonts"),
 	type: "asset/resource",
 	generator: {
-		filename: "fonts/[name][ext]"
-	}
-}
+		filename: "fonts/[name][ext]",
+	},
+};
 
 module.exports = {
 	mode,
@@ -85,8 +84,8 @@ module.exports = {
 		fallback: {
 			fs: false,
 			os: false,
-			path: false
-		}
+			path: false,
+		},
 	},
 	externals: {
 		meeseOS: "MeeseOS",
@@ -96,15 +95,17 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.DefinePlugin({
-			"process.env.PUBLIC_URL": JSON.stringify(minimize ? env_vars.PUBLIC_URL : localhost),
+			"process.env.PUBLIC_URL": JSON.stringify(
+				minimize ? env_vars.PUBLIC_URL : localhost
+			),
 			"process.env.GH_USERNAME": JSON.stringify(env_vars.GH_USERNAME),
-			"process.env.GH_PAT": JSON.stringify(env_vars.GH_PAT)
+			"process.env.GH_PAT": JSON.stringify(env_vars.GH_PAT),
 		}),
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
-			chunkFilename: "[id].css"
+			chunkFilename: "[id].css",
 		}),
-		...plugins
+		...plugins,
 	],
 	module: {
 		rules: [
@@ -119,14 +120,14 @@ module.exports = {
 					{
 						loader: MiniCssExtractPlugin.loader,
 						options: {
-							esModule: false
-						}
+							esModule: false,
+						},
 					},
 					cssLoader,
 					postcssLoader,
 					sassLoader,
-				]
+				],
 			},
-		]
-	}
+		],
+	},
 };

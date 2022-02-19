@@ -29,29 +29,29 @@
  */
 
 .meeseOS-notifications {
-  position: absolute;
-  top: 0;
-  right: 0;
-  pointer-events: none;
-  box-sizing: border-box;
-  padding: $base-margin;
-  z-index: 16777272;
-  overflow: visible;
+	position: absolute;
+	top: 0;
+	right: 0;
+	pointer-events: none;
+	box-sizing: border-box;
+	padding: $base-margin;
+	z-index: 16777272;
+	overflow: visible;
 }
 
 .meeseOS-notification {
-  padding: $base-margin;
-  box-sizing: border-box;
-  pointer-events: all;
-  min-width: 200px;
-  margin-bottom: $base-margin;
+	padding: $base-margin;
+	box-sizing: border-box;
+	pointer-events: all;
+	min-width: 200px;
+	margin-bottom: $base-margin;
 }
 
 .meeseOS-notification-wrapper {
-  background-size: 3em;
-  background-repeat: no-repeat;
+	background-size: 3em;
+	background-repeat: no-repeat;
 
-  &[data-has-icon=true] {
-    padding-left: calc(3em + #{$base-margin});
-  }
+	&[data-has-icon="true"] {
+		padding-left: calc(3em + #{$base-margin});
+	}
 }

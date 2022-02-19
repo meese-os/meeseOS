@@ -31,103 +31,111 @@
 /*
  * Creates URL request path
  */
-const encodeQueryData = data => Object.keys(data)
-  .filter(k => typeof data[k] !== 'object')
-  .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
-  .join('&');
+const encodeQueryData = (data) =>
+	Object.keys(data)
+		.filter((k) => typeof data[k] !== "object")
+		.map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k]))
+		.join("&");
 
 const bodyTypes = [
-  window.ArrayBuffer,
-  window.ArrayBufferView,
-  window.Blob,
-  window.File,
-  window.URLSearchParams,
-  window.FormData
-].filter(t => !!t);
+	window.ArrayBuffer,
+	window.ArrayBufferView,
+	window.Blob,
+	window.File,
+	window.URLSearchParams,
+	window.FormData,
+].filter((t) => !!t);
 
 /*
  * Creates fetch() options
  */
 const createFetchOptions = (url, options, type) => {
-  const fetchOptions = {
-    credentials: 'same-origin',
-    method: 'get',
-    headers: {},
-    ...options
-  };
+	const fetchOptions = {
+		credentials: "same-origin",
+		method: "get",
+		headers: {},
+		...options,
+	};
 
-  if (type === 'json') {
-    fetchOptions.headers = {
-      ...fetchOptions.headers,
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    };
-  }
+	if (type === "json") {
+		fetchOptions.headers = {
+			...fetchOptions.headers,
+			Accept: "application/json, text/plain, */*",
+			"Content-Type": "application/json",
+		};
+	}
 
-  if (fetchOptions.body && fetchOptions.method.toLowerCase() === 'get') {
-    url += '?' + encodeQueryData(fetchOptions.body);
-    delete fetchOptions.body;
-  }
+	if (fetchOptions.body && fetchOptions.method.toLowerCase() === "get") {
+		url += "?" + encodeQueryData(fetchOptions.body);
+		delete fetchOptions.body;
+	}
 
-  const hasBody = typeof fetchOptions.body !== 'undefined';
-  const stringBody = typeof fetchOptions.body === 'string';
+	const hasBody = typeof fetchOptions.body !== "undefined";
+	const stringBody = typeof fetchOptions.body === "string";
 
-  if (type === 'json' && (hasBody && !stringBody)) {
-    if (!(fetchOptions.body instanceof FormData)) {
-      const found = bodyTypes.find(t => (fetchOptions.body instanceof t));
-      if (!found) {
-        fetchOptions.body = JSON.stringify(fetchOptions.body);
-      }
-    }
-  }
+	if (type === "json" && hasBody && !stringBody) {
+		if (!(fetchOptions.body instanceof FormData)) {
+			const found = bodyTypes.find((t) => fetchOptions.body instanceof t);
+			if (!found) {
+				fetchOptions.body = JSON.stringify(fetchOptions.body);
+			}
+		}
+	}
 
-  return [url, fetchOptions];
+	return [url, fetchOptions];
 };
 
 /**
  * This is a fetch polyfill for XMLHttpRequest.
  * Mainly used to get upload progress indicator.
  */
-const fetchXhr = (target, fetchOptions) => new Promise((resolve, reject) => {
-  const req = new XMLHttpRequest();
+const fetchXhr = (target, fetchOptions) =>
+	new Promise((resolve, reject) => {
+		const req = new XMLHttpRequest();
 
-  const onError = (msg) => (ev) => {
-    console.warn(msg, ev);
-    reject(new Error(msg));
-  };
+		const onError = (msg) => (ev) => {
+			console.warn(msg, ev);
+			reject(new Error(msg));
+		};
 
-  const onLoad = () => {
-    resolve({
-      status: req.status,
-      statusText: req.statusText,
-      ok: req.status >= 200 && req.status <= 299,
-      headers: {
-        get: k => req.getResponseHeader(k)
-      },
-      text: () => Promise.resolve(JSON.responseText),
-      json: () => Promise.resolve(JSON.parse(req.responseText)),
-      arrayBuffer: () => Promise.resolve(req.response)
-    });
-  };
+		const onLoad = () => {
+			resolve({
+				status: req.status,
+				statusText: req.statusText,
+				ok: req.status >= 200 && req.status <= 299,
+				headers: {
+					get: (k) => req.getResponseHeader(k),
+				},
+				text: () => Promise.resolve(JSON.responseText),
+				json: () => Promise.resolve(JSON.parse(req.responseText)),
+				arrayBuffer: () => Promise.resolve(req.response),
+			});
+		};
 
-  if (typeof fetchOptions.onProgress === 'function') {
-    const rel = fetchOptions.method.toUpperCase() === 'GET' ? req : req.upload;
-    rel.addEventListener('progress', (ev) => {
-      if (ev.lengthComputable) {
-        const percentComplete = Math.round(ev.loaded / ev.total * 100);
-        fetchOptions.onProgress(ev, percentComplete);
-      }
-    });
-  }
+		if (typeof fetchOptions.onProgress === "function") {
+			const rel =
+				fetchOptions.method.toUpperCase() === "GET" ? req : req.upload;
+			rel.addEventListener("progress", (ev) => {
+				if (ev.lengthComputable) {
+					const percentComplete = Math.round((ev.loaded / ev.total) * 100);
+					fetchOptions.onProgress(ev, percentComplete);
+				}
+			});
+		}
 
-  req.addEventListener('load', onLoad);
-  req.addEventListener('error', onError('An error occured while performing XHR request'));
-  req.addEventListener('abort', onError('XHR request was aborted'));
-  req.open(fetchOptions.method, target);
-  Object.entries(fetchOptions.headers).forEach(([k, v]) => req.setRequestHeader(k, v));
-  req.responseType = fetchOptions.responseType || '';
-  req.send(fetchOptions.body);
-});
+		req.addEventListener("load", onLoad);
+		req.addEventListener(
+			"error",
+			onError("An error occured while performing XHR request")
+		);
+		req.addEventListener("abort", onError("XHR request was aborted"));
+		req.open(fetchOptions.method, target);
+		Object.entries(fetchOptions.headers).forEach(([k, v]) =>
+			req.setRequestHeader(k, v)
+		);
+		req.responseType = fetchOptions.responseType || "";
+		req.send(fetchOptions.body);
+	});
 
 /**
  * Make a HTTP request
@@ -138,31 +146,30 @@ const fetchXhr = (target, fetchOptions) => new Promise((resolve, reject) => {
  * @return {Promise<*>}
  */
 export const fetch = (url, options = {}, type = null) => {
-  const [target, fetchOptions] = createFetchOptions(url, options, type);
+	const [target, fetchOptions] = createFetchOptions(url, options, type);
 
-  const createErrorRejection = (response, error) =>
-    Promise.reject(new Error(error
-      ? error
-      : `${response.status} (${response.statusText})`));
+	const createErrorRejection = (response, error) =>
+		Promise.reject(
+			new Error(error || `${response.status} (${response.statusText})`)
+		);
 
-  const op = options.xhr
-    ? fetchXhr(target, fetchOptions)
-    : window.fetch(target, fetchOptions);
+	const op = options.xhr
+		? fetchXhr(target, fetchOptions)
+		: window.fetch(target, fetchOptions);
 
-  return op
-    .then(response => {
-      if (!response.ok) {
-        const contentType = response.headers.get('content-type');
-        const method = contentType && contentType.indexOf('application/json') !== -1
-          ? 'json'
-          : 'text';
+	return op.then((response) => {
+		if (!response.ok) {
+			const contentType = response.headers.get("content-type");
+			const method =
+				contentType && contentType.indexOf("application/json") !== -1
+					? "json"
+					: "text";
 
-        return response[method]()
-          .then(data => createErrorRejection(response, data.error));
-      }
+			return response[method]().then((data) =>
+				createErrorRejection(response, data.error)
+			);
+		}
 
-      return type === 'json'
-        ? response.json()
-        : response;
-    });
+		return type === "json" ? response.json() : response;
+	});
 };

@@ -18,5 +18,6 @@ In your stylelint config:
 
 ```json
 {
-  "extends": "@aaronmeese.com/stylelint-config"
+	"extends": "@aaronmeese.com/stylelint-config"
 }
+```

@@ -29,19 +29,19 @@
  */
 
 .Window_Xterm {
-  .meeseOS-window-content {
-    background: #000;
-  }
+	.meeseOS-window-content {
+		background: #000;
+	}
 
-  .terminal,
-  .xterm-viewport {
-    width: 100% !important;
-    height: 100% !important;
-  }
+	.terminal,
+	.xterm-viewport {
+		width: 100% !important;
+		height: 100% !important;
+	}
 
-  @import 'xterm';
+	@import "xterm";
 
-  .xterm .xterm-helper-textarea {
-    left: 0 !important;
-  }
+	.xterm .xterm-helper-textarea {
+		left: 0 !important;
+	}
 }

@@ -28,96 +28,100 @@
  * @license Simplified BSD License
  */
 
-import Notification from './notification';
-import {createCssText} from './utils/dom';
+import Notification from "./notification";
+import { createCssText } from "./utils/dom";
 
 /**
  * Notification Factory
  */
 export default class Notifications {
+	/**
+	 * @param {Core} core OS.js Core instance reference
+	 */
+	constructor(core) {
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
 
-  /**
-   * @param {Core} core OS.js Core instance reference
-   */
-  constructor(core) {
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
+		/**
+		 * @type {Element}
+		 */
+		this.$element = null;
+	}
 
-    /**
-     * @type {Element}
-     */
-    this.$element = null;
-  }
+	/**
+	 * Destroy notification handler
+	 */
+	destroy() {
+		this.$element.remove();
+		this.$element = null;
+	}
 
-  /**
-   * Destroy notification handler
-   */
-  destroy() {
-    this.$element.remove();
-    this.$element = null;
-  }
+	/**
+	 * Initialize notification handler
+	 */
+	init() {
+		this.$element = document.createElement("div");
+		this.$element.classList.add("meeseOS-notifications");
+		this.core.$root.appendChild(this.$element);
 
-  /**
-   * Initialize notification handler
-   */
-  init() {
-    this.$element = document.createElement('div');
-    this.$element.classList.add('meeseOS-notifications');
-    this.core.$root.appendChild(this.$element);
+		this.core.on("meeseOS/desktop:applySettings", () => {
+			this.setElementStyles();
+		});
 
-    this.core.on('meeseOS/desktop:applySettings', () => {
-      this.setElementStyles();
-    });
+		this.setElementStyles();
+	}
 
-    this.setElementStyles();
-  }
+	/**
+	 * Create a new notification
+	 * @param {NotificationOptions} options See notification class for options
+	 * @return {Notification}
+	 */
+	create(options) {
+		if (!options) {
+			throw new Error("Notification options not given");
+		}
 
-  /**
-   * Create a new notification
-   * @param {NotificationOptions} options See notification class for options
-   * @return {Notification}
-   */
-  create(options) {
-    if (!options) {
-      throw new Error('Notification options not given');
-    }
+		const notification = new Notification(this.core, this.$element, options);
+		notification.render();
+		return notification;
+	}
 
-    const notification = new Notification(this.core, this.$element, options);
-    notification.render();
-    return notification;
-  }
+	/**
+	 * Sets the element styles
+	 */
+	setElementStyles() {
+		const styles = createCssText(this.createElementStyles());
+		this.$element.style.cssText = styles;
+	}
 
-  /**
-   * Sets the element styles
-   */
-  setElementStyles() {
-    const styles = createCssText(this.createElementStyles());
-    this.$element.style.cssText = styles;
-  }
+	/**
+	 * Creates a new CSS style object
+	 * @return {{property: string}}
+	 */
+	createElementStyles() {
+		const defaultPosition = this.core.config(
+			"desktop.settings.notifications.position",
+			"top-right"
+		);
 
-  /**
-   * Creates a new CSS style object
-   * @return {{property: string}}
-   */
-  createElementStyles() {
-    const defaultPosition = this.core
-      .config('desktop.settings.notifications.position', 'top-right');
+		const position = this.core
+			.make("meeseOS/settings")
+			.get("meeseOS/desktop", "notifications.position", defaultPosition);
 
-    const position = this.core.make('meeseOS/settings')
-      .get('meeseOS/desktop', 'notifications.position', defaultPosition);
+		if (position.split("-").length !== 2) {
+			return {};
+		}
 
-    if (position.split('-').length !== 2) {
-      return {};
-    }
-
-    return ['left', 'right', 'top', 'bottom']
-      .reduce((carry, key) => ({
-        [key]: position.indexOf(key) === -1 ? 'auto' : '0',
-        ...carry
-      }), {});
-  }
+		return ["left", "right", "top", "bottom"].reduce(
+			(carry, key) => ({
+				[key]: position.indexOf(key) === -1 ? "auto" : "0",
+				...carry,
+			}),
+			{}
+		);
+	}
 }

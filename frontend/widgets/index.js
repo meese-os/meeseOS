@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import './index.scss';
+import "./index.scss";
 
-export {default as WidgetServiceProvider} from './src/provider';
-export {default as Widget} from './src/widget';
-export {default as DigitalClockWidget} from './src/items/digitalclock';
+export { default as WidgetServiceProvider } from "./src/provider";
+export { default as Widget } from "./src/widget";
+export { default as DigitalClockWidget } from "./src/items/digitalclock";

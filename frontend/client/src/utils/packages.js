@@ -29,54 +29,50 @@
  */
 
 export const createPackageAvailabilityCheck = (core) => {
-  const user = core.getUser();
-  const permissions = core.config('packages.permissions', {});
+	const user = core.getUser();
+	const permissions = core.config("packages.permissions", {});
 
-  const checkMetadataGroups = iter => {
-    const m = iter.strictGroups === false ? 'some' : 'every';
+	const checkMetadataGroups = (iter) => {
+		const m = iter.strictGroups === false ? "some" : "every";
 
-    return iter.groups instanceof Array
-      ? iter.groups[m](g => user.groups.indexOf(g) !== -1)
-      : true;
-  };
+		return iter.groups instanceof Array
+			? iter.groups[m]((g) => user.groups.indexOf(g) !== -1)
+			: true;
+	};
 
-  const checkConfigGroups = iter => {
-    const perm = permissions[iter.name];
-    if (perm && perm.groups instanceof Array) {
-      const m = perm.strictGroups === false ? 'some' : 'every';
-      return perm.groups[m](g => user.groups.indexOf(g) !== -1);
-    }
+	const checkConfigGroups = (iter) => {
+		const perm = permissions[iter.name];
+		if (perm && perm.groups instanceof Array) {
+			const m = perm.strictGroups === false ? "some" : "every";
+			return perm.groups[m]((g) => user.groups.indexOf(g) !== -1);
+		}
 
-    return true;
-  };
+		return true;
+	};
 
-  const checkBlacklist = iter => user.blacklist instanceof Array
-    ? user.blacklist.indexOf(iter.name) === -1
-    : true;
+	const checkBlacklist = (iter) =>
+		user.blacklist instanceof Array
+			? user.blacklist.indexOf(iter.name) === -1
+			: true;
 
-  const checks =  [
-    checkMetadataGroups,
-    checkConfigGroups,
-    checkBlacklist
-  ];
+	const checks = [checkMetadataGroups, checkConfigGroups, checkBlacklist];
 
-  return metadata => checks.every(fn => fn(metadata));
+	return (metadata) => checks.every((fn) => fn(metadata));
 };
 
-export const createManifestFromArray = list => list
-  .map(iter => ({
-    type: 'application',
-    ...iter,
-    files: (iter.files || [])
-      .map(file =>
-        typeof file === 'string'
-          ? {filename: file, type: 'preload'}
-          : {type: 'preload', ...file}
-      )
-  }));
+export const createManifestFromArray = (list) =>
+	list.map((iter) => ({
+		type: "application",
+		...iter,
+		files: (iter.files || []).map((file) =>
+			typeof file === "string"
+				? { filename: file, type: "preload" }
+				: { type: "preload", ...file }
+		),
+	}));
 
 export const filterMetadataFilesByType = (files, type) =>
-  (files || []).filter(file => file.type === type);
+	(files || []).filter((file) => file.type === type);
 
-export const metadataFilesToFilenames = files =>
-  (files || []).map(file => file.filename);
+export const metadataFilesToFilenames = (files) =>
+	(files || []).map((file) => file.filename);

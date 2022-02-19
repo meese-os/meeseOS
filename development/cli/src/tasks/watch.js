@@ -27,111 +27,120 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-const fs = require('fs-extra');
-const path = require('path');
-const webpack = require('webpack');
+const fs = require("fs-extra");
+const path = require("path");
+const webpack = require("webpack");
 
-const unique = arr => arr.filter((elem, pos, arr) => arr.indexOf(elem) === pos);
+const unique = (arr) =>
+	arr.filter((elem, pos, arr) => arr.indexOf(elem) === pos);
 
-const npmDirectories = npmFile => fs.readJson(npmFile)
-  .then(npm => {
-    const parent = path.dirname(npmFile);
-    const list = [
-      ...Object.keys(npm.dependencies || {}),
-      ...Object.keys(npm.devDependencies || {})
-    ];
+const npmDirectories = (npmFile) =>
+	fs.readJson(npmFile).then((npm) => {
+		const parent = path.dirname(npmFile);
+		const list = [
+			...Object.keys(npm.dependencies || {}),
+			...Object.keys(npm.devDependencies || {}),
+		];
 
-    return list.map(filename => path.resolve(parent, 'node_modules', filename));
-  });
+		return list.map((filename) =>
+			path.resolve(parent, "node_modules", filename)
+		);
+	});
 
-const realpaths = list => Promise.all(list.map(fn => fs.realpath(fn).catch(err => false)))
-  .then(list => list.filter(value => value !== false));
+const realpaths = (list) =>
+	Promise.all(list.map((fn) => fs.realpath(fn).catch((err) => false))).then(
+		(list) => list.filter((value) => value !== false)
+	);
 
-const directories = options =>
-  fs.readJson(options.packages)
-    .then(pkgs => {
-      return npmDirectories(options.npm)
-        .then(list => [...pkgs, ...list]);
-    })
-    .then(list => {
-      const subs = list.map(iter => path.resolve(iter, 'package.json'));
+const directories = (options) =>
+	fs
+		.readJson(options.packages)
+		.then((pkgs) => {
+			return npmDirectories(options.npm).then((list) => [...pkgs, ...list]);
+		})
+		.then((list) => {
+			const subs = list.map((iter) => path.resolve(iter, "package.json"));
 
-      return Promise.all(subs.map(npmDirectories))
-        .then(subList => {
-          return [].concat(...subList);
-        })
-        .then(subList => ([...list, ...subList]));
-    });
+			return Promise.all(subs.map(npmDirectories))
+				.then((subList) => {
+					return [].concat(...subList);
+				})
+				.then((subList) => [...list, ...subList]);
+		});
 
-const filter = list => Promise.all(list.map(dir => {
-  const filename = path.resolve(dir, 'webpack.config.js');
+const filter = (list) =>
+	Promise.all(
+		list.map((dir) => {
+			const filename = path.resolve(dir, "webpack.config.js");
 
-  return fs.exists(filename)
-    .then(exists => exists ? filename : false);
-})).then(list => list.filter(val => val !== false));
+			return fs.exists(filename).then((exists) => (exists ? filename : false));
+		})
+	).then((list) => list.filter((val) => val !== false));
 
-const read = list => Promise.all(list.map(filename => require(filename)));
+const read = (list) => Promise.all(list.map((filename) => require(filename)));
 
 const wlog = (logger, cb) => (err, status) => {
-  if (err) {
-    logger.warn('An error occured while building');
-    logger.fatal(new Error(err.stack || err));
-  } else {
-    console.log(status.toString({
-      colors: true
-    }));
+	if (err) {
+		logger.warn("An error occured while building");
+		logger.fatal(new Error(err.stack || err));
+	} else {
+		console.log(
+			status.toString({
+				colors: true,
+			})
+		);
 
-    const {warnings, errors} = status.toJson();
-    const truncated = str => ((str.split('\n').slice(0, 3).join('\n')) + '...');
-    const append = [];
+		const { warnings, errors } = status.toJson();
+		const truncated = (str) => str.split("\n").slice(0, 3).join("\n") + "...";
+		const append = [];
 
-    if (status.hasErrors()) {
-      append.push(`With ${errors.length} error(s)`);
-    }
+		if (status.hasErrors()) {
+			append.push(`With ${errors.length} error(s)`);
+		}
 
-    if (status.hasWarnings()) {
-      append.push(`With ${warnings.length} warning(s)`);
-    }
+		if (status.hasWarnings()) {
+			append.push(`With ${warnings.length} warning(s)`);
+		}
 
-    warnings.forEach(warn => logger.warn(truncated(warn)));
-    errors.forEach(error => logger.fatal(truncated(error)));
+		warnings.forEach((warn) => logger.warn(truncated(warn)));
+		errors.forEach((error) => logger.fatal(truncated(error)));
 
-    const msg = append.length ? `, with ${append.join(' and ')}` : '';
-    logger.success('Build successful' + msg);
-  }
+		const msg = append.length ? `, with ${append.join(" and ")}` : "";
+		logger.success("Build successful" + msg);
+	}
 
-  if (typeof cb === 'function') {
-    cb(err, status);
-  }
+	if (typeof cb === "function") {
+		cb(err, status);
+	}
 };
 
+const action = async ({ logger, options, args }) => {
+	logger.info("Looking up npm packages...");
 
-const action = async ({logger, options, args}) => {
-  logger.info('Looking up npm packages...');
+	const print = (list) => {
+		list.forEach((filename) => logger.info(`Watching ${filename}`));
+		return list;
+	};
 
-  const print = list => {
-    list.forEach(filename => logger.info(`Watching ${filename}`));
-    return list;
-  };
+	return directories(options)
+		.then(realpaths)
+		.then(filter)
+		.then(unique)
+		.then((fileList) => {
+			print(fileList);
 
-  return directories(options)
-    .then(realpaths)
-    .then(filter)
-    .then(unique)
-    .then(fileList => {
-      print(fileList);
-
-      return read(fileList)
-        .then(list => {
-          return webpack(list)
-            .watch({}, wlog(logger, () => print(fileList)));
-        });
-    });
+			return read(fileList).then((list) => {
+				return webpack(list).watch(
+					{},
+					wlog(logger, () => print(fileList))
+				);
+			});
+		});
 };
 
 module.exports = {
-  'watch:all': {
-    description: 'Watch all linked node packages',
-    action
-  }
+	"watch:all": {
+		description: "Watch all linked node packages",
+		action,
+	},
 };

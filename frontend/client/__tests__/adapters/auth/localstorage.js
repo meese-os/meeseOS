@@ -1,20 +1,18 @@
-import {createInstance} from 'meeseOS';
-import adapter from '../../../src/adapters/auth/localstorage.js';
+import { createInstance } from "meeseOS";
+import adapter from "../../../src/adapters/auth/localstorage.js";
 
-describe('LocalStorage Auth Adapter', () => {
-  let core;
+describe("LocalStorage Auth Adapter", () => {
+	let core;
 
-  beforeAll(() => createInstance().then(c => (core = c)));
-  afterAll(() => core.destroy());
+	beforeAll(() => createInstance().then((c) => (core = c)));
+	afterAll(() => core.destroy());
 
-  test('#login', () => {
-    const a = adapter(core);
-    const values = {
-      foo: 'bar'
-    };
+	test("#login", () => {
+		const a = adapter(core);
+		const values = {
+			foo: "bar",
+		};
 
-    return expect(a.login(values))
-      .resolves
-      .toBe(values);
-  });
+		return expect(a.login(values)).resolves.toBe(values);
+	});
 });

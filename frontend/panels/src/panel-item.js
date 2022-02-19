@@ -28,70 +28,77 @@
  * @licence Simplified BSD License
  */
 
-import {app, h} from 'hyperapp';
-import {EventEmitter} from '@aaronmeese.com/event-emitter';
+import { app, h } from "hyperapp";
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
 
 /**
  * OS.js Panel Item
  * @see {Panel}
  */
 export default class PanelItem extends EventEmitter {
+	/**
+	 * Create panel item
+	 *
+	 * @param {Core} core Core reference
+	 * @param {Panel} panel Panel reference
+	 * @param {Object} options Options
+	 */
+	constructor(core, panel, options = {}) {
+		super("Panel");
 
-  /**
-   * Create panel item
-   *
-   * @param {Core} core Core reference
-   * @param {Panel} panel Panel reference
-   * @param {Object} options Options
-   */
-  constructor(core, panel, options = {}) {
-    super('Panel');
+		this.core = core;
+		this.panel = panel;
+		this.options = options;
+		this.state = {};
+		this.actions = {};
+		this.inited = false;
+	}
 
-    this.core = core;
-    this.panel = panel;
-    this.options = options;
-    this.state = {};
-    this.actions = {};
-    this.inited = false;
-  }
+	/**
+	 * Destroy panel item
+	 */
+	destroy() {
+		this.emit("destroy", this);
+	}
 
-  /**
-   * Destroy panel item
-   */
-  destroy() {
-    this.emit('destroy', this);
-  }
+	/**
+	 * Initializes panel item
+	 * @param {Object} state State
+	 * @param {Object} actions Actions
+	 * @return {Object} Bound actions
+	 */
+	init(state = {}, actions = {}) {
+		if (this.inited) {
+			return false;
+		}
 
-  /**
-   * Initializes panel item
-   * @param {Object} state State
-   * @param {Object} actions Actions
-   * @return {Object} Bound actions
-   */
-  init(state = {}, actions = {}) {
-    if (this.inited) {
-      return false;
-    }
+		this.inited = true;
+		this.emit("init", this);
 
-    this.inited = true;
-    this.emit('init', this);
+		return app(
+			state,
+			actions,
+			(state, actions) => {
+				return this.render(state, actions);
+			},
+			this.panel.$element
+		);
+	}
 
-    return app(state, actions, (state, actions) => {
-      return this.render(state, actions);
-    }, this.panel.$element);
-  }
-
-  /**
-   * Renders the panel item
-   * @param {String} name The panel item virtual name
-   * @param {Object[]} children The panel item children
-   * @return {Node} A *virtual* node
-   */
-  render(name, children = []) {
-    return h('div', {
-      className: 'meeseOS-panel-item',
-      'data-name': name
-    }, children);
-  }
-
+	/**
+	 * Renders the panel item
+	 * @param {String} name The panel item virtual name
+	 * @param {Object[]} children The panel item children
+	 * @return {Node} A *virtual* node
+	 */
+	render(name, children = []) {
+		return h(
+			"div",
+			{
+				className: "meeseOS-panel-item",
+				"data-name": name,
+			},
+			children
+		);
+	}
 }

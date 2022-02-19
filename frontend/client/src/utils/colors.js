@@ -34,10 +34,11 @@
  * @param {string} hex Color hex code
  * @return {string} Inverted hex code
  */
-export const invertHex = hex => '#' + hex
-  .match(/[a-f0-9]{2}/ig)
-  .map(e => (255 - parseInt(e, 16) | 0)
-    .toString(16)
-    .replace(/^([a-f0-9])$/, '0$1')
-  )
-  .join('');
+export const invertHex = (hex) =>
+	"#" +
+	hex
+		.match(/[a-f0-9]{2}/gi)
+		.map((e) =>
+			((255 - parseInt(e, 16)) | 0).toString(16).replace(/^([a-f0-9])$/, "0$1")
+		)
+		.join("");

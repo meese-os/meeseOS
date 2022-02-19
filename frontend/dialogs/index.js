@@ -28,25 +28,25 @@
  * @licence Simplified BSD License
  */
 
-import './index.scss';
-import Dialog from './src/dialog';
-import DialogServiceProvider from './src/provider';
-import AlertDialog from './src/dialogs/alert';
-import ConfirmDialog from './src/dialogs/confirm';
-import PromptDialog from './src/dialogs/prompt';
-import ProgressDialog from './src/dialogs/progress';
-import ColorDialog from './src/dialogs/color';
-import FileDialog from './src/dialogs/file';
-import ChoiceDialog from './src/dialogs/choice';
+import "./index.scss";
+import Dialog from "./src/dialog";
+import DialogServiceProvider from "./src/provider";
+import AlertDialog from "./src/dialogs/alert";
+import ConfirmDialog from "./src/dialogs/confirm";
+import PromptDialog from "./src/dialogs/prompt";
+import ProgressDialog from "./src/dialogs/progress";
+import ColorDialog from "./src/dialogs/color";
+import FileDialog from "./src/dialogs/file";
+import ChoiceDialog from "./src/dialogs/choice";
 
 export {
-  Dialog,
-  AlertDialog,
-  ConfirmDialog,
-  PromptDialog,
-  ProgressDialog,
-  ColorDialog,
-  FileDialog,
-  ChoiceDialog,
-  DialogServiceProvider
+	Dialog,
+	AlertDialog,
+	ConfirmDialog,
+	PromptDialog,
+	ProgressDialog,
+	ColorDialog,
+	FileDialog,
+	ChoiceDialog,
+	DialogServiceProvider,
 };

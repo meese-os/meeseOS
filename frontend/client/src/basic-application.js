@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import {EventEmitter} from '@aaronmeese.com/event-emitter';
-import {basename, pathname} from './utils/vfs';
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { basename, pathname } from "./utils/vfs";
 
 /**
  * Basic Application Options
@@ -48,231 +48,224 @@ import {basename, pathname} from './utils/vfs';
  * Also sets the internal proc args for sessions.
  */
 export class BasicApplication extends EventEmitter {
+	/**
+	 * Basic Application Constructor
+	 * @param {Core} core OS.js Core API
+	 * @param {Application} proc The application process
+	 * @param {Window} win The main application window
+	 * @param {BasicApplicationOptions} [options={}] Basic application options
+	 */
+	constructor(core, proc, win, options = {}) {
+		super("BasicApplication<" + proc.name + ">");
 
-  /**
-   * Basic Application Constructor
-   * @param {Core} core OS.js Core API
-   * @param {Application} proc The application process
-   * @param {Window} win The main application window
-   * @param {BasicApplicationOptions} [options={}] Basic application options
-   */
-  constructor(core, proc, win, options = {}) {
-    super('BasicApplication<' + proc.name + '>');
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
 
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
+		/**
+		 * Application instance reference
+		 * @type {Application}
+		 * @readonly
+		 */
+		this.proc = proc;
 
-    /**
-     * Application instance reference
-     * @type {Application}
-     * @readonly
-     */
-    this.proc = proc;
+		/**
+		 * Window instance reference
+		 * @type {Window}
+		 * @readonly
+		 */
+		this.win = win;
 
-    /**
-     * Window instance reference
-     * @type {Window}
-     * @readonly
-     */
-    this.win = win;
+		/**
+		 * Basic Application Options
+		 * @type {BasicApplicationOptions}
+		 * @readonly
+		 */
+		this.options = {
+			mimeTypes: proc.metadata.mimes || [],
+			loadMimeTypes: [],
+			saveMimeTypes: [],
+			defaultFilename: "New File",
+			...options,
+		};
+	}
 
-    /**
-     * Basic Application Options
-     * @type {BasicApplicationOptions}
-     * @readonly
-     */
-    this.options = {
-      mimeTypes: proc.metadata.mimes || [],
-      loadMimeTypes: [],
-      saveMimeTypes: [],
-      defaultFilename: 'New File',
-      ...options
-    };
-  }
+	/**
+	 * Destroys all Basic Application internals
+	 */
+	destroy() {
+		this.off();
+		super.destroy();
+	}
 
-  /**
-   * Destroys all Basic Application internals
-   */
-  destroy() {
-    this.off();
-    super.destroy();
-  }
+	/**
+	 * Initializes the application
+	 * @return {Promise<boolean>}
+	 */
+	init() {
+		if (this.proc.args.file) {
+			this.open(this.proc.args.file);
+		} else {
+			this.create();
+		}
 
-  /**
-   * Initializes the application
-   * @return {Promise<boolean>}
-   */
-  init() {
-    if (this.proc.args.file) {
-      this.open(this.proc.args.file);
-    } else {
-      this.create();
-    }
+		return Promise.resolve(true);
+	}
 
-    return Promise.resolve(true);
-  }
+	/**
+	 * Gets options for a dialog
+	 * @param {string} type Dialog type
+	 * @return {object}
+	 */
+	getDialogOptions(type, options = {}) {
+		const { file, ...rest } = options;
 
-  /**
-   * Gets options for a dialog
-   * @param {string} type Dialog type
-   * @return {object}
-   */
-  getDialogOptions(type, options = {}) {
-    const {
-      file,
-      ...rest
-    } = options;
+		const { defaultFilename, mimeTypes, loadMimeTypes, saveMimeTypes } =
+			this.options;
 
-    const {
-      defaultFilename,
-      mimeTypes,
-      loadMimeTypes,
-      saveMimeTypes
-    } = this.options;
+		const currentFile = file || this.proc.args.file;
+		const defaultPath = this.core.config("vfs.defaultPath");
+		const path = currentFile ? currentFile.path : null;
 
-    const currentFile = file ? file : this.proc.args.file;
-    const defaultPath = this.core.config('vfs.defaultPath');
-    const path = currentFile ? currentFile.path : null;
+		let mime = type === "open" ? loadMimeTypes : saveMimeTypes;
+		if (!mime.length) {
+			mime = mimeTypes;
+		}
 
-    let mime = type === 'open' ? loadMimeTypes : saveMimeTypes;
-    if (!mime.length) {
-      mime = mimeTypes;
-    }
+		return [
+			{
+				type,
+				mime,
+				filename: path ? basename(path) : defaultFilename,
+				path: path ? pathname(path) : defaultPath,
+				...rest,
+			},
+			{
+				parent: this.win,
+				attributes: {
+					modal: true,
+				},
+			},
+		];
+	}
 
-    return [{
-      type,
-      mime,
-      filename: path ? basename(path) : defaultFilename,
-      path: path ? pathname(path) : defaultPath,
-      ...rest
-    }, {
-      parent: this.win,
-      attributes: {
-        modal: true
-      }
-    }];
-  }
+	/**
+	 * Updates the window title to match open file
+	 */
+	updateWindowTitle() {
+		if (this.win) {
+			const prefix = this.proc.metadata.title;
+			const title = this._createTitle(prefix);
 
-  /**
-   * Updates the window title to match open file
-   */
-  updateWindowTitle() {
-    if (this.win) {
-      const prefix = this.proc.metadata.title;
-      const title = this._createTitle(prefix);
+			this.win.setTitle(title);
+		}
+	}
 
-      this.win.setTitle(title);
-    }
-  }
+	/**
+	 * Creates a new dialog of a type
+	 * @param {string} type Dialog type
+	 * @param {Function} cb Callback
+	 * @param {object} [options] Override options
+	 */
+	createDialog(type, cb, options = {}) {
+		const [args, opts] = this.getDialogOptions(type, options);
 
-  /**
-   * Creates a new dialog of a type
-   * @param {string} type Dialog type
-   * @param {Function} cb Callback
-   * @param {object} [options] Override options
-   */
-  createDialog(type, cb, options = {}) {
-    const [args, opts] = this.getDialogOptions(type, options);
+		if (this.core.has("meeseOS/dialog")) {
+			this.core.make("meeseOS/dialog", "file", args, opts, (btn, item) => {
+				if (btn === "ok") {
+					cb(item);
+				}
+			});
+		}
+	}
 
-    if (this.core.has('meeseOS/dialog')) {
-      this.core.make('meeseOS/dialog', 'file', args, opts, (btn, item) => {
-        if (btn === 'ok') {
-          cb(item);
-        }
-      });
-    }
-  }
+	/**
+	 * Opens given file
+	 *
+	 * Does not do any actual VFS operation
+	 *
+	 * @param {VFSFile} file A file
+	 */
+	open(item) {
+		this._setFile(item, "open-file");
+	}
 
-  /**
-   * Opens given file
-   *
-   * Does not do any actual VFS operation
-   *
-   * @param {VFSFile} file A file
-   */
-  open(item) {
-    this._setFile(item, 'open-file');
-  }
+	/**
+	 * Saves given file
+	 *
+	 * Does not do any actual VFS operation
+	 *
+	 * @param {VFSFile} file A file
+	 */
+	save(item) {
+		this._setFile(item, "save-file");
+	}
 
-  /**
-   * Saves given file
-   *
-   * Does not do any actual VFS operation
-   *
-   * @param {VFSFile} file A file
-   */
-  save(item) {
-    this._setFile(item, 'save-file');
-  }
+	/**
+	 * Create new file
+	 *
+	 * Does not do any actual VFS operation
+	 */
+	create() {
+		this.proc.args.file = null;
 
-  /**
-   * Create new file
-   *
-   * Does not do any actual VFS operation
-   */
-  create() {
-    this.proc.args.file = null;
+		this.emit("new-file");
 
-    this.emit('new-file');
+		this.updateWindowTitle();
+	}
 
-    this.updateWindowTitle();
-  }
+	/**
+	 * Create new file
+	 * @see BasicApplication#create
+	 */
+	createNew() {
+		this.create();
+	}
 
-  /**
-   * Create new file
-   * @see BasicApplication#create
-   */
-  createNew() {
-    this.create();
-  }
+	/**
+	 * Creates a new save dialog
+	 * @param {object} [options] Dialog options
+	 */
+	createSaveDialog(options = {}) {
+		this.createDialog("save", (item) => this.save(item), options);
+	}
 
-  /**
-   * Creates a new save dialog
-   * @param {object} [options] Dialog options
-   */
-  createSaveDialog(options = {}) {
-    this.createDialog('save', item => this.save(item), options);
-  }
+	/**
+	 * Creates a new load dialog
+	 * @param {object} [options] Dialog options
+	 */
+	createOpenDialog(options = {}) {
+		this.createDialog("open", (item) => this.open(item), options);
+	}
 
-  /**
-   * Creates a new load dialog
-   * @param {object} [options] Dialog options
-   */
-  createOpenDialog(options = {}) {
-    this.createDialog('open', item => this.open(item), options);
-  }
+	/**
+	 * Sets file from open/save action
+	 *
+	 * @private
+	 * @param {VFSFile} item File
+	 * @param {string} eventName Event to fire
+	 */
+	_setFile(item, eventName) {
+		this.proc.args.file = { ...item };
+		this.emit(eventName, item);
+		this.updateWindowTitle();
+	}
 
-  /**
-   * Sets file from open/save action
-   *
-   * @private
-   * @param {VFSFile} item File
-   * @param {string} eventName Event to fire
-   */
-  _setFile(item, eventName) {
-    this.proc.args.file = {...item};
-    this.emit(eventName, item);
-    this.updateWindowTitle();
-  }
+	/**
+	 * Creates the window title
+	 *
+	 * @private
+	 * @param {string} prefix Title prefix
+	 * @return {string}
+	 */
+	_createTitle(prefix) {
+		const title = this.proc.args.file
+			? basename(this.proc.args.file.path)
+			: this.options.defaultFilename;
 
-  /**
-   * Creates the window title
-   *
-   * @private
-   * @param {string} prefix Title prefix
-   * @return {string}
-   */
-  _createTitle(prefix) {
-    const title = this.proc.args.file
-      ? basename(this.proc.args.file.path)
-      : this.options.defaultFilename;
-
-    return title
-      ? `${prefix} - ${title}`
-      : prefix;
-  }
+		return title ? `${prefix} - ${title}` : prefix;
+	}
 }

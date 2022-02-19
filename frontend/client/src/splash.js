@@ -32,54 +32,54 @@
  * Splash Screen UI
  */
 export default class Splash {
-  /**
-   * Create Splash
-   * @param {Core} core Core reference
-   */
-  constructor(core) {
-    /**
-     * Core instance reference
-     * @type {Core}
-     * @readonly
-     */
-    this.core = core;
+	/**
+	 * Create Splash
+	 * @param {Core} core Core reference
+	 */
+	constructor(core) {
+		/**
+		 * Core instance reference
+		 * @type {Core}
+		 * @readonly
+		 */
+		this.core = core;
 
-    /**
-     * Splash root element
-     * @type {Element}
-     * @readonly
-     */
-    this.$loading = document.createElement('div');
-    this.$loading.className = 'meeseOS-boot-splash';
+		/**
+		 * Splash root element
+		 * @type {Element}
+		 * @readonly
+		 */
+		this.$loading = document.createElement("div");
+		this.$loading.className = "meeseOS-boot-splash";
 
-    core.on('meeseOS/core:boot', () => this.show());
-    core.on('meeseOS/core:booted', () => this.destroy());
-    core.on('meeseOS/core:logged-in', () => this.show());
-    core.on('meeseOS/core:started', () => this.destroy());
-  }
+		core.on("meeseOS/core:boot", () => this.show());
+		core.on("meeseOS/core:booted", () => this.destroy());
+		core.on("meeseOS/core:logged-in", () => this.show());
+		core.on("meeseOS/core:started", () => this.destroy());
+	}
 
-  /**
-   * Initializes splash
-   */
-  init() {
-    this.$loading.appendChild(document.createTextNode('Loading...'));
-  }
+	/**
+	 * Initializes splash
+	 */
+	init() {
+		this.$loading.appendChild(document.createTextNode("Loading..."));
+	}
 
-  /**
-   * Shows splash
-   */
-  show() {
-    if (!this.$loading.parentNode) {
-      this.core.$root.appendChild(this.$loading);
-    }
-  }
+	/**
+	 * Shows splash
+	 */
+	show() {
+		if (!this.$loading.parentNode) {
+			this.core.$root.appendChild(this.$loading);
+		}
+	}
 
-  /**
-   * Destroys splash
-   */
-  destroy() {
-    if (this.$loading.parentNode) {
-      this.$loading.remove();
-    }
-  }
+	/**
+	 * Destroys splash
+	 */
+	destroy() {
+		if (this.$loading.parentNode) {
+			this.$loading.remove();
+		}
+	}
 }

@@ -29,39 +29,39 @@
  */
 
 .meeseOS-gui-expander {
-  display: block;
+	display: block;
 
-  &-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
+	&-wrapper {
+		display: flex;
+		flex-direction: column;
+	}
 
-  &-header {
-    flex: 1 1;
-    display: flex;
-    padding: calc($base-margin / 2);
-    cursor: pointer;
+	&-header {
+		flex: 1 1;
+		display: flex;
+		padding: calc($base-margin / 2);
+		cursor: pointer;
 
-    &-icon {
-      flex: 0 0;
-      min-width: 1em;
-      margin-right: calc($base-margin / 2);
+		&-icon {
+			flex: 0 0;
+			min-width: 1em;
+			margin-right: calc($base-margin / 2);
 
-      &::after {
-        content: '\25BC';
-      }
+			&::after {
+				content: "\25BC";
+			}
 
-      &[data-active="true"]::after {
-        content: '\25B2';
-      }
-    }
+			&[data-active="true"]::after {
+				content: "\25B2";
+			}
+		}
 
-    &-label {
-      flex: 1 1;
-    }
-  }
+		&-label {
+			flex: 1 1;
+		}
+	}
 
-  &-content {
-    margin-top: $base-margin;
-  }
+	&-content {
+		margin-top: $base-margin;
+	}
 }

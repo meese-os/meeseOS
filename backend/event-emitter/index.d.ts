@@ -35,62 +35,62 @@ export as namespace meeseOS__event_emitter;
 export type EventName = string | string[];
 
 export interface EventOptions {
-  /**
-   * Do not remove unless forced
-   */
-  persist?: boolean;
+	/**
+	 * Do not remove unless forced
+	 */
+	persist?: boolean;
 
-  /**
-   * Fire only once
-   */
-  once?: boolean;
+	/**
+	 * Fire only once
+	 */
+	once?: boolean;
 }
 
 export interface EventInstance {
-  /**
-   * Event callback
-   */
-  callback: Function;
+	/**
+	 * Event callback
+	 */
+	callback: Function;
 
-  /**
-   * Event options
-   */
-  options: EventOptions;
+	/**
+	 * Event options
+	 */
+	options: EventOptions;
 }
 
 export class EventEmitter {
-  /**
-   * EventEmitter name
-   */
-  name: string;
+	/**
+	 * EventEmitter name
+	 */
+	name: string;
 
-  /**
-   * Map of registered events
-   */
-  events: Map<string, EventInstance>;
+	/**
+	 * Map of registered events
+	 */
+	events: Map<string, EventInstance>;
 
-  /**
-   * Constructor
-   */
-  constructor(name?: string);
+	/**
+	 * Constructor
+	 */
+	constructor(name?: string);
 
-  /**
-   * Add an event handler
-   */
-  on(event: EventName, callback: Function, options?: EventOptions): this;
+	/**
+	 * Add an event handler
+	 */
+	on(event: EventName, callback: Function, options?: EventOptions): this;
 
-  /**
-   * Adds an event handler that only fires once
-   */
-  once(event: EventName, callback: Function): this;
+	/**
+	 * Adds an event handler that only fires once
+	 */
+	once(event: EventName, callback: Function): this;
 
-  /**
-   * Removes an event handler
-   */
-  off(event?: EventName, callback?: Function, force?: boolean): this;
+	/**
+	 * Removes an event handler
+	 */
+	off(event?: EventName, callback?: Function, force?: boolean): this;
 
-  /**
-   * Emits an event
-   */
-  emit(event: EventName, ...args: any): this;
+	/**
+	 * Emits an event
+	 */
+	emit(event: EventName, ...args: any): this;
 }

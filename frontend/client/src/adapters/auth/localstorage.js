@@ -34,7 +34,7 @@
  * @param {object} [options] Adapter options
  */
 const localStorageAuth = (core, options) => ({
-  login: (values) => Promise.resolve(values)
+	login: (values) => Promise.resolve(values),
 });
 
 export default localStorageAuth;

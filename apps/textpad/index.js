@@ -28,105 +28,117 @@
  * @licence Simplified BSD License
  */
 
-import {h, app} from 'hyperapp';
-import {Box, TextareaField, Menubar, MenubarItem} from '@aaronmeese.com/gui';
-import meeseOS from 'meeseOS';
-import {name as applicationName} from './metadata.json';
+import { h, app } from "hyperapp";
+import { Box, TextareaField, Menubar, MenubarItem } from "@aaronmeese.com/gui";
+import meeseOS from "meeseOS";
+import { name as applicationName } from "./metadata.json";
 
 // File menu
-const createMenu = (current, actions) => ([
-  {label: 'New', onclick: () => actions.menuNew()},
-  {label: 'Open', onclick: () => actions.menuOpen()},
-  {label: 'Save', disabled: !current, onclick: () => actions.menuSave()},
-  {label: 'Save As', onclick: () => actions.menuSaveAs()},
-  {label: 'Quit', onclick: () => actions.menuQuit()}
-]);
+const createMenu = (current, actions) => [
+	{ label: "New", onclick: () => actions.menuNew() },
+	{ label: "Open", onclick: () => actions.menuOpen() },
+	{ label: "Save", disabled: !current, onclick: () => actions.menuSave() },
+	{ label: "Save As", onclick: () => actions.menuSaveAs() },
+	{ label: "Quit", onclick: () => actions.menuQuit() },
+];
 
 // OS.js application
 const createApplication = (core, proc, win, $content) => {
-  const vfs = core.make('meeseOS/vfs');
-  const basic = core.make('meeseOS/basic-application', proc, win, {
-    defaultFilename: 'New File.txt'
-  });
+	const vfs = core.make("meeseOS/vfs");
+	const basic = core.make("meeseOS/basic-application", proc, win, {
+		defaultFilename: "New File.txt",
+	});
 
-  // Hyperapp
-  const ha = app({
-    text: ''
-  }, {
-    setText: text => state => ({text}),
+	// Hyperapp
+	const ha = app(
+		{
+			text: "",
+		},
+		{
+			setText: (text) => (state) => ({ text }),
 
-    save: () => state => {
-      if (proc.args.file) {
-        const contents = $content.querySelector('textarea').value;
-        vfs.writefile(proc.args.file, contents);
-      }
-    },
+			save: () => (state) => {
+				if (proc.args.file) {
+					const contents = $content.querySelector("textarea").value;
+					vfs.writefile(proc.args.file, contents);
+				}
+			},
 
-    load: item => (state, actions) => {
-      vfs.readfile(item)
-        .then(contents => actions.setText(contents))
-        .catch(error => console.error(error)); // FIXME: Dialog
-    },
+			load: (item) => (state, actions) => {
+				vfs
+					.readfile(item)
+					.then((contents) => actions.setText(contents))
+					.catch((error) => console.error(error)); // FIXME: Dialog
+			},
 
-    menu: ev => (state, actions) => {
-      core.make('meeseOS/contextmenu').show({
-        position: ev.target,
-        menu: createMenu(proc.args.file, actions)
-      });
-    },
+			menu: (ev) => (state, actions) => {
+				core.make("meeseOS/contextmenu").show({
+					position: ev.target,
+					menu: createMenu(proc.args.file, actions),
+				});
+			},
 
-    menuNew: () => state => basic.createNew(),
-    menuOpen: () => state => basic.createOpenDialog(),
-    menuSave: () => (state, actions) => actions.save(),
-    menuSaveAs: () => state => basic.createSaveDialog(),
-    menuQuit: () => state => proc.destroy()
-  }, (state, actions) => {
-    return h(Box, {}, [
-      h(Menubar, {}, [
-        h(MenubarItem, {
-          onclick: ev => actions.menu(ev)
-        }, 'File')
-      ]),
-      h(TextareaField, {
-        box: {grow: 1},
-        value: state.text,
-        oninput: (ev, value) => actions.setText(value)
-      })
-    ]);
-  }, $content);
+			menuNew: () => (state) => basic.createNew(),
+			menuOpen: () => (state) => basic.createOpenDialog(),
+			menuSave: () => (state, actions) => actions.save(),
+			menuSaveAs: () => (state) => basic.createSaveDialog(),
+			menuQuit: () => (state) => proc.destroy(),
+		},
+		(state, actions) => {
+			return h(Box, {}, [
+				h(Menubar, {}, [
+					h(
+						MenubarItem,
+						{
+							onclick: (ev) => actions.menu(ev),
+						},
+						"File"
+					),
+				]),
+				h(TextareaField, {
+					box: { grow: 1 },
+					value: state.text,
+					oninput: (ev, value) => actions.setText(value),
+				}),
+			]);
+		},
+		$content
+	);
 
-
-  win.on('drop', (ev, data) => {
-    if (data.isFile && data.mime) {
-      const found = proc.metadata.mimes.find(m => (new RegExp(m)).test(data.mime));
-      if (found) {
-        basic.open(data);
-      }
-    }
-  });
-  proc.on('destroy', () => basic.destroy());
-  basic.on('new-file', () => ha.setText(''));
-  basic.on('save-file', ha.save);
-  basic.on('open-file', ha.load);
-  basic.init();
+	win.on("drop", (ev, data) => {
+		if (data.isFile && data.mime) {
+			const found = proc.metadata.mimes.find((m) =>
+				new RegExp(m).test(data.mime)
+			);
+			if (found) {
+				basic.open(data);
+			}
+		}
+	});
+	proc.on("destroy", () => basic.destroy());
+	basic.on("new-file", () => ha.setText(""));
+	basic.on("save-file", ha.save);
+	basic.on("open-file", ha.load);
+	basic.init();
 };
 
 // OS.js window
 const createMainWindow = (core, proc) => {
-  proc.createWindow({
-    id: 'TextpadWindow',
-    icon: proc.resource(proc.metadata.icon),
-    dimension: {width: 400, height: 400}
-  })
-    .on('destroy', () => proc.destroy())
-    .on('render', (win) => win.focus())
-    .render(($content, win) => createApplication(core, proc, win, $content));
+	proc
+		.createWindow({
+			id: "TextpadWindow",
+			icon: proc.resource(proc.metadata.icon),
+			dimension: { width: 400, height: 400 },
+		})
+		.on("destroy", () => proc.destroy())
+		.on("render", (win) => win.focus())
+		.render(($content, win) => createApplication(core, proc, win, $content));
 };
 
 const createProcess = (core, args, options, metadata) => {
-  const proc = core.make('meeseOS/application', {args, options, metadata});
-  createMainWindow(core, proc);
-  return proc;
+	const proc = core.make("meeseOS/application", { args, options, metadata });
+	createMainWindow(core, proc);
+	return proc;
 };
 
 meeseOS.register(applicationName, createProcess);

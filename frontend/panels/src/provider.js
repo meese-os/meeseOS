@@ -27,11 +27,11 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-import Panel from './panel';
-import WindowsPanelItem from './items/windows';
-import TrayPanelItem from './items/tray';
-import ClockPanelItem from './items/clock';
-import MenuPanelItem from './items/menu';
+import Panel from "./panel";
+import WindowsPanelItem from "./items/windows";
+import TrayPanelItem from "./items/tray";
+import ClockPanelItem from "./items/clock";
+import MenuPanelItem from "./items/menu";
 
 /**
  * Panel Service Provider
@@ -39,81 +39,88 @@ import MenuPanelItem from './items/menu';
  * @desc Provides methods to handle panels on a desktop in OS.js
  */
 export default class PanelServiceProvider {
+	constructor(core, args = {}) {
+		this.core = core;
+		this.panels = [];
+		this.inited = false;
+		this.registry = Object.assign(
+			{
+				menu: MenuPanelItem,
+				windows: WindowsPanelItem,
+				tray: TrayPanelItem,
+				clock: ClockPanelItem,
+			},
+			args.registry || {}
+		);
+	}
 
-  constructor(core, args = {}) {
-    this.core = core;
-    this.panels = [];
-    this.inited = false;
-    this.registry = Object.assign({
-      menu: MenuPanelItem,
-      windows: WindowsPanelItem,
-      tray: TrayPanelItem,
-      clock: ClockPanelItem
-    }, args.registry || {});
-  }
+	destroy() {
+		this.inited = false;
+		this.panels.forEach((panel) => panel.destroy());
+		this.panels = [];
+	}
 
-  destroy() {
-    this.inited = false;
-    this.panels.forEach(panel => panel.destroy());
-    this.panels = [];
-  }
+	async init() {
+		this.core.singleton("meeseOS/panels", () => ({
+			register: (name, classRef) => {
+				if (this.registry[name]) {
+					console.warn("Overwriting previously registered panel item", name);
+				}
 
-  async init() {
-    this.core.singleton('meeseOS/panels', () => ({
-      register: (name, classRef) => {
-        if (this.registry[name]) {
-          console.warn('Overwriting previously registered panel item', name);
-        }
+				this.registry[name] = classRef;
+			},
 
-        this.registry[name] = classRef;
-      },
+			removeAll: () => {
+				this.panels.forEach((p) => p.destroy());
+				this.panels = [];
+			},
 
-      removeAll: () => {
-        this.panels.forEach(p => p.destroy());
-        this.panels = [];
-      },
+			remove: (panel) => {
+				const index =
+					typeof panel === "number"
+						? panel
+						: this.panels.findIndex((p) => p === panel);
 
-      remove: (panel) => {
-        const index = typeof panel === 'number'
-          ? panel
-          : this.panels.findIndex(p => p === panel);
+				if (index >= 0) {
+					this.panels[index].destroy();
+					this.panels.splice(index, 1);
+				}
+			},
 
-        if (index >= 0) {
-          this.panels[index].destroy();
-          this.panels.splice(index, 1);
-        }
-      },
+			create: (options) => {
+				const panel = new Panel(this.core, options);
 
-      create: (options) => {
-        const panel = new Panel(this.core, options);
+				this.panels.push(panel);
 
-        this.panels.push(panel);
+				panel.on("destroy", () =>
+					this.core.emit("meeseOS/panel:destroy", panel, this.panels)
+				);
+				panel.on("create", () =>
+					setTimeout(() => {
+						this.core.emit("meeseOS/panel:create", panel, this.panels);
+					}, 1)
+				);
 
-        panel.on('destroy', () => this.core.emit('meeseOS/panel:destroy', panel, this.panels));
-        panel.on('create', () => setTimeout(() => {
-          this.core.emit('meeseOS/panel:create', panel, this.panels);
-        }, 1));
+				if (this.inited) {
+					panel.init();
+				}
+			},
 
-        if (this.inited) {
-          panel.init();
-        }
-      },
+			save: () => {
+				const settings = this.core.make("meeseOS/settings");
+				const panels = this.panels.map((panel) => panel.options);
 
-      save: () => {
-        const settings = this.core.make('meeseOS/settings');
-        const panels = this.panels.map(panel => panel.options);
+				return Promise.resolve(
+					settings.set("meeseOS/desktop", "panels", panels)
+				).then(() => settings.save());
+			},
 
-        return Promise.resolve(settings.set('meeseOS/desktop', 'panels', panels))
-          .then(() => settings.save());
-      },
+			get: (name) => this.registry[name],
+		}));
+	}
 
-      get: (name) => this.registry[name]
-    }));
-  }
-
-  start() {
-    this.inited = true;
-    this.panels.forEach(p => p.init());
-  }
-
+	start() {
+		this.inited = true;
+		this.panels.forEach((p) => p.init());
+	}
 }

@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import {ServiceProvider} from '@aaronmeese.com/common';
-import Auth from '../auth';
+import { ServiceProvider } from "@aaronmeese.com/common";
+import Auth from "../auth";
 
 /**
  * Auth Service Contract
@@ -52,59 +52,56 @@ import Auth from '../auth';
  * Creates the login prompt and handles authentication flow
  */
 export default class AuthServiceProvider extends ServiceProvider {
+	/**
+	 * @param {Core} core OS.js Core
+	 * @param {AuthServiceOptions} [options={}]
+	 */
+	constructor(core, options = {}) {
+		super(core);
 
-  /**
-   * @param {Core} core OS.js Core
-   * @param {AuthServiceOptions} [options={}]
-   */
-  constructor(core, options = {}) {
-    super(core);
+		/**
+		 * @type {Auth}
+		 * @readonly
+		 */
+		this.auth = new Auth(core, options);
+	}
 
-    /**
-     * @type {Auth}
-     * @readonly
-     */
-    this.auth = new Auth(core, options);
-  }
+	/**
+	 * Initializes authentication
+	 * @return {Promise<undefined>}
+	 */
+	init() {
+		this.core.singleton("meeseOS/auth", () => this.createAuthContract());
 
-  /**
-   * Initializes authentication
-   * @return {Promise<undefined>}
-   */
-  init() {
-    this.core.singleton('meeseOS/auth', () => this.createAuthContract());
+		return this.auth.init();
+	}
 
-    return this.auth.init();
-  }
+	/**
+	 * Destroys authentication
+	 */
+	destroy() {
+		this.auth.destroy();
 
-  /**
-   * Destroys authentication
-   */
-  destroy() {
-    this.auth.destroy();
+		return super.destroy();
+	}
 
-    return super.destroy();
-  }
+	/**
+	 * Get a list of services this provider registers
+	 * @return {string[]}
+	 */
+	provides() {
+		return ["meeseOS/auth"];
+	}
 
-  /**
-   * Get a list of services this provider registers
-   * @return {string[]}
-   */
-  provides() {
-    return [
-      'meeseOS/auth'
-    ];
-  }
-
-  /**
-   * @return {AuthProviderContract}
-   */
-  createAuthContract() {
-    return {
-      show: (cb) => this.auth.show(cb),
-      login: (values) => this.auth.login(values),
-      logout: (reload) => this.auth.logout(reload),
-      user: () => this.core.getUser()
-    };
-  }
+	/**
+	 * @return {AuthProviderContract}
+	 */
+	createAuthContract() {
+		return {
+			show: (cb) => this.auth.show(cb),
+			login: (values) => this.auth.login(values),
+			logout: (reload) => this.auth.logout(reload),
+			user: () => this.core.getUser(),
+		};
+	}
 }

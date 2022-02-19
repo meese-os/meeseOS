@@ -28,12 +28,12 @@
  * @licence Simplified BSD License
  */
 
-import './index.scss';
+import "./index.scss";
 
-export {default as PanelServiceProvider} from './src/provider';
-export {default as WindowsPanelItem} from './src/items/windows';
-export {default as TrayPanelItem} from './src/items/tray';
-export {default as ClockPanelItem} from './src/items/clock';
-export {default as MenuPanelItem} from './src/items/menu';
-export {default as PanelItem} from './src/panel-item';
-export {default as Panel} from './src/panel';
+export { default as PanelServiceProvider } from "./src/provider";
+export { default as WindowsPanelItem } from "./src/items/windows";
+export { default as TrayPanelItem } from "./src/items/tray";
+export { default as ClockPanelItem } from "./src/items/clock";
+export { default as MenuPanelItem } from "./src/items/menu";
+export { default as PanelItem } from "./src/panel-item";
+export { default as Panel } from "./src/panel";

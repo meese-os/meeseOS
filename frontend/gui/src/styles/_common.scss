@@ -29,36 +29,36 @@
  */
 
 .meeseOS-gui {
-  display: flex;
-  position: relative;
-  min-width: 1em;
-  min-height: 1em;
-  box-sizing: border-box;
+	display: flex;
+	position: relative;
+	min-width: 1em;
+	min-height: 1em;
+	box-sizing: border-box;
 }
 
 .meeseOS-window-content > .meeseOS-gui-box:only-child {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .meeseOS-gui-horizontal {
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .meeseOS-gui-vertical {
-  flex-direction: row;
+	flex-direction: row;
 }
 
 .meeseOS-icon {
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-color: transparent;
-  background-size: 100%;
-  min-width: 1rem;
-  min-height: 1rem;
-  display: inline-block;
-  vertical-align: middle;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-color: transparent;
+	background-size: 100%;
+	min-width: 1rem;
+	min-height: 1rem;
+	display: inline-block;
+	vertical-align: middle;
 }

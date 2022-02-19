@@ -5,27 +5,27 @@ const Footer = () => {
 
 	return (
 		<footer style={bgStyle} className="mt-auto py-3 text-center">
-			{/*<strong> &copy; {new Date().getFullYear()} </strong>*/}
+			{/* <strong> &copy; {new Date().getFullYear()} </strong> */}
 			<a
 				className="text-dark"
 				target="_blank"
-				rel="noopener"
+				rel="noopener noreferrer"
 				href="https://github.com/ajmeese7/aaronmeese.com"
 				aria-label="Website Code"
 			>
-				<i className="fas fa-code"></i>
+				<i className="fas fa-code" />
 			</a>{" "}
-			with <i className="fas fa-heart"></i> by{" "}
+			with <i className="fas fa-heart" /> by{" "}
 			<a
 				className="badge badge-dark"
 				target="_blank"
-				rel="noopener"
+				rel="noopener noreferrer"
 				href="https://github.com/ajmeese7"
 				aria-label="My GitHub"
 			>
 				Aaron Meese
 			</a>{" "}
-			using <i className="fab fa-react"></i>
+			using <i className="fab fa-react" />
 			<p>
 				<small className="text-muted">
 					{" "}

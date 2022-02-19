@@ -8,11 +8,13 @@ const NodemonPlugin = require("nodemon-webpack-plugin");
 const plugins = [];
 
 if (mode === "production") {
-	plugins.push(new CssMinimizerPlugin({
-		minimizerOptions: {
-			preset: [ "advanced" ],
-		},
-	}));
+	plugins.push(
+		new CssMinimizerPlugin({
+			minimizerOptions: {
+				preset: ["advanced"],
+			},
+		})
+	);
 }
 
 const siteTitle = "Aaron Meese";
@@ -20,11 +22,11 @@ module.exports = {
 	mode,
 	devtool: "source-map",
 	entry: {
-		meeseOS: path.resolve(__dirname, "src/client/index.js")
+		meeseOS: path.resolve(__dirname, "src/client/index.js"),
 	},
 	performance: {
 		maxEntrypointSize: 500 * 1024,
-		maxAssetSize: 500 * 1024
+		maxAssetSize: 500 * 1024,
 	},
 	watchOptions: {
 		aggregateTimeout: 500,
@@ -33,22 +35,22 @@ module.exports = {
 	optimization: {
 		minimize,
 		splitChunks: {
-			chunks: "all"
-		}
+			chunks: "all",
+		},
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src/client/index.ejs"),
 			favicon: path.resolve(__dirname, "src/client/favicon.png"),
-			title: siteTitle
+			title: siteTitle,
 		}),
 		new MiniCssExtractPlugin({
-			filename: "[name].css"
+			filename: "[name].css",
 		}),
 		new NodemonPlugin({
 			script: "src/server/index.js",
 		}),
-		...plugins
+		...plugins,
 	],
 	module: {
 		rules: [
@@ -60,8 +62,8 @@ module.exports = {
 				test: /\.(eot|svg|ttf|woff|woff2)$/,
 				type: "asset/resource",
 				generator: {
-					filename: "fonts/[name].[ext]"
-				}
+					filename: "fonts/[name].[ext]",
+				},
 			},
 			{
 				test: /\.(sa|sc|c)ss$/,
@@ -70,31 +72,31 @@ module.exports = {
 					{
 						loader: "css-loader",
 						options: {
-							sourceMap: true
-						}
+							sourceMap: true,
+						},
 					},
 					{
 						loader: "sass-loader",
 						options: {
-							sourceMap: true
-						}
-					}
-				]
+							sourceMap: true,
+						},
+					},
+				],
 			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
-					loader: "babel-loader"
-				}
+					loader: "babel-loader",
+				},
 			},
 			{
 				test: /\.js$/,
 				enforce: "pre",
 				use: {
-					loader: "source-map-loader"
-				}
-			}
-		]
-	}
+					loader: "source-map-loader",
+				},
+			},
+		],
+	},
 };

@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {Element} from './Element';
+import { h } from "hyperapp";
+import { Element } from "./Element";
 
 /**
  * A flexbox
@@ -38,8 +38,16 @@ import {Element} from './Element';
  * @param {h[]} children Children
  */
 export const Box = (props, children) =>
-  h(Element, Object.assign({
-    orientation: 'horizontal'
-  }, props, {
-    class: ['meeseOS-gui-box', props.class],
-  }), children);
+	h(
+		Element,
+		Object.assign(
+			{
+				orientation: "horizontal",
+			},
+			props,
+			{
+				class: ["meeseOS-gui-box", props.class],
+			}
+		),
+		children
+	);

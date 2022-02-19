@@ -28,18 +28,18 @@
  * @licence Simplified BSD License
  */
 
-import {h} from 'hyperapp';
-import {createField} from '../element';
+import { h } from "hyperapp";
+import { createField } from "../element";
 
 /*
  * Parses option value
  */
-const parseValue = value => {
-  try {
-    return JSON.parse(value);
-  } catch (e) {
-    return value;
-  }
+const parseValue = (value) => {
+	try {
+		return JSON.parse(value);
+	} catch (e) {
+		return value;
+	}
 };
 
 /**
@@ -51,22 +51,30 @@ const parseValue = value => {
  * @param {h[]} children Children
  */
 export const ToggleField = (props = {}, children = []) =>
-  createField('toggle-field', props, {
-    type: 'checkbox',
-    checked: false
-  }, (fieldProps) => h('label', {
-
-  }, [
-    h('input', fieldProps),
-    h('span', {
-      class: 'meeseOS-toggle-input'
-    }),
-    h('span', {
-      class: 'meeseOS-toggle-label'
-    }, [
-      props.label || '',
-      ...children
-    ])
-  ]), ev => [props.type === 'radio'
-    ? parseValue(ev.target.value)
-    : !!ev.target.checked]);
+	createField(
+		"toggle-field",
+		props,
+		{
+			type: "checkbox",
+			checked: false,
+		},
+		(fieldProps) =>
+			h("label", {}, [
+				h("input", fieldProps),
+				h("span", {
+					class: "meeseOS-toggle-input",
+				}),
+				h(
+					"span",
+					{
+						class: "meeseOS-toggle-label",
+					},
+					[props.label || "", ...children]
+				),
+			]),
+		(ev) => [
+			props.type === "radio"
+				? parseValue(ev.target.value)
+				: !!ev.target.checked,
+		]
+	);

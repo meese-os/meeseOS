@@ -28,10 +28,10 @@
  * @licence Simplified BSD License
  */
 
-import {resolveTreeByKey, providerHandler} from './utils.js';
-import {EventEmitter} from '@aaronmeese.com/event-emitter';
-import merge from 'deepmerge';
-import omitDeep from 'omit-deep';
+import { resolveTreeByKey, providerHandler } from "./utils.js";
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import merge from "deepmerge";
+import omitDeep from "omit-deep";
 
 /**
  * Core
@@ -39,141 +39,138 @@ import omitDeep from 'omit-deep';
  * @desc Main class for OS.js service providers and bootstrapping.
  */
 export class CoreBase extends EventEmitter {
+	/**
+	 * Create core instance
+	 * @param {Object} defaultConfiguration Default configuration
+	 * @param {Object} configuration Configuration given
+	 * @param {Object} options Options
+	 */
+	constructor(defaultConfiguration, configuration, options) {
+		super("Core");
 
-  /**
-   * Create core instance
-   * @param {Object} defaultConfiguration Default configuration
-   * @param {Object} configuration Configuration given
-   * @param {Object} options Options
-   */
-  constructor(defaultConfiguration, configuration, options) {
-    super('Core');
+		// https://github.com/KyleAMathews/deepmerge#webpack-bug
+		const merger = merge.default ? merge.default : merge;
+		const omitted = omitDeep(defaultConfiguration, options.omit || []);
 
-    // https://github.com/KyleAMathews/deepmerge#webpack-bug
-    const merger = merge.default ? merge.default : merge;
-    const omitted = omitDeep(defaultConfiguration, options.omit || []);
+		this.logger = console;
+		this.configuration = merger(omitted, configuration);
+		this.options = options;
+		this.booted = false;
+		this.started = false;
+		this.destroyed = false;
+		this.providers = providerHandler(this);
+	}
 
-    this.logger = console;
-    this.configuration = merger(omitted, configuration);
-    this.options = options;
-    this.booted = false;
-    this.started = false;
-    this.destroyed = false;
-    this.providers = providerHandler(this);
-  }
+	/**
+	 * Destroy core instance
+	 */
+	destroy() {
+		if (this.destroyed) {
+			return false;
+		}
 
-  /**
-   * Destroy core instance
-   */
-  destroy() {
-    if (this.destroyed) {
-      return false;
-    }
+		this.booted = false;
+		this.destroyed = true;
+		this.started = false;
 
-    this.booted = false;
-    this.destroyed = true;
-    this.started = false;
+		const promises = this.providers.destroy();
 
-    const promises = this.providers.destroy();
+		super.destroy();
 
-    super.destroy();
+		return promises;
+	}
 
-    return promises;
-  }
+	/**
+	 * Boots up OS.js
+	 */
+	boot() {
+		if (this.booted) {
+			return Promise.resolve(true);
+		}
 
-  /**
-   * Boots up OS.js
-   */
-  boot() {
-    if (this.booted) {
-      return Promise.resolve(true);
-    }
+		this.started = false;
+		this.destroyed = false;
+		this.booted = true;
 
-    this.started = false;
-    this.destroyed = false;
-    this.booted = true;
+		return this.providers.init(true).then(() => true);
+	}
 
-    return this.providers.init(true)
-      .then(() => true);
-  }
+	/**
+	 * Starts all core services
+	 */
+	start() {
+		if (this.started) {
+			return Promise.resolve(true);
+		}
 
-  /**
-   * Starts all core services
-   */
-  start() {
-    if (this.started) {
-      return Promise.resolve(true);
-    }
+		this.started = true;
 
-    this.started = true;
+		return this.providers.init(false).then(() => true);
+	}
 
-    return this.providers.init(false)
-      .then(() => true);
-  }
+	/**
+	 * Gets a configuration entry by key
+	 *
+	 * @param {String} key The key to get the value from
+	 * @param {*} [defaultValue] If result is undefined, return this instead
+	 * @see {resolveTreeByKey}
+	 * @return {*}
+	 */
+	config(key, defaultValue) {
+		return key
+			? resolveTreeByKey(this.configuration, key, defaultValue)
+			: Object.assign({}, this.configuration);
+	}
 
-  /**
-   * Gets a configuration entry by key
-   *
-   * @param {String} key The key to get the value from
-   * @param {*} [defaultValue] If result is undefined, return this instead
-   * @see {resolveTreeByKey}
-   * @return {*}
-   */
-  config(key, defaultValue) {
-    return key
-      ? resolveTreeByKey(this.configuration, key, defaultValue)
-      : Object.assign({}, this.configuration);
-  }
+	/**
+	 * Register a service provider
+	 *
+	 * @param {Class} ref A class reference
+	 * @param {Object} [options] Options for handling of provider
+	 * @param {Boolean} [options.before] Load this provider early
+	 * @param {Object} [options.args] Arguments to send to the constructor
+	 */
+	register(ref, options = {}) {
+		this.providers.register(ref, options);
+	}
 
-  /**
-   * Register a service provider
-   *
-   * @param {Class} ref A class reference
-   * @param {Object} [options] Options for handling of provider
-   * @param {Boolean} [options.before] Load this provider early
-   * @param {Object} [options.args] Arguments to send to the constructor
-   */
-  register(ref, options = {}) {
-    this.providers.register(ref, options);
-  }
+	/**
+	 * Register a instanciator provider
+	 *
+	 * @param {String} name Provider name
+	 * @param {Function} callback Callback that returns an instance
+	 */
+	instance(name, callback) {
+		this.providers.bind(name, false, callback);
+	}
 
-  /**
-   * Register a instanciator provider
-   *
-   * @param {String} name Provider name
-   * @param {Function} callback Callback that returns an instance
-   */
-  instance(name, callback) {
-    this.providers.bind(name, false, callback);
-  }
+	/**
+	 * Register a singleton provider
+	 *
+	 * @param {String} name Provider name
+	 * @param {Function} callback Callback that returns an instance
+	 */
+	singleton(name, callback) {
+		this.providers.bind(name, true, callback);
+	}
 
-  /**
-   * Register a singleton provider
-   *
-   * @param {String} name Provider name
-   * @param {Function} callback Callback that returns an instance
-   */
-  singleton(name, callback) {
-    this.providers.bind(name, true, callback);
-  }
+	/**
+	 * Create an instance of a provided service
+	 *
+	 * @param {String} name Service name
+	 * @param {*} args Constructor arguments
+	 * @return {*} An instance of a service
+	 */
+	make(name, ...args) {
+		return this.providers.make(name, ...args);
+	}
 
-  /**
-   * Create an instance of a provided service
-   *
-   * @param {String} name Service name
-   * @param {*} args Constructor arguments
-   * @return {*} An instance of a service
-   */
-  make(name, ...args) {
-    return this.providers.make(name, ...args);
-  }
-
-  /**
-   * Check if a service exists
-   * @param {String} name Provider name
-   * @return {Boolean}
-   */
-  has(name) {
-    return this.providers.has(name);
-  }
+	/**
+	 * Check if a service exists
+	 * @param {String} name Provider name
+	 * @return {Boolean}
+	 */
+	has(name) {
+		return this.providers.has(name);
+	}
 }

@@ -28,4 +28,4 @@
  * @licence Simplified BSD License
  */
 
-import './index.scss';
+import "./index.scss";
