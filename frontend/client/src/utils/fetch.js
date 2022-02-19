@@ -44,7 +44,7 @@ const bodyTypes = [
 	window.File,
 	window.URLSearchParams,
 	window.FormData,
-].filter((t) => !!t);
+].filter((t) => Boolean(t));
 
 /*
  * Creates fetch() options

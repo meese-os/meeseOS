@@ -50,7 +50,7 @@ const npmPackages = async (root) => {
 	const results = await Promise.all(promises);
 
 	const packages = results.filter(
-		({ json }) => !!json.meeseOS && json.meeseOS.type === "package"
+		({ json }) => Boolean(json.meeseOS) && json.meeseOS.type === "package"
 	);
 
 	const list = await Promise.all(
@@ -62,7 +62,7 @@ const npmPackages = async (root) => {
 		)
 	);
 
-	return list.filter((res) => !!res);
+	return list.filter((res) => Boolean(res));
 };
 
 const spawnAsync = (cmd, args, options) =>
@@ -92,7 +92,7 @@ const loadTasks = async (defaults, includes, options) => {
 };
 
 const createOptions = (options) => ({
-	production: !!(process.env.NODE_ENV || "development").match(/^prod/),
+	production: Boolean((process.env.NODE_ENV || "development").match(/^prod/)),
 	cli: createPath(options.root, "src/cli"),
 	npm: createPath(options.root, "package.json"),
 	packages: createPath(options.root, "packages.json"),

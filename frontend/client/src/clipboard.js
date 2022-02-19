@@ -84,7 +84,7 @@ export default class Clipboard {
 		if (type instanceof RegExp) {
 			return (
 				typeof this.clipboard.type === "string" &&
-				!!this.clipboard.type.match(type)
+				Boolean(this.clipboard.type.match(type))
 			);
 		}
 		return this.clipboard.type === type;

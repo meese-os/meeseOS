@@ -91,7 +91,7 @@ export const Element = (props, children = []) => {
 		{
 			oncreate: props.oncreate,
 			ondestroy: props.ondestroy,
-			class: classNames.filter((s) => !!s).join(" "),
+			class: classNames.filter((s) => Boolean(s)).join(" "),
 			style,
 		},
 		children

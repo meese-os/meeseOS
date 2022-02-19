@@ -134,7 +134,7 @@ export default class Notification {
 					"div",
 					{
 						class: "meeseOS-notification-wrapper",
-						"data-has-icon": !!state.icon,
+						"data-has-icon": Boolean(state.icon),
 						style: {
 							backgroundImage: state.icon ? `url(${state.icon})` : undefined,
 						},

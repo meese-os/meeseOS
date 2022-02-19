@@ -396,7 +396,7 @@ export const getMediaQueryName = (win) =>
  */
 export const loadOptionsFromConfig = (config, appName, windowId) => {
 	const matchStringOrRegex = (str, matcher) =>
-		matcher instanceof RegExp ? !!str.match(matcher) : str === matcher;
+		matcher instanceof RegExp ? Boolean(str.match(matcher)) : str === matcher;
 
 	const found = config.find(({ application, window }) => {
 		if (!application && !window) {

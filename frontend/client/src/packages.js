@@ -465,7 +465,7 @@ export default class Packages {
 	getCompatiblePackages(mimeType) {
 		return this.getPackages((meta) => {
 			if (meta.mimes) {
-				return !!meta.mimes.find((mime) => {
+				return Boolean(meta.mimes.find((mime) => {
 					try {
 						const re = new RegExp(mime);
 						return re.test(mimeType);
@@ -474,7 +474,7 @@ export default class Packages {
 					}
 
 					return mime === mimeType;
-				});
+				}));
 			}
 
 			return false;

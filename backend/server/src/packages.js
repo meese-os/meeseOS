@@ -131,7 +131,7 @@ class Packages {
 		return new Promise((resolve, reject) => {
 			stream.once("end", () => {
 				Promise.all(result)
-					.then((result) => result.filter((iter) => !!iter.handler))
+					.then((result) => result.filter((iter) => Boolean(iter.handler)))
 					.then(resolve)
 					.catch(reject);
 			});
