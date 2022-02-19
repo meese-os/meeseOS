@@ -9,7 +9,7 @@
 # https://gist.github.com/mihow/9c7f559807069a03e302605691f85572?permalink_comment_id=2706921#gistcomment-2706921
 if [ -f .env ]
 then
-	export $(cat .env | sed 's/#.*//g' | xargs)
+	export $(sed 's/#.*//g' .env | xargs)
 else
 	read -p "Username: " USERNAME
 	read -sp "Password: " PASSWORD
