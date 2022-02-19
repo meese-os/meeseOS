@@ -149,7 +149,9 @@ export default class FileDialog extends Dialog {
 					}),
 					buttons: {
 						ok:
-							this.args.filetype === "directory" ? true : Boolean(this.args.filename),
+							this.args.filetype === "directory"
+								? true
+								: Boolean(this.args.filename),
 					},
 				},
 				{
@@ -206,7 +208,10 @@ export default class FileDialog extends Dialog {
 
 						if (this.args.filetype === "file") {
 							actions.setButtonState({
-								ok: this.args.type === "save" ? Boolean(this.args.filename) : false,
+								ok:
+									this.args.type === "save"
+										? Boolean(this.args.filename)
+										: false,
 							});
 						}
 					},

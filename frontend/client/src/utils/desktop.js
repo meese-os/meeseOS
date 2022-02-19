@@ -44,7 +44,8 @@ export const validVfsDrop = (data) => data && data.path;
  * @return {boolean}
  */
 export const isDroppingImage = (data) =>
-	validVfsDrop(data) && imageDropMimes.some((re) => Boolean(data.mime.match(re)));
+	validVfsDrop(data) &&
+	imageDropMimes.some((re) => Boolean(data.mime.match(re)));
 
 /**
  * Creates a set of styles based on background settings

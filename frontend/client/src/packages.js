@@ -465,16 +465,18 @@ export default class Packages {
 	getCompatiblePackages(mimeType) {
 		return this.getPackages((meta) => {
 			if (meta.mimes) {
-				return Boolean(meta.mimes.find((mime) => {
-					try {
-						const re = new RegExp(mime);
-						return re.test(mimeType);
-					} catch (e) {
-						logger.warn("Compability check failed", e);
-					}
+				return Boolean(
+					meta.mimes.find((mime) => {
+						try {
+							const re = new RegExp(mime);
+							return re.test(mimeType);
+						} catch (e) {
+							logger.warn("Compability check failed", e);
+						}
 
-					return mime === mimeType;
-				}));
+						return mime === mimeType;
+					})
+				);
 			}
 
 			return false;
