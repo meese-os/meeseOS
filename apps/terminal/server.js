@@ -28,10 +28,15 @@
  * @licence Simplified BSD License
  */
 
+const path = require('path');
 const os = require('os');
 const pty = require('node-pty');
 const {v4: uuidv4} = require('uuid');
+require('dotenv').config({
+	path: path.resolve(__dirname, 'scripts/.env')
+});
 
+const windowsPlatform = os.platform() === 'win32';
 let connections = {};
 let terminals = [];
 
@@ -39,24 +44,21 @@ let terminals = [];
  * Creates a new Terminal
  */
 const createTerminal = (core, ws, options = {}, args = []) => {
-  const useLogin = core.config('xterm.login', true);
-  const hostname = core.config('xterm.ssh.hostname', 'localhost');
+  const hostname = core.config('xterm.hostname', 'localhost');
+  const username = process.env.USERNAME || options.username || 'root';
+  const password = process.env.PASSWORD || options.password || 'toor';
+  const sshCommand = `ssh -o StrictHostKeyChecking=no ${username}@${hostname}`;
+  let sshPassCommand = `sshpass -p ${password} ${sshCommand}`;
 
-  if (useLogin) {
-    const username = typeof useLogin === 'string' ? useLogin : options.username;
-    const sshCommand = `ssh -o StrictHostKeyChecking=no ${username}@${hostname}`;
-    let sshPassCommand = `sshpass -p ${process.env.SSH_PASSWORD} ${sshCommand}`;
-
-    // If you're on Windows, you have to run `sshpass` from your WSL distro.
-    // Make sure you have the sshpass binary installed.
-    if (os.platform() === 'win32') sshPassCommand = `wsl -- ${sshPassCommand}`;
-    args = [...args, '-c', sshPassCommand];
-  }
+  // If you're on Windows, you have to run `sshpass` from your WSL distro.
+  // Make sure you have the sshpass binary installed.
+  if (windowsPlatform) sshPassCommand = `wsl -- ${sshPassCommand}`;
+  args = [...args, '-c', sshPassCommand];
 
   // Logs on the server side (CLI), so does not pose a security threat
-  console.log('[Xterm]', 'Creating terminal...', {useLogin, options, args});
+  console.log('[Xterm]', 'Creating terminal...', {options, args});
 
-  const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
+  const shell = windowsPlatform ? 'powershell.exe' : 'bash';
   const size = options.size || {cols: 80, rows: 24};
   const term = pty.spawn(shell, args, {
     cols: size.cols,
@@ -128,14 +130,13 @@ const createConnection = (core, ws) => {
   let pinged = false;
 
   ws.on('message', (uuid) => {
-    if (!pinged) {
-      try {
-        const term = createTerminal(core, ws, connections[uuid]);
-        ws.send(String(term.pid));
-        pinged = {uuid, pid: term.pid};
-      } catch (e) {
-        console.warn(e);
-      }
+    if (pinged) return;
+    try {
+      const term = createTerminal(core, ws, connections[uuid]);
+      ws.send(String(term.pid));
+      pinged = {uuid, pid: term.pid};
+    } catch (e) {
+      console.warn(e);
     }
   });
 };

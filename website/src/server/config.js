@@ -36,19 +36,13 @@
 
 const path = require('path');
 const root = path.resolve(__dirname, '../../');
-const username = 'xterm';
-const linux = 'raspberrypi';
-const windows = 'localhost';
+const hostname = 'raspberrypi';
 
 module.exports = {
   root,
   port: 8000,
   public: path.resolve(root, 'dist'),
   xterm: {
-    // String to force username, false to login to default account
-    login: username,
-    ssh: {
-      hostname: linux,
-    }
+		hostname: hostname,
   },
 };

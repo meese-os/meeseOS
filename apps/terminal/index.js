@@ -72,6 +72,7 @@ const createConnection = async (core, proc, win, term, fit) => {
 
   ws.on('open', () => {
     ws.send(uuid);
+		term.clear();
 
     pinger = setInterval(() => {
       ws.send(JSON.stringify({action: 'ping'}));
@@ -123,9 +124,9 @@ const createConnection = async (core, proc, win, term, fit) => {
  */
 const createTerminal = (core, proc, index) => {
   const term = new Terminal({
-		cols: 40,
-		rows: 30,
-	});
+    cols: 40,
+    rows: 30,
+  });
 
   const fitAddon = new FitAddon();
   term.loadAddon(fitAddon);

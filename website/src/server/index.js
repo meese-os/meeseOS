@@ -49,7 +49,6 @@ const {
 
 const config = require('./config.js');
 const meeseOS = new Core(config, {});
-require('dotenv').config();
 
 meeseOS.register(CoreServiceProvider, {before: true});
 meeseOS.register(PackageServiceProvider);

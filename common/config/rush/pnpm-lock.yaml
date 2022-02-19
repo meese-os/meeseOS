@@ -70,7 +70,7 @@ importers:
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
-      dotenv: ^14.3.2
+      dotenv: ^16.0.0
       eslint: ^8.9.0
       font-awesome: ^4.7.0
       jquery: ^3.6.0
@@ -95,7 +95,7 @@ importers:
       '@react-hook/window-size': 3.0.5_react@16.14.0
       axios: 0.21.4
       bootstrap: 4.6.1_jquery@3.6.0
-      dotenv: 14.3.2
+      dotenv: 16.0.0
       font-awesome: 4.7.0
       jquery: 3.6.0
       react: 16.14.0
@@ -142,6 +142,7 @@ importers:
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
+      dotenv: ^16.0.0
       eslint: ^8.9.0
       hyperapp: ^1.2.10
       mini-css-extract-plugin: ^2.5.3
@@ -159,6 +160,7 @@ importers:
       xterm-addon-fit: ^0.3.0
     dependencies:
       clipboard-polyfill: 2.8.6
+      dotenv: 16.0.0
       hyperapp: 1.2.10
       node-pty: 0.9.0
       uuid: 7.0.3
@@ -769,7 +771,6 @@ importers:
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
-      dotenv: ^16.0.0
       eslint: ^8.9.0
       html-webpack-plugin: ^5.5.0
       hyperapp: ^1.2.10
@@ -799,7 +800,6 @@ importers:
       '@aaronmeese.com/terminal': link:../apps/terminal
       '@aaronmeese.com/textpad': link:../apps/textpad
       '@aaronmeese.com/widgets': link:../frontend/widgets
-      dotenv: 16.0.0
       hyperapp: 1.2.10
       typeface-roboto: 1.1.13
     devDependencies:
@@ -4399,11 +4399,6 @@ packages:
     dependencies:
       is-obj: 2.0.0
     dev: true
-
-  /dotenv/14.3.2:
-    resolution: {integrity: sha512-vwEppIphpFdvaMCaHfCEv9IgwcxMljMw2TnAQBB4VWPvzXQLTb82jwmdOKzlEVUL3gNFT4l4TPKO+Bn+sqcrVQ==}
-    engines: {node: '>=12'}
-    dev: false
 
   /dotenv/16.0.0:
     resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
