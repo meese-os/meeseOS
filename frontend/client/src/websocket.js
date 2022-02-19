@@ -145,7 +145,7 @@ export default class Websocket extends EventEmitter {
 	 */
 	_attachEvents() {
 		this.on("open", (ev) => {
-			const reconnected = !!this.reconnecting;
+			const reconnected = Boolean(this.reconnecting);
 
 			this.connected = true;
 			this.reconnecting = false;

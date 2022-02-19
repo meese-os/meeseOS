@@ -107,7 +107,7 @@ const createView = (core, fs, icon) => {
 				h(
 					"div",
 					{
-						"data-error": !!state.error,
+						"data-error": Boolean(state.error),
 						class: "meeseOS-search-message",
 						style: {
 							display: state.error || state.status ? "block" : "none",

@@ -500,7 +500,7 @@ export default class Window extends EventEmitter {
 		}
 
 		classNames
-			.filter((val) => !!val)
+			.filter((val) => Boolean(val))
 			.forEach((val) => this.$element.classList.add(val));
 	}
 

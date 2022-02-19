@@ -175,7 +175,7 @@ const createView = (options) => {
 				id: options.id,
 				style: { display: state.hidden ? "none" : undefined },
 			},
-			[left(), middle(), right()].filter((el) => !!el)
+			[left(), middle(), right()].filter((el) => Boolean(el))
 		);
 	};
 };

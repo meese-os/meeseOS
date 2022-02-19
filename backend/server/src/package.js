@@ -118,7 +118,7 @@ class Package {
 		return (
 			this.script &&
 			this.metadata &&
-			!!manifest.find((iter) => iter.name === this.metadata.name)
+			Boolean(manifest.find((iter) => iter.name === this.metadata.name))
 		);
 	}
 

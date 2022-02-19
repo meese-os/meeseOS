@@ -32,7 +32,7 @@ import { h } from "hyperapp";
 import PanelItem from "../panel-item";
 import defaultIcon from "../logo-blue-32x32.png";
 
-const sortBy = (fn) => (a, b) => -(fn(a) < fn(b)) || +(fn(a) > fn(b));
+const sortBy = (fn) => (a, b) => -(fn(a) < fn(b)) || Number(fn(a) > fn(b));
 const sortByLabel = (iter) => String(iter.label).toLowerCase();
 
 const makeTree = (core, icon) => {

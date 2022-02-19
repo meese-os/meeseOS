@@ -118,7 +118,7 @@ export class EventEmitter {
 	 */
 	off(name, callback = null, force = false) {
 		getEventNames(name)
-			.filter((n) => !!this.events[n])
+			.filter((n) => Boolean(this.events[n]))
 			.forEach((n) => {
 				if (callback) {
 					let i = this.events[n].length;

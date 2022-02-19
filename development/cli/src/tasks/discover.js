@@ -52,7 +52,7 @@ const glob = async (dir) => {
 
 	const files = await fs.readdir(dir);
 	const result = await Promise.all(files.map(stat));
-	return result.filter((f) => !!f);
+	return result.filter((f) => Boolean(f));
 };
 
 const clean = async (copyFiles, dir) =>

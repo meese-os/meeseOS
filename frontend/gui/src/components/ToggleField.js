@@ -75,6 +75,6 @@ export const ToggleField = (props = {}, children = []) =>
 		(ev) => [
 			props.type === "radio"
 				? parseValue(ev.target.value)
-				: !!ev.target.checked,
+				: Boolean(ev.target.checked),
 		]
 	);

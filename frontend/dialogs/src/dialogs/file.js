@@ -149,7 +149,9 @@ export default class FileDialog extends Dialog {
 					}),
 					buttons: {
 						ok:
-							this.args.filetype === "directory" ? true : !!this.args.filename,
+							this.args.filetype === "directory"
+								? true
+								: Boolean(this.args.filename),
 					},
 				},
 				{
@@ -206,7 +208,10 @@ export default class FileDialog extends Dialog {
 
 						if (this.args.filetype === "file") {
 							actions.setButtonState({
-								ok: this.args.type === "save" ? !!this.args.filename : false,
+								ok:
+									this.args.type === "save"
+										? Boolean(this.args.filename)
+										: false,
 							});
 						}
 					},
@@ -259,7 +264,7 @@ export default class FileDialog extends Dialog {
 									this.emitCallback(this.getPositiveButton(), ev, true),
 								oninput: (ev) => {
 									const filename = ev.target.value;
-									actions.setButtonState({ ok: !!filename });
+									actions.setButtonState({ ok: Boolean(filename) });
 									actions.setFilename(filename);
 								},
 								box: {

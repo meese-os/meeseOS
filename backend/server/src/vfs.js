@@ -43,7 +43,7 @@ const {
 
 const respondNumber = (result) => (typeof result === "number" ? result : -1);
 const respondBoolean = (result) =>
-	typeof result === "boolean" ? result : !!result;
+	typeof result === "boolean" ? result : Boolean(result);
 const requestPath = (req) => [sanitize(req.fields.path)];
 const requestSearch = (req) => [sanitize(req.fields.root), req.fields.pattern];
 const requestCross = (req) => [
@@ -245,7 +245,7 @@ const createCrossRequestFactory =
 				options
 			);
 
-			return !!result;
+			return Boolean(result);
 		}
 
 		// Simulates a copy/move
@@ -261,7 +261,7 @@ const createCrossRequestFactory =
 			await srcMount.adapter.unlink(srcMount)(from, options);
 		}
 
-		return !!result;
+		return Boolean(result);
 	};
 
 /*
