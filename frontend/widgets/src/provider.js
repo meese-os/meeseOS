@@ -33,7 +33,7 @@ import DigitalClock from "./items/digitalclock";
 /**
  * Widget Service Provider
  *
- * @desc Provides methods to handle widgets on a desktop in OS.js
+ * @desc Provides methods to handle widgets on a desktop in MeeseOS
  */
 export default class WidgetServiceProvider {
 	constructor(core, args = {}) {

@@ -44,7 +44,7 @@ const chokidar = require("chokidar");
  */
 
 /**
- * OS.js Package Abstraction
+ * MeeseOS Package Abstraction
  */
 class Package {
 	/**

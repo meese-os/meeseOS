@@ -257,7 +257,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Performs a request to the OS.js server with the application
+	 * Performs a request to the MeeseOS server with the application
 	 * as the endpoint.
 	 * @param {string} [path=/] Append this to endpoint
 	 * @param {Options} [options] fetch options

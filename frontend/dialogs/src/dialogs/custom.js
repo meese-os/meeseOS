@@ -32,7 +32,7 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Custom OS.js Dialog
+ * Custom MeeseOS Dialog
  */
 export default class CustomDialog extends Dialog {
 	constructor(core, options, valueCallback, callback) {

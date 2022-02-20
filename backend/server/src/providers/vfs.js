@@ -32,7 +32,7 @@ const { ServiceProvider } = require("@aaronmeese.com/common");
 const Filesystem = require("../filesystem");
 
 /**
- * OS.js Virtual Filesystem Service Provider
+ * MeeseOS Virtual Filesystem Service Provider
  */
 class VFSServiceProvider extends ServiceProvider {
 	constructor(core, options = {}) {

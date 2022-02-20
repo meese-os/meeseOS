@@ -109,12 +109,12 @@ const colorFromClick = (ev, canvas) => {
 };
 
 /**
- * Default OS.js Color Dialog
+ * Default MeeseOS Color Dialog
  */
 export default class ColorDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
 	 * @param {Function} callback The callback function

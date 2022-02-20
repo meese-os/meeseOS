@@ -48,7 +48,7 @@ const readOrDefault = (filename) =>
  */
 
 /**
- * OS.js Package Management
+ * MeeseOS Package Management
  */
 class Packages {
 	/**

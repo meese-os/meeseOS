@@ -50,7 +50,7 @@ const logger = consola.withTag("Core");
 let _instance;
 
 /**
- * OS.js Server Core
+ * MeeseOS Server Core
  */
 class Core extends CoreBase {
 	/**

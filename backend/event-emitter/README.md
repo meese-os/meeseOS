@@ -4,9 +4,9 @@
 
 [OS.js](https://www.os-js.org/) is an [open-source](https://raw.githubusercontent.com/os-js/OS.js/master/LICENSE) web desktop platform with a window manager, application APIs, GUI toolkit, filesystem abstractions and much more.
 
-# OS.js EventEmitter
+# MeeseOS EventEmitter
 
-This is a EventEmitter implementation for OS.js.
+This is a EventEmitter implementation for MeeseOS.
 
 ## API
 

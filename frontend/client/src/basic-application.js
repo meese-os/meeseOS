@@ -50,7 +50,7 @@ import { basename, pathname } from "./utils/vfs";
 export class BasicApplication extends EventEmitter {
 	/**
 	 * Basic Application Constructor
-	 * @param {Core} core OS.js Core API
+	 * @param {Core} core MeeseOS Core API
 	 * @param {Application} proc The application process
 	 * @param {Window} win The main application window
 	 * @param {BasicApplicationOptions} [options={}] Basic application options

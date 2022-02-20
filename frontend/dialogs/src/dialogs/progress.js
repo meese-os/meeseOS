@@ -33,12 +33,12 @@ import Dialog from "../dialog";
 import { Box, Progressbar } from "@aaronmeese.com/gui";
 
 /**
- * Default OS.js Progress Dialog
+ * Default MeeseOS Progress Dialog
  */
 export default class ProgressDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
 	 * @param {String} [args.message] Dialog message

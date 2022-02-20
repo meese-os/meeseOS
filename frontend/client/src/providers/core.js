@@ -141,11 +141,11 @@ import logger from "../logger";
  */
 
 /**
- * OS.js Core Service Provider
+ * MeeseOS Core Service Provider
  */
 export default class CoreServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core OS.js Core
+	 * @param {Core} core MeeseOS Core
 	 * @param {CoreProviderOptions} [options={}] Arguments
 	 */
 	constructor(core, options = {}) {

@@ -4,9 +4,9 @@
 
 [OS.js](https://www.os-js.org/) is an [open-source](https://raw.githubusercontent.com/os-js/OS.js/master/LICENSE) web desktop platform with a window manager, application APIs, GUI toolkit, filesystem abstractions and much more.
 
-# OS.js Stylelint Rules
+# MeeseOS Stylelint Rules
 
-These are the default Stylelint rules for OS.js codebase.
+These are the default Stylelint rules for MeeseOS codebase.
 
 ## Installation
 

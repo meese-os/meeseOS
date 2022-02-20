@@ -36,7 +36,7 @@ const Packages = require("../packages");
 const { closeWatches } = require("../utils/core");
 
 /**
- * OS.js Package Service Provider
+ * MeeseOS Package Service Provider
  */
 class PackageServiceProvider extends ServiceProvider {
 	constructor(core) {

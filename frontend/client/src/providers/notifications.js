@@ -32,11 +32,11 @@ import Notifications from "../notifications";
 import { ServiceProvider } from "@aaronmeese.com/common";
 
 /**
- * OS.js Notification Service Provider
+ * MeeseOS Notification Service Provider
  */
 export default class NotificationServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core OS.js Core
+	 * @param {Core} core MeeseOS Core
 	 */
 	constructor(core) {
 		super(core);

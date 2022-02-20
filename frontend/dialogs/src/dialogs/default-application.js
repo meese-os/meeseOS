@@ -33,12 +33,12 @@ import { SelectField, ToggleField, Box } from "@aaronmeese.com/gui";
 import Dialog from "../dialog";
 
 /**
- * Default OS.js DefaultApplication Dialog
+ * Default MeeseOS DefaultApplication Dialog
  */
 export default class DefaultApplicationDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
 	 * @param {String} [args.message] Dialog message

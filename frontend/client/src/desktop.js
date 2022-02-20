@@ -264,7 +264,7 @@ export default class Desktop extends EventEmitter {
 		// Creates tray
 		const tray = this.core.make("meeseOS/tray").create(
 			{
-				title: "OS.js developer tools",
+				title: "MeeseOS developer tools",
 			},
 			(ev) => this.onDeveloperMenu(ev)
 		);

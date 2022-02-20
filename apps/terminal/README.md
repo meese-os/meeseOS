@@ -4,9 +4,9 @@
 
 [OS.js](https://www.os-js.org/) is an [open-source](https://raw.githubusercontent.com/os-js/OS.js/master/LICENSE) web desktop platform with a window manager, application APIs, GUI toolkit, filesystem abstractions and much more.
 
-# OS.js v3 Xterm Application
+# MeeseOS Xterm Application
 
-This is the Xterm Application for OS.js v3
+This is the Xterm Application for MeeseOS
 
 ![Screenshot](https://raw.githubusercontent.com/os-js/osjs-xterm-application/master/screenshot.png)
 
@@ -28,7 +28,7 @@ Start from application menu.
 
 **Note that it will log into a shell with the username you are logged in as.**
 
-If you want to change this behavior, you can add this to your `src/server/config.js` file in the OS.js distribution:
+If you want to change this behavior, you can add this to your `src/server/config.js` file in the MeeseOS distribution:
 
 ```javascript
 module.exports = {

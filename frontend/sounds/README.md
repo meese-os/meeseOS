@@ -4,9 +4,9 @@
 
 [OS.js](https://www.os-js.org/) is an [open-source](https://raw.githubusercontent.com/os-js/OS.js/master/LICENSE) web desktop platform with a window manager, application APIs, GUI toolkit, filesystem abstractions and much more.
 
-# aaronmeese.com Sound Theme
+# MeeseOS Sound Theme
 
-This is the Sound theme for aaronmeese.com
+This is the Sound theme for MeeseOS
 
 ## Installation
 

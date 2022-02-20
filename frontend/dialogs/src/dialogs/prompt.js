@@ -33,12 +33,12 @@ import Dialog from "../dialog";
 import { Box, TextField } from "@aaronmeese.com/gui";
 
 /**
- * Default OS.js Prompt Dialog
+ * Default MeeseOS Prompt Dialog
  */
 export default class PromptDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
 	 * @param {String} [args.message] Dialog message

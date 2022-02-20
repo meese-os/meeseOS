@@ -4,6 +4,6 @@
 
 [OS.js](https://www.os-js.org/) is an [open-source](https://raw.githubusercontent.com/os-js/OS.js/master/LICENSE) web desktop platform with a window manager, application APIs, GUI toolkit, filesystem abstractions and much more.
 
-# OS.js Common Modules
+# MeeseOS Common Modules
 
 Contains the base core libraries used for both the server and client.

@@ -109,7 +109,7 @@ const createAdapter = (core, options) => {
  */
 export default class Auth {
 	/**
-	 * @param {Core} core OS.js Core instance reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {AuthSettings} [options={}] Auth Options
 	 */
 	constructor(core, options = {}) {

@@ -4,9 +4,9 @@
 
 [OS.js](https://www.os-js.org/) is an [open-source](https://raw.githubusercontent.com/os-js/OS.js/master/LICENSE) web desktop platform with a window manager, application APIs, GUI toolkit, filesystem abstractions and much more.
 
-# aaronmeese.com Gnome Icon Theme
+# MeeseOS Gnome Icon Theme
 
-This is the Gnome Icon Theme module for aaronmeese.com
+This is the Gnome Icon Theme module for MeeseOS
 
 [![Build Status](https://travis-ci.org/os-js/osjs-gnome-icons.svg?branch=master)](https://travis-ci.org/os-js/osjs-gnome-icons)
 

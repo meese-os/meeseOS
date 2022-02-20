@@ -31,7 +31,7 @@
 /**
  * Service Provider Interface
  *
- * @desc Provides a basic Service Provider interface for OS.js
+ * @desc Provides a basic Service Provider interface for MeeseOS
  *
  * @interface
  */

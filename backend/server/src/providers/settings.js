@@ -32,7 +32,7 @@ const Settings = require("../settings");
 const { ServiceProvider } = require("@aaronmeese.com/common");
 
 /**
- * OS.js Settings Service Provider
+ * MeeseOS Settings Service Provider
  */
 class SettingsServiceProvider extends ServiceProvider {
 	constructor(core, options) {

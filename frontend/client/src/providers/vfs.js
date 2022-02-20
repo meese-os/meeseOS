@@ -74,11 +74,11 @@ import * as utils from "../utils/vfs";
  */
 
 /**
- * OS.js Virtual Filesystem Service Provider
+ * MeeseOS Virtual Filesystem Service Provider
  */
 export default class VFSServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core OS.js Core
+	 * @param {Core} core MeeseOS Core
 	 * @param {VFSServiceOptions} [options={}]
 	 */
 	constructor(core, options = {}) {

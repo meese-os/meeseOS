@@ -45,7 +45,7 @@ const validContextMenuTarget = (ev) => {
 };
 
 /**
- * OS.js GUI Service Provider
+ * MeeseOS GUI Service Provider
  *
  * @desc Provides wrapper services around GUI features
  */

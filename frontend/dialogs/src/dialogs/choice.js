@@ -33,12 +33,12 @@ import { SelectField, Box } from "@aaronmeese.com/gui";
 import Dialog from "../dialog";
 
 /**
- * Default OS.js Choice Dialog
+ * Default MeeseOS Choice Dialog
  */
 export default class ChoiceDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
 	 * @param {String} [args.message] Dialog message

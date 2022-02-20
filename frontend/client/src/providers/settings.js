@@ -49,11 +49,11 @@ import Settings from "../settings";
  */
 
 /**
- * OS.js Settings Service Provider
+ * MeeseOS Settings Service Provider
  */
 export default class SettingsServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core OS.js Core
+	 * @param {Core} core MeeseOS Core
 	 * @param {SettingsServiceOptions} [options={}]
 	 */
 	constructor(core, options = {}) {

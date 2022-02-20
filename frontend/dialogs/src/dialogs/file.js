@@ -53,12 +53,12 @@ const getMountpoints = (core) =>
 		);
 
 /**
- * Default OS.js File Dialog
+ * Default MeeseOS File Dialog
  */
 export default class FileDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
 	 * @param {String} [args.type='open'] Dialog type (open/save)

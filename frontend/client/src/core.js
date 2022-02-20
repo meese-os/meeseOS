@@ -70,7 +70,7 @@ import logger from "./logger";
  */
 
 /**
- * Main Core class for OS.js service providers and bootstrapping.
+ * Main Core class for MeeseOS service providers and bootstrapping.
  */
 export default class Core extends CoreBase {
 	/**
@@ -201,7 +201,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Boots up OS.js
+	 * Boots up MeeseOS
 	 * @return {Promise<boolean>}
 	 */
 	boot() {
@@ -249,7 +249,7 @@ export default class Core extends CoreBase {
 					});
 				}
 
-				logger.debug("OS.js STARTED WITHOUT ANY AUTHENTICATION");
+				logger.debug("MeeseOS STARTED WITHOUT ANY AUTHENTICATION");
 				return done();
 			})
 			.catch(done);
@@ -465,7 +465,7 @@ export default class Core extends CoreBase {
 	 * Make a HTTP request
 	 *
 	 * This is a wrapper for making a 'fetch' request with some helpers
-	 * and integration with OS.js
+	 * and integration with MeeseOS
 	 *
 	 * @param {string} url The endpoint
 	 * @param {Options} [options] fetch options

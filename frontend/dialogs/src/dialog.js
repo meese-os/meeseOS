@@ -102,14 +102,14 @@ const createOptions = (options, args) =>
 	);
 
 /**
- * OS.js default Dialog implementation
+ * MeeseOS default Dialog implementation
  *
  * Creates a Window with predefined content and actions(s)
  */
 export default class Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {Object} options Dialog options (including Window)
 	 * @param {Object} [options.defaultValue] Default callback value

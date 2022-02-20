@@ -73,7 +73,7 @@ import {
 /**
  * Package Manager
  *
- * Handles indexing, loading and launching of OS.js packages
+ * Handles indexing, loading and launching of MeeseOS packages
  */
 export default class Packages {
 	/**

@@ -102,7 +102,7 @@ const timeout = (fn) => {
 /**
  * ContextMenu Class
  *
- * @desc Handles a Menu/ContextMenu globally for OS.js
+ * @desc Handles a Menu/ContextMenu globally for MeeseOS
  */
 export class ContextMenu {
 	constructor(core) {

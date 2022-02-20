@@ -44,11 +44,11 @@ import Desktop from "../desktop";
  */
 
 /**
- * OS.js Desktop Service Provider
+ * MeeseOS Desktop Service Provider
  */
 export default class DesktopServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core OS.js Core
+	 * @param {Core} core MeeseOS Core
 	 */
 	constructor(core, options = {}) {
 		super(core, options || {});

@@ -33,12 +33,12 @@ import { Box, TextareaField } from "@aaronmeese.com/gui";
 import Dialog from "../dialog";
 
 /**
- * Default OS.js Alert Dialog
+ * Default MeeseOS Alert Dialog
  */
 export default class AlertDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core OS.js Core reference
+	 * @param {Core} core MeeseOS Core reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title='Alert'] Dialog title
 	 * @param {String} [args.message=''] Dialog message

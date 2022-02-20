@@ -100,7 +100,7 @@ declare class CoreBase extends EventEmitter {
 	 */
 	destroy(): void;
 	/**
-	 * Boots up OS.js
+	 * Boots up MeeseOS
 	 */
 	boot(): Promise<boolean>;
 	/**
@@ -770,7 +770,7 @@ declare class Application extends EventEmitter {
 	 */
 	resource(path?: string, options?: object): string;
 	/**
-	 * Performs a request to the OS.js server with the application
+	 * Performs a request to the MeeseOS server with the application
 	 * as the endpoint.
 	 */
 	request(path?: string, options?: any, type?: string): Promise<any>;
@@ -929,7 +929,7 @@ declare class Core extends CoreBase {
 	/**
 	 * Make a HTTP request
 	 * This is a wrapper for making a 'fetch' request with some helpers
-	 * and integration with OS.js
+	 * and integration with MeeseOS
 	 */
 	request(url: string, options?: any, type?: string, force?: boolean): any;
 	/**

@@ -39,5 +39,5 @@ const register = (core, args, options, metadata) => {
 	return proc;
 };
 
-// Creates the internal callback function when OS.js launches an application
+// Creates the internal callback function when MeeseOS launches an application
 meeseOS.register(applicationName, register);

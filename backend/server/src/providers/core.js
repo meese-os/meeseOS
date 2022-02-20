@@ -38,7 +38,7 @@ const { ServiceProvider } = require("@aaronmeese.com/common");
 const { isAuthenticated, closeWatches } = require("../utils/core.js");
 
 /**
- * OS.js Core Service Provider
+ * MeeseOS Core Service Provider
  */
 class CoreServiceProvider extends ServiceProvider {
 	constructor(core, options) {

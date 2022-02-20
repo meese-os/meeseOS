@@ -4,9 +4,9 @@
 
 [OS.js](https://www.os-js.org/) is an [open-source](https://raw.githubusercontent.com/os-js/OS.js/master/LICENSE) web desktop platform with a window manager, application APIs, GUI toolkit, filesystem abstractions and much more.
 
-# OS.js Widgets module
+# MeeseOS Widgets module
 
-This is the Widgets module for OS.js
+This is the Widgets module for MeeseOS
 
 - https://manual.os-js.org/v3/install/
 - https://manual.os-js.org/v3/guide/provider/

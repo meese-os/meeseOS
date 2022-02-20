@@ -81,7 +81,7 @@ const createAdapter = (core, options) => {
  */
 
 /**
- * OS.js Settings Manager
+ * MeeseOS Settings Manager
  */
 export default class Settings {
 	// TODO: Destroy method

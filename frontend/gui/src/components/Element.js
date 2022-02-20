@@ -61,7 +61,7 @@ const boxPropNames = {
 };
 
 /**
- * A generic OS.js GUI container
+ * A generic MeeseOS GUI container
  * @param {Object} props Properties
  * @param {h[]} children Children
  */

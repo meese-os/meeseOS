@@ -39,7 +39,7 @@ import createUI from "./adapters/ui/login";
  */
 
 /**
- * OS.js Login UI
+ * MeeseOS Login UI
  */
 export default class Login extends EventEmitter {
 	/**

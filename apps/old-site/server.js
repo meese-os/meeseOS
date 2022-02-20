@@ -1,4 +1,4 @@
-// Methods OS.js server requires
+// Methods MeeseOS server requires
 module.exports = (core, proc) => ({
 	// When server initializes
 	init: async () => {

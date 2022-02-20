@@ -124,7 +124,7 @@ export class CoreBase extends EventEmitter {
 	destroy(): void;
 
 	/**
-	 * Boots up OS.js
+	 * Boots up MeeseOS
 	 */
 	boot(): Promise<boolean>;
 

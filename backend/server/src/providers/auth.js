@@ -32,7 +32,7 @@ const { ServiceProvider } = require("@aaronmeese.com/common");
 const Auth = require("../auth.js");
 
 /**
- * OS.js Auth Service Provider
+ * MeeseOS Auth Service Provider
  */
 class AuthServiceProvider extends ServiceProvider {
 	constructor(core, options) {

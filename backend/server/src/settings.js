@@ -43,7 +43,7 @@ const fsAdapter = require("./adapters/settings/fs");
  */
 
 /**
- * OS.js Settings Manager
+ * MeeseOS Settings Manager
  */
 class Settings {
 	/**

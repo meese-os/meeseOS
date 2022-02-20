@@ -32,7 +32,7 @@ import { app, h } from "hyperapp";
 import { EventEmitter } from "@aaronmeese.com/event-emitter";
 
 /**
- * OS.js Panel Item
+ * MeeseOS Panel Item
  * @see {Panel}
  */
 export default class PanelItem extends EventEmitter {

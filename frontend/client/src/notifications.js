@@ -36,7 +36,7 @@ import { createCssText } from "./utils/dom";
  */
 export default class Notifications {
 	/**
-	 * @param {Core} core OS.js Core instance reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**

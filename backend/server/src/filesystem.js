@@ -70,7 +70,7 @@ const logger = consola.withTag("Filesystem");
  */
 
 /**
- * OS.js Virtual Filesystem
+ * MeeseOS Virtual Filesystem
  */
 class Filesystem {
 	/**

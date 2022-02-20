@@ -42,7 +42,7 @@ const createMenu = (current, actions) => [
 	{ label: "Quit", onclick: () => actions.menuQuit() },
 ];
 
-// OS.js application
+// MeeseOS application
 const createApplication = (core, proc, win, $content) => {
 	const vfs = core.make("meeseOS/vfs");
 	const basic = core.make("meeseOS/basic-application", proc, win, {
@@ -122,7 +122,7 @@ const createApplication = (core, proc, win, $content) => {
 	basic.init();
 };
 
-// OS.js window
+// MeeseOS window
 const createMainWindow = (core, proc) => {
 	proc
 		.createWindow({

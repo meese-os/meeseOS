@@ -47,13 +47,13 @@ import Auth from "../auth";
  */
 
 /**
- * OS.js Auth Service Provider
+ * MeeseOS Auth Service Provider
  *
  * Creates the login prompt and handles authentication flow
  */
 export default class AuthServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core OS.js Core
+	 * @param {Core} core MeeseOS Core
 	 * @param {AuthServiceOptions} [options={}]
 	 */
 	constructor(core, options = {}) {

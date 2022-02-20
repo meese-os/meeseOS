@@ -36,7 +36,7 @@ import MenuPanelItem from "./items/menu";
 /**
  * Panel Service Provider
  *
- * @desc Provides methods to handle panels on a desktop in OS.js
+ * @desc Provides methods to handle panels on a desktop in MeeseOS
  */
 export default class PanelServiceProvider {
 	constructor(core, args = {}) {

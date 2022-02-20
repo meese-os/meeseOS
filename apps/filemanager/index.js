@@ -981,7 +981,7 @@ const createWindow = (core, proc) => {
 };
 
 /**
- * Launches the OS.js application process
+ * Launches the MeeseOS application process
  */
 const createProcess = (core, args, options, metadata) => {
 	const proc = core.make("meeseOS/application", {

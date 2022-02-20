@@ -36,7 +36,7 @@ import omitDeep from "omit-deep";
 /**
  * Core
  *
- * @desc Main class for OS.js service providers and bootstrapping.
+ * @desc Main class for MeeseOS service providers and bootstrapping.
  */
 export class CoreBase extends EventEmitter {
 	/**
@@ -81,7 +81,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Boots up OS.js
+	 * Boots up MeeseOS
 	 */
 	boot() {
 		if (this.booted) {
