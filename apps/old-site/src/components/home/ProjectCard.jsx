@@ -14,27 +14,27 @@ const ProjectCard = ({ value, index }) => {
 				if (hours < 1) return setUpdatedAt("just now");
 				const measurement = hours === 1 ? "hour" : "hours";
 				return setUpdatedAt(`${hours.toString()} ${measurement} ago`);
-			} else {
-				const monthNames = [
-					"January",
-					"February",
-					"March",
-					"April",
-					"May",
-					"June",
-					"July",
-					"August",
-					"September",
-					"October",
-					"November",
-					"December",
-				];
-				const day = date.getDate();
-				const monthIndex = date.getMonth();
-				const year = date.getFullYear();
-
-				return setUpdatedAt(`on ${day} ${monthNames[monthIndex]} ${year}`);
 			}
+
+			const monthNames = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December",
+			];
+			const day = date.getDate();
+			const monthIndex = date.getMonth();
+			const year = date.getFullYear();
+
+			return setUpdatedAt(`on ${day} ${monthNames[monthIndex]} ${year}`);
 		},
 		[value.pushed_at]
 	);

@@ -247,10 +247,9 @@ export default class Core extends CoreBase {
 							done();
 						}
 					});
-				} else {
-					logger.debug("OS.js STARTED WITHOUT ANY AUTHENTICATION");
 				}
 
+				logger.debug("OS.js STARTED WITHOUT ANY AUTHENTICATION");
 				return done();
 			})
 			.catch(done);

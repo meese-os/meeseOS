@@ -272,13 +272,11 @@ export class DesktopIconView extends EventEmitter {
 				openContextMenu: ({ ev, entry, index }) => {
 					if (entry) {
 						this.createFileContextMenu(ev, entry);
-
 						return { selected: index };
-					} else {
-						this.createRootContextMenu(ev);
-
-						return { selected: -1 };
 					}
+
+					this.createRootContextMenu(ev);
+					return { selected: -1 };
 				},
 
 				openEntry: ({ entry, forceDialog }) => {

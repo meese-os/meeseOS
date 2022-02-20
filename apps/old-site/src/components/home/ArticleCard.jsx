@@ -15,27 +15,27 @@ const ArticleCard = ({ value, index }) => {
 				if (hours < 1) return setCreatedAt("just now");
 				const measurement = hours === 1 ? "hour" : "hours";
 				return setCreatedAt(`${hours.toString()} ${measurement} ago`);
-			} else {
-				const monthNames = [
-					"January",
-					"February",
-					"March",
-					"April",
-					"May",
-					"June",
-					"July",
-					"August",
-					"September",
-					"October",
-					"November",
-					"December",
-				];
-				const day = date.getDate();
-				const monthIndex = date.getMonth();
-				const year = date.getFullYear();
-
-				return setCreatedAt(`${monthNames[monthIndex]} ${day}, ${year}`);
 			}
+
+			const monthNames = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December",
+			];
+			const day = date.getDate();
+			const monthIndex = date.getMonth();
+			const year = date.getFullYear();
+
+			return setCreatedAt(`${monthNames[monthIndex]} ${day}, ${year}`);
 		},
 		[value.createdAt]
 	);
