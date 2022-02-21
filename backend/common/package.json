@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "aaronmeese.com Common Modules",
   "main": "dist/main.js",
   "module": "dist/main.js",

@@ -28,14 +28,15 @@
  * @license Simplified BSD License
  */
 
-import Application from "./application";
-import logger from "./logger";
-import Splash from "./splash";
-import Websocket from "./websocket";
 import { CoreBase } from "@aaronmeese.com/common";
 import { defaultConfiguration } from "./config";
 import { fetch } from "./utils/fetch";
 import { urlResolver } from "./utils/url";
+import Application from "./application";
+import logger from "./logger";
+import Splash from "./splash";
+import Websocket from "./websocket";
+import merge from "deepmerge";
 
 /**
  * @callback SplashCallback
@@ -476,11 +477,7 @@ export default class Core extends CoreBase {
 
 		if (!url.match(/^((http|ws|ftp)s?:)/i)) {
 			url = this.url(url);
-			// FIXME: Deep merge
-			options = {
-				...(options || {}),
-				...(this.requestOptions || {}),
-			};
+			options = merge(options, this.requestOptions);
 		}
 
 		// TODO: Fix this:

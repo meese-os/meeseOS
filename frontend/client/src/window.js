@@ -480,14 +480,13 @@ export default class Window extends EventEmitter {
 	 */
 	_checkModal() {
 		// TODO: Global modal
-		if (this.parent) {
-			if (this.attributes.modal) {
-				this.on("render", () => this.parent.setState("loading", true));
-				this.on("destroy", () => this.parent.setState("loading", false));
-			}
-
-			this.on("destroy", () => this.parent.focus());
+		if (!this.parent) return;
+		if (this.attributes.modal) {
+			this.on("render", () => this.parent.setState("loading", true));
+			this.on("destroy", () => this.parent.setState("loading", false));
 		}
+
+		this.on("destroy", () => this.parent.focus());
 	}
 
 	/**
@@ -556,12 +555,9 @@ export default class Window extends EventEmitter {
 	 * @return {boolean}
 	 */
 	close() {
-		if (this.destroyed) {
-			return false;
-		}
+		if (this.destroyed) return false;
 
 		this.emit("close", this);
-
 		this.destroy();
 
 		return true;
@@ -890,15 +886,14 @@ export default class Window extends EventEmitter {
 	_setState(name, value, update = true) {
 		const oldValue = this.state[name];
 		this.state[name] = value;
+		if (!update) return;
 
-		if (update) {
-			if (oldValue !== value) {
-				logger.debug("Window::_setState()", name, value);
-			}
-
-			this._updateAttributes();
-			this._updateStyles();
+		if (oldValue !== value) {
+			logger.debug("Window::_setState()", name, value);
 		}
+
+		this._updateAttributes();
+		this._updateStyles();
 	}
 
 	/**

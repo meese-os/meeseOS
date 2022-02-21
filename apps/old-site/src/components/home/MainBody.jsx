@@ -40,7 +40,7 @@ const MainBody = () => {
 				<h1 className="display-1" style={{ lineHeight: "1.1" }}>
 					<div
 						className="lettercrap"
-						// TODO: Display this all the time, just resize the font and line height to make it prettier
+						// TODO: Resize the font and line height to make it prettier on different screen sizes
 						data-lettercrap-text={FirstName + " " + LastName}
 						data-lettercrap-aspect-ratio="0.3"
 					/>

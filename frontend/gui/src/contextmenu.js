@@ -36,9 +36,7 @@ import { Menu } from "./components/Menu";
  */
 const clampSubMenu = (root, ev) => {
 	let ul = ev.target.querySelector("ul");
-	if (!ul) {
-		return;
-	}
+	if (!ul) return;
 
 	// FIXME: Safari reports wrong item
 	if (ul.classList.contains("meeseOS-gui-menu-container")) {
@@ -142,15 +140,12 @@ export class ContextMenu {
 					el = el || document.querySelector("#meeseOS-context-menu");
 					clearTimeout(clampTimeout);
 
-					if (el) {
-						const root = this.core.$root;
-						const newPosition = clampMenu(root, el, props.position);
-						if (newPosition) {
-							return { position: newPosition };
-						}
+					if (!el) return {};
+					const root = this.core.$root;
+					const newPosition = clampMenu(root, el, props.position);
+					if (newPosition) {
+						return { position: newPosition };
 					}
-
-					return {};
 				},
 				onshow: (ev) => (props) => {
 					clampTimeout = timeout(() => clampSubMenu(this.core.$root, ev));

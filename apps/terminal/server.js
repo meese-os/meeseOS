@@ -34,6 +34,7 @@ const pty = require("node-pty");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config({
 	path: path.resolve(__dirname, "scripts/.env"),
+	override: true,
 });
 
 const windowsPlatform = os.platform() === "win32";

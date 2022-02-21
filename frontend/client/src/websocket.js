@@ -127,9 +127,7 @@ export default class Websocket extends EventEmitter {
 	 * @private
 	 */
 	_destroyConnection() {
-		if (!this.connection) {
-			return;
-		}
+		if (!this.connection) return;
 
 		eventNames.forEach((name) => {
 			this.connection[`on${name}`] = () => {};
@@ -165,7 +163,6 @@ export default class Websocket extends EventEmitter {
 			clearInterval(this.reconnecting);
 
 			this._destroyConnection();
-
 			this.connected = false;
 
 			if (this.options.reconnect) {

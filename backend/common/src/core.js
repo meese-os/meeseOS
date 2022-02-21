@@ -48,12 +48,9 @@ export class CoreBase extends EventEmitter {
 	constructor(defaultConfiguration, configuration, options) {
 		super("Core");
 
-		// https://github.com/KyleAMathews/deepmerge#webpack-bug
-		const merger = merge.default ? merge.default : merge;
 		const omitted = omitDeep(defaultConfiguration, options.omit || []);
-
 		this.logger = console;
-		this.configuration = merger(omitted, configuration);
+		this.configuration = merge(omitted, configuration);
 		this.options = options;
 		this.booted = false;
 		this.started = false;
