@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import defaultWallpaper from "./styles/wallpaper.png";
 import defaultIcon from "./styles/logo-blue-32x32.png";
+import defaultWallpaper from "./styles/wallpaper.png";
 
 /**
  * TODO: typedef

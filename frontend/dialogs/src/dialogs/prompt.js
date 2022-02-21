@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import { h, app } from "hyperapp";
-import Dialog from "../dialog";
 import { Box, TextField } from "@aaronmeese.com/gui";
+import { app, h } from "hyperapp";
+import Dialog from "../dialog";
 
 /**
  * Default MeeseOS Prompt Dialog

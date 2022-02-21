@@ -1,16 +1,17 @@
-import React, { Fragment } from "react";
+
 import { BrowserRouter, Route } from "react-router-dom";
+import { showNavigationbar } from "./editable-stuff/configurations.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./App.css";
-import { showNavigationbar } from "./editable-stuff/configurations.json";
+import React from "react";
 
-import MainBody from "./components/home/MainBody";
 import AboutMe from "./components/home/AboutMe";
 import Articles from "./components/home/Articles";
-import Project from "./components/home/Project";
 import Footer from "./components/Footer";
+import MainBody from "./components/home/MainBody";
 import Navbar from "./components/Navbar";
+import Project from "./components/home/Project";
 
 const Home = () => {
 	return (

@@ -28,14 +28,14 @@
  * @license Simplified BSD License
  */
 
-import { supportsPassive } from "./utils/dom";
-import { getEvent, matchKeyCombo } from "./utils/input";
 import {
-	resizer,
-	mover,
 	getMediaQueryName,
 	getCascadePosition,
+	mover,
+	resizer,
 } from "./utils/windows";
+import { getEvent, matchKeyCombo } from "./utils/input";
+import { supportsPassive } from "./utils/dom";
 
 const isPassive = supportsPassive();
 const touchArg = isPassive ? { passive: true } : false;

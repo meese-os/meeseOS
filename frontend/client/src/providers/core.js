@@ -28,21 +28,21 @@
  * @license Simplified BSD License
  */
 
-import Application from "../application";
-import Window from "../window";
-import WindowBehavior from "../window-behavior";
-import Session from "../session";
-import Packages from "../packages";
-import Tray from "../tray";
-import Websocket from "../websocket";
-import Clipboard from "../clipboard";
-import Middleware from "../middleware";
-import { style, script, playSound } from "../utils/dom";
-import { resourceResolver } from "../utils/desktop";
-import * as dnd from "../utils/dnd";
 import { BasicApplication } from "../basic-application.js";
 import { ServiceProvider } from "@aaronmeese.com/common";
 import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { playSound, script, style } from "../utils/dom";
+import { resourceResolver } from "../utils/desktop";
+import * as dnd from "../utils/dnd";
+import Application from "../application";
+import Clipboard from "../clipboard";
+import Middleware from "../middleware";
+import Packages from "../packages";
+import Session from "../session";
+import Tray from "../tray";
+import Websocket from "../websocket";
+import Window from "../window";
+import WindowBehavior from "../window-behavior";
 import logger from "../logger";
 
 /**

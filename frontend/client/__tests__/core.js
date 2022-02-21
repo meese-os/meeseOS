@@ -1,6 +1,6 @@
 import { createInstance } from "../__mocks__/core.js";
-import Core from "../src/core.js";
 import Application from "../src/application.js";
+import Core from "../src/core.js";
 
 describe("Core", () => {
 	let core;

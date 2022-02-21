@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import { resolveTreeByKey, providerHandler } from "./utils.js";
+import { providerHandler, resolveTreeByKey } from "./utils.js";
 import { EventEmitter } from "@aaronmeese.com/event-emitter";
 import merge from "deepmerge";
 import omitDeep from "omit-deep";

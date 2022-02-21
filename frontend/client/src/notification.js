@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { h, app } from "hyperapp";
+import { app, h } from "hyperapp";
 import { createNativeNotification } from "./utils/dom";
 import logger from "./logger";
 

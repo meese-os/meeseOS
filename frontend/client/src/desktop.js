@@ -28,21 +28,21 @@
  * @license Simplified BSD License
  */
 
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
-import Application from "./application";
-import { handleTabOnTextarea } from "./utils/dom";
-import { matchKeyCombo } from "./utils/input";
-import { DesktopIconView } from "./adapters/ui/iconview";
 import {
-	isDroppingImage,
 	applyBackgroundStyles,
 	createPanelSubtraction,
+	isDroppingImage,
 	isVisible,
 } from "./utils/desktop";
-import Window from "./window";
+import { DesktopIconView } from "./adapters/ui/iconview";
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { handleTabOnTextarea } from "./utils/dom";
+import { matchKeyCombo } from "./utils/input";
+import Application from "./application";
 import Search from "./search";
-import merge from "deepmerge";
+import Window from "./window";
 import logger from "./logger";
+import merge from "deepmerge";
 
 /**
  * TODO: typedef

@@ -28,10 +28,10 @@
  * @licence Simplified BSD License
  */
 
-import { h } from "hyperapp";
-import { doubleTap } from "../utils";
 import { Element } from "./Element";
 import { Icon } from "./Icon";
+import { doubleTap } from "../utils";
+import { h } from "hyperapp";
 
 const tapper = doubleTap();
 

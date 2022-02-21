@@ -29,13 +29,13 @@
  */
 
 import Application from "./application";
-import Websocket from "./websocket";
+import logger from "./logger";
 import Splash from "./splash";
+import Websocket from "./websocket";
 import { CoreBase } from "@aaronmeese.com/common";
 import { defaultConfiguration } from "./config";
 import { fetch } from "./utils/fetch";
 import { urlResolver } from "./utils/url";
-import logger from "./logger";
 
 /**
  * @callback SplashCallback

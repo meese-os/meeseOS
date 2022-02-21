@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import { h, app } from "hyperapp";
+import { SelectField, TextareaField, Toolbar } from "@aaronmeese.com/gui";
+import { app, h } from "hyperapp";
 import Dialog from "../dialog";
-import { Toolbar, SelectField, TextareaField } from "@aaronmeese.com/gui";
 
 /**
  * Default MeeseOS Font Dialog

@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import { h } from "hyperapp";
 import { Element } from "./Element";
+import { h } from "hyperapp";
 
 /**
  * A flexbox container

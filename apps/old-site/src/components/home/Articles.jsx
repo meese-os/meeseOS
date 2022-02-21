@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
 import { useWindowSize } from "@react-hook/window-size/throttled";
-import ArticleCard from "./ArticleCard";
 import {
 	// TODO: For all these warnings, see https://stackoverflow.com/a/67216720/6456163
 	showArticles,
 } from "../../editable-stuff/configurations.json";
+import ArticleCard from "./ArticleCard";
+import axios from "axios";
 
 let articles = [];
 const Articles = () => {

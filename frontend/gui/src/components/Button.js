@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import { h } from "hyperapp";
 import { Icon } from "./Icon";
 import { createField } from "../element";
+import { h } from "hyperapp";
 
 /**
  * A button

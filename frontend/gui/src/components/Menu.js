@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import { h } from "hyperapp";
 import { Icon } from "./Icon";
+import { h } from "hyperapp";
 
 const ul = (props, children = [], level = 0) => {
 	const label = (child) => {

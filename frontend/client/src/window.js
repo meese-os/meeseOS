@@ -27,25 +27,26 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
-import { droppable } from "./utils/dnd";
-import {
-	escapeHtml,
-	createCssText,
-	supportsTransition,
-	getActiveElement,
-} from "./utils/dom";
+
 import {
 	createAttributes,
-	createState,
 	createDOMAttributes,
 	createDOMStyles,
 	clampPosition,
+	createState,
+	dimensionFromElement,
+	positionFromGravity,
 	renderCallback,
 	transformVectors,
-	positionFromGravity,
-	dimensionFromElement,
 } from "./utils/windows";
+import {
+	createCssText,
+	escapeHtml,
+	getActiveElement,
+	supportsTransition,
+} from "./utils/dom";
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { droppable } from "./utils/dnd";
 import logger from "./logger";
 
 /**

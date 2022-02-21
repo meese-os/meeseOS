@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import NavItem from "./home/NavItem";
+import React, { useEffect, useState } from "react";
 import { FirstName, showResume } from "../editable-stuff/configurations.json";
+import NavItem from "./home/NavItem";
 import Pdf from "../editable-stuff/resume.pdf";
 
 const Navbar = () => {

@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import PanelItem from "./panel-item";
 import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import PanelItem from "./panel-item";
 
 /**
  * Panel

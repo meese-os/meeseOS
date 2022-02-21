@@ -29,15 +29,15 @@
  */
 
 import AlertDialog from "./dialogs/alert";
-import ConfirmDialog from "./dialogs/confirm";
-import PromptDialog from "./dialogs/prompt";
-import ProgressDialog from "./dialogs/progress";
+import ChoiceDialog from "./dialogs/choice";
 import ColorDialog from "./dialogs/color";
+import ConfirmDialog from "./dialogs/confirm";
+import CustomDialog from "./dialogs/custom";
+import DefaultApplicationDialog from "./dialogs/default-application";
 import FontDialog from "./dialogs/font";
 import FileDialog from "./dialogs/file";
-import ChoiceDialog from "./dialogs/choice";
-import DefaultApplicationDialog from "./dialogs/default-application";
-import CustomDialog from "./dialogs/custom";
+import PromptDialog from "./dialogs/prompt";
+import ProgressDialog from "./dialogs/progress";
 
 export default class DialogServiceProvider {
 	constructor(core, args = {}) {

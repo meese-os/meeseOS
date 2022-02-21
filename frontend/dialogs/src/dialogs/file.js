@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import { h, app } from "hyperapp";
+import { app, h } from "hyperapp";
 import Dialog from "../dialog";
-import { TextField, SelectField, listView } from "@aaronmeese.com/gui";
+import { SelectField, TextField, listView } from "@aaronmeese.com/gui";
 
 const getMountpoint = (str) => str.split(":")[0] + ":/";
 

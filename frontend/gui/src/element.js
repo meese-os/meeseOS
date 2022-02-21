@@ -27,9 +27,10 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-import { h } from "hyperapp";
-import { filteredProps } from "./utils";
+
 import { Element } from "./components/Element";
+import { filteredProps } from "./utils";
+import { h } from "hyperapp";
 
 /**
  * Creates a new field Element wrapper

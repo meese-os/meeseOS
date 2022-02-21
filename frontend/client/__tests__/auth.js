@@ -1,6 +1,6 @@
 import { createInstance } from "meeseOS";
-import Core from "../src/core.js";
 import Auth from "../src/auth.js";
+import Core from "../src/core.js";
 
 // TODO: UI
 

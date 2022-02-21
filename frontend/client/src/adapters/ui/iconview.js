@@ -27,12 +27,13 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
-import { h, app } from "hyperapp";
-import { doubleTap } from "../../utils/input";
-import { pathJoin } from "../../utils/vfs";
-import { invertHex } from "../../utils/colors";
+
+import { app, h } from "hyperapp";
 import { isDroppingImage, validVfsDrop } from "../../utils/desktop";
+import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { doubleTap } from "../../utils/input";
+import { invertHex } from "../../utils/colors";
+import { pathJoin } from "../../utils/vfs";
 
 const tapper = doubleTap();
 

@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import loadingScreen from "./loading-screen/loading.html";
 import { createLettercrap } from "./loading-screen/lettercrap.js";
+import loadingScreen from "./loading-screen/loading.html";
 
 /**
  * Splash Screen UI

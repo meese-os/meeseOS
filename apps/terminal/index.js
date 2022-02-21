@@ -28,14 +28,13 @@
  * @licence Simplified BSD License
  */
 
-import { Terminal } from "xterm";
-import { FitAddon } from "xterm-addon-fit";
+import "./index.scss";
 import * as clipboard from "clipboard-polyfill";
 import { AttachAddon } from "./attach.js";
-
-import "./index.scss";
+import { FitAddon } from "xterm-addon-fit";
 import meeseOS from "meeseOS";
 import { name as applicationName } from "./metadata.json";
+import { Terminal } from "xterm";
 
 /*
  * Creates a new Terminal connection

@@ -28,23 +28,22 @@
  * @licence Simplified BSD License
  */
 
-import meeseOS from "meeseOS";
-import { h, app } from "hyperapp";
-import dateformat from "dateformat";
-
-import "./index.scss";
-import { name as applicationName } from "./metadata.json";
 import {
 	Box,
 	Button,
-	TextField,
-	Toolbar,
 	Menubar,
 	MenubarItem,
-	Statusbar,
 	Panes,
+	Statusbar,
+	TextField,
+	Toolbar,
 	listView,
 } from "@aaronmeese.com/gui";
+import { app, h } from "hyperapp";
+import { name as applicationName } from "./metadata.json";
+import "./index.scss";
+import dateformat from "dateformat";
+import meeseOS from "meeseOS";
 
 /**
  * Creates default settings

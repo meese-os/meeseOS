@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
+import { Element } from "./Element";
 import { h } from "hyperapp";
 import nestable from "hyperapp-nestable";
-import { Element } from "./Element";
 
 const onmousedown = (ev, actions, orientation) => {
 	const { target, clientX, clientY } = ev;

@@ -1,9 +1,10 @@
 import "./index.scss";
-import meeseOS from "meeseOS";
 import { name as applicationName } from "./metadata.json";
+import App from "./src/App";
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./src/App";
+import meeseOS from "meeseOS";
+
 
 // Our launcher
 const register = (core, args, options, metadata) => {

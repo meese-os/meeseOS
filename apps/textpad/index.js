@@ -28,10 +28,10 @@
  * @licence Simplified BSD License
  */
 
-import { h, app } from "hyperapp";
-import { Box, TextareaField, Menubar, MenubarItem } from "@aaronmeese.com/gui";
-import meeseOS from "meeseOS";
+import { app, h } from "hyperapp";
+import { Box, Menubar, MenubarItem, TextareaField } from "@aaronmeese.com/gui";
 import { name as applicationName } from "./metadata.json";
+import meeseOS from "meeseOS";
 
 // File menu
 const createMenu = (current, actions) => [

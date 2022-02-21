@@ -1,12 +1,12 @@
-import React from "react";
-import { useWindowSize } from "@react-hook/window-size/throttled";
 import {
-	aboutHeading,
 	aboutDescription,
+	aboutHeading,
 	picture,
 	showResume,
 } from "../../editable-stuff/configurations.json";
+import { useWindowSize } from "@react-hook/window-size/throttled";
 import Pdf from "../../editable-stuff/resume.pdf";
+import React from "react";
 
 const AboutMe = () => {
 	const [width] = useWindowSize({ fps: 60 });

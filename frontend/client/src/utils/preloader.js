@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { style, script } from "./dom";
+import { script, style } from "./dom";
 import logger from "../logger";
 
 /**

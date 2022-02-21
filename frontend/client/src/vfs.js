@@ -29,9 +29,9 @@
  */
 
 import {
-	transformReaddir,
-	transformArrayBuffer,
 	createFileIter,
+	transformArrayBuffer,
+	transformReaddir,
 } from "./utils/vfs";
 
 /**

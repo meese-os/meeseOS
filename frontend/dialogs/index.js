@@ -29,15 +29,15 @@
  */
 
 import "./index.scss";
+import AlertDialog from "./src/dialogs/alert";
+import ChoiceDialog from "./src/dialogs/choice";
+import ColorDialog from "./src/dialogs/color";
+import ConfirmDialog from "./src/dialogs/confirm";
 import Dialog from "./src/dialog";
 import DialogServiceProvider from "./src/provider";
-import AlertDialog from "./src/dialogs/alert";
-import ConfirmDialog from "./src/dialogs/confirm";
+import FileDialog from "./src/dialogs/file";
 import PromptDialog from "./src/dialogs/prompt";
 import ProgressDialog from "./src/dialogs/progress";
-import ColorDialog from "./src/dialogs/color";
-import FileDialog from "./src/dialogs/file";
-import ChoiceDialog from "./src/dialogs/choice";
 
 export {
 	Dialog,

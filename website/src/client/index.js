@@ -39,21 +39,21 @@
 //
 
 import {
+	AuthServiceProvider,
 	Core,
 	CoreServiceProvider,
 	DesktopServiceProvider,
-	VFSServiceProvider,
 	NotificationServiceProvider,
 	SettingsServiceProvider,
-	AuthServiceProvider,
+	VFSServiceProvider,
 } from "@aaronmeese.com/client";
 
-import { PanelServiceProvider } from "@aaronmeese.com/panels";
-import { GUIServiceProvider } from "@aaronmeese.com/gui";
 import { DialogServiceProvider } from "@aaronmeese.com/dialogs";
+import { GUIServiceProvider } from "@aaronmeese.com/gui";
+import { PanelServiceProvider } from "@aaronmeese.com/panels";
 import { WidgetServiceProvider } from "@aaronmeese.com/widgets";
-import config from "./config.js";
 import "./index.scss";
+import config from "./config.js";
 
 const init = () => {
 	const meeseOS = new Core(config, {});

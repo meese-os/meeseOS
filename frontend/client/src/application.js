@@ -27,12 +27,13 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import merge from "deepmerge";
+
 import { EventEmitter } from "@aaronmeese.com/event-emitter";
 import { loadOptionsFromConfig } from "./utils/windows";
+import logger from "./logger";
+import merge from "deepmerge";
 import Websocket from "./websocket";
 import Window from "./window";
-import logger from "./logger";
 
 const applications = [];
 let applicationCount = 0;

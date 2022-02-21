@@ -28,11 +28,11 @@
  * @license Simplified BSD License
  */
 
-import merge from "deepmerge";
-import simplejsonconf from "simplejsonconf";
 import localStorageSettings from "./adapters/settings/localstorage";
-import serverSettings from "./adapters/settings/server";
 import logger from "./logger";
+import merge from "deepmerge";
+import serverSettings from "./adapters/settings/server";
+import simplejsonconf from "simplejsonconf";
 
 const defaultAdapters = {
 	server: serverSettings,

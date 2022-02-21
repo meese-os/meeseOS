@@ -28,10 +28,10 @@
  * @license Simplified BSD License
  */
 import Cookies from "js-cookie";
-import Login from "./login";
-import serverAuth from "./adapters/auth/server";
 import localStorageAuth from "./adapters/auth/localstorage";
 import logger from "./logger";
+import Login from "./login";
+import serverAuth from "./adapters/auth/server";
 
 const defaultAdapters = {
 	server: serverAuth,

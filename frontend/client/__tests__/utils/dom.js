@@ -1,14 +1,14 @@
 import {
-	style,
-	script,
-	escapeHtml,
 	createCssText,
+	escapeHtml,
+	getActiveElement,
+	handleTabOnTextarea,
+	playSound,
+	script,
+	style,
 	supportedMedia,
 	supportsPassive,
 	supportsTransition,
-	getActiveElement,
-	playSound,
-	handleTabOnTextarea,
 } from "../../src/utils/dom.js";
 
 describe("DOM Utils", () => {

@@ -28,15 +28,15 @@
  * @license Simplified BSD License
  */
 
-import Application from "./application";
-import Preloader from "./utils/preloader";
-import logger from "./logger";
 import {
-	createPackageAvailabilityCheck,
 	createManifestFromArray,
+	createPackageAvailabilityCheck,
 	filterMetadataFilesByType,
 	metadataFilesToFilenames,
 } from "./utils/packages";
+import Application from "./application";
+import Preloader from "./utils/preloader";
+import logger from "./logger";
 
 /**
  * A registered package reference

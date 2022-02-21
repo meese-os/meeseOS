@@ -1,6 +1,6 @@
+import { BasicApplication } from "../src/basic-application.js";
 import { createInstance } from "meeseOS";
 import Application from "../src/application.js";
-import { BasicApplication } from "../src/basic-application.js";
 
 describe("BasicApplication", () => {
 	let core;

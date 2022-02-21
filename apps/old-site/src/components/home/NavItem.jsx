@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
 // TODO: Make the page scroll to the href instead of jerking
 const NavItem = ({ name, href }) => {

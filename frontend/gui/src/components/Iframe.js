@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import { h } from "hyperapp";
-import { filteredProps } from "../utils";
 import { Element } from "./Element";
+import { filteredProps } from "../utils";
+import { h } from "hyperapp";
 
 /**
  * A iframe

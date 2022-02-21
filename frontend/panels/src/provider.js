@@ -27,11 +27,12 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @licence Simplified BSD License
  */
-import Panel from "./panel";
-import WindowsPanelItem from "./items/windows";
-import TrayPanelItem from "./items/tray";
+
 import ClockPanelItem from "./items/clock";
 import MenuPanelItem from "./items/menu";
+import Panel from "./panel";
+import TrayPanelItem from "./items/tray";
+import WindowsPanelItem from "./items/windows";
 
 /**
  * Panel Service Provider

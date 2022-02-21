@@ -1,7 +1,7 @@
 import { createInstance } from "meeseOS";
 import Application from "../src/application.js";
-import Window from "../src/window.js";
 import Websocket from "../src/websocket.js";
+import Window from "../src/window.js";
 
 describe("Application", () => {
 	let core;

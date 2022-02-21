@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import { h, app } from "hyperapp";
-import { SelectField, ToggleField, Box } from "@aaronmeese.com/gui";
+import { Box, SelectField, ToggleField } from "@aaronmeese.com/gui";
+import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**

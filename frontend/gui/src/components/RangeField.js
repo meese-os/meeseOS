@@ -28,8 +28,8 @@
  * @licence Simplified BSD License
  */
 
-import { h } from "hyperapp";
 import { createField } from "../element";
+import { h } from "hyperapp";
 
 /**
  * A range field

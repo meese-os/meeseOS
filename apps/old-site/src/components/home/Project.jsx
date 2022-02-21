@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import { useWindowSize } from "@react-hook/window-size/throttled";
-import ProjectCard from "./ProjectCard";
+import React, { useCallback, useEffect, useState } from "react";
 import {
 	gitHubQuery,
 	projectsLength,
 } from "../../editable-stuff/configurations.json";
+import { useWindowSize } from "@react-hook/window-size/throttled";
+import ProjectCard from "./ProjectCard";
+import axios from "axios";
 
 const Project = () => {
 	const [recentProjects, setRecentProjectsArray] = useState([]);

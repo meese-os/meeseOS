@@ -28,8 +28,8 @@
  * @license Simplified BSD License
  */
 
-import logger from "./logger";
 import defaultIcon from "./styles/logo-blue-32x32.png";
+import logger from "./logger";
 
 /**
  * Tray Icon Data

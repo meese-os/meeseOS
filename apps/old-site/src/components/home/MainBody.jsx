@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Typical from "react-typical";
-import { createLettercrap } from "../../../lettercrap";
 import {
 	FirstName,
 	LastName,
 	descWords,
 	icons,
 } from "../../editable-stuff/configurations.json";
+import React, { useEffect, useState } from "react";
+import Typical from "react-typical";
+import { createLettercrap } from "../../../lettercrap";
 
 const MainBody = () => {
 	const [hoverstatus, setHoverstatus] = useState(

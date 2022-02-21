@@ -29,8 +29,8 @@
  */
 
 import { ServiceProvider } from "@aaronmeese.com/common";
-import Filesystem from "../filesystem";
 import * as utils from "../utils/vfs";
+import Filesystem from "../filesystem";
 
 /**
  * Filesytem Service Contract
