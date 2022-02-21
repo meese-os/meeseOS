@@ -283,7 +283,6 @@ export default class Core extends CoreBase {
 			}
 
 			console.groupEnd();
-
 			return !err;
 		};
 
@@ -292,9 +291,7 @@ export default class Core extends CoreBase {
 		}
 
 		console.group("Core::start()");
-
 		this.emit("meeseOS/core:start");
-
 		this._createListeners();
 
 		return super
@@ -320,9 +317,9 @@ export default class Core extends CoreBase {
 	_attachEvents() {
 		// Attaches sounds for certain events
 		this.on("meeseOS/core:started", () => {
-			if (this.has("meeseOS/sounds")) {
+			/*if (this.has("meeseOS/sounds")) {
 				this.make("meeseOS/sounds").play("service-login");
-			}
+			}*/
 		});
 
 		this.on("meeseOS/core:destroy", () => {
@@ -378,7 +375,6 @@ export default class Core extends CoreBase {
 		let wasConnected = false;
 
 		logger.debug("Creating websocket connection on", uri);
-
 		this.ws = new Websocket("CoreSocket", uri, {
 			interval: this.config("ws.connectInterval", 1000),
 		});
@@ -426,9 +422,7 @@ export default class Core extends CoreBase {
 	_createListeners() {
 		const handle = (data) => {
 			const { pid, wid, args } = data;
-
 			const proc = Application.getApplications().find((p) => p.pid === pid);
-
 			const win = proc ? proc.windows.find((w) => w.wid === wid) : null;
 
 			if (win) {
@@ -526,7 +520,6 @@ export default class Core extends CoreBase {
 		}
 
 		const run = (app) => this.run(app, { file }, options);
-
 		const compatible = this.make("meeseOS/packages").getCompatiblePackages(
 			file.mime
 		);

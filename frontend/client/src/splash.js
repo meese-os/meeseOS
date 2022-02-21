@@ -28,6 +28,10 @@
  * @license Simplified BSD License
  */
 
+// TODO: Make this not a problem in jest testing
+import loadingScreen from "./loading-screen/loading.html";
+import { createLettercrap } from "./loading-screen/lettercrap.js";
+
 /**
  * Splash Screen UI
  */
@@ -52,17 +56,87 @@ export default class Splash {
 		this.$loading = document.createElement("div");
 		this.$loading.className = "meeseOS-boot-splash";
 
+		/**
+		 * The transition time for `.loadingPage` in `styles/_loading.scss`
+		 * @type {Number}
+		 * @readonly
+		 */
+		this.pageTransitionTime = 1000;
+
+		/**
+		 * The time between quips, in milliseconds
+		 * @type {Number}
+		 * @readonly
+		 */
+		this.timePerQuip = 1500;
+
+		/**
+		 * The array of quips to display
+		 * @type {Array}
+		 * @readonly
+		 */
+		this.quips = [
+			"Contracting a wizard...",
+			"Moving dragon from the mouth of the cave...",
+			"Collecting all the loot...",
+			"Divvying up dubloons...",
+		];
+
 		core.on("meeseOS/core:boot", () => this.show());
-		core.on("meeseOS/core:booted", () => this.destroy());
 		core.on("meeseOS/core:logged-in", () => this.show());
-		core.on("meeseOS/core:started", () => this.destroy());
+		core.on("meeseOS/splash:finished", () => this.destroy());
 	}
 
 	/**
-	 * Initializes splash
+	 * Initializes splash with listener for user interaction
 	 */
 	init() {
-		this.$loading.appendChild(document.createTextNode("Loading..."));
+		this.$loading.appendChild(stringToHTML(loadingScreen));
+		this.core.emit("meeseOS/splash:loaded");
+
+		// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#specifying_this_using_bind
+		this.start = this.start.bind(this);
+		document.body.style.cursor = "pointer";
+		document.body.addEventListener("click", this.start, false);
+	}
+
+	/**
+	 * Starts splash screen functionality after user interaction
+	 */
+	start() {
+		this.core.emit("meeseOS/splash:started");
+		document.body.removeEventListener("click", this.start);
+
+		if (this.core.has("meeseOS/sounds")) {
+			this.core.make("meeseOS/sounds").play("dial-up-modem");
+		}
+
+		document.getElementById("mouseNotMoved").style.display = "none";
+		document.getElementById("mouseMoved").style.display = "block";
+		document.body.style.cursor = "default";
+		createLettercrap();
+
+		const loadingBar = document.getElementById("loadingBar");
+		for (let i = 1; i <= this.quips.length; i++) {
+			setTimeout(() => {
+				loadingBar.innerText = this.quips[i - 1];
+				loadingBar.style.width = i / this.quips.length * 100 + '%';
+			}, this.timePerQuip * i);
+		}
+
+		// Fade out the loading screen after all the quips have been displayed
+		window.setTimeout(() => {
+			const loadingScreenElement = document.getElementsByClassName("loadingPage")[1];
+			loadingScreenElement.style.opacity = 0;
+
+			// IDEA: Use $core.contents
+			const meeseOSContents = document.getElementsByClassName("meeseOS-contents")[0];
+			meeseOSContents.style.opacity = 1;
+
+			setTimeout(() => {
+				this.core.emit("meeseOS/splash:finished");
+			}, this.pageTransitionTime);
+		}, this.timePerQuip * (this.quips.length + 1));
 	}
 
 	/**
@@ -78,8 +152,20 @@ export default class Splash {
 	 * Destroys splash
 	 */
 	destroy() {
+		// TODO: Make this transition ease out
 		if (this.$loading.parentNode) {
 			this.$loading.remove();
 		}
 	}
 }
+
+/**
+ * Convert a template string into HTML DOM nodes
+ * @param  {String} str The template string
+ * @return {Node}       The template HTML
+ */
+const stringToHTML = (str) => {
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(str, "text/html");
+	return doc.body;
+};

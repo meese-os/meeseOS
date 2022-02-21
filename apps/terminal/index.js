@@ -56,7 +56,7 @@ const createConnection = async (core, proc, win, term, fit) => {
 		method: "post",
 		body: params,
 	});
-	const pingInterval = core.config("xterm.ping", 30000);
+	const pingInterval = core.config("xterm.ping", 30 * 1000);
 
 	const ws = proc.socket("/socket", {
 		socket: {

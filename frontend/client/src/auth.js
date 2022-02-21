@@ -218,27 +218,25 @@ export default class Auth {
 		return this.adapter
 			.login(values)
 			.then((response) => {
-				if (response) {
-					const settings = this.core.config("auth.cookie");
-					if (settings.enabled) {
-						Cookies.set(settings.name, JSON.stringify(values), {
-							expires: settings.expires,
-							sameSite: "strict",
-						});
-					} else {
-						Cookies.remove(settings.name);
-					}
+				if (!response) return false;
 
-					this.ui.destroy();
-					this.callback(response);
-
-					this.core.emit("meeseOS/core:logged-in");
-					this.ui.emit("login:stop", response);
-
-					return true;
+				const settings = this.core.config("auth.cookie");
+				if (settings.enabled) {
+					Cookies.set(settings.name, JSON.stringify(values), {
+						expires: settings.expires,
+						sameSite: "strict",
+					});
+				} else {
+					Cookies.remove(settings.name);
 				}
 
-				return false;
+				this.ui.destroy();
+				this.callback(response);
+
+				this.core.emit("meeseOS/core:logged-in");
+				this.ui.emit("login:stop", response);
+
+				return true;
 			})
 			.catch((e) => {
 				if (this.core.config("development")) {
@@ -259,9 +257,7 @@ export default class Auth {
 	 */
 	logout(reload = true) {
 		return this.adapter.logout(reload).then((response) => {
-			if (!response) {
-				return false;
-			}
+			if (!response) return false;
 
 			const settings = this.core.config("auth.cookie");
 			Cookies.remove(settings.name);
@@ -283,13 +279,10 @@ export default class Auth {
 		return this.adapter
 			.register(values)
 			.then((response) => {
-				if (response) {
-					this.ui.emit("register:stop", response);
+				if (!response) return false;
 
-					return response;
-				}
-
-				return false;
+				this.ui.emit("register:stop", response);
+				return response;
 			})
 			.catch((e) => {
 				if (this.core.config("development")) {

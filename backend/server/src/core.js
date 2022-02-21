@@ -179,10 +179,7 @@ class Core extends CoreBase {
 	 * @return {Promise<boolean>}
 	 */
 	async boot() {
-		if (this.booted) {
-			return true;
-		}
-
+		if (this.booted) return true;
 		this.emit("meeseOS/core:start");
 
 		if (this.configuration.logging) {
@@ -262,24 +259,21 @@ class Core extends CoreBase {
 	 */
 	broadcast(name, params, filter) {
 		filter = filter || (() => true);
+		if (!this.ws) return;
 
-		if (this.ws) {
-			this.wss.clients // This is a Set
-				.forEach((client) => {
-					if (!client._meeseOS_client) {
-						return;
-					}
+		this.wss.clients // This is a Set
+			.forEach((client) => {
+				if (!client._meeseOS_client) return;
 
-					if (filter(client)) {
-						client.send(
-							JSON.stringify({
-								params,
-								name,
-							})
-						);
-					}
-				});
-		}
+				if (filter(client)) {
+					client.send(
+						JSON.stringify({
+							params,
+							name,
+						})
+					);
+				}
+			});
 	}
 
 	/**
