@@ -86,7 +86,7 @@ ProjectCard.propTypes = {
 		pushed_at: PropTypes.string.isRequired,
 	}),
 	index: PropTypes.number.isRequired,
-}
+};
 
 const Languages = ({ value, svn_url }) => {
 	const [data, setData] = useState([]);

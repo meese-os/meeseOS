@@ -58,8 +58,12 @@ const MainBody = () => {
 							>
 								<i
 									className={`fab ${icon.image} fa-3x ${hoverstatus[icon.id]}`}
-									onMouseOver={function() { toggleHover({ icon, event: "enter" }) }}
-									onMouseOut={function() { toggleHover({ icon, event: "leave" }) }}
+									onMouseOver={function () {
+										toggleHover({ icon, event: "enter" });
+									}}
+									onMouseOut={function () {
+										toggleHover({ icon, event: "leave" });
+									}}
 								/>
 							</a>
 						))}
