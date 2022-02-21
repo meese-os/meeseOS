@@ -83,6 +83,6 @@ ArticleCard.propTypes = {
 		createdAt: PropTypes.number.isRequired,
 	}),
 	index: PropTypes.number.isRequired,
-}
+};
 
 export default ArticleCard;
