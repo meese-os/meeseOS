@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route } from "react-router-dom";
 import { showNavigationbar } from "./editable-stuff/configurations.json";
 import "bootstrap/dist/css/bootstrap.min.css";

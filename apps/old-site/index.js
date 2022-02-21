@@ -5,7 +5,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import meeseOS from "meeseOS";
 
-
 // Our launcher
 const register = (core, args, options, metadata) => {
 	// Create a new Application instance
