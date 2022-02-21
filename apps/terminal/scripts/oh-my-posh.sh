@@ -5,6 +5,11 @@ if command -v oh-my-posh >/dev/null 2>&1; then
 	exit 0
 fi
 
+# Optional: Install a Nerd Font for best results.
+# Otherwise you should stick with the minimal themes:
+# https://ohmyposh.dev/docs/config-fonts
+sh ./install-nerdfont.sh
+
 # Depending on the architecture of your server, you may need to change `arm`.
 # See all the available architectures here:
 # https://github.com/JanDeDobbeleer/oh-my-posh/releases
@@ -26,7 +31,3 @@ then
 	printf "\n# Loads the user's oh-my-posh configuration when the shell starts\n" | sudo tee -a "$USERDIR/.bashrc"
 	echo "eval \"\$(oh-my-posh --init --shell bash --config $USERDIR/.poshthemes/$OHMYPOSHTHEME.omp.json)\"" | sudo tee -a "$USERDIR/.bashrc"
 fi
-
-# TODO: Install a NerdFont as well for full effect,
-# otherwise let the user know that they can only use minimal themes:
-# https://ohmyposh.dev/docs/config-fonts
