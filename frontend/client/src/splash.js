@@ -120,17 +120,19 @@ export default class Splash {
 		for (let i = 1; i <= this.quips.length; i++) {
 			setTimeout(() => {
 				loadingBar.innerText = this.quips[i - 1];
-				loadingBar.style.width = i / this.quips.length * 100 + '%';
+				loadingBar.style.width = (i / this.quips.length) * 100 + "%";
 			}, this.timePerQuip * i);
 		}
 
 		// Fade out the loading screen after all the quips have been displayed
 		window.setTimeout(() => {
-			const loadingScreenElement = document.getElementsByClassName("loadingPage")[1];
+			const loadingScreenElement =
+				document.getElementsByClassName("loadingPage")[1];
 			loadingScreenElement.style.opacity = 0;
 
 			// IDEA: Use $core.contents
-			const meeseOSContents = document.getElementsByClassName("meeseOS-contents")[0];
+			const meeseOSContents =
+				document.getElementsByClassName("meeseOS-contents")[0];
 			meeseOSContents.style.opacity = 1;
 
 			setTimeout(() => {

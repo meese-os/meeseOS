@@ -1,5 +1,5 @@
 // Variables
-$green: #0A0;
+$green: #0a0;
 $blinkDuration: 2.5s;
 $blinkAnimationType: linear;
 $minBlinkOpacity: 0.1;
@@ -69,19 +69,37 @@ $loading-offset: 25px;
 }
 
 @-moz-keyframes blinker {
-	0% { opacity: 1.0; }
-	50% { opacity: $minBlinkOpacity; }
-	100% { opacity: 1.0; }
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: $minBlinkOpacity;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 @-webkit-keyframes blinker {
-	0% { opacity: 1.0; }
-	50% { opacity: $minBlinkOpacity; }
-	100% { opacity: 1.0; }
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: $minBlinkOpacity;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 @keyframes blinker {
-	0% { opacity: 1.0; }
-	50% { opacity: $minBlinkOpacity; }
-	100% { opacity: 1.0; }
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: $minBlinkOpacity;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 .loadingPage {
@@ -91,7 +109,7 @@ $loading-offset: 25px;
 	left: 0;
 	text-align: center;
 	z-index: 9999999999999999;
-	color: #FFF;
+	color: #fff;
 	background-color: #000;
 	transition: 1s;
 
@@ -107,7 +125,7 @@ $loading-offset: 25px;
 		h1 {
 			font-family: Terminal;
 			letter-spacing: 1.35px;
-			text-shadow: 0 0 1.5px #FFF;
+			text-shadow: 0 0 1.5px #fff;
 		}
 	}
 }
@@ -129,7 +147,7 @@ $loading-offset: 25px;
 	overflow: visible;
 	margin-top: 0;
 	margin-bottom: 0;
-	color: #FFF;
+	color: #fff;
 	background: $green;
 	position: relative;
 	display: inline-block;

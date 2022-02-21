@@ -317,9 +317,9 @@ export default class Core extends CoreBase {
 	_attachEvents() {
 		// Attaches sounds for certain events
 		this.on("meeseOS/core:started", () => {
-			/*if (this.has("meeseOS/sounds")) {
+			/* if (this.has("meeseOS/sounds")) {
 				this.make("meeseOS/sounds").play("service-login");
-			}*/
+			} */
 		});
 
 		this.on("meeseOS/core:destroy", () => {
