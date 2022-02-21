@@ -28,7 +28,6 @@
  * @license Simplified BSD License
  */
 
-// TODO: Make this not a problem in jest testing
 import loadingScreen from "./loading-screen/loading.html";
 import { createLettercrap } from "./loading-screen/lettercrap.js";
 
