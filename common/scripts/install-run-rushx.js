@@ -15,4 +15,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //
 // For more information, see: https://rushjs.io/pages/maintainer/setup_new_repo/
 require("./install-run-rush");
-// # sourceMappingURL=install-run-rushx.js.map
+//# sourceMappingURL=install-run-rushx.js.map
