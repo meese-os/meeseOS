@@ -128,10 +128,7 @@ export default class Splash {
 		window.setTimeout(() => {
 			const loadingScreenElement = document.getElementsByClassName("loadingPage")[1];
 			loadingScreenElement.style.opacity = 0;
-
-			// IDEA: Use $core.contents
-			const meeseOSContents = document.getElementsByClassName("meeseOS-contents")[0];
-			meeseOSContents.style.opacity = 1;
+			this.core.$contents.style.opacity = 1;
 
 			setTimeout(() => {
 				this.core.emit("meeseOS/splash:finished");
