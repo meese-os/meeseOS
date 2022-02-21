@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // TODO: Make the page scroll to the href instead of jerking
 const NavItem = ({ name, href }) => {
@@ -19,6 +20,10 @@ const NavItem = ({ name, href }) => {
 			</a>
 		</li>
 	);
+};
+NavItem.propTypes = {
+	name: PropTypes.string.isRequired,
+	href: PropTypes.string.isRequired,
 };
 
 export default NavItem;

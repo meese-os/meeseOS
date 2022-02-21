@@ -72,7 +72,7 @@ const createTerminal = (core, ws, options = {}, args = []) => {
 		console.log("[Xterm]", "Closing terminal...");
 		term.kill();
 
-		const foundIndex = terminals.findIndex((t) => t.pid == term.pid);
+		const foundIndex = terminals.findIndex((t) => t.pid === term.pid);
 		if (foundIndex !== -1) {
 			terminals.splice(foundIndex, 1);
 		}

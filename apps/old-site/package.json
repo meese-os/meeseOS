@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/old-site",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Old aaronmeese.com design",
   "scripts": {
     "eslint": "eslint *.js",
@@ -47,6 +47,7 @@
     "dotenv": "^16.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
+    "prop-types": "^15.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.1.2",

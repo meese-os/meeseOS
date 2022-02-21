@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { articlesLength } from "../../editable-stuff/configurations.json";
 
 const ArticleCard = ({ value, index }) => {
@@ -72,5 +73,16 @@ const ArticleCard = ({ value, index }) => {
 		</div>
 	);
 };
+ArticleCard.propTypes = {
+	value: PropTypes.shape({
+		title: PropTypes.string.isRequired,
+		description: PropTypes.string,
+		url: PropTypes.string.isRequired,
+		imageUrl: PropTypes.string,
+		publicationName: PropTypes.string,
+		createdAt: PropTypes.number.isRequired,
+	}),
+	index: PropTypes.number.isRequired,
+}
 
 export default ArticleCard;

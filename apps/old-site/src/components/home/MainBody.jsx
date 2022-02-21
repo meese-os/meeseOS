@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Typical from "react-typical";
 import { createLettercrap } from "../../../lettercrap";
-// TODO: Replace with https://stackoverflow.com/a/36862446/6456163
-import { useWindowSize } from "@react-hook/window-size/throttled";
 import {
 	FirstName,
 	LastName,
@@ -11,7 +9,6 @@ import {
 } from "../../editable-stuff/configurations.json";
 
 const MainBody = () => {
-	const [width] = useWindowSize({ fps: 60 });
 	const [hoverstatus, setHoverstatus] = useState(
 		new Array(icons.length).fill("socialicons")
 	);
@@ -44,7 +41,6 @@ const MainBody = () => {
 					<div
 						className="lettercrap"
 						// TODO: Display this all the time, just resize the font and line height to make it prettier
-						// className={`${width > 1200 ? "" : "d-none"}`}
 						data-lettercrap-text={FirstName + " " + LastName}
 						data-lettercrap-aspect-ratio="0.3"
 					/>
@@ -62,8 +58,8 @@ const MainBody = () => {
 							>
 								<i
 									className={`fab ${icon.image} fa-3x ${hoverstatus[icon.id]}`}
-									onMouseOver={() => toggleHover({ icon, event: "enter" })}
-									onMouseOut={() => toggleHover({ icon, event: "leave" })}
+									onMouseOver={function() { toggleHover({ icon, event: "enter" }) }}
+									onMouseOut={function() { toggleHover({ icon, event: "leave" }) }}
 								/>
 							</a>
 						))}
@@ -96,6 +92,6 @@ const TypingAnimation = React.memo(
 		);
 	},
 	(props, prevProp) => true
-); // this line prevents re-rendering
+); // The unused props prevent re-rendering
 
 export default MainBody;

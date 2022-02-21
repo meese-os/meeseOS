@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 
 const ProjectCard = ({ value, index }) => {
@@ -75,6 +76,17 @@ const ProjectCard = ({ value, index }) => {
 		</div>
 	);
 };
+ProjectCard.propTypes = {
+	value: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		description: PropTypes.string.isRequired,
+		svn_url: PropTypes.string.isRequired,
+		stargazers_count: PropTypes.number.isRequired,
+		languages_url: PropTypes.string.isRequired,
+		pushed_at: PropTypes.string.isRequired,
+	}),
+	index: PropTypes.number.isRequired,
+}
 
 const Languages = ({ value, svn_url }) => {
 	const [data, setData] = useState([]);
@@ -119,6 +131,10 @@ const Languages = ({ value, svn_url }) => {
 			))}
 		</div>
 	);
+};
+Languages.propTypes = {
+	value: PropTypes.string.isRequired,
+	svn_url: PropTypes.string.isRequired,
 };
 
 export default ProjectCard;
