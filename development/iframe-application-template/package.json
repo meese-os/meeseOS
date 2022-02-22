@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/iframe-application-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MeeseOS iFrame Application Template",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,7 +22,6 @@
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.4",
     "eslint": "^8.9.0",
-    "mini-css-extract-plugin": "^2.5.3",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   },

@@ -62,6 +62,7 @@ const register = (core, args, options, metadata) => {
 			const iframe = document.createElement("iframe");
 			iframe.style.width = "100%";
 			iframe.style.height = "100%";
+			iframe.style.backgroundColor = "white";
 			iframe.src = proc.resource(url);
 			iframe.setAttribute("border", "0");
 			$content.appendChild(iframe);
