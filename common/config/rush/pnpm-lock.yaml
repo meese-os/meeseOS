@@ -54,6 +54,30 @@ importers:
       webpack: 5.69.1_webpack-cli@4.9.2
       webpack-cli: 4.9.2_webpack@5.69.1
 
+  ../../apps/image-to-8bit:
+    specifiers:
+      '@aaronmeese.com/eslint-config': workspace:*
+      '@babel/core': ^7.17.2
+      '@babel/plugin-transform-runtime': ^7.17.0
+      '@babel/preset-env': ^7.16.11
+      '@babel/runtime': ^7.17.2
+      babel-loader: ^8.2.3
+      copy-webpack-plugin: ^10.2.4
+      eslint: ^8.9.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
+    devDependencies:
+      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@babel/core': 7.17.5
+      '@babel/plugin-transform-runtime': 7.17.0_@babel+core@7.17.5
+      '@babel/preset-env': 7.16.11_@babel+core@7.17.5
+      '@babel/runtime': 7.17.2
+      babel-loader: 8.2.3_9351ded4f79a023849d74b5df047d562
+      copy-webpack-plugin: 10.2.4_webpack@5.69.1
+      eslint: 8.9.0
+      webpack: 5.69.1_webpack-cli@4.9.2
+      webpack-cli: 4.9.2_webpack@5.69.1
+
   ../../apps/old-site:
     specifiers:
       '@aaronmeese.com/eslint-config': workspace:*
@@ -762,6 +786,7 @@ importers:
       '@aaronmeese.com/filemanager': workspace:*
       '@aaronmeese.com/gnome-icons': workspace:*
       '@aaronmeese.com/gui': workspace:*
+      '@aaronmeese.com/image-to-8bit': workspace:*
       '@aaronmeese.com/old-site': workspace:*
       '@aaronmeese.com/panels': workspace:*
       '@aaronmeese.com/server': workspace:*
@@ -800,6 +825,7 @@ importers:
       '@aaronmeese.com/filemanager': link:../apps/filemanager
       '@aaronmeese.com/gnome-icons': link:../frontend/gnome-icons
       '@aaronmeese.com/gui': link:../frontend/gui
+      '@aaronmeese.com/image-to-8bit': link:../apps/image-to-8bit
       '@aaronmeese.com/old-site': link:../apps/old-site
       '@aaronmeese.com/panels': link:../frontend/panels
       '@aaronmeese.com/server': link:../backend/server

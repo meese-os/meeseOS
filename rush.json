@@ -493,6 +493,10 @@
       "projectFolder": "apps/old-site"
     },
     {
+      "packageName": "@aaronmeese.com/image-to-8bit",
+      "projectFolder": "apps/image-to-8bit"
+    },
+    {
       "packageName": "@aaronmeese.com/panels",
       "projectFolder": "frontend/panels"
     },
