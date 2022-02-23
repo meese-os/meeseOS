@@ -45,19 +45,20 @@ const register = (core, args, options, metadata) => {
 	const proc = core.make("meeseOS/application", {
 		args,
 		options,
-		metadata
+		metadata,
 	});
 
 	// Create  a new Window instance
-	proc.createWindow({
-		id: "image-to-8bit",
-		title: metadata.title,
-		icon: proc.resource(proc.metadata.icon),
-		dimension: { width: 600, height: 650 },
-		position: { left: 700, top: 200 }
-	})
+	proc
+		.createWindow({
+			id: "image-to-8bit",
+			title: metadata.title,
+			icon: proc.resource(proc.metadata.icon),
+			dimension: { width: 600, height: 650 },
+			position: { left: 700, top: 200 },
+		})
 		.on("destroy", () => proc.destroy())
-		.render($content => {
+		.render(($content) => {
 			const iframe = document.createElement("iframe");
 			iframe.style.width = "100%";
 			iframe.style.height = "100%";

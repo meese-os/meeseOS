@@ -6,9 +6,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
 	mode,
 	devtool: "source-map",
-	entry: [
-		path.resolve(__dirname, "index.js"),
-	],
+	entry: [path.resolve(__dirname, "index.js")],
 	optimization: {
 		minimize,
 	},
@@ -17,8 +15,8 @@ module.exports = {
 	},
 	plugins: [
 		new CopyWebpackPlugin({
-			patterns: [ "icon.png" ],
-		})
+			patterns: ["icon.png"],
+		}),
 	],
 	module: {
 		rules: [
@@ -26,9 +24,9 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
-					loader: "babel-loader"
-				}
-			}
-		]
-	}
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
 };
