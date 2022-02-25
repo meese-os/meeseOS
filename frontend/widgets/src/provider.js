@@ -44,7 +44,7 @@ export default class WidgetServiceProvider {
 		this.registry = {
 			digitalclock: DigitalClock,
 			analogclock: AnalogClock,
-			...(args.registry || {})
+			...(args.registry || {}),
 		};
 	}
 

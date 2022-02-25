@@ -94,7 +94,7 @@ export default class AnalogClockWidget extends Widget {
 		}
 
 		const size = Math.min(width, height);
-		const radius = size / 2 * 0.9;
+		const radius = (size / 2) * 0.9;
 		this.drawClock(context, radius);
 	}
 
@@ -106,31 +106,23 @@ export default class AnalogClockWidget extends Widget {
 			},
 			{
 				label: "Set Number Color",
-				onclick: () => this.createColorDialog(
-					"Set Number Color",
-					"numberColor"
-				),
+				onclick: () =>
+					this.createColorDialog("Set Number Color", "numberColor"),
 			},
 			{
 				label: "Set Hour Hand Color",
-				onclick: () => this.createColorDialog(
-					"Set Hour Hand Color",
-					"hourHandColor"
-				),
+				onclick: () =>
+					this.createColorDialog("Set Hour Hand Color", "hourHandColor"),
 			},
 			{
 				label: "Set Minute Hand Color",
-				onclick: () => this.createColorDialog(
-					"Set Minute Color",
-					"minuteHandColor"
-				),
+				onclick: () =>
+					this.createColorDialog("Set Minute Color", "minuteHandColor"),
 			},
 			{
 				label: "Set Seconds Hand Color",
-				onclick: () => this.createColorDialog(
-					"Set Seconds Color",
-					"secondsHandColor"
-				),
+				onclick: () =>
+					this.createColorDialog("Set Seconds Color", "secondsHandColor"),
 			},
 		];
 	}
@@ -202,10 +194,15 @@ export default class AnalogClockWidget extends Widget {
 		ctx.fill();
 
 		// Styling for the border of the clock
-		let circleRadius = radius * 0.95;
-		let circleEnding = radius * 1.05;
-		let gradient = ctx.createRadialGradient(
-			0, 0, circleRadius, 0, 0, circleEnding
+		const circleRadius = radius * 0.95;
+		const circleEnding = radius * 1.05;
+		const gradient = ctx.createRadialGradient(
+			0,
+			0,
+			circleRadius,
+			0,
+			0,
+			circleEnding
 		);
 		gradient.addColorStop(0, "#333");
 		gradient.addColorStop(0.5, "white");
@@ -237,7 +234,7 @@ export default class AnalogClockWidget extends Widget {
 		ctx.textAlign = "center";
 
 		for (let num = 1; num < 13; num++) {
-			let ang = num * Math.PI / 6;
+			const ang = (num * Math.PI) / 6;
 			ctx.rotate(ang);
 			ctx.translate(0, -radius * 0.85);
 			ctx.rotate(-ang);
@@ -255,26 +252,27 @@ export default class AnalogClockWidget extends Widget {
 	 * @private
 	 */
 	drawTime(ctx, radius) {
-		let now = new Date();
+		const now = new Date();
 		let hour = now.getHours() % 12;
 		let minute = now.getMinutes();
 		let second = now.getSeconds();
 
 		// Hour hand
 		ctx.strokeStyle = this.options.hourHandColor;
-		hour = (hour * Math.PI / 6) +
-			(minute * Math.PI / (6 * 60)) +
-			(second * Math.PI / (360 * 60));
-		this.drawHand(ctx, hour, radius*0.5, radius*0.07);
+		hour =
+			(hour * Math.PI) / 6 +
+			(minute * Math.PI) / (6 * 60) +
+			(second * Math.PI) / (360 * 60);
+		this.drawHand(ctx, hour, radius * 0.5, radius * 0.07);
 
 		// Minutes hand
 		ctx.strokeStyle = this.options.minuteHandColor;
-		minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+		minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
 		this.drawHand(ctx, minute, radius * 0.8, radius * 0.07);
 
 		// Seconds hand
 		ctx.strokeStyle = this.options.secondsHandColor;
-		second = (second * Math.PI / 30);
+		second = (second * Math.PI) / 30;
 		this.drawHand(ctx, second, radius * 0.9, radius * 0.02);
 	}
 
