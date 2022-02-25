@@ -100,7 +100,7 @@ const onmousedown = (ev, $root, widget) => {
 		const diffX = ev.clientX - startX;
 		const diffY = ev.clientY - startY;
 
-		// TODO: Aspect Ratio
+		// TODO: Aspect Ratio!
 
 		clearTimeout(debounce);
 
@@ -218,10 +218,7 @@ export default class Widget {
 	}
 
 	destroy() {
-		if (this.destroyed) {
-			return;
-		}
-
+		if (this.destroyed) return;
 		this.destroyed = true;
 		this.onDestroy();
 
@@ -231,10 +228,8 @@ export default class Widget {
 			this.dialog.destroy();
 		}
 
-		if (this.$element) {
-			if (this.$element.parentNode) {
-				this.$element.remove();
-			}
+		if (this.$element && this.$element.parentNode) {
+			this.$element.remove();
 		}
 
 		this.$canvas = null;
@@ -300,9 +295,7 @@ export default class Widget {
 	}
 
 	updateDimension() {
-		if (this.destroyed) {
-			return;
-		}
+		if (this.destroyed) return;
 
 		const { width, height } = this.options.dimension;
 		this.$element.style.width = String(width) + "px";
@@ -312,9 +305,7 @@ export default class Widget {
 	}
 
 	updatePosition() {
-		if (this.destroyed) {
-			return;
-		}
+		if (this.destroyed) return;
 
 		const { left, right, top, bottom } = getPosition(
 			this.core,
@@ -354,7 +345,6 @@ export default class Widget {
 				label: "Remove Widget",
 				onclick: () => {
 					this.core.make("meeseOS/widgets").remove(this);
-
 					this.core.make("meeseOS/widgets").save();
 				},
 			},
