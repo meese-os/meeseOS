@@ -29,6 +29,7 @@
  */
 
 import DigitalClock from "./items/digitalclock";
+import AnalogClock from "./items/analogclock";
 
 /**
  * Widget Service Provider
@@ -40,7 +41,11 @@ export default class WidgetServiceProvider {
 		this.core = core;
 		this.widgets = [];
 		this.inited = false;
-		this.registry = { digitalclock: DigitalClock, ...(args.registry || {}) };
+		this.registry = {
+			digitalclock: DigitalClock,
+			analogclock: AnalogClock,
+			...(args.registry || {})
+		};
 	}
 
 	destroy() {
