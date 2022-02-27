@@ -30,6 +30,26 @@
 
 import Widget from "../widget";
 
+/**
+ * Gets the proper hex color from the associated varName
+ * @param {String} varName
+ * @param {Object | Object[]} colors
+ * @return {string} hex color
+ */
+const getColorHex = (varName, colors) => {
+	// When initially the colors parameter is an object of varNames paired
+	// with colors, instead of the array of objects that is returned from the
+	// multiple-colors dialog box.
+	if (Object.prototype.toString.call(colors) !== "[object Array]") {
+		return colors[varName];
+	}
+
+	// Colors parameter is an array of objects, in which the varName property
+	// is used to find the color we want.
+	const index = colors.findIndex(color => color.varName === varName);
+	return colors[index] ? colors[index].hex : "#000000";
+};
+
 export default class AnalogClockWidget extends Widget {
 	constructor(core, options) {
 		/** The default starting size for this widget. */
@@ -53,10 +73,12 @@ export default class AnalogClockWidget extends Widget {
 			},
 			{
 				fontFamily: "Monospace",
-				numberColor: "#000000",
-				hourHandColor: "#000000",
-				minuteHandColor: "#000000",
-				secondHandColor: "#000000",
+				colors: {
+					numberColor: "#000000",
+					hourHandColor: "#000000",
+					minuteHandColor: "#000000",
+					secondHandColor: "#000000",
+				},
 			}
 		);
 
@@ -105,24 +127,8 @@ export default class AnalogClockWidget extends Widget {
 				onclick: () => this.createFontDialog(),
 			},
 			{
-				label: "Set Number Color",
-				onclick: () =>
-					this.createColorDialog("Set Number Color", "numberColor"),
-			},
-			{
-				label: "Set Hour Hand Color",
-				onclick: () =>
-					this.createColorDialog("Set Hour Hand Color", "hourHandColor"),
-			},
-			{
-				label: "Set Minute Hand Color",
-				onclick: () =>
-					this.createColorDialog("Set Minute Color", "minuteHandColor"),
-			},
-			{
-				label: "Set Seconds Hand Color",
-				onclick: () =>
-					this.createColorDialog("Set Seconds Color", "secondsHandColor"),
+				label: "Set Colors",
+				onclick: () => this.createMultipleColorsDialog(),
 			},
 		];
 	}
@@ -146,21 +152,19 @@ export default class AnalogClockWidget extends Widget {
 	}
 
 	/**
-	 * Creates a color dialog for the specified property.
-	 * @param {string} title the title of the dialog
-	 * @param {string} variable the name of the variable to set
+	 * Creates a color dialog for all of the widget's properties.
 	 */
-	createColorDialog(title, variable) {
+	createMultipleColorsDialog() {
 		this.core.make(
 			"meeseOS/dialog",
-			"color",
+			"multipleColors",
 			{
-				color: this.options.fontColor,
-				title: title,
+				colors: this.options.colors,
+				title: "Set Widget Colors",
 			},
 			(btn, value) => {
 				if (btn === "ok") {
-					this.options[variable] = value.hex;
+					this.options.colors = value;
 					this.compute();
 					this.saveSettings();
 				}
@@ -190,7 +194,7 @@ export default class AnalogClockWidget extends Widget {
 		// The background of the clock
 		ctx.beginPath();
 		ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-		ctx.fillStyle = "transparent";
+		ctx.fillStyle = "white";
 		ctx.fill();
 
 		// Styling for the border of the clock
@@ -228,7 +232,7 @@ export default class AnalogClockWidget extends Widget {
 	 */
 	drawNumbers(ctx, radius) {
 		const fontSize = radius * 0.15;
-		ctx.fillStyle = this.options.numberColor;
+		ctx.fillStyle = getColorHex("numberColor", this.options.colors);
 		ctx.font = `${fontSize}px ${this.options.fontFamily}`;
 		ctx.textBaseline = "middle";
 		ctx.textAlign = "center";
@@ -258,7 +262,7 @@ export default class AnalogClockWidget extends Widget {
 		let second = now.getSeconds();
 
 		// Hour hand
-		ctx.strokeStyle = this.options.hourHandColor;
+		ctx.strokeStyle = getColorHex("hourHandColor", this.options.colors);
 		hour =
 			(hour * Math.PI) / 6 +
 			(minute * Math.PI) / (6 * 60) +
@@ -266,12 +270,12 @@ export default class AnalogClockWidget extends Widget {
 		this.drawHand(ctx, hour, radius * 0.5, radius * 0.07);
 
 		// Minutes hand
-		ctx.strokeStyle = this.options.minuteHandColor;
+		ctx.strokeStyle = getColorHex("minuteHandColor", this.options.colors);
 		minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
 		this.drawHand(ctx, minute, radius * 0.8, radius * 0.07);
 
-		// Seconds hand
-		ctx.strokeStyle = this.options.secondsHandColor;
+		// Second hand
+		ctx.strokeStyle = getColorHex("secondHandColor", this.options.colors);
 		second = (second * Math.PI) / 30;
 		this.drawHand(ctx, second, radius * 0.9, radius * 0.02);
 	}

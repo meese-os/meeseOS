@@ -35,7 +35,7 @@ import plain from "is-plain-object";
 
 let dialogCount = 0;
 
-/*
+/**
  * Default button attributes
  */
 const defaultButtons = () => ({
@@ -46,25 +46,27 @@ const defaultButtons = () => ({
 	no: { label: "No" },
 });
 
-/*
- * Creates a button from name
+/**
+ * Creates a button from a name
+ * @param {String} name button name
+ * @return {Object} button
  */
-const defaultButton = (n) => {
+const defaultButton = (name) => {
 	const defs = defaultButtons();
-	if (defs[n]) {
+	if (defs[name]) {
 		return Object.assign(
 			{},
 			{
-				name: n,
+				name: name,
 			},
-			defs[n]
+			defs[name]
 		);
 	}
 
-	return { label: n, name: n };
+	return { label: name, name: name };
 };
 
-/*
+/**
  * Creates options
  */
 const createOptions = (options, args) =>
@@ -96,9 +98,7 @@ const createOptions = (options, args) =>
 			},
 		},
 		options,
-		{
-			isMergeableObject: plain,
-		}
+		{ isMergeableObject: plain, }
 	);
 
 /**
@@ -178,6 +178,7 @@ export default class Dialog {
 		});
 
 		this.win.on("render", () => {
+			// TODO
 			// this.win.resizeFit();
 			this.win.focus();
 
@@ -220,20 +221,20 @@ export default class Dialog {
 	 * @return {Object[]} Virtual dom node children list
 	 */
 	createButtons(states = {}) {
-		const onclick = (n, ev) => {
-			this.win.emit("dialog:button", n, ev);
+		const onclick = (name, event) => {
+			this.win.emit("dialog:button", name, event);
 		};
 
-		return this.buttons.map((b) =>
+		return this.buttons.map((button) =>
 			h(
 				Button,
 				Object.assign(
 					{},
 					{
-						disabled: states[b.name] === false,
-						onclick: (ev) => onclick(b.name, ev),
+						disabled: states[button.name] === false,
+						onclick: (event) => onclick(button.name, event),
 					},
-					b
+					button
 				)
 			)
 		);
@@ -242,18 +243,16 @@ export default class Dialog {
 	/**
 	 * Emits the callback
 	 * @param {String} name Button or action name
-	 * @param {Event} [ev] Browser event reference
+	 * @param {Event} [event] Browser event reference
 	 * @param {Boolean} [close=false] Close dialog
 	 */
-	emitCallback(name, ev, close = false) {
-		if (this.calledBack) {
-			return;
-		}
+	emitCallback(name, event, close = false) {
+		if (this.calledBack) return;
 		this.calledBack = true;
 
-		console.debug("Callback in dialog", name, ev, close);
+		console.debug("Callback in dialog", name, event, close);
 
-		this.callback(name, this.getValue(), ev);
+		this.callback(name, this.getValue(), event);
 
 		if (close) {
 			this.destroy();
@@ -280,7 +279,7 @@ export default class Dialog {
 	 * @return {String|undefined}
 	 */
 	getPositiveButton() {
-		const found = this.buttons.find((b) => b.positive === true);
+		const found = this.buttons.find((button) => button.positive === true);
 		return found ? found.name : null;
 	}
 
@@ -289,7 +288,7 @@ export default class Dialog {
 	 * @return {String|undefined}
 	 */
 	getNegativeButton() {
-		const found = this.buttons.find((b) => !b.positive);
+		const found = this.buttons.find((button) => !button.positive);
 		return found ? found.name : null;
 	}
 
@@ -298,6 +297,7 @@ export default class Dialog {
 	 * @return {*}
 	 */
 	getValue() {
+		// TODO: Customize this so it can take other values
 		return typeof this.value === "undefined"
 			? this.options.defaultValue
 			: this.value;

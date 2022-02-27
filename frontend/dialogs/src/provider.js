@@ -36,6 +36,7 @@ import CustomDialog from "./dialogs/custom";
 import DefaultApplicationDialog from "./dialogs/default-application";
 import FontDialog from "./dialogs/font";
 import FileDialog from "./dialogs/file";
+import MultipleColorsDialog from "./dialogs/multiple-colors";
 import PromptDialog from "./dialogs/prompt";
 import ProgressDialog from "./dialogs/progress";
 
@@ -45,14 +46,15 @@ export default class DialogServiceProvider {
 		this.registry = Object.assign(
 			{
 				alert: AlertDialog,
-				confirm: ConfirmDialog,
-				prompt: PromptDialog,
-				progress: ProgressDialog,
+				choice: ChoiceDialog,
 				color: ColorDialog,
+				confirm: ConfirmDialog,
+				defaultApplication: DefaultApplicationDialog,
 				font: FontDialog,
 				file: FileDialog,
-				choice: ChoiceDialog,
-				defaultApplication: DefaultApplicationDialog,
+				multipleColors: MultipleColorsDialog,
+				prompt: PromptDialog,
+				progress: ProgressDialog,
 			},
 			args.registry || {}
 		);
