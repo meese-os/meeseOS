@@ -32,10 +32,12 @@ import { Box, BoxContainer, RangeField, TextField } from "@aaronmeese.com/gui";
 import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
-/*
- * Creates a palette canvas
+/**
+ * Creates a palette canvas at the specified dimensions
+ * @param {Number} width
+ * @param {Number} height
  */
-const createPalette = (width, height) => {
+const createPalette = (width = 98, height = 98) => {
 	const canvas = document.createElement("canvas");
 	canvas.width = width;
 	canvas.height = height;
@@ -139,7 +141,6 @@ export default class ColorDialog extends Dialog {
 
 		this.value = { r: 0, g: 0, b: 0, hex: "#000000" };
 
-		// TODO: Copy this logic to multiple-colors
 		let color = args.color;
 		if (color) {
 			if (typeof color === "string") {
@@ -166,7 +167,6 @@ export default class ColorDialog extends Dialog {
 					({ color, value }) =>
 					(state) => {
 						this.value[color] = value;
-						// TODO: Copy this to multiple-colors
 						return { [color]: value };
 					},
 				updateHex: () => (state) => {

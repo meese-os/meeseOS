@@ -30,26 +30,6 @@
 
 import Widget from "../widget";
 
-/**
- * Gets the proper hex color from the associated varName
- * @param {String} varName
- * @param {Object | Object[]} colors
- * @return {string} hex color
- */
-const getColorHex = (varName, colors) => {
-	// When initially the colors parameter is an object of varNames paired
-	// with colors, instead of the array of objects that is returned from the
-	// multiple-colors dialog box.
-	if (Object.prototype.toString.call(colors) !== "[object Array]") {
-		return colors[varName];
-	}
-
-	// Colors parameter is an array of objects, in which the varName property
-	// is used to find the color we want.
-	const index = colors.findIndex(color => color.varName === varName);
-	return colors[index] ? colors[index].hex : "#000000";
-};
-
 export default class AnalogClockWidget extends Widget {
 	constructor(core, options) {
 		/** The default starting size for this widget. */
@@ -232,7 +212,7 @@ export default class AnalogClockWidget extends Widget {
 	 */
 	drawNumbers(ctx, radius) {
 		const fontSize = radius * 0.15;
-		ctx.fillStyle = getColorHex("numberColor", this.options.colors);
+		ctx.fillStyle = this.options.colors["numberColor"];
 		ctx.font = `${fontSize}px ${this.options.fontFamily}`;
 		ctx.textBaseline = "middle";
 		ctx.textAlign = "center";
@@ -262,7 +242,7 @@ export default class AnalogClockWidget extends Widget {
 		let second = now.getSeconds();
 
 		// Hour hand
-		ctx.strokeStyle = getColorHex("hourHandColor", this.options.colors);
+		ctx.strokeStyle = this.options.colors["hourHandColor"];
 		hour =
 			(hour * Math.PI) / 6 +
 			(minute * Math.PI) / (6 * 60) +
@@ -270,12 +250,12 @@ export default class AnalogClockWidget extends Widget {
 		this.drawHand(ctx, hour, radius * 0.5, radius * 0.07);
 
 		// Minutes hand
-		ctx.strokeStyle = getColorHex("minuteHandColor", this.options.colors);
+		ctx.strokeStyle = this.options.colors["minuteHandColor"];
 		minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
 		this.drawHand(ctx, minute, radius * 0.8, radius * 0.07);
 
 		// Second hand
-		ctx.strokeStyle = getColorHex("secondHandColor", this.options.colors);
+		ctx.strokeStyle = this.options.colors["secondHandColor"];
 		second = (second * Math.PI) / 30;
 		this.drawHand(ctx, second, radius * 0.9, radius * 0.02);
 	}
