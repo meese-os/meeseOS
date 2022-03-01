@@ -202,12 +202,10 @@ export default class MultipleColorsDialog extends Dialog {
 						oninput: (ev, newValue) => {
 							newValue = Number(newValue);
 							actions.setComponent({ color: color, newValue });
-							return { [color]: newValue };
 						},
 						onchange: (ev, newValue) => {
 							newValue = Number(newValue);
 							actions.setComponent({ color: color, newValue });
-							return newValue;
 						},
 					}),
 					h(TextField, {
@@ -218,7 +216,6 @@ export default class MultipleColorsDialog extends Dialog {
 						oninput: (ev, newValue) => {
 							newValue = Number(newValue);
 							actions.setComponent({ color: color, newValue });
-							return { hex: this.value[this.selectedColor] };
 						},
 					}),
 				]);
