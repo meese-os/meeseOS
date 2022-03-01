@@ -28,7 +28,13 @@
  * @licence Simplified BSD License
  */
 
-import { Box, BoxContainer, RangeField, TextField } from "@aaronmeese.com/gui";
+import {
+	Box,
+	BoxContainer,
+	RangeField,
+	SelectField,
+	TextField,
+} from "@aaronmeese.com/gui";
 import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
@@ -68,10 +74,11 @@ const createPalette = (width = 98, height = 98) => {
 	return canvas;
 };
 
-/*
+/**
  * Converts hex to its component values
  */
-const hexToComponent = (hex) => {
+const hexToComponent = (hex = "#000000") => {
+	if (typeof hex === "object") hex = hex.hex;
 	const rgb = parseInt(hex.replace("#", ""), 16);
 	const val = {};
 	val.r = (rgb & (255 << 16)) >> 16;
@@ -80,7 +87,7 @@ const hexToComponent = (hex) => {
 	return val;
 };
 
-/*
+/**
  * Convert component values into hex
  */
 const componentToHex = ({ r, g, b }) => {
@@ -93,7 +100,7 @@ const componentToHex = ({ r, g, b }) => {
 	return "#" + hex.join("").toUpperCase();
 };
 
-/*
+/**
  * Gets the color of a clicked palette area
  */
 const colorFromClick = (ev, canvas) => {
@@ -109,9 +116,9 @@ const colorFromClick = (ev, canvas) => {
 };
 
 /**
- * Default MeeseOS Color Dialog
+ * Default MeeseOS Multiple Colors Dialog
  */
-export default class ColorDialog extends Dialog {
+export default class MultipleColorsDialog extends Dialog {
 	/**
 	 * Constructor
 	 * @param {Core} core MeeseOS Core reference
@@ -127,7 +134,7 @@ export default class ColorDialog extends Dialog {
 				className: "color",
 				buttons: ["ok", "cancel"],
 				window: {
-					title: args.title || "Select Color",
+					title: args.title || "Select Colors",
 					attributes: {
 						minDimension: {
 							width: 500,
@@ -139,65 +146,73 @@ export default class ColorDialog extends Dialog {
 			callback
 		);
 
-		this.value = { r: 0, g: 0, b: 0, hex: "#000000" };
+		// Format: { colorOne: "#000000", colorTwo: "#000000", ... }
+		this.value = args.colors || { default: "#000000" };
 
-		let color = args.color;
-		if (color) {
-			if (typeof color === "string") {
-				if (color.substr(0, 1) !== "#") {
-					color = "#" + color;
-				}
-
-				this.value = Object.assign({}, this.value, hexToComponent(args.color));
-				this.value.hex = args.color;
-			} else {
-				this.value = Object.assign({}, this.value, args.color);
-				this.value.hex = componentToHex(this.value);
-			}
-		}
+		// Initially set the selected color to the first in the list
+		const [firstKey] = Object.keys(this.value);
+		this.selectedColor = firstKey;
 	}
 
 	render(options) {
 		super.render(options, ($content) => {
 			const canvas = createPalette(98, 98);
-			const initialState = Object.assign({}, this.value);
+			const initialState = Object.assign({}, this);
 			const initialActions = {
-				setColor: (color) => (state) => color,
+				setColor: (newHex) => (state) =>
+					(this.value[this.selectedColor] = state.value[state.selectedColor] =
+						newHex),
+				setColors: (colors) => (state) => (this.value = state.value = colors),
+				setSelectedColor: (color) => (state) =>
+					(this.selectedColor = state.selectedColor = color),
 				setComponent:
-					({ color, value }) =>
-					(state) => {
-						this.value[color] = value;
-						return { [color]: value };
-					},
-				updateHex: () => (state) => {
-					const hex = componentToHex(state);
-					this.value.hex = hex;
-					return { hex };
-				},
+					// color -> r, g, or b; newValue -> 0-255
+
+
+						({ color, newValue }) =>
+						(state) => {
+							const previousHex = this.value[this.selectedColor];
+							const previousComponent = hexToComponent(previousHex);
+							const newComponent = {
+								...previousComponent,
+								[color]: newValue,
+							};
+
+							const newHex = componentToHex(newComponent);
+							this.value[this.selectedColor] = state.value[
+								state.selectedColor
+							] = newHex;
+
+							return { [color]: newValue };
+						},
 			};
 
-			const rangeContainer = (c, v, actions) =>
+			const rangeContainer = (color, value, actions) =>
 				h(Box, { orientation: "vertical", align: "center", padding: false }, [
-					h(Box, { shrink: 1 }, h("div", {}, c.toUpperCase())),
+					h(Box, { shrink: 1 }, h("div", {}, color.toUpperCase())),
 					h(RangeField, {
 						box: { grow: 1 },
 						min: 0,
 						max: 255,
-						value: v,
-						oncreate: (el) => (el.value = v),
-						oninput: (ev, value) => {
-							actions.setComponent({ color: c, value });
+						value: value,
+						oncreate: (el) => (el.value = value),
+						oninput: (ev, newValue) => {
+							newValue = Number(newValue);
+							actions.setComponent({ color: color, newValue });
 						},
-						onchange: (ev, value) => {
-							actions.updateHex();
+						onchange: (ev, newValue) => {
+							newValue = Number(newValue);
+							actions.setComponent({ color: color, newValue });
 						},
 					}),
 					h(TextField, {
 						box: { shrink: 1, basis: "5em" },
-						value: String(v),
-						oninput: (ev, value) => {
-							actions.setComponent({ color: c, value });
-							actions.updateHex();
+						type: "number",
+						value: Number(value),
+						oncreate: (el) => (el.value = Number(value)),
+						oninput: (ev, newValue) => {
+							newValue = Number(newValue);
+							actions.setComponent({ color: color, newValue });
 						},
 					}),
 				]);
@@ -205,6 +220,7 @@ export default class ColorDialog extends Dialog {
 			const a = app(
 				initialState,
 				initialActions,
+				// actions -> the functions listed above the class
 				(state, actions) =>
 					this.createView([
 						h(Box, { orientation: "vertical", grow: 1, shrink: 1 }, [
@@ -214,15 +230,38 @@ export default class ColorDialog extends Dialog {
 									style: { display: "inline-block" },
 									oncreate: (el) => el.appendChild(canvas),
 								}),
+								h(SelectField, {
+									choices: Object.keys(state.value),
+									value: state.selectedColor,
+									oncreate: (el) => (el.value = state.selectedColor),
+									onchange: (event, newColor) => {
+										actions.setSelectedColor(newColor);
+									},
+								}),
 								h(TextField, {
-									value: state.hex,
-									style: { width: "100px", color: state.hex },
+									value: state.value[state.selectedColor],
+									style: {
+										width: "100px",
+										color: state.value[state.selectedColor],
+									},
 								}),
 							]),
 							h(Box, { padding: false, grow: 1, shrink: 1 }, [
-								rangeContainer("r", state.r, actions),
-								rangeContainer("g", state.g, actions),
-								rangeContainer("b", state.b, actions),
+								rangeContainer(
+									"r",
+									hexToComponent(state.value[state.selectedColor]).r,
+									actions
+								),
+								rangeContainer(
+									"g",
+									hexToComponent(state.value[state.selectedColor]).g,
+									actions
+								),
+								rangeContainer(
+									"b",
+									hexToComponent(state.value[state.selectedColor]).b,
+									actions
+								),
 							]),
 						]),
 					]),
@@ -230,11 +269,9 @@ export default class ColorDialog extends Dialog {
 			);
 
 			canvas.addEventListener("click", (ev) => {
-				const color = colorFromClick(ev, canvas);
-				if (color) {
-					a.setColor(color);
-					a.updateHex();
-				}
+				const newColor = colorFromClick(ev, canvas);
+				const newHex = newColor.hex;
+				a.setColor(newHex);
 			});
 		});
 	}
