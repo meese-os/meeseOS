@@ -35,7 +35,7 @@
  */
 
 /**
- * Resolves an URL
+ * Resolves a URL
  * @param {CoreConfig} configuration
  */
 export const urlResolver = (configuration) => {

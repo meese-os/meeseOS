@@ -106,13 +106,6 @@ export default class Core extends CoreBase {
 		this.ping = null;
 
 		/**
-		 * Splash instance
-		 * @type {Splash}
-		 * @readonly
-		 */
-		this.splash = options.splash ? options.splash(this) : new Splash(this);
-
-		/**
 		 * Main DOM element
 		 * @type {Element}
 		 * @readonly
@@ -167,7 +160,16 @@ export default class Core extends CoreBase {
 				uri.replace(/^\/+/, "/");
 		}
 
-		this.splash.init();
+		// Only create the splash in production
+		if (this.configuration.development === false) {
+			/**
+			 * Splash instance
+			 * @type {Splash}
+			 * @readonly
+			 */
+			this.splash = options.splash ? options.splash(this) : new Splash(this);
+			this.splash.init();
+		}
 	}
 
 	/**
