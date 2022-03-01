@@ -33,7 +33,7 @@ import {
 	BoxContainer,
 	RangeField,
 	SelectField,
-	TextField
+	TextField,
 } from "@aaronmeese.com/gui";
 import { app, h } from "hyperapp";
 import Dialog from "../dialog";
@@ -51,22 +51,22 @@ const createPalette = (width = 98, height = 98) => {
 	const ctx = canvas.getContext("2d");
 
 	let gradient = ctx.createLinearGradient(0, 0, ctx.canvas.width, 0);
-	gradient.addColorStop(0,    "rgb(255,   0,   0)");
+	gradient.addColorStop(0, "rgb(255,   0,   0)");
 	gradient.addColorStop(0.15, "rgb(255,   0, 255)");
 	gradient.addColorStop(0.33, "rgb(0,     0, 255)");
 	gradient.addColorStop(0.49, "rgb(0,   255, 255)");
 	gradient.addColorStop(0.67, "rgb(0,   255,   0)");
 	gradient.addColorStop(0.84, "rgb(255, 255,   0)");
-	gradient.addColorStop(1,    "rgb(255,   0,   0)");
+	gradient.addColorStop(1, "rgb(255,   0,   0)");
 
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
 	gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
-	gradient.addColorStop(0,   "rgba(255, 255, 255, 1)");
+	gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
 	gradient.addColorStop(0.5, "rgba(255, 255, 255, 0)");
 	gradient.addColorStop(0.5, "rgba(0,     0,   0, 0)");
-	gradient.addColorStop(1,   "rgba(0,     0,   0, 1)");
+	gradient.addColorStop(1, "rgba(0,     0,   0, 1)");
 
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -159,35 +159,32 @@ export default class MultipleColorsDialog extends Dialog {
 			const canvas = createPalette(98, 98);
 			const initialState = Object.assign({}, this);
 			const initialActions = {
-				setColor: (newHex) => (state) => (
-					this.value[this.selectedColor] =
-						state.value[state.selectedColor] =
-						newHex
-				),
-				setColors: (colors) => (state) => (
-					this.value = state.value = colors
-				),
-				setSelectedColor: (color) => (state) => (
-					this.selectedColor = state.selectedColor = color
-				),
+				setColor: (newHex) => (state) =>
+					(this.value[this.selectedColor] = state.value[state.selectedColor] =
+						newHex),
+				setColors: (colors) => (state) => (this.value = state.value = colors),
+				setSelectedColor: (color) => (state) =>
+					(this.selectedColor = state.selectedColor = color),
 				setComponent:
 					// color -> r, g, or b; newValue -> 0-255
-					({ color, newValue }) =>
-					(state) => {
-						const previousHex = this.value[this.selectedColor];
-						const previousComponent = hexToComponent(previousHex);
-						const newComponent = {
-							...previousComponent,
-							[color]: newValue,
-						};
 
-						const newHex = componentToHex(newComponent);
-						this.value[this.selectedColor] =
-							state.value[state.selectedColor] =
-							newHex;
 
-						return { [color]: newValue };
-					},
+						({ color, newValue }) =>
+						(state) => {
+							const previousHex = this.value[this.selectedColor];
+							const previousComponent = hexToComponent(previousHex);
+							const newComponent = {
+								...previousComponent,
+								[color]: newValue,
+							};
+
+							const newHex = componentToHex(newComponent);
+							this.value[this.selectedColor] = state.value[
+								state.selectedColor
+							] = newHex;
+
+							return { [color]: newValue };
+						},
 			};
 
 			const rangeContainer = (color, value, actions) =>
@@ -243,17 +240,32 @@ export default class MultipleColorsDialog extends Dialog {
 								}),
 								h(TextField, {
 									value: state.value[state.selectedColor],
-									style: { width: "100px", color: state.value[state.selectedColor] },
+									style: {
+										width: "100px",
+										color: state.value[state.selectedColor],
+									},
 								}),
 							]),
 							h(Box, { padding: false, grow: 1, shrink: 1 }, [
-								rangeContainer("r", hexToComponent(state.value[state.selectedColor]).r, actions),
-								rangeContainer("g", hexToComponent(state.value[state.selectedColor]).g, actions),
-								rangeContainer("b", hexToComponent(state.value[state.selectedColor]).b, actions),
+								rangeContainer(
+									"r",
+									hexToComponent(state.value[state.selectedColor]).r,
+									actions
+								),
+								rangeContainer(
+									"g",
+									hexToComponent(state.value[state.selectedColor]).g,
+									actions
+								),
+								rangeContainer(
+									"b",
+									hexToComponent(state.value[state.selectedColor]).b,
+									actions
+								),
 							]),
 						]),
 					]),
-					$content
+				$content
 			);
 
 			canvas.addEventListener("click", (ev) => {

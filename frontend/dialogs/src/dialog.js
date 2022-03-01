@@ -98,7 +98,7 @@ const createOptions = (options, args) =>
 			},
 		},
 		options,
-		{ isMergeableObject: plain, }
+		{ isMergeableObject: plain }
 	);
 
 /**

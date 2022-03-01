@@ -212,7 +212,7 @@ export default class AnalogClockWidget extends Widget {
 	 */
 	drawNumbers(ctx, radius) {
 		const fontSize = radius * 0.15;
-		ctx.fillStyle = this.options.colors["numberColor"];
+		ctx.fillStyle = this.options.colors.numberColor;
 		ctx.font = `${fontSize}px ${this.options.fontFamily}`;
 		ctx.textBaseline = "middle";
 		ctx.textAlign = "center";
@@ -242,7 +242,7 @@ export default class AnalogClockWidget extends Widget {
 		let second = now.getSeconds();
 
 		// Hour hand
-		ctx.strokeStyle = this.options.colors["hourHandColor"];
+		ctx.strokeStyle = this.options.colors.hourHandColor;
 		hour =
 			(hour * Math.PI) / 6 +
 			(minute * Math.PI) / (6 * 60) +
@@ -250,12 +250,12 @@ export default class AnalogClockWidget extends Widget {
 		this.drawHand(ctx, hour, radius * 0.5, radius * 0.07);
 
 		// Minutes hand
-		ctx.strokeStyle = this.options.colors["minuteHandColor"];
+		ctx.strokeStyle = this.options.colors.minuteHandColor;
 		minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
 		this.drawHand(ctx, minute, radius * 0.8, radius * 0.07);
 
 		// Second hand
-		ctx.strokeStyle = this.options.colors["secondHandColor"];
+		ctx.strokeStyle = this.options.colors.secondHandColor;
 		second = (second * Math.PI) / 30;
 		this.drawHand(ctx, second, radius * 0.9, radius * 0.02);
 	}

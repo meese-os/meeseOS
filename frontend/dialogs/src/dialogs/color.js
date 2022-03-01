@@ -45,22 +45,22 @@ const createPalette = (width = 98, height = 98) => {
 	const ctx = canvas.getContext("2d");
 
 	let gradient = ctx.createLinearGradient(0, 0, ctx.canvas.width, 0);
-	gradient.addColorStop(0,    "rgb(255,   0,   0)");
+	gradient.addColorStop(0, "rgb(255,   0,   0)");
 	gradient.addColorStop(0.15, "rgb(255,   0, 255)");
 	gradient.addColorStop(0.33, "rgb(0,     0, 255)");
 	gradient.addColorStop(0.49, "rgb(0,   255, 255)");
 	gradient.addColorStop(0.67, "rgb(0,   255,   0)");
 	gradient.addColorStop(0.84, "rgb(255, 255,   0)");
-	gradient.addColorStop(1,    "rgb(255,   0,   0)");
+	gradient.addColorStop(1, "rgb(255,   0,   0)");
 
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
 	gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
-	gradient.addColorStop(0,   "rgba(255, 255, 255, 1)");
+	gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
 	gradient.addColorStop(0.5, "rgba(255, 255, 255, 0)");
 	gradient.addColorStop(0.5, "rgba(0,     0,   0, 0)");
-	gradient.addColorStop(1,   "rgba(0,     0,   0, 1)");
+	gradient.addColorStop(1, "rgba(0,     0,   0, 1)");
 
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
