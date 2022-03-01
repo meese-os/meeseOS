@@ -97,6 +97,11 @@ export default class Splash {
 		this.start = this.start.bind(this);
 		document.body.style.cursor = "pointer";
 		document.body.addEventListener("click", this.start, false);
+
+		// Hide the normal MeeseOS content
+		const content = document.querySelector(".meeseOS-contents");
+		content.style.transition = "1s";
+		content.style.opacity = 0;
 	}
 
 	/**
