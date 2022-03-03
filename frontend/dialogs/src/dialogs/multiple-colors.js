@@ -167,8 +167,6 @@ export default class MultipleColorsDialog extends Dialog {
 					(this.selectedColor = state.selectedColor = color),
 				setComponent:
 					// color -> r, g, or b; newValue -> 0-255
-
-
 						({ color, newValue }) =>
 						(state) => {
 							const previousHex = this.value[this.selectedColor];
@@ -247,20 +245,13 @@ export default class MultipleColorsDialog extends Dialog {
 								}),
 							]),
 							h(Box, { padding: false, grow: 1, shrink: 1 }, [
-								rangeContainer(
-									"r",
-									hexToComponent(state.value[state.selectedColor]).r,
-									actions
-								),
-								rangeContainer(
-									"g",
-									hexToComponent(state.value[state.selectedColor]).g,
-									actions
-								),
-								rangeContainer(
-									"b",
-									hexToComponent(state.value[state.selectedColor]).b,
-									actions
+								// Creates a rangeContainer element for each color component
+								["r", "g", "b"].map((color) =>
+									rangeContainer(
+										color,
+										hexToComponent(state.value[state.selectedColor])[color],
+										actions
+									)
 								),
 							]),
 						]),
