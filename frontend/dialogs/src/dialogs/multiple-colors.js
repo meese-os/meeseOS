@@ -167,6 +167,8 @@ export default class MultipleColorsDialog extends Dialog {
 					(this.selectedColor = state.selectedColor = color),
 				setComponent:
 					// color -> r, g, or b; newValue -> 0-255
+
+
 						({ color, newValue }) =>
 						(state) => {
 							const previousHex = this.value[this.selectedColor];
