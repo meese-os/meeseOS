@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-/*
+/**
  * Creates URL request path
  */
 const encodeQueryData = (data) =>
@@ -46,7 +46,7 @@ const bodyTypes = [
 	window.FormData,
 ].filter((t) => Boolean(t));
 
-/*
+/**
  * Creates fetch() options
  */
 const createFetchOptions = (url, options, type) => {
@@ -157,7 +157,7 @@ export const fetch = (url, options = {}, type = null) => {
 		? fetchXhr(target, fetchOptions)
 		: window.fetch(target, fetchOptions);
 
-	return op.then((response) => {
+	return op.then(async (response) => {
 		if (!response.ok) {
 			const contentType = response.headers.get("content-type");
 			const method =
@@ -170,6 +170,14 @@ export const fetch = (url, options = {}, type = null) => {
 			);
 		}
 
-		return type === "json" ? response.json() : response;
+		// Helps prevent an error from being thrown when resizing the terminal.
+		// I haven't been able to determine the cause of the error, so this would
+		// be a great TODO to return to later to try and find the root cause.
+		try {
+			if (type === "json") response = await response.json();
+			return response;
+		} catch (e) {
+			return response;
+		}
 	});
 };

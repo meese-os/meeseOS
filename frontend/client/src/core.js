@@ -482,9 +482,6 @@ export default class Core extends CoreBase {
 			options = merge(options, this.requestOptions);
 		}
 
-		// TODO: Fix this:
-		// Error: An error occured while performing a request: SyntaxError: Unexpected end of JSON input
-		// for terminal
 		return fetch(url, options, type).catch((error) => {
 			logger.warn(error);
 
