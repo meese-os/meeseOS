@@ -165,11 +165,11 @@ export default class MultipleColorsDialog extends Dialog {
 				setColors: (colors) => (state) => (this.value = state.value = colors),
 				setSelectedColor: (color) => (state) =>
 					(this.selectedColor = state.selectedColor = color),
+				// color -> r, g, or b; newValue -> 0-255
 				setComponent:
-					// color -> r, g, or b; newValue -> 0-255
-						({ color, newValue }) =>
-						(state) => {
-							const previousHex = this.value[this.selectedColor];
+					({ color, newValue }) =>
+					(state) => {
+						const previousHex = this.value[this.selectedColor];
 							const previousComponent = hexToComponent(previousHex);
 							const newComponent = {
 								...previousComponent,
@@ -219,6 +219,7 @@ export default class MultipleColorsDialog extends Dialog {
 				initialState,
 				initialActions,
 				// actions -> the functions listed above the class
+				// state -> `this` from the class
 				(state, actions) =>
 					this.createView([
 						h(Box, { orientation: "vertical", grow: 1, shrink: 1 }, [
@@ -227,14 +228,6 @@ export default class MultipleColorsDialog extends Dialog {
 									class: "meeseOS-gui-border",
 									style: { display: "inline-block" },
 									oncreate: (el) => el.appendChild(canvas),
-								}),
-								h(SelectField, {
-									choices: Object.keys(state.value),
-									value: state.selectedColor,
-									oncreate: (el) => (el.value = state.selectedColor),
-									onchange: (event, newColor) => {
-										actions.setSelectedColor(newColor);
-									},
 								}),
 								h(TextField, {
 									value: state.value[state.selectedColor],
@@ -253,6 +246,15 @@ export default class MultipleColorsDialog extends Dialog {
 										actions
 									)
 								),
+								// TODO: Add mapped labels
+								h(SelectField, {
+									choices: Object.keys(state.value),
+									value: state.selectedColor,
+									oncreate: (el) => (el.value = state.selectedColor),
+									onchange: (event, newColor) => {
+										actions.setSelectedColor(newColor);
+									},
+								}),
 							]),
 						]),
 					]),

@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/dialogs",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "aaronmeese.com Dialogs",
   "main": "dist/main.js",
   "module": "dist/main.js",
