@@ -170,19 +170,18 @@ export default class MultipleColorsDialog extends Dialog {
 					({ color, newValue }) =>
 					(state) => {
 						const previousHex = this.value[this.selectedColor];
-							const previousComponent = hexToComponent(previousHex);
-							const newComponent = {
-								...previousComponent,
-								[color]: newValue,
-							};
+						const previousComponent = hexToComponent(previousHex);
+						const newComponent = {
+							...previousComponent,
+							[color]: newValue,
+						};
 
-							const newHex = componentToHex(newComponent);
-							this.value[this.selectedColor] = state.value[
-								state.selectedColor
-							] = newHex;
+						const newHex = componentToHex(newComponent);
+						this.value[this.selectedColor] = state.value[state.selectedColor] =
+							newHex;
 
-							return { [color]: newValue };
-						},
+						return { [color]: newValue };
+					},
 			};
 
 			const rangeContainer = (color, value, actions) =>
