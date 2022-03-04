@@ -636,6 +636,15 @@ const menuFactory = (core, proc, win) => {
 			isContextMenu,
 		});
 
+		const configuredItems = [];
+    if (core.config('filemanager.disableDownload', false) !== true) {
+      configuredItems.push({
+        label: "Download",
+        disabled: !item || isDirectory || !isValidFile,
+        onclick: () => emitter('filemanager:menu:download')
+      });
+    }
+
 		return [
 			...openMenu,
 			{
@@ -649,11 +658,7 @@ const menuFactory = (core, proc, win) => {
 				onclick: () => emitter("filemanager:menu:delete"),
 			},
 			...clipboardMenu,
-			{
-				label: "Download",
-				disabled: !item || isDirectory || !isValidFile,
-				onclick: () => emitter("filemanager:menu:download"),
-			},
+			...configuredItems,
 			...appendItems,
 		];
 	};

@@ -39,10 +39,6 @@
   },
   "dependencies": {
     "@aaronmeese.com/gui": "workspace:*",
-    "hyperapp": "^1.2.10"
-  },
-  "dependencies": {
-    "@aaronmeese.com/gui": "workspace:*",
     "dateformat": "^3.0.3",
     "hyperapp": "^1.2.10"
   },

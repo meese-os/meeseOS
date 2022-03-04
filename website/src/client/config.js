@@ -50,4 +50,7 @@ export default {
 			],
 		},
 	},
+	filemanager: {
+		disableDownload: false,
+	}
 };
