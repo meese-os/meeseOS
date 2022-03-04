@@ -71,7 +71,7 @@ const view = (core, proc, win) => (state, actions) =>
 							onload: (ev) => actions.resizeFit(ev.target),
 					  })
 					: null,
-			].filter((i) => !!i)
+			].filter((i) => Boolean(i))
 		),
 	]);
 
@@ -166,7 +166,7 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 			);
 
 			if (args.file) {
-				proc.emit("readFile", args.file, !!proc.options.restore);
+				proc.emit("readFile", args.file, Boolean(proc.options.restore));
 			}
 		});
 
