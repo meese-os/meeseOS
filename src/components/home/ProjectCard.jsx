@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-require('dotenv').config();
+require("dotenv").config();
 
 const ProjectCard = ({ value, index }) => {
   const [updated_at, setUpdatedAt] = useState("0 mints");
@@ -14,7 +14,7 @@ const ProjectCard = ({ value, index }) => {
 
       if (hours < 24) {
         if (hours < 1) return setUpdatedAt("just now");
-        let measurement = hours === 1 ? "hour" : "hours";
+        const measurement = hours === 1 ? "hour" : "hours";
         return setUpdatedAt(`${hours.toString()} ${measurement} ago`);
       } else {
         const monthNames = [
@@ -29,7 +29,7 @@ const ProjectCard = ({ value, index }) => {
           "September",
           "October",
           "November",
-          "December"
+          "December",
         ];
         const day = date.getDate();
         const monthIndex = date.getMonth();
@@ -81,24 +81,27 @@ const ProjectCard = ({ value, index }) => {
 const Languages = ({ value, svn_url }) => {
   const [data, setData] = useState([]);
 
-  const getLanguages = useCallback((e) => {
-    axios
-      .get(value, {
-        auth: {
-          username: process.env.GH_USERNAME,
-          password: process.env.OAUTH_TOKEN
-        }
-      })
-      .then(response => setData(response.data))
-      .catch(error => console.error(error.message))
-      .finally(() => {});
-  }, [value]);
+  const getLanguages = useCallback(
+    (e) => {
+      axios
+        .get(value, {
+          auth: {
+            username: process.env.GH_USERNAME,
+            password: process.env.OAUTH_TOKEN,
+          },
+        })
+        .then((response) => setData(response.data))
+        .catch((error) => console.error(error.message))
+        .finally(() => {});
+    },
+    [value]
+  );
 
   useEffect(() => getLanguages(), [getLanguages]);
 
   const array = [];
   let total_count = 0;
-  for (let index in data) {
+  for (const index in data) {
     array.push(index);
     total_count += data[index];
   }
@@ -107,7 +110,7 @@ const Languages = ({ value, svn_url }) => {
   return (
     <div className="pb-3">
       {array.map((language) => (
-        <a 
+        <a
           key={language}
           className="badge badge-light card-link mr-2 mb-1 ml-0"
           href={svn_url + `/search?l=${language}`}

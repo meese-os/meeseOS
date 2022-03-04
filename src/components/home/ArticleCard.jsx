@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  articlesLength,
-} from "../../editable-stuff/configurations.json";
+import { articlesLength } from "../../editable-stuff/configurations.json";
 
 const ArticleCard = ({ value, index }) => {
   const [created_at, setCreatedAt] = useState("0 mints");
@@ -15,7 +13,7 @@ const ArticleCard = ({ value, index }) => {
 
       if (hours < 24) {
         if (hours < 1) return setCreatedAt("just now");
-        let measurement = hours === 1 ? "hour" : "hours";
+        const measurement = hours === 1 ? "hour" : "hours";
         return setCreatedAt(`${hours.toString()} ${measurement} ago`);
       } else {
         const monthNames = [
@@ -30,7 +28,7 @@ const ArticleCard = ({ value, index }) => {
           "September",
           "October",
           "November",
-          "December"
+          "December",
         ];
         const day = date.getDate();
         const monthIndex = date.getMonth();
@@ -55,13 +53,15 @@ const ArticleCard = ({ value, index }) => {
           >
             <h5 className="card-title d-inline-block mb-3">{value.title} </h5>
           </a>
-          <img className="medium-image mb-2" src={value.imageUrl} alt="Article header" />
+          <img
+            className="medium-image mb-2"
+            src={value.imageUrl}
+            alt="Article header"
+          />
           <p className="card-text">{value.description} </p>
-          <a
-            href={value.url}
-            target=" _blank"
-          >
-            Continue reading on {value.publicationName ? value.publicationName : "Medium"}...
+          <a href={value.url} target=" _blank">
+            Continue reading on{" "}
+            {value.publicationName ? value.publicationName : "Medium"}...
           </a>
           <hr />
           <p className="card-text">

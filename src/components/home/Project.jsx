@@ -17,21 +17,26 @@ const Project = () => {
     const headers = {
       auth: {
         username: gitHubUsername,
-        password: process.env.REACT_APP_OAUTH_TOKEN
-      }
-    }
+        password: process.env.REACT_APP_OAUTH_TOKEN,
+      },
+    };
 
     let data;
     axios
-      .get("https://api.github.com/users/" + gitHubUsername + gitHubQuery, headers)
-      .then(response => {
+      .get(
+        "https://api.github.com/users/" + gitHubUsername + gitHubQuery,
+        headers
+      )
+      .then((response) => {
         data = response.data;
-        setRecentProjectsArray(response.data.slice(0, projectsLength))
+        setRecentProjectsArray(response.data.slice(0, projectsLength));
       })
-      .catch(error => console.error(error.message))
+      .catch((error) => console.error(error.message))
       .finally(() => {
         // Sort by most popular projects
-        let popular = data.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? -1 : 1);
+        const popular = data.sort((a, b) =>
+          a.stargazers_count > b.stargazers_count ? -1 : 1
+        );
         setPopularProjectsArray(popular.slice(0, projectsLength));
       });
   }, []);
@@ -41,11 +46,19 @@ const Project = () => {
   return (
     <div id="projects" className="jumbotron jumbotron-fluid bg-transparent m-0">
       {popularProjects.length && (
-        <div id="popularProjects" className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
+        <div
+          id="popularProjects"
+          className={`container container-fluid p-${width > 560 ? "5" : "4"}`}
+        >
           <h1 className="display-4 pb-4">Most Popular Projects</h1>
           <div className="row">
             {popularProjects.map((project, index) => (
-              <ProjectCard key={project.id} id={project.id} value={project} index={index} />
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                value={project}
+                index={index}
+              />
             ))}
           </div>
         </div>
@@ -53,11 +66,19 @@ const Project = () => {
 
       {/* NOTE: When a project is starred, it will show as recently updated with the old date */}
       {recentProjects.length && (
-        <div id="recentProjects" className={`container container-fluid p-${width > 560 ? "5" : "4"}`}>
+        <div
+          id="recentProjects"
+          className={`container container-fluid p-${width > 560 ? "5" : "4"}`}
+        >
           <h1 className="display-4 pb-4">Recently Updated Projects</h1>
           <div className="row">
             {recentProjects.map((project, index) => (
-              <ProjectCard key={project.id} id={project.id} value={project} index={index} />
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                value={project}
+                index={index}
+              />
             ))}
           </div>
         </div>

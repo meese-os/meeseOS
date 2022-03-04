@@ -13,18 +13,20 @@ it'll be overwritten every commit.
 If you want to start it up locally, run `npm run start`.
 
 ## Desktop TODOs
+
 - Figure out how to change the PDF favicon
 - Testimonial picture format in configurations like the following:
-  - ```<img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." />```
+  - `` <img src={`https://github.com/${username}.png`} className="card-img-top" alt="..." /> ``
 - After I get more testimonials from people, look into redoing the section to
-look more like [this](https://launchschool.com/results).
+  look more like [this](https://launchschool.com/results).
 - Make popular and recent slideshow style, so you can click between them
 - Add claps like stars for Medium, then fix them in the same way as the other sections
   - Add an hourly ms param to update the cache every hour for Cloudflare Workers
   - Add a similar `Load More` button to testimonials, where the `index > 1` can be
-  incremented somehow. Try to fade in the new ones gracefully.
+    incremented somehow. Try to fade in the new ones gracefully.
 
 ## Mobile TODOs
+
 - Make the nav look better
 - See if I can break up the long list of social icons, it's too much
 - Fix the titles lookily choppily inserted
