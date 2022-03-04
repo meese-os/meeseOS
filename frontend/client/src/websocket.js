@@ -204,7 +204,7 @@ export default class Websocket extends EventEmitter {
 	 */
 	send(...args) {
 		// TODO: Fix problem here after closing terminal window;
-			// `WebSocket is already in CLOSING or CLOSED state.`
+		// `WebSocket is already in CLOSING or CLOSED state.`
 		return this.connection.send(...args);
 	}
 

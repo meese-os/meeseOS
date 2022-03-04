@@ -180,9 +180,8 @@ export default class MultipleColorsDialog extends Dialog {
 						};
 
 						const newHex = componentToHex(newComponent);
-						this.value[this.selectedColor] = state.value[
-							state.selectedColor
-						] = newHex;
+						this.value[this.selectedColor] = state.value[state.selectedColor] =
+							newHex;
 
 						return { [color]: newValue };
 					},
