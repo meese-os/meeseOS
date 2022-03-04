@@ -11,6 +11,7 @@ if [ -f .env ]
 then
 	export $(sed 's/#.*//g' .env | xargs)
 else
+	# If no `.env` file exists, ask the user for the data:
 	read -p "Username: " USERNAME
 	read -sp "Password: " PASSWORD
 	printf "\n"
