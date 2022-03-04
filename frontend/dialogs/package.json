@@ -1,0 +1,90 @@
+{
+  "name": "@aaronmeese.com/dialogs",
+  "version": "2.1.2",
+  "description": "aaronmeese.com Dialogs",
+  "main": "dist/main.js",
+  "module": "dist/main.js",
+  "style": "dist/main.css",
+  "files": [
+    "dist/main.js",
+    "dist/main.js.map",
+    "dist/main.css",
+    "dist/main.css.map",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "eslint": "eslint index.js 'src/**/*.js'",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "stylelint": "stylelint index.scss 'src/**/*.scss'",
+    "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
+  },
+  "devDependencies": {
+    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@babel/core": "^7.17.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "eslint": "^8.9.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "sass": "^1.49.7",
+    "sass-loader": "^12.5.0",
+    "stylelint": "^14.5.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-scss": "^4.1.0",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@aaronmeese.com/gui": "workspace:*",
+    "deepmerge": "^4.2.2",
+    "hyperapp": "^1.2.10",
+    "is-plain-object": "^5.0.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@aaronmeese.com/stylelint-config"
+  },
+  "esdoc": {
+    "source": "./src",
+    "destination": "./doc",
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "brand": {
+            "title": "aaronmeese.com Dialog API",
+            "description": "aaronmeese.com Dialog API Documentation"
+          },
+          "lint": {
+            "enable": false
+          },
+          "coverage": {
+            "enable": false
+          },
+          "undocumentIdentifier": {
+            "enable": false
+          }
+        }
+      },
+      {
+        "name": "esdoc-publish-html-plugin"
+      }
+    ]
+  }
+}

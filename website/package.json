@@ -1,0 +1,92 @@
+{
+  "name": "@aaronmeese.com/website",
+  "version": "2.0.1",
+  "description": "aaronmeese.com, implemented in OS.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "eslint": "eslint 'src/client/**/*.js' 'src/server/**/*.js'",
+    "stylelint": "stylelint 'src/client/*.scss'",
+    "serve": "node src/server/index.js",
+    "build:manifest": "meese-cli package:discover",
+    "package:discover": "meese-cli package:discover",
+    "package:create": "meese-cli package:create",
+    "make:auth": "meese-cli make:auth",
+    "make:settings": "meese-cli make:settings",
+    "make:vfs": "meese-cli make:vfs",
+    "make:application": "meese-cli make:application",
+    "make:iframe-application": "meese-cli make:iframe-application",
+    "make:provider": "meese-cli make:provider",
+    "build": "npm run package:discover && webpack",
+    "watch": "webpack --watch"
+  },
+  "author": "Aaron Meese <aaronjmeese@gmail.com>",
+  "devDependencies": {
+    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@babel/core": "^7.17.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "eslint": "^8.9.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "sass": "^1.49.7",
+    "sass-loader": "^12.5.0",
+    "stylelint": "^14.5.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-scss": "^4.1.0",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "html-webpack-plugin": "^5.5.0",
+    "nodemon-webpack-plugin": "^4.7.1",
+    "source-map-loader": "^3.0.1"
+  },
+  "dependencies": {
+    "@aaronmeese.com/cli": "workspace:*",
+    "@aaronmeese.com/client": "workspace:*",
+    "@aaronmeese.com/dialogs": "workspace:*",
+    "@aaronmeese.com/filemanager": "workspace:*",
+    "@aaronmeese.com/gui": "workspace:*",
+    "@aaronmeese.com/image-to-8bit": "workspace:*",
+    "@aaronmeese.com/old-site": "workspace:*",
+    "@aaronmeese.com/panels": "workspace:*",
+    "@aaronmeese.com/server": "workspace:*",
+    "@aaronmeese.com/standard-theme": "workspace:*",
+    "@aaronmeese.com/terminal": "workspace:*",
+    "@aaronmeese.com/textpad": "workspace:*",
+    "@aaronmeese.com/widgets": "workspace:*",
+    "@aaronmeese.com/sounds": "workspace:*",
+    "@aaronmeese.com/gnome-icons": "workspace:*",
+    "hyperapp": "^1.2.10",
+    "typeface-roboto": "1.1.13"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 8
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@aaronmeese.com/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
+}

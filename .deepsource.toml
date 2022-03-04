@@ -1,22 +1,25 @@
 version = 1
 
+exclude_patterns = ["common/**"]
+
 [[analyzers]]
 name = "javascript"
 enabled = true
 
   [analyzers.meta]
   plugins = ["react"]
-
-[[analyzers]]
-name = "php"
-enabled = true
+  environment = ["nodejs","browser","jest"]
 
 [[analyzers]]
 name = "docker"
 enabled = true
 
-[[transformers]]
-name = "php-cs-fixer"
+[[analyzers]]
+name = "secrets"
+enabled = true
+
+[[analyzers]]
+name = "shell"
 enabled = true
 
 [[transformers]]

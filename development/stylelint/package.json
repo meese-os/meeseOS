@@ -1,0 +1,13 @@
+{
+  "name": "@aaronmeese.com/stylelint-config",
+  "version": "1.0.0",
+  "description": "aaronmeese.com Stylelint configuration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"stylelint-config does not need to be built\""
+  },
+  "dependencies": {
+    "stylelint": "^13.8.0"
+  }
+}

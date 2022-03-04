@@ -1,0 +1,8 @@
+{
+  "name": "FileManager",
+  "category": "utilities",
+  "icon": "icon.png",
+  "title": "File Manager",
+  "description": "File Manager",
+  "files": ["main.js", "main.css"]
+}

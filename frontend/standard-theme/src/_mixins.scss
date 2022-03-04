@@ -1,0 +1,135 @@
+/*
+ * OS.js - JavaScript Cloud/Web Desktop Platform
+ *
+ * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @licence Simplified BSD License
+ */
+
+@mixin shadowed {
+	box-shadow: 0 0 $base-margin rgba(0, 0, 0, 0.5);
+}
+
+@mixin focusable {
+	&:focus {
+		outline: $outline;
+	}
+
+	&:disabled {
+		opacity: 0.8;
+	}
+}
+
+@mixin panel {
+	@include shadowed;
+
+	background: $panel-background;
+	color: $panel-foreground;
+}
+
+@mixin button {
+	@include focusable;
+
+	border: $button-border;
+	background: $button-background-fallback;
+	background: $button-background;
+	color: $button-foreground;
+
+	&[active="true"],
+	&:active {
+		border: $button-border-active;
+		background: $button-background-active;
+		outline: 0 none;
+	}
+
+	&:disabled {
+		color: lighten($button-foreground, 50%);
+	}
+}
+
+@mixin input {
+	@include focusable;
+
+	border: $input-border;
+	background: $input-background;
+	color: $input-foreground;
+
+	&:disabled {
+		color: lighten($input-foreground, 50%);
+	}
+}
+
+@mixin view {
+	border: $view-border;
+	background: $view-background;
+}
+
+@mixin window-button($from, $to) {
+	background: $from;
+	background: linear-gradient(to bottom, $from 0%, $to 100%);
+}
+
+@mixin window {
+	border: $window-border;
+	background: $window-background;
+	border-radius: 4px;
+
+	@include shadowed;
+}
+
+@mixin range-slider-input {
+	background: transparent;
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+	height: $range-slider-height;
+	-webkit-appearance: none;
+}
+
+@mixin range-slider-track {
+	width: $range-slider-track-width;
+	height: $range-slider-track-height;
+	background: $view-background;
+	border-radius: $range-slider-track-border-radius;
+	border: 0 none;
+	cursor: pointer;
+}
+
+@mixin range-slider-button {
+	border: $button-border;
+	height: $range-slider-button-height;
+	width: $range-slider-button-width;
+	border-radius: $range-slider-button-border-radius;
+	background: $button-background;
+	margin-top: -$range-slider-track-height / 2;
+	cursor: pointer;
+}
+
+@mixin range-slider-ms-fill {
+	background: $view-background;
+	border: $input-border;
+	border-radius: $range-slider-track-border-radius;
+}

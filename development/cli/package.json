@@ -1,0 +1,68 @@
+{
+  "name": "@aaronmeese.com/cli",
+  "version": "1.1.1",
+  "description": "aaronmeese.com CLI",
+  "main": "index.js",
+  "files": [
+    "bin",
+    "src",
+    "index.js",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "echo \"There is no build command for cli\" && exit 0",
+    "test": "npm run eslint && npm run jest",
+    "jest": "jest",
+    "coverage": "jest --coverage",
+    "eslint": "eslint index.js 'src/**/*.js' 'bin/*.js'",
+    "prepublishOnly": "npm run test"
+  },
+  "bin": {
+    "meese-cli": "bin/cli.js"
+  },
+  "engines": {
+    "node": ">=8.0"
+  },
+  "devDependencies": {
+    "@aaronmeese.com/eslint-config": "workspace:*",
+    "eslint": "^8.9.0",
+    "jest": "^26.0.0"
+  },
+  "dependencies": {
+    "commander": "^4.1.1",
+    "consola": "^2.15.0",
+    "fs-extra": "^9.0.1",
+    "getopts": "^2.2.5",
+    "globby": "^11.0.2",
+    "inquirer": "^7.3.3",
+    "temp": "^0.9.4",
+    "which": "^2.0.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2018,
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__mocks__/setup.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/tasks/watch.js",
+      "/node_modules/"
+    ]
+  }
+}

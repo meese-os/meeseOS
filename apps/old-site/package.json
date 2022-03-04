@@ -1,0 +1,82 @@
+{
+  "name": "@aaronmeese.com/old-site",
+  "version": "1.0.3",
+  "description": "Old aaronmeese.com design",
+  "scripts": {
+    "eslint": "eslint *.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "stylelint": "stylelint index.scss src/**/*.scss",
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && npm run build"
+  },
+  "files": [
+    "dist/",
+    "server.js",
+    "metadata.json"
+  ],
+  "devDependencies": {
+    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@babel/core": "^7.17.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "eslint": "^8.9.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "sass": "^1.49.7",
+    "sass-loader": "^12.5.0",
+    "stylelint": "^14.5.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-scss": "^4.1.0",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "@babel/preset-react": "^7.0.0",
+    "postcss": "^8.4.5",
+    "postcss-loader": "^4.0.0",
+    "postcss-preset-env": "^7.2.3",
+    "style-loader": "^2.0.0"
+  },
+  "dependencies": {
+    "@react-hook/window-size": "3.0.5",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.4.1",
+    "dotenv": "^16.0.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.6.0",
+    "prop-types": "^15.8.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-typical": "^0.1.3"
+  },
+  "meeseOS": {
+    "type": "package"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@aaronmeese.com/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
+}

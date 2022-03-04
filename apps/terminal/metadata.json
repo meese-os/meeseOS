@@ -1,0 +1,10 @@
+{
+  "name": "Terminal",
+  "category": "network",
+  "icon": "logo.svg",
+  "singleton": true,
+  "title": "Xterm",
+  "description": "Xterm remote shell",
+  "server": "server.js",
+  "files": ["main.js", "main.css"]
+}

@@ -1,0 +1,136 @@
+{
+  "name": "@aaronmeese.com/client",
+  "version": "2.1.4",
+  "description": "aaronmeese.com client",
+  "main": "dist/main.js",
+  "style": "dist/main.css",
+  "typings": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "dist/main.js",
+    "dist/main.js.map",
+    "dist/main.css",
+    "dist/main.css.map",
+    "dist/*.png",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint && npm run jest",
+    "jest": "jest",
+    "coverage": "jest --coverage",
+    "eslint": "eslint index.js 'src/**/*.js'",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "stylelint": "stylelint index.scss src/**/*.scss",
+    "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
+  },
+  "devDependencies": {
+    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@babel/core": "^7.17.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "babel-loader": "^8.2.3",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "eslint": "^8.9.0",
+    "html-loader": "^3.1.0",
+    "html-loader-jest": "^0.2.1",
+    "mini-css-extract-plugin": "^2.5.3",
+    "sass": "^1.49.7",
+    "sass-loader": "^12.5.0",
+    "stylelint": "^14.5.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-scss": "^4.1.0",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "jest": "^26.0.0"
+  },
+  "dependencies": {
+    "@aaronmeese.com/common": "workspace:*",
+    "@aaronmeese.com/event-emitter": "workspace:*",
+    "@aaronmeese.com/sounds": "workspace:*",
+    "css-mediaquery": "^0.1.2",
+    "deepmerge": "^4.2.2",
+    "hyperapp": "^1.2.10",
+    "js-cookie": "^3.0.1",
+    "simplejsonconf": "^2.0.7"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@aaronmeese.com/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "esdoc": {
+    "source": "./src",
+    "destination": "./doc",
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "brand": {
+            "title": "aaronmeese.com Core API",
+            "description": "aaronmeese.com Core API Documentation"
+          },
+          "lint": {
+            "enable": false
+          },
+          "coverage": {
+            "enable": false
+          },
+          "undocumentIdentifier": {
+            "enable": false
+          }
+        }
+      },
+      {
+        "name": "esdoc-publish-html-plugin"
+      },
+      {
+        "name": "esdoc-ecmascript-proposal-plugin",
+        "option": {
+          "all": true
+        }
+      }
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "testEnvironment": "jsdom",
+    "coverageReporters": [
+      "lcov"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__mocks__/setup.js"
+    ],
+    "moduleNameMapper": {
+      "^meeseOS$": "<rootDir>/__mocks__/core.js",
+      "^.+\\.html?$": "html-loader-jest",
+      "^.+\\.scss$": "<rootDir>/__mocks__/null-module.js",
+      "^.+\\.(png|jpe?g|gif)$": "<rootDir>/__mocks__/null-module.js"
+    },
+    "coveragePathIgnorePatterns": [
+      "src/config.js",
+      "src/providers",
+      "/node_modules/"
+    ]
+  }
+}

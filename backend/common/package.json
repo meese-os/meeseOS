@@ -1,0 +1,88 @@
+{
+  "name": "@aaronmeese.com/common",
+  "version": "1.0.1",
+  "description": "aaronmeese.com Common Modules",
+  "main": "dist/main.js",
+  "module": "dist/main.js",
+  "typings": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "dist/main.js.map",
+    "dist/main.js",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "eslint": "eslint index.js 'src/**/*.js'",
+    "prepublishOnly": "npm run eslint && rm ./dist/* && NODE_ENV=production npm run build"
+  },
+  "devDependencies": {
+    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@babel/core": "^7.17.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "babel-loader": "^8.2.3",
+    "eslint": "^8.9.0",
+    "stylelint": "^14.5.0",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@aaronmeese.com/event-emitter": "workspace:*",
+    "async-dependency-graph": "^1.1.4",
+    "deepmerge": "^4.2.2",
+    "omit-deep": "^0.3.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@aaronmeese.com/eslint-config"
+  },
+  "babel": {
+    "sourceType": "unambiguous",
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "esdoc": {
+    "source": "./src",
+    "destination": "./doc",
+    "plugins": [
+      {
+        "name": "esdoc-standard-plugin",
+        "option": {
+          "brand": {
+            "title": "aaronmeese.com Common API",
+            "description": "aaronmeese.com Common API Documentation"
+          },
+          "lint": {
+            "enable": false
+          },
+          "coverage": {
+            "enable": false
+          },
+          "undocumentIdentifier": {
+            "enable": false
+          }
+        }
+      },
+      {
+        "name": "esdoc-publish-html-plugin"
+      },
+      {
+        "name": "./src/esdoc.js"
+      }
+    ]
+  }
+}

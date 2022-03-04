@@ -1,0 +1,169 @@
+// Variables
+$green: #0a0;
+$blinkDuration: 2.5s;
+$blinkAnimationType: linear;
+$minBlinkOpacity: 0.1;
+$loading-offset: 25px;
+
+@font-face {
+	font-family: "Terminal";
+	src: url("./src/fonts/_terminal.ttf") format("truetype");
+}
+
+.meeseOS-boot-splash {
+	width: 100%;
+	height: 100%;
+
+	body {
+		margin: 0;
+	}
+
+	[data-letter-crap] {
+		/* TODO: Conditional font size */
+		position: relative;
+		white-space: pre;
+		overflow: hidden;
+		font-size: 10px;
+		line-height: 10px;
+		font-family: monospace;
+		padding: 0;
+		color: $green;
+		width: 90%;
+		max-width: 1200px;
+	}
+}
+
+#loadingSeparator {
+	border: 0;
+	border-top: 1px dashed gray;
+	width: 250px;
+	border-image: radial-gradient(gray, transparent) 1;
+}
+
+// https://stackoverflow.com/revisions/16344389/7
+.blinking {
+	font-family: Terminal;
+	font-size: 24px;
+	color: $green;
+	text-shadow: 0 0 5px $green;
+
+	-webkit-animation-name: blinker;
+	-webkit-animation-duration: $blinkDuration;
+	-webkit-animation-timing-function: $blinkAnimationType;
+	-webkit-animation-iteration-count: infinite;
+
+	-moz-animation-name: blinker;
+	-moz-animation-duration: $blinkDuration;
+	-moz-animation-timing-function: $blinkAnimationType;
+	-moz-animation-iteration-count: infinite;
+
+	animation-name: blinker;
+	animation-duration: $blinkDuration;
+	animation-timing-function: $blinkAnimationType;
+	animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: $minBlinkOpacity;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-webkit-keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: $minBlinkOpacity;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: $minBlinkOpacity;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.loadingPage {
+	width: 100%;
+	height: calc(100% + $loading-offset);
+	top: 0;
+	left: 0;
+	text-align: center;
+	z-index: 9999999999999999;
+	color: #fff;
+	background-color: #000;
+	transition: 1s;
+
+	.loadingContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		margin-top: -$loading-offset;
+
+		h1 {
+			font-family: Terminal;
+			letter-spacing: 1.35px;
+			text-shadow: 0 0 1.5px #fff;
+		}
+	}
+}
+
+#mouseMoved {
+	display: none;
+}
+
+#loadingBar {
+	font-family: monospace;
+	font-size: 12px;
+	line-height: 20px;
+	width: 0;
+	min-width: 0;
+	max-width: 100%;
+	height: 20px;
+	min-height: 20px;
+	max-height: 20px;
+	overflow: visible;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: #fff;
+	background: $green;
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	box-shadow: 0 -3px 0 $green;
+}
+
+#loadingBar:before {
+	content: "\00a0";
+}
+
+#loadingBarDiv {
+	width: 75%;
+	min-width: 200px;
+	max-width: 800px;
+	height: 20px;
+	min-height: 20px;
+	max-height: 20px;
+	background: #000;
+	position: relative;
+	display: inline-block;
+	text-align: left;
+	overflow: visible;
+}

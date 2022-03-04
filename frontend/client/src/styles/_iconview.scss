@@ -1,0 +1,112 @@
+/*
+ * OS.js - JavaScript Cloud/Web Desktop Platform
+ *
+ * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @license Simplified BSD License
+ */
+
+.meeseOS-desktop-iconview {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	&__wrapper {
+		position: absolute;
+		top: 1em;
+		left: 1em;
+		width: calc(100% - 2em);
+		height: calc(100% - 2em);
+	}
+
+	&__entry {
+		$self: &;
+
+		vertical-align: top;
+		display: inline-block;
+		position: relative;
+		z-index: 0;
+		text-align: center;
+		overflow: hidden;
+		margin: 0.5em;
+		width: 5em;
+		height: 6.5em;
+
+		&__inner {
+			width: 100%;
+			min-height: 100%;
+		}
+
+		&__icon {
+			flex-grow: 1;
+			height: 4.5em;
+			width: 100%;
+			padding: 0.5em;
+			box-sizing: border-box;
+			position: relative;
+
+			&__shortcut {
+				width: 1em;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
+
+			&__icon {
+				width: 100%;
+			}
+		}
+
+		&__label {
+			height: 1rem;
+			width: 100%;
+			box-sizing: border-box;
+			overflow: hidden;
+			text-align: center;
+			word-break: break-all;
+			text-overflow: ellipsis;
+		}
+
+		&--selected {
+			z-index: 1;
+			overflow: visible;
+
+			#{ $self }__icon {
+				background-color: rgba(0, 0, 200, 0.9);
+			}
+
+			#{ $self }__label {
+				padding: 0 0.5em 0.5em 0.5em;
+				background-color: rgba(0, 0, 200, 0.9);
+				color: #fff;
+				overflow: visible;
+				height: auto;
+				overflow-wrap: break-word;
+			}
+		}
+	}
+}

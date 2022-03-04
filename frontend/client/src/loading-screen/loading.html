@@ -1,0 +1,34 @@
+<!--
+	IDEA: If a terminal, don't do any of this until loading up the desktop.
+	Then the blinking part could be removed entirely.
+-->
+
+<div class="loadingPage" id="mouseNotMoved">
+	<div class="loadingContainer">
+		<p class="blinking">Click anywhere to wake MeeseOS...</p>
+	</div>
+</div>
+
+<div class="loadingPage" id="mouseMoved">
+	<div class="loadingContainer">
+		<div
+			data-lettercrap-text="Aaron Meese"
+			data-lettercrap-aspect-ratio="0.3"
+		></div>
+		<hr id="loadingSeparator" />
+
+		<h1>MeeseOS</h1>
+		<div id="loadingBarDiv">
+			<div id="loadingBar">
+				<!-- TODO: Make this transition smoother;
+					- https://github.com/lucagez/bars
+					- https://codepen.io/avstorm/pen/abdajMB
+					- https://kimmobrunfeldt.github.io/progressbar.js/
+					- https://loading.io/progress/
+					- https://codepen.io/sleek-geek/pen/LVVEMY
+				-->
+				Initializing...
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,7 @@
+{
+  "type": "theme",
+  "name": "StandardTheme",
+  "title": "Standard Theme",
+  "description": "Standard Theme",
+  "files": ["main.js", "main.css"]
+}

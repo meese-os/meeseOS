@@ -1,0 +1,7 @@
+{
+  "type": "icons",
+  "name": "GnomeIcons",
+  "title": "Gnome Icons",
+  "description": "Gnome Icons",
+  "files": ["main.css"]
+}
