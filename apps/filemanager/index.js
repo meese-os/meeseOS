@@ -637,13 +637,13 @@ const menuFactory = (core, proc, win) => {
 		});
 
 		const configuredItems = [];
-    if (core.config('filemanager.disableDownload', false) !== true) {
-      configuredItems.push({
-        label: "Download",
-        disabled: !item || isDirectory || !isValidFile,
-        onclick: () => emitter('filemanager:menu:download')
-      });
-    }
+		if (core.config("filemanager.disableDownload", false) !== true) {
+			configuredItems.push({
+				label: "Download",
+				disabled: !item || isDirectory || !isValidFile,
+				onclick: () => emitter("filemanager:menu:download"),
+			});
+		}
 
 		return [
 			...openMenu,
