@@ -8,7 +8,7 @@ module.exports = {
 	devtool: "source-map",
 	entry: path.resolve(__dirname, "index.js"),
 	externals: {
-		meeseOS: "MeeseOS"
+		meeseOS: "MeeseOS",
 	},
 	optimization: {
 		minimize,
@@ -24,9 +24,9 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules\/(?!@meeseOS)/,
 				use: {
-					loader: "babel-loader"
-				}
-			}
-		]
-	}
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
 };
