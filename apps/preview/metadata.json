@@ -1,0 +1,14 @@
+{
+  "name": "Preview",
+  "category": "graphics",
+  "icon": "icon.png",
+  "title": "Preview",
+  "description": "See images and videos",
+  "mimes": [
+    "^image\/(.*)",
+    "^video\/(.*)"
+  ],
+  "files": [
+    "main.js"
+  ]
+}

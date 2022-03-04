@@ -501,6 +501,10 @@
       "projectFolder": "frontend/panels"
     },
     {
+      "packageName": "@aaronmeese.com/preview",
+      "projectFolder": "apps/preview"
+    },
+    {
       "packageName": "@aaronmeese.com/server",
       "projectFolder": "backend/server"
     },

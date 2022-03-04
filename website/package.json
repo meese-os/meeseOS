@@ -54,6 +54,7 @@
     "@aaronmeese.com/image-to-8bit": "workspace:*",
     "@aaronmeese.com/old-site": "workspace:*",
     "@aaronmeese.com/panels": "workspace:*",
+    "@aaronmeese.com/preview": "workspace:*",
     "@aaronmeese.com/server": "workspace:*",
     "@aaronmeese.com/standard-theme": "workspace:*",
     "@aaronmeese.com/terminal": "workspace:*",
