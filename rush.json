@@ -509,6 +509,10 @@
       "projectFolder": "backend/server"
     },
     {
+      "packageName": "@aaronmeese.com/settings",
+      "projectFolder": "apps/settings"
+    },
+    {
       "packageName": "@aaronmeese.com/sounds",
       "projectFolder": "frontend/sounds"
     },
