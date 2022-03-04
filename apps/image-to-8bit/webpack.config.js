@@ -15,7 +15,7 @@ module.exports = {
 	},
 	plugins: [
 		new CopyWebpackPlugin({
-			patterns: ["icon.png"],
+			patterns: ["game_controller.png"],
 		}),
 	],
 	module: {

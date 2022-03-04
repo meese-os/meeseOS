@@ -1,7 +1,7 @@
 {
   "name": "image-to-8bit",
   "category": "utilities",
-  "icon": "icon.png",
+  "icon": "game_controller.png",
   "title": "Image to 8-bit",
   "description": "Convert an image to an 8-bit likeness",
   "files": ["main.js"]
