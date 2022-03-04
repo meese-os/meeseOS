@@ -56,6 +56,8 @@ export default class Websocket extends EventEmitter {
 	 */
 	constructor(name, uri, options = {}) {
 		logger.debug("Websocket::constructor()", name, uri);
+		// NOTE: This is the last thing logged to console before
+		// the app freezes and refuses to load any further
 
 		super("Websocket@" + name);
 
@@ -201,7 +203,8 @@ export default class Websocket extends EventEmitter {
 	 * Wrapper for sending data
 	 */
 	send(...args) {
-		// TODO: Fix problem here after closing terminal window
+		// TODO: Fix problem here after closing terminal window;
+			// `WebSocket is already in CLOSING or CLOSED state.`
 		return this.connection.send(...args);
 	}
 

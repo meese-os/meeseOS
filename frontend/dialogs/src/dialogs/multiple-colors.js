@@ -152,6 +152,9 @@ export default class MultipleColorsDialog extends Dialog {
 		// Initially set the selected color to the first in the list
 		const [firstKey] = Object.keys(this.value);
 		this.selectedColor = firstKey;
+
+		// TODO: Store copy of original colors, so we can revert if user cancels
+		// TODO: Close dialog if the widget is deleted
 	}
 
 	render(options) {
@@ -177,8 +180,9 @@ export default class MultipleColorsDialog extends Dialog {
 						};
 
 						const newHex = componentToHex(newComponent);
-						this.value[this.selectedColor] = state.value[state.selectedColor] =
-							newHex;
+						this.value[this.selectedColor] = state.value[
+							state.selectedColor
+						] = newHex;
 
 						return { [color]: newValue };
 					},

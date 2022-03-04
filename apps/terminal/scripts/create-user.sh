@@ -9,26 +9,26 @@ fi
 
 echo "Creating user '$USERNAME'..."
 
-# TODO: Limited or restricted shell here
-	# https://stackoverflow.com/a/14811915/6456163
-	# https://linux.die.net/man/1/lshell
-	# https://www.mail-archive.com/secureshell@securityfocus.com/msg00301.html
-	# https://docstore.mik.ua/orelly/networking_2ndEd/ssh/ch08_02.htm#ch08-13075.html
-	# https://www.google.com/search?q=jailkit&sourceid=chrome&ie=UTF-8
-	# https://tecadmin.net/how-to-limit-user-access-with-lshell-limited-shell/
-	# https://www.techrepublic.com/article/how-to-use-restricted-shell-to-limit-user-access-to-a-linux-system/
-sudo useradd -m -s /bin/bash "$USERNAME"
+# Create secure jail for the new user
+sh ./create-jail.sh
+
+# Add the new user to the jail
+echo "$USERNAME:x:2000:100::/jail/./home/$USERNAME:/usr/sbin/jk_chrootsh" >> /etc/passwd
+echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/bash" >> /jail/etc/passwd
+echo "$USERNAME::11302:0:99999:7:::" >> /etc/shadow
+
+# Create the new user and their home directory
 echo "$USERNAME:$PASSWORD" | sudo chpasswd
+cd /jail/home
+sudo jk_cp -v -f /jail /etc/shadow
+sudo jk_cp -v -f /jail /etc/shadow-
+sudo mkdir jailuser
+sudo chown 2000:100 jailuser
 
-# Remove Maildir if it was created by the system
-Maildir=/home/"$USERNAME"/Maildir
-if [ -d "$Maildir" ]; then rm -rf "$Maildir"; fi
-
-# IDEA: Get user input for Jenkins here with
-# https://www.shellhacks.com/jenkins-pipeline-input-step-example/
+# Configure what is accessible to the new user
+sh ./configure-jail.sh
 
 # TODO: Copy custom README template to /home/xterm/README.md
-# TODO: Limit user's permissions so they cannot access directories that they aren't supposed to
 # TODO: Add an intentional vulnerability somewhere for CTF
 # https://www.linuxquestions.org/questions/linux-server-73/motd-or-login-banner-per-user-699925/
 
