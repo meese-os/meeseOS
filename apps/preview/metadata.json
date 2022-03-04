@@ -4,11 +4,6 @@
   "icon": "icon.png",
   "title": "Preview",
   "description": "See images and videos",
-  "mimes": [
-    "^image\/(.*)",
-    "^video\/(.*)"
-  ],
-  "files": [
-    "main.js"
-  ]
+  "mimes": ["^image/(.*)", "^video/(.*)"],
+  "files": ["main.js"]
 }
