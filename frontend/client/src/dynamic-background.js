@@ -84,13 +84,15 @@ const matrixEffect = (canvas, options) => {
 
 	// Makes it start off fast (to cover the whole screen) then slow down
 	let fastSpeedOver = false;
-	const interval = setInterval(draw, 10);
+	const fastSpeed = 10;
+	const interval = setInterval(draw, fastSpeed);
+	const timeForWholeScreen = fastSpeed * screen.height / fontSize;
+
 	setTimeout(function () {
-		// TODO: Figure out some math to make this exactly fit the SCREEN height on every device
 		clearInterval(interval);
 		fastSpeedOver = true;
 		draw();
-	}, 1000);
+	}, timeForWholeScreen);
 };
 
 module.exports = {
