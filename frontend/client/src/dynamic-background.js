@@ -86,7 +86,7 @@ const matrixEffect = (canvas, options) => {
 	let fastSpeedOver = false;
 	const fastSpeed = 10;
 	const interval = setInterval(draw, fastSpeed);
-	const timeForWholeScreen = fastSpeed * screen.height / fontSize;
+	const timeForWholeScreen = (fastSpeed * screen.height) / fontSize;
 
 	setTimeout(function () {
 		clearInterval(interval);
