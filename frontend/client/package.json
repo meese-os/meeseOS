@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/client",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "aaronmeese.com client",
   "main": "dist/main.js",
   "style": "dist/main.css",
