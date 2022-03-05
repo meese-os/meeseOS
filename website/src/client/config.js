@@ -43,6 +43,18 @@ export default {
 	},
 	desktop: {
 		settings: {
+			background: {
+				// TODO: Add a dialog for selecting effects as well as images
+				// TODO: Add other cool images available to use by default
+				type: "dynamic",
+				effect: "matrixEffect",
+				options: {
+					//backgroundColor: "#000000",
+					//rainColor: "green",
+					//rainbowMode: true,
+					//speed: 20,
+				}
+			},
 			widgets: [
 				{
 					name: "digitalclock",

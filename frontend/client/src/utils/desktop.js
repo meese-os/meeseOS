@@ -30,6 +30,7 @@
 
 import logger from "../logger";
 import { supportedMedia } from "./dom";
+import effects from "../dynamic-background";
 
 const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
 
@@ -51,6 +52,17 @@ export const isDroppingImage = (data) =>
  * Creates a set of styles based on background settings
  */
 export const applyBackgroundStyles = (core, background) => {
+	if (background.type === "standard") {
+		createStandardBackground(core, background);
+	} else if (background.type === "dynamic") {
+		createDynamicBackground(background);
+	}
+};
+
+/**
+ * Creates a standard background with an image and a color, if applicable
+ */
+const createStandardBackground = (core, background) => {
 	const { $root } = core;
 
 	const styles = {
@@ -86,6 +98,17 @@ export const applyBackgroundStyles = (core, background) => {
 	}
 
 	Object.keys(styles).forEach((k) => ($root.style[k] = styles[k]));
+};
+
+/**
+ * Creates a dynamic background based on the specified settings
+ */
+const createDynamicBackground = (background) => {
+	const canvas = document.querySelector(".meeseOS-dynamic-background");
+	const options = background.options || {};
+
+	// Calls the background effect function by name
+	effects[background.effect](canvas, options);
 };
 
 /**

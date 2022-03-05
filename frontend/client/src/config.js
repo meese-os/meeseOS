@@ -202,6 +202,7 @@ export const defaultConfiguration = {
 				position: "top-right",
 			},
 			background: {
+				type: "standard",
 				src: defaultWallpaper,
 				color: "#572a79",
 				style: "cover",

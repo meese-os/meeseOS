@@ -313,9 +313,7 @@ export default class Desktop extends EventEmitter {
 		});
 
 		this.core.$root.addEventListener("keydown", (e) => {
-			if (!e.target) {
-				return;
-			}
+			if (!e.target) return;
 
 			if (e.keyCode === 114) {
 				// F3
