@@ -49,11 +49,11 @@ export default {
 				type: "dynamic",
 				effect: "matrixEffect",
 				options: {
-					//backgroundColor: "#000000",
-					//rainColor: "green",
-					//rainbowMode: true,
-					//speed: 20,
-				}
+					// backgroundColor: "#000000",
+					// rainColor: "green",
+					// rainbowMode: true,
+					// speed: 20,
+				},
 			},
 			widgets: [
 				{
