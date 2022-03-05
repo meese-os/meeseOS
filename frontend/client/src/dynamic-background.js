@@ -10,7 +10,7 @@ const matrixEffect = (canvas, options) => {
 		backgroundColor: "#000000",
 		rainbowMode: false,
 		speed: 40,
-	}
+	};
 
 	// Override the defaults with any user-provided options
 	const settings = Object.assign({}, defaults, options);
@@ -22,16 +22,19 @@ const matrixEffect = (canvas, options) => {
 	// TODO: Make this responsive
 
 	// Unicode Russian characters
-	const russianCharacters = "\u0402\u0403\u040A\u040B\u0411\u0414\u0416\u0419\u041B" +
+	const russianCharacters =
+		"\u0402\u0403\u040A\u040B\u0411\u0414\u0416\u0419\u041B" +
 		"\u0423\u0424\u0426\u0429\u042A\u042E\u042F\u0434\u0436\u0444\u0452\u0457\u045C" +
 		"\u0461\u0463\u0464\u0466\u0468\u046A\u046E\u0471\u0472\u047A\u0481\u0482\u0483" +
-		"\u0494\u0498\u049C\u04A0\u04A8\u04B0\u04B4\u04FC\u04FD\u04FE\u04C7\u04C3\u04C1"
-		.split('');
+		"\u0494\u0498\u049C\u04A0\u04A8\u04B0\u04B4\u04FC\u04FD\u04FE\u04C7\u04C3\u04C1".split(
+			""
+		);
 
-	const fontSizeValue = window.getComputedStyle(canvas, null)
+	const fontSizeValue = window
+		.getComputedStyle(canvas, null)
 		.getPropertyValue("font-size");
 	const fontSize = parseFloat(fontSizeValue);
-	canvas.style.fontSize = (fontSize + 1) + "px";
+	canvas.style.fontSize = fontSize + 1 + "px";
 
 	// Populate the drops array with 1's
 	const num_columns = Math.round(canvas.width / fontSize);
@@ -57,7 +60,12 @@ const matrixEffect = (canvas, options) => {
 		// Draw the raindrops
 		for (let xCoord = 0; xCoord < drops.length; xCoord++) {
 			ctx.fillStyle = settings.backgroundColor;
-			ctx.fillRect(xCoord * fontSize, drops[xCoord] * fontSize, fontSize, fontSize);
+			ctx.fillRect(
+				xCoord * fontSize,
+				drops[xCoord] * fontSize,
+				fontSize,
+				fontSize
+			);
 			ctx.fillStyle = color;
 
 			const character = getRussianCharacter();
@@ -76,15 +84,15 @@ const matrixEffect = (canvas, options) => {
 
 	// Makes it start off fast (to cover the whole screen) then slow down
 	let fastSpeedOver = false;
-	let interval = setInterval(draw, 10);
-	setTimeout(function() {
+	const interval = setInterval(draw, 10);
+	setTimeout(function () {
 		// TODO: Figure out some math to make this exactly fit the SCREEN height on every device
 		clearInterval(interval);
 		fastSpeedOver = true;
 		draw();
 	}, 1000);
-}
+};
 
 module.exports = {
-	matrixEffect
-}
+	matrixEffect,
+};
