@@ -34,6 +34,7 @@ import ColorDialog from "./dialogs/color";
 import ConfirmDialog from "./dialogs/confirm";
 import CustomDialog from "./dialogs/custom";
 import DefaultApplicationDialog from "./dialogs/default-application";
+import DynamicBackgroundsDialog from "./dialogs/dynamic-backgrounds";
 import FontDialog from "./dialogs/font";
 import FileDialog from "./dialogs/file";
 import MultipleColorsDialog from "./dialogs/multiple-colors";
@@ -50,6 +51,7 @@ export default class DialogServiceProvider {
 				color: ColorDialog,
 				confirm: ConfirmDialog,
 				defaultApplication: DefaultApplicationDialog,
+				dynamicBackgrounds: DynamicBackgroundsDialog,
 				font: FontDialog,
 				file: FileDialog,
 				multipleColors: MultipleColorsDialog,

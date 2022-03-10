@@ -34,6 +34,14 @@ import {
 	isDroppingImage,
 	isVisible,
 } from "./utils/desktop";
+import {
+	Box,
+	BoxContainer,
+	RangeField,
+	SelectField,
+	TextField,
+} from "@aaronmeese.com/gui";
+import { app, h } from "hyperapp";
 import { DesktopIconView } from "./adapters/ui/iconview";
 import { EventEmitter } from "@aaronmeese.com/event-emitter";
 import { handleTabOnTextarea } from "./utils/dom";
@@ -522,14 +530,11 @@ export default class Desktop extends EventEmitter {
 		};
 
 		applyCss(newSettings);
-
-		// TODO: Multiple panels
 		applyOverlays("meeseOS/panels", (newSettings.panels || []).slice(-1));
 		applyOverlays("meeseOS/widgets", newSettings.widgets);
 
 		this.applyTheme(newSettings.theme);
 		this.applyIcons(newSettings.icons);
-
 		this.applyIconView(newSettings.iconview);
 
 		this.core.emit("meeseOS/desktop:applySettings");
@@ -601,7 +606,6 @@ export default class Desktop extends EventEmitter {
 		return this._applyTheme(name).then(
 			({ elements, errors, callback, metadata }) => {
 				this._removeIcons();
-
 				this.$icons = Object.values(elements);
 
 				this.emit("icons:init");
@@ -681,6 +685,7 @@ export default class Desktop extends EventEmitter {
 		const droppedImage = isDroppingImage(data);
 		const menu = [];
 
+		// TODO: Show dynamic menu entries
 		const setWallpaper = () =>
 			settings
 				.set("meeseOS/desktop", "background.src", data)
@@ -783,25 +788,38 @@ export default class Desktop extends EventEmitter {
 			.make("meeseOS/packages")
 			.getPackages((p) => p.type === "theme");
 
+		const staticWallpaperDialog = {
+			label: "Static wallpaper",
+			onclick: () => {
+				this.core.make(
+					"meeseOS/dialog",
+					"file",
+					{ mime: ["^image"] },
+					(btn, file) => {
+						if (btn === "ok") {
+							// IDEA: Other options here like "cover"
+							this._applySettingsByKey("background.type", "standard");
+							this._applySettingsByKey("background.src", file);
+						}
+					}
+				);
+			},
+		};
+
+		const dynamicWallpaperDialog = {
+			label: "Dynamic wallpaper",
+			onclick: () => this.createDynamicWallpaperDialog(),
+		};
+
 		const defaultItems = lockSettings
 			? []
 			: [
 					{
-						label: "Select wallpaper",
-						onclick: () => {
-							this.core.make(
-								"meeseOS/dialog",
-								"file",
-								{
-									mime: ["^image"],
-								},
-								(btn, file) => {
-									if (btn === "ok") {
-										this._applySettingsByKey("background.src", file);
-									}
-								}
-							);
-						},
+						label: "Background",
+						items: [
+							staticWallpaperDialog,
+							dynamicWallpaperDialog,
+						],
 					},
 					{
 						label: "Select theme",
@@ -844,6 +862,68 @@ export default class Desktop extends EventEmitter {
 	}
 
 	/**
+	 * Creates a custom dynamic wallpaper dialog
+	 * @private
+	 */
+	createDynamicWallpaperDialog() {
+		const choices = {
+			"Matrix Effect": "matrixEffect",
+		}
+
+		const options = {
+			buttons: ["ok", "cancel"],
+			window: {
+				title: "Dynamic Wallpaper",
+				dimension: { width: 400, height: 200 }
+			}
+		};
+
+		const callbackValue = dialog => {
+			console.log("DIALOG callback:", dialog);
+		};
+
+		const callbackButton = (btn, value) => {
+			// TODO: Try to access the returned state
+			if (btn === "ok") {
+				console.log("Dialog callback button value:", value);
+				this._applySettingsByKey("background.type", "dynamic");
+				this._applySettingsByKey("background.effect", value);
+			}
+		};
+
+		const dialog = this.core.make("meeseOS/dialogs")
+			.create(options, callbackValue, callbackButton);
+
+		// TODO: Add options to customize the effect settings
+		dialog.render($content => {
+			app({
+				// state
+				value: "matrixEffect",
+			}, {
+				// actions
+				setValue: (value) => (state) => {
+					console.log("setValue new value:", value);
+					console.log("setValue state:", state);
+					state.value = value;
+					this.value = value;
+					return { value };
+				},
+			}, (state, actions) => dialog.createView([
+				h(SelectField, {
+					choices: Object.keys(choices),
+					value: state.value,
+					oncreate: (el) => (el.value = state.value),
+					onchange: (event, newEffect) => {
+						console.log("SelectField onchange newEffect:", newEffect);
+						console.log("SelectField onchange mapped newEffect:", choices[newEffect]);
+						actions.setValue(choices[newEffect]);
+					},
+				}),
+			]), $content);
+		});
+	}
+
+	/**
 	 * Sets the keyboard context.
 	 *
 	 * Used for tabbing and other special events
@@ -863,7 +943,6 @@ export default class Desktop extends EventEmitter {
 	 */
 	getRect() {
 		const root = this.core.$root;
-		// FIXME: Is this now wrong because panels are not on the root anymore ?!
 		const { left, top, right, bottom } = this.subtract;
 		const width = root.offsetWidth - left - right;
 		const height = root.offsetHeight - top - bottom;

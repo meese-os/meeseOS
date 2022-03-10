@@ -53,6 +53,7 @@ export const isDroppingImage = (data) =>
  */
 export const applyBackgroundStyles = (core, background) => {
 	if (background.type === "standard") {
+		hideDynamicBackground();
 		createStandardBackground(core, background);
 	} else if (background.type === "dynamic") {
 		createDynamicBackground(background);
@@ -105,11 +106,20 @@ const createStandardBackground = (core, background) => {
  */
 const createDynamicBackground = (background) => {
 	const canvas = document.querySelector(".meeseOS-dynamic-background");
-	const options = background.options || {};
+	canvas.style.display = "inherit";
 
 	// Calls the background effect function by name
+	const options = background.options || {};
 	effects[background.effect](canvas, options);
 };
+
+/**
+ * Hides the dynamic background canvas
+ */
+const hideDynamicBackground = () => {
+	const canvas = document.querySelector(".meeseOS-dynamic-background");
+	canvas.style.display = "none";
+}
 
 /**
  * Creates a rectangle with the realestate panels takes up
