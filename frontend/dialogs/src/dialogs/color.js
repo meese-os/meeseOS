@@ -80,7 +80,7 @@ export default class ColorDialog extends Dialog {
 		let color = args.color;
 		if (color) {
 			if (typeof color === "string") {
-				if (color.substr(0, 1) !== "#") {
+				if (color.charAt(0) !== "#") {
 					color = "#" + color;
 				}
 
@@ -100,10 +100,16 @@ export default class ColorDialog extends Dialog {
 			const initialActions = {
 				setColor: (color) => (state) => color,
 				setComponent:
-					({ color, value }) =>
+					({ color, newValue }) =>
 					(state) => {
-						this.value[color] = value;
-						return { [color]: value };
+						this.value[color] = newValue;
+
+						// Updates the hex as well, since that logic has since been
+						// abstracted to color-utils
+						const hex = componentToHex(state);
+						this.value.hex = hex;
+
+						return { [color]: newValue, hex };
 					},
 				updateHex: () => (state) => {
 					const hex = componentToHex(state);

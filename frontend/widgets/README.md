@@ -12,13 +12,7 @@ This is the Widgets module for MeeseOS
 - https://manual.os-js.org/v3/guide/provider/
 - https://manual.os-js.org/v3/tutorial/widget/
 
-## Installation
-
-First, install the module:
-
-```bash
-npm install @aaronmeese.com/widgets
-```
+## Usage
 
 In your client bootstrap (`src/client/index.js`):
 

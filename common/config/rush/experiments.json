@@ -3,7 +3,7 @@
  * Rush features.  More documentation is available on the Rush website: https://rushjs.io
  */
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/experiments.schema.json"
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/experiments.schema.json",
 
   /**
    * By default, 'rush install' passes --no-prefer-frozen-lockfile to 'pnpm install'.
@@ -22,7 +22,7 @@
    * Used to allow links between workspace projects or the addition/removal of references to existing dependency versions to not
    * cause hash changes.
    */
-  // "omitImportersFromPreventManualShrinkwrapChanges": true,
+  "omitImportersFromPreventManualShrinkwrapChanges": true,
 
   /**
    * If true, the chmod field in temporary project tar headers will not be normalized.
@@ -34,7 +34,7 @@
    * If true, build caching will respect the allowWarningsInSuccessfulBuild flag and cache builds with warnings.
    * This will not replay warnings from the cached build.
    */
-  // "buildCacheWithAllowWarningsInSuccessfulBuild": true,
+  "buildCacheWithAllowWarningsInSuccessfulBuild": true
 
   /**
    * If true, the phased commands feature is enabled. To use this feature, create a "phased" command

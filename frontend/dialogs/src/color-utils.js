@@ -87,7 +87,6 @@ export const hexToComponent = (hex = "#000000") => {
  * @param {String} color hexadecimal color
  * @param {Object} value TODO: typedef
  * @param {Object} actions TODO: typedef
- * @returns TODO: typedef
  */
 export const rangeContainer = (color, value, actions) =>
 	h(Box, { orientation: "vertical", align: "center", padding: false }, [

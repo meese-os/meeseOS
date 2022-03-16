@@ -8,11 +8,7 @@
 
 These are the default ESLint rules for MeeseOS codebase.
 
-## Installation
-
-```
-npm install --save-dev @aaronmeese.com/eslint-config
-```
+## Usage
 
 In your eslint config:
 

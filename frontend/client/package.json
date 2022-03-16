@@ -50,7 +50,9 @@
   },
   "dependencies": {
     "@aaronmeese.com/common": "workspace:*",
+    "@aaronmeese.com/dynamic-wallpapers": "workspace:*",
     "@aaronmeese.com/event-emitter": "workspace:*",
+    "@aaronmeese.com/gui": "workspace:*",
     "@aaronmeese.com/sounds": "workspace:*",
     "css-mediaquery": "^0.1.2",
     "deepmerge": "^4.2.2",

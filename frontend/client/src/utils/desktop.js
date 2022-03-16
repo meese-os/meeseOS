@@ -30,7 +30,7 @@
 
 import logger from "../logger";
 import { supportedMedia } from "./dom";
-import effects from "../dynamic-background";
+import wallpapers from "@aaronmeese.com/dynamic-wallpapers";
 
 const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
 
@@ -108,9 +108,13 @@ const createDynamicBackground = (background) => {
 	const canvas = document.querySelector(".meeseOS-dynamic-background");
 	canvas.style.display = "inherit";
 
+	// TODO: Destroy and re-create canvas as opposed to just hiding it
+	// when transitioning between static and dynamic backgrounds
+
 	// Calls the background effect function by name
+	const effectName = background.effect || "default";
 	const options = background.options || {};
-	effects[background.effect](canvas, options);
+	wallpapers[effectName].effect(canvas, options);
 };
 
 /**
@@ -119,7 +123,7 @@ const createDynamicBackground = (background) => {
 const hideDynamicBackground = () => {
 	const canvas = document.querySelector(".meeseOS-dynamic-background");
 	canvas.style.display = "none";
-}
+};
 
 /**
  * Creates a rectangle with the realestate panels takes up

@@ -28,32 +28,7 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the client configuration tree.
-// Guide: https://manual.os-js.org/v3/config/#client
-// Complete config tree: https://github.com/os-js/osjs-client/blob/master/src/config.js
-//
-
-export default {
-	auth: {
-		login: {
-			username: "demo",
-			password: "demo",
-		},
-	},
-	desktop: {
-		settings: {
-			background: {
-				// TODO: Add other cool images available to use by default!
-				type: "dynamic",
-				effect: "Matrix",
-			},
-			widgets: [
-				{ name: "digitalclock", },
-			],
-		},
-	},
-	filemanager: {
-		disableDownload: false,
-	},
-};
+.Window_SettingsMainWindow {
+  // Windows automatically gets assigned this classname based on 'name'
+  // in your metadata.json file
+}
