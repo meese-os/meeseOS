@@ -56,7 +56,7 @@ import "./index.scss";
 import config from "./config.js";
 
 const init = () => {
-	const meeseOS = new Core(config, {});
+	const meeseOS = new Core(config);
 
 	// Register your service providers
 	meeseOS.register(CoreServiceProvider);

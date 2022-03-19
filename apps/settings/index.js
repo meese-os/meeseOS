@@ -154,8 +154,10 @@ const fieldMap = () => {
 						label: "Dynamic",
 						value: "dynamic"
 					}],
-					oncreate: (ev) =>
-						(ev.value = state.settings.desktop.background.type),
+					oncreate: (ev) => (ev.value =
+						resolveSetting(state.settings, state.defaults)
+							("desktop.background.type")
+					),
 					onchange: (ev) => actions.updateWallpaperType(ev)
 				}),
 				...(state.static
@@ -377,8 +379,11 @@ const renderWindow = (core, proc) => ($content, win) => {
 		defaults: getDefaults(),
 		settings: getSettings(),
 	};
-	initialState.static =
-		initialState.settings.desktop.background.type === "static";
+
+	initialState.static = resolveSetting(
+		initialState.settings,
+		initialState.defaults
+	)("desktop.background.type") === "static";
 
 	const actions = {
 		save: () => (state, actions) => {
