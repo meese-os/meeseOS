@@ -482,6 +482,7 @@ export default class Window extends EventEmitter {
 		// TODO: Global modal
 		if (!this.parent) return;
 		if (this.attributes.modal) {
+			// TODO: Handle this occasionally throwing errors with `settings`
 			this.on("render", () => this.parent.setState("loading", true));
 			this.on("destroy", () => this.parent.setState("loading", false));
 		}

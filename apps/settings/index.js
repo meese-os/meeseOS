@@ -35,6 +35,7 @@ import {
 	SelectField,
 	Tabs,
 	TextField,
+	ToggleField,
 	Toolbar
 } from "@aaronmeese.com/gui";
 import { app, h } from "hyperapp";
@@ -43,6 +44,7 @@ import merge from "deepmerge";
 import meeseOS from "meeseOS";
 import wallpapers from "@aaronmeese.com/dynamic-wallpapers";
 
+/** An array of settings for static backgrounds in MeeseOS. */
 const staticBackgroundItems = [{
 	label: "Image",
 	path: "desktop.background.src",
@@ -53,7 +55,6 @@ const staticBackgroundItems = [{
 	dialog: (props, state, actions, currentValue) => ([
 		"file",
 		{
-			// path: //TODO
 			type: "open",
 			title: "Select background",
 			mime: [/^image/]
@@ -77,25 +78,23 @@ const staticBackgroundItems = [{
 }, {
 	label: "Color",
 	path: "desktop.background.color",
-	type: "dialog",
-	dialog: (props, state, actions, currentValue) => ([
-		"color",
-		{color: currentValue},
-		(btn, value) => {
-			if (btn === "ok") {
-				actions.update({ path: props.path, value: value.hex });
-			}
-		}
-	]),
+	type: "color",
 }];
 
+/**
+ * Returns all of the settings for a given dynamic background effect.
+ * @returns {Object[]}
+ */
 const dynamicBackgroundItems = (state) => {
+	if (state.static) return [];
+
 	const selectedEffectKey = resolveSetting(
 		state.settings,
 		state.defaults
 	)("desktop.background.effect");
+
 	const selectedEffect = wallpapers[selectedEffectKey];
-	const options = selectedEffect.options;
+	const options = selectedEffect.options || {};
 
 	const items = Object.keys(options)
 		.map(key => {
@@ -111,9 +110,42 @@ const dynamicBackgroundItems = (state) => {
 	return items;
 };
 
-// Maps our section items to a field
+/**
+ * Loads all of the available dynamic wallpaper effects.
+ * @return {Object[]}
+ */
+const getDynamicWallpaperChoices = () =>
+	Object.keys(wallpapers).map(key => {
+		const properties = wallpapers[key];
+
+		return {
+			label: properties.label || "Mystery",
+			value: properties.effect.name,
+		};
+	});
+
+/**
+ * Creates a `select` field for dynamic wallpaper effects.
+ * @returns {Object[]}
+ */
+const dynamicBackgroundSelect = (state, actions) => [{
+	label: "Effect",
+	path: "desktop.background.effect",
+	type: "select",
+	choices: () => getDynamicWallpaperChoices(),
+	oncreate: (ev) => (
+		ev.value =
+			state.wallpaperEffect || getDynamicWallpaperChoices()[0].value
+	),
+	onchange: (ev) => actions.setWallpaperEffect(ev)
+}];
+
+// TODO: When the new settings are applied, the old ones should be removed
+// TODO: Scrollbar
+
+/** Maps our section items to a field */
 const fieldMap = () => {
-	const getValue = props => props.transformValue
+	const getValue = (props) => props.transformValue
 		? props.transformValue(props.value)
 		: props.value;
 
@@ -144,6 +176,45 @@ const fieldMap = () => {
 			}, "...")
 		]),
 
+		// TODO: Automatically convert RGB to hex in dialog box, and adjust
+		// range slider elements as is appropriate
+		color: (props) => (state, actions) => h(BoxContainer, {}, [
+			h(TextField, {
+				box: { grow: 1 },
+				readonly: true,
+				value: getValue(props),
+				oninput: (ev, value) => actions.update({ path: props.path, value })
+			}),
+
+			h(Button, {
+				onclick: () => actions.dialog([
+					"color",
+					{ color: getValue(props) },
+					(btn, value) => {
+						if (btn === "ok") {
+							actions.update({ path: props.path, value: value.hex });
+						}
+					}
+				])
+			}, "...")
+		]),
+
+		// TODO: Make this act how I want it to
+		boolean: (props) => (state, actions) => h(ToggleField, {
+			oncreate: (ev) => (ev.value = getValue(props)),
+			oninput: (ev, value) => actions.update({ path: props.path, value })
+		}),
+
+		number: (props) => (state, actions) => h(TextField, {
+			box: { shrink: 1 },
+			type: "number",
+			oncreate: (el) => (el.value = Number(getValue(props))),
+			oninput: (ev, newValue) => {
+				newValue = Number(newValue);
+				actions.update({ path: props.path, value: newValue });
+			},
+		}),
+
 		wallpaper: (props) => (state, actions) =>
 			h(Box, { grow: 1, shrink: 1 }, [
 				h(SelectField, {
@@ -160,10 +231,12 @@ const fieldMap = () => {
 					),
 					onchange: (ev) => actions.updateWallpaperType(ev)
 				}),
-				...(state.static
+				(state.static
 					? render(state, actions, staticBackgroundItems)
-					: render(state, actions, dynamicBackgroundItems(state))
-				)
+					: render(state, actions, dynamicBackgroundSelect(state, actions))
+				),
+				// Will return an empty array if the wallpaper type is not dynamic
+				render(state, actions, dynamicBackgroundItems(state))
 			]),
 
 		fallback: (props) => (state, actions) => h(TextField, {
@@ -173,7 +246,7 @@ const fieldMap = () => {
 	};
 };
 
-// Resolves a tree by dot notation
+/** Resolves an object tree by dot notation */
 const resolve = (tree, key, defaultValue) => {
 	try {
 		const value = key.split(/\./g)
@@ -185,17 +258,17 @@ const resolve = (tree, key, defaultValue) => {
 	}
 };
 
-// Resolves settings by dot notation and gets default values
-const resolveSetting = (settings, defaults) => key =>
+/** Resolves settings by dot notation and gets default values */
+const resolveSetting = (settings, defaults) => (key) =>
 	resolve(settings, key, resolve(defaults, key));
 
-const resolveValue = (key, value) => key === "desktop.iconview.enabled" // FIXME
+const resolveValue = (key, value) => (key) === "desktop.iconview.enabled" // FIXME
 	? value === "true"
 	: value;
 
-// Resolves a new value in our tree
-// FIXME: There must be a better way
-const resolveNewSetting = state => (key, value) => {
+/** Resolves a new value in our tree */
+const resolveNewSetting = (state) => (key, value) => {
+	// FIXME: There must be a better way
 	const object = {};
 	const keys = key.split(/\./g);
 
@@ -214,7 +287,7 @@ const resolveNewSetting = state => (key, value) => {
 
 // https://github.com/os-js/osjs-settings-application/issues/11#issuecomment-1067199781
 
-// Our sections
+/** MeeseOS tab sections */
 const tabSections = [{
 	title: "Background",
 	items: [{
@@ -247,6 +320,7 @@ const tabSections = [{
 		label: "Enable desktop icons",
 		path: "desktop.iconview.enabled",
 		type: "select",
+		// TODO: See if I can get rid of the ()
 		choices: () => ([{
 			label: "Yes",
 			value: "true"
@@ -261,6 +335,7 @@ const tabSections = [{
 		path: "desktop.iconview.fontColorStyle",
 		type: "select",
 		defaultValue: "system",
+		// TODO: See if I can get rid of the ()
 		choices: () => ({
 			system: "System",
 			invert: "Inverted background color",
@@ -269,16 +344,7 @@ const tabSections = [{
 	}, {
 		label: "Custom font color",
 		path: "desktop.iconview.fontColor",
-		type: "dialog",
-		dialog: (props, state, actions, currentValue) => ([
-			"color",
-			{color: currentValue},
-			(btn, value) => {
-				if (btn === "ok") {
-					actions.update({ path: props.path, value: value.hex });
-				}
-			}
-		])
+		type: "color"
 	}]
 }];
 
@@ -302,9 +368,9 @@ const renderItem = (state, actions) => (item) => {
 			value
 		}, item))
 	];
-}
+};
 
-// Renders sections
+/** Renders tab sections into the settings app */
 const renderSections = (core, state, actions) =>
 	tabSections.map((section) => {
 		const items = section.items
@@ -319,7 +385,7 @@ const renderSections = (core, state, actions) =>
 		}, ...items);
 	});
 
-// Renders our settings window
+/** Renders our settings window */
 const renderWindow = (core, proc) => ($content, win) => {
 	const settingsService = core.make("meeseOS/settings");
 	const packageService = core.make("meeseOS/packages");
@@ -338,7 +404,7 @@ const renderWindow = (core, proc) => ($content, win) => {
 				{ value: "", label: "None" },
 				...get("sounds")
 			]
-		}
+		};
 	};
 
 	const getDefaults = () => ({
@@ -401,7 +467,7 @@ const renderWindow = (core, proc) => ($content, win) => {
 				});
 		},
 
-		dialog: options => () => {
+		dialog: (options) => () => {
 			const [name, args, callback] = options;
 
 			createDialog(name, args, {
@@ -414,9 +480,13 @@ const renderWindow = (core, proc) => ($content, win) => {
       static: ev.target.value === "static"
     }),
 
+		setWallpaperEffect: (ev) => ({
+			wallpaperEffect: ev.target.value
+		}),
+
 		update: ({ path, value }) => state => resolveNewSetting(state)(path, value),
 		refresh: () => () => ({ settings: getSettings() }),
-		setLoading: loading => ({ loading })
+		setLoading: (loading) => ({ loading })
 	};
 
 	const instance = app(initialState, actions, view, $content);
@@ -425,7 +495,7 @@ const renderWindow = (core, proc) => ($content, win) => {
 	win.on("settings/refresh", refresh);
 };
 
-// Creates our application
+/** Create our application */
 const register = (core, args, options, metadata) => {
 	const proc = core.make("meeseOS/application", {args, options, metadata});
 

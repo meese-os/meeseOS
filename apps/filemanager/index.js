@@ -150,6 +150,7 @@ const mountViewRowsFactory = (core) => {
 	const fs = core.make("meeseOS/fs");
 	const getMountpoints = () => fs.mountpoints(true);
 
+	// https://github.com/os-js/OS.js/issues/796
 	return () =>
 		getMountpoints().map((m) => ({
 			columns: [

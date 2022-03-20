@@ -1,7 +1,7 @@
 /**
- * A mapping of the variable names to their relevant information
+ * A mapping of the variable names to their relevant information.
  */
-const MatrixOptions = {
+const matrixOptions = {
 	rainColor: {
 		label: "Rain Color",
 		type: "color",
@@ -18,22 +18,22 @@ const MatrixOptions = {
 		defaultValue: false,
 	},
 	speed: {
-		label: "Speed",
+		label: "Delay between drops (ms)",
 		type: "number",
 		defaultValue: 40,
 	},
 };
 
 /**
- * Creates a Matrix falling rain effect with Russian characters
+ * Creates a Matrix falling rain effect with Russian characters.
  * @param {HTMLCanvasElement} canvas
  * @param {Object} options
  * @link https://github.com/ajmeese7/matrix-wallpaper
  */
-const MatrixEffect = (canvas, options) => {
-	const defaults = Object.keys(MatrixOptions)
+const matrix = (canvas, options) => {
+	const defaults = Object.keys(matrixOptions)
 		.map((key) => ({
-			[key]: MatrixOptions[key].defaultValue
+			[key]: matrixOptions[key].defaultValue
 		}));
 
 	// Override the defaults with any user-provided options
@@ -120,6 +120,7 @@ const MatrixEffect = (canvas, options) => {
 };
 
 export default {
-	effect: MatrixEffect,
-	options: MatrixOptions,
+	label: "Matrix",
+	effect: matrix,
+	options: matrixOptions,
 }

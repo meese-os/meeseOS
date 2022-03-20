@@ -28,11 +28,9 @@
  * @licence Simplified BSD License
  */
 
-//
 // This is the client configuration tree.
 // Guide: https://manual.os-js.org/v3/config/#client
 // Complete config tree: https://github.com/os-js/osjs-client/blob/master/src/config.js
-//
 
 export default {
 	auth: {
@@ -46,7 +44,7 @@ export default {
 			background: {
 				// TODO: Add other cool images available to use by default!
 				type: "dynamic",
-				effect: "Matrix",
+				effect: "matrix",
 			},
 			widgets: [
 				{ name: "digitalclock", },

@@ -28,6 +28,9 @@
  * @licence Simplified BSD License
  */
 
+// TODO: Implement parent class override function for update time to make
+// the clock animation smooth if the other method does not work
+
 import Widget from "../widget";
 
 export default class AnalogClockWidget extends Widget {
