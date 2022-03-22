@@ -173,8 +173,6 @@ const fieldMap = () => {
 			}, "...")
 		]),
 
-		// TODO: Automatically convert RGB to hex in dialog box, and adjust
-		// range slider elements as is appropriate
 		color: (props) => (state, actions) => h(BoxContainer, {}, [
 			h(TextField, {
 				box: { grow: 1 },

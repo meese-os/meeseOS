@@ -80,14 +80,26 @@ export default class ColorDialog extends Dialog {
 		let color = args.color;
 		if (color) {
 			if (typeof color === "string") {
-				if (color.charAt(0) !== "#") {
+				if (color.startsWith("rgb")) {
+					const colorComponents = color
+						.replace(/^rgb\(/, "")
+						.replace(/\)$/, "")
+						.split(",")
+						.map(v => parseInt(v, 10));
+
+					color = componentToHex({
+						r: colorComponents[0],
+						g: colorComponents[1],
+						b: colorComponents[2],
+					});
+				} else if (color.charAt(0) !== "#") {
 					color = "#" + color;
 				}
 
-				this.value = Object.assign({}, this.value, hexToComponent(args.color));
-				this.value.hex = args.color;
+				this.value = Object.assign({}, this.value, hexToComponent(color));
+				this.value.hex = color;
 			} else {
-				this.value = Object.assign({}, this.value, args.color);
+				this.value = Object.assign({}, this.value, color);
 				this.value.hex = componentToHex(this.value);
 			}
 		}
