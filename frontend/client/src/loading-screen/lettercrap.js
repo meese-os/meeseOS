@@ -1,29 +1,9 @@
-// Customized from https://github.com/ajmeese7/lettercrap
-export function createLettercrap() {
-	const lettercrapTextElement = document.querySelector(
-		"[data-lettercrap-text]"
-	);
-	const text = lettercrapTextElement.getAttribute("data-lettercrap-text");
-	const imageURL = createImageURL(text);
-	lettercrapTextElement.setAttribute("data-letter-crap", imageURL);
-
-	const lettercrapElement = document.querySelector("[data-letter-crap]");
-	initElement(lettercrapElement);
-}
-
 const charWidth = 6;
 const charHeight = 10;
 const updateInterval = 150;
 const likelihoodOfReplacingWord = 0.05;
 const likelihoodOfChangingExistingText = 0.1;
 const randomChoice = (x) => x[Math.floor(Math.random() * x.length)];
-
-function initElement(element) {
-	const img = new Image();
-	img.onload = () => render(element, img, null);
-	img.src = element.getAttribute("data-letter-crap");
-	img.crossOrigin = "anonymous";
-}
 
 function createImageURL(text) {
 	const canvas = document.createElement("canvas");
@@ -148,4 +128,24 @@ function getTextContentWithImageAtSize(
 		startOfFilledInSequence = null;
 	}
 	return chars;
+}
+
+function initElement(element) {
+	const img = new Image();
+	img.onload = () => render(element, img, null);
+	img.src = element.getAttribute("data-letter-crap");
+	img.crossOrigin = "anonymous";
+}
+
+// Customized from https://github.com/ajmeese7/lettercrap
+export function createLettercrap() {
+	const lettercrapTextElement = document.querySelector(
+		"[data-lettercrap-text]"
+	);
+	const text = lettercrapTextElement.getAttribute("data-lettercrap-text");
+	const imageURL = createImageURL(text);
+	lettercrapTextElement.setAttribute("data-letter-crap", imageURL);
+
+	const lettercrapElement = document.querySelector("[data-letter-crap]");
+	initElement(lettercrapElement);
 }

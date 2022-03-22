@@ -49,18 +49,6 @@ export const isDroppingImage = (data) =>
 	imageDropMimes.some((re) => Boolean(data.mime.match(re)));
 
 /**
- * Creates a set of styles based on background settings
- */
-export const applyBackgroundStyles = (core, background) => {
-	if (background.type === "standard") {
-		hideDynamicBackground();
-		createStandardBackground(core, background);
-	} else if (background.type === "dynamic") {
-		createDynamicBackground(background);
-	}
-};
-
-/**
  * Creates a standard background with an image and a color, if applicable
  */
 const createStandardBackground = (core, background) => {
@@ -123,6 +111,18 @@ const createDynamicBackground = (background) => {
 const hideDynamicBackground = () => {
 	const canvas = document.querySelector(".meeseOS-dynamic-background");
 	canvas.style.display = "none";
+};
+
+/**
+ * Creates a set of styles based on background settings
+ */
+export const applyBackgroundStyles = (core, background) => {
+	if (background.type === "standard") {
+		hideDynamicBackground();
+		createStandardBackground(core, background);
+	} else if (background.type === "dynamic") {
+		createDynamicBackground(background);
+	}
 };
 
 /**

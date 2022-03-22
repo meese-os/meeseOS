@@ -38,21 +38,6 @@ export const createPalette = (width = 98, height = 98) => {
 };
 
 /**
- * Gets the color of a clicked palette area
- */
-export const colorFromClick = (ev, canvas) => {
-	const { clientX, clientY } = ev;
-	const box = canvas.getBoundingClientRect();
-	const cx = clientX - box.x;
-	const cy = clientY - box.y;
-	const ctx = canvas.getContext("2d");
-	const { data } = ctx.getImageData(cx, cy, 1, 1);
-	const [r, g, b] = data;
-	const hex = componentToHex({ r, g, b });
-	return { r, g, b, hex };
-};
-
-/**
  * Convert component values into hex
  */
 export const componentToHex = ({ r, g, b }) => {
@@ -76,6 +61,21 @@ export const hexToComponent = (hex = "#000000") => {
 	val.g = (rgb & (255 << 8)) >> 8;
 	val.b = rgb & 255;
 	return val;
+};
+
+/**
+ * Gets the color of a clicked palette area
+ */
+ export const colorFromClick = (ev, canvas) => {
+	const { clientX, clientY } = ev;
+	const box = canvas.getBoundingClientRect();
+	const cx = clientX - box.x;
+	const cy = clientY - box.y;
+	const ctx = canvas.getContext("2d");
+	const { data } = ctx.getImageData(cx, cy, 1, 1);
+	const [r, g, b] = data;
+	const hex = componentToHex({ r, g, b });
+	return { r, g, b, hex };
 };
 
 /**

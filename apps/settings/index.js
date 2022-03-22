@@ -44,6 +44,23 @@ import merge from "deepmerge";
 import meeseOS from "meeseOS";
 import wallpapers from "@aaronmeese.com/dynamic-wallpapers";
 
+/** Resolves an object tree by dot notation */
+const resolve = (tree, key, defaultValue) => {
+	try {
+		const value = key
+			.split(/\./g)
+			.reduce((result, key) => result[key], Object.assign({}, tree));
+
+		return typeof value === "undefined" ? defaultValue : value;
+	} catch (e) {
+		return defaultValue;
+	}
+};
+
+/** Resolves settings by dot notation and gets default values */
+const resolveSetting = (settings, defaults) => (key) =>
+	resolve(settings, key, resolve(defaults, key));
+
 /** An array of settings for static backgrounds in MeeseOS. */
 const staticBackgroundItems = [
 	{
@@ -266,23 +283,6 @@ const fieldMap = () => {
 			}),
 	};
 };
-
-/** Resolves an object tree by dot notation */
-const resolve = (tree, key, defaultValue) => {
-	try {
-		const value = key
-			.split(/\./g)
-			.reduce((result, key) => result[key], Object.assign({}, tree));
-
-		return typeof value === "undefined" ? defaultValue : value;
-	} catch (e) {
-		return defaultValue;
-	}
-};
-
-/** Resolves settings by dot notation and gets default values */
-const resolveSetting = (settings, defaults) => (key) =>
-	resolve(settings, key, resolve(defaults, key));
 
 const resolveValue = (key, value) =>
 	key === "desktop.iconview.enabled" // FIXME
