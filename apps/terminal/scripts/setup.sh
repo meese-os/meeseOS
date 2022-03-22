@@ -13,7 +13,9 @@ then
 else
 	# If no `.env` file exists, ask the user for the data:
 	read -p "Username: " USERNAME
+	export USERNAME
 	read -sp "Password: " PASSWORD
+	export PASSWORD
 	printf "\n"
 fi
 
