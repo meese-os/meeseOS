@@ -15,13 +15,6 @@ This is the Xterm Application for MeeseOS
 - `bash`
 - `ssh`
 
-## Installation
-
-```bash
-npm install --save --production @aaronmeese.com/xterm-application
-npm run package:discover
-```
-
 # Usage
 
 Start from application menu.

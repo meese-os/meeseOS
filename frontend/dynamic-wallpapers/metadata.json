@@ -1,0 +1,6 @@
+{
+  "name": "DynamicWallpapers",
+  "title": "Dynamic Wallpapers",
+  "description": "A collection of dynamic wallpapers for the MeeseOS desktop.",
+  "files": ["main.js"]
+}

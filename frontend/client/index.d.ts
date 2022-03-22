@@ -2507,6 +2507,7 @@ export type BasicApplicationOptions = {
 	defaultFilename?: string;
 };
 
+// TODO: See if the `as` is needed on all of these
 export {
 	Application as Application,
 	Auth as Auth,

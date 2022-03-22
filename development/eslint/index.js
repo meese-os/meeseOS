@@ -48,7 +48,7 @@ module.exports = {
 		"no-new-object": 2,
 		"no-trailing-spaces": 2,
 		"comma-spacing": ["error", { before: false, after: true }],
-		"object-curly-spacing": ["error", "never"],
+		"object-curly-spacing": ["error", "always"],
 		"prefer-object-spread": 1,
 	},
 };

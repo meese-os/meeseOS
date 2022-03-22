@@ -1,13 +1,22 @@
 {
-  "name": "___NAME___",
+  "name": "@aaronmeese.com/settings",
+  "version": "1.1.1",
+  "description": "MeeseOS Settings Application",
   "scripts": {
-    "test": "npm run eslint",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint *.js",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run test && rm ./dist/* && npm run build"
+    "stylelint": "stylelint index.scss src/**/*.scss",
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && NODE_ENV=production npm run build"
   },
+  "files": [
+    "dist/",
+    "server.js",
+    "metadata.json"
+  ],
   "devDependencies": {
+    "@aaronmeese.com/dynamic-wallpapers": "workspace:*",
     "@aaronmeese.com/eslint-config": "workspace:*",
     "@aaronmeese.com/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
@@ -28,7 +37,14 @@
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@aaronmeese.com/gui": "workspace:*",
+    "deepmerge": "^4.2.2",
+    "hyperapp": "^1.2.10"
+  },
+  "meeseOS": {
+    "type": "package"
+  },
   "eslintConfig": {
     "env": {
       "browser": true,
@@ -39,6 +55,9 @@
     },
     "extends": "@aaronmeese.com/eslint-config"
   },
+  "stylelint": {
+    "extends": "@aaronmeese.com/stylelint-config"
+  },
   "babel": {
     "presets": [
       "@babel/preset-env"
@@ -46,8 +65,5 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  },
-  "meeseOS": {
-    "type": "package"
   }
 }

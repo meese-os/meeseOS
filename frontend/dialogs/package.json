@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/dialogs",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "aaronmeese.com Dialogs",
   "main": "dist/main.js",
   "module": "dist/main.js",
@@ -33,8 +33,8 @@
     "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.9.0",
     "mini-css-extract-plugin": "^2.5.3",
-    "sass": "^1.49.7",
-    "sass-loader": "^12.5.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
     "stylelint": "^14.5.0",
     "stylelint-config-standard": "^25.0.0",
     "stylelint-scss": "^4.1.0",

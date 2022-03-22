@@ -31,8 +31,8 @@
 import { app, h } from "hyperapp";
 import { Menu } from "./components/Menu";
 
-/*
- * Makes sure sub-menus stays within viewport
+/**
+ * Makes sure sub-menus stay within the viewport
  */
 const clampSubMenu = (root, ev) => {
 	let ul = ev.target.querySelector("ul");
@@ -55,8 +55,8 @@ const clampSubMenu = (root, ev) => {
 	}
 };
 
-/*
- * Makes sure menu stays within viewport
+/**
+ * Makes sure menu stays within the viewport
  */
 const clampMenu = (root, el, currentPosition) => {
 	const result = {};
@@ -80,7 +80,7 @@ const clampMenu = (root, el, currentPosition) => {
 	return overflowBottom || overflowRight ? result : null;
 };
 
-/*
+/**
  * Context Menu view
  */
 const view = (callback) => (props, actions) =>

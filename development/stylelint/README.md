@@ -8,11 +8,7 @@
 
 These are the default Stylelint rules for MeeseOS codebase.
 
-## Installation
-
-```
-npm install --save-dev @aaronmeese.com/stylelint-config
-```
+## Usage
 
 In your stylelint config:
 

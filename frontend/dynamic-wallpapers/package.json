@@ -1,41 +1,42 @@
 {
-  "name": "___NAME___",
+  "name": "@aaronmeese.com/dynamic-wallpapers",
+  "version": "1.0.0",
+  "description": "aaronmeese.com Dynamic Wallpapers",
+  "files": [
+    "dist/",
+    "metadata.json"
+  ],
   "scripts": {
-    "test": "npm run eslint",
-    "eslint": "eslint *.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint index.js",
+    "stylelint": "stylelint index.scss src/**/*.scss",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run test && rm ./dist/* && npm run build"
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
     "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/runtime": "^7.17.2",
     "babel-loader": "^8.2.3",
-    "copy-webpack-plugin": "^10.2.4",
-    "css-loader": "^6.6.0",
-    "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.9.0",
-    "mini-css-extract-plugin": "^2.5.3",
-    "sass": "^1.49.9",
-    "sass-loader": "^12.6.0",
-    "stylelint": "^14.5.0",
-    "stylelint-config-standard": "^25.0.0",
-    "stylelint-scss": "^4.1.0",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {},
+  "meeseOS": {
+    "type": "package"
+  },
   "eslintConfig": {
     "env": {
       "browser": true,
       "node": true
     },
     "parserOptions": {
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaVersion": 8
     },
     "extends": "@aaronmeese.com/eslint-config"
   },
@@ -46,8 +47,5 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  },
-  "meeseOS": {
-    "type": "package"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "application",
+  "name": "Settings",
+  "category": "utilities",
+  "singleton": true,
+  "server": null,
+  "title": "Settings",
+  "description": "Application to configure MeeseOS",
+  "files": ["main.js"]
+}

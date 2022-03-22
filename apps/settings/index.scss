@@ -1,4 +1,4 @@
-/*!
+/*
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -28,49 +28,7 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the client bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
-//
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
-//
-
-import {
-	AuthServiceProvider,
-	Core,
-	CoreServiceProvider,
-	DesktopServiceProvider,
-	NotificationServiceProvider,
-	SettingsServiceProvider,
-	VFSServiceProvider,
-} from "@aaronmeese.com/client";
-
-import { DialogServiceProvider } from "@aaronmeese.com/dialogs";
-import { GUIServiceProvider } from "@aaronmeese.com/gui";
-import { PanelServiceProvider } from "@aaronmeese.com/panels";
-import { WidgetServiceProvider } from "@aaronmeese.com/widgets";
-import "./index.scss";
-import config from "./config.js";
-
-const init = () => {
-	const meeseOS = new Core(config);
-
-	// Register your service providers
-	meeseOS.register(CoreServiceProvider);
-	meeseOS.register(DesktopServiceProvider);
-	meeseOS.register(VFSServiceProvider);
-	meeseOS.register(NotificationServiceProvider);
-	meeseOS.register(SettingsServiceProvider, { before: true });
-	meeseOS.register(AuthServiceProvider, { before: true });
-	meeseOS.register(PanelServiceProvider);
-	meeseOS.register(DialogServiceProvider);
-	meeseOS.register(GUIServiceProvider);
-	meeseOS.register(WidgetServiceProvider);
-
-	meeseOS.boot();
-};
-
-window.addEventListener("DOMContentLoaded", () => init());
+.Window_SettingsMainWindow {
+	// Windows automatically gets assigned this classname based on 'name'
+	// in your metadata.json file
+}

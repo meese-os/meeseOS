@@ -522,14 +522,11 @@ export default class Desktop extends EventEmitter {
 		};
 
 		applyCss(newSettings);
-
-		// TODO: Multiple panels
 		applyOverlays("meeseOS/panels", (newSettings.panels || []).slice(-1));
 		applyOverlays("meeseOS/widgets", newSettings.widgets);
 
 		this.applyTheme(newSettings.theme);
 		this.applyIcons(newSettings.icons);
-
 		this.applyIconView(newSettings.iconview);
 
 		this.core.emit("meeseOS/desktop:applySettings");
@@ -601,7 +598,6 @@ export default class Desktop extends EventEmitter {
 		return this._applyTheme(name).then(
 			({ elements, errors, callback, metadata }) => {
 				this._removeIcons();
-
 				this.$icons = Object.values(elements);
 
 				this.emit("icons:init");
@@ -681,6 +677,7 @@ export default class Desktop extends EventEmitter {
 		const droppedImage = isDroppingImage(data);
 		const menu = [];
 
+		// TODO: Show dynamic menu entries
 		const setWallpaper = () =>
 			settings
 				.set("meeseOS/desktop", "background.src", data)
@@ -786,23 +783,7 @@ export default class Desktop extends EventEmitter {
 		const defaultItems = lockSettings
 			? []
 			: [
-					{
-						label: "Select wallpaper",
-						onclick: () => {
-							this.core.make(
-								"meeseOS/dialog",
-								"file",
-								{
-									mime: ["^image"],
-								},
-								(btn, file) => {
-									if (btn === "ok") {
-										this._applySettingsByKey("background.src", file);
-									}
-								}
-							);
-						},
-					},
+					// TODO: Hotlink this to the settings app
 					{
 						label: "Select theme",
 						items: themes.map((theme) => ({
@@ -863,7 +844,6 @@ export default class Desktop extends EventEmitter {
 	 */
 	getRect() {
 		const root = this.core.$root;
-		// FIXME: Is this now wrong because panels are not on the root anymore ?!
 		const { left, top, right, bottom } = this.subtract;
 		const width = root.offsetWidth - left - right;
 		const height = root.offsetHeight - top - bottom;

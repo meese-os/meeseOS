@@ -30,7 +30,8 @@
 
 .meeseOS-gui-box {
 	display: flex;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 
 	& > .meeseOS-gui-menubar,
 	& > .meeseOS-gui-toolbar,

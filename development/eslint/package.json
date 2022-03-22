@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/eslint-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "aaronmeese.com ESLint configuration",
   "main": "index.js",
   "scripts": {

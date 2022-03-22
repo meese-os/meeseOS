@@ -473,6 +473,10 @@
       "projectFolder": "development/eslint"
     },
     {
+      "packageName": "@aaronmeese.com/dynamic-wallpapers",
+      "projectFolder": "frontend/dynamic-wallpapers"
+    },
+    {
       "packageName": "@aaronmeese.com/event-emitter",
       "projectFolder": "backend/event-emitter"
     },
@@ -489,12 +493,12 @@
       "projectFolder": "frontend/gui"
     },
     {
-      "packageName": "@aaronmeese.com/old-site",
-      "projectFolder": "apps/old-site"
-    },
-    {
       "packageName": "@aaronmeese.com/image-to-8bit",
       "projectFolder": "apps/image-to-8bit"
+    },
+    {
+      "packageName": "@aaronmeese.com/old-site",
+      "projectFolder": "apps/old-site"
     },
     {
       "packageName": "@aaronmeese.com/panels",
@@ -507,6 +511,10 @@
     {
       "packageName": "@aaronmeese.com/server",
       "projectFolder": "backend/server"
+    },
+    {
+      "packageName": "@aaronmeese.com/settings",
+      "projectFolder": "apps/settings"
     },
     {
       "packageName": "@aaronmeese.com/sounds",
