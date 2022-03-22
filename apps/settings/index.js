@@ -140,9 +140,6 @@ const dynamicBackgroundSelect = (state, actions) => [{
 	onchange: (ev) => actions.setWallpaperEffect(ev)
 }];
 
-// TODO: When the new settings are applied, the old ones should be removed
-// TODO: Scrollbar
-
 /** Maps our section items to a field */
 const fieldMap = () => {
 	const getValue = (props) => props.transformValue
@@ -199,19 +196,26 @@ const fieldMap = () => {
 			}, "...")
 		]),
 
-		// TODO: Make this act how I want it to
 		boolean: (props) => (state, actions) => h(ToggleField, {
-			oncreate: (ev) => (ev.value = getValue(props)),
-			oninput: (ev, value) => actions.update({ path: props.path, value })
+			oncreate: (ev) => (ev.checked = getValue(props)),
+			checked: getValue(props),
+			oninput: (ev, checked) =>
+				actions.update({ path: props.path, value: checked })
 		}),
 
 		number: (props) => (state, actions) => h(TextField, {
-			box: { shrink: 1 },
+			box: {
+				shrink: 1,
+				basis: "2em",
+				style: {
+					minHeight: "25px"
+				},
+			},
 			type: "number",
 			oncreate: (el) => (el.value = Number(getValue(props))),
-			oninput: (ev, newValue) => {
-				newValue = Number(newValue);
-				actions.update({ path: props.path, value: newValue });
+			oninput: (ev, value) => {
+				value = Number(value);
+				actions.update({ path: props.path, value });
 			},
 		}),
 
@@ -320,8 +324,7 @@ const tabSections = [{
 		label: "Enable desktop icons",
 		path: "desktop.iconview.enabled",
 		type: "select",
-		// TODO: See if I can get rid of the ()
-		choices: () => ([{
+		choices: () => [{
 			label: "Yes",
 			value: "true"
 		}, {
@@ -329,13 +332,12 @@ const tabSections = [{
 			// the conversion logic in resolveValue
 			label: "No",
 			value: "false"
-		}])
+		}]
 	}, {
 		label: "Font color style",
 		path: "desktop.iconview.fontColorStyle",
 		type: "select",
 		defaultValue: "system",
-		// TODO: See if I can get rid of the ()
 		choices: () => ({
 			system: "System",
 			invert: "Inverted background color",

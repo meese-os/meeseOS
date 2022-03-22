@@ -25,6 +25,12 @@ const matrixOptions = {
 };
 
 /**
+ * Used for keeping track of the currently running interval.
+ * @link https://stackoverflow.com/a/16532222/6456163
+ */
+const matrixObject = {};
+
+/**
  * Creates a Matrix falling rain effect with Russian characters.
  * @param {HTMLCanvasElement} canvas
  * @param {Object} options
@@ -101,21 +107,22 @@ const matrix = (canvas, options) => {
 
 			drops[xCoord]++;
 		}
-
-		// Call the draw function again
-		if (fastSpeedOver) setTimeout(draw, settings.speed);
 	}
 
 	// Makes it start off fast (to cover the whole screen) then slow down
-	let fastSpeedOver = false;
 	const fastSpeed = 10;
-	const interval = setInterval(draw, fastSpeed);
 	const timeForWholeScreen = (fastSpeed * screen.height) / fontSize;
 
+	// Clear out any possible previous intervals from previous settings
+	clearInterval(matrixObject.interval);
+	matrixObject.interval = setInterval(draw, fastSpeed);
+
 	setTimeout(function () {
-		clearInterval(interval);
-		fastSpeedOver = true;
-		draw();
+		// Clear the fast interval
+		clearInterval(matrixObject.interval);
+
+		// Change the interval to the user-defined speed
+		matrixObject.interval = setInterval(draw, settings.speed);
 	}, timeForWholeScreen);
 };
 
