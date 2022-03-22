@@ -66,7 +66,7 @@ export const hexToComponent = (hex = "#000000") => {
 /**
  * Gets the color of a clicked palette area
  */
- export const colorFromClick = (ev, canvas) => {
+export const colorFromClick = (ev, canvas) => {
 	const { clientX, clientY } = ev;
 	const box = canvas.getBoundingClientRect();
 	const cx = clientX - box.x;
