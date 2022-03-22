@@ -1,8 +1,4 @@
-import {
-	Box,
-	RangeField,
-	TextField,
-} from "@aaronmeese.com/gui";
+import { Box, RangeField, TextField } from "@aaronmeese.com/gui";
 import { h } from "hyperapp";
 
 /**
@@ -44,7 +40,7 @@ export const createPalette = (width = 98, height = 98) => {
 /**
  * Gets the color of a clicked palette area
  */
- export const colorFromClick = (ev, canvas) => {
+export const colorFromClick = (ev, canvas) => {
 	const { clientX, clientY } = ev;
 	const box = canvas.getBoundingClientRect();
 	const cx = clientX - box.x;
@@ -59,7 +55,7 @@ export const createPalette = (width = 98, height = 98) => {
 /**
  * Convert component values into hex
  */
- export const componentToHex = ({ r, g, b }) => {
+export const componentToHex = ({ r, g, b }) => {
 	const hex = [
 		parseInt(r, 10).toString(16),
 		parseInt(g, 10).toString(16),

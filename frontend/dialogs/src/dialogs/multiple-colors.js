@@ -1,9 +1,4 @@
-import {
-	Box,
-	BoxContainer,
-	SelectField,
-	TextField,
-} from "@aaronmeese.com/gui";
+import { Box, BoxContainer, SelectField, TextField } from "@aaronmeese.com/gui";
 import {
 	componentToHex,
 	colorFromClick,
@@ -64,8 +59,7 @@ export default class MultipleColorsDialog extends Dialog {
 			const initialActions = {
 				setColor: (newHex) => (state) =>
 					(state.value[state.selectedColor] = newHex),
-				setSelectedColor: (color) => (state) =>
-					(state.selectedColor = color),
+				setSelectedColor: (color) => (state) => (state.selectedColor = color),
 				// color -> r, g, or b; newValue -> 0-255
 				setComponent:
 					({ color, newValue }) =>

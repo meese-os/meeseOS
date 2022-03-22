@@ -46,9 +46,7 @@ export default {
 				type: "dynamic",
 				effect: "matrix",
 			},
-			widgets: [
-				{ name: "digitalclock", },
-			],
+			widgets: [{ name: "digitalclock" }],
 		},
 	},
 	filemanager: {

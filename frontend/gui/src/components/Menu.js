@@ -91,7 +91,7 @@ const ul = (props, children = [], level = 0) => {
 							onmouseover: child.items ? props.onshow : undefined,
 							ontouchend: child.items ? props.onshow : undefined,
 							// TODO: Figure out how to open an app for
-								// frontend/client/src/desktop.js
+							// frontend/client/src/desktop.js
 							onclick: (ev) => {
 								if (child.items) {
 									return;

@@ -763,9 +763,7 @@ export default class Desktop extends EventEmitter {
 	onContextMenu(ev) {
 		const lockSettings = this.core.config("desktop.lock");
 		const extras = [].concat(
-			...this.contextmenuEntries.map(
-				(e) => (typeof e === "function" ? e() : e)
-			)
+			...this.contextmenuEntries.map((e) => (typeof e === "function" ? e() : e))
 		);
 		const config = this.core.config("desktop.contextmenu");
 		const hasIconview = this.core

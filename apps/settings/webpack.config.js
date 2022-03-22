@@ -19,7 +19,7 @@ if (mode === "production") {
 module.exports = {
 	mode,
 	devtool: "source-map",
-	entry: [path.resolve(__dirname, "index.js"),],
+	entry: [path.resolve(__dirname, "index.js")],
 	optimization: {
 		minimize,
 	},
@@ -29,9 +29,9 @@ module.exports = {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
-			chunkFilename: "[id].css"
+			chunkFilename: "[id].css",
 		}),
-		...plugins
+		...plugins,
 	],
 	module: {
 		rules: [
@@ -42,24 +42,24 @@ module.exports = {
 					{
 						loader: "css-loader",
 						options: {
-							sourceMap: true
-						}
+							sourceMap: true,
+						},
 					},
 					{
 						loader: "sass-loader",
 						options: {
-							sourceMap: true
-						}
-					}
-				]
+							sourceMap: true,
+						},
+					},
+				],
 			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules\/(?!@meeseOS)/,
 				use: {
-					loader: "babel-loader"
-				}
-			}
-		]
-	}
+					loader: "babel-loader",
+				},
+			},
+		],
+	},
 };

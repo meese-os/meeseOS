@@ -28,11 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import {
-	Box,
-	BoxContainer,
-	TextField,
-} from "@aaronmeese.com/gui";
+import { Box, BoxContainer, TextField } from "@aaronmeese.com/gui";
 import {
 	componentToHex,
 	colorFromClick,
@@ -42,7 +38,6 @@ import {
 } from "../color-utils";
 import { app, h } from "hyperapp";
 import Dialog from "../dialog";
-
 
 /**
  * Default MeeseOS Color Dialog
@@ -85,7 +80,7 @@ export default class ColorDialog extends Dialog {
 						.replace(/^rgb\(/, "")
 						.replace(/\)$/, "")
 						.split(",")
-						.map(v => parseInt(v, 10));
+						.map((v) => parseInt(v, 10));
 
 					color = componentToHex({
 						r: colorComponents[0],
