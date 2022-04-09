@@ -136,22 +136,15 @@ export default class FileDialog extends Dialog {
 					filename: this.args.filename,
 					listview: listView.state({
 						columns: [
-							{
-								label: "Name",
-							},
-							{
-								label: "Type",
-							},
-							{
-								label: "Size",
-							},
+							{ label: "Name", },
+							{ label: "Type", },
+							{ label: "Size", },
 						],
 					}),
 					buttons: {
 						ok:
 							this.args.filetype === "directory"
-								? true
-								: Boolean(this.args.filename),
+								|| Boolean(this.args.filename),
 					},
 				},
 				{

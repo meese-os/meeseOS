@@ -28,8 +28,12 @@
  * @license Simplified BSD License
  */
 
-import defaultIcon from "./styles/logo-blue-32x32.png";
-import defaultWallpaper from "./styles/wallpaper.png";
+import defaultIcon from "./styles/aaron.png";
+
+// TODO: Make this scale to the closest screen size out of a preset list
+const resolution = "1920x1080";
+const randomWallpaper = () =>
+	"https://source.unsplash.com/random/" + resolution + "?sig=" + Math.random();
 
 /**
  * TODO: typedef
@@ -40,7 +44,6 @@ const createUri = (str) =>
 	str.replace(/(index\.(html?|php))$/, "").replace(/\/?$/, "/");
 
 const pathname = createUri(window.location.pathname);
-
 const href = createUri(window.location.href);
 
 export const defaultConfiguration = {
@@ -203,7 +206,8 @@ export const defaultConfiguration = {
 			},
 			background: {
 				type: "static",
-				src: defaultWallpaper,
+				// TODO: Test if this works or if it is only because of the CSS
+				src: randomWallpaper,
 				color: "#572a79",
 				style: "cover",
 			},

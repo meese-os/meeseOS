@@ -43,7 +43,9 @@
 	background-size: cover;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
-	background-image: url("src/styles/wallpaper.png");
+	/* TODO: Change this to the default wallpaper in JS */
+	/* background-image: url("src/styles/cyberpunk_city.jpg"); */
+	background-image: url("https://source.unsplash.com/random/1920x1080");
 	position: fixed;
 	top: 0;
 	left: 0;

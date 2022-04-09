@@ -43,6 +43,9 @@ module.exports = {
 				test: /\.(svg|png|jpe?g|gif|webp)$/,
 				type: "asset/resource",
 				exclude: /node_modules/,
+				generator: {
+					filename: "[name][ext]",
+				},
 			},
 			{
 				test: /\.(sa|sc|c)ss$/,

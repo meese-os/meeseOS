@@ -525,6 +525,10 @@
       "projectFolder": "frontend/standard-theme"
     },
     {
+      "packageName": "@aaronmeese.com/static-wallpapers",
+      "projectFolder": "frontend/static-wallpapers"
+    },
+    {
       "packageName": "@aaronmeese.com/stylelint-config",
       "projectFolder": "development/stylelint"
     },

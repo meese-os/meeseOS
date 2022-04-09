@@ -30,7 +30,7 @@
 
 import logger from "../logger";
 import { supportedMedia } from "./dom";
-import wallpapers from "@aaronmeese.com/dynamic-wallpapers";
+import dynamicWallpapers from "@aaronmeese.com/dynamic-wallpapers";
 
 const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
 
@@ -49,9 +49,9 @@ export const isDroppingImage = (data) =>
 	imageDropMimes.some((re) => Boolean(data.mime.match(re)));
 
 /**
- * Creates a standard background with an image and a color, if applicable
+ * Creates a static background with an image and a color, if applicable
  */
-const createStandardBackground = (core, background) => {
+const createStaticBackground = (core, background) => {
 	const { $root } = core;
 
 	const styles = {
@@ -102,7 +102,7 @@ const createDynamicBackground = (background) => {
 	// Calls the background effect function by name
 	const effectName = background.effect || "default";
 	const options = background.options || {};
-	wallpapers[effectName].effect(canvas, options);
+	dynamicWallpapers[effectName].effect(canvas, options);
 };
 
 /**
@@ -117,9 +117,9 @@ const hideDynamicBackground = () => {
  * Creates a set of styles based on background settings
  */
 export const applyBackgroundStyles = (core, background) => {
-	if (background.type === "standard") {
+	if (background.type === "static") {
 		hideDynamicBackground();
-		createStandardBackground(core, background);
+		createStaticBackground(core, background);
 	} else if (background.type === "dynamic") {
 		createDynamicBackground(background);
 	}

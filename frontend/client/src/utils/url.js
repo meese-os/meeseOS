@@ -63,12 +63,15 @@ export const urlResolver = (configuration) => {
 
 		let url = endpoint.replace(/^\/+/, "");
 		if (metadata.type) {
+			// TODO: Clean this code up
 			const path = endpoint.replace(/^\/?/, "/");
 			const type =
 				metadata.type === "theme"
 					? "themes"
 					: metadata.type === "icons"
 					? "icons"
+					: metadata.type === "wallpapers"
+					? "wallpapers"
 					: "apps";
 
 			url = `${type}/${metadata.name}${path}`;

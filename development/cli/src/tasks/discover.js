@@ -123,6 +123,7 @@ const action = async ({ logger, options, args, commander }) => {
 
 	const found = await getAllPackages(logger, options.config.discover);
 
+	// This is where the packages are created
 	const packages = found.filter(
 		removeSoftDeleted(logger, options.config.disabled)
 	);
@@ -149,6 +150,7 @@ const action = async ({ logger, options, args, commander }) => {
 		theme: dist.themes,
 		icons: dist.icons,
 		sounds: dist.sounds,
+		wallpapers: dist.wallpapers,
 	};
 
 	const discover = () =>
@@ -180,8 +182,10 @@ const action = async ({ logger, options, args, commander }) => {
 
 	await fs.ensureDir(dist.root);
 	await fs.ensureDir(dist.themes);
+	await fs.ensureDir(dist.wallpapers);
 	await fs.ensureDir(dist.packages);
 	await clean(copyFiles, dist.themes);
+	await clean(copyFiles, dist.wallpapers);
 	await clean(copyFiles, dist.packages);
 
 	logger.info("Placing packages in dist...");

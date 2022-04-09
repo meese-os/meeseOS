@@ -56,7 +56,7 @@ export const pathJoin = (...args) =>
 		})
 		.join("/");
 
-/*
+/**
  * Sort by locale string
  */
 const sortString = (k, d) => (a, b) =>
@@ -64,7 +64,7 @@ const sortString = (k, d) => (a, b) =>
 		? String(a[k]).localeCompare(b[k])
 		: String(b[k]).localeCompare(a[k]);
 
-/*
+/**
  * Sort by date
  */
 const sortDate = (k, d) => (a, b) =>
@@ -72,13 +72,13 @@ const sortDate = (k, d) => (a, b) =>
 		? new Date(a[k]) > new Date(b[k])
 		: new Date(b[k]) > new Date(a[k]);
 
-/*
+/**
  * Sort by educated guess
  */
 const sortDefault = (k, d) => (a, b) =>
 	a[k] < b[k] ? -1 : a[k] > b[k] ? (d === "asc" ? 1 : 0) : d === "asc" ? 0 : 1;
 
-/*
+/**
  * Sorts an array of files
  */
 const sortFn = (t) => {
@@ -91,7 +91,7 @@ const sortFn = (t) => {
 	return sortDefault;
 };
 
-/*
+/**
  * Map of sorters from readdir attributes
  */
 const sortMap = {
@@ -297,7 +297,7 @@ export const createFileIter = (stat) => ({
  */
 export const basename = (path) => path.split("/").reverse()[0];
 
-/*
+/**
  * Get path of a file
  * @param {string} path The path
  * @return {string}
@@ -314,11 +314,11 @@ export const pathname = (path) => {
 };
 
 /**
- * Gets prefix from vfs path
+ * Gets prefix from a VFS path
  * @param {string} str Input
  * @return {string}
  */
-export const parseMontpointPrefix = (str) => {
+export const parseMountpointPrefix = (str) => {
 	const re = /^([\w-_]+):+(.*)/;
 
 	const match = String(str).replace(/\+/g, "/").match(re);

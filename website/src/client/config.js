@@ -42,7 +42,6 @@ export default {
 	desktop: {
 		settings: {
 			background: {
-				// TODO: Add other cool images available to use by default!
 				type: "dynamic",
 				effect: "matrix",
 			},

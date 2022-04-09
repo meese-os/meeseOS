@@ -30,7 +30,8 @@
 
 import { h } from "hyperapp";
 import PanelItem from "../panel-item";
-import defaultIcon from "../logo-blue-32x32.png";
+//import defaultIcon from "../logo-blue-32x32.png";
+import defaultIcon from "../aaron.png";
 
 const sortBy = (fn) => (a, b) => -(fn(a) < fn(b)) || Number(fn(a) > fn(b));
 const sortByLabel = (iter) => String(iter.label).toLowerCase();
@@ -207,6 +208,8 @@ export default class MenuPanelItem extends PanelItem {
 				},
 				[
 					h("img", {
+						// TODO: Change icon here as opposed to log in/out
+						// TODO: Boot to login screen w/ form and option to `log in as guest`
 						src: icon,
 						alt: "Menu",
 					}),

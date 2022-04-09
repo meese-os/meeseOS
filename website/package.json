@@ -60,6 +60,7 @@
     "@aaronmeese.com/settings": "workspace:*",
     "@aaronmeese.com/sounds": "workspace:*",
     "@aaronmeese.com/standard-theme": "workspace:*",
+    "@aaronmeese.com/static-wallpapers": "workspace:*",
     "@aaronmeese.com/terminal": "workspace:*",
     "@aaronmeese.com/textpad": "workspace:*",
     "@aaronmeese.com/widgets": "workspace:*",

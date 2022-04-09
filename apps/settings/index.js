@@ -42,7 +42,7 @@ import { app, h } from "hyperapp";
 import { name as applicationName } from "./metadata.json";
 import merge from "deepmerge";
 import meeseOS from "meeseOS";
-import wallpapers from "@aaronmeese.com/dynamic-wallpapers";
+import dynamicWallpapers from "@aaronmeese.com/dynamic-wallpapers";
 
 /** Resolves an object tree by dot notation */
 const resolve = (tree, key, defaultValue) => {
@@ -63,6 +63,7 @@ const resolveSetting = (settings, defaults) => (key) =>
 
 /** An array of settings for static backgrounds in MeeseOS. */
 const staticBackgroundItems = [
+	// TODO: `Random` option to pull from Unsplash
 	{
 		label: "Image",
 		path: "desktop.background.src",
@@ -75,6 +76,7 @@ const staticBackgroundItems = [
 				type: "open",
 				title: "Select background",
 				mime: [/^image/],
+				path: "meeseOS:/",
 			},
 			(btn, value) => {
 				if (btn === "ok") {
@@ -113,7 +115,7 @@ const dynamicBackgroundItems = (state) => {
 		state.defaults
 	)("desktop.background.effect");
 
-	const selectedEffect = wallpapers[selectedEffectKey];
+	const selectedEffect = dynamicWallpapers[selectedEffectKey];
 	const options = selectedEffect.options || {};
 
 	const items = Object.keys(options).map((key) => {
@@ -134,8 +136,8 @@ const dynamicBackgroundItems = (state) => {
  * @return {Object[]}
  */
 const getDynamicWallpaperChoices = () =>
-	Object.keys(wallpapers).map((key) => {
-		const properties = wallpapers[key];
+	Object.keys(dynamicWallpapers).map((key) => {
+		const properties = dynamicWallpapers[key];
 
 		return {
 			label: properties.label || "Mystery",
@@ -185,16 +187,12 @@ const fieldMap = () => {
 					oninput: (ev, value) => actions.update({ path: props.path, value }),
 				}),
 
-				h(
-					Button,
-					{
-						onclick: () =>
-							actions.dialog(
-								props.dialog(props, state, actions, getValue(props))
-							),
-					},
-					"..."
-				),
+				h(Button, {
+					onclick: () =>
+						actions.dialog(
+							props.dialog(props, state, actions, getValue(props))
+						),
+				}, "..."),
 			]),
 
 		color: (props) => (state, actions) =>
@@ -206,22 +204,18 @@ const fieldMap = () => {
 					oninput: (ev, value) => actions.update({ path: props.path, value }),
 				}),
 
-				h(
-					Button,
-					{
-						onclick: () =>
-							actions.dialog([
-								"color",
-								{ color: getValue(props) },
-								(btn, value) => {
-									if (btn === "ok") {
-										actions.update({ path: props.path, value: value.hex });
-									}
-								},
-							]),
-					},
-					"..."
-				),
+				h(Button, {
+					onclick: () =>
+						actions.dialog([
+							"color",
+							{ color: getValue(props) },
+							(btn, value) => {
+								if (btn === "ok") {
+									actions.update({ path: props.path, value: value.hex });
+								}
+							},
+						]),
+				}, "..."),
 			]),
 
 		boolean: (props) => (state, actions) =>
@@ -359,8 +353,6 @@ const tabSections = [
 						value: "true",
 					},
 					{
-						// TODO: See if boolean values work here; if so, I can remove
-						// the conversion logic in resolveValue
 						label: "No",
 						value: "false",
 					},
@@ -533,9 +525,10 @@ const renderWindow = (core, proc) => ($content, win) => {
 			);
 		},
 
-		updateWallpaperType: (ev) => ({
-			static: ev.target.value === "static",
-		}),
+		updateWallpaperType: (ev) => (state, actions) => {
+			state.settings.desktop.background.type = ev.target.value;
+			return { static: ev.target.value === "static" };
+		},
 
 		setWallpaperEffect: (ev) => ({
 			wallpaperEffect: ev.target.value,
@@ -562,7 +555,7 @@ const register = (core, args, options, metadata) => {
 	const win = proc.createWindow({
 		id: "SettingsMainWindow",
 		title: metadata.title,
-		dimension: { width: 400, height: 400 },
+		dimension: { width: 450, height: 405 },
 		gravity: "center",
 	});
 

@@ -856,6 +856,18 @@ importers:
       webpack: 5.69.1_webpack-cli@4.9.2
       webpack-cli: 4.9.2_webpack@5.69.1
 
+  ../../frontend/static-wallpapers:
+    specifiers:
+      copy-webpack-plugin: ^10.2.4
+      eslint: ^8.9.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
+    devDependencies:
+      copy-webpack-plugin: 10.2.4_webpack@5.69.1
+      eslint: 8.9.0
+      webpack: 5.69.1_webpack-cli@4.9.2
+      webpack-cli: 4.9.2_webpack@5.69.1
+
   ../../frontend/widgets:
     specifiers:
       '@aaronmeese.com/eslint-config': workspace:*
@@ -918,6 +930,7 @@ importers:
       '@aaronmeese.com/settings': workspace:*
       '@aaronmeese.com/sounds': workspace:*
       '@aaronmeese.com/standard-theme': workspace:*
+      '@aaronmeese.com/static-wallpapers': workspace:*
       '@aaronmeese.com/stylelint-config': workspace:*
       '@aaronmeese.com/terminal': workspace:*
       '@aaronmeese.com/textpad': workspace:*
@@ -959,6 +972,7 @@ importers:
       '@aaronmeese.com/settings': link:../apps/settings
       '@aaronmeese.com/sounds': link:../frontend/sounds
       '@aaronmeese.com/standard-theme': link:../frontend/standard-theme
+      '@aaronmeese.com/static-wallpapers': link:../frontend/static-wallpapers
       '@aaronmeese.com/terminal': link:../apps/terminal
       '@aaronmeese.com/textpad': link:../apps/textpad
       '@aaronmeese.com/widgets': link:../frontend/widgets

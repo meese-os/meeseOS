@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import defaultIcon from "./styles/logo-blue-32x32.png";
+import defaultIcon from "./styles/aaron.png";
 import logger from "./logger";
 
 /**

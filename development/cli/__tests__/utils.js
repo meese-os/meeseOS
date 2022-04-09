@@ -11,8 +11,9 @@ describe("utils", () => {
 			expect(options.dist()).toEqual({
 				root: "/tmp/dist",
 				themes: "/tmp/dist/themes",
-				sounds: "/tmp/dist/sounds",
 				icons: "/tmp/dist/icons",
+				sounds: "/tmp/dist/sounds",
+				wallpapers: "/tmp/dist/wallpapers",
 				packages: "/tmp/dist/apps",
 				metadata: "/tmp/dist/metadata.json",
 			});

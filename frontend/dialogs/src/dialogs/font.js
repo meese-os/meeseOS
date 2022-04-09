@@ -54,7 +54,7 @@ export default class FontDialog extends Dialog {
 		args = Object.assign(
 			{},
 			{
-				title: "Chose Font",
+				title: "Choose Font",
 				minSize: 6,
 				maxSize: 48,
 				unit: "px",

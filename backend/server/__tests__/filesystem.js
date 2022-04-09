@@ -38,7 +38,7 @@ describe("Filesystem", () => {
 
 		expect(filesystem.mime("image file.png")).toBe("image/png");
 
-		expect(filesystem.mime("unknown file.666")).toBe(
+		expect(filesystem.mime("unknown file.999")).toBe(
 			"application/octet-stream"
 		);
 

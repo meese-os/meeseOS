@@ -1,8 +1,0 @@
-{
-  "name": "MyiFrameApplication",
-  "category": null,
-  "icon": "icon.png",
-  "title": "My iFrame Application",
-  "description": "My iFrame Application",
-  "files": ["main.js"]
-}

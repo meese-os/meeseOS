@@ -31,7 +31,7 @@
 import {
 	createWatchEvents,
 	filterMountByGroups,
-	parseMontpointPrefix,
+	parseMountpointPrefix,
 } from "./utils/vfs";
 import { EventEmitter } from "@aaronmeese.com/event-emitter";
 import * as VFS from "./vfs";
@@ -390,7 +390,7 @@ export default class Filesystem extends EventEmitter {
 	 */
 	getMountpointFromPath(file) {
 		const path = typeof file === "string" ? file : file.path;
-		const prefix = parseMontpointPrefix(path);
+		const prefix = parseMountpointPrefix(path);
 
 		if (!prefix) {
 			throw new Error(`Given path \'${path}\' does not match \'name:/path\'`);

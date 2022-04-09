@@ -3,7 +3,7 @@
   "category": "network",
   "icon": "logo.svg",
   "singleton": true,
-  "title": "Xterm",
+  "title": "Terminal",
   "description": "Xterm remote shell",
   "server": "server.js",
   "files": ["main.js", "main.css"]
