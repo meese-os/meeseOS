@@ -9,7 +9,7 @@ const register = (core, args, options, metadata) => {
 	 * @example https://example.com/ for remote sites
 	 * @example /data/index.html for local files
 	 */
-	 const url = "/data/index.html";
+	const url = "/data/index.html";
 
 	// Create a new Application instance
 	const proc = core.make("meeseOS/application", { args, options, metadata });

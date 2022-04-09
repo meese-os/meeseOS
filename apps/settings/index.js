@@ -187,12 +187,16 @@ const fieldMap = () => {
 					oninput: (ev, value) => actions.update({ path: props.path, value }),
 				}),
 
-				h(Button, {
-					onclick: () =>
-						actions.dialog(
-							props.dialog(props, state, actions, getValue(props))
-						),
-				}, "..."),
+				h(
+					Button,
+					{
+						onclick: () =>
+							actions.dialog(
+								props.dialog(props, state, actions, getValue(props))
+							),
+					},
+					"..."
+				),
 			]),
 
 		color: (props) => (state, actions) =>
@@ -204,18 +208,22 @@ const fieldMap = () => {
 					oninput: (ev, value) => actions.update({ path: props.path, value }),
 				}),
 
-				h(Button, {
-					onclick: () =>
-						actions.dialog([
-							"color",
-							{ color: getValue(props) },
-							(btn, value) => {
-								if (btn === "ok") {
-									actions.update({ path: props.path, value: value.hex });
-								}
-							},
-						]),
-				}, "..."),
+				h(
+					Button,
+					{
+						onclick: () =>
+							actions.dialog([
+								"color",
+								{ color: getValue(props) },
+								(btn, value) => {
+									if (btn === "ok") {
+										actions.update({ path: props.path, value: value.hex });
+									}
+								},
+							]),
+					},
+					"..."
+				),
 			]),
 
 		boolean: (props) => (state, actions) =>

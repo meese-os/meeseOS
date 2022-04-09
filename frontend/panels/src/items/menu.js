@@ -30,7 +30,7 @@
 
 import { h } from "hyperapp";
 import PanelItem from "../panel-item";
-//import defaultIcon from "../logo-blue-32x32.png";
+// import defaultIcon from "../logo-blue-32x32.png";
 import defaultIcon from "../aaron.png";
 
 const sortBy = (fn) => (a, b) => -(fn(a) < fn(b)) || Number(fn(a) > fn(b));
