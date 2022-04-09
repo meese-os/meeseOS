@@ -135,16 +135,11 @@ export default class FileDialog extends Dialog {
 					mount: startingLocation ? getMountpoint(startingLocation.path) : null,
 					filename: this.args.filename,
 					listview: listView.state({
-						columns: [
-							{ label: "Name", },
-							{ label: "Type", },
-							{ label: "Size", },
-						],
+						columns: [{ label: "Name" }, { label: "Type" }, { label: "Size" }],
 					}),
 					buttons: {
 						ok:
-							this.args.filetype === "directory"
-								|| Boolean(this.args.filename),
+							this.args.filetype === "directory" || Boolean(this.args.filename),
 					},
 				},
 				{
