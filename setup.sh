@@ -14,7 +14,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Install rush packages and build
-npm install -g rush
+npm install -g @microsoft/rush
 rush install
 rush build
 
