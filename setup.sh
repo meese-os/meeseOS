@@ -24,4 +24,4 @@ sh ./apps/terminal/scripts/setup.sh
 # Run the server
 cd website
 npm run package:discover
-npm run serve
+npm run serve &
