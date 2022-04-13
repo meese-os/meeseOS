@@ -18,9 +18,12 @@ npm install -g @microsoft/rush
 rush install
 rush build
 
+echo "MAIN USERNAME: $USERNAME"
+echo "MAIN PASSWORD: $PASSWORD"
+
 # Set up the terminal app then return to the project root
 cd ./apps/terminal/scripts
-sudo bash ./setup.sh
+bash ./setup.sh
 cd ../../..
 
 # Run the server in the background so the Jenkins job can complete
