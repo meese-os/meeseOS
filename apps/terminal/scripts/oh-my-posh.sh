@@ -8,7 +8,7 @@ fi
 # Optional: Install a Nerd Font for best results.
 # Otherwise you should stick with the minimal themes:
 # https://ohmyposh.dev/docs/config-fonts
-sh ./install-nerdfont.sh
+bash ./install-nerdfont.sh
 
 # Depending on the architecture of your server, you may need to change `arm`.
 # See all the available architectures here:
