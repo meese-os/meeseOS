@@ -96,10 +96,14 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			"process.env.PUBLIC_URL": JSON.stringify(
-				minimize ? env_vars.PUBLIC_URL : localhost
+				minimize
+					? (process.env.PUBLIC_URL || env_vars.PUBLIC_URL)
+					: localhost
 			),
-			"process.env.GH_USERNAME": JSON.stringify(env_vars.GH_USERNAME),
-			"process.env.GH_PAT": JSON.stringify(env_vars.GH_PAT),
+			"process.env.GH_USERNAME":
+				JSON.stringify(process.env.GH_USERNAME || env_vars.GH_USERNAME),
+			"process.env.GH_PAT":
+				JSON.stringify(process.env.GH_PAT || env_vars.GH_PAT),
 		}),
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
