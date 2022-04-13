@@ -32,13 +32,13 @@ echo "LS -la: `ls -la`"
 echo "Parent ls -la: `ls -la ..`"
 
 # Will create the user only if they do not already exist
-sh -x ./create-user.sh
+sh ./create-user.sh
 
 # Installs some helpful packages used by the app
 sudo apt-get install -y sshpass python2 build-essential
 
 # Optional: Install `oh-my-posh`
-sh -x ./oh-my-posh.sh
+sh ./oh-my-posh.sh
 
 # Clean up the environment
 echo "Cleaning up..."

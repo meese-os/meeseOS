@@ -18,10 +18,11 @@ npm install -g @microsoft/rush
 rush install
 rush build
 
-# Set up the terminal app
-sh ./apps/terminal/scripts/setup.sh
+# Set up the terminal app from within the folder context
+# @link https://stackoverflow.com/a/10566575/6456163
+(cd ./apps/terminal/scripts; ./setup.sh)
 
-# Run the server
+# Run the server in the background so the Jenkins job can complete
 cd website
 npm run package:discover
 npm run serve &
