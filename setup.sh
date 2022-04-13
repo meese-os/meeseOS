@@ -18,8 +18,6 @@ npm install -g @microsoft/rush
 rush install
 rush build
 
-echo "PASSWORD VAR IN ROOT: $PASSWORD"
-
 # Set up the terminal app then return to the project root
 cd ./apps/terminal/scripts
 sh ./setup.sh

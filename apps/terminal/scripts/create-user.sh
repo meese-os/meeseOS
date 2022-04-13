@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Error if the username is not set
-if "$USERNAME" == ""; then
+if [ "$USERNAME" == "" ]; then
 	echo "ERROR: The username is not set. Please set the USERNAME environment variable."
 	exit 1
 fi
@@ -19,9 +19,16 @@ echo "Creating user '$USERNAME'..."
 sh ./create-jail.sh
 
 # Add the new user to the jail
-echo "$USERNAME:x:2000:100::/jail/./home/$USERNAME:/usr/sbin/jk_chrootsh" >> /etc/passwd
-echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/bash" >> /jail/etc/passwd
-echo "$USERNAME::11302:0:99999:7:::" >> /etc/shadow
+# TODO: /jail/./home/$USERNAME check in /etc/passwd
+if grep -q -c "/jail/./home/$USERNAME" /etc/passwd; then
+	echo "User '$USERNAME' already in jail, not adding again..."
+else
+	echo "Adding user '$USERNAME' to jail..."
+	echo "$USERNAME:x:2000:100::/jail/./home/$USERNAME:/usr/sbin/jk_chrootsh" >> /etc/passwd
+	echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/bash" >> /jail/etc/passwd
+	echo "$USERNAME::11302:0:99999:7:::" >> /etc/shadow
+	echo "Added user '$USERNAME' to jail..."
+fi
 
 # Create the new user and their home directory
 echo "$USERNAME:$PASSWORD" | sudo chpasswd

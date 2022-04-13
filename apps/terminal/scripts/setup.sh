@@ -5,14 +5,12 @@
 #          https://github.com/ajmeese7/raspberrypi           #
 ##############################################################
 
-echo "PASSWORD VAR IN SCRIPTS: $PASSWORD"
-
 # Adds the `.env` variables to the shell environment:
 # https://gist.github.com/mihow/9c7f559807069a03e302605691f85572?permalink_comment_id=2706921#gistcomment-2706921
 if [ -f .env ]; then
 	# Exports the .env variables to the shell environment:
 	export $(sed 's/#.*//g' .env | xargs)
-elif [ "x${PASSWORD}" == "x" ]; then
+elif [[ "$PASSWORD" == "" ]]; then
 	# If no `.env` file exists and the env vars aren't already set,
 	# ask the user for the data:
 	read -p "Username: " USERNAME
