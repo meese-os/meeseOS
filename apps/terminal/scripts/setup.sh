@@ -27,9 +27,6 @@ else
 	export PASSWORD
 fi
 
-echo "After the if statements, the USERNAME is set to '$USERNAME'"
-echo "After the if statements, the PASSWORD is set to '$PASSWORD'"
-
 # Will create the user only if they do not already exist
 bash ./create-user.sh
 
