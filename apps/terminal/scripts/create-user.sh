@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Error if the username is not set
+if "$USERNAME" == ""; then
+	echo "ERROR: The username is not set. Please set the USERNAME environment variable."
+	exit 1
+fi
+
 # https://stackoverflow.com/a/14811915/6456163
 if id "$USERNAME" >/dev/null 2>&1; then
 	# WSL doesn't work with `&>/dev/null`, so we use the above
