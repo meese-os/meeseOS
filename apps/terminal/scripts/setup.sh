@@ -10,7 +10,13 @@
 if [ -f .env ]; then
 	# Exports the .env variables to the shell environment:
 	export $(sed 's/#.*//g' .env | xargs)
-elif [[ "$PASSWORD" == "" ]]; then
+elif [[ -n $USERNAME ]]; then
+	# The env vars are already set, so just export them to be safe:
+	echo "The username is set to '$USERNAME'"
+	echo "The password is set to '$PASSWORD'"
+	export USERNAME
+	export PASSWORD
+else
 	# If no `.env` file exists and the env vars aren't already set,
 	# ask the user for the data:
 	read -p "Username: " USERNAME
@@ -18,20 +24,16 @@ elif [[ "$PASSWORD" == "" ]]; then
 	read -sp "Password: " PASSWORD
 	export PASSWORD
 	printf "\n"
-else
-	# The env vars are already set, so just export them:
-	export USERNAME
-	export PASSWORD
 fi
 
 # Will create the user only if they do not already exist
-sh ./create-user.sh
+sudo bash ./create-user.sh
 
 # Installs some helpful packages used by the app
 sudo apt-get install -y sshpass python2 build-essential
 
 # Optional: Install `oh-my-posh`
-sh ./oh-my-posh.sh
+bash ./oh-my-posh.sh
 
 # Clean up the environment
 echo "Cleaning up..."

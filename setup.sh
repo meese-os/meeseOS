@@ -20,7 +20,7 @@ rush build
 
 # Set up the terminal app then return to the project root
 cd ./apps/terminal/scripts
-sh ./setup.sh
+sudo bash ./setup.sh
 cd ../../..
 
 # Run the server in the background so the Jenkins job can complete

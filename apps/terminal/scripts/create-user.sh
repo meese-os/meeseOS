@@ -8,7 +8,7 @@ fi
 
 # https://stackoverflow.com/a/14811915/6456163
 if id "$USERNAME" >/dev/null 2>&1; then
-	# WSL doesn't work with `&>/dev/null`, so we use the above
+	# WSL doesn't work with `&>/dev/null`, so we use the above for compatibility
 	echo "User '$USERNAME' already exists, skipping creation..."
 	exit 0
 fi
@@ -16,10 +16,9 @@ fi
 echo "Creating user '$USERNAME'..."
 
 # Create secure jail for the new user
-sh ./create-jail.sh
+sudo bash ./create-jail.sh
 
 # Add the new user to the jail
-# TODO: /jail/./home/$USERNAME check in /etc/passwd
 if grep -q -c "/jail/./home/$USERNAME" /etc/passwd; then
 	echo "User '$USERNAME' already in jail, not adding again..."
 else
@@ -39,7 +38,7 @@ sudo mkdir jailuser
 sudo chown 2000:100 jailuser
 
 # Configure what is accessible to the new user
-sh ./configure-jail.sh
+bash ./configure-jail.sh
 
 # TODO: Copy custom README template to /home/xterm/README.md
 # TODO: Add an intentional vulnerability somewhere for CTF
