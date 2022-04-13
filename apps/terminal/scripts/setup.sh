@@ -5,20 +5,18 @@
 #          https://github.com/ajmeese7/raspberrypi           #
 ##############################################################
 
+echo "TOP OF SETUP.SH"
+printenv
+echo "USERNAME: $USERNAME"
+echo "PASSWORD: $PASSWORD"
+
 # Adds the `.env` variables to the shell environment:
 # https://gist.github.com/mihow/9c7f559807069a03e302605691f85572?permalink_comment_id=2706921#gistcomment-2706921
 if [ -f .env ]; then
 	# Exports the .env variables to the shell environment:
-	echo "The .env file exists"
+	echo "The .env file exists!"
 	export $(sed 's/#.*//g' .env | xargs)
-	echo printenv
 elif [ -v $USERNAME ]; then
-	# The env vars are already set, so just export them to be safe:
-	echo "The username is set to '$USERNAME'"
-	echo "The password is set to '$PASSWORD'"
-	export USERNAME
-	export PASSWORD
-else
 	# If no `.env` file exists and the env vars aren't already set,
 	# ask the user for the data:
 	read -p "Username: " USERNAME
@@ -26,6 +24,12 @@ else
 	read -sp "Password: " PASSWORD
 	export PASSWORD
 	printf "\n"
+else
+	# The env vars are already set, so just export them to be safe:
+	echo "ELSE The username is set to '$USERNAME'"
+	echo "ELSE The password is set to '$PASSWORD'"
+	export USERNAME
+	export PASSWORD
 fi
 
 echo "After the if statements, the USERNAME is set to '$USERNAME'"
