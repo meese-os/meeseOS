@@ -18,9 +18,6 @@ npm install -g @microsoft/rush
 rush install
 rush build
 
-echo "MAIN USERNAME: $USERNAME"
-echo "MAIN PASSWORD: $PASSWORD"
-
 # Set up the terminal app then return to the project root
 cd ./apps/terminal/scripts
 bash ./setup.sh

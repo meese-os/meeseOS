@@ -23,9 +23,9 @@ if grep -q -c "/jail/./home/$USERNAME" /etc/passwd; then
 	echo "User '$USERNAME' already in jail, not adding again..."
 else
 	echo "Adding user '$USERNAME' to jail..."
-	echo "$USERNAME:x:2000:100::/jail/./home/$USERNAME:/usr/sbin/jk_chrootsh" >> /etc/passwd
-	echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/bash" >> /jail/etc/passwd
-	echo "$USERNAME::11302:0:99999:7:::" >> /etc/shadow
+	echo "$USERNAME:x:2000:100::/jail/./home/$USERNAME:/usr/sbin/jk_chrootsh" | sudo tee -a /etc/passwd
+	echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/bash" | sudo tee -a /jail/etc/passwd
+	echo "$USERNAME::11302:0:99999:7:::" | sudo tee -a /etc/shadow
 	echo "Added user '$USERNAME' to jail..."
 fi
 
@@ -34,7 +34,7 @@ echo "$USERNAME:$PASSWORD" | sudo chpasswd
 cd /jail/home
 sudo jk_cp -v -f /jail /etc/shadow
 sudo jk_cp -v -f /jail /etc/shadow-
-sudo mkdir jailuser
+sudo -p mkdir jailuser
 sudo chown 2000:100 jailuser
 
 # Configure what is accessible to the new user
