@@ -12,7 +12,7 @@ if [ -f .env ]; then
 	echo "The .env file exists"
 	export $(sed 's/#.*//g' .env | xargs)
 	echo printenv
-elif [[ -n $USERNAME ]]; then
+elif [ -v $USERNAME ]; then
 	# The env vars are already set, so just export them to be safe:
 	echo "The username is set to '$USERNAME'"
 	echo "The password is set to '$PASSWORD'"
