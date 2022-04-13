@@ -6,7 +6,6 @@
 ##############################################################
 
 echo "TOP OF SETUP.SH"
-printenv
 echo "USERNAME: $USERNAME"
 echo "PASSWORD: $PASSWORD"
 
@@ -36,7 +35,7 @@ echo "After the if statements, the USERNAME is set to '$USERNAME'"
 echo "After the if statements, the PASSWORD is set to '$PASSWORD'"
 
 # Will create the user only if they do not already exist
-sudo bash ./create-user.sh
+bash ./create-user.sh
 
 # Installs some helpful packages used by the app
 sudo apt-get install -y sshpass python2 build-essential

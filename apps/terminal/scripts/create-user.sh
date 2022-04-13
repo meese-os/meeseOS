@@ -16,7 +16,7 @@ fi
 echo "Creating user '$USERNAME'..."
 
 # Create secure jail for the new user
-sudo bash ./create-jail.sh
+bash ./create-jail.sh
 
 # Add the new user to the jail
 if grep -q -c "/jail/./home/$USERNAME" /etc/passwd; then
