@@ -12,7 +12,7 @@ echo "PASSWORD VAR IN SCRIPTS: $PASSWORD"
 if [ -f .env ]; then
 	# Exports the .env variables to the shell environment:
 	export $(sed 's/#.*//g' .env | xargs)
-elif [ x"${PASSWORD}" == "x" ]; then
+elif [ "x${PASSWORD}" == "x" ]; then
 	# If no `.env` file exists and the env vars aren't already set,
 	# ask the user for the data:
 	read -p "Username: " USERNAME
