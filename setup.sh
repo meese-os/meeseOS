@@ -20,7 +20,7 @@ rush build
 
 # Set up the terminal app from within the folder context
 # @link https://stackoverflow.com/a/10566575/6456163
-(cd ./apps/terminal/scripts; ./setup.sh)
+(cd ./apps/terminal/scripts; sudo sh ./setup.sh)
 
 # Run the server in the background so the Jenkins job can complete
 cd website
