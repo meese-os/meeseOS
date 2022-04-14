@@ -4,8 +4,11 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Setup
 
-1. `nvm install`
-2. `nvm use`
+- `nvm install`
+- `nvm use`
+- `rush install`
+- `rush build`
+- `pm2 startup`
 
 ## Troubleshooting
 

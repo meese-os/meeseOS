@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Stop and delete any previously running instances
+pm2 delete "npm run serve"
+
 # Install nvm for Node installation versioning
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
@@ -26,4 +29,4 @@ cd ../../..
 # Run the server in the background so the Jenkins job can complete
 cd website
 npm run package:discover
-npm run serve &
+pm2 start "npm run serve"
