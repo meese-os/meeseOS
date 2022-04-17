@@ -171,8 +171,8 @@ export default class Filesystem extends EventEmitter {
 			stopOnError
 				? this._mountpointAction(m)
 				: this._mountpointAction(m).catch((err) =>
-					logger.warn("Error while mounting", m, err)
-				);
+						logger.warn("Error while mounting", m, err)
+				  );
 
 		return Promise.all(this.mounts.map(fn));
 	}
@@ -324,23 +324,16 @@ export default class Filesystem extends EventEmitter {
 			const sameAdapter = srcMount.adapter === destMount.adapter;
 
 			if (!sameAdapter) {
-				return (
-					VFS.readfile(
-						srcMount._adapter,
-						srcMount
-					)(src)
-						.then((ab) =>
-							VFS.writefile(destMount._adapter, destMount)(dest, ab)
-						)
-						.then((result) => {
-							return method === "rename"
-								? VFS.unlink(
-									srcMount._adapter,
-									srcMount
-								)(src).then(() => result)
-								: result;
-						})
-				);
+				return VFS.readfile(
+					srcMount._adapter,
+					srcMount
+				)(src)
+					.then((ab) => VFS.writefile(destMount._adapter, destMount)(dest, ab))
+					.then((result) => {
+						return method === "rename"
+							? VFS.unlink(srcMount._adapter, srcMount)(src).then(() => result)
+							: result;
+					});
 			}
 		}
 
