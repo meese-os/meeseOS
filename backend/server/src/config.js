@@ -36,7 +36,7 @@ const defaultConfiguration = {
 	development: !(process.env.NODE_ENV || "").match(/^prod/i),
 	logging: true,
 	index: "index.html",
-	bind: "0.0.0.0",
+	bind: "localhost",
 	port: 8000,
 	public: null,
 	morgan: "tiny",

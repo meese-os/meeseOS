@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Be sure pm2 is installed
+npm install pm2 -g
+
 # Stop and delete any previously running instances
 pm2 delete "npm run serve"
 
@@ -30,3 +33,5 @@ cd ../../..
 cd website
 npm run package:discover
 pm2 start "npm run serve"
+
+# The final files will be deployed to /var/lib/jenkins/workspace/aaronmeese.com

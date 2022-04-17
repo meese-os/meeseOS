@@ -171,8 +171,8 @@ export default class Filesystem extends EventEmitter {
 			stopOnError
 				? this._mountpointAction(m)
 				: this._mountpointAction(m).catch((err) =>
-						logger.warn("Error while mounting", m, err)
-				  );
+					logger.warn("Error while mounting", m, err)
+				);
 
 		return Promise.all(this.mounts.map(fn));
 	}
@@ -255,11 +255,11 @@ export default class Filesystem extends EventEmitter {
 			(found) => {
 				// FIXME: Add already mounting state
 				if (!found) {
-					throw new Error(`Filesystem \'${name}\' not found`);
+					throw new Error(`Filesystem '${name}' not found`);
 				} else if (unmount && !found.mounted) {
-					throw new Error(`Filesystem \'${name}\' not mounted`);
+					throw new Error(`Filesystem '${name}' not mounted`);
 				} else if (!unmount && found.mounted) {
-					throw new Error(`Filesystem \'${name}\' already mounted`);
+					throw new Error(`Filesystem '${name}' already mounted`);
 				}
 
 				return this._mountpointAction(found, unmount);
@@ -332,13 +332,12 @@ export default class Filesystem extends EventEmitter {
 						.then((ab) =>
 							VFS.writefile(destMount._adapter, destMount)(dest, ab)
 						)
-						// TODO
 						.then((result) => {
 							return method === "rename"
 								? VFS.unlink(
-										srcMount._adapter,
-										srcMount
-								  )(src).then(() => result)
+									srcMount._adapter,
+									srcMount
+								)(src).then(() => result)
 								: result;
 						})
 				);
@@ -393,13 +392,13 @@ export default class Filesystem extends EventEmitter {
 		const prefix = parseMountpointPrefix(path);
 
 		if (!prefix) {
-			throw new Error(`Given path \'${path}\' does not match \'name:/path\'`);
+			throw new Error(`Given path '${path}' does not match 'name:/path'`);
 		}
 
 		const found = this.mounts.find((m) => m.name === prefix);
 
 		if (!found) {
-			throw new Error(`Filesystem not found for \'${prefix}\':`);
+			throw new Error(`Filesystem not found for '${prefix}':`);
 		}
 
 		return found;

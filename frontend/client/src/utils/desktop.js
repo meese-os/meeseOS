@@ -69,6 +69,8 @@ const createStaticBackground = (core, background) => {
 	}
 
 	if (background.style !== "color") {
+		// TODO: Better handling of undefined background.src
+		// to not error in `frontend/client/src/filesystem.js`
 		if (background.src === undefined) {
 			styles.backgroundImage = undefined;
 		} else if (typeof background.src === "string") {

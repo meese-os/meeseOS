@@ -49,7 +49,7 @@ const resolve = (tree, key, defaultValue) => {
 	try {
 		const value = key
 			.split(/\./g)
-			.reduce((result, key) => result[key], Object.assign({}, tree));
+			.reduce((result, key) => result[key], { ...tree });
 
 		return typeof value === "undefined" ? defaultValue : value;
 	} catch (e) {
@@ -403,13 +403,11 @@ const renderItem = (state, actions) => (item) => {
 		h(BoxContainer, { style: { marginBottom: 0 } }, item.label),
 		h(
 			element,
-			Object.assign(
-				{
-					type: item.type,
-					value,
-				},
-				item
-			)
+			{
+				type: item.type,
+				value,
+				...item
+			}
 		),
 	];
 };
@@ -534,7 +532,15 @@ const renderWindow = (core, proc) => ($content, win) => {
 		},
 
 		updateWallpaperType: (ev) => (state, actions) => {
-			state.settings.desktop.background.type = ev.target.value;
+			if (state.settings.desktop.background) {
+				state.settings.desktop.background.type = ev.target.value;
+			} else {
+				// Initialize the background object if it doesn't exist yet
+				state.settings.desktop.background = {
+					type: ev.target.value,
+				};
+			}
+
 			return { static: ev.target.value === "static" };
 		},
 
@@ -544,8 +550,8 @@ const renderWindow = (core, proc) => ($content, win) => {
 
 		update:
 			({ path, value }) =>
-			(state) =>
-				resolveNewSetting(state)(path, value),
+				(state) =>
+					resolveNewSetting(state)(path, value),
 		refresh: () => () => ({ settings: getSettings() }),
 		setLoading: (loading) => ({ loading }),
 	};
