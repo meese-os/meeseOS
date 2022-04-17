@@ -547,8 +547,8 @@ const renderWindow = (core, proc) => ($content, win) => {
 
 		update:
 			({ path, value }) =>
-				(state) =>
-					resolveNewSetting(state)(path, value),
+			(state) =>
+				resolveNewSetting(state)(path, value),
 		refresh: () => () => ({ settings: getSettings() }),
 		setLoading: (loading) => ({ loading }),
 	};
