@@ -10,6 +10,8 @@ This redesign of my website would not be possible without the _incredible_ work 
 - `nvm install`
 - `nvm use`
 - `rush install`
+- `cp apps/old-site/.env.template apps/old-site/.env`
+	- Enter the appropriate information here
 - `rush build`
 - `pm2 startup`
 
