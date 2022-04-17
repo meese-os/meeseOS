@@ -23,4 +23,4 @@ sudo make install
 # Configure jailkit
 sudo jk_init -v -j /jail ssh
 sudo mkdir /jail/home
-echo "users:x:100:" > /jail/etc/group
+echo "users:x:100:" | sudo tee /jail/etc/group

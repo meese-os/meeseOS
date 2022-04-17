@@ -31,11 +31,14 @@ fi
 
 # Create the new user and their home directory
 echo "$USERNAME:$PASSWORD" | sudo chpasswd
-cd /jail/home
-sudo jk_cp -v -f /jail /etc/shadow
-sudo jk_cp -v -f /jail /etc/shadow-
-sudo mkdir -p $USERNAME
-sudo chown 2000:100 $USERNAME
+export $USERNAME
+(
+	cd /jail/home;
+	sudo jk_cp -v -f /jail /etc/shadow;
+	sudo jk_cp -v -f /jail /etc/shadow-;
+	sudo mkdir -p $USERNAME;
+	sudo chown 2000:100 $USERNAME;
+)
 
 # Configure what is accessible to the new user
 bash ./configure-jail.sh
