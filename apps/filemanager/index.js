@@ -117,7 +117,7 @@ const isSpecialFile = (filename) => ["..", "."].indexOf(filename) !== -1;
 const createInitialPaths = (core, proc) => {
 	const homePath = { path: core.config("vfs.defaultPath", "home:/") };
 	const initialPath = proc.args.path
-		? { ...homePath, ...proc.args.path }
+		? ({ ...homePath, ...proc.args.path })
 		: homePath;
 
 	return { homePath, initialPath };
@@ -371,23 +371,23 @@ const vfsActionFactory = (core, proc, win, dialog, state) => {
 
 	const paste =
 		(move, currentPath) =>
-		({ item, callback }) => {
-			const dest = { path: pathJoin(currentPath.path, item.filename) };
+			({ item, callback }) => {
+				const dest = { path: pathJoin(currentPath.path, item.filename) };
 
-			const fn = move
-				? vfs.move(item, dest, { pid: proc.pid })
-				: vfs.copy(item, dest, { pid: proc.pid });
+				const fn = move
+					? vfs.move(item, dest, { pid: proc.pid })
+					: vfs.copy(item, dest, { pid: proc.pid });
 
-			return fn
-				.then(() => {
-					refresh(true);
+				return fn
+					.then(() => {
+						refresh(true);
 
-					if (typeof callback === "function") {
-						callback();
-					}
-				})
-				.catch((error) => dialog("error", error, "Failed to paste file(s)"));
-		};
+						if (typeof callback === "function") {
+							callback();
+						}
+					})
+					.catch((error) => dialog("error", error, "Failed to paste file(s)"));
+			};
 
 	return {
 		download: (file) => vfs.download(file),
@@ -590,24 +590,24 @@ const menuFactory = (core, proc, win) => {
 
 		const openMenu = isDirectory
 			? [
-					{
-						label: "Go",
-						disabled: !item,
-						onclick: () => emitter("filemanager:navigate"),
-					},
-			  ]
+				{
+					label: "Go",
+					disabled: !item,
+					onclick: () => emitter("filemanager:navigate"),
+				},
+			]
 			: [
-					{
-						label: "Open",
-						disabled: !item,
-						onclick: () => emitter("filemanager:open"),
-					},
-					{
-						label: "Open with...",
-						disabled: !item,
-						onclick: () => emitter("filemanager:openWith"),
-					},
-			  ];
+				{
+					label: "Open",
+					disabled: !item,
+					onclick: () => emitter("filemanager:open"),
+				},
+				{
+					label: "Open with...",
+					disabled: !item,
+					onclick: () => emitter("filemanager:openWith"),
+				},
+			];
 
 		const clipboardMenu = [
 			{
@@ -807,65 +807,63 @@ const createApplication = (core, proc) => {
 
 			push:
 				(path) =>
-				({ index, list }) => {
-					const newList = index === -1 ? [] : list;
-					const lastHistory = newList[newList.length - 1];
-					const newIndex =
+					({ index, list }) => {
+						const newList = index === -1 ? [] : list;
+						const lastHistory = newList[newList.length - 1];
+						const newIndex =
 						lastHistory === path ? newList.length - 1 : newList.push(path) - 1;
 
-					return { list: newList, index: newIndex };
-				},
+						return { list: newList, index: newIndex };
+					},
 
 			back:
 				() =>
-				({ index, list }) => {
-					const newIndex = Math.max(0, index - 1);
-					win.emit("filemanager:navigate", list[newIndex], true);
-					return { index: newIndex };
-				},
+					({ index, list }) => {
+						const newIndex = Math.max(0, index - 1);
+						win.emit("filemanager:navigate", list[newIndex], true);
+						return { index: newIndex };
+					},
 
 			forward:
 				() =>
-				({ index, list }) => {
-					const newIndex = Math.min(list.length - 1, index + 1);
-					win.emit("filemanager:navigate", list[newIndex], true);
-					return { index: newIndex };
-				},
+					({ index, list }) => {
+						const newIndex = Math.min(list.length - 1, index + 1);
+						win.emit("filemanager:navigate", list[newIndex], true);
+						return { index: newIndex };
+					},
 		},
 
 		toggleMinimalistic:
 			() =>
-			({ minimalistic }) => ({ minimalistic: !minimalistic }),
+				({ minimalistic }) => ({ minimalistic: !minimalistic }),
 
 		setPath: (path) => ({ path }),
 		setStatus: (status) => ({ status }),
 		setMinimalistic: (minimalistic) => ({ minimalistic }),
 		setList:
 			({ list, path, selectFile }) =>
-			({ fileview, mountview }) => {
-				let selectedIndex;
+				({ fileview, mountview }) => {
+					// TODO: Test initializing this to 0
+					let selectedIndex;
 
-				if (selectFile) {
-					const foundIndex = list.findIndex(
-						(file) => file.filename === selectFile
-					);
-					if (foundIndex !== -1) {
-						selectedIndex = foundIndex;
+					if (selectFile) {
+						const foundIndex = list.findIndex(
+							(file) => file.filename === selectFile
+						);
+						if (foundIndex !== -1) {
+							selectedIndex = foundIndex;
+						}
 					}
-				}
 
-				return {
-					path,
-					status: statusMessage(path, list),
-					mountview: { ...mountview, rows: createMounts() },
-					fileview: {
-						...fileview,
-						selectedIndex,
-						columns: createColumns(),
-						rows: createRows(list),
-					},
-				};
-			},
+					return {
+						path,
+						status: statusMessage(path, list),
+						mountview: { ...mountview, rows: createMounts(), },
+						fileview: { ...fileview, selectedIndex,
+							columns: createColumns(),
+							rows: createRows(list), },
+					};
+				},
 
 		mountview: listView.actions({
 			select: ({ data }) =>
@@ -989,7 +987,7 @@ const createProcess = (core, args, options, metadata) => {
 	const proc = core.make("meeseOS/application", {
 		args,
 		metadata,
-		options: { ...options, settings: createDefaultSettings() },
+		options: { ...options, settings: createDefaultSettings(), },
 	});
 
 	const emitter = proc.emitAll();

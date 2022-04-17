@@ -19,10 +19,10 @@ rush install
 rush build
 
 # Be sure pm2 is installed
-npm install pm2 -g
+sudo npm install pm2 -g
 
 # Stop and delete any previously running instances
-pm2 delete "npm run serve"
+sudo pm2 delete "npm run serve"
 
 # Set up the terminal app then return to the project root
 cd ./apps/terminal/scripts
@@ -32,6 +32,8 @@ cd ../../..
 # Run the server in the background so the Jenkins job can complete
 cd website
 npm run package:discover
-pm2 start "npm run serve"
+sudo pm2 start "npm run serve"
+sudo pm2 save
 
-# The final files will be deployed to /var/lib/jenkins/workspace/aaronmeese.com
+# The final files will be deployed to /var/lib/jenkins/workspace/aaronmeese.com.
+# The final process can be monitored with `sudo pm2 monit`

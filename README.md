@@ -15,17 +15,13 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Troubleshooting
 
-If you encounter the error `EADDRINUSE, Address already in use`, run the following command:
+If you encounter the error `EADDRINUSE, Address already in use` on Windows, run `taskkill /F /IM node.exe`.
 
-`taskkill /F /IM node.exe`
+To see if your process is still runninng, run `pm2 list`.
 
-To see if your process is still runninng, run the following command:
+To monitor the logs from your process, run `pm2 monit`.
 
-`pm2 list`
-
-To monitor the logs from your process, run the following command:
-
-`pm2 monit`
+To see if the port is already in use, run `netstat -tulpn | grep LISTEN`. If you need to free the port, you can likely run `sudo pkill -9 node`.
 
 ## TODOs
 
