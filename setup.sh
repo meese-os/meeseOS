@@ -13,8 +13,8 @@ nvm install 16
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# Install rush packages and build
-npm install -g @microsoft/rush
+# Install rush + pm2 and build
+npm install -g @microsoft/rush pm2
 rush install
 rush build
 
@@ -23,6 +23,6 @@ cd ./apps/terminal/scripts
 bash ./setup.sh
 cd ../../..
 
-# Prepare the server to be ran manually
+# Run the server in the background so the Jenkins job can complete
 cd website
 npm run package:discover
