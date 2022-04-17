@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Be sure pm2 is installed
-npm install pm2 -g
-
-# Stop and delete any previously running instances
-pm2 delete "npm run serve"
-
 # Install nvm for Node installation versioning
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
@@ -23,6 +17,12 @@ export NVM_DIR="$HOME/.nvm"
 npm install -g @microsoft/rush
 rush install
 rush build
+
+# Be sure pm2 is installed
+npm install pm2 -g
+
+# Stop and delete any previously running instances
+pm2 delete "npm run serve"
 
 # Set up the terminal app then return to the project root
 cd ./apps/terminal/scripts
