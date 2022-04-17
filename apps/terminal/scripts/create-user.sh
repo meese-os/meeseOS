@@ -34,8 +34,8 @@ echo "$USERNAME:$PASSWORD" | sudo chpasswd
 cd /jail/home
 sudo jk_cp -v -f /jail /etc/shadow
 sudo jk_cp -v -f /jail /etc/shadow-
-sudo -p mkdir jailuser
-sudo chown 2000:100 jailuser
+sudo mkdir -p $USERNAME
+sudo chown 2000:100 $USERNAME
 
 # Configure what is accessible to the new user
 bash ./configure-jail.sh
