@@ -401,14 +401,11 @@ const renderItem = (state, actions) => (item) => {
 
 	return [
 		h(BoxContainer, { style: { marginBottom: 0 } }, item.label),
-		h(
-			element,
-			{
-				type: item.type,
-				value,
-				...item
-			}
-		),
+		h(element, {
+			type: item.type,
+			value,
+			...item,
+		}),
 	];
 };
 
@@ -550,8 +547,8 @@ const renderWindow = (core, proc) => ($content, win) => {
 
 		update:
 			({ path, value }) =>
-				(state) =>
-					resolveNewSetting(state)(path, value),
+			(state) =>
+				resolveNewSetting(state)(path, value),
 		refresh: () => () => ({ settings: getSettings() }),
 		setLoading: (loading) => ({ loading }),
 	};

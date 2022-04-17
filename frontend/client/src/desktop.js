@@ -783,17 +783,17 @@ export default class Desktop extends EventEmitter {
 		const defaultItems = lockSettings
 			? []
 			: [
-				// TODO: Hotlink this to the settings app
-				{
-					label: "Select theme",
-					items: themes.map((theme) => ({
-						label: theme.title,
-						onclick: () => {
-							this._applySettingsByKey("theme", theme.name);
-						},
-					})),
-				},
-			];
+					// TODO: Hotlink this to the settings app
+					{
+						label: "Select theme",
+						items: themes.map((theme) => ({
+							label: theme.title,
+							onclick: () => {
+								this._applySettingsByKey("theme", theme.name);
+							},
+						})),
+					},
+			  ];
 
 		if (hasIconview && this.iconview) {
 			defaultItems.push({
@@ -806,8 +806,8 @@ export default class Desktop extends EventEmitter {
 			useDefaults === "function"
 				? config.defaults(this, defaultItems)
 				: useDefaults
-					? defaultItems
-					: [];
+				? defaultItems
+				: [];
 
 		const provided =
 			typeof this.options.contextmenu === "function"
