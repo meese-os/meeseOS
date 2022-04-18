@@ -24,20 +24,22 @@ if grep -q -c "/jail/./home/$USERNAME" /etc/passwd; then
 else
 	echo "Adding user '$USERNAME' to jail..."
 	echo "$USERNAME:x:2000:100::/jail/./home/$USERNAME:/usr/sbin/jk_chrootsh" | sudo tee -a /etc/passwd
-	echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/bash" | sudo tee -a /jail/etc/passwd
+	echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/rbash" | sudo tee -a /jail/etc/passwd
 	echo "$USERNAME::11302:0:99999:7:::" | sudo tee -a /etc/shadow
 	echo "Added user '$USERNAME' to jail..."
 fi
 
 # Create the new user and their home directory
 echo "$USERNAME:$PASSWORD" | sudo chpasswd
-export $USERNAME
 (
 	cd /jail/home;
 	sudo jk_cp -v -f /jail /etc/shadow;
 	sudo jk_cp -v -f /jail /etc/shadow-;
 	sudo mkdir -p $USERNAME;
 	sudo chown 2000:100 $USERNAME;
+
+	echo "export TERM=xterm-256color" | sudo tee -a $USERNAME/.bashrc;
+	echo "export SHELL=/nice/try" | sudo tee -a $USERNAME/.bashrc;
 )
 
 # Configure what is accessible to the new user
