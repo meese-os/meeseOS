@@ -1,10 +1,10 @@
 #!/bin/sh
 
 echo "Installing Nerd Font..."
-INSTALL_PATH="/usr/share/fonts/truetype"
+INSTALL_PATH="/jail/usr/share/fonts/truetype"
 
 if [ ! -d "$INSTALL_PATH" ]; then
-	mkdir -p "$INSTALL_PATH"
+	sudo mkdir -p "$INSTALL_PATH"
 fi
 
 # Can be replaced by a Nerd Font of your choice from https://www.nerdfonts.com/font-downloads
@@ -18,8 +18,7 @@ sudo unzip "$NERD_FONT_NAME.zip" -d "$INSTALL_PATH"
 sudo rm "$NERD_FONT_NAME.zip"
 
 # Install the Nerd Font to the system
-fc-cache -f
-cd $HOME
+sudo fc-cache -f
 
 # TODO: Find a way to get the default font indicator, so this guide can be
 # used to change the default font:

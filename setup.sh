@@ -12,6 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 16
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm use
 
 # Install rush + pm2 and build
 npm install -g @microsoft/rush pm2
