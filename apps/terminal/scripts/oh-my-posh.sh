@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if sudo su -c "command -v oh-my-posh" $USERNAME; then
+if sudo su -c "command -v oh-my-posh" "$USERNAME"; then
 	echo "oh-my-posh is already installed for this user..."
 	exit 0
 fi
@@ -19,7 +19,7 @@ sudo mkdir -p "$BINARIES"
 # https://github.com/JanDeDobbeleer/oh-my-posh/releases
 sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-arm -O "$BINARIES/oh-my-posh"
 sudo chmod +x "$BINARIES/oh-my-posh"
-sudo chown -R $USERNAME "$BINARIES/oh-my-posh"
+sudo chown -R "$USERNAME" "$BINARIES/oh-my-posh"
 USERDIR="/jail/home/$USERNAME"
 sudo mkdir -p "$USERDIR/.poshthemes"
 
