@@ -7,7 +7,7 @@ const register = (core, args, options, metadata) => {
 	// Create a new Application instance
 	const proc = core.make("meeseOS/application", { args, options, metadata });
 
-	// Create  a new Window instance
+	// Create a new Window instance
 	proc
 		.createWindow({
 			id: "___NAME___Window",
@@ -35,5 +35,5 @@ const register = (core, args, options, metadata) => {
 	return proc;
 };
 
-// Creates the internal callback function when OS.js launches an application
+// Creates the internal callback function when MeeseOS launches an application
 meeseOS.register(applicationName, register);

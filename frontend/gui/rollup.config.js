@@ -1,7 +1,7 @@
 import babel from "rollup-plugin-babel";
-import minify from "rollup-plugin-babel-minify";
-import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
+import resolve from "rollup-plugin-node-resolve";
+import { terser } from "rollup-plugin-terser";
 
 export default [
 	{
@@ -21,7 +21,7 @@ export default [
 				runtimeHelpers: true,
 				exclude: "node_modules/**",
 			}),
-			minify({
+			terser({
 				comments: false,
 				sourceMap: true,
 			}),

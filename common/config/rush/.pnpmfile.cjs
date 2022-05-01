@@ -28,6 +28,13 @@ module.exports = {
  */
 function readPackage(packageJson, context) {
 
+	// https://github.com/pnpm/pnpm/discussions/3995#discussioncomment-1647425
+	packageJson.dependencies = {
+    ...packageJson.peerDependencies,
+    ...packageJson.dependencies,
+  }
+  packageJson.peerDependencies = {};
+
   // // The karma types have a missing dependency on typings from the log4js package.
   // if (packageJson.name === '@types/karma') {
   //  context.log('Fixed up dependencies for @types/karma');

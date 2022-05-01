@@ -1,7 +1,7 @@
 import meeseOS from "meeseOS";
 import { name as applicationName } from "./metadata.json";
 
-// Creates the internal callback function when OS.js launches an application
+// Creates the internal callback function when MeeseOS launches an application
 // Note the first argument is the "name" taken from your metadata.json file
 const register = (core, args, options, metadata) => {
 	/**

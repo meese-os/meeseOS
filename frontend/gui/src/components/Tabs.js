@@ -38,11 +38,11 @@ const headers = ({ labels, onchange, oncontextmenu }, state, actions) =>
 			{
 				class: state.selectedIndex === index ? "meeseOS__active" : "",
 				oncontextmenu: (ev) => {
-					(oncontextmenu || function () {})(ev, index, label);
+					(oncontextmenu || function() {})(ev, index, label);
 				},
 				onclick: (ev) => {
 					actions.setSelectedIndex(index);
-					(onchange || function () {})(ev, index, label);
+					(onchange || function() {})(ev, index, label);
 				},
 			},
 			h("span", {}, label)
@@ -97,11 +97,9 @@ const view = nestable(
 export const Tabs = (props, children) =>
 	h(
 		view,
-		Object.assign(
-			{
-				class: "meeseOS-gui meeseOS-gui-tabs " + (props.class || ""),
-			},
-			props
-		),
+		{
+			class: "meeseOS-gui meeseOS-gui-tabs " + (props.class || ""),
+			...props
+		},
 		children
 	);
