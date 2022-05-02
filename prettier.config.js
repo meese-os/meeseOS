@@ -8,8 +8,8 @@ module.exports = {
     {
       files: ["*.json", "prettier.config.js"],
       options: {
-        useTabs: false
-      }
+        useTabs: false,
+      },
     },
-  ]
+  ],
 };
