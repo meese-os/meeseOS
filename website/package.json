@@ -64,6 +64,7 @@
     "@aaronmeese.com/static-wallpapers": "workspace:*",
     "@aaronmeese.com/terminal": "workspace:*",
     "@aaronmeese.com/textpad": "workspace:*",
+    "@aaronmeese.com/uptime-monitor": "workspace:*",
     "@aaronmeese.com/widgets": "workspace:*",
     "hyperapp": "^1.2.10",
     "typeface-roboto": "^1.1.13"

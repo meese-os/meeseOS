@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/cli",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "aaronmeese.com CLI",
   "main": "index.js",
   "files": [

@@ -5,6 +5,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
 
+	// TODO: Set the following in this file somehow
+	// max-install-attempts: 1
+
   /**
    * (Required) This specifies the version of the Rush engine to be used in this repo.
    * Rush's "version selector" feature ensures that the globally installed tool will
@@ -62,7 +65,7 @@
      * The default value is false to avoid legacy compatibility issues.
      * It is strongly recommended to set strictPeerDependencies=true.
      */
-    // "strictPeerDependencies": true,
+    "strictPeerDependencies": true,
 
     /**
      * Configures the strategy used to select versions during installation.
@@ -539,6 +542,10 @@
     {
       "packageName": "@aaronmeese.com/textpad",
       "projectFolder": "apps/textpad"
+    },
+		{
+      "packageName": "@aaronmeese.com/uptime-monitor",
+      "projectFolder": "apps/uptime-monitor"
     },
     {
       "packageName": "@aaronmeese.com/website",

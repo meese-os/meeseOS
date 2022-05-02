@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/gui",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "aaronmeese.com GUI",
   "module": "dist/esm.js",
   "main": "dist/main.js",
