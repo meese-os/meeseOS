@@ -9,6 +9,7 @@ sudo jk_cp -v -f /jail /bin/rbash
 sudo jk_cp -v -f /jail /bin/ls
 sudo jk_cp -v -f /jail /usr/bin/clear
 sudo jk_cp -v -f /jail /usr/bin/which
+# TODO: Make `which` not throw rbash: /usr/bin/which: /bin/sh: bad interpreter: No such file or directory
 
 ###
 # Copy over additional files that the new user needs access to

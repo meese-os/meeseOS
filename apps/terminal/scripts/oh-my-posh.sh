@@ -20,17 +20,19 @@ sudo mkdir -p "$BINARIES"
 echo "Installing oh-my-posh..."
 sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-arm -O "$BINARIES/oh-my-posh" >/dev/null
 sudo chmod +x "$BINARIES/oh-my-posh"
-sudo chown -R "$USERNAME" "$BINARIES/oh-my-posh"
+sudo chown "$USERNAME:users" "$BINARIES/oh-my-posh"
 
 USERDIR="/jail/home/$USERNAME"
-sudo mkdir -p "$USERDIR/.poshthemes"
+THEMESPATH="$USERDIR/.poshthemes"
+sudo mkdir -p "$THEMESPATH"
 
 # Pick a theme to your liking from here:
 # https://ohmyposh.dev/docs/themes
 echo "Installing the oh-my-posh theme..."
 OHMYPOSHTHEME=material
 THEMELINK="https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/$OHMYPOSHTHEME.omp.json"
-sudo wget "$THEMELINK" -O "$USERDIR/.poshthemes/$OHMYPOSHTHEME.omp.json" >/dev/null
+sudo wget "$THEMELINK" -O "$THEMESPATH/$OHMYPOSHTHEME.omp.json" >/dev/null
+sudo chown -R "$USERNAME:users" "$THEMESPATH"
 
 # /dev/null reference explained: https://unix.stackexchange.com/a/164628/370076
 USERBASH="$USERDIR/.bashrc"
