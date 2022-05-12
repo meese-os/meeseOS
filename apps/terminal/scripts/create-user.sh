@@ -2,7 +2,7 @@
 
 # Error if the username is not set
 if [ "$USERNAME" == "" ]; then
-	echo "ERROR: The username is not set. Please set the USERNAME environment variable."
+	echo "ERROR: The username is not set. Please set the USERNAME environment variable and try again."
 	exit 1
 fi
 
@@ -14,6 +14,14 @@ if id "$USERNAME" >/dev/null 2>&1; then
 fi
 
 echo "Creating user '$USERNAME'..."
+
+# TODO: Use keys instead of a password for SSH authentication
+# https://stackoverflow.com/a/50067008/6456163
+
+# TODO: Look into other shells instead of rbash for more security:
+# https://stackoverflow.com/a/56319942/6456163
+
+# TODO: https://serverfault.com/a/1093244/537331
 
 # Create secure jail for the new user
 bash ./create-jail.sh
@@ -29,18 +37,38 @@ else
 	echo "Added user '$USERNAME' to jail..."
 fi
 
+# IDEA: https://stackoverflow.com/questions/21498667/how-to-limit-user-commands-in-linux
+
 # Create the new user and their home directory
 echo "$USERNAME:$PASSWORD" | sudo chpasswd
-(
-	cd /jail/home;
-	sudo jk_cp -v -f /jail /etc/shadow;
-	sudo jk_cp -v -f /jail /etc/shadow-;
-	sudo mkdir -p $USERNAME;
-	sudo chown 2000:100 $USERNAME;
+sudo jk_cp -v -f /jail /etc/shadow;
+sudo jk_cp -v -f /jail /etc/shadow-;
+sudo mkdir -p /jail/home/$USERNAME;
+sudo chown 2000:100 /jail/home/$USERNAME;
 
-	echo "export TERM=xterm-256color" | sudo tee -a $USERNAME/.bashrc;
-	echo "export SHELL=/nice/try" | sudo tee -a $USERNAME/.bashrc;
-)
+# Create the user's .bashrc file
+USERBASH="/jail/home/$USERNAME/.bashrc"
+sudo touch $USERBASH
+
+# Configure the user's bash profile and set the file to immutable
+while IFS= read -r line
+do
+	# Adds the lines from the repo's `.bashrc` to the user's `.bashrc` line by line
+	echo "$line" | sudo tee -a "$USERBASH";
+done < "$PWD/.bashrc";
+sudo chattr +i "$USERBASH";
+
+# Remove the SSH banner for the new user
+# Props to https://unix.stackexchange.com/a/96982/370076
+if grep -q -c "Match User $USERNAME" /etc/ssh/sshd_config; then
+	echo "SSH banner already set for user '$USERNAME', skipping..."
+else
+	echo "Setting SSH banner for user '$USERNAME'..."
+	echo "Match User $USERNAME" | sudo tee -a /etc/ssh/sshd_config
+	echo "  Banner \"none\"" | sudo tee -a /etc/ssh/sshd_config
+	sudo service sshd restart
+	echo "SSH banner removed for user '$USERNAME'..."
+fi
 
 # Configure what is accessible to the new user
 bash ./configure-jail.sh

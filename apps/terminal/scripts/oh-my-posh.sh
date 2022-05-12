@@ -17,22 +17,31 @@ sudo mkdir -p "$BINARIES"
 # Depending on the architecture of your server, you may need to change `arm`.
 # See all the available architectures here:
 # https://github.com/JanDeDobbeleer/oh-my-posh/releases
-sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-arm -O "$BINARIES/oh-my-posh"
+echo "Installing oh-my-posh..."
+sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-arm -O "$BINARIES/oh-my-posh" >/dev/null
 sudo chmod +x "$BINARIES/oh-my-posh"
 sudo chown -R "$USERNAME" "$BINARIES/oh-my-posh"
+
 USERDIR="/jail/home/$USERNAME"
 sudo mkdir -p "$USERDIR/.poshthemes"
 
 # Pick a theme to your liking from here:
 # https://ohmyposh.dev/docs/themes
+echo "Installing the oh-my-posh theme..."
 OHMYPOSHTHEME=material
 THEMELINK="https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/$OHMYPOSHTHEME.omp.json"
-sudo wget "$THEMELINK" -O "$USERDIR/.poshthemes/$OHMYPOSHTHEME.omp.json"
+sudo wget "$THEMELINK" -O "$USERDIR/.poshthemes/$OHMYPOSHTHEME.omp.json" >/dev/null
 
 # /dev/null reference explained: https://unix.stackexchange.com/a/164628/370076
-if ! grep -q -c "oh-my-posh" /dev/null "$USERDIR/.bashrc";
+USERBASH="$USERDIR/.bashrc"
+if ! grep -q -c "oh-my-posh" /dev/null "$USERBASH";
 then
+	echo "Adding oh-my-posh to the user's '.bashrc'..."
+	sudo chattr -i "$USERBASH";
+
 	# https://stackoverflow.com/a/19738137/6456163
-	printf "\n# Loads the user's oh-my-posh configuration when the shell starts\n" | sudo tee -a "$USERDIR/.bashrc"
-	echo "eval \"\$(oh-my-posh init bash --strict --config $USERDIR/.poshthemes/$OHMYPOSHTHEME.omp.json)\"" | sudo tee -a "$USERDIR/.bashrc"
+	printf "\n# Loads the user's 'oh-my-posh' configuration when the shell starts\n" | sudo tee -a "$USERBASH"
+	echo "eval \"\$(oh-my-posh init bash --strict --config $USERDIR/.poshthemes/$OHMYPOSHTHEME.omp.json)\"" | sudo tee -a "$USERBASH"
+
+	sudo chattr +i "$USERBASH";
 fi

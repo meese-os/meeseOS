@@ -14,6 +14,7 @@ This redesign of my website would not be possible without the _incredible_ work 
   - Enter the appropriate information here
 - `cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env`
   - Enter the appropriate information here
+- `sh ./apps/terminal/scripts/setup.sh`
 - `rush update`
 - `rush build`
 - `pm2 startup`

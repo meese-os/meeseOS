@@ -30,15 +30,18 @@ fi
 # Will create the user only if they do not already exist
 bash ./create-user.sh
 
+# TODO: Secure the server a little more with the following:
+# https://serverfault.com/a/766634/537331
+
 # Installs some helpful packages used by the app
 sudo apt-get install -y sshpass python2 build-essential
 
-# Optional: Install `oh-my-posh`
+# OPTIONAL: Install `oh-my-posh`
 bash ./oh-my-posh.sh
 
 # Clean up the environment
 echo "Cleaning up..."
 unset USERNAME
 unset PASSWORD
-history -c
+history -c 2>/dev/null
 echo "Done!"
