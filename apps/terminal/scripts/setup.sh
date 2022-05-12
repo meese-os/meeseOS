@@ -27,6 +27,9 @@ else
 	export PASSWORD
 fi
 
+# Change to the directory where the script is located:
+cd "$(dirname "$0")"
+
 # Will create the user only if they do not already exist
 bash ./create-user.sh
 
