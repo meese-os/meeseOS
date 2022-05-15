@@ -20,10 +20,6 @@ rush install
 rush build
 
 # Set up the terminal app then return to the project root
-cd ./apps/terminal/scripts
+pushd ./apps/terminal/scripts
 bash ./setup.sh
-cd ../../..
-
-# Run the server in the background so the Jenkins job can complete
-cd website
-npm run package:discover
+popd

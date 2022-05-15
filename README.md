@@ -19,6 +19,12 @@ This redesign of my website would not be possible without the _incredible_ work 
 - `rush build`
 - `pm2 startup`
 
+## Deploy
+- `sudo pm2 delete "npm run serve" 2>/dev/null`
+	- Deletes the old server process if it exists
+- `sudo pm2 start "npm run serve"`
+- `sudo pm2 save`
+
 ## Troubleshooting
 
 If you encounter the error `EADDRINUSE, Address already in use` on Windows, run `taskkill /F /IM node.exe`.
@@ -28,7 +34,3 @@ To see if your process is still runninng, run `pm2 list`.
 To monitor the logs from your process, run `pm2 monit`.
 
 To see if the port is already in use, run `netstat -tulpn | grep LISTEN`. If you need to free the port, you can likely run `sudo pkill -9 node`. Alternatively, you can run the command `sudo fuser -k 8000/tcp` until there is no output, then the port will be guaranteed to be free.
-
-## TODOs
-
-- Pinpoint why the GUI occasionally refuses to initialize when testing so I can raise an issue on the OS.js repo
