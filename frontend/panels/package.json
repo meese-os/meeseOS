@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/panels",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "aaronmeese.com Panels",
   "main": "dist/main.js",
   "module": "dist/main.js",

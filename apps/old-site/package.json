@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/old-site",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Old aaronmeese.com design",
   "scripts": {
     "eslint": "eslint *.js",
@@ -41,7 +41,7 @@
     "style-loader": "^2.0.0"
   },
   "dependencies": {
-		"@popperjs/core": "^2.10.20",
+    "@popperjs/core": "^2.10.20",
     "@react-hook/window-size": "3.0.5",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.3",

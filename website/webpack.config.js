@@ -7,13 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const plugins = [];
 
 if (mode === "production") {
-	plugins.push(
-		new CssMinimizerPlugin({
-			minimizerOptions: {
-				preset: ["advanced"],
-			},
-		})
-	);
+	plugins.push(new CssMinimizerPlugin());
 }
 
 const siteTitle = "Aaron Meese";

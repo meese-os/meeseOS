@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/gnome-icons",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "aaronmeese.com Gnome Icons",
   "files": [
     "dist/",

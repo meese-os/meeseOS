@@ -7,13 +7,7 @@ const minimize = mode === "production";
 const plugins = [];
 
 if (mode === "production") {
-	plugins.push(
-		new CssMinimizerPlugin({
-			minimizerOptions: {
-				preset: ["advanced"],
-			},
-		})
-	);
+	plugins.push(new CssMinimizerPlugin());
 }
 
 module.exports = {

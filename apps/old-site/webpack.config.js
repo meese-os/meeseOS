@@ -11,13 +11,7 @@ const plugins = [];
 const localhost = "localhost:8000";
 
 if (mode === "production") {
-	plugins.push(
-		new CssMinimizerPlugin({
-			minimizerOptions: {
-				preset: ["advanced"],
-			},
-		})
-	);
+	plugins.push(new CssMinimizerPlugin());
 }
 
 // Loaders

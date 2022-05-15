@@ -15,10 +15,11 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Deploy
 
-- `sudo pm2 delete "npm run deploy" 2>/dev/null`
+- `cd ./website`
+- `pm2 delete "npm run deploy" 2>/dev/null`
   - Deletes the old server process if it exists
-- `sudo pm2 start "npm run deploy"`
-- `sudo pm2 save`
+- `pm2 start "npm run deploy"`
+- `pm2 save`
 
 ## Troubleshooting
 

@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/widgets",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "aaronmeese.com Widgets",
   "main": "dist/main.js",
   "module": "dist/main.js",
