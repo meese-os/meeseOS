@@ -5,8 +5,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
 
-	// TODO: Set the following in this file somehow
-	// max-install-attempts: 1
+  // TODO: Set the following in this file somehow
+  // max-install-attempts: 1
 
   /**
    * (Required) This specifies the version of the Rush engine to be used in this repo.
@@ -543,7 +543,7 @@
       "packageName": "@aaronmeese.com/textpad",
       "projectFolder": "apps/textpad"
     },
-		{
+    {
       "packageName": "@aaronmeese.com/uptime-monitor",
       "projectFolder": "apps/uptime-monitor"
     },

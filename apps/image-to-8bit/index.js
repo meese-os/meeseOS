@@ -28,47 +28,47 @@
  * @licence Simplified BSD License
  */
 
-import { name as applicationName } from "./metadata.json";
-import meeseOS from "meeseOS";
+import { name as applicationName } from './metadata.json'
+import meeseOS from 'meeseOS'
 
 // Creates the internal callback function when MeeseOS launches an application
 // Note the first argument is the "name" taken from your metadata.json file
 const register = (core, args, options, metadata) => {
-	/**
+  /**
 	 * The endpoint that you want your iFrame application to display.
 	 * @example https://example.com/ for remote sites
 	 * @example /data/index.html for local files
 	 */
-	const url = "https://aaronmeese.com/image-to-8bit/";
+  const url = 'https://aaronmeese.com/image-to-8bit/'
 
-	// Create a new Application instance
-	const proc = core.make("meeseOS/application", {
-		args,
-		options,
-		metadata,
-	});
+  // Create a new Application instance
+  const proc = core.make('meeseOS/application', {
+    args,
+    options,
+    metadata
+  })
 
-	// Create  a new Window instance
-	proc
-		.createWindow({
-			id: "image-to-8bit",
-			title: metadata.title,
-			icon: proc.resource(proc.metadata.icon),
-			dimension: { width: 600, height: 650 },
-			position: { left: 700, top: 200 },
-		})
-		.on("destroy", () => proc.destroy())
-		.render(($content) => {
-			const iframe = document.createElement("iframe");
-			iframe.style.width = "100%";
-			iframe.style.height = "100%";
-			iframe.style.backgroundColor = "white";
-			iframe.src = proc.resource(url);
-			iframe.setAttribute("border", "0");
-			$content.appendChild(iframe);
-		});
+  // Create  a new Window instance
+  proc
+    .createWindow({
+      id: 'image-to-8bit',
+      title: metadata.title,
+      icon: proc.resource(proc.metadata.icon),
+      dimension: { width: 600, height: 650 },
+      position: { left: 700, top: 200 }
+    })
+    .on('destroy', () => proc.destroy())
+    .render(($content) => {
+      const iframe = document.createElement('iframe')
+      iframe.style.width = '100%'
+      iframe.style.height = '100%'
+      iframe.style.backgroundColor = 'white'
+      iframe.src = proc.resource(url)
+      iframe.setAttribute('border', '0')
+      $content.appendChild(iframe)
+    })
 
-	return proc;
-};
+  return proc
+}
 
-meeseOS.register(applicationName, register);
+meeseOS.register(applicationName, register)
