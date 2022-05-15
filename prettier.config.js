@@ -4,15 +4,15 @@ module.exports = {
   singleQuote: false,
   jsxSingleQuote: false,
   semi: true,
-  trailingComma: "es5",
+  trailingComma: 'es5',
   overrides: [
     {
-      files: ["*.json", "prettier.config.js"],
+      files: ['*.json', 'prettier.config.js'],
       options: {
         useTabs: false,
         singleQuote: false,
-        semi: true,
-      },
-    },
-  ],
-};
+        semi: true
+      }
+    }
+  ]
+}
