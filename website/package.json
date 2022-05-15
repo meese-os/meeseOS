@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/website",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "aaronmeese.com, implemented in OS.js",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,8 @@
     "make:iframe-application": "meese-cli make:iframe-application",
     "make:provider": "meese-cli make:provider",
     "build": "webpack && npm run build:manifest",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "deploy": "NODE_ENV=production npm run build && npm run serve"
   },
   "author": "Aaron Meese <aaronjmeese@gmail.com>",
   "devDependencies": {

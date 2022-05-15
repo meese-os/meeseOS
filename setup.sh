@@ -8,8 +8,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 . $NVM_DIR/nvm.sh;
 
-# Install Node 16.x
-nvm install 16
+# Install Node (version from .nvmrc)
+nvm install
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm use
@@ -18,6 +18,7 @@ nvm use
 npm install -g @microsoft/rush pm2
 rush install
 rush build
+pm2 startup
 
 # Set up the terminal app then return to the project root
 pushd ./apps/terminal/scripts

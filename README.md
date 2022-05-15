@@ -7,22 +7,16 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Setup
 
-- `nvm install`
-- `nvm use`
-- `rush install`
 - `cp apps/old-site/.env.template apps/old-site/.env`
   - Enter the appropriate information here
 - `cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env`
   - Enter the appropriate information here
-- `bash ./apps/terminal/scripts/setup.sh`
-- `rush update`
-- `rush build`
-- `pm2 startup`
+- `bash ./setup.sh`
 
 ## Deploy
-- `sudo pm2 delete "npm run serve" 2>/dev/null`
+- `sudo pm2 delete "npm run deploy" 2>/dev/null`
 	- Deletes the old server process if it exists
-- `sudo pm2 start "npm run serve"`
+- `sudo pm2 start "npm run deploy"`
 - `sudo pm2 save`
 
 ## Troubleshooting
