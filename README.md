@@ -14,8 +14,9 @@ This redesign of my website would not be possible without the _incredible_ work 
 - `bash ./setup.sh`
 
 ## Deploy
+
 - `sudo pm2 delete "npm run deploy" 2>/dev/null`
-	- Deletes the old server process if it exists
+  - Deletes the old server process if it exists
 - `sudo pm2 start "npm run deploy"`
 - `sudo pm2 save`
 
