@@ -43,7 +43,7 @@ then
 
 	# https://stackoverflow.com/a/19738137/6456163
 	printf "\n# Loads the user's 'oh-my-posh' configuration when the shell starts\n" | sudo tee -a "$USERBASH"
-	echo "eval \"\$(oh-my-posh init bash --strict --config $USERDIR/.poshthemes/$OHMYPOSHTHEME.omp.json)\"" | sudo tee -a "$USERBASH"
+	echo "eval \"\$(oh-my-posh init bash --strict --config /home/$USERNAME/.poshthemes/$OHMYPOSHTHEME.omp.json)\"" | sudo tee -a "$USERBASH"
 
 	sudo chattr +i "$USERBASH";
 fi
