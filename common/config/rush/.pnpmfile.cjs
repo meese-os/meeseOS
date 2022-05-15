@@ -27,7 +27,14 @@ module.exports = {
  * The return value is the updated object.
  */
 function readPackage(packageJson, context) {
+	if (packageJson.name === "sass-loader") {
+		// We don't want to install the node-sass and sass-embedded packages
+		// that are peer dependencies of sass-loader becasue we already have
+		// `sass` installed.
+		return packageJson;
+	}
 
+	// Automatically installs peer dependencies into the project.
 	// https://github.com/pnpm/pnpm/discussions/3995#discussioncomment-1647425
 	packageJson.dependencies = {
     ...packageJson.peerDependencies,

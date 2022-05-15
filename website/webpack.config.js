@@ -4,7 +4,6 @@ const minimize = mode === "production";
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const NodemonPlugin = require("nodemon-webpack-plugin");
 const plugins = [];
 
 if (mode === "production") {
@@ -46,9 +45,6 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
-		}),
-		new NodemonPlugin({
-			script: "src/server/index.js",
 		}),
 		...plugins,
 	],

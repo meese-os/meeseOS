@@ -584,5 +584,5 @@ const register = (core, args, options, metadata) => {
 	return proc;
 };
 
-// Register package in OS.js
+// Register package in MeeseOS
 meeseOS.register(applicationName, register);

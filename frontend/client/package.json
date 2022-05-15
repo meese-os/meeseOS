@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/client",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "aaronmeese.com client",
   "main": "dist/main.js",
   "style": "dist/main.css",
@@ -39,7 +39,7 @@
     "html-loader": "^3.1.0",
     "html-loader-jest": "^0.2.1",
     "mini-css-extract-plugin": "^2.5.3",
-    "sass": "^1.49.9",
+    "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "stylelint": "^14.5.0",
     "stylelint-config-standard": "^25.0.0",

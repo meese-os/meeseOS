@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/panels",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "aaronmeese.com Panels",
   "main": "dist/main.js",
   "module": "dist/main.js",
@@ -34,7 +34,7 @@
     "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.9.0",
     "mini-css-extract-plugin": "^2.5.3",
-    "sass": "^1.49.9",
+    "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "stylelint": "^14.5.0",
     "stylelint-config-standard": "^25.0.0",
