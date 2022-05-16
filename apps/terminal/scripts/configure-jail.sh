@@ -51,6 +51,6 @@ sudo mount -t proc /proc /jail/proc/
 # TODO: Try remounting /proc on every reboot with
 # https://serverfault.com/a/302124/537331
 
-
 # Create a `/tmp` directory for use by oh-my-posh
 sudo mkdir /jail/tmp
+sudo chmod 777 /jail/tmp # ;)
