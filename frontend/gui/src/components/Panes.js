@@ -124,11 +124,11 @@ const inner = nestable(
 		init: (props) => ({ sizes: props.sizes || [150] }),
 		setSize:
 			({ index, size }) =>
-				(state) => {
-					const sizes = [].concat(state.sizes);
-					sizes[index] = size;
-					return { sizes };
-				},
+			(state) => {
+				const sizes = [].concat(state.sizes);
+				sizes[index] = size;
+				return { sizes };
+			},
 	},
 	view,
 	"div"

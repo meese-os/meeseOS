@@ -35,7 +35,7 @@ import nestable from "hyperapp-nestable";
 const view = (state, actions) => (props, children) => {
 	return h(
 		Element,
-		{ ...props.box || {}, class: ["meeseOS-gui-expander-wrapper"], },
+		{ ...(props.box || {}), class: ["meeseOS-gui-expander-wrapper"] },
 		[
 			h(
 				"div",
@@ -85,7 +85,7 @@ const inner = nestable(
 			ative: props.active !== false,
 		}),
 		ontoggle: ({ ev, active, ontoggle }) => {
-			const cb = ontoggle || function() {};
+			const cb = ontoggle || function () {};
 			cb(ev, active);
 			return { active };
 		},
@@ -103,8 +103,4 @@ const inner = nestable(
  * @param {h[]} children Children
  */
 export const Expander = (props, children) =>
-	h(
-		inner,
-		{ ...props, class: "meeseOS-gui meeseOS-gui-expander", },
-		children
-	);
+	h(inner, { ...props, class: "meeseOS-gui meeseOS-gui-expander" }, children);
