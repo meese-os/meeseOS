@@ -24,3 +24,5 @@ sudo make install
 sudo jk_init -v -j /jail ssh
 sudo mkdir /jail/home
 echo "users:x:100:" | sudo tee /jail/etc/group
+
+# TODO: `sudo jk_check` to check if jailkit is working and secure
