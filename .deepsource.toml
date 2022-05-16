@@ -25,7 +25,3 @@ enabled = true
 [[transformers]]
 name = "prettier"
 enabled = true
-
-[[transformers]]
-name = "standardjs"
-enabled = true
