@@ -27,7 +27,7 @@ module.exports = {
 		],
 		"space-before-blocks": ["error", "always"],
 		"space-infix-ops": ["error", { int32Hint: false }],
-		"spaced-comment": ["warn", "always", { "exceptions": ["!"] }],
+		"spaced-comment": ["warn", "always", { exceptions: ["!"] }],
 		"prefer-arrow-callback": 1,
 		"prefer-spread": 1,
 		"prefer-rest-params": 1,
