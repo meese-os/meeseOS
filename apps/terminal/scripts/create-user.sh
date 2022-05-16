@@ -18,7 +18,7 @@ echo "Creating user '$USERNAME'..."
 # TODO: Use keys instead of a password for SSH authentication
 # https://stackoverflow.com/a/50067008/6456163
 
-# TODO: Look into other shells instead of rbash for more security:
+# TODO: Look into other shells instead of bash for more security:
 # https://stackoverflow.com/a/56319942/6456163
 
 # TODO: https://serverfault.com/a/1093244/537331
@@ -32,7 +32,7 @@ if grep -q -c "/jail/./home/$USERNAME" /etc/passwd; then
 else
 	echo "Adding user '$USERNAME' to jail..."
 	echo "$USERNAME:x:2000:100::/jail/./home/$USERNAME:/usr/sbin/jk_chrootsh" | sudo tee -a /etc/passwd
-	echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/rbash" | sudo tee -a /jail/etc/passwd
+	echo "$USERNAME:x:2000:100::/home/$USERNAME:/bin/bash" | sudo tee -a /jail/etc/passwd
 	echo "$USERNAME::11302:0:99999:7:::" | sudo tee -a /etc/shadow
 	echo "Added user '$USERNAME' to jail..."
 fi
