@@ -19,7 +19,7 @@ declare -a commands=(
 
 # Props to https://stackoverflow.com/a/22432604/6456163 for array looping code
 num_commands=${#commands[@]}
-for (( i=0; i<$num_commands; i++ ));
+for (( i=0; i<num_commands; i++ ));
 do
 	sudo jk_cp -v -f /jail "${commands[$i]}"
 done
