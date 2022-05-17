@@ -10,10 +10,14 @@ export SHELL=/nice/try
 alias ssh="echo \"You wanted a secure shell, you got one!\""
 alias whoami="echo \"The better question is, *why* are you?\""
 
-# Make things *slightly* more difficult for the user, so they have to
-# work a little harder to escape rbash into real bash
-  # TODO: Try to prevent escape from rbash to bash
-alias bash="bash -r"
+# Implement "cat" so `oh-my-posh` can be used without error;
+# clever users can also use this to view the contents of files,
+# which is why I wanted to avoid using `cat` in the first place.
+# Unfortunately this is the best solution that is currently available,
+# pending a satisfactory resolution of https://github.com/JanDeDobbeleer/oh-my-posh/issues/2281
+	# Thanks to https://stackoverflow.com/a/55620350/6456163
+	# and https://unix.stackexchange.com/a/195484/370076 for this idea
+alias cat='_cat(){ echo "$(<$1)";}; _cat'
 
 # Disable command history
 set +o history

@@ -36,11 +36,14 @@ bash ./create-user.sh
 # TODO: Secure the server a little more with the following:
 # https://serverfault.com/a/766634/537331
 
-# Installs some helpful packages used by the app
+# Installs some helpful packages used by the terminal app
 sudo apt-get install -y sshpass python2 build-essential
 
 # OPTIONAL: Install `oh-my-posh`
 bash ./oh-my-posh.sh
+
+# Prevent the user from writing to any files in their home directory
+sudo chmod -R 544 "/jail/home/$USERNAME" 2>/dev/null
 
 # Clean up the environment
 echo "Cleaning up..."

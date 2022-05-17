@@ -16,6 +16,7 @@ This redesign of my website would not be possible without the _incredible_ work 
 ## Deploy
 
 - `cd ./website`
+- `nvm use`
 - `pm2 delete "npm run deploy" 2>/dev/null`
   - Deletes the old server process if it exists
 - `pm2 start "npm run deploy"`

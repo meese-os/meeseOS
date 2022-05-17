@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/terminal",
-  "version": "2.3.5",
+  "version": "2.3.13",
   "description": "aaronmeese.com Terminal Application",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
