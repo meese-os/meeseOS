@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if sudo su -c "command -v oh-my-posh" "$USERNAME"; then
-	echo "oh-my-posh is already installed for this user..."
-	exit 0
+  echo "oh-my-posh is already installed for this user..."
+  exit 0
 fi
 
 # Optional: Install a Nerd Font for best results.
@@ -38,12 +38,12 @@ sudo chown -R "$USERNAME:users" "$THEMESPATH"
 USERBASH="$USERDIR/.bashrc"
 if ! grep -q -c "oh-my-posh init" /dev/null "$USERBASH";
 then
-	echo "Adding oh-my-posh to the user's '.bashrc'..."
-	sudo chattr -i "$USERBASH";
+  echo "Adding oh-my-posh to the user's '.bashrc'..."
+  sudo chattr -i "$USERBASH";
 
-	# https://stackoverflow.com/a/19738137/6456163
-	printf "\n# Loads the user's 'oh-my-posh' configuration when the shell starts\n" | sudo tee -a "$USERBASH"
-	echo "eval \"\$(oh-my-posh init bash --strict --config /home/$USERNAME/.poshthemes/$OHMYPOSHTHEME.omp.json 2>/dev/null)\"" | sudo tee -a "$USERBASH"
+  # https://stackoverflow.com/a/19738137/6456163
+  printf "\n# Loads the user's 'oh-my-posh' configuration when the shell starts\n" | sudo tee -a "$USERBASH"
+  echo "eval \"\$(oh-my-posh init bash --strict --config /home/$USERNAME/.poshthemes/$OHMYPOSHTHEME.omp.json 2>/dev/null)\"" | sudo tee -a "$USERBASH"
 
-	sudo chattr +i "$USERBASH";
+  sudo chattr +i "$USERBASH";
 fi

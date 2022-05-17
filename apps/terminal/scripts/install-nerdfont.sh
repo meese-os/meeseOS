@@ -4,12 +4,12 @@ echo "Installing Nerd Font..."
 INSTALL_PATH="/jail/usr/share/fonts/truetype"
 
 if [ ! -d "$INSTALL_PATH" ]; then
-	sudo mkdir -p "$INSTALL_PATH"
+  sudo mkdir -p "$INSTALL_PATH"
 else
-	# This path doesn't exist initially, so if it's detected we can
-	# assume it's been created by the script.
-	echo "Nerd Fonts already installed, skipping..."
-	exit 0
+  # This path doesn't exist initially, so if it's detected we can
+  # assume it's been created by the script.
+  echo "Nerd Fonts already installed, skipping..."
+  exit 0
 fi
 
 # Can be replaced by a Nerd Font of your choice from https://www.nerdfonts.com/font-downloads

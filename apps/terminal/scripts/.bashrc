@@ -15,8 +15,8 @@ alias whoami="echo \"The better question is, *why* are you?\""
 # which is why I wanted to avoid using `cat` in the first place.
 # Unfortunately this is the best solution that is currently available,
 # pending a satisfactory resolution of https://github.com/JanDeDobbeleer/oh-my-posh/issues/2281
-	# Thanks to https://stackoverflow.com/a/55620350/6456163
-	# and https://unix.stackexchange.com/a/195484/370076 for this idea
+  # Thanks to https://stackoverflow.com/a/55620350/6456163
+  # and https://unix.stackexchange.com/a/195484/370076 for this idea
 alias cat='_cat(){ echo "$(<$1)";}; _cat'
 
 # Disable command history

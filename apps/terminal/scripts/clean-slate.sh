@@ -14,8 +14,8 @@ sudo umount /jail/proc
 # https://stackoverflow.com/a/2108296/6456163
 for dir in /jail/home/*/
 do
-	dir=${dir%*/}
-	sudo userdel -f "${dir##*/}" 2>/dev/null
+  dir=${dir%*/}
+  sudo userdel -f "${dir##*/}" 2>/dev/null
 done
 
 # Delete the jail

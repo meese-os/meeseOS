@@ -4,8 +4,8 @@
 # https://www.mikeslab.net/ubuntu-1404-creating-a-very-jailed-user-with-jailkit/
 
 if [ -d "/jail" ]; then
-	echo "Jail already exists, skipping creation..."
-	exit 0
+  echo "Jail already exists, skipping creation..."
+  exit 0
 fi
 
 # Download and unpack jailkit

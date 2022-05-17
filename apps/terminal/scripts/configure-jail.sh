@@ -7,21 +7,21 @@
 echo "Copying over commands for the new user..."
 
 declare -a commands=(
-	"/bin/bash"        # The default shell
-	"/bin/sh"          # Required for which
-	"/bin/dash"        # Required for which
-	"/bin/ls"
-	"/usr/bin/clear"
-	"/usr/bin/which"
-	"/usr/bin/tr"      # Required for oh-my-posh
-	"/bin/rm"          # Required for oh-my-posh
+  "/bin/bash"        # The default shell
+  "/bin/sh"          # Required for which
+  "/bin/dash"        # Required for which
+  "/bin/ls"
+  "/usr/bin/clear"
+  "/usr/bin/which"
+  "/usr/bin/tr"      # Required for oh-my-posh
+  "/bin/rm"          # Required for oh-my-posh
 )
 
 # Props to https://stackoverflow.com/a/22432604/6456163 for array looping code
 num_commands=${#commands[@]}
 for (( i=0; i<num_commands; i++ ));
 do
-	sudo jk_cp -v -f /jail "${commands[$i]}"
+  sudo jk_cp -v -f /jail "${commands[$i]}"
 done
 
 ###
