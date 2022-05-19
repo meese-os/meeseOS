@@ -19,7 +19,7 @@
     "make:provider": "meese-cli make:provider",
     "build": "webpack && npm run build:manifest",
     "watch": "webpack --watch",
-    "deploy": "NODE_ENV=production npm run build && npm run serve"
+    "deploy": "NODE_ENV=production npm run serve"
   },
   "author": "Aaron Meese <aaronjmeese@gmail.com>",
   "devDependencies": {

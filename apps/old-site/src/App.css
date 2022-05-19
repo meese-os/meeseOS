@@ -9,14 +9,14 @@
 	);
 
 	background-size: 1200% 1200%;
-	-webkit-animation: AnimationName 70s ease infinite;
-	-moz-animation: AnimationName 70s ease infinite;
-	-o-animation: AnimationName 70s ease infinite;
-	animation: AnimationName 70s ease infinite;
+	-webkit-animation: GradientAnimation 70s ease infinite;
+	-moz-animation: GradientAnimation 70s ease infinite;
+	-o-animation: GradientAnimation 70s ease infinite;
+	animation: GradientAnimation 70s ease infinite;
 	height: 100%;
 }
 
-@-webkit-keyframes AnimationName {
+@-webkit-keyframes GradientAnimation {
 	0% {
 		background-position: 0% 7%;
 	}
@@ -28,7 +28,7 @@
 	}
 }
 
-@-moz-keyframes AnimationName {
+@-moz-keyframes GradientAnimation {
 	0% {
 		background-position: 0% 7%;
 	}
@@ -40,7 +40,7 @@
 	}
 }
 
-@-o-keyframes AnimationName {
+@-o-keyframes GradientAnimation {
 	0% {
 		background-position: 0% 7%;
 	}
@@ -52,7 +52,7 @@
 	}
 }
 
-@keyframes AnimationName {
+@keyframes GradientAnimation {
 	0% {
 		background-position: 0% 7%;
 	}
@@ -70,6 +70,10 @@
 	padding-right: 5px;
 	transition: all 0.8s;
 	margin: 4px;
+}
+
+#socialIcons a:hover {
+	text-decoration: none;
 }
 
 .socialiconshover {
@@ -109,6 +113,15 @@
 
 .medium-image {
 	max-width: 100%;
+}
+
+.bg-gradient {
+	background: linear-gradient(rgb(245, 245, 245), rgba(245, 245, 245, 0));
+}
+
+#aboutme .lead {
+	line-height: 1.65em;
+	margin-left: 20px;
 }
 
 #stars {
@@ -487,11 +500,4 @@
 	to {
 		transform: translateY(-2000px);
 	}
-}
-.bg-gradient {
-	background: linear-gradient(rgb(245, 245, 245), rgba(245, 245, 245, 0));
-}
-
-#socialIcons a:hover {
-	text-decoration: none;
 }

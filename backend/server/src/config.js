@@ -36,6 +36,7 @@ const defaultConfiguration = {
 	development: !(process.env.NODE_ENV || "").match(/^prod/i),
 	logging: true,
 	index: "index.html",
+	// NOTE: This will likely need to be `localhost` on Windows machines
 	bind: "0.0.0.0",
 	port: 8000,
 	public: null,

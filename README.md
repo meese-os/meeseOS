@@ -15,10 +15,10 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Deploy
 
-- `cd ./website`
-- `nvm use`
 - `pm2 delete "npm run deploy" 2>/dev/null`
   - Deletes the old server process if it exists
+- `NODE_ENV=production rush build`
+- `cd ./website && nvm use`
 - `pm2 start "npm run deploy"`
   - Running `pm2 monit` will allow you to track when the server has finished initializing
 - `pm2 save --force`

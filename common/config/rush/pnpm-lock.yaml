@@ -91,7 +91,7 @@ importers:
       '@react-hook/window-size': 3.0.5
       axios: ^0.21.1
       babel-loader: ^8.2.3
-      bootstrap: ^5.1.3
+      bootstrap: ^4.4.1
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
@@ -121,7 +121,7 @@ importers:
       '@popperjs/core': 2.11.5
       '@react-hook/window-size': 3.0.5
       axios: 0.21.4
-      bootstrap: 5.1.3
+      bootstrap: 4.6.1
       dotenv: 16.0.1
       font-awesome: 4.7.0
       jquery: 3.6.0
@@ -3800,10 +3800,11 @@ packages:
     resolution: {integrity: sha1-aN/1++YMUes3cl6p4+0xDcwed24=}
     dev: true
 
-  /bootstrap/5.1.3:
-    resolution: {integrity: sha512-fcQztozJ8jToQWXxVuEyXWW+dSo8AiXWKwiSSrKWsRB/Qt+Ewwza+JWoLKiTuQLaEPhdNAJ7+Dosc9DOIqNy7Q==}
+  /bootstrap/4.6.1:
+    resolution: {integrity: sha512-0dj+VgI9Ecom+rvvpNZ4MUZJz8dcX7WCX+eTID9+/8HgOkv3dsRzi8BGeZJCQU6flWQVYxwTQnEZFrmJSEO7og==}
     dependencies:
-      '@popperjs/core': 2.11.5
+      jquery: 3.6.0
+      popper.js: 1.16.1
     dev: false
 
   /brace-expansion/1.1.11:
@@ -8094,6 +8095,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /popper.js/1.16.1:
+    resolution: {integrity: sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==}
+    deprecated: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+    dev: false
 
   /posix-character-classes/0.1.1:
     resolution: {integrity: sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=}

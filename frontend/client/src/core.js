@@ -556,16 +556,16 @@ export default class Core extends CoreBase {
 
 		const value = useDefault
 			? this.make("meeseOS/settings").get(
-					"meeseOS/default-application",
-					file.mime
-			  )
+				"meeseOS/default-application",
+				file.mime
+			)
 			: null;
 
 		const type = useDefault ? "defaultApplication" : "choice";
 
 		const args = {
 			title: "Select application",
-			message: `Select application for \'${file.path}\'`,
+			message: `Select application for '${file.path}'`,
 			choices: compatible.reduce((o, i) => ({ ...o, [i.name]: i.name }), {}),
 			value,
 		};
