@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+		<!-- Variable Declaration -->
+		<% var title = htmlWebpackPlugin.options.title; %>
+		<% var description = "MeeseOS - JavaScript Cloud/Web Desktop Platform"; %>
+		<% var url = "https://aaronmeese.com"; %>
+		<% var image = "social.png"; %>
+
+		<!-- Primary Meta Tags -->
     <meta charset="utf-8" />
     <meta name="google" content="notranslate" />
-    <meta name="description" content="MeeseOS - JavaScript Cloud/Web Desktop Platform" />
+    <meta name="description" content="<%= description %>" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title><%= title %></title>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="<%= url %>">
+		<meta property="og:title" content="<%= title %>">
+		<meta property="og:description" content="<%= description %>">
+		<meta property="og:image" content="<%= image %>">
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content="<%= url %>">
+		<meta property="twitter:title" content="<%= title %>">
+		<meta property="twitter:description" content="<%= description %>">
+		<meta property="twitter:image" content="<%= image %>">
   </head>
   <body>
   </body>

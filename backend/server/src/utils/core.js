@@ -31,7 +31,7 @@
 const express_session = require("express-session");
 const express_ws = require("express-ws");
 
-/*
+/**
  * Converts an input argument to configuration entry
  * Overrides the user-created configuration file
  */
@@ -59,7 +59,7 @@ module.exports.createSession = (app, configuration) => {
 	});
 };
 
-/*
+/**
  * Create WebSocket server
  */
 module.exports.createWebsocket = (app, configuration, session, httpServer) =>
@@ -74,7 +74,7 @@ module.exports.createWebsocket = (app, configuration, session, httpServer) =>
 		},
 	});
 
-/*
+/**
  * Wrapper for parsing json
  */
 module.exports.parseJson = (str) => {
@@ -85,7 +85,7 @@ module.exports.parseJson = (str) => {
 	}
 };
 
-/*
+/**
  * Checks groups for a request
  */
 const validateGroups = (req, groups, all) => {
@@ -100,18 +100,18 @@ const validateGroups = (req, groups, all) => {
 	return true;
 };
 
-/*
+/**
  * Authentication middleware wrapper
  */
 module.exports.isAuthenticated =
 	(groups = [], all = false) =>
-	(req, res, next) => {
-		if (req.session.user && validateGroups(req, groups, all)) {
-			return next();
-		}
+		(req, res, next) => {
+			if (req.session.user && validateGroups(req, groups, all)) {
+				return next();
+			}
 
-		return res.status(403).send("Access denied");
-	};
+			return res.status(403).send("Access denied");
+		};
 
 /**
  * Closes an array of watches

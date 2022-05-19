@@ -1,6 +1,7 @@
 const path = require("path");
 const mode = process.env.NODE_ENV || "development";
 const minimize = mode === "production";
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -10,7 +11,6 @@ if (mode === "production") {
 	plugins.push(new CssMinimizerPlugin());
 }
 
-const siteTitle = "Aaron Meese";
 module.exports = {
 	mode,
 	devtool: "source-map",
@@ -32,10 +32,13 @@ module.exports = {
 		},
 	},
 	plugins: [
+		new CopyWebpackPlugin({
+			patterns: ["src/client/social.png"],
+		}),
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src/client/index.ejs"),
 			favicon: path.resolve(__dirname, "src/client/aaron.png"),
-			title: siteTitle,
+			title: "Aaron Meese",
 		}),
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
