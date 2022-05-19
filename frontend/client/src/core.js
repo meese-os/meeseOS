@@ -556,9 +556,9 @@ export default class Core extends CoreBase {
 
 		const value = useDefault
 			? this.make("meeseOS/settings").get(
-				"meeseOS/default-application",
-				file.mime
-			)
+					"meeseOS/default-application",
+					file.mime
+			  )
 			: null;
 
 		const type = useDefault ? "defaultApplication" : "choice";
