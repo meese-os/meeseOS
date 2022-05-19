@@ -105,13 +105,13 @@ const validateGroups = (req, groups, all) => {
  */
 module.exports.isAuthenticated =
 	(groups = [], all = false) =>
-		(req, res, next) => {
-			if (req.session.user && validateGroups(req, groups, all)) {
-				return next();
-			}
+	(req, res, next) => {
+		if (req.session.user && validateGroups(req, groups, all)) {
+			return next();
+		}
 
-			return res.status(403).send("Access denied");
-		};
+		return res.status(403).send("Access denied");
+	};
 
 /**
  * Closes an array of watches
