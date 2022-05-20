@@ -15,17 +15,9 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Deploy
 
-- `pm2 delete "npm run deploy" 2>/dev/null`
-  - Deletes the old server process if it exists
-- `git fetch --all`
-- `git reset origin/master --hard`
-- `nvm use`
-- `rush update`
-- `NODE_ENV=production rush build`
-- `cd ./website`
-- `pm2 start "npm run deploy"`
-  - Running `pm2 monit` will allow you to track when the server has finished initializing
-- `pm2 save --force`
+- `bash ./deploy.sh`
+	- Can use `--no-reset` for local deployment testing, so you don't lose your changes
+- Running `pm2 monit` will allow you to track when the server has finished initializing
 
 ## Troubleshooting
 
