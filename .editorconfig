@@ -7,6 +7,6 @@ charset = utf-8
 trim_trailing_whitespace = false
 insert_final_newline = false
 
-[*.json, *.toml, *.sh]
+[*.json, *.toml, *.sh, *.md]
 indent_style = space
 indent_size = 2

@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Deletes the old server process if it exists
-pm2 delete "npm run deploy" 2>/dev/null
-
 # Fetches the latest code from the repo
 if [ "$1" != "--no-reset" ]; then
 	echo "Fetching latest code from repo..."
@@ -18,6 +15,9 @@ export NVM_DIR="$HOME/.nvm"
 nvm use
 rush update
 NODE_ENV=production rush build
+
+# Deletes the old server process if it exists, done last to minimize downtime
+pm2 delete "npm run deploy" 2>/dev/null
 
 # Starts the server
 cd ./website
