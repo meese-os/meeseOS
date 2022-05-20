@@ -16,7 +16,7 @@ This redesign of my website would not be possible without the _incredible_ work 
 ## Deploy
 
 - `bash ./deploy.sh`
-	- Can use `--no-reset` for local deployment testing, so you don't lose your changes
+  - Can use `--no-reset` for local deployment testing, so you don't lose your changes
 - Running `pm2 monit` will allow you to track when the server has finished initializing
 
 ## Troubleshooting
