@@ -10,8 +10,7 @@
  * DomAnimator
  *********************************************/
 
-export const DomAnimator = (function() {
-
+export const DomAnimator = function () {
 	"use strict";
 
 	let currentFrame = 0;
@@ -31,7 +30,7 @@ export const DomAnimator = (function() {
 	function extend(target, source) {
 		for (let key in source) {
 			if (!(key in target)) {
-				target[ key ] = source[ key ];
+				target[key] = source[key];
 			}
 		}
 		return target;
@@ -58,20 +57,21 @@ export const DomAnimator = (function() {
 	function swapWhitespace(array) {
 		let i = 0;
 
-		for(i; i < array.length; i++) {
+		for (i; i < array.length; i++) {
 			array[i] = array[i].replace(/ /g, whiteSpaceString);
 		}
 		return array;
 	}
 
 	function animate(time) {
-
 		// No time set, just use default!
 		if (!time) time = defaultTime;
 
 		// No frames
 		if (frames.length === 0) {
-			return console.log("I need frames to animate. You can add them with .addFrame( string )");
+			return console.log(
+				"I need frames to animate. You can add them with .addFrame( string )"
+			);
 		}
 
 		if (attached === false) {
@@ -84,15 +84,12 @@ export const DomAnimator = (function() {
 	}
 
 	function renderFrame() {
-
 		let frameData = frames[currentFrame];
 
 		if (multiNode) {
-
 			for (let i = 0; i < nodes.length; i++) {
 				nodes[i].nodeValue = frameData[i];
 			}
-
 		} else {
 			nodes[0].nodeValue = frameData;
 		}
@@ -104,20 +101,17 @@ export const DomAnimator = (function() {
 	}
 
 	function attachToDocument() {
-
 		let head = document.head;
 		let parent = head.parentNode;
 
 		// This assumes you have the same amount of frames in each section.
 		if (multiNode) {
-
 			let totalNodes = frames[0].length;
-			for(let i = 0; i < totalNodes; i++) {
+			for (let i = 0; i < totalNodes; i++) {
 				let node = document.createComment("");
 				nodes.push(node);
 				parent.insertBefore(node, head);
 			}
-
 		} else {
 			let node = document.createComment("");
 			nodes.push(node);
@@ -130,19 +124,16 @@ export const DomAnimator = (function() {
 	}
 
 	function addFrame(frameData) {
-
 		if (!frameData) frameData = "no frame data";
 
-		let frameType = typeof(frameData);
+		let frameType = typeof frameData;
 
 		// Multi line data.
 		if (frameType === "object") {
-
 			frames.push(parseMultilineFrame(frameData));
 
 			// String data
 		} else if (frameType === "string") {
-
 			frames.push(parseSingleLineFrame(frameData));
 		}
 	}
@@ -156,7 +147,6 @@ export const DomAnimator = (function() {
 	return extend(main, {
 		addFrame: addFrame,
 		animate: animate,
-		stop: stop
+		stop: stop,
 	});
-
-});
+};
