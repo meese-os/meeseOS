@@ -28,7 +28,9 @@
  * @license Simplified BSD License
  * @preserve Copyright (c) Anders Evenrud <andersevenrud@gmail.com>
  */
+
 import "./index.scss";
+import "./src/monkey-animation";
 
 export { default as Core } from "./src/core";
 export { default as Window } from "./src/window";
