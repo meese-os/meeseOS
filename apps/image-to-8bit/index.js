@@ -39,7 +39,7 @@ const register = (core, args, options, metadata) => {
 	 * @example https://example.com/ for remote sites
 	 * @example /data/index.html for local files
 	 */
-	const url = "https://aaronmeese.com/image-to-8bit/";
+	const url = "https://ajmeese7.github.io/image-to-8bit/";
 
 	// Create a new Application instance
 	const proc = core.make("meeseOS/application", {
