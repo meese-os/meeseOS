@@ -1,6 +1,6 @@
 {
   "type": "application",
-  "name": "Uptime Monitor",
+  "name": "uptime-monitor",
   "category": "utilities",
   "title": "Uptime Monitor",
   "description": "The Uptime Monitor application monitors the uptime of your servers and alerts you when they go down.",

@@ -28,3 +28,8 @@ To see if your process is still runninng, run `pm2 list`.
 To monitor the logs from your process, run `pm2 monit`.
 
 To see if the port is already in use, run `netstat -tulpn | grep LISTEN`. If you need to free the port, you can likely run `sudo pkill -9 node`. Alternatively, you can run the command `sudo fuser -k 8000/tcp` until there is no output, then the port will be guaranteed to be free.
+
+# TODO
+- Caching for "rush-project.json"
+	- "Project does not have a rush-project.json configuration file, or one provided by a rig, so it does not support caching."
+	- "rush build --verbose"
