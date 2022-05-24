@@ -31,7 +31,10 @@ const matrixOptions = {
 const matrixObject = {};
 
 /** Unicode Russian characters split into an array. */
-const russianCharacters = "\u0402\u040A\u040B\u0411\u0414\u0416\u041B\u0424\u0426\u0429\u042A\u042E\u042F\u0434\u0436\u0444\u0464\u0466\u0468\u046A\u0471\u0472\u047A\u0494\u0498\u049C\u04A0\u04A8\u04B4\u04FC\u04FE\u04C1\u0419\u0452\u0463\u046e\u0481".split("");
+const russianCharacters =
+	"\u0402\u040A\u040B\u0411\u0414\u0416\u041B\u0424\u0426\u0429\u042A\u042E\u042F\u0434\u0436\u0444\u0464\u0466\u0468\u046A\u0471\u0472\u047A\u0494\u0498\u049C\u04A0\u04A8\u04B4\u04FC\u04FE\u04C1\u0419\u0452\u0463\u046e\u0481".split(
+		""
+	);
 
 /**
  * Creates a Matrix falling rain effect with Russian characters.
@@ -50,7 +53,7 @@ const matrix = (canvas, options) => {
 	// Set the canvas width and height to the screen width and height;
 	// NOTE: Disabling alpha here makes the rain the wrong size (too big), so don't :)
 	const ctx = canvas.getContext("2d");
-	canvas.width  = window.innerWidth;
+	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 
 	// Define variables above the resize function
@@ -71,7 +74,7 @@ const matrix = (canvas, options) => {
 	 * @link https://stackoverflow.com/a/64981706/6456163
 	 */
 	function windowResize() {
-		canvas.width  = window.innerWidth;
+		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 
 		const numRows = Math.round(canvas.height / fontSize);
@@ -108,7 +111,9 @@ const matrix = (canvas, options) => {
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 		// Prepare to draw the raindrops
-		const textColor = settings.rainbowMode ? getRainbowColor() : settings.rainColor;
+		const textColor = settings.rainbowMode
+			? getRainbowColor()
+			: settings.rainColor;
 		ctx.fillStyle = textColor;
 		ctx.font = fontSize + "px arial";
 		const backgroundColor = settings.backgroundColor;
