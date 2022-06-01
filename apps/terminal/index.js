@@ -174,7 +174,7 @@ const createTerminal = (core, proc, index) => {
 	proc
 		.createWindow({
 			id: "Xterm_" + String(index),
-			title: proc.metadata.title.en_EN,
+			title: proc.metadata.title,
 			icon: proc.resource(proc.metadata.icon),
 			dimension: { width: 625, height: 360 },
 			attributes: {

@@ -11,7 +11,7 @@ const register = (core, args, options, metadata) => {
 	proc
 		.createWindow({
 			id: "___NAME___Window",
-			title: metadata.title.en_EN,
+			title: metadata.title,
 			icon: proc.resource(proc.metadata.icon),
 			dimension: { width: 400, height: 400 },
 			position: { left: 700, top: 200 },

@@ -4,11 +4,7 @@
   "category": null,
   "server": "server.js",
   "icon": "icon.png",
-  "title": {
-    "en_EN": "___NAME___"
-  },
-  "description": {
-    "en_EN": "___NAME___"
-  },
+  "title": "___NAME___",
+  "description": "___NAME___",
   "files": ["main.js", "main.css"]
 }
