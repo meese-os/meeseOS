@@ -21,7 +21,3 @@ enabled = true
 [[analyzers]]
 name = "shell"
 enabled = true
-
-[[transformers]]
-name = "prettier"
-enabled = true
