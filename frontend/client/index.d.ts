@@ -801,11 +801,6 @@ declare class Application extends EventEmitter {
 	 */
 	getSession(): ApplicationSession;
 	/**
-	 * Emits an event across all (or filtered) applications
-	 * @deprecated
-	 */
-	emitAll(filter?: Function): Function;
-	/**
 	 * Saves settings
 	 */
 	saveSettings(): Promise<boolean>;

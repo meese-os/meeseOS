@@ -39,13 +39,13 @@ const tapper = doubleTap();
 
 const onDropAction =
 	(actions) =>
-	(ev, data, files, shortcut = true) => {
-		if (validVfsDrop(data)) {
-			actions.addEntry({ entry: data, shortcut });
-		} else if (files.length > 0) {
-			actions.uploadEntries(files);
-		}
-	};
+		(ev, data, files, shortcut = true) => {
+			if (validVfsDrop(data)) {
+				actions.addEntry({ entry: data, shortcut });
+			} else if (files.length > 0) {
+				actions.uploadEntries(files);
+			}
+		};
 
 const isRootElement = (ev) =>
 	ev.target &&
@@ -116,8 +116,8 @@ const view = (fileIcon, themeIcon, droppable) => (state, actions) =>
 									}),
 									entry.shortcut !== false
 										? h("img", {
-												src: themeIcon("emblem-symbolic-link"),
-												class:
+											src: themeIcon("emblem-symbolic-link"),
+											class:
 													"meeseOS-desktop-iconview__entry__icon__shortcut",
 										  })
 										: null,
@@ -305,24 +305,24 @@ export class DesktopIconView extends EventEmitter {
 
 				addEntry:
 					({ entry, shortcut }) =>
-					(state, actions) => {
-						const dest = `${root}/${entry.filename}`;
+						(state, actions) => {
+							const dest = `${root}/${entry.filename}`;
 
-						mkdir(root)
-							.catch(() => true)
-							.then(() => {
-								if (shortcut || entry.mime === "meeseOS/application") {
-									return shortcuts.add(entry);
-								}
+							mkdir(root)
+								.catch(() => true)
+								.then(() => {
+									if (shortcut || entry.mime === "meeseOS/application") {
+										return shortcuts.add(entry);
+									}
 
-								return copy(entry, dest)
-									.then(() => actions.reload(true))
-									.catch(error);
-							})
-							.then(() => actions.reload(true));
+									return copy(entry, dest)
+										.then(() => actions.reload(true))
+										.catch(error);
+								})
+								.then(() => actions.reload(true));
 
-						return { selected: -1 };
-					},
+							return { selected: -1 };
+						},
 
 				removeEntry: (entry) => (state, actions) => {
 					if (entry.shortcut !== false) {

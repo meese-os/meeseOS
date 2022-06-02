@@ -156,11 +156,11 @@ export default class Packages {
 
 		return manifest
 			? this.core
-					.request(manifest, {}, "json", true)
-					.then((metadata) => this.addPackages(metadata))
-					.then((metadata) => this._preloadBackgroundFiles(metadata))
-					.then(() => true)
-					.catch((error) => logger.error(error))
+				.request(manifest, {}, "json", true)
+				.then((metadata) => this.addPackages(metadata))
+				.then((metadata) => this._preloadBackgroundFiles(metadata))
+				.then(() => true)
+				.catch((error) => logger.error(error))
 			: Promise.resolve(true);
 	}
 
@@ -352,19 +352,19 @@ export default class Packages {
 		};
 
 		if (!canLaunch(metadata)) {
-			fail(`You are not permitted to run \'${name}\'`);
+			fail(`You are not permitted to run '${name}'`);
 		}
 
 		return this.preloader
 			.load(preloads, options.forcePreload === true)
 			.then(({ errors }) => {
 				if (errors.length) {
-					fail(`Package Loading \'${name}\' failed: ${errors.join(", ")}`);
+					fail(`Package Loading '${name}' failed: ${errors.join(", ")}`);
 				}
 
 				const found = this.packages.find((pkg) => pkg.metadata.name === name);
 				if (!found) {
-					fail(`Package Runtime \'${name}\' not found`);
+					fail(`Package Runtime '${name}' not found`);
 				}
 
 				return create(found);
@@ -400,7 +400,7 @@ export default class Packages {
 		const metadata = this.metadata.find((pkg) => pkg.name === name);
 		if (!metadata) {
 			throw new Error(
-				`Metadata not found for \'${name}\'. Is it in the manifest?`
+				`Metadata not found for '${name}'. Is it in the manifest?`
 			);
 		}
 

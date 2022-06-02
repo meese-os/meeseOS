@@ -413,30 +413,6 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Emits an event across all (or filtered) applications
-	 *
-	 * @deprecated
-	 * @param {Function} [filter] A method to filter what applications to send to
-	 * @return {Function} Function with 'emit()' signature
-	 */
-	emitAll(filter) {
-		logger.warn(
-			"Application#emitAll is deprecated. Use Core#broadcast instead"
-		);
-
-		const defaultFilter = (proc) => proc.pid !== this.pid;
-		const filterFn =
-			typeof filter === "function"
-				? filter
-				: typeof filter === "string"
-				? (proc) => defaultFilter(proc) && proc.metadata.name === filter
-				: defaultFilter;
-
-		return (name, ...args) =>
-			applications.filter(filterFn).map((proc) => proc.emit(name, ...args));
-	}
-
-	/**
 	 * Saves settings
 	 * @return {Promise<boolean>}
 	 */

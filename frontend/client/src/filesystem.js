@@ -171,8 +171,8 @@ export default class Filesystem extends EventEmitter {
 			stopOnError
 				? this._mountpointAction(m)
 				: this._mountpointAction(m).catch((err) =>
-						logger.warn("Error while mounting", m, err)
-				  );
+					logger.warn("Error while mounting", m, err)
+				);
 
 		return Promise.all(this.mounts.map(fn));
 	}
@@ -311,6 +311,7 @@ export default class Filesystem extends EventEmitter {
 
 	/**
 	 * Request action wrapper
+	 *
 	 * @private
 	 * @param {string} method
 	 * @param {*} ...args Arguments
@@ -339,6 +340,7 @@ export default class Filesystem extends EventEmitter {
 
 		const [file] = args;
 		const mount = this.getMountpointFromPath(file);
+		if (!mount) return Promise.reject(new Error("No file was specified"));
 
 		return VFS[method](mount._adapter, mount)(...args);
 	}
@@ -381,6 +383,8 @@ export default class Filesystem extends EventEmitter {
 	 * @return {FilesystemMountpoint|null}
 	 */
 	getMountpointFromPath(file) {
+		if (!file) return null;
+
 		const path = typeof file === "string" ? file : file.path;
 		const prefix = parseMountpointPrefix(path);
 

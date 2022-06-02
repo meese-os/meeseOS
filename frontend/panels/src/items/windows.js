@@ -37,8 +37,8 @@ const mapWindow = (win) => {
 		icon: win.state.icon,
 		title: win.state.title,
 		focused: win.state.focused,
-		attributes: Object.assign({}, win.attributes),
-		state: Object.assign({}, win.state),
+		attributes: { ...win.attributes },
+		state: { ...win.state },
 		raise: () => {
 			win.raise();
 			win.focus();
@@ -92,16 +92,16 @@ export default class WindowsPanelItem extends PanelItem {
 
 				remove:
 					(win) =>
-					({ windows }) => {
-						const foundIndex = windows.findIndex((w) => w.wid === win.wid);
-						if (foundIndex !== -1) {
-							windows.splice(foundIndex, 1);
+						({ windows }) => {
+							const foundIndex = windows.findIndex((w) => w.wid === win.wid);
+							if (foundIndex !== -1) {
+								windows.splice(foundIndex, 1);
 
-							return { windows };
-						}
+								return { windows };
+							}
 
-						return {};
-					},
+							return {};
+						},
 
 				change: (win) => (state) => {
 					const windows = state.windows;
