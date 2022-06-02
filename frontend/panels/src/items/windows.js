@@ -206,7 +206,7 @@ export default class WindowsPanelItem extends PanelItem {
 		);
 
 		const special = state.launchers.map((name) =>
-			h("div", {}, h("span", {}, `Launching \'${name}\'`))
+			h("div", {}, h("span", {}, `Launching '${name}'`))
 		);
 
 		const children = [...windows, ...special];
