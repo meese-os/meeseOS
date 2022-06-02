@@ -156,11 +156,11 @@ export default class Packages {
 
 		return manifest
 			? this.core
-				.request(manifest, {}, "json", true)
-				.then((metadata) => this.addPackages(metadata))
-				.then((metadata) => this._preloadBackgroundFiles(metadata))
-				.then(() => true)
-				.catch((error) => logger.error(error))
+					.request(manifest, {}, "json", true)
+					.then((metadata) => this.addPackages(metadata))
+					.then((metadata) => this._preloadBackgroundFiles(metadata))
+					.then(() => true)
+					.catch((error) => logger.error(error))
 			: Promise.resolve(true);
 	}
 

@@ -146,71 +146,71 @@ const createOptions = (req) => {
 // Standard request with only a target
 const createRequestFactory =
 	(findMountpoint) =>
-		(getter, method, readOnly, respond) =>
-			async (req, res) => {
-				const options = createOptions(req);
-				const args = [...getter(req, res), options];
+	(getter, method, readOnly, respond) =>
+	async (req, res) => {
+		const options = createOptions(req);
+		const args = [...getter(req, res), options];
 
-				const found = await findMountpoint(args[0]);
-				if (method === "search") {
-					if (
-						found.mount.attributes &&
-						found.mount.attributes.searchable === false
-					) {
-						return [];
+		const found = await findMountpoint(args[0]);
+		if (method === "search") {
+			if (
+				found.mount.attributes &&
+				found.mount.attributes.searchable === false
+			) {
+				return [];
+			}
+		}
+
+		const { attributes } = found.mount;
+		const strict = attributes.strictGroups !== false;
+		const ranges =
+			!attributes.adapter ||
+			attributes.adapter === "system" ||
+			attributes.ranges === true;
+		const vfsMethodWrapper = (m) =>
+			found.adapter[m]
+				? found.adapter[m](found)(...args)
+				: Promise.reject(new Error(`Adapter does not support ${m}`));
+		const readstat = () => vfsMethodWrapper("stat").catch(() => ({}));
+		await checkMountpointPermission(req, res, method, readOnly, strict)(found);
+
+		const result = await vfsMethodWrapper(method);
+		if (method === "readfile") {
+			const stat = await readstat();
+
+			if (ranges && options.range) {
+				try {
+					if (stat.size) {
+						const size = stat.size;
+						const [start, end] = options.range;
+						const realEnd = end || size - 1;
+						const chunksize = realEnd - start + 1;
+
+						res.writeHead(206, {
+							"Content-Range": `bytes ${start}-${realEnd}/${size}`,
+							"Accept-Ranges": "bytes",
+							"Content-Length": chunksize,
+							"Content-Type": stat.mime,
+						});
 					}
+				} catch (e) {
+					console.warn("Failed to send a ranged response", e);
 				}
+			} else if (stat.mime) {
+				res.append("Content-Type", stat.mime);
+			}
 
-				const { attributes } = found.mount;
-				const strict = attributes.strictGroups !== false;
-				const ranges =
-					!attributes.adapter ||
-					attributes.adapter === "system" ||
-					attributes.ranges === true;
-				const vfsMethodWrapper = (m) =>
-					found.adapter[m]
-						? found.adapter[m](found)(...args)
-						: Promise.reject(new Error(`Adapter does not support ${m}`));
-				const readstat = () => vfsMethodWrapper("stat").catch(() => ({}));
-				await checkMountpointPermission(req, res, method, readOnly, strict)(found);
+			if (options.download) {
+				const filename = encodeURIComponent(path.basename(args[0]));
+				res.append(
+					"Content-Disposition",
+					`attachment; filename*=utf-8''${filename}`
+				);
+			}
+		}
 
-				const result = await vfsMethodWrapper(method);
-				if (method === "readfile") {
-					const stat = await readstat();
-
-					if (ranges && options.range) {
-						try {
-							if (stat.size) {
-								const size = stat.size;
-								const [start, end] = options.range;
-								const realEnd = end || size - 1;
-								const chunksize = realEnd - start + 1;
-
-								res.writeHead(206, {
-									"Content-Range": `bytes ${start}-${realEnd}/${size}`,
-									"Accept-Ranges": "bytes",
-									"Content-Length": chunksize,
-									"Content-Type": stat.mime,
-								});
-							}
-						} catch (e) {
-							console.warn("Failed to send a ranged response", e);
-						}
-					} else if (stat.mime) {
-						res.append("Content-Type", stat.mime);
-					}
-
-					if (options.download) {
-						const filename = encodeURIComponent(path.basename(args[0]));
-						res.append(
-							"Content-Disposition",
-							`attachment; filename*=utf-8''${filename}`
-						);
-					}
-				}
-
-				return respond ? respond(result) : result;
-			};
+		return respond ? respond(result) : result;
+	};
 
 // Request that has a source and target
 const createCrossRequestFactory =

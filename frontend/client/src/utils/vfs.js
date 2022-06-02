@@ -334,12 +334,12 @@ export const parseMountpointPrefix = (str) => {
  */
 export const filterMountByGroups =
 	(userGroups) =>
-		(mountGroups, strict = true) =>
-			mountGroups instanceof Array
-				? mountGroups[strict ? "every" : "some"](
+	(mountGroups, strict = true) =>
+		mountGroups instanceof Array
+			? mountGroups[strict ? "every" : "some"](
 					(g) => userGroups.indexOf(g) !== -1
 			  )
-				: true;
+			: true;
 
 /**
  * Creates a list of VFS events to simulate server-side

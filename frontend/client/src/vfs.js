@@ -84,10 +84,10 @@ const handleDirectoryList = (path, options) => (result) =>
  */
 export const readdir =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			adapter
-				.readdir(pathToObject(path), options, mount)
-				.then(handleDirectoryList(path, options));
+	(path, options = {}) =>
+		adapter
+			.readdir(pathToObject(path), options, mount)
+			.then(handleDirectoryList(path, options));
 
 /**
  * Reads a file
@@ -101,12 +101,12 @@ export const readdir =
  */
 export const readfile =
 	(adapter, mount) =>
-		(path, type = "string", options = {}) =>
-			adapter
-				.readfile(pathToObject(path), type, options, mount)
-				.then((response) =>
-					transformArrayBuffer(response.body, response.mime, type)
-				);
+	(path, type = "string", options = {}) =>
+		adapter
+			.readfile(pathToObject(path), type, options, mount)
+			.then((response) =>
+				transformArrayBuffer(response.body, response.mime, type)
+			);
 
 /**
  * Writes a file
@@ -117,14 +117,14 @@ export const readfile =
  */
 export const writefile =
 	(adapter, mount) =>
-		(path, data, options = {}) => {
-			const binary =
+	(path, data, options = {}) => {
+		const binary =
 			data instanceof ArrayBuffer || data instanceof Blob
 				? data
 				: new Blob([data], { type: "application/octet-stream" });
 
-			return adapter.writefile(pathToObject(path), binary, options, mount);
-		};
+		return adapter.writefile(pathToObject(path), binary, options, mount);
+	};
 
 /**
  * Copies a file or directory (move)
@@ -135,8 +135,8 @@ export const writefile =
  */
 export const copy =
 	(adapter, mount) =>
-		(from, to, options = {}) =>
-			adapter.copy(pathToObject(from), pathToObject(to), options, mount);
+	(from, to, options = {}) =>
+		adapter.copy(pathToObject(from), pathToObject(to), options, mount);
 
 /**
  * Renames a file or directory (move)
@@ -147,8 +147,8 @@ export const copy =
  */
 export const rename =
 	(adapter, mount) =>
-		(from, to, options = {}) =>
-			adapter.rename(pathToObject(from), pathToObject(to), options, mount);
+	(from, to, options = {}) =>
+		adapter.rename(pathToObject(from), pathToObject(to), options, mount);
 
 /**
  * Alias of 'readme'
@@ -167,8 +167,8 @@ export const move = rename;
  */
 export const mkdir =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			adapter.mkdir(pathToObject(path), options, mount);
+	(path, options = {}) =>
+		adapter.mkdir(pathToObject(path), options, mount);
 
 /**
  * Removes a file or directory
@@ -178,8 +178,8 @@ export const mkdir =
  */
 export const unlink =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			adapter.unlink(pathToObject(path), options, mount);
+	(path, options = {}) =>
+		adapter.unlink(pathToObject(path), options, mount);
 
 /**
  * Checks if path exists
@@ -189,8 +189,8 @@ export const unlink =
  */
 export const exists =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			adapter.exists(pathToObject(path), options, mount);
+	(path, options = {}) =>
+		adapter.exists(pathToObject(path), options, mount);
 
 /**
  * Gets the stats of the file or directory
@@ -200,10 +200,10 @@ export const exists =
  */
 export const stat =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			adapter
-				.stat(pathToObject(path), options, mount)
-				.then((stat) => createFileIter(stat));
+	(path, options = {}) =>
+		adapter
+			.stat(pathToObject(path), options, mount)
+			.then((stat) => createFileIter(stat));
 
 /**
  * Gets an URL to a resource defined by file
@@ -213,8 +213,8 @@ export const stat =
  */
 export const url =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			adapter.url(pathToObject(path), options, mount);
+	(path, options = {}) =>
+		adapter.url(pathToObject(path), options, mount);
 
 /**
  * Initiates a native browser download of the file
@@ -224,10 +224,10 @@ export const url =
  */
 export const download =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			typeof adapter.download === "function" && options.readfile !== true
-				? adapter.download(pathToObject(path), options, mount)
-				: readfile(adapter)(path, "blob").then((body) => {
+	(path, options = {}) =>
+		typeof adapter.download === "function" && options.readfile !== true
+			? adapter.download(pathToObject(path), options, mount)
+			: readfile(adapter)(path, "blob").then((body) => {
 					const filename = pathToObject(path).path.split("/").splice(-1)[0];
 					const url = window.URL.createObjectURL(body);
 
@@ -254,15 +254,15 @@ export const download =
  */
 export const search =
 	(adapter, mount) =>
-		(root, pattern, options = {}) => {
-			if (mount.attributes && mount.attributes.searchable === false) {
-				return Promise.resolve([]);
-			}
+	(root, pattern, options = {}) => {
+		if (mount.attributes && mount.attributes.searchable === false) {
+			return Promise.resolve([]);
+		}
 
-			return adapter
-				.search(pathToObject(root), pattern, options, mount)
-				.then(handleDirectoryList(root, options));
-		};
+		return adapter
+			.search(pathToObject(root), pattern, options, mount)
+			.then(handleDirectoryList(root, options));
+	};
 
 /**
  * Touches a file
@@ -271,5 +271,5 @@ export const search =
  */
 export const touch =
 	(adapter, mount) =>
-		(path, options = {}) =>
-			adapter.touch(pathToObject(path), options, mount);
+	(path, options = {}) =>
+		adapter.touch(pathToObject(path), options, mount);

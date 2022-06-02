@@ -171,8 +171,8 @@ export default class Filesystem extends EventEmitter {
 			stopOnError
 				? this._mountpointAction(m)
 				: this._mountpointAction(m).catch((err) =>
-					logger.warn("Error while mounting", m, err)
-				);
+						logger.warn("Error while mounting", m, err)
+				  );
 
 		return Promise.all(this.mounts.map(fn));
 	}

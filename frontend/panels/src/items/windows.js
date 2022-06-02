@@ -92,16 +92,16 @@ export default class WindowsPanelItem extends PanelItem {
 
 				remove:
 					(win) =>
-						({ windows }) => {
-							const foundIndex = windows.findIndex((w) => w.wid === win.wid);
-							if (foundIndex !== -1) {
-								windows.splice(foundIndex, 1);
+					({ windows }) => {
+						const foundIndex = windows.findIndex((w) => w.wid === win.wid);
+						if (foundIndex !== -1) {
+							windows.splice(foundIndex, 1);
 
-								return { windows };
-							}
+							return { windows };
+						}
 
-							return {};
-						},
+						return {};
+					},
 
 				change: (win) => (state) => {
 					const windows = state.windows;
