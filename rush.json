@@ -488,6 +488,10 @@
       "projectFolder": "apps/filemanager"
     },
     {
+      "packageName": "@aaronmeese.com/games",
+      "projectFolder": "apps/games"
+    },
+    {
       "packageName": "@aaronmeese.com/gnome-icons",
       "projectFolder": "frontend/gnome-icons"
     },

@@ -1,0 +1,9 @@
+{
+  "type": "application",
+  "name": "games",
+  "category": null,
+  "icon": "icon.png",
+  "title": "Games",
+  "description": "A collection of games ran in JS-DOS.",
+  "files": ["main.js", "main.css"]
+}

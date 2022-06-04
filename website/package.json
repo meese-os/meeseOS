@@ -51,6 +51,7 @@
     "@aaronmeese.com/client": "workspace:*",
     "@aaronmeese.com/dialogs": "workspace:*",
     "@aaronmeese.com/filemanager": "workspace:*",
+    "@aaronmeese.com/games": "workspace:*",
     "@aaronmeese.com/gnome-icons": "workspace:*",
     "@aaronmeese.com/gui": "workspace:*",
     "@aaronmeese.com/image-to-8bit": "workspace:*",
