@@ -38,20 +38,12 @@ export const DomAnimator = function () {
 
 	// Frame passed through as a list []
 	function parseMultilineFrame(frame) {
-		if (multiNode) {
-			return swapWhitespace(frame);
-		} else {
-			return padString(frame.join("\n"));
-		}
+		return multiNode ? swapWhitespace(frame) : padString(frame.join("\n"));
 	}
 
 	// Frame passed through as a string.
 	function parseSingleLineFrame(frame) {
-		if (multiNode) {
-			return swapWhitespace(frame.split("\n"));
-		} else {
-			return padString(frame);
-		}
+		return multiNode ? swapWhitespace(frame.split("\n")) : padString(frame);
 	}
 
 	function swapWhitespace(array) {
