@@ -42,6 +42,10 @@ sudo apt-get install -y sshpass python2 build-essential
 # OPTIONAL: Install `oh-my-posh`
 bash ./oh-my-posh.sh
 
+# OPTIONAL: Install `Zork`; this will only work if you have access to the
+# private Zork repo, no peeking at the code and cheating!
+bash ./install-zork.sh
+
 # Prevent the user from writing to any files in their home directory
 sudo chmod -R 544 "/jail/home/$USERNAME" 2>/dev/null
 

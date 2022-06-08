@@ -41,10 +41,10 @@ fi
 
 # Create the new user and their home directory
 echo "$USERNAME:$PASSWORD" | sudo chpasswd
-sudo jk_cp -v -f /jail /etc/shadow;
-sudo jk_cp -v -f /jail /etc/shadow-;
-sudo mkdir -p /jail/home/$USERNAME;
-sudo chown 2000:100 /jail/home/$USERNAME;
+sudo jk_cp -v -f /jail /etc/shadow
+sudo jk_cp -v -f /jail /etc/shadow-
+sudo mkdir -p /jail/home/$USERNAME
+sudo chown 2000:100 /jail/home/$USERNAME
 
 # Create the user's .bashrc file
 USERBASH="/jail/home/$USERNAME/.bashrc"
@@ -57,7 +57,7 @@ do
   echo "$line" | sudo tee -a "$USERBASH";
 done < "$PWD/.bashrc";
 sudo chmod -R 544 "/jail/home/$USERNAME/.bashrc"
-sudo chattr +i "$USERBASH";
+sudo chattr +i "$USERBASH"
 
 # Remove the SSH banner for the new user
 # Props to https://unix.stackexchange.com/a/96982/370076

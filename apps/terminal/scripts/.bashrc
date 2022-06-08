@@ -2,6 +2,9 @@
 # Meant to help secure the jailed user's terminal
 ###
 
+# Display an initial message to the user when the shell is loaded
+echo "Welcome to the secure terminal!"
+
 # Set variables in the shell
 export TERM=xterm-256color
 export SHELL=/nice/try
