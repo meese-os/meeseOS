@@ -23,3 +23,6 @@ alias cat='_cat(){ echo "$(<$1)";}; _cat'
 
 # Disable command history
 set +o history
+
+# Add frotz to the path
+export PATH=$PATH:/usr/games

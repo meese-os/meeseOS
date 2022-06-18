@@ -56,7 +56,7 @@ do
   # Adds the lines from the repo's `.bashrc` to the user's `.bashrc` line by line
   echo "$line" | sudo tee -a "$USERBASH";
 done < "$PWD/.bashrc";
-sudo chmod -R 544 "/jail/home/$USERNAME/.bashrc"
+sudo chmod -R 544 "$USERBASH"
 sudo chattr +i "$USERBASH"
 
 # Remove the SSH banner for the new user

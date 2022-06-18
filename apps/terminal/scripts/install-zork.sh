@@ -1,51 +1,40 @@
 #!/bin/bash
 
-# Deletes the zork directory if it exists
-sudo rm -rf ./zork
+jail_bin="/jail/usr/local/bin"
+zork_dir="$jail_bin/zork"
+
+# Deletes the zork directory + files if they exist
+pushd "$jail_bin"
+sudo rm -rf $(ls -A | grep -E "(COMPILED)|(zork*)")
+popd
 
 # Downloads the latest version of the Zork repo
-if ! (git clone "https://$GITHUB_USERNAME:$GITHUB_PAT@github.com/meese-enterprises/zork.git" ./zork) then
+if ! (sudo git clone "https://$GITHUB_USERNAME:$GITHUB_PAT@github.com/meese-enterprises/zork.git" "$zork_dir") then
 	echo "ERROR: Failed to clone the repository. Did you set the GITHUB_USERNAME and GITHUB_PAT environment variables?"
 	echo "If you did, do you have permission to clone the repository?"
 	exit 1
 fi
 
 echo "Cloned the Zork repository successfully!"
-pushd ./zork
+pushd "$zork_dir"
 
-# Deletes everything except the compiled game binaries and the special
-# password-protected scripts to run them.
-# https://stackoverflow.com/a/69741666/6456163
-rm -rf $(ls -A | grep -vE "(COMPILED)|(zork.\.sh)")
-
-# Convert shell files to binaries with shc
-echo "Converting Zork shell files to binaries..."
-git clone https://github.com/neurobin/shc
-pushd shc
-sh ./autogen.sh 2>/dev/null
-./configure
-make
-sudo make install
-popd
-rm -rf shc
-
-# Removes all the original scripts, leaving only the compiled binaries
-ls -A | grep -E "zork.\.sh" | while read -r file; do
-	echo "Compiling $file..."
-	shc -U -f "$file" -o "${file%.*}"
-	rm "$file" && rm "$file.x.c"
-done
-
-# Change the permissions of the files to disallow writing
-sudo chown root:root -R *
-sudo chmod 755 -R *
-
-# Install the software necessary to run the game
+# Install the software necessary to run the game files
 sudo apt install frotz
+sudo jk_cp -v -f /jail /usr/games/frotz
 
-# Copy the compiled game binaries to the jail
-sudo cp -r * /jail/usr/local/bin
+# Deletes everything except the encrypted game binaries and
+# executables that are necessary to run them
+# https://stackoverflow.com/a/69741666/6456163
+sudo rm -rf $(ls -A | grep -vE "(COMPILED)|(EXECUTABLES)")
+sudo mv EXECUTABLES/* .
+sudo rm -rf EXECUTABLES
 
-# TODO: Fix this returning strange useless text when executed
+# Move the contents of the folder to the proper directory
+sudo mv "$zork_dir/"* "$jail_bin"
+popd
 
+# Moving the symlink breaks it, so instead we can delete it and create a new one
+pushd "$jail_bin"
+sudo rm -rf "$zork_dir" zork
+sudo ln -sf zork1 zork
 popd

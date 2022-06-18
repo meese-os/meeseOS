@@ -33,8 +33,10 @@ cd "$(dirname "$0")"
 # Will create the user only if they do not already exist
 bash ./create-user.sh
 
-# TODO: Secure the server a little more with the following:
-# https://serverfault.com/a/766634/537331
+# Hide the `uname` MOTD on SSH login to the server:
+echo "Hiding the 'uname' output from the terminal on SSH login..."
+uname_motd=/etc/update-motd.d/10-uname
+perl -p -e 's/\nuname -snrvm/\n# uname -snrvm/' "$uname_motd" | sudo tee "$uname_motd"
 
 # Installs some helpful packages used by the terminal app
 sudo apt-get install -y sshpass python2 build-essential
