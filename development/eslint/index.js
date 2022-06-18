@@ -50,5 +50,7 @@ module.exports = {
 		"comma-spacing": ["error", { before: false, after: true }],
 		"object-curly-spacing": ["error", "always"],
 		"prefer-object-spread": 1,
+		"no-constant-binary-expression": 2,
+		"no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
 	},
 };

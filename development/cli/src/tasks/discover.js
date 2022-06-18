@@ -143,7 +143,7 @@ const action = async ({ logger, options, args, commander }) => {
 			);
 		}
 
-		return Object.assign({}, meta, override || {});
+		return { ...meta, ...override || {} };
 	});
 
 	const roots = {

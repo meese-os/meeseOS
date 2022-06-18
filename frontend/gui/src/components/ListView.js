@@ -127,70 +127,62 @@ const createView = (props) => {
 export const ListView = (props) =>
 	h(
 		Element,
-		Object.assign(
-			{
-				class: "meeseOS-gui-list-view",
-			},
-			props.box || {}
-		),
+		{
+			class: "meeseOS-gui-list-view",
+			...props.box || {}
+		},
 		createView(filteredProps(props, ["box"]))
 	);
 
 export const listView = {
 	component: (state, actions) => {
-		const newProps = Object.assign(
-			{
-				zebra: true,
-				columns: [],
-				rows: [],
-				onselect: ({ data, index, ev }) => {
-					actions.select({ data, index, ev });
-					actions.setSelectedIndex(index);
-				},
-				onactivate: ({ data, index, ev }) => {
-					actions.activate({ data, index, ev });
-					actions.setSelectedIndex(-1);
-				},
-				oncontextmenu: ({ data, index, ev }) => {
-					actions.select({ data, index, ev });
-					actions.contextmenu({ data, index, ev });
-					actions.setSelectedIndex(index);
-				},
-				oncreate: (args) => {
-					actions.created(args);
-				},
-				onscroll: (ev) => {
-					actions.scroll(ev);
-				},
+		const newProps = {
+			zebra: true,
+			columns: [],
+			rows: [],
+			onselect: ({ data, index, ev }) => {
+				actions.select({ data, index, ev });
+				actions.setSelectedIndex(index);
 			},
-			state
-		);
+			onactivate: ({ data, index, ev }) => {
+				actions.activate({ data, index, ev });
+				actions.setSelectedIndex(-1);
+			},
+			oncontextmenu: ({ data, index, ev }) => {
+				actions.select({ data, index, ev });
+				actions.contextmenu({ data, index, ev });
+				actions.setSelectedIndex(index);
+			},
+			oncreate: (args) => {
+				actions.created(args);
+			},
+			onscroll: (ev) => {
+				actions.scroll(ev);
+			},
+			...state
+		};
 
 		return (props = {}) => ListView(Object.assign(newProps, props));
 	},
 
 	state: (state) =>
-		Object.assign(
-			{
-				selectedIndex: -1,
-				scrollTop: 0,
-			},
-			state
-		),
+		({
+			selectedIndex: -1,
+			scrollTop: 0,
+			...state
+		}),
 
 	actions: (actions) =>
-		Object.assign(
-			{
-				select: () => () => ({}),
-				activate: () => () => ({}),
-				contextmenu: () => () => ({}),
-				created: () => () => ({}),
-				scroll: () => (state) => state,
-				setRows: (rows) => ({ rows }),
-				setColumns: (columns) => ({ columns }),
-				setScrollTop: (scrollTop) => (state) => ({ scrollTop }),
-				setSelectedIndex: (selectedIndex) => (state) => ({ selectedIndex }),
-			},
-			actions || {}
-		),
+		({
+			select: () => () => ({}),
+			activate: () => () => ({}),
+			contextmenu: () => () => ({}),
+			created: () => () => ({}),
+			scroll: () => (state) => state,
+			setRows: (rows) => ({ rows }),
+			setColumns: (columns) => ({ columns }),
+			setScrollTop: (scrollTop) => (state) => ({ scrollTop }),
+			setSelectedIndex: (selectedIndex) => (state) => ({ selectedIndex }),
+			...actions || {}
+		}),
 };

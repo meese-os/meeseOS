@@ -85,7 +85,7 @@ const inner = nestable(
 			ative: props.active !== false,
 		}),
 		ontoggle: ({ ev, active, ontoggle }) => {
-			const cb = ontoggle || function () {};
+			const cb = ontoggle || function() {};
 			cb(ev, active);
 			return { active };
 		},

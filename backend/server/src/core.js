@@ -224,7 +224,7 @@ class Core extends CoreBase {
 		const checkFile = path.join(pub, this.configuration.index);
 		if (!fs.existsSync(checkFile)) {
 			logger.warn(
-				'Missing files in "dist/" directory. Did you forget to run "npm run build" ?'
+				"Missing files in \"dist/\" directory. Did you forget to run \"npm run build\" ?"
 			);
 		}
 

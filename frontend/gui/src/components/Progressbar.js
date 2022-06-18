@@ -62,9 +62,7 @@ export const Progressbar = (props, children = []) => {
 
 	return h(
 		Element,
-		Object.assign({}, props.box || {}, {
-			class: ["meeseOS-gui-progressbar", props.class],
-		}),
+		{ ...props.box || {}, class: ["meeseOS-gui-progressbar", props.class], },
 		[c, ...children]
 	);
 };

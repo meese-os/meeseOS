@@ -41,14 +41,10 @@ import { h } from "hyperapp";
 export const Toolbar = (props, children) =>
 	h(
 		Element,
-		Object.assign(
-			{
-				orientation: "vertical",
-			},
-			props,
-			{
-				class: ["meeseOS-gui-toolbar", props.class],
-			}
-		),
+		{
+			orientation: "vertical",
+			...props,
+			class: ["meeseOS-gui-toolbar", props.class],
+		},
 		children
 	);

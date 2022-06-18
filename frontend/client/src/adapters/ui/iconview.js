@@ -118,7 +118,7 @@ const view = (fileIcon, themeIcon, droppable) => (state, actions) =>
 										? h("img", {
 											src: themeIcon("emblem-symbolic-link"),
 											class:
-													"meeseOS-desktop-iconview__entry__icon__shortcut",
+												"meeseOS-desktop-iconview__entry__icon__shortcut",
 										  })
 										: null,
 								]

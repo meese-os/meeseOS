@@ -373,8 +373,8 @@ const getScreenOrientation = (screen) =>
 	screen && screen.orientation
 		? screen.orientation.type
 		: window.matchMedia("(orientation: portrait)")
-		? "portrait"
-		: "landscape";
+			? "portrait"
+			: "landscape";
 
 /*
  * Gets a media query name from a map

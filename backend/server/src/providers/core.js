@@ -200,11 +200,11 @@ class CoreServiceProvider extends ServiceProvider {
 
 			const pingInterval = interval
 				? setInterval(() => {
-						ws.send(
-							JSON.stringify({
-								name: "meeseOS/core:ping",
-							})
-						);
+					ws.send(
+						JSON.stringify({
+							name: "meeseOS/core:ping",
+						})
+					);
 				  }, interval)
 				: undefined;
 

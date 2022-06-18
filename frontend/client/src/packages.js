@@ -179,7 +179,7 @@ export default class Packages {
 
 		const metadata = this.metadata.find((pkg) => pkg.name === name);
 		if (!metadata) {
-			throw new Error(`Package Metadata \'${name}\' not found`);
+			throw new Error(`Package Metadata '${name}' not found`);
 		}
 
 		if (["theme", "icons", "sounds"].indexOf(metadata.type) !== -1) {
@@ -286,7 +286,7 @@ export default class Packages {
 		const canLaunch = createPackageAvailabilityCheck(this.core);
 
 		const dialog = (e) => {
-			const exception = `An exception occured in \'${name}\'`;
+			const exception = `An exception occured in '${name}'`;
 			if (this.core.has("meeseOS/dialog")) {
 				this.core.make(
 					"meeseOS/dialog",

@@ -44,15 +44,13 @@ export default class PanelServiceProvider {
 		this.core = core;
 		this.panels = [];
 		this.inited = false;
-		this.registry = Object.assign(
-			{
-				menu: MenuPanelItem,
-				windows: WindowsPanelItem,
-				tray: TrayPanelItem,
-				clock: ClockPanelItem,
-			},
-			args.registry || {}
-		);
+		this.registry = {
+			menu: MenuPanelItem,
+			windows: WindowsPanelItem,
+			tray: TrayPanelItem,
+			clock: ClockPanelItem,
+			...args.registry || {}
+		};
 	}
 
 	destroy() {

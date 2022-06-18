@@ -179,7 +179,7 @@ export default class MenuPanelItem extends PanelItem {
 		const onmenuopen = () => {
 			const els = Array.from(
 				this.panel.$element.querySelectorAll(
-					'.meeseOS-panel-item[data-name="menu"]'
+					".meeseOS-panel-item[data-name=\"menu\"]"
 				)
 			);
 			els.forEach((el) =>

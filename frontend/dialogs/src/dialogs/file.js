@@ -69,31 +69,27 @@ export default class FileDialog extends Dialog {
 	 * @param {Function} callback The callback function
 	 */
 	constructor(core, args, callback) {
-		args = Object.assign(
-			{},
-			{
-				title: null,
-				type: "open",
-				filetype: "file",
-				path: core.config("vfs.defaultPath"),
-				filename: null,
-				mime: [],
-			},
-			args
-		);
+		args = {
+
+			title: null,
+			type: "open",
+			filetype: "file",
+			path: core.config("vfs.defaultPath"),
+			filename: null,
+			mime: [],
+			...args
+		};
 
 		if (typeof args.path === "string") {
 			args.path = { path: args.path };
 		}
 
 		try {
-			args.path = Object.assign(
-				{
-					isDirectory: true,
-					filename: args.path.path.split(":/")[1].split("/").pop() || "",
-				},
-				args.path
-			);
+			args.path = {
+				isDirectory: true,
+				filename: args.path.path.split(":/")[1].split("/").pop() || "",
+				...args.path
+			};
 		} catch (e) {
 			console.warn(e);
 		}
@@ -101,8 +97,8 @@ export default class FileDialog extends Dialog {
 		const title = args.title
 			? args.title
 			: args.type === "open"
-			? "Open"
-			: "Save";
+				? "Open"
+				: "Save";
 
 		super(
 			core,
@@ -145,26 +141,26 @@ export default class FileDialog extends Dialog {
 				{
 					_readdir:
 						({ path, files }) =>
-						(state, actions) => {
-							const listview = state.listview;
-							listview.selectedIndex = -1;
-							listview.rows = files.map((file) => ({
-								columns: [
-									{
-										label: file.filename,
-										icon: getFileIcon(file),
-									},
-									file.mime,
-									file.humanSize,
-								],
-								data: file,
-							}));
+							(state, actions) => {
+								const listview = state.listview;
+								listview.selectedIndex = -1;
+								listview.rows = files.map((file) => ({
+									columns: [
+										{
+											label: file.filename,
+											icon: getFileIcon(file),
+										},
+										file.mime,
+										file.humanSize,
+									],
+									data: file,
+								}));
 
-							return { path, listview };
-						},
+								return { path, listview };
+							},
 
 					setButtonState: (btn) => (state) => ({
-						buttons: Object.assign({}, state.buttons, btn),
+						buttons: { ...state.buttons, ...btn },
 					}),
 
 					setMountpoint: (mount) => (state, actions) => {
@@ -181,7 +177,7 @@ export default class FileDialog extends Dialog {
 								} else if (this.args.mime.length) {
 									return item.mime
 										? this.args.mime.some((test) =>
-												new RegExp(test).test(item.mime)
+											new RegExp(test).test(item.mime)
 										  )
 										: true;
 								}
@@ -236,12 +232,10 @@ export default class FileDialog extends Dialog {
 							}),
 							h(
 								listView.component(
-									Object.assign(
-										{
-											box: { grow: 1, shrink: 1 },
-										},
-										state.listview
-									),
+									{
+										box: { grow: 1, shrink: 1 },
+										...state.listview
+									},
 									actions.listview
 								)
 							),
@@ -325,10 +319,8 @@ export default class FileDialog extends Dialog {
 				this.win.$content.querySelector("input[type=text]").value;
 
 			return filename
-				? Object.assign({}, this.args.path, {
-						filename,
-						path: path.replace(/\/?$/, "/") + filename,
-				  })
+				? ({ ...this.args.path, filename,
+					path: path.replace(/\/?$/, "/") + filename, })
 				: undefined;
 		}
 

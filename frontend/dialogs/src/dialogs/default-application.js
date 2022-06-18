@@ -48,15 +48,13 @@ export default class DefaultApplicationDialog extends Dialog {
 	 * @param {Function} callback The callback function
 	 */
 	constructor(core, args, callback) {
-		args = Object.assign(
-			{},
-			{
-				title: "DefaultApplication",
-				message: "",
-				choices: {},
-			},
-			args
-		);
+		args = {
+
+			title: "DefaultApplication",
+			message: "",
+			choices: {},
+			...args
+		};
 
 		super(
 			core,
@@ -83,7 +81,7 @@ export default class DefaultApplicationDialog extends Dialog {
 
 	render(options) {
 		const setLocalState = (oldState, newState) => {
-			const state = Object.assign({}, oldState, newState);
+			const state = { ...oldState, ...newState };
 			this.value = state;
 			return state;
 		};

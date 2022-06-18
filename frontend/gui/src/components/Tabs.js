@@ -38,11 +38,11 @@ const headers = ({ labels, onchange, oncontextmenu }, state, actions) =>
 			{
 				class: state.selectedIndex === index ? "meeseOS__active" : "",
 				oncontextmenu: (ev) => {
-					(oncontextmenu || function () {})(ev, index, label);
+					(oncontextmenu || function() {})(ev, index, label);
 				},
 				onclick: (ev) => {
 					actions.setSelectedIndex(index);
-					(onchange || function () {})(ev, index, label);
+					(onchange || function() {})(ev, index, label);
 				},
 			},
 			h("span", {}, label)

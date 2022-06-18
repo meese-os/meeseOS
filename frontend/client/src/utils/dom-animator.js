@@ -10,7 +10,7 @@
  * DomAnimator
  *********************************************/
 
-export const DomAnimator = function () {
+export const DomAnimator = function() {
 	"use strict";
 
 	let currentFrame = 0;

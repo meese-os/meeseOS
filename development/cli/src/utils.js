@@ -70,13 +70,11 @@ const spawnAsync = (cmd, args, options) =>
 		const child = spawn(
 			cmd,
 			args,
-			Object.assign(
-				{},
-				{
-					stdio: ["pipe", process.stdout, process.stderr],
-				},
-				options || {}
-			)
+			{
+
+				stdio: ["pipe", process.stdout, process.stderr],
+				...options || {}
+			}
 		);
 		child.on("close", (code) => (code ? reject(code) : resolve(true)));
 	});

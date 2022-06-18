@@ -42,11 +42,11 @@ export const SelectField = (props = {}, children = []) => {
 	const getChoices = (choices) =>
 		choices instanceof Array
 			? choices.map((value) =>
-					typeof value === "object" ? value : { value, label: value }
+				typeof value === "object" ? value : { value, label: value }
 			  )
 			: Object.keys(props.choices || {}).map((value) => ({
-					value,
-					label: props.choices[value],
+				value,
+				label: props.choices[value],
 			  }));
 
 	const choices = getChoices(props.choices).map(({ value, label }) => {

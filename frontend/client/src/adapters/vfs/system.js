@@ -32,38 +32,38 @@ const getters = ["exists", "stat", "readdir", "readfile"];
 
 const requester =
 	(core) =>
-	(fn, body, type, options = {}) =>
-		core
-			.request(
-				`/vfs/${fn}`,
-				{
-					body,
-					method: getters.indexOf(fn) !== -1 ? "get" : "post",
-					...options,
-				},
-				type
-			)
-			.then((response) => {
-				if (type === "json") {
-					return { mime: "application/json", body: response };
-				} else if (fn === "writefile") {
-					return response.json();
-				}
+		(fn, body, type, options = {}) =>
+			core
+				.request(
+					`/vfs/${fn}`,
+					{
+						body,
+						method: getters.indexOf(fn) !== -1 ? "get" : "post",
+						...options,
+					},
+					type
+				)
+				.then((response) => {
+					if (type === "json") {
+						return { mime: "application/json", body: response };
+					} else if (fn === "writefile") {
+						return response.json();
+					}
 
-				const contentType =
+					const contentType =
 					response.headers.get("content-type") || "application/octet-stream";
 
-				return response.arrayBuffer().then((result) => ({
-					mime: contentType,
-					body: result,
-				}));
-			});
+					return response.arrayBuffer().then((result) => ({
+						mime: contentType,
+						body: result,
+					}));
+				});
 
 const methods = (core, request) => {
 	const passthrough =
 		(name) =>
-		({ path }, options) =>
-			request(name, { path, options }, "json").then(({ body }) => body);
+			({ path }, options) =>
+				request(name, { path, options }, "json").then(({ body }) => body);
 
 	return {
 		readdir: ({ path }, options) =>

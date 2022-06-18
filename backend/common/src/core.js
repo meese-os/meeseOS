@@ -116,7 +116,7 @@ export class CoreBase extends EventEmitter {
 	config(key, defaultValue) {
 		return key
 			? resolveTreeByKey(this.configuration, key, defaultValue)
-			: Object.assign({}, this.configuration);
+			: ({ ...this.configuration });
 	}
 
 	/**

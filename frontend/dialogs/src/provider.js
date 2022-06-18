@@ -43,21 +43,19 @@ import ProgressDialog from "./dialogs/progress";
 export default class DialogServiceProvider {
 	constructor(core, args = {}) {
 		this.core = core;
-		this.registry = Object.assign(
-			{
-				alert: AlertDialog,
-				choice: ChoiceDialog,
-				color: ColorDialog,
-				confirm: ConfirmDialog,
-				defaultApplication: DefaultApplicationDialog,
-				font: FontDialog,
-				file: FileDialog,
-				multipleColors: MultipleColorsDialog,
-				prompt: PromptDialog,
-				progress: ProgressDialog,
-			},
-			args.registry || {}
-		);
+		this.registry = {
+			alert: AlertDialog,
+			choice: ChoiceDialog,
+			color: ColorDialog,
+			confirm: ConfirmDialog,
+			defaultApplication: DefaultApplicationDialog,
+			font: FontDialog,
+			file: FileDialog,
+			multipleColors: MultipleColorsDialog,
+			prompt: PromptDialog,
+			progress: ProgressDialog,
+			...args.registry || {}
+		};
 	}
 
 	destroy() {}

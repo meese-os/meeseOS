@@ -50,8 +50,8 @@ const createAdapter = (core, options) => {
 	const adapter = core.config("standalone")
 		? localStorageAuth
 		: typeof options.adapter === "function"
-		? options.adapter
-		: defaultAdapters[options.adapter || "server"];
+			? options.adapter
+			: defaultAdapters[options.adapter || "server"];
 
 	return {
 		login: () => Promise.reject(new Error("Not implemented")),
@@ -132,7 +132,7 @@ export default class Auth {
 		 * @type {AuthCallback}
 		 * @readonly
 		 */
-		this.callback = function () {};
+		this.callback = function() {};
 
 		/**
 		 * Core instance reference

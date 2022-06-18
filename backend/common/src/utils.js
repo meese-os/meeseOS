@@ -36,7 +36,7 @@ export const resolveTreeByKey = (tree, key, defaultValue) => {
 	try {
 		result = key
 			.split(/\./g)
-			.reduce((result, key) => result[key], Object.assign({}, tree));
+			.reduce((result, key) => result[key], { ...tree });
 	} catch (e) {
 		/* noop */
 	}

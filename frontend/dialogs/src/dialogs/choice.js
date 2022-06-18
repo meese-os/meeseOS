@@ -47,16 +47,14 @@ export default class ChoiceDialog extends Dialog {
 	 * @param {Function} callback The callback function
 	 */
 	constructor(core, args, callback) {
-		args = Object.assign(
-			{},
-			{
-				title: "Choice",
-				message: "",
-				value: undefined,
-				choices: {},
-			},
-			args
-		);
+		args = {
+
+			title: "Choice",
+			message: "",
+			value: undefined,
+			choices: {},
+			...args
+		};
 
 		super(
 			core,

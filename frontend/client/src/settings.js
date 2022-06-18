@@ -43,8 +43,8 @@ const createAdapter = (core, options) => {
 	const adapter = core.config("standalone")
 		? localStorageSettings
 		: typeof options.adapter === "function"
-		? options.adapter
-		: defaultAdapters[options.adapter || "localStorage"];
+			? options.adapter
+			: defaultAdapters[options.adapter || "localStorage"];
 
 	return {
 		load: () => Promise.reject(new Error("Not implemented")),

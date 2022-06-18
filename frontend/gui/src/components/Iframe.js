@@ -41,18 +41,14 @@ import { h } from "hyperapp";
 export const Iframe = (props, children = []) =>
 	h(
 		Element,
-		Object.assign({}, props.box || {}, {
-			class: ["meeseOS-gui-iframe", props.class],
-		}),
+		{ ...props.box || {}, class: ["meeseOS-gui-iframe", props.class], },
 		[
 			h(
 				"iframe",
-				Object.assign(
-					{
-						frameborder: 0,
-					},
-					filteredProps(props, ["box"])
-				)
+				{
+					frameborder: 0,
+					...filteredProps(props, ["box"])
+				}
 			),
 			...children,
 		]

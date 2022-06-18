@@ -39,8 +39,6 @@ import { Element } from "./Element";
 export const BoxStyled = (props, children) =>
 	h(
 		Element,
-		Object.assign({}, props, {
-			class: ["meeseOS-gui-box-styled", props.class],
-		}),
+		{ ...props, class: ["meeseOS-gui-box-styled", props.class], },
 		children
 	);

@@ -40,8 +40,6 @@ import { h } from "hyperapp";
 export const Statusbar = (props, children) =>
 	h(
 		Element,
-		Object.assign({}, props.box || {}, {
-			class: ["meeseOS-gui-statusbar", props.class],
-		}),
+		{ ...props.box || {}, class: ["meeseOS-gui-statusbar", props.class], },
 		children
 	);

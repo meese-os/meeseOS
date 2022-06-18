@@ -40,31 +40,27 @@ import { h } from "hyperapp";
  * @param {Function} cb Callback to get value => (event)
  */
 export const createField = (name, props, defaultProps, cb, cbInput) => {
-	const oninput = props.oninput || function () {};
-	const onchange = props.onchange || function () {};
-	const onkeydown = props.onkeydown || function () {};
+	const oninput = props.oninput || function() {};
+	const onchange = props.onchange || function() {};
+	const onkeydown = props.onkeydown || function() {};
 
 	const getValue = cbInput || ((ev) => [ev.target.value]);
-	const fieldProps = Object.assign(
-		{
-			oninput: (ev) => oninput(ev, ...getValue(ev)),
-			onchange: (ev) => onchange(ev, ...getValue(ev)),
-			onkeydown: (ev) => {
-				if (ev.keyCode === 13 && props.onenter) {
-					props.onenter(ev, ...getValue(ev));
-				}
-				onkeydown(ev);
-			},
+	const fieldProps = {
+		oninput: (ev) => oninput(ev, ...getValue(ev)),
+		onchange: (ev) => onchange(ev, ...getValue(ev)),
+		onkeydown: (ev) => {
+			if (ev.keyCode === 13 && props.onenter) {
+				props.onenter(ev, ...getValue(ev));
+			}
+			onkeydown(ev);
 		},
-		defaultProps,
-		filteredProps(props, ["choices", "label", "box", "oninput", "onchange"])
-	);
+		...defaultProps,
+		...filteredProps(props, ["choices", "label", "box", "oninput", "onchange"])
+	};
 
 	return h(
 		Element,
-		Object.assign({}, props.box || {}, {
-			class: "meeseOS-gui-field meeseOS-gui-" + name,
-		}),
+		{ ...props.box || {}, class: "meeseOS-gui-field meeseOS-gui-" + name, },
 		cb(fieldProps)
 	);
 };

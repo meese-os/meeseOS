@@ -53,8 +53,8 @@ export default class ConfirmDialog extends Dialog {
 			args.buttons instanceof Array
 				? args.buttons
 				: yesno
-				? ["yes", "no"]
-				: ["ok", "cancel"];
+					? ["yes", "no"]
+					: ["ok", "cancel"];
 
 		super(
 			core,

@@ -1,11 +1,12 @@
 {
   "name": "@aaronmeese.com/eslint-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "aaronmeese.com ESLint configuration",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"eslint-config does not need to be built\""
+    "build": "echo \"eslint-config does not need to be built\"",
+		"eslint": ""
   },
   "dependencies": {
     "eslint": "^7"

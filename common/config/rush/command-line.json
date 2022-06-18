@@ -166,6 +166,14 @@
     //    */
     //   // "autoinstallerName": "my-task"
     // }
+
+		{
+      "commandKind": "bulk",
+      "name": "eslint",
+      "summary": "Runs eslint on all JavaScript files.",
+      "description": "Runs eslint on all JavaScript files in each project to ensure they are compliant with the recommended style guide.",
+      "enableParallelism": true
+    }
   ],
 
   /**
@@ -293,5 +301,12 @@
     //     }
     //   ]
     // }
+
+		{
+      "parameterKind": "flag",
+      "longName": "--fix",
+      "description": "Fix all the detected linting errors.",
+      "associatedCommands": [ "eslint" ]
+    }
   ]
 }

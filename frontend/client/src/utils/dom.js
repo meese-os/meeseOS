@@ -61,7 +61,7 @@ export const style = (root, src) =>
 export const script = (root, src) =>
 	new Promise((resolve, reject) => {
 		const el = document.createElement("script");
-		el.onreadystatechange = function () {
+		el.onreadystatechange = function() {
 			if (this.readyState === "complete" || this.readyState === "loaded") {
 				resolve(el);
 			}
@@ -136,7 +136,7 @@ export const getActiveElement = (root) => {
  * @link https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
  * @return {boolean}
  */
-export const supportsPassive = (function () {
+export const supportsPassive = (function() {
 	let supportsPassive = false;
 	try {
 		const opts = Object.defineProperty({}, "passive", {
@@ -216,7 +216,7 @@ export const supportedMedia = () => {
  * Gets if CSS transitions is supported
  * @return {boolean}
  */
-export const supportsTransition = (function () {
+export const supportsTransition = (function() {
 	const el = document.createElement("div");
 	const tests = [
 		"WebkitTransition",

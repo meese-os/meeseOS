@@ -96,18 +96,18 @@ const basicScaffoldDefaults = {
 const forceBasicScaffold = (args) =>
 	args.type && args.filename
 		? {
-				...args,
-				target: path.join("src", args.type, args.filename),
-				confirm: true,
+			...args,
+			target: path.join("src", args.type, args.filename),
+			confirm: true,
 		  }
 		: false;
 
 const forcePackageScaffold = (args) =>
 	args.name
 		? {
-				...args,
-				target: path.join("src", "packages", args.name),
-				confirm: true,
+			...args,
+			target: path.join("src", "packages", args.name),
+			confirm: true,
 		  }
 		: false;
 
@@ -150,55 +150,55 @@ const ask = (type, s) =>
 
 const scaffoldPackage =
 	(type) =>
-	async ({ logger, options, args }) => {
-		const defaultName =
+		async ({ logger, options, args }) => {
+			const defaultName =
 			type === "iframe-application" ? "MyIframeApplication" : "MyApplication";
 
-		const additions =
+			const additions =
 			type === "iframe-application"
 				? ["data/index.html"]
 				: ["server.js", "index.scss"];
 
-		const files = [
-			"icon.png",
-			"index.js",
-			"webpack.config.js",
-			"package.json",
-			"metadata.json",
-			...additions,
-		];
+			const files = [
+				"icon.png",
+				"index.js",
+				"webpack.config.js",
+				"package.json",
+				"metadata.json",
+				...additions,
+			];
 
-		const packages = await utils.npmPackages(
-			path.resolve(options.root, "node_modules")
-		);
+			const packages = await utils.npmPackages(
+				path.resolve(options.root, "node_modules")
+			);
 
-		const promises = (name, dirname, replace) =>
-			files.map((filename) => {
-				const source = path.resolve(templates, type, filename);
-				const destination = path.resolve(dirname, filename);
+			const promises = (name, dirname, replace) =>
+				files.map((filename) => {
+					const source = path.resolve(templates, type, filename);
+					const destination = path.resolve(dirname, filename);
 
-				return fs.exists(destination).then((exists) => {
-					if (exists && !replace) {
-						logger.info("Skipping", filename);
-						return true;
-					}
+					return fs.exists(destination).then((exists) => {
+						if (exists && !replace) {
+							logger.info("Skipping", filename);
+							return true;
+						}
 
-					const binary = filename.match(/\.png$/);
+						const binary = filename.match(/\.png$/);
 
-					return fs
-						.ensureDir(path.dirname(destination))
-						.then(() => fs.readFile(source, binary ? null : "utf8"))
-						.then((raw) => (binary ? raw : raw.replace(/___NAME___/g, name)))
-						.then((contents) => fs.writeFile(destination, contents))
-						.then(() => {
-							logger.success("Wrote", destination.replace(options.root, ""));
-						});
+						return fs
+							.ensureDir(path.dirname(destination))
+							.then(() => fs.readFile(source, binary ? null : "utf8"))
+							.then((raw) => (binary ? raw : raw.replace(/___NAME___/g, name)))
+							.then((contents) => fs.writeFile(destination, contents))
+							.then(() => {
+								logger.success("Wrote", destination.replace(options.root, ""));
+							});
+					});
 				});
-			});
 
-		const force = forcePackageScaffold(args);
+			const force = forcePackageScaffold(args);
 
-		const choices =
+			const choices =
 			force ||
 			(await inquirer.prompt([
 				{
@@ -236,65 +236,65 @@ const scaffoldPackage =
 				},
 			]));
 
-		if (!choices.confirm) {
-			logger.warn("Scaffolding aborted...");
-			return Promise.resolve(true);
-		}
-
-		const destination = path.resolve(options.root, choices.target);
-		const exists = await fs.exists(destination);
-		let replace = true;
-
-		if (exists && !args.force) {
-			logger.warn("Target directory already exists");
-
-			const { overwrite } = await inquirer.prompt([
-				{
-					type: "confirm",
-					name: "overwrite",
-					message: "Do you want to overwrite existing directory?",
-					default: false,
-				},
-			]);
-
-			if (!overwrite) {
-				throw new Error("Aborted by user!");
+			if (!choices.confirm) {
+				logger.warn("Scaffolding aborted...");
+				return Promise.resolve(true);
 			}
 
-			const a = await inquirer.prompt([
-				{
-					type: "confirm",
-					name: "replace",
-					message: "Do you want to overwrite existing files?",
-					default: false,
-				},
-			]);
+			const destination = path.resolve(options.root, choices.target);
+			const exists = await fs.exists(destination);
+			let replace = true;
 
-			replace = a.replace;
-		}
+			if (exists && !args.force) {
+				logger.warn("Target directory already exists");
 
-		await fs.ensureDir(destination);
+				const { overwrite } = await inquirer.prompt([
+					{
+						type: "confirm",
+						name: "overwrite",
+						message: "Do you want to overwrite existing directory?",
+						default: false,
+					},
+				]);
 
-		return Promise.all(promises(choices.name, destination, replace))
-			.then(() => logger.info('Running "npm install"'))
-			.then(() =>
-				args.dry
-					? false
-					: utils.spawnAsync(npmBinary, ["install"], { cwd: destination })
-			)
-			.then(() => logger.success("...dependencies installed"))
-			.then(() => logger.info('Running "npm run build"'))
-			.then(() =>
-				args.dry
-					? false
-					: utils.spawnAsync(npmBinary, ["run", "build"], { cwd: destination })
-			)
-			.then(() => logger.success("...build complete"))
-			.then(() => {
-				logger.info("Package was generated and built.");
-				logger.info('Run "npm run package:discover" to make it available.');
+				if (!overwrite) {
+					throw new Error("Aborted by user!");
+				}
 
-				console.log(`
+				const a = await inquirer.prompt([
+					{
+						type: "confirm",
+						name: "replace",
+						message: "Do you want to overwrite existing files?",
+						default: false,
+					},
+				]);
+
+				replace = a.replace;
+			}
+
+			await fs.ensureDir(destination);
+
+			return Promise.all(promises(choices.name, destination, replace))
+				.then(() => logger.info("Running \"npm install\""))
+				.then(() =>
+					args.dry
+						? false
+						: utils.spawnAsync(npmBinary, ["install"], { cwd: destination })
+				)
+				.then(() => logger.success("...dependencies installed"))
+				.then(() => logger.info("Running \"npm run build\""))
+				.then(() =>
+					args.dry
+						? false
+						: utils.spawnAsync(npmBinary, ["run", "build"], { cwd: destination })
+				)
+				.then(() => logger.success("...build complete"))
+				.then(() => {
+					logger.info("Package was generated and built.");
+					logger.info("Run \"npm run package:discover\" to make it available.");
+
+					console.log(`
 For more information about packages, visit:
 
 - https://manual.os-js.org/v3/resource/overview/
@@ -302,41 +302,41 @@ For more information about packages, visit:
 - https://manual.os-js.org/v3/development/
 - https://manual.os-js.org/v3/tutorial/iframe/
       `);
-			});
-	};
+				});
+		};
 
 const scaffoldBasic =
 	(type) =>
-	async ({ logger, options, args }) => {
-		logger.info("Scaffolding", type);
+		async ({ logger, options, args }) => {
+			logger.info("Scaffolding", type);
 
-		const s = scaffolds[type];
-		const forced = forceBasicScaffold(args);
-		const choices = forced || (await ask(type, s));
+			const s = scaffolds[type];
+			const forced = forceBasicScaffold(args);
+			const choices = forced || (await ask(type, s));
 
-		if (!choices.confirm) {
-			logger.info("Scaffolding aborted...");
-			return;
-		}
+			if (!choices.confirm) {
+				logger.info("Scaffolding aborted...");
+				return;
+			}
 
-		const source = path.resolve(templates, s.dirname, choices.type + ".js");
+			const source = path.resolve(templates, s.dirname, choices.type + ".js");
 
-		const destination = path.resolve(options.root, choices.target);
+			const destination = path.resolve(options.root, choices.target);
 
-		const exists = await fs.exists(destination);
-		if (exists && !args.force) {
-			throw new Error("Destination already exists!");
-		}
+			const exists = await fs.exists(destination);
+			if (exists && !args.force) {
+				throw new Error("Destination already exists!");
+			}
 
-		await fs.ensureDir(path.dirname(destination));
-		const raw = await fs.readFile(source, "utf8");
-		const contents = `/*${s.info}*/` + raw;
-		await fs.writeFile(destination, contents);
+			await fs.ensureDir(path.dirname(destination));
+			const raw = await fs.readFile(source, "utf8");
+			const contents = `/*${s.info}*/` + raw;
+			await fs.writeFile(destination, contents);
 
-		logger.success("Wrote", path.basename(destination));
+			logger.success("Wrote", path.basename(destination));
 
-		console.log(s.info);
-	};
+			console.log(s.info);
+		};
 
 module.exports = {
 	"make:auth": {

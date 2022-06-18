@@ -67,9 +67,7 @@ export const MenubarItem = (props, children = []) => {
 export const Menubar = (props, children = []) =>
 	h(
 		Element,
-		Object.assign({}, props, {
-			class: ["meeseOS-gui-menubar", props.class],
-		}),
+		{ ...props, class: ["meeseOS-gui-menubar", props.class], },
 		[
 			...(props.items || []).map((item) =>
 				h(

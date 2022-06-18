@@ -44,15 +44,13 @@ export const Label = (props = {}, children = []) => {
 	const placement = props.placement || "top";
 	const text = props.text || "";
 
-	const elementProps = Object.assign(
-		{
-			class: [
-				"meeseOS-gui-field-label",
-				"meeseOS-gui-field-label-on-" + placement,
-			],
-		},
-		props.box || {}
-	);
+	const elementProps = {
+		class: [
+			"meeseOS-gui-field-label",
+			"meeseOS-gui-field-label-on-" + placement,
+		],
+		...props.box || {}
+	};
 
 	return h(Element, elementProps, [
 		h("label", { for: props.for }, text),

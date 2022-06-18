@@ -47,14 +47,12 @@ export default class PromptDialog extends Dialog {
 	constructor(core, args, callback) {
 		super(
 			core,
-			Object.assign(
-				{},
-				{
-					value: "",
-					placeholder: "",
-				},
-				args
-			),
+			{
+
+				value: "",
+				placeholder: "",
+				...args
+			},
 			{
 				className: "prompt",
 				buttons: ["ok", "cancel"],

@@ -76,14 +76,14 @@ export const Element = (props, children = []) => {
 	}
 
 	const defaultStyle =
-		typeof props.style === "string" ? {} : Object.assign({}, props.style || {});
+		typeof props.style === "string" ? {} : ({ ...props.style || {} });
 
 	const style = Object.keys(props).reduce((result, prop) => {
 		const value = boxPropNames[prop]
 			? boxPropNames[prop](props[prop])
 			: undefined;
 
-		return Object.assign({}, result, value);
+		return { ...result, ...value };
 	}, defaultStyle);
 
 	return h(

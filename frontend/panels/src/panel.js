@@ -47,16 +47,14 @@ export default class Panel extends EventEmitter {
 		super("Panel");
 
 		this.core = core;
-		this.options = Object.assign(
-			{},
-			{
-				ontop: true,
-				position: "top",
-				contextmenu: true,
-				items: [],
-			},
-			options
-		);
+		this.options = {
+
+			ontop: true,
+			position: "top",
+			contextmenu: true,
+			items: [],
+			...options
+		};
 
 		this.items = [];
 		this.inited = false;

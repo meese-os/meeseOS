@@ -40,14 +40,10 @@ import { h } from "hyperapp";
 export const Box = (props, children) =>
 	h(
 		Element,
-		Object.assign(
-			{
-				orientation: "horizontal",
-			},
-			props,
-			{
-				class: ["meeseOS-gui-box", props.class],
-			}
-		),
+		{
+			orientation: "horizontal",
+			...props,
+			class: ["meeseOS-gui-box", props.class],
+		},
 		children
 	);

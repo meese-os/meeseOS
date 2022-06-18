@@ -69,10 +69,10 @@ export const urlResolver = (configuration) => {
 				metadata.type === "theme"
 					? "themes"
 					: metadata.type === "icons"
-					? "icons"
-					: metadata.type === "wallpapers"
-					? "wallpapers"
-					: "apps";
+						? "icons"
+						: metadata.type === "wallpapers"
+							? "wallpapers"
+							: "apps";
 
 			url = `${type}/${metadata.name}${path}`;
 		}

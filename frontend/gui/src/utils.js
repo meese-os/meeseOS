@@ -40,12 +40,10 @@ export const filteredProps = (props, filterKeys) => {
 
 	return keys.filter(filter).reduce(
 		(result, k) =>
-			Object.assign(
-				{
-					[k]: props[k],
-				},
-				result
-			),
+			({
+				[k]: props[k],
+				...result
+			}),
 		{}
 	);
 };

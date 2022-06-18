@@ -510,7 +510,7 @@ export default class Window extends EventEmitter {
 	 * @param {Function} [callback] Callback when window DOM has been constructed
 	 * @return {Window} this instance
 	 */
-	render(callback = function () {}) {
+	render(callback = function() {}) {
 		if (this.rendered) {
 			return this;
 		} else if (!this.inited) {
@@ -851,11 +851,11 @@ export default class Window extends EventEmitter {
 		return this.attributes.sessionable === false
 			? null
 			: {
-					id: this.id,
-					maximized: this.state.maximized,
-					minimized: this.state.minimized,
-					position: { ...this.state.position },
-					dimension: { ...this.state.dimension },
+				id: this.id,
+				maximized: this.state.maximized,
+				minimized: this.state.minimized,
+				position: { ...this.state.position },
+				dimension: { ...this.state.dimension },
 			  };
 	}
 

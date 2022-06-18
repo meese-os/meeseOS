@@ -48,15 +48,13 @@ export default class AlertDialog extends Dialog {
 	 * @param {Function} callback The callback function
 	 */
 	constructor(core, args, callback) {
-		args = Object.assign(
-			{},
-			{
-				title: "Alert",
-				type: "info",
-				message: "",
-			},
-			args
-		);
+		args = {
+
+			title: "Alert",
+			type: "info",
+			message: "",
+			...args
+		};
 
 		if (typeof args.sound === "undefined") {
 			args.sound = args.type === "error" ? "bell" : "message";

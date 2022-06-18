@@ -51,22 +51,20 @@ export default class FontDialog extends Dialog {
 	 * @param {Function} callback The callback function
 	 */
 	constructor(core, args, callback) {
-		args = Object.assign(
-			{},
-			{
-				title: "Choose Font",
-				minSize: 6,
-				maxSize: 48,
-				unit: "px",
-				name: "Roboto",
-				size: 10,
-				style: "regular",
-				text: "The quick brown fox jumps over the lazy dog",
-				controls: ["size", "name", "style"],
-				fonts: ["Roboto", "arial", "sans-serif", "monospace"],
-			},
-			args
-		);
+		args = {
+
+			title: "Choose Font",
+			minSize: 6,
+			maxSize: 48,
+			unit: "px",
+			name: "Roboto",
+			size: 10,
+			style: "regular",
+			text: "The quick brown fox jumps over the lazy dog",
+			controls: ["size", "name", "style"],
+			fonts: ["Roboto", "arial", "sans-serif", "monospace"],
+			...args
+		};
 
 		super(
 			core,
@@ -111,7 +109,7 @@ export default class FontDialog extends Dialog {
 			italic: "Italic",
 		};
 
-		const initialState = Object.assign({}, this.value);
+		const initialState = { ...this.value };
 		const initialActions = {
 			setSize: (size) => (state) => {
 				this.value.size = size;

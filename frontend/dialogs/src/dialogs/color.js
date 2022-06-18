@@ -91,10 +91,10 @@ export default class ColorDialog extends Dialog {
 					color = "#" + color;
 				}
 
-				this.value = Object.assign({}, this.value, hexToComponent(color));
+				this.value = { ...this.value, ...hexToComponent(color) };
 				this.value.hex = color;
 			} else {
-				this.value = Object.assign({}, this.value, color);
+				this.value = { ...this.value, ...color };
 				this.value.hex = componentToHex(this.value);
 			}
 		}
@@ -103,21 +103,21 @@ export default class ColorDialog extends Dialog {
 	render(options) {
 		super.render(options, ($content) => {
 			const canvas = createPalette(98, 98);
-			const initialState = Object.assign({}, this.value);
+			const initialState = { ...this.value };
 			const initialActions = {
 				setColor: (color) => (state) => color,
 				setComponent:
 					({ color, newValue }) =>
-					(state) => {
-						this.value[color] = newValue;
+						(state) => {
+							this.value[color] = newValue;
 
-						// Updates the hex as well, since that logic has since been
-						// abstracted to color-utils
-						const hex = componentToHex(state);
-						this.value.hex = hex;
+							// Updates the hex as well, since that logic has since been
+							// abstracted to color-utils
+							const hex = componentToHex(state);
+							this.value.hex = hex;
 
-						return { [color]: newValue, hex };
-					},
+							return { [color]: newValue, hex };
+						},
 				updateHex: () => (state) => {
 					const hex = componentToHex(state);
 					this.value.hex = hex;

@@ -61,14 +61,14 @@ const view = (core, proc, win) => (state, actions) =>
 			[
 				state.image
 					? h(Image, {
-							src: state.image.url,
-							onload: (ev) => actions.resizeFit(ev.target),
+						src: state.image.url,
+						onload: (ev) => actions.resizeFit(ev.target),
 					  })
 					: null,
 				state.video
 					? h(Video, {
-							src: state.video.url,
-							onload: (ev) => actions.resizeFit(ev.target),
+						src: state.video.url,
+						onload: (ev) => actions.resizeFit(ev.target),
 					  })
 					: null,
 			].filter((i) => Boolean(i))
@@ -77,7 +77,7 @@ const view = (core, proc, win) => (state, actions) =>
 
 const openFile = async (core, proc, win, a, file, restore) => {
 	const url = await core.make("meeseOS/vfs").url(file);
-	const ref = Object.assign({}, file, { url });
+	const ref = { ...file, url };
 
 	if (file.mime.match(/^image/)) {
 		a.setImage({ image: ref, restore });

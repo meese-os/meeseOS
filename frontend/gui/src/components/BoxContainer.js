@@ -40,8 +40,6 @@ import { h } from "hyperapp";
 export const BoxContainer = (props, children) =>
 	h(
 		Element,
-		Object.assign({}, props, {
-			class: ["meeseOS-gui-box-container", props.class],
-		}),
+		{ ...props, class: ["meeseOS-gui-box-container", props.class], },
 		children
 	);

@@ -54,13 +54,11 @@ const defaultButtons = () => ({
 const defaultButton = (name) => {
 	const defs = defaultButtons();
 	if (defs[name]) {
-		return Object.assign(
-			{},
-			{
-				name: name,
-			},
-			defs[name]
-		);
+		return {
+
+			name: name,
+			...defs[name]
+		};
 	}
 
 	return { label: name, name: name };
@@ -118,7 +116,7 @@ export default class Dialog {
 	constructor(core, args, options, callback) {
 		this.core = core;
 		this.args = args;
-		this.callback = callback || function () {};
+		this.callback = callback || function() {};
 		this.options = createOptions(options, args);
 		this.win = null;
 		this.value = undefined;
@@ -128,8 +126,8 @@ export default class Dialog {
 			typeof n === "string"
 				? defaultButton(n)
 				: {
-						label: n.label || "button",
-						name: n.name || "unknown",
+					label: n.label || "button",
+					name: n.name || "unknown",
 				  }
 		);
 
@@ -228,14 +226,12 @@ export default class Dialog {
 		return this.buttons.map((button) =>
 			h(
 				Button,
-				Object.assign(
-					{},
-					{
-						disabled: states[button.name] === false,
-						onclick: (event) => onclick(button.name, event),
-					},
-					button
-				)
+				{
+
+					disabled: states[button.name] === false,
+					onclick: (event) => onclick(button.name, event),
+					...button
+				}
 			)
 		);
 	}

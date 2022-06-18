@@ -50,7 +50,7 @@ export default class MultipleColorsDialog extends Dialog {
 	render(options) {
 		super.render(options, ($content) => {
 			const canvas = createPalette(98, 98);
-			const initialState = Object.assign({}, this);
+			const initialState = { ...this };
 
 			// Initially set the selected color to the first in the list
 			const [firstKey] = Object.keys(initialState.value);
@@ -63,20 +63,19 @@ export default class MultipleColorsDialog extends Dialog {
 				// color -> r, g, or b; newValue -> 0-255
 				setComponent:
 					({ color, newValue }) =>
-					(state) => {
-						const previousHex = state.value[state.selectedColor];
-						const previousComponent = hexToComponent(previousHex);
-						const newComponent = {
-							...previousComponent,
-							[color]: newValue,
-						};
+						(state) => {
+							const previousHex = state.value[state.selectedColor];
+							const previousComponent = hexToComponent(previousHex);
+							const newComponent = {
+								...previousComponent,
+								[color]: newValue,
+							};
 
-						const newHex = componentToHex(newComponent);
-						this.value[state.selectedColor] = state.value[state.selectedColor] =
-							newHex;
-
-						return { [color]: newValue };
-					},
+							const newHex = componentToHex(newComponent);
+							state.value[state.selectedColor] = newHex;
+							this.value[state.selectedColor] = newHex;
+							return { [color]: newValue };
+						},
 			};
 
 			const a = app(

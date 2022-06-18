@@ -80,64 +80,56 @@ export const IconView = (props) => {
 
 	return h(
 		Element,
-		Object.assign(
-			{
-				class: "meeseOS-gui-icon-view",
-			},
-			props.box || {}
-		),
+		{
+			class: "meeseOS-gui-icon-view",
+			...props.box || {}
+		},
 		inner
 	);
 };
 
 export const iconView = {
 	component: (state, actions) => {
-		const newProps = Object.assign(
-			{
-				entries: [],
-				onselect: ({ data, index, ev }) => {
-					actions.select({ data, index, ev });
-					actions.setSelectedIndex(index);
-				},
-				onactivate: ({ data, index, ev }) => {
-					actions.activate({ data, index, ev });
-					actions.setSelectedIndex(-1);
-				},
-				oncontextmenu: ({ data, index, ev }) => {
-					actions.select({ data, index, ev });
-					actions.contextmenu({ data, index, ev });
-					actions.setSelectedIndex(index);
-				},
-				oncreate: (args) => {
-					actions.created(args);
-				},
+		const newProps = {
+			entries: [],
+			onselect: ({ data, index, ev }) => {
+				actions.select({ data, index, ev });
+				actions.setSelectedIndex(index);
 			},
-			state
-		);
+			onactivate: ({ data, index, ev }) => {
+				actions.activate({ data, index, ev });
+				actions.setSelectedIndex(-1);
+			},
+			oncontextmenu: ({ data, index, ev }) => {
+				actions.select({ data, index, ev });
+				actions.contextmenu({ data, index, ev });
+				actions.setSelectedIndex(index);
+			},
+			oncreate: (args) => {
+				actions.created(args);
+			},
+			...state
+		};
 
 		return (props = {}) => IconView(Object.assign(newProps, props));
 	},
 
 	state: (state) =>
-		Object.assign(
-			{
-				selectedIndex: -1,
-				scrollTop: 0,
-			},
-			state
-		),
+		({
+			selectedIndex: -1,
+			scrollTop: 0,
+			...state
+		}),
 
 	actions: (actions) =>
-		Object.assign(
-			{
-				select: () => () => ({}),
-				activate: () => () => ({}),
-				contextmenu: () => () => ({}),
-				created: () => () => ({}),
-				setEntries: (entries) => () => ({ entries }),
-				setScrollTop: (scrollTop) => (state) => ({ scrollTop }),
-				setSelectedIndex: (selectedIndex) => (state) => ({ selectedIndex }),
-			},
-			actions || {}
-		),
+		({
+			select: () => () => ({}),
+			activate: () => () => ({}),
+			contextmenu: () => () => ({}),
+			created: () => () => ({}),
+			setEntries: (entries) => () => ({ entries }),
+			setScrollTop: (scrollTop) => (state) => ({ scrollTop }),
+			setSelectedIndex: (selectedIndex) => (state) => ({ selectedIndex }),
+			...actions || {}
+		}),
 };
