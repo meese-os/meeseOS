@@ -54,8 +54,8 @@ const fetchMocks = {
 			String(method).toLowerCase() === "post"
 				? true
 				: {
-						foo: "bar",
-				  },
+					foo: "bar",
+				},
 
 		"/logout": true,
 
@@ -65,13 +65,11 @@ const fetchMocks = {
 		},
 
 		"/login": ({ body }) =>
-			Object.assign(
-				{
-					id: 0,
-					groups: [],
-				},
-				JSON.parse(body)
-			),
+			({
+				id: 0,
+				groups: [],
+				...JSON.parse(body)
+			}),
 	},
 };
 

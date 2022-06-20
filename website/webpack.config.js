@@ -37,7 +37,7 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src/client/index.ejs"),
-			favicon: path.resolve(__dirname, "src/client/aaron.png"),
+			favicon: path.resolve(__dirname, "src/client/favicon.png"),
 			title: "Aaron Meese",
 		}),
 		new MiniCssExtractPlugin({

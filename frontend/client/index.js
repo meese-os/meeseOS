@@ -59,4 +59,4 @@ export { default as Clipboard } from "./src/clipboard";
 export { default as Middleware } from "./src/middleware";
 export { BasicApplication } from "./src/basic-application";
 export { defaultConfiguration as configuration } from "./src/config";
-export { default as icon } from "./src/styles/aaron.png";
+export { default as icon } from "./src/styles/icon.png";

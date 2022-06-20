@@ -30,7 +30,7 @@
 
 import { h } from "hyperapp";
 import PanelItem from "../panel-item";
-import defaultIcon from "../aaron.png";
+import defaultIcon from "../icon.png";
 
 const sortBy = (fn) => (a, b) => -(fn(a) < fn(b)) || Number(fn(a) > fn(b));
 const sortByLabel = (iter) => String(iter.label).toLowerCase();

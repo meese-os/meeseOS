@@ -315,12 +315,10 @@ const scaffoldBasic =
 			const choices = forced || (await ask(type, s));
 
 			if (!choices.confirm) {
-				logger.info("Scaffolding aborted...");
-				return;
+				return logger.info("Scaffolding aborted...");
 			}
 
 			const source = path.resolve(templates, s.dirname, choices.type + ".js");
-
 			const destination = path.resolve(options.root, choices.target);
 
 			const exists = await fs.exists(destination);
@@ -330,7 +328,7 @@ const scaffoldBasic =
 
 			await fs.ensureDir(path.dirname(destination));
 			const raw = await fs.readFile(source, "utf8");
-			const contents = `/*${s.info}*/` + raw;
+			const contents = `/*${s.info}*/\n` + raw;
 			await fs.writeFile(destination, contents);
 
 			logger.success("Wrote", path.basename(destination));

@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import defaultIcon from "./styles/aaron.png";
+import defaultIcon from "./styles/icon.png";
 
 // TODO: Make this scale to the closest screen size out of a preset list
 const resolution = "1920x1080";

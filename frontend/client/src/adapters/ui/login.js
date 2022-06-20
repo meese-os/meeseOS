@@ -86,7 +86,7 @@ const createView = (options) => {
 			class: "meeseOS-login-logo",
 			"data-position": position,
 			style: {
-				backgroundImage: `url('${src}')`,
+				backgroundImage: `url("${src}")`,
 			},
 		});
 
