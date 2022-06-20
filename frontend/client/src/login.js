@@ -85,6 +85,7 @@ export default class Login extends EventEmitter {
 						name: "username",
 						type: "text",
 						placeholder: "Username",
+						autocomplete: false
 					},
 				},
 				{
