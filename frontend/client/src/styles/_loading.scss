@@ -8,6 +8,8 @@ $loading-offset: 25px;
 @font-face {
 	font-family: "Terminal";
 	src: url("./src/fonts/_terminal.ttf") format("truetype");
+	// https://web.dev/font-display/
+	font-display: swap;
 }
 
 .meeseOS-boot-splash {

@@ -856,7 +856,7 @@ export default class Window extends EventEmitter {
 				minimized: this.state.minimized,
 				position: { ...this.state.position },
 				dimension: { ...this.state.dimension },
-			  };
+			};
 	}
 
 	/**
