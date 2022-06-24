@@ -49,11 +49,17 @@ const {
 
 const config = require("./config.js");
 const meeseOS = new Core(config, {});
+const customAdapter = require("./auth/adapter.js");
 
 meeseOS.register(CoreServiceProvider, { before: true });
 meeseOS.register(PackageServiceProvider);
 meeseOS.register(VFSServiceProvider);
-meeseOS.register(AuthServiceProvider);
+meeseOS.register(AuthServiceProvider, {
+	args: {
+		adapter: customAdapter,
+		// config: {},
+	},
+});
 meeseOS.register(SettingsServiceProvider);
 
 const shutdown = (signal) => (error) => {

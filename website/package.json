@@ -67,6 +67,7 @@
     "@aaronmeese.com/textpad": "workspace:*",
     "@aaronmeese.com/uptime-monitor": "workspace:*",
     "@aaronmeese.com/widgets": "workspace:*",
+    "dotenv": "^16.0.0",
     "hyperapp": "^1.2.10",
     "typeface-roboto": "^1.1.13"
   },

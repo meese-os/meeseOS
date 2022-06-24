@@ -38,9 +38,7 @@ import PanelItem from "../panel-item";
  */
 export default class TrayPanelItem extends PanelItem {
 	init() {
-		if (this.inited) {
-			return;
-		}
+		if (this.inited) return;
 
 		const actions = super.init(
 			{

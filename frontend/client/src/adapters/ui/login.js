@@ -202,9 +202,14 @@ const create = (options, login, startHidden, $container) => {
 					return;
 				}
 
-				const values = Array.from(ev.target.elements)
-					.filter((el) => el.type !== "submit")
-					.reduce((o, el) => ({ ...o, [el.name]: el.value }), {});
+				let values = {};
+				if (ev.submitter.id === "guest-login") {
+					values = { username: "guest", password: "guest" };
+				} else {
+					values = Array.from(ev.target.elements)
+						.filter((el) => el.type !== "submit")
+						.reduce((o, el) => ({ ...o, [el.name]: el.value }), {});
+				}
 
 				ee.emit("login:post", values);
 			},

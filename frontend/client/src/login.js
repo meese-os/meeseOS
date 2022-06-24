@@ -101,6 +101,15 @@ export default class Login extends EventEmitter {
 					attributes: {
 						type: "submit",
 						value: "Login",
+						id: "standard-login",
+					},
+				},
+				{
+					tagName: "input",
+					attributes: {
+						type: "submit",
+						value: "Login as Guest",
+						id: "guest-login",
 					},
 				},
 			],

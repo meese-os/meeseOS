@@ -165,6 +165,22 @@
 		text-decoration: uppercase;
 		padding: $base-margin;
 		margin-top: $base-margin * 2;
+
+		span {
+			animation: pulse 1.5s infinite ease-out;
+			font-size: 14px;
+			display: inline-table;
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			transform: perspective(1px) translateZ(0);
+			-webkit-transform: perspective(1px) translateZ(0);
+			-webkit-font-smoothing: subpixel-antialiased;
+			filter: blur(0px);
+			-webkit-filter: blur(0);
+			perspective: 1000;
+			-webkit-perspective: 1000;
+			will-change: auto;
+		}
 	}
 
 	.meeseOS-login-stamp {
@@ -175,20 +191,28 @@
 	}
 
 	input {
-		outline: 1px solid rgba(255, 255, 255, 0.5);
-
 		&:focus,
 		&:active {
 			box-shadow: 0 0 0.5em rgba(255, 255, 255, 0.8);
+			outline: none;
 		}
 	}
 
 	input[type="submit"],
 	button {
 		padding: $base-margin;
-		background-color: #fff;
 		letter-spacing: 1px;
 		text-transform: uppercase;
+	}
+
+	#standard-login {
+		background-color: #fff;
+	}
+
+	#guest-login {
+		// TODO: Pick a better color for this
+		background-color: #3e56cb;
+		color: #fff;
 	}
 
 	select,
@@ -225,4 +249,18 @@
 	:-moz-placeholder {
 		@include placeholder-effect;
 	}
+}
+
+// IDEA: Animate font size instead of scale;
+// https://stackoverflow.com/a/56824604/6456163
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.048);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

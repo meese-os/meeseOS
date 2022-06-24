@@ -41,7 +41,6 @@ const nullAdapter = require("./adapters/auth/null.js");
 /**
  * Authentication User Profile
  * @typedef {Object} AuthUserProfile
- * @property {number} id
  * @property {string} username
  * @property {string} name
  * @property {string[]} groups
@@ -219,9 +218,8 @@ class Auth {
 	 */
 	createUserProfile(fields, result) {
 		const ignores = ["password"];
-		const required = ["username", "id"];
+		const required = ["username"];
 		const template = {
-			id: 0,
 			username: fields.username,
 			name: fields.username,
 			groups: this.core.config("auth.defaultGroups", []),

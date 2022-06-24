@@ -10,7 +10,9 @@ This redesign of my website would not be possible without the _incredible_ work 
 - `cp apps/old-site/.env.template apps/old-site/.env`
   - Enter the appropriate information here
 - `cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env`
-  - Enter the appropriate information here
+  - Enter the appropriate information
+- `cp website/src/server/auth/.env.template website/src/server/auth/.env`
+	- Enter the appropriate information
 - `bash ./setup.sh`
 
 ## Deploy
