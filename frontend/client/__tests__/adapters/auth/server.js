@@ -16,7 +16,6 @@ describe("Server Auth Adapter", () => {
 		return expect(a.login(values)).resolves.toEqual({
 			username: "jest",
 			groups: [],
-			id: 0,
 		});
 	});
 

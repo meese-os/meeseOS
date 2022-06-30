@@ -45,9 +45,10 @@ const createUri = (str) =>
 
 const pathname = createUri(window.location.pathname);
 const href = createUri(window.location.href);
+const development = !(process.env.NODE_ENV || "").match(/^prod/i);
 
 export const defaultConfiguration = {
-	development: !(process.env.NODE_ENV || "").match(/^prod/i),
+	development: development,
 	standalone: false,
 
 	http: {
@@ -136,8 +137,9 @@ export const defaultConfiguration = {
 		cookie: {
 			name: "meeseOS.auth",
 			expires: 7,
-			enabled: false,
-			secure: false,
+			enabled: true,
+			// Only supports HTTPS in production, but allows insecure cookies in development
+			secure: !development,
 		},
 
 		login: {
@@ -147,10 +149,8 @@ export const defaultConfiguration = {
 
 		// NOTE: These are the fallback default values
 		defaultUserData: {
-			id: null,
-			// TODO: Create myself an admin user with special permissions
-			username: "meeseOS",
-			groups: [],
+			username: "guest",
+			groups: ["guest"],
 		},
 	},
 

@@ -28,8 +28,10 @@
  * @licence Simplified BSD License
  */
 
+@use "sass:color";
+
 @mixin shadowed {
-	box-shadow: 0 0 $base-margin rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 $base-margin rgb(0 0 0 / 50%);
 }
 
 @mixin focusable {
@@ -65,7 +67,7 @@
 	}
 
 	&:disabled {
-		color: lighten($button-foreground, 50%);
+		color: color.adjust($color: $button-foreground, $lightness: 50%);
 	}
 }
 
@@ -77,7 +79,7 @@
 	color: $input-foreground;
 
 	&:disabled {
-		color: lighten($input-foreground, 50%);
+		color: color.adjust($color: $input-foreground, $lightness: 50%);
 	}
 }
 
@@ -106,7 +108,7 @@
 	padding: 0;
 	overflow: visible;
 	height: $range-slider-height;
-	-webkit-appearance: none;
+	appearance: none;
 }
 
 @mixin range-slider-track {

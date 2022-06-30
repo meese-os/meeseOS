@@ -66,7 +66,6 @@ const fetchMocks = {
 
 		"/login": ({ body }) =>
 			({
-				id: 0,
 				groups: [],
 				...JSON.parse(body)
 			}),

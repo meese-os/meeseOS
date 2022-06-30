@@ -29,32 +29,24 @@
  */
 
 $base-margin: 1em;
-
 $font-family: "Roboto", sans-serif;
 $font-color: #242424;
-
 $transition-duration: 0.1s;
 $transition-timing-function: ease-out;
-
 $window-border: 1px solid #716c6c;
 $window-background: #ebebeb;
-
-$panel-background: rgba(0, 0, 0, 0.9);
+$panel-background: rgb(0 0 0 / 90%);
 $panel-foreground: #fff;
-
 $main-border-color: #c1c1c1;
-
 $input-background: #fff;
 $input-border: 1px solid $main-border-color;
 $input-foreground: $font-color;
-
 $button-background-fallback: #d9d9d9;
 $button-background-active: linear-gradient(to bottom, #f4f4f4 0%, #f8f8f8 100%);
 $button-background: linear-gradient(to bottom, #f8f8f8 0%, #f4f4f4 100%);
 $button-border-active: 1px solid #242424;
 $button-border: 1px solid $main-border-color;
 $button-foreground: $font-color;
-
 $range-slider-height: 2em;
 $range-slider-button-height: 1em;
 $range-slider-button-width: 1em;
@@ -62,19 +54,14 @@ $range-slider-button-border-radius: 0;
 $range-slider-track-height: 0.5em;
 $range-slider-track-width: 100%;
 $range-slider-track-border-radius: 0;
-
 $view-background: #d9d9d9;
 $view-border: 1px solid $main-border-color;
-
-$active-background: rgba(0, 0, 200, 0.9);
+$active-background: rgb(0 0 200 / 90%);
 $active-foreground: #fff;
-
-$progress-background: rgba(0, 0, 200, 0.5);
+$progress-background: rgb(0 0 200 / 50%);
 $progress-foreground: #fff;
-
-$outline: 1px solid rgba(0, 0, 200, 0.2);
+$outline: 1px solid rgb(0 0 200 / 20%);
 $zebra-background: #f9f9f9;
-
 $scrollbar-button-border: $button-border;
 $scrollbar-button-background: $button-background;
 $scrollbar-button-foreground: $input-foreground;

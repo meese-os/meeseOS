@@ -96,12 +96,12 @@
 			overflow: visible;
 
 			#{ $self }__icon {
-				background-color: rgba(0, 0, 200, 0.9);
+				background-color: rgb(0 0 200 / 90%);
 			}
 
 			#{ $self }__label {
-				padding: 0 0.5em 0.5em 0.5em;
-				background-color: rgba(0, 0, 200, 0.9);
+				padding: 0 0.5em 0.5em;
+				background-color: rgb(0 0 200 / 90%);
 				color: #fff;
 				overflow: visible;
 				height: auto;

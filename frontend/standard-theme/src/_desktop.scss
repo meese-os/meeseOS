@@ -28,9 +28,9 @@
  * @licence Simplified BSD License
  */
 
-//
-// Panel
-//
+/***********
+ *  Panel  *
+ ***********/
 
 .meeseOS-panel {
 	@include panel;
@@ -53,9 +53,9 @@
 	}
 }
 
-//
-// Search
-//
+/************
+ *  Search  *
+ ************/
 
 .meeseOS-search-input {
 	border: 0 none;
@@ -70,9 +70,9 @@
 	}
 }
 
-//
-// Iconview
-//
+/************
+ * Iconview *
+ ************/
 
 .meeseOS-desktop-iconview {
 	&__entry {

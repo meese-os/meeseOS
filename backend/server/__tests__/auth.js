@@ -4,13 +4,9 @@ const { Response } = require("jest-express/lib/response");
 const { Request } = require("jest-express/lib/request");
 
 describe("Authentication", () => {
-	let core;
-	let auth;
-	let request;
-	let response;
+	let core, auth, request, response;
 
 	const profile = {
-		id: 0,
 		username: "jest",
 		name: "jest",
 		groups: [],

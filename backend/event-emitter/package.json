@@ -25,6 +25,7 @@
     "@babel/runtime": "^7.17.2",
     "babel-loader": "^8.2.3",
     "eslint": "^8.18.0",
+    "eslint-plugin-jest": "^26.5.3",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
     "jest": "^26.0.0"
@@ -39,12 +40,14 @@
   "eslintConfig": {
     "env": {
       "browser": true,
-      "node": true
+      "node": true,
+      "jest/globals": true
     },
+    "plugins": ["jest"],
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": ["@aaronmeese.com/eslint-config", "plugin:jest/recommended"]
   },
   "babel": {
     "presets": [

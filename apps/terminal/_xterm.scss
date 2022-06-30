@@ -35,7 +35,7 @@
  *  Default styles for xterm.js
  */
 
-& .xterm {
+.xterm {
 	font-family: courier-new, courier, monospace;
 	font-feature-settings: "liga" 0;
 	position: relative;
@@ -44,12 +44,12 @@
 	-webkit-user-select: none;
 }
 
-& .xterm.focus,
-& .xterm:focus {
+.xterm.focus,
+.xterm:focus {
 	outline: none;
 }
 
-& .xterm .xterm-helpers {
+.xterm .xterm-helpers {
 	position: absolute;
 	top: 0;
 	/**
@@ -59,7 +59,7 @@
 	z-index: 10;
 }
 
-& .xterm .xterm-helper-textarea {
+.xterm .xterm-helper-textarea {
 	/*
      * HACK: to fix IE's blinking cursor
      * Move textarea out of the screen to the far left, so that the cursor is not visible.
@@ -77,7 +77,7 @@
 	resize: none;
 }
 
-& .xterm .composition-view {
+.xterm .composition-view {
 	/* TODO: Composition position got messed up somewhere */
 	background: #000;
 	color: #fff;
@@ -87,11 +87,11 @@
 	z-index: 1;
 }
 
-& .xterm .composition-view.active {
+.xterm .composition-view.active {
 	display: block;
 }
 
-& .xterm .xterm-viewport {
+.xterm .xterm-viewport {
 	/* On OS X this is required in order for the scroll bar to appear fully opaque */
 	background-color: #000;
 	overflow-y: scroll;
@@ -103,21 +103,21 @@
 	bottom: 0;
 }
 
-& .xterm .xterm-screen {
+.xterm .xterm-screen {
 	position: relative;
 }
 
-& .xterm .xterm-screen canvas {
+.xterm .xterm-screen canvas {
 	position: absolute;
 	left: 0;
 	top: 0;
 }
 
-& .xterm .xterm-scroll-area {
+.xterm .xterm-scroll-area {
 	visibility: hidden;
 }
 
-& .xterm-char-measure-element {
+.xterm-char-measure-element {
 	display: inline-block;
 	visibility: hidden;
 	position: absolute;
@@ -126,26 +126,26 @@
 	line-height: normal;
 }
 
-& .xterm {
+.xterm {
 	cursor: text;
 }
 
-& .xterm.enable-mouse-events {
+.xterm.enable-mouse-events {
 	/* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
 	cursor: default;
 }
 
-& .xterm.xterm-cursor-pointer {
+.xterm.xterm-cursor-pointer {
 	cursor: pointer;
 }
 
-& .xterm.column-select.focus {
+.xterm.column-select.focus {
 	/* Column selection mode */
 	cursor: crosshair;
 }
 
-& .xterm .xterm-accessibility,
-& .xterm .xterm-message {
+.xterm .xterm-accessibility,
+.xterm .xterm-message {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -155,7 +155,7 @@
 	color: transparent;
 }
 
-& .xterm .live-region {
+.xterm .live-region {
 	position: absolute;
 	left: -9999px;
 	width: 1px;

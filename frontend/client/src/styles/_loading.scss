@@ -1,13 +1,14 @@
 // Variables
 $green: #0a0;
-$blinkDuration: 2.5s;
-$blinkAnimationType: linear;
-$minBlinkOpacity: 0.1;
+$blink-duration: 2.5s;
+$blink-animation-type: linear;
+$min-blink-opacity: 0.1;
 $loading-offset: 25px;
 
 @font-face {
-	font-family: "Terminal";
+	font-family: Terminal;
 	src: url("./src/fonts/_terminal.ttf") format("truetype");
+
 	// https://web.dev/font-display/
 	font-display: swap;
 }
@@ -42,58 +43,55 @@ $loading-offset: 25px;
 	border-image: radial-gradient(gray, transparent) 1;
 }
 
-// https://stackoverflow.com/revisions/16344389/7
+// https://stackoverflow.com/a/16344389/6456163
 .blinking {
 	font-family: Terminal;
 	font-size: 24px;
 	color: $green;
 	text-shadow: 0 0 5px $green;
-
-	-webkit-animation-name: blinker;
-	-webkit-animation-duration: $blinkDuration;
-	-webkit-animation-timing-function: $blinkAnimationType;
-	-webkit-animation-iteration-count: infinite;
-
-	-moz-animation-name: blinker;
-	-moz-animation-duration: $blinkDuration;
-	-moz-animation-timing-function: $blinkAnimationType;
-	-moz-animation-iteration-count: infinite;
-
 	animation-name: blinker;
-	animation-duration: $blinkDuration;
-	animation-timing-function: $blinkAnimationType;
+	animation-duration: $blink-duration;
+	animation-timing-function: $blink-animation-type;
 	animation-iteration-count: infinite;
 }
 
-@-moz-keyframes blinker {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: $minBlinkOpacity;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-@-webkit-keyframes blinker {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: $minBlinkOpacity;
-	}
-	100% {
-		opacity: 1;
-	}
-}
 @keyframes blinker {
 	0% {
 		opacity: 1;
 	}
+
 	50% {
-		opacity: $minBlinkOpacity;
+		opacity: $min-blink-opacity;
 	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: $min-blink-opacity;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: $min-blink-opacity;
+	}
+
 	100% {
 		opacity: 1;
 	}
@@ -152,7 +150,7 @@ $loading-offset: 25px;
 	box-shadow: 0 -3px 0 $green;
 }
 
-#loadingBar:before {
+#loadingBar::before {
 	content: "\00a0";
 }
 

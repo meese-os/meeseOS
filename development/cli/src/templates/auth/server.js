@@ -3,7 +3,6 @@ module.exports = (core, config) => ({
 		const { username } = req.body;
 
 		return {
-			id: 1,
 			username,
 			groups: ["admin"],
 		};

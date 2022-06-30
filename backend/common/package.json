@@ -12,10 +12,10 @@
     "README.md"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint index.js 'src/**/*.js'",
+    "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "eslint": "eslint index.js 'src/**/*.js'",
     "prepublishOnly": "npm run eslint && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {

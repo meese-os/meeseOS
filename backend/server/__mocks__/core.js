@@ -18,25 +18,23 @@ module.exports = (options = {}) => {
 	const tempPath = temp.mkdirSync("meeseOS-vfs");
 
 	const meeseOS = new Core(
-		Object.assign(
-			{
-				tempPath,
-				development: false,
-				port: 0,
-				root: __dirname,
-				public: path.resolve(__dirname, "dist"),
-				vfs: {
-					root: tempPath,
-					watch: true,
-				},
-				mime: {
-					filenames: {
-						"defined file": "test/jest",
-					},
+		({
+			tempPath,
+			development: false,
+			port: 0,
+			root: __dirname,
+			public: path.resolve(__dirname, "dist"),
+			vfs: {
+				root: tempPath,
+				watch: true,
+			},
+			mime: {
+				filenames: {
+					"defined file": "test/jest",
 				},
 			},
-			config
-		),
+			...config
+		}),
 		{
 			kill: false,
 		}

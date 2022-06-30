@@ -30,7 +30,7 @@
 
 $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
 
-@mixin meeseOS-window-maximized {
+@mixin application-window-maximized {
 	top: 0 !important;
 	left: 0 !important;
 	width: 100% !important;
@@ -162,14 +162,8 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
 	touch-action: none;
 
 	/* This actually increases performance */
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
-	-webkit-perspective: 1000;
-	-moz-perspective: 1000;
 	perspective: 1000;
 
 	&::after {
@@ -184,7 +178,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
 	}
 
 	&[data-maximized="true"] {
-		@include meeseOS-window-maximized();
+		@include application-window-maximized;
 
 		.meeseOS-window-resize {
 			cursor: inherit !important;
@@ -232,7 +226,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
 
 .meeseOS-root[data-mobile="true"] {
 	.meeseOS-window {
-		@include meeseOS-window-maximized();
+		@include application-window-maximized;
 
 		opacity: 1;
 

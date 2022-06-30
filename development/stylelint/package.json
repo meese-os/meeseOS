@@ -4,7 +4,7 @@
   "description": "aaronmeese.com Stylelint configuration",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"stylelint-config has no tests\" && exit 0",
     "build": "echo \"stylelint-config does not need to be built\"",
     "eslint": ""
   },

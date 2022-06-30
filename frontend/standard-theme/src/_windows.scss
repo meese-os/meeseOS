@@ -51,7 +51,7 @@
 		}
 
 		&::after {
-			border: 1px solid rgba(102, 102, 102, 0.5);
+			border: 1px solid rgb(102 102 102 / 50%);
 			z-index: 2;
 		}
 	}
@@ -68,7 +68,7 @@
 		pointer-events: none;
 
 		&::after {
-			background: rgba(0, 0, 0, 0.5);
+			background: rgb(0 0 0 / 50%);
 		}
 	}
 

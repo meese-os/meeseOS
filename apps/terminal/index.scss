@@ -28,6 +28,8 @@
  * @licence Simplified BSD License
  */
 
+@import "xterm";
+
 .Window_Xterm {
 	.meeseOS-window-content {
 		background: #000;
@@ -38,8 +40,6 @@
 		width: 100% !important;
 		height: 100% !important;
 	}
-
-	@import "xterm";
 
 	.xterm .xterm-helper-textarea {
 		left: 0 !important;

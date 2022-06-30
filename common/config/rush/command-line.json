@@ -173,6 +173,13 @@
       "summary": "Runs eslint on all JavaScript files.",
       "description": "Runs eslint on all JavaScript files in each project to ensure they are compliant with the recommended style guide.",
       "enableParallelism": true
+    },
+    {
+      "commandKind": "bulk",
+      "name": "test",
+      "summary": "Runs tests for all projects.",
+      "description": "Runs the specified tests for each project, usually 'eslint' and 'jest.'",
+      "enableParallelism": true
     }
   ],
 

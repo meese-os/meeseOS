@@ -44,11 +44,12 @@
 		left: 0;
 		content: "";
 		z-index: 1000;
-		background: radial-gradient(
-			ellipse at center,
-			rgba(0, 0, 0, 0.2) 0%,
-			rgba(0, 0, 0, 0.65) 100%
-		);
+		background:
+			radial-gradient(
+				ellipse at center,
+				rgb(0 0 0 / 20%) 0%,
+				rgb(0 0 0 / 65%) 100%
+			);
 	}
 }
 
@@ -159,7 +160,7 @@
 	}
 
 	.meeseOS-login-error {
-		background: rgba(255, 0, 0, 0.8);
+		background: rgb(255 0 0 / 80%);
 		color: #fff;
 		text-align: center;
 		text-decoration: uppercase;
@@ -171,14 +172,10 @@
 			font-size: 14px;
 			display: inline-table;
 			backface-visibility: hidden;
-			-webkit-backface-visibility: hidden;
 			transform: perspective(1px) translateZ(0);
-			-webkit-transform: perspective(1px) translateZ(0);
 			-webkit-font-smoothing: subpixel-antialiased;
-			filter: blur(0px);
-			-webkit-filter: blur(0);
+			filter: blur(0);
 			perspective: 1000;
-			-webkit-perspective: 1000;
 			will-change: auto;
 		}
 	}
@@ -187,13 +184,13 @@
 		margin-top: $base-margin * 2;
 		font-size: 80%;
 		text-align: right;
-		color: rgba(255, 255, 255, 0.5);
+		color: rgb(255 255 255 / 50%);
 	}
 
 	input {
 		&:focus,
 		&:active {
-			box-shadow: 0 0 0.5em rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 0.5em rgb(255 255 255 / 80%);
 			outline: none;
 		}
 	}
@@ -219,14 +216,12 @@
 	input[type="password"],
 	input[type="text"] {
 		padding: $base-margin;
-		background: rgba(255, 255, 255, 0.5);
+		background: rgb(255 255 255 / 50%);
 		color: #fff;
 		letter-spacing: 1px;
 	}
 
 	select {
-		-webkit-appearance: none;
-		-moz-appearance: none;
 		appearance: none;
 
 		option {
@@ -234,19 +229,11 @@
 		}
 	}
 
-	::-webkit-input-placeholder {
+	::placeholder {
 		@include placeholder-effect;
 	}
 
-	::-moz-placeholder {
-		@include placeholder-effect;
-	}
-
-	:-ms-input-placeholder {
-		@include placeholder-effect;
-	}
-
-	:-moz-placeholder {
+	:placeholder {
 		@include placeholder-effect;
 	}
 }
@@ -254,13 +241,15 @@
 // IDEA: Animate font size instead of scale;
 // https://stackoverflow.com/a/56824604/6456163
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.048);
-  }
-  100% {
-    transform: scale(1);
-  }
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.048);
+	}
+
+	100% {
+		transform: scale(1);
+	}
 }

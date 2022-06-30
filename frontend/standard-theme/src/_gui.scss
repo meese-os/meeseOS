@@ -88,30 +88,30 @@
 }
 
 .meeseOS-gui-range-field > input[type="range"] {
-	@include range-slider-input();
+	@include range-slider-input;
 
 	width: 100%;
 
 	&::-webkit-slider-runnable-track {
-		@include range-slider-track();
+		@include range-slider-track;
 	}
 
 	&::-webkit-slider-thumb {
-		@include range-slider-button();
+		@include range-slider-button;
 
-		-webkit-appearance: none;
+		appearance: none;
 	}
 
 	&::-moz-range-track {
-		@include range-slider-track();
+		@include range-slider-track;
 	}
 
 	&::-moz-range-thumb {
-		@include range-slider-button();
+		@include range-slider-button;
 	}
 
 	&::-ms-track {
-		@include range-slider-track();
+		@include range-slider-track;
 
 		background: transparent;
 		border-color: transparent;
@@ -119,15 +119,15 @@
 	}
 
 	&::-ms-fill-lower {
-		@include range-slider-ms-fill();
+		@include range-slider-ms-fill;
 	}
 
 	&::-ms-fill-upper {
-		@include range-slider-ms-fill();
+		@include range-slider-ms-fill;
 	}
 
 	&::-ms-thumb {
-		@include range-slider-button();
+		@include range-slider-button;
 	}
 }
 
@@ -144,6 +144,7 @@
 .meeseOS-gui-menu {
 	ul {
 		@include panel;
+
 		// @include window;
 	}
 
@@ -196,8 +197,7 @@
 		color: $active-foreground;
 	}
 
-	.rows:not([data-zebra="false"])
-		> div:nth-child(2n + 1):not(.meeseOS__active) {
+	.rows:not([data-zebra="false"]) > div:nth-child(2n + 1):not(.meeseOS__active) {
 		background-color: $zebra-background;
 	}
 }

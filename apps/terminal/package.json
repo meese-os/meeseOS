@@ -3,9 +3,9 @@
   "version": "2.3.16",
   "description": "aaronmeese.com Terminal Application",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint index.js",
-    "stylelint": "stylelint index.scss",
+    "stylelint": "stylelint index.scss --fix",
+    "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && NODE_ENV=production npm run build"
@@ -28,11 +28,11 @@
     "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.18.0",
     "mini-css-extract-plugin": "^2.5.3",
-    "sass": "^1.51.0",
-    "sass-loader": "^12.6.0",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
     "stylelint": "^14.5.0",
     "stylelint-config-standard": "^25.0.0",
-    "stylelint-scss": "^4.1.0",
+    "stylelint-config-standard-scss": "^4.0.0",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   },
@@ -60,7 +60,7 @@
     "extends": "@aaronmeese.com/eslint-config"
   },
   "stylelint": {
-    "extends": "@aaronmeese.com/stylelint-config"
+    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
   },
   "babel": {
     "presets": [

@@ -2,13 +2,10 @@ const fs = require("fs-extra");
 const meeseOS = require("meeseOS");
 const path = require("path");
 const Filesystem = require("../src/filesystem.js");
-const { Response } = require("jest-express/lib/response");
 const { Request } = require("jest-express/lib/request");
 
 describe("Filesystem", () => {
-	let core;
-	let filesystem;
-	let mountpoint;
+	let core, filesystem, mountpoint;
 
 	beforeAll(() =>
 		meeseOS().then((c) => {
@@ -19,17 +16,16 @@ describe("Filesystem", () => {
 
 	afterAll(() => core.destroy());
 
-	/* Already inited from provider
-  test('#constructor', () => {
+	// Already inited from provider
+  test("#constructor", () => {
     filesystem = new Filesystem(core);
   });
 
-  test('#init', () => {
+  test("#init", () => {
     return expect(filesystem.init())
       .resolves
       .toBe(true);
   });
-  */
 
 	test("#mime", () => {
 		expect(filesystem.mime("text file.txt")).toBe("text/plain");
@@ -110,9 +106,7 @@ describe("Filesystem", () => {
 	});
 
 	test("#watch - test emitter", async () => {
-		if (!core.config("vfs.watch")) {
-			return;
-		}
+		if (!core.config("vfs.watch")) return;
 
 		const filename = path.join(core.config("tempPath"), "jest/watch.txt");
 		const cb = jest.fn();

@@ -30,8 +30,8 @@
 
 $base-margin: 1em;
 
-@import "./src/_panel.scss";
-@import "./src/items/_clock.scss";
-@import "./src/items/_menu.scss";
-@import "./src/items/_tray.scss";
-@import "./src/items/_windows.scss";
+@import "./src/panel";
+@import "./src/items/clock";
+@import "./src/items/menu";
+@import "./src/items/tray";
+@import "./src/items/windows";

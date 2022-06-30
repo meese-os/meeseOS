@@ -288,9 +288,9 @@ module.exports = (core) => {
 			(vfs) =>
 				(file, data, options = {}) =>
 					new Promise((resolve, reject) => {
-					// FIXME: Currently this actually copies the file because
-					// formidable will put this in a temporary directory.
-					// It would probably be better to do a "rename()" on local filesystems
+						// FIXME: Currently this actually copies the file because
+						// formidable will put this in a temporary directory.
+						// It would probably be better to do a "rename()" on local filesystems
 						const realPath = getRealPath(core, options.session, vfs.mount, file);
 
 						const write = () => {

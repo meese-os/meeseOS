@@ -22,6 +22,7 @@
   "devDependencies": {
     "@aaronmeese.com/eslint-config": "workspace:*",
     "eslint": "^8.18.0",
+    "eslint-plugin-jest": "^26.5.3",
     "jest-express": "^1.12.0",
     "temp": "^0.9.4",
     "jest": "^26.0.0"
@@ -51,12 +52,14 @@
   "eslintConfig": {
     "env": {
       "browser": true,
-      "node": true
+      "node": true,
+      "jest/globals": true
     },
+    "plugins": ["jest"],
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": ["@aaronmeese.com/eslint-config", "plugin:jest/recommended"]
   },
   "esdoc": {
     "source": "./src",

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
     "eslint": "eslint 'src/client/**/*.js' 'src/server/**/*.js'",
-    "stylelint": "stylelint 'src/client/*.scss'",
+    "stylelint": "stylelint 'src/client/*.scss' --fix",
     "serve": "node src/server/index.js",
     "build:manifest": "meese-cli package:discover",
     "package:discover": "meese-cli package:discover",
@@ -37,12 +37,12 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.3",
     "pm2": "^5.2.0",
-    "sass": "^1.51.0",
-    "sass-loader": "^12.6.0",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
     "source-map-loader": "^3.0.1",
     "stylelint": "^14.5.0",
     "stylelint-config-standard": "^25.0.0",
-    "stylelint-scss": "^4.1.0",
+    "stylelint-config-standard-scss": "^4.0.0",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   },
@@ -86,7 +86,7 @@
     "extends": "@aaronmeese.com/eslint-config"
   },
   "stylelint": {
-    "extends": "@aaronmeese.com/stylelint-config"
+    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
   },
   "babel": {
     "presets": [

@@ -225,9 +225,7 @@ export class DesktopIconView extends EventEmitter {
 
 	_render(root) {
 		const oldRoot = this.root;
-		if (root) {
-			this.root = root;
-		}
+		if (root) this.root = root;
 
 		if (this.$root) {
 			if (this.root !== oldRoot) {

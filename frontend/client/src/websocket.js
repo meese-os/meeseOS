@@ -56,9 +56,6 @@ export default class Websocket extends EventEmitter {
 	 */
 	constructor(name, uri, options = {}) {
 		logger.debug("Websocket::constructor()", name, uri);
-		// NOTE: This is the last thing logged to console before
-		// the app freezes and refuses to load any further
-
 		super("Websocket@" + name);
 
 		/**

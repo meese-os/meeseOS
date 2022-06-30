@@ -18,7 +18,6 @@ describe("Auth null adapter", () => {
 				},
 			})
 		).resolves.toEqual({
-			id: 0,
 			username: "jest",
 		});
 	});
