@@ -30,6 +30,7 @@
 
 const fs = require("fs-extra");
 const consola = require("consola");
+const pathLib = require("path");
 const logger = consola.withTag("Auth");
 const nullAdapter = require("./adapters/auth/null.js");
 
@@ -246,15 +247,30 @@ class Auth {
 	 * @return {Promise<undefined>}
 	 */
 	async createHomeDirectory(profile) {
-		try {
-			const vfs = this.core.make("meeseOS/vfs");
-			const shortcutsFile = await vfs.realpath("home:/.desktop/.shortcuts.json", profile);
-			await fs.ensureFile(shortcutsFile);
-		} catch (e) {
-			console.warn(
-				"Failed trying to make home directory for",
-				profile.username
-			);
+		const vfs = this.core.make("meeseOS/vfs");
+		const template = this.core.config("vfs.home.template", []);
+
+		if (typeof template === "string") {
+			// If the template is a string, it is a path to a directory
+			// that should be copied to the user's home directory
+			const root = await vfs.realpath("home:/", profile);
+
+			fs.copySync(template, root, { overwrite: false });
+		} else if (Array.isArray(template)) {
+			// If the template is an array, it is a list of files that
+			// should be copied to the user's home directory
+			for (const file of template) {
+				try {
+					const { path, contents = [] } = file;
+					const shortcutsFile = await vfs.realpath(`home:/${path}`, profile);
+
+					await fs.ensureDir(pathLib.dirname(shortcutsFile));
+					await fs.writeFile(shortcutsFile, contents);
+				} catch (e) {
+					console.warn(`There was a problem writing '${file.path}' to the home directory template`);
+					console.error("ERROR:", e);
+				}
+			}
 		}
 	}
 }

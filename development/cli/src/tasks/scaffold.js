@@ -144,7 +144,7 @@ const ask = (type, s) =>
 			name: "confirm",
 			type: "confirm",
 			message: (answers) =>
-				`Are you sure you want to write to '${answers.target}'`,
+				`Are you sure you want to write to '${answers.target}'?`,
 		},
 	]);
 

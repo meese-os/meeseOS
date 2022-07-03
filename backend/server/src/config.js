@@ -59,12 +59,12 @@ const defaultConfiguration = {
 	},
 	proxy: [
 		/*
-    {
-      source: 'pattern',
-      destination: 'pattern',
-      options: {}
-    }
-    */
+		{
+			source: 'pattern',
+			destination: 'pattern',
+			options: {}
+		}
+		*/
 	],
 	auth: {
 		vfsGroups: [],
@@ -133,6 +133,15 @@ const defaultConfiguration = {
 				},
 			},
 		],
+
+		home: {
+			template: [
+				{
+					path: ".desktop/.shortcuts.json",
+					contents: JSON.stringify([]),
+				},
+			]
+		},
 	},
 };
 

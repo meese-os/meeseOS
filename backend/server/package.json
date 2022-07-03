@@ -1,6 +1,6 @@
 {
   "name": "@aaronmeese.com/server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "aaronmeese.com Server",
   "main": "index.js",
   "scripts": {
