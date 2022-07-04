@@ -48,11 +48,62 @@ export const isDroppingImage = (data) =>
 	validVfsDrop(data) &&
 	imageDropMimes.some((re) => Boolean(data.mime.match(re)));
 
-// TODO: Make this scale to the closest screen size out of a preset list
-// TODO: Orientation parameter
-const resolution = "1920x1080";
-const getRandomWallpaper = () =>
-	"https://source.unsplash.com/random/" + resolution + "?sig=" + Math.random();
+/** Array of common screen resolutions to match against and query Unsplash for. */
+const standardResolutions = [
+	// Desktops
+	{ width: 3840, height: 2160 },
+	{ width: 2560, height: 1440 },
+	{ width: 1920, height: 1080 },
+	{ width: 1600, height: 900 },
+	{ width: 1440, height: 900 },
+	{ width: 1366, height: 768 },
+	{ width: 1280, height: 1024 },
+	{ width: 1280, height: 800 },
+	{ width: 1280, height: 720 },
+	{ width: 1024, height: 768 },
+	{ width: 800, height: 600 },
+	// Mobile devices
+	{ width: 720, height: 1280 },
+	{ width: 750, height: 1334 },
+	{ width: 1080, height: 1920 },
+	{ width: 1125, height: 2436 },
+	{ width: 1440, height: 2960 },
+];
+
+/**
+ * Calculates the size difference between the real size and a standard screen size.
+ * @param {Object} realSize The real size of the screen
+ * @param {Object} standard The point to check for distance
+ * @returns {number} The distance between the real resolution and the standard resolution
+ * @link https://stackoverflow.com/a/56306192/6456163
+ */
+const getResolutionDistance = (realSize, standard) =>
+	Math.sqrt(
+		Math.pow(realSize.width - standard.width, 2) +
+		Math.pow(realSize.height - standard.height, 2)
+	);
+
+/**
+ * Uses the screen resolution to find an Unsplash wallpaper that matches the screen resolution.
+ * @returns {string}
+ * @link https://stackoverflow.com/a/56306192/6456163
+ */
+const getRandomWallpaper = () => {
+	const realWidth = window.screen.width * window.devicePixelRatio;
+  const realHeight = window.screen.height * window.devicePixelRatio;
+	const realSize = { width: realWidth, height: realHeight };
+	const closestResolution = standardResolutions.reduce((prev, curr) =>
+		getResolutionDistance(prev, realSize) < getResolutionDistance(curr, realSize)
+			? prev
+			: curr
+	);
+
+	const resolution = `${closestResolution.width}x${closestResolution.height}`;
+	const orientation = window.innerHeight > window.innerWidth ? "portrait" : "landscape";
+	const orientationParam = `orientation=${orientation}`;
+	const sigParam = `sig=${Math.random()}`;
+	return `https://source.unsplash.com/random/${resolution}?${orientationParam}&${sigParam}`;
+}
 
 /**
  * Creates a static background with an image and a color, if applicable
