@@ -142,16 +142,19 @@ export const defaultConfiguration = {
 			secure: !development,
 		},
 
+		// The default credentials to use when logging in
 		login: {
-			username: null,
-			password: null,
+			username: "guest",
+			password: "guest",
 		},
 
-		// NOTE: These are the fallback default values
+		// The default values for newly registered users
 		defaultUserData: {
-			username: "guest",
-			groups: ["guest"],
+			username: "user",
+			groups: ["user"],
 		},
+
+		allowGuest: true,
 	},
 
 	settings: {

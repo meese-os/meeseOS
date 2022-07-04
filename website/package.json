@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/website",
+  "name": "@meeseOS/website",
   "version": "2.0.9",
   "description": "aaronmeese.com, implemented in OS.js",
   "main": "index.js",
@@ -23,8 +23,8 @@
   },
   "author": "Aaron Meese <aaronjmeese@gmail.com>",
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -47,26 +47,26 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@aaronmeese.com/cli": "workspace:*",
-    "@aaronmeese.com/client": "workspace:*",
-    "@aaronmeese.com/dialogs": "workspace:*",
-    "@aaronmeese.com/filemanager": "workspace:*",
-    "@aaronmeese.com/games": "workspace:*",
-    "@aaronmeese.com/gnome-icons": "workspace:*",
-    "@aaronmeese.com/gui": "workspace:*",
-    "@aaronmeese.com/image-to-8bit": "workspace:*",
-    "@aaronmeese.com/old-site": "workspace:*",
-    "@aaronmeese.com/panels": "workspace:*",
-    "@aaronmeese.com/preview": "workspace:*",
-    "@aaronmeese.com/server": "workspace:*",
-    "@aaronmeese.com/settings": "workspace:*",
-    "@aaronmeese.com/sounds": "workspace:*",
-    "@aaronmeese.com/standard-theme": "workspace:*",
-    "@aaronmeese.com/static-wallpapers": "workspace:*",
-    "@aaronmeese.com/terminal": "workspace:*",
-    "@aaronmeese.com/textpad": "workspace:*",
-    "@aaronmeese.com/uptime-monitor": "workspace:*",
-    "@aaronmeese.com/widgets": "workspace:*",
+    "@meeseOS/cli": "workspace:*",
+    "@meeseOS/client": "workspace:*",
+    "@meeseOS/dialogs": "workspace:*",
+    "@meeseOS/filemanager": "workspace:*",
+    "@meeseOS/games": "workspace:*",
+    "@meeseOS/gnome-icons": "workspace:*",
+    "@meeseOS/gui": "workspace:*",
+    "@meeseOS/image-to-8bit": "workspace:*",
+    "@meeseOS/old-site": "workspace:*",
+    "@meeseOS/panels": "workspace:*",
+    "@meeseOS/preview": "workspace:*",
+    "@meeseOS/server": "workspace:*",
+    "@meeseOS/settings": "workspace:*",
+    "@meeseOS/sounds": "workspace:*",
+    "@meeseOS/standard-theme": "workspace:*",
+    "@meeseOS/static-wallpapers": "workspace:*",
+    "@meeseOS/terminal": "workspace:*",
+    "@meeseOS/textpad": "workspace:*",
+    "@meeseOS/uptime-monitor": "workspace:*",
+    "@meeseOS/widgets": "workspace:*",
     "dotenv": "^16.0.0",
     "hyperapp": "^1.2.10",
     "typeface-roboto": "^1.1.13"
@@ -83,10 +83,10 @@
       "sourceType": "module",
       "ecmaVersion": 8
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "babel": {
     "presets": [

@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-const { ServiceProvider } = require("@aaronmeese.com/common");
+const { ServiceProvider } = require("@meeseOS/common");
 const Auth = require("../auth.js");
 
 /**

@@ -29,7 +29,7 @@
  */
 
 const Settings = require("../settings");
-const { ServiceProvider } = require("@aaronmeese.com/common");
+const { ServiceProvider } = require("@meeseOS/common");
 
 /**
  * MeeseOS Settings Service Provider

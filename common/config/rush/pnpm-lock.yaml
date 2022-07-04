@@ -7,13 +7,13 @@ importers:
 
   ../../apps/filemanager:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/gui': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -27,16 +27,16 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/gui': link:../../frontend/gui
+      '@meeseOS/gui': link:../../frontend/gui
       dateformat: 3.0.3
       hyperapp: 1.2.10
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -50,12 +50,12 @@ importers:
 
   ../../apps/games:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -76,12 +76,12 @@ importers:
       react: 16.14.0
       react-dom: 16.14.0
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -99,22 +99,22 @@ importers:
 
   ../../apps/image-to-8bit:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       eslint: ^8.18.0
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       eslint: 8.18.0
@@ -123,13 +123,13 @@ importers:
 
   ../../apps/old-site:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.0.0
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       '@popperjs/core': ^2.10.20
       '@react-hook/window-size': 3.0.5
       axios: ^0.21.1
@@ -175,13 +175,13 @@ importers:
       react-router-dom: 5.3.1
       react-typical: 0.1.3
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/preset-react': 7.16.7
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -202,13 +202,13 @@ importers:
 
   ../../apps/preview:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/gui': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -223,15 +223,15 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/gui': link:../../frontend/gui
+      '@meeseOS/gui': link:../../frontend/gui
       hyperapp: 1.2.10
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -247,14 +247,14 @@ importers:
 
   ../../apps/settings:
     specifiers:
-      '@aaronmeese.com/dynamic-wallpapers': workspace:*
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/dynamic-wallpapers': workspace:*
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/gui': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -271,17 +271,17 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/gui': link:../../frontend/gui
+      '@meeseOS/gui': link:../../frontend/gui
       deepmerge: 4.2.2
       hyperapp: 1.2.10
     devDependencies:
-      '@aaronmeese.com/dynamic-wallpapers': link:../../frontend/dynamic-wallpapers
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/dynamic-wallpapers': link:../../frontend/dynamic-wallpapers
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -298,12 +298,12 @@ importers:
 
   ../../apps/terminal:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       clipboard-polyfill: ^2.8.6
       copy-webpack-plugin: ^10.2.4
@@ -335,12 +335,12 @@ importers:
       xterm-addon-attach: 0.5.0
       xterm-addon-fit: 0.3.0
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -357,13 +357,13 @@ importers:
 
   ../../apps/textpad:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/gui': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -378,15 +378,15 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/gui': link:../../frontend/gui
+      '@meeseOS/gui': link:../../frontend/gui
       hyperapp: 1.2.10
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -402,21 +402,21 @@ importers:
 
   ../../apps/uptime-monitor:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
       babel-loader: ^8.2.3
       eslint: ^8.18.0
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       eslint: 8.18.0
       webpack: 5.72.1_webpack-cli@4.9.2
@@ -424,12 +424,12 @@ importers:
 
   ../../backend/common:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/event-emitter': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/event-emitter': workspace:*
       async-dependency-graph: ^1.1.4
       babel-loader: ^8.2.3
       deepmerge: ^4.2.2
@@ -439,16 +439,16 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/event-emitter': link:../event-emitter
+      '@meeseOS/event-emitter': link:../event-emitter
       async-dependency-graph: 1.1.5
       deepmerge: 4.2.2
       omit-deep: 0.3.0
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       eslint: 8.18.0
       stylelint: 14.8.2
@@ -457,11 +457,11 @@ importers:
 
   ../../backend/event-emitter:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
       babel-loader: ^8.2.3
       eslint: ^8.18.0
       eslint-plugin-jest: ^26.5.3
@@ -469,11 +469,11 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       eslint: 8.18.0
       eslint-plugin-jest: 26.5.3_jest@26.6.3
@@ -483,8 +483,8 @@ importers:
 
   ../../backend/server:
     specifiers:
-      '@aaronmeese.com/common': workspace:*
-      '@aaronmeese.com/eslint-config': workspace:*
+      '@meeseOS/common': workspace:*
+      '@meeseOS/eslint-config': workspace:*
       body-parser: ^1.19.1
       chokidar: ^3.5.3
       connect-loki: ^1.2.0
@@ -510,7 +510,7 @@ importers:
       temp: ^0.9.4
       uuid: ^8.3.2
     dependencies:
-      '@aaronmeese.com/common': link:../common
+      '@meeseOS/common': link:../common
       body-parser: 1.20.0
       chokidar: 3.5.3
       connect-loki: 1.2.0
@@ -531,7 +531,7 @@ importers:
       sanitize-filename: 1.6.3
       uuid: 8.3.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
+      '@meeseOS/eslint-config': link:../../development/eslint
       eslint: 8.18.0
       eslint-plugin-jest: 26.5.3_jest@26.6.3
       jest: 26.6.3
@@ -540,7 +540,7 @@ importers:
 
   ../../development/cli:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
+      '@meeseOS/eslint-config': workspace:*
       commander: ^4.1.1
       consola: ^2.15.0
       eslint: ^8.18.0
@@ -562,7 +562,7 @@ importers:
       temp: 0.9.4
       which: 2.0.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../eslint
+      '@meeseOS/eslint-config': link:../eslint
       eslint: 8.18.0
       eslint-plugin-jest: 26.5.3_jest@26.6.3
       jest: 26.6.3
@@ -581,17 +581,17 @@ importers:
 
   ../../frontend/client:
     specifiers:
-      '@aaronmeese.com/common': workspace:*
-      '@aaronmeese.com/dynamic-wallpapers': workspace:*
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/event-emitter': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/sounds': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/common': workspace:*
+      '@meeseOS/dynamic-wallpapers': workspace:*
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/event-emitter': workspace:*
+      '@meeseOS/gui': workspace:*
+      '@meeseOS/sounds': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -615,23 +615,23 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/common': link:../../backend/common
-      '@aaronmeese.com/dynamic-wallpapers': link:../dynamic-wallpapers
-      '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
-      '@aaronmeese.com/gui': link:../gui
-      '@aaronmeese.com/sounds': link:../sounds
+      '@meeseOS/common': link:../../backend/common
+      '@meeseOS/dynamic-wallpapers': link:../dynamic-wallpapers
+      '@meeseOS/event-emitter': link:../../backend/event-emitter
+      '@meeseOS/gui': link:../gui
+      '@meeseOS/sounds': link:../sounds
       css-mediaquery: 0.1.2
       deepmerge: 4.2.2
       hyperapp: 1.2.10
       js-cookie: 3.0.1
       simplejsonconf: 2.0.7
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -652,13 +652,13 @@ importers:
 
   ../../frontend/dialogs:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/gui': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -676,17 +676,17 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/gui': link:../gui
+      '@meeseOS/gui': link:../gui
       deepmerge: 4.2.2
       hyperapp: 1.2.10
       is-plain-object: 5.0.0
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -703,21 +703,21 @@ importers:
 
   ../../frontend/dynamic-wallpapers:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
       babel-loader: ^8.2.3
       eslint: ^8.18.0
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       eslint: 8.18.0
       webpack: 5.72.1_webpack-cli@4.9.2
@@ -725,12 +725,12 @@ importers:
 
   ../../frontend/gnome-icons:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -745,12 +745,12 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -767,12 +767,12 @@ importers:
 
   ../../frontend/gui:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -797,12 +797,12 @@ importers:
       hyperapp: 1.2.10
       hyperapp-nestable: 1.1.0
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -824,13 +824,13 @@ importers:
 
   ../../frontend/panels:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/event-emitter': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/event-emitter': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -847,16 +847,16 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/event-emitter': link:../../backend/event-emitter
+      '@meeseOS/event-emitter': link:../../backend/event-emitter
       dateformat: 3.0.3
       hyperapp: 1.2.10
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -883,12 +883,12 @@ importers:
 
   ../../frontend/standard-theme:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -903,12 +903,12 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -935,12 +935,12 @@ importers:
 
   ../../frontend/widgets:
     specifiers:
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -958,12 +958,12 @@ importers:
     dependencies:
       deepmerge: 4.2.2
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2
@@ -980,32 +980,32 @@ importers:
 
   ../../website:
     specifiers:
-      '@aaronmeese.com/cli': workspace:*
-      '@aaronmeese.com/client': workspace:*
-      '@aaronmeese.com/dialogs': workspace:*
-      '@aaronmeese.com/eslint-config': workspace:*
-      '@aaronmeese.com/filemanager': workspace:*
-      '@aaronmeese.com/games': workspace:*
-      '@aaronmeese.com/gnome-icons': workspace:*
-      '@aaronmeese.com/gui': workspace:*
-      '@aaronmeese.com/image-to-8bit': workspace:*
-      '@aaronmeese.com/old-site': workspace:*
-      '@aaronmeese.com/panels': workspace:*
-      '@aaronmeese.com/preview': workspace:*
-      '@aaronmeese.com/server': workspace:*
-      '@aaronmeese.com/settings': workspace:*
-      '@aaronmeese.com/sounds': workspace:*
-      '@aaronmeese.com/standard-theme': workspace:*
-      '@aaronmeese.com/static-wallpapers': workspace:*
-      '@aaronmeese.com/stylelint-config': workspace:*
-      '@aaronmeese.com/terminal': workspace:*
-      '@aaronmeese.com/textpad': workspace:*
-      '@aaronmeese.com/uptime-monitor': workspace:*
-      '@aaronmeese.com/widgets': workspace:*
       '@babel/core': ^7.17.2
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/cli': workspace:*
+      '@meeseOS/client': workspace:*
+      '@meeseOS/dialogs': workspace:*
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/filemanager': workspace:*
+      '@meeseOS/games': workspace:*
+      '@meeseOS/gnome-icons': workspace:*
+      '@meeseOS/gui': workspace:*
+      '@meeseOS/image-to-8bit': workspace:*
+      '@meeseOS/old-site': workspace:*
+      '@meeseOS/panels': workspace:*
+      '@meeseOS/preview': workspace:*
+      '@meeseOS/server': workspace:*
+      '@meeseOS/settings': workspace:*
+      '@meeseOS/sounds': workspace:*
+      '@meeseOS/standard-theme': workspace:*
+      '@meeseOS/static-wallpapers': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
+      '@meeseOS/terminal': workspace:*
+      '@meeseOS/textpad': workspace:*
+      '@meeseOS/uptime-monitor': workspace:*
+      '@meeseOS/widgets': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -1026,36 +1026,36 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
-      '@aaronmeese.com/cli': link:../development/cli
-      '@aaronmeese.com/client': link:../frontend/client
-      '@aaronmeese.com/dialogs': link:../frontend/dialogs
-      '@aaronmeese.com/filemanager': link:../apps/filemanager
-      '@aaronmeese.com/games': link:../apps/games
-      '@aaronmeese.com/gnome-icons': link:../frontend/gnome-icons
-      '@aaronmeese.com/gui': link:../frontend/gui
-      '@aaronmeese.com/image-to-8bit': link:../apps/image-to-8bit
-      '@aaronmeese.com/old-site': link:../apps/old-site
-      '@aaronmeese.com/panels': link:../frontend/panels
-      '@aaronmeese.com/preview': link:../apps/preview
-      '@aaronmeese.com/server': link:../backend/server
-      '@aaronmeese.com/settings': link:../apps/settings
-      '@aaronmeese.com/sounds': link:../frontend/sounds
-      '@aaronmeese.com/standard-theme': link:../frontend/standard-theme
-      '@aaronmeese.com/static-wallpapers': link:../frontend/static-wallpapers
-      '@aaronmeese.com/terminal': link:../apps/terminal
-      '@aaronmeese.com/textpad': link:../apps/textpad
-      '@aaronmeese.com/uptime-monitor': link:../apps/uptime-monitor
-      '@aaronmeese.com/widgets': link:../frontend/widgets
+      '@meeseOS/cli': link:../development/cli
+      '@meeseOS/client': link:../frontend/client
+      '@meeseOS/dialogs': link:../frontend/dialogs
+      '@meeseOS/filemanager': link:../apps/filemanager
+      '@meeseOS/games': link:../apps/games
+      '@meeseOS/gnome-icons': link:../frontend/gnome-icons
+      '@meeseOS/gui': link:../frontend/gui
+      '@meeseOS/image-to-8bit': link:../apps/image-to-8bit
+      '@meeseOS/old-site': link:../apps/old-site
+      '@meeseOS/panels': link:../frontend/panels
+      '@meeseOS/preview': link:../apps/preview
+      '@meeseOS/server': link:../backend/server
+      '@meeseOS/settings': link:../apps/settings
+      '@meeseOS/sounds': link:../frontend/sounds
+      '@meeseOS/standard-theme': link:../frontend/standard-theme
+      '@meeseOS/static-wallpapers': link:../frontend/static-wallpapers
+      '@meeseOS/terminal': link:../apps/terminal
+      '@meeseOS/textpad': link:../apps/textpad
+      '@meeseOS/uptime-monitor': link:../apps/uptime-monitor
+      '@meeseOS/widgets': link:../frontend/widgets
       dotenv: 16.0.1
       hyperapp: 1.2.10
       typeface-roboto: 1.1.13
     devDependencies:
-      '@aaronmeese.com/eslint-config': link:../development/eslint
-      '@aaronmeese.com/stylelint-config': link:../development/stylelint
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../development/eslint
+      '@meeseOS/stylelint-config': link:../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.9.2
       copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
       css-loader: 6.7.1_webpack-cli@4.9.2

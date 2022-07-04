@@ -42,7 +42,16 @@ export default {
 			widgets: [{ name: "digitalclock" }],
 		},
 	},
+
 	filemanager: {
 		disableDownload: false,
+	},
+
+	auth: {
+		// Prevents the user from automatically logging in as "demo"
+		login: {
+			username: null,
+			password: null,
+		},
 	},
 };

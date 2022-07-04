@@ -59,6 +59,9 @@ const jsxLoader = {
 const pdfLoader = {
 	test: /\.pdf$/,
 	type: "asset/resource",
+	generator: {
+		filename: "[name][ext]",
+	},
 };
 const fontAwesomeLoader = {
 	test: /\.(ttf|eot|svg|woff(2)?)$/,

@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/standard-theme",
+  "name": "@meeseOS/standard-theme",
   "version": "2.0.2",
   "description": "aaronmeese.com Standard Theme",
   "files": [
@@ -16,8 +16,8 @@
     "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -48,10 +48,10 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "babel": {
     "presets": [

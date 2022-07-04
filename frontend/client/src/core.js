@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { CoreBase } from "@aaronmeese.com/common";
+import { CoreBase } from "@meeseOS/common";
 import { defaultConfiguration } from "./config";
 import { fetch } from "./utils/fetch";
 import { urlResolver } from "./utils/url";
@@ -607,7 +607,6 @@ export default class Core extends CoreBase {
 	/**
 	 * Sends a 'broadcast' event with given arguments
 	 * to all applications matching given filter
-	 *
 	 * @param {string|Function} pkg The filter
 	 * @param {string} name The event name
 	 * @param {*} ...args Arguments to pass to emit
@@ -659,11 +658,20 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Add middleware function to a group
-	 *
 	 * @param {string} group Middleware group
 	 * @param {Function} callback Middleware function to add
 	 */
 	middleware(group, callback) {
 		return this.make("meeseOS/middleware").add(group, callback);
+	}
+
+	/**
+	 * Kills the specified application by name
+	 * @param {string} name Application name
+	 */
+	kill(name) {
+		const apps = Application.getApplications();
+		const found = apps.filter(proc => proc.metadata.name === name);
+		found.forEach(proc => proc.destroy());
 	}
 }

@@ -1,4 +1,4 @@
-import { Box, BoxContainer, SelectField, TextField } from "@aaronmeese.com/gui";
+import { Box, BoxContainer, SelectField, TextField } from "@meeseOS/gui";
 import {
 	componentToHex,
 	colorFromClick,

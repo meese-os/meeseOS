@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { ServiceProvider } from "@aaronmeese.com/common";
+import { ServiceProvider } from "@meeseOS/common";
 import Settings from "../settings";
 
 /**

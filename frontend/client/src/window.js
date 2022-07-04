@@ -45,7 +45,7 @@ import {
 	getActiveElement,
 	supportsTransition,
 } from "./utils/dom";
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { EventEmitter } from "@meeseOS/event-emitter";
 import { droppable } from "./utils/dnd";
 import logger from "./logger";
 

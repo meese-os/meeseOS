@@ -45,7 +45,7 @@ const {
 	VFSServiceProvider,
 	AuthServiceProvider,
 	SettingsServiceProvider,
-} = require("@aaronmeese.com/server");
+} = require("@meeseOS/server");
 
 const config = require("./config.js");
 const meeseOS = new Core(config, {});

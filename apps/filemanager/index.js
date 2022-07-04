@@ -38,7 +38,7 @@ import {
 	TextField,
 	Toolbar,
 	listView,
-} from "@aaronmeese.com/gui";
+} from "@meeseOS/gui";
 import { app, h } from "hyperapp";
 import { name as applicationName } from "./metadata.json";
 import "./index.scss";
@@ -843,8 +843,7 @@ const createApplication = (core, proc) => {
 		setList:
 			({ list, path, selectFile }) =>
 				({ fileview, mountview }) => {
-					// TODO: Test initializing this to 0
-					let selectedIndex;
+					let selectedIndex = 0;
 
 					if (selectFile) {
 						const foundIndex = list.findIndex(

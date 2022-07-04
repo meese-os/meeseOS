@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/gnome-icons",
+  "name": "@meeseOS/gnome-icons",
   "version": "1.0.2",
   "description": "aaronmeese.com Gnome Icons",
   "files": [
@@ -16,8 +16,8 @@
     "prepublishOnly": "npm run eslint && npm run stylelint && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -49,10 +49,10 @@
       "sourceType": "module",
       "ecmaVersion": 8
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "babel": {
     "presets": [

@@ -29,7 +29,7 @@
  */
 
 import { providerHandler, resolveTreeByKey } from "./utils.js";
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { EventEmitter } from "@meeseOS/event-emitter";
 import merge from "deepmerge";
 import omitDeep from "omit-deep";
 

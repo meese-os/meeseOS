@@ -27,7 +27,8 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+
+import { EventEmitter } from "@meeseOS/event-emitter";
 import createUI from "./adapters/ui/login";
 
 /**
@@ -64,9 +65,10 @@ export default class Login extends EventEmitter {
 		 */
 		this.core = core;
 
+		const allowGuestLogin = this.core.config("auth.allowGuest", false);
+
 		/**
 		 * Login options
-		 * TODO: typedef
 		 * @type {Object}
 		 * @readonly
 		 */
@@ -104,14 +106,15 @@ export default class Login extends EventEmitter {
 						id: "standard-login",
 					},
 				},
-				{
+				// Only show the guest login if the option is enabled
+				...(allowGuestLogin ? [{
 					tagName: "input",
 					attributes: {
 						type: "submit",
 						value: "Login as Guest",
 						id: "guest-login",
 					},
-				},
+				}] : []),
 			],
 			...options,
 		};

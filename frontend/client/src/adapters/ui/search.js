@@ -29,7 +29,7 @@
  */
 
 import { app, h } from "hyperapp";
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { EventEmitter } from "@meeseOS/event-emitter";
 
 const createView = (core, fs, icon) => {
 	const resultView = ({ results, index }, actions) =>

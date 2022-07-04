@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/event-emitter",
+  "name": "@meeseOS/event-emitter",
   "version": "1.1.1",
   "description": "A simple event emitter",
   "main": "dist/main.js",
@@ -18,7 +18,7 @@
     "prepublishOnly": "npm run test && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -47,7 +47,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": ["@aaronmeese.com/eslint-config", "plugin:jest/recommended"]
+    "extends": ["@meeseOS/eslint-config", "plugin:jest/recommended"]
   },
   "babel": {
     "presets": [

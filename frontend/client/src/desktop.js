@@ -35,7 +35,7 @@ import {
 	isVisible,
 } from "./utils/desktop";
 import { DesktopIconView } from "./adapters/ui/iconview";
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { EventEmitter } from "@meeseOS/event-emitter";
 import { handleTabOnTextarea } from "./utils/dom";
 import { matchKeyCombo } from "./utils/input";
 import Application from "./application";

@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/stylelint-config",
+  "name": "@meeseOS/stylelint-config",
   "version": "1.0.0",
   "description": "aaronmeese.com Stylelint configuration",
   "main": "index.js",

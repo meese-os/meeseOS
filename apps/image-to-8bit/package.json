@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/image-to-8bit",
+  "name": "@meeseOS/image-to-8bit",
   "version": "1.0.2",
   "description": "MeeseOS Image to 8bit application",
   "scripts": {
@@ -14,7 +14,7 @@
     "metadata.json"
   ],
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -37,7 +37,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "babel": {
     "presets": [

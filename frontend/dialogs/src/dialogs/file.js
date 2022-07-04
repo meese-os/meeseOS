@@ -30,7 +30,7 @@
 
 import { app, h } from "hyperapp";
 import Dialog from "../dialog";
-import { SelectField, TextField, listView } from "@aaronmeese.com/gui";
+import { SelectField, TextField, listView } from "@meeseOS/gui";
 
 const getMountpoint = (str) => str.split(":")[0] + ":/";
 

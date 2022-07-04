@@ -29,7 +29,7 @@
  */
 
 import { app, h } from "hyperapp";
-import { Box, Menubar, MenubarItem, TextareaField } from "@aaronmeese.com/gui";
+import { Box, Menubar, MenubarItem, TextareaField } from "@meeseOS/gui";
 import { name as applicationName } from "./metadata.json";
 import meeseOS from "meeseOS";
 

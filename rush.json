@@ -456,107 +456,107 @@
     //   "reviewCategory": "tools"
     // }
     {
-      "packageName": "@aaronmeese.com/cli",
+      "packageName": "@meeseOS/cli",
       "projectFolder": "development/cli"
     },
     {
-      "packageName": "@aaronmeese.com/client",
+      "packageName": "@meeseOS/client",
       "projectFolder": "frontend/client"
     },
     {
-      "packageName": "@aaronmeese.com/common",
+      "packageName": "@meeseOS/common",
       "projectFolder": "backend/common"
     },
     {
-      "packageName": "@aaronmeese.com/dialogs",
+      "packageName": "@meeseOS/dialogs",
       "projectFolder": "frontend/dialogs"
     },
     {
-      "packageName": "@aaronmeese.com/eslint-config",
+      "packageName": "@meeseOS/eslint-config",
       "projectFolder": "development/eslint"
     },
     {
-      "packageName": "@aaronmeese.com/dynamic-wallpapers",
+      "packageName": "@meeseOS/dynamic-wallpapers",
       "projectFolder": "frontend/dynamic-wallpapers"
     },
     {
-      "packageName": "@aaronmeese.com/event-emitter",
+      "packageName": "@meeseOS/event-emitter",
       "projectFolder": "backend/event-emitter"
     },
     {
-      "packageName": "@aaronmeese.com/filemanager",
+      "packageName": "@meeseOS/filemanager",
       "projectFolder": "apps/filemanager"
     },
     {
-      "packageName": "@aaronmeese.com/games",
+      "packageName": "@meeseOS/games",
       "projectFolder": "apps/games"
     },
     {
-      "packageName": "@aaronmeese.com/gnome-icons",
+      "packageName": "@meeseOS/gnome-icons",
       "projectFolder": "frontend/gnome-icons"
     },
     {
-      "packageName": "@aaronmeese.com/gui",
+      "packageName": "@meeseOS/gui",
       "projectFolder": "frontend/gui"
     },
     {
-      "packageName": "@aaronmeese.com/image-to-8bit",
+      "packageName": "@meeseOS/image-to-8bit",
       "projectFolder": "apps/image-to-8bit"
     },
     {
-      "packageName": "@aaronmeese.com/old-site",
+      "packageName": "@meeseOS/old-site",
       "projectFolder": "apps/old-site"
     },
     {
-      "packageName": "@aaronmeese.com/panels",
+      "packageName": "@meeseOS/panels",
       "projectFolder": "frontend/panels"
     },
     {
-      "packageName": "@aaronmeese.com/preview",
+      "packageName": "@meeseOS/preview",
       "projectFolder": "apps/preview"
     },
     {
-      "packageName": "@aaronmeese.com/server",
+      "packageName": "@meeseOS/server",
       "projectFolder": "backend/server"
     },
     {
-      "packageName": "@aaronmeese.com/settings",
+      "packageName": "@meeseOS/settings",
       "projectFolder": "apps/settings"
     },
     {
-      "packageName": "@aaronmeese.com/sounds",
+      "packageName": "@meeseOS/sounds",
       "projectFolder": "frontend/sounds"
     },
     {
-      "packageName": "@aaronmeese.com/standard-theme",
+      "packageName": "@meeseOS/standard-theme",
       "projectFolder": "frontend/standard-theme"
     },
     {
-      "packageName": "@aaronmeese.com/static-wallpapers",
+      "packageName": "@meeseOS/static-wallpapers",
       "projectFolder": "frontend/static-wallpapers"
     },
     {
-      "packageName": "@aaronmeese.com/stylelint-config",
+      "packageName": "@meeseOS/stylelint-config",
       "projectFolder": "development/stylelint"
     },
     {
-      "packageName": "@aaronmeese.com/terminal",
+      "packageName": "@meeseOS/terminal",
       "projectFolder": "apps/terminal"
     },
     {
-      "packageName": "@aaronmeese.com/textpad",
+      "packageName": "@meeseOS/textpad",
       "projectFolder": "apps/textpad"
     },
     {
-      "packageName": "@aaronmeese.com/uptime-monitor",
+      "packageName": "@meeseOS/uptime-monitor",
       "projectFolder": "apps/uptime-monitor"
     },
     {
-      "packageName": "@aaronmeese.com/website",
+      "packageName": "@meeseOS/website",
       "projectFolder": "website"
     },
     {
-      "packageName": "@aaronmeese.com/widgets",
+      "packageName": "@meeseOS/widgets",
       "projectFolder": "frontend/widgets"
     }
   ]

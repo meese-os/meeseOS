@@ -29,7 +29,7 @@
  */
 export as namespace meeseOS__common;
 
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { EventEmitter } from "@meeseOS/event-emitter";
 
 export interface ServiceProviderOptions {
 	before?: boolean;

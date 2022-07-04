@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/terminal",
+  "name": "@meeseOS/terminal",
   "version": "2.3.16",
   "description": "aaronmeese.com Terminal Application",
   "scripts": {
@@ -16,8 +16,8 @@
     "server.js"
   ],
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -57,10 +57,10 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "babel": {
     "presets": [

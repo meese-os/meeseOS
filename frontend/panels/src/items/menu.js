@@ -136,7 +136,6 @@ const makeTree = (core, icon) => {
 
 /**
  * Menu
- *
  * @desc Menu Panel Item
  */
 export default class MenuPanelItem extends PanelItem {
@@ -208,7 +207,6 @@ export default class MenuPanelItem extends PanelItem {
 				[
 					h("img", {
 						// TODO: Change icon here as opposed to log in/out
-						// TODO: Boot to login screen w/ form and option to `log in as guest`
 						src: icon,
 						alt: "Menu",
 					}),

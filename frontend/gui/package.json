@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/gui",
+  "name": "@meeseOS/gui",
   "version": "2.1.2",
   "description": "aaronmeese.com GUI",
   "module": "dist/esm.js",
@@ -25,8 +25,8 @@
     "README.md"
   ],
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -62,10 +62,10 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "babel": {
     "presets": [

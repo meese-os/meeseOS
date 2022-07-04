@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/common",
+  "name": "@meeseOS/common",
   "version": "1.0.1",
   "description": "aaronmeese.com Common Modules",
   "main": "dist/main.js",
@@ -19,7 +19,7 @@
     "prepublishOnly": "npm run eslint && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -31,7 +31,7 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@aaronmeese.com/event-emitter": "workspace:*",
+    "@meeseOS/event-emitter": "workspace:*",
     "async-dependency-graph": "^1.1.4",
     "deepmerge": "^4.2.2",
     "omit-deep": "^0.3.0"
@@ -44,7 +44,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "babel": {
     "sourceType": "unambiguous",

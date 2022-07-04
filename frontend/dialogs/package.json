@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/dialogs",
+  "name": "@meeseOS/dialogs",
   "version": "2.1.5",
   "description": "aaronmeese.com Dialogs",
   "main": "dist/main.js",
@@ -21,8 +21,8 @@
     "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -42,7 +42,7 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@aaronmeese.com/gui": "workspace:*",
+    "@meeseOS/gui": "workspace:*",
     "deepmerge": "^4.2.2",
     "hyperapp": "^1.2.10",
     "is-plain-object": "^5.0.0"
@@ -55,10 +55,10 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "esdoc": {
     "source": "./src",

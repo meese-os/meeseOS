@@ -34,6 +34,7 @@ module.exports = {
 	plugins: [
 		new CopyWebpackPlugin({
 			patterns: ["src/client/social.png"],
+			patterns: ["src/client/icon.png"],
 		}),
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src/client/index.ejs"),

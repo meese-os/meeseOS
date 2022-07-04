@@ -46,12 +46,12 @@ import {
 	NotificationServiceProvider,
 	SettingsServiceProvider,
 	VFSServiceProvider,
-} from "@aaronmeese.com/client";
+} from "@meeseOS/client";
 
-import { DialogServiceProvider } from "@aaronmeese.com/dialogs";
-import { GUIServiceProvider } from "@aaronmeese.com/gui";
-import { PanelServiceProvider } from "@aaronmeese.com/panels";
-import { WidgetServiceProvider } from "@aaronmeese.com/widgets";
+import { DialogServiceProvider } from "@meeseOS/dialogs";
+import { GUIServiceProvider } from "@meeseOS/gui";
+import { PanelServiceProvider } from "@meeseOS/panels";
+import { WidgetServiceProvider } from "@meeseOS/widgets";
 import "./index.scss";
 import config from "./config.js";
 

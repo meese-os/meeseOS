@@ -29,7 +29,7 @@
  */
 
 import Notifications from "../notifications";
-import { ServiceProvider } from "@aaronmeese.com/common";
+import { ServiceProvider } from "@meeseOS/common";
 
 /**
  * MeeseOS Notification Service Provider

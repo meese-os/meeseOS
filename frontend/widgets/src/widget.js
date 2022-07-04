@@ -385,7 +385,7 @@ export default class Widget {
 	}
 
 	clampToViewport() {
-		// TODO: Uncaught TypeError: Cannot read properties of undefined (reading 'top'
+		// TODO: Uncaught TypeError: Cannot read properties of undefined (reading 'top')
 		// after changing the wallpaper type
 		const { top, left } = this.options.position;
 		const rect = this.core.make("meeseOS/desktop").getRect();

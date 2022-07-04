@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/dynamic-wallpapers",
+  "name": "@meeseOS/dynamic-wallpapers",
   "version": "1.1.0",
   "description": "aaronmeese.com Dynamic Wallpapers",
   "files": [
@@ -14,7 +14,7 @@
     "prepublishOnly": "npm run eslint && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -37,7 +37,7 @@
       "sourceType": "module",
       "ecmaVersion": 8
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "babel": {
     "presets": [

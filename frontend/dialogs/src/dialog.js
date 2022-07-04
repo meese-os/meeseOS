@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import { Box, Button, Toolbar } from "@aaronmeese.com/gui";
+import { Box, Button, Toolbar } from "@meeseOS/gui";
 import { h } from "hyperapp";
 import merge from "deepmerge";
 import plain from "is-plain-object";

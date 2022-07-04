@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/client",
+  "name": "@meeseOS/client",
   "version": "2.4.0",
   "description": "aaronmeese.com client",
   "main": "dist/main.js",
@@ -25,8 +25,8 @@
     "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -50,11 +50,11 @@
     "jest": "^26.0.0"
   },
   "dependencies": {
-    "@aaronmeese.com/common": "workspace:*",
-    "@aaronmeese.com/dynamic-wallpapers": "workspace:*",
-    "@aaronmeese.com/event-emitter": "workspace:*",
-    "@aaronmeese.com/gui": "workspace:*",
-    "@aaronmeese.com/sounds": "workspace:*",
+    "@meeseOS/common": "workspace:*",
+    "@meeseOS/dynamic-wallpapers": "workspace:*",
+    "@meeseOS/event-emitter": "workspace:*",
+    "@meeseOS/gui": "workspace:*",
+    "@meeseOS/sounds": "workspace:*",
     "css-mediaquery": "^0.1.2",
     "deepmerge": "^4.2.2",
     "hyperapp": "^1.2.10",
@@ -71,10 +71,10 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": ["@aaronmeese.com/eslint-config", "plugin:jest/recommended"]
+    "extends": ["@meeseOS/eslint-config", "plugin:jest/recommended"]
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@aaronmeese.com/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "babel": {
     "presets": [

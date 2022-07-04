@@ -170,9 +170,7 @@ export const fetch = (url, options = {}, type = null) => {
 			);
 		}
 
-		// Helps prevent an error from being thrown when resizing the terminal.
-		// I haven't been able to determine the cause of the error, so this would
-		// be a great TODO to return to later to try and find the root cause.
+		// Prevents an error from being thrown when resizing the terminal
 		try {
 			if (type === "json") response = await response.json();
 			return response;

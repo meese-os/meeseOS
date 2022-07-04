@@ -33,7 +33,7 @@ import {
 	filterMountByGroups,
 	parseMountpointPrefix,
 } from "./utils/vfs";
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { EventEmitter } from "@meeseOS/event-emitter";
 import * as VFS from "./vfs";
 import appsAdapter from "./adapters/vfs/apps";
 import defaultAdapter from "./adapters/vfs/null";

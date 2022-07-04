@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import { Box, TextField } from "@aaronmeese.com/gui";
+import { Box, TextField } from "@meeseOS/gui";
 import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 

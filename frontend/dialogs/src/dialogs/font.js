@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import { SelectField, TextareaField, Toolbar } from "@aaronmeese.com/gui";
+import { SelectField, TextareaField, Toolbar } from "@meeseOS/gui";
 import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/textpad",
+  "name": "@meeseOS/textpad",
   "version": "2.0.1",
   "description": "aaronmeese.com Textpad Application",
   "files": [
@@ -17,12 +17,12 @@
     "type": "package"
   },
   "dependencies": {
-    "@aaronmeese.com/gui": "workspace:*",
+    "@meeseOS/gui": "workspace:*",
     "hyperapp": "^1.2.10"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -48,7 +48,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "babel": {
     "presets": [

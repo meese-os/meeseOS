@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/server",
+  "name": "@meeseOS/server",
   "version": "1.2.1",
   "description": "aaronmeese.com Server",
   "main": "index.js",
@@ -20,7 +20,7 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
     "eslint": "^8.18.0",
     "eslint-plugin-jest": "^26.5.3",
     "jest-express": "^1.12.0",
@@ -28,7 +28,7 @@
     "jest": "^26.0.0"
   },
   "dependencies": {
-    "@aaronmeese.com/common": "workspace:*",
+    "@meeseOS/common": "workspace:*",
     "body-parser": "^1.19.1",
     "chokidar": "^3.5.3",
     "connect-loki": "^1.2.0",
@@ -59,7 +59,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": ["@aaronmeese.com/eslint-config", "plugin:jest/recommended"]
+    "extends": ["@meeseOS/eslint-config", "plugin:jest/recommended"]
   },
   "esdoc": {
     "source": "./src",

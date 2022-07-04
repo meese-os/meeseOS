@@ -37,7 +37,7 @@ const express = require("express");
 const minimist = require("minimist");
 const deepmerge = require("deepmerge");
 const consola = require("consola");
-const { CoreBase } = require("@aaronmeese.com/common");
+const { CoreBase } = require("@meeseOS/common");
 const {
 	argvToConfig,
 	createSession,

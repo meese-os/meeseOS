@@ -1,4 +1,4 @@
-import { ServiceProvider } from "@aaronmeese.com/common";
+import { ServiceProvider } from "@meeseOS/common";
 import * as config from "../src/config";
 import Core from "../src/core";
 import CoreServiceProvider from "../src/providers/core";

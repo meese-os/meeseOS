@@ -30,7 +30,7 @@
 
 import { app, h } from "hyperapp";
 import { isDroppingImage, validVfsDrop } from "../../utils/desktop";
-import { EventEmitter } from "@aaronmeese.com/event-emitter";
+import { EventEmitter } from "@meeseOS/event-emitter";
 import { doubleTap } from "../../utils/input";
 import { invertHex } from "../../utils/colors";
 import { pathJoin } from "../../utils/vfs";

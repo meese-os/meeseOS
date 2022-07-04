@@ -37,12 +37,12 @@ import {
 	TextField,
 	ToggleField,
 	Toolbar,
-} from "@aaronmeese.com/gui";
+} from "@meeseOS/gui";
 import { app, h } from "hyperapp";
 import { name as applicationName } from "./metadata.json";
 import merge from "deepmerge";
 import meeseOS from "meeseOS";
-import dynamicWallpapers from "@aaronmeese.com/dynamic-wallpapers";
+import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 
 /** Resolves an object tree by dot notation */
 const resolve = (tree, key, defaultValue) => {

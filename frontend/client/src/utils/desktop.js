@@ -30,7 +30,7 @@
 
 import logger from "../logger";
 import { supportedMedia } from "./dom";
-import dynamicWallpapers from "@aaronmeese.com/dynamic-wallpapers";
+import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 
 const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
 

@@ -1,5 +1,5 @@
 {
-  "name": "@aaronmeese.com/preview",
+  "name": "@meeseOS/preview",
   "version": "1.0.1",
   "description": "MeeseOS Preview Application",
   "scripts": {
@@ -17,8 +17,8 @@
     "type": "package"
   },
   "devDependencies": {
-    "@aaronmeese.com/eslint-config": "workspace:*",
-    "@aaronmeese.com/stylelint-config": "workspace:*",
+    "@meeseOS/eslint-config": "workspace:*",
+    "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -37,7 +37,7 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "@aaronmeese.com/gui": "workspace:*",
+    "@meeseOS/gui": "workspace:*",
     "hyperapp": "^1.2.10"
   },
   "eslintConfig": {
@@ -48,7 +48,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@aaronmeese.com/eslint-config"
+    "extends": "@meeseOS/eslint-config"
   },
   "babel": {
     "presets": [
