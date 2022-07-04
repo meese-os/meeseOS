@@ -111,7 +111,6 @@ const createOptions = (options) => ({
 			// TODO: Make these two output to a single directory, not nested and capitalized;
 			// Is it maybe the metadata title that creates the additional file?
 			sounds: createPath(root, "sounds"),
-			// `@meeseOS/sounds as Sounds [symlink, npm]` in package:discover
 			wallpapers: createPath(root, "wallpapers"),
 			packages: createPath(root, "apps"),
 			metadata: createPath(root, "metadata.json"),

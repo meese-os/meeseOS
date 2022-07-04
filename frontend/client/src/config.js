@@ -30,11 +30,6 @@
 
 import defaultIcon from "./styles/icon.png";
 
-// TODO: Make this scale to the closest screen size out of a preset list
-const resolution = "1920x1080";
-const randomWallpaper = () =>
-	"https://source.unsplash.com/random/" + resolution + "?sig=" + Math.random();
-
 /**
  * TODO: typedef
  * @typedef {Object} CoreConfig
@@ -209,8 +204,8 @@ export const defaultConfiguration = {
 			},
 			background: {
 				type: "static",
-				// TODO: Test if this works or if it is only because of the CSS
-				src: randomWallpaper,
+				random: true,
+				src: "meeseOS:/wallpapers/Wallpapers/plain.png",
 				color: "#572a79",
 				style: "cover",
 			},

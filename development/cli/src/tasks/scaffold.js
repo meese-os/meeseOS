@@ -99,7 +99,7 @@ const forceBasicScaffold = (args) =>
 			...args,
 			target: path.join("src", args.type, args.filename),
 			confirm: true,
-		  }
+		}
 		: false;
 
 const forcePackageScaffold = (args) =>
@@ -108,7 +108,7 @@ const forcePackageScaffold = (args) =>
 			...args,
 			target: path.join("src", "packages", args.name),
 			confirm: true,
-		  }
+		}
 		: false;
 
 const ask = (type, s) =>

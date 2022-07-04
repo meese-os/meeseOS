@@ -44,7 +44,7 @@ import merge from "deepmerge";
 import meeseOS from "meeseOS";
 import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 
-/** Resolves an object tree by dot notation */
+/** Resolves an object tree by dot notation. */
 const resolve = (tree, key, defaultValue) => {
 	try {
 		const value = key
@@ -57,19 +57,28 @@ const resolve = (tree, key, defaultValue) => {
 	}
 };
 
-/** Resolves settings by dot notation and gets default values */
+/** Resolves settings by dot notation and gets default values. */
 const resolveSetting = (settings, defaults) => (key) =>
 	resolve(settings, key, resolve(defaults, key));
 
-/** An array of settings for static backgrounds in MeeseOS. */
-const staticBackgroundItems = [
-	// TODO: `Random` option to pull from Unsplash
+/**
+ * An array of settings for static backgrounds in MeeseOS
+ * @returns {Object[]}
+ */
+const staticBackgroundOptions = (state, actions) => [
 	{
+		// IDEA: Add tooltips, i.e. "This will only work with internet connectivity"
+		label: "Random Wallpaper",
+		path: "desktop.background.random",
+		type: "boolean",
+		defaultValue: false,
+	},
+	...(!resolveSetting(state.settings, state.defaults)("desktop.background.random") ? [{
 		label: "Image",
 		path: "desktop.background.src",
 		type: "dialog",
 		transformValue: (value) =>
-			value ? (typeof value === "string" ? value : value.path) : value,
+			typeof value === "string" ? value : value.path,
 		dialog: (props, state, actions, currentValue) => [
 			"file",
 			{
@@ -84,7 +93,8 @@ const staticBackgroundItems = [
 				}
 			},
 		],
-	},
+		defaultValue: "meeseOS:/wallpapers/Wallpapers/plain.png",
+	}] : []),
 	{
 		label: "Style",
 		path: "desktop.background.style",
@@ -133,7 +143,7 @@ const dynamicBackgroundItems = (state) => {
 
 /**
  * Loads all of the available dynamic wallpaper effects.
- * @return {Object[]}
+ * @returns {Object[]}
  */
 const getDynamicWallpaperChoices = () =>
 	Object.keys(dynamicWallpapers).map((key) => {
@@ -162,7 +172,7 @@ const dynamicBackgroundSelect = (state, actions) => [
 	},
 ];
 
-/** Maps our section items to a field */
+/** Maps our section items to a field. */
 const fieldMap = () => {
 	const getValue = (props) =>
 		props.transformValue ? props.transformValue(props.value) : props.value;
@@ -272,7 +282,7 @@ const fieldMap = () => {
 					onchange: (ev) => actions.updateWallpaperType(ev),
 				}),
 				state.static
-					? render(state, actions, staticBackgroundItems)
+					? render(state, actions, staticBackgroundOptions(state, actions))
 					: render(state, actions, dynamicBackgroundSelect(state, actions)),
 				// Will return an empty array if the wallpaper type is not dynamic
 				render(state, actions, dynamicBackgroundItems(state)),
@@ -291,9 +301,10 @@ const resolveValue = (key, value) =>
 		? value === "true"
 		: value;
 
-/** Resolves a new value in our tree */
+/** Resolves a new value in our tree. */
 const resolveNewSetting = (state) => (key, value) => {
 	// FIXME: There must be a better way
+	if (!key) return;
 	const object = {};
 	const keys = key.split(/\./g);
 
@@ -356,6 +367,7 @@ const tabSections = [
 				path: "desktop.iconview.enabled",
 				type: "select",
 				choices: () => [
+					// TODO: This should be a boolean
 					{
 						label: "Yes",
 						value: "true",
@@ -549,6 +561,7 @@ const renderWindow = (core, proc) => ($content, win) => {
 			({ path, value }) =>
 				(state) =>
 					resolveNewSetting(state)(path, value),
+
 		refresh: () => () => ({ settings: getSettings() }),
 		setLoading: (loading) => ({ loading }),
 	};

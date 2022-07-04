@@ -48,6 +48,12 @@ export const isDroppingImage = (data) =>
 	validVfsDrop(data) &&
 	imageDropMimes.some((re) => Boolean(data.mime.match(re)));
 
+// TODO: Make this scale to the closest screen size out of a preset list
+// TODO: Orientation parameter
+const resolution = "1920x1080";
+const getRandomWallpaper = () =>
+	"https://source.unsplash.com/random/" + resolution + "?sig=" + Math.random();
+
 /**
  * Creates a static background with an image and a color, if applicable
  */
@@ -69,13 +75,11 @@ const createStaticBackground = (core, background) => {
 	}
 
 	if (background.style !== "color") {
-		// TODO: Better handling of undefined background.src
-		// to not error in `frontend/client/src/filesystem.js`
-		if (background.src === undefined) {
+		if (background.random) {
+			styles.backgroundImage = `url(${getRandomWallpaper()})`;
+		} else if (background.src === undefined) {
 			styles.backgroundImage = undefined;
-		} else if (typeof background.src === "string") {
-			styles.backgroundImage = `url(${background.src})`;
-		} else if (background.src) {
+		} else if (background.src.match(/^meeseOS:/)) {
 			core
 				.make("meeseOS/vfs")
 				.url(background.src)
@@ -85,6 +89,8 @@ const createStaticBackground = (core, background) => {
 				.catch((error) =>
 					logger.warn("Error while setting wallpaper from VFS", error)
 				);
+		} else if (typeof background.src === "string") {
+			styles.backgroundImage = `url(${background.src})`;
 		}
 	}
 

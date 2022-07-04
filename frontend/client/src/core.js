@@ -62,7 +62,7 @@ import merge from "deepmerge";
  * @property {SplashCallback|Splash} [splash] Custom callback function for creating splash screen
  */
 
-/*
+/**
  * Core Open File Options
  *
  * @typedef {Object} CoreOpenOptions
@@ -232,6 +232,9 @@ export default class Core extends CoreBase {
 		this._attachEvents();
 		this.emit("meeseOS/core:boot");
 
+		// TODO: Listen for meeseOS/splash:finished based on settings
+		// TODO: Prevent flash of login UI if the local cookie is set
+
 		return super
 			.boot()
 			.then(() => {
@@ -325,6 +328,7 @@ export default class Core extends CoreBase {
 		// Attaches sounds for certain events
 		this.on("meeseOS/core:started", () => {
 			if (this.has("meeseOS/sounds")) {
+				// TODO: Don't attempt to run this on autologin via cookie; DOMException
 				this.make("meeseOS/sounds").play("service-login");
 			}
 		});
@@ -351,6 +355,7 @@ export default class Core extends CoreBase {
 			const enabled = this.config("http.ping");
 
 			if (enabled) {
+				// Defaults to every 30 minutes if not specified otherwise
 				const pingTime = typeof enabled === "number" ? enabled : 30 * 60 * 1000;
 
 				this.ping = setInterval(() => {

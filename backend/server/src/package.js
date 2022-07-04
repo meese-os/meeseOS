@@ -168,8 +168,8 @@ class Package {
 	 * @return {string}
 	 */
 	resource(path) {
-		if (path.substr(0, 1) !== "/") {
-			path = "/" + path;
+		if (path.charAt(0) !== "/") {
+			path = `/${path}`;
 		}
 
 		return `/apps/${this.metadata.name}${path}`;

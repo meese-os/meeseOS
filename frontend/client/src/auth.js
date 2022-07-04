@@ -172,8 +172,10 @@ export default class Auth {
 
 		this.core.emit("meeseOS/core:logged-out");
 
+		// TODO: Decide on a better desired behavior here
 		if (reload) {
 			setTimeout(() => {
+				// IDEA: Close all applications so session doesn't remember for next time?
 				window.location.reload();
 				// FIXME Reload, not refresh
 				// this.core.boot();
@@ -194,12 +196,18 @@ export default class Auth {
 		this.callback = cb;
 		this.ui.init(autologin);
 
+		// IDEA: Emitting of the events here?
 		if (autologin) {
 			return this.login(login);
 		} else if (settings.enabled) {
 			const cookie = Cookies.get(settings.name);
-			console.warn(cookie);
+			// IDEA: Transition to a password hash in the cookie, not the actual password
+
 			if (cookie) {
+				if (this.core.config("development")) {
+					logger.warn("Authentication cookie:", cookie);
+				}
+
 				return this.login(JSON.parse(cookie));
 			}
 		}
@@ -233,6 +241,7 @@ export default class Auth {
 				this.ui.destroy();
 				this.callback(response);
 
+				// TODO: Emit a different event based on cookie login vs. password login
 				this.core.emit("meeseOS/core:logged-in");
 				this.ui.emit("login:stop", response);
 

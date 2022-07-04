@@ -110,6 +110,9 @@ const removeSoftDeleted = (logger, disabled) => (iter) => {
 
 const action = async ({ logger, options, args, commander }) => {
 	const dist = options.dist();
+	// TODO: Allow this param to be set on a per-package basis,
+		// to allow things like the "Wallpapers" package files to be copied
+		// but not necessarily everything else
 	const copyFiles = args.copy === true;
 	const relativeSymlinks = !copyFiles && args.relative === true;
 	const discoveryDest = path.resolve(args.discover || options.packages);
@@ -155,19 +158,19 @@ const action = async ({ logger, options, args, commander }) => {
 
 	const discover = () =>
 		packages.map((pkg) => {
-			const d = roots[pkg.meta.type]
+			const dest = roots[pkg.meta.type]
 				? path.resolve(roots[pkg.meta.type], pkg.meta.name)
 				: path.resolve(dist.packages, pkg.meta.name);
 
-			let s = path.resolve(pkg.filename, "dist");
+			let src = path.resolve(pkg.filename, "dist");
 			if (relativeSymlinks) {
-				s = path.relative(options.root, s);
+				src = path.relative(options.root, src);
 			}
 
 			return fs
-				.ensureDir(s)
+				.ensureDir(src)
 				.then(() => {
-					return copyFiles ? fs.copy(s, d) : fs.ensureSymlink(s, d, "junction");
+					return copyFiles ? fs.copy(src, dest) : fs.ensureSymlink(src, dest, "junction");
 				})
 				.catch((err) => console.warn(err));
 		});
