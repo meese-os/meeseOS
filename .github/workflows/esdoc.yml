@@ -43,7 +43,7 @@ jobs:
         id: push_directory
         uses: meese-enterprises/github-action-push-to-another-repository@v1.6
         env:
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.MANUAL_REPO_PAT }}
         with:
           source-directories: |
             frontend/client/doc
