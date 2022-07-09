@@ -5,15 +5,15 @@
 </p>
 
 <p align="center">
-  <a href="https://deepsource.io/gh/ajmeese7/aaronmeese.com/?ref=repository-badge">
+  <a href="https://deepsource.io/gh/meese-enterprises/meeseOS/?ref=repository-badge">
     <img
-      src="https://deepsource.io/gh/ajmeese7/aaronmeese.com.svg/?label=active+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
+      src="https://deepsource.io/gh/meese-enterprises/meeseOS.svg/?label=active+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
       title="Active issues on DeepSource"
     />
   </a>
-  <a href="https://deepsource.io/gh/ajmeese7/aaronmeese.com/?ref=repository-badge">
+  <a href="https://deepsource.io/gh/ameese-enterprises/meeseOS/?ref=repository-badge">
     <img
-      src="https://deepsource.io/gh/ajmeese7/aaronmeese.com.svg/?label=resolved+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
+      src="https://deepsource.io/gh/meese-enterprises/meeseOS.svg/?label=resolved+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
       title="Resolved issues on DeepSource"
     />
   </a>
