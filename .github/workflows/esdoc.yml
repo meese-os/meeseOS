@@ -1,0 +1,62 @@
+# Modified from https://github.com/os-js/osjs-server/blob/master/.github/workflows/www-esdoc.yml
+name: Deploy esdoc
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          npm install -g \
+          esdoc \
+          esdoc-standard-plugin \
+          esdoc-publish-html-plugin \
+          esdoc-lint-plugin \
+          esdoc-coverage-plugin \
+          esdoc-accessor-plugin \
+          esdoc-type-inference-plugin \
+          esdoc-external-ecmascript-plugin \
+          esdoc-brand-plugin \
+          esdoc-undocumented-identifier-plugin \
+          esdoc-unexported-identifier-plugin \
+          esdoc-integrate-test-plugin \
+          esdoc-integrate-manual-plugin \
+          esdoc-ecmascript-proposal-plugin \
+          esdoc-node
+      - name: Build esdocs
+        run: |
+          cd frontend/client && esdoc
+          cd ../dialogs && esdoc
+          cd ../gui && esdoc
+          cd ../panels && esdoc
+          cd ../widgets && esdoc
+          cd ../../backend/server && esdoc
+          cd ../common && esdoc
+          cd ../event-emitter && esdoc
+      - name: Deploy to manual repository
+        id: push_directory
+        uses: meese-enterprises/github-action-push-to-another-repository@multiple-source-directories
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          source-directories: |
+            frontend/client/doc
+            frontend/dialog/doc
+            frontend/gui/doc
+            frontend/panels/doc
+            frontend/widgets/doc
+            backend/server/doc
+            backend/common/doc
+            backend/event-emitter/doc
+          target-directory: src/api
+          target-branch: master
+          destination-github-username: meese-enterprises
+          destination-repository-name: meeseOS-manual
+          user-email: ajmeese7@gmail.com
+          user-name: ajmeese7
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
