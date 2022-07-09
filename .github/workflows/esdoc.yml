@@ -41,19 +41,28 @@ jobs:
           cd ../event-emitter && esdoc
       - name: Deploy to manual repository
         id: push_directory
-        uses: meese-enterprises/github-action-push-to-another-repository@multiple-source-directories
+        uses: meese-enterprises/github-action-push-to-another-repository@1.6
         env:
           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
           source-directories: |
             frontend/client/doc
-            frontend/dialog/doc
+            frontend/dialogs/doc
             frontend/gui/doc
             frontend/panels/doc
             frontend/widgets/doc
             backend/server/doc
             backend/common/doc
             backend/event-emitter/doc
+          destination-directory-prefixes: |
+            client
+            dialogs
+            gui
+            panels
+            widgets
+            server
+            common
+            event-emitter
           target-directory: src/api
           target-branch: master
           destination-github-username: meese-enterprises
