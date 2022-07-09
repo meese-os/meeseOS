@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - ci-testing
+      - master
 jobs:
   build:
     name: Build and deploy
