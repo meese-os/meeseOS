@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/stylelint-config",
   "version": "1.0.0",
-  "description": "aaronmeese.com Stylelint configuration",
+  "description": "meeseOS Stylelint configuration",
   "main": "index.js",
   "scripts": {
     "test": "echo \"stylelint-config has no tests\" && exit 0",

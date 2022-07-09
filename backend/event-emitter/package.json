@@ -71,8 +71,8 @@
         "name": "esdoc-standard-plugin",
         "option": {
           "brand": {
-            "title": "aaronmeese.com EventEmitter API",
-            "description": "aaronmeese.com EventEmitter API Documentation"
+            "title": "meeseOS EventEmitter API",
+            "description": "meeseOS EventEmitter API Documentation"
           },
           "lint": {
             "enable": false

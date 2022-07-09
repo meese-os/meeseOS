@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/common",
   "version": "1.0.1",
-  "description": "aaronmeese.com Common Modules",
+  "description": "meeseOS Common Modules",
   "main": "dist/main.js",
   "module": "dist/main.js",
   "typings": "index.d.ts",
@@ -63,8 +63,8 @@
         "name": "esdoc-standard-plugin",
         "option": {
           "brand": {
-            "title": "aaronmeese.com Common API",
-            "description": "aaronmeese.com Common API Documentation"
+            "title": "meeseOS Common API",
+            "description": "meeseOS Common API Documentation"
           },
           "lint": {
             "enable": false
@@ -79,6 +79,12 @@
       },
       {
         "name": "esdoc-publish-html-plugin"
+      },
+      {
+        "name": "esdoc-ecmascript-proposal-plugin",
+        "option": {
+          "all": true
+        }
       },
       {
         "name": "./src/esdoc.js"

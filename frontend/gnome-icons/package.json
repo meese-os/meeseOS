@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/gnome-icons",
   "version": "1.0.2",
-  "description": "aaronmeese.com Gnome Icons",
+  "description": "meeseOS Gnome Icons",
   "files": [
     "dist/",
     "metadata.json",

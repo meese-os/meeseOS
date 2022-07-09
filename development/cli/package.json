@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/cli",
   "version": "1.1.4",
-  "description": "aaronmeese.com CLI",
+  "description": "meeseOS CLI",
   "main": "index.js",
   "files": [
     "bin",

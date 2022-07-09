@@ -255,21 +255,31 @@ class Auth {
 			// that should be copied to the user's home directory
 			const root = await vfs.realpath("home:/", profile);
 
-			fs.copySync(template, root, { overwrite: false });
+			await fs.copy(template, root, { overwrite: false });
 		} else if (Array.isArray(template)) {
-			// If the template is an array, it is a list of files that
-			// should be copied to the user's home directory
-			for (const file of template) {
-				try {
-					const { path, contents = [] } = file;
-					const shortcutsFile = await vfs.realpath(`home:/${path}`, profile);
+			await this.createHomeDirectoryFromArray(template, vfs, profile);
+		}
+	}
 
-					await fs.ensureDir(pathLib.dirname(shortcutsFile));
-					await fs.writeFile(shortcutsFile, contents);
-				} catch (e) {
-					console.warn(`There was a problem writing '${file.path}' to the home directory template`);
-					console.error("ERROR:", e);
-				}
+	/**
+	 * If the template is an array, it is a list of files that should be copied
+	 * to the user's home directory
+	 * @param {Object[]} template Array of objects with a specified path,
+	 * optionally with specified content but defaulting to `[]` if not
+	 * @param {VFSServiceProvider} vfs An instance of the virtual file system
+	 * @param {AuthUserProfile} profile User profile
+	 */
+	 async createHomeDirectoryFromArray(template, vfs, profile) {
+		for (const file of template) {
+			try {
+				const { path, contents = [] } = file;
+				const shortcutsFile = await vfs.realpath(`home:/${path}`, profile);
+
+				await fs.ensureDir(pathLib.dirname(shortcutsFile));
+				await fs.writeFile(shortcutsFile, contents);
+			} catch (e) {
+				console.warn(`There was a problem writing '${file.path}' to the home directory template`);
+				console.error("ERROR:", e);
 			}
 		}
 	}

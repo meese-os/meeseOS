@@ -72,3 +72,6 @@ dist
 
 # Jest test coverage
 coverage
+
+# GitHub Actions executable
+/bin

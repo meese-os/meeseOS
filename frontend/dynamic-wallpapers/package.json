@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/dynamic-wallpapers",
   "version": "1.1.0",
-  "description": "aaronmeese.com Dynamic Wallpapers",
+  "description": "meeseOS Dynamic Wallpapers",
   "files": [
     "dist/",
     "metadata.json"

@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/terminal",
   "version": "2.3.16",
-  "description": "aaronmeese.com Terminal Application",
+  "description": "meeseOS Terminal Application",
   "scripts": {
     "eslint": "eslint index.js",
     "stylelint": "stylelint index.scss --fix",

@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/standard-theme",
   "version": "2.0.2",
-  "description": "aaronmeese.com Standard Theme",
+  "description": "meeseOS Standard Theme",
   "files": [
     "dist/",
     "metadata.json",

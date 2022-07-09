@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/client",
   "version": "2.4.2",
-  "description": "aaronmeese.com client",
+  "description": "meeseOS client",
   "main": "dist/main.js",
   "style": "dist/main.css",
   "typings": "index.d.ts",
@@ -92,8 +92,8 @@
         "name": "esdoc-standard-plugin",
         "option": {
           "brand": {
-            "title": "aaronmeese.com Core API",
-            "description": "aaronmeese.com Core API Documentation"
+            "title": "meeseOS Core API",
+            "description": "meeseOS Core API Documentation"
           },
           "lint": {
             "enable": false

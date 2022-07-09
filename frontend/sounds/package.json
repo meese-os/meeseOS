@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/sounds",
   "version": "1.0.1",
-  "description": "aaronmeese.com Sounds",
+  "description": "meeseOS Sounds",
   "files": [
     "dist/",
     "metadata.json"

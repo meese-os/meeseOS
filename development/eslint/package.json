@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/eslint-config",
   "version": "1.0.3",
-  "description": "aaronmeese.com ESLint configuration",
+  "description": "meeseOS ESLint configuration",
   "main": "index.js",
   "scripts": {
     "test": "echo \"eslint-config has no tests\" && exit 0",

@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/widgets",
   "version": "2.0.2",
-  "description": "aaronmeese.com Widgets",
+  "description": "meeseOS Widgets",
   "main": "dist/main.js",
   "module": "dist/main.js",
   "style": "dist/main.scss",
@@ -73,8 +73,8 @@
         "name": "esdoc-standard-plugin",
         "option": {
           "brand": {
-            "title": "aaronmeese.com Widget API",
-            "description": "aaronmeese.com Panel API Documentation"
+            "title": "meeseOS Widget API",
+            "description": "meeseOS Panel API Documentation"
           },
           "lint": {
             "enable": false
@@ -89,6 +89,12 @@
       },
       {
         "name": "esdoc-publish-html-plugin"
+      },
+      {
+        "name": "esdoc-ecmascript-proposal-plugin",
+        "option": {
+          "all": true
+        }
       }
     ]
   }

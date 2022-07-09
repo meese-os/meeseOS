@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/filemanager",
   "version": "2.0.3",
-  "description": "aaronmeese.com Filemanager Application",
+  "description": "meeseOS Filemanager Application",
   "scripts": {
     "eslint": "eslint *.js",
     "test": "npm run eslint",

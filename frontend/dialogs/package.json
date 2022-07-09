@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/dialogs",
   "version": "2.1.5",
-  "description": "aaronmeese.com Dialogs",
+  "description": "meeseOS Dialogs",
   "main": "dist/main.js",
   "module": "dist/main.js",
   "style": "dist/main.css",
@@ -68,8 +68,8 @@
         "name": "esdoc-standard-plugin",
         "option": {
           "brand": {
-            "title": "aaronmeese.com Dialog API",
-            "description": "aaronmeese.com Dialog API Documentation"
+            "title": "meeseOS Dialog API",
+            "description": "meeseOS Dialog API Documentation"
           },
           "lint": {
             "enable": false

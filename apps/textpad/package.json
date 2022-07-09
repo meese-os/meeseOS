@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/textpad",
   "version": "2.0.1",
-  "description": "aaronmeese.com Textpad Application",
+  "description": "meeseOS Textpad Application",
   "files": [
     "dist/",
     "metadata.json"

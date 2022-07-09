@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/panels",
   "version": "2.0.3",
-  "description": "aaronmeese.com Panels",
+  "description": "meeseOS Panels",
   "main": "dist/main.js",
   "module": "dist/main.js",
   "style": "dist/main.css",
@@ -76,8 +76,8 @@
         "name": "esdoc-standard-plugin",
         "option": {
           "brand": {
-            "title": "aaronmeese.com Panel API",
-            "description": "aaronmeese.com Panel API Documentation"
+            "title": "meeseOS Panel API",
+            "description": "meeseOS Panel API Documentation"
           },
           "lint": {
             "enable": false
@@ -92,6 +92,12 @@
       },
       {
         "name": "esdoc-publish-html-plugin"
+      },
+      {
+        "name": "esdoc-ecmascript-proposal-plugin",
+        "option": {
+          "all": true
+        }
       }
     ]
   }

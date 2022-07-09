@@ -49,6 +49,14 @@ To see if your process is still runninng, run `pm2 list`.
 
 To monitor the logs from your process, run `pm2 monit`.
 
+## Development
+
+To run GitHub Actions locally, do the following:
+
+1. `curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash`
+2. `sudo ./bin/act -s GITHUB_TOKEN=ENTER_YOUR_PAT_HERE`
+3. Select "Medium" as the image size
+
 
 # TODO
 

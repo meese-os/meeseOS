@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/static-wallpapers",
   "version": "1.0.0",
-  "description": "aaronmeese.com Static Wallpapers",
+  "description": "meeseOS Static Wallpapers",
   "files": [
     "dist/",
     "metadata.json"

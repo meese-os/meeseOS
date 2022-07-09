@@ -1,7 +1,7 @@
 {
   "name": "@meeseOS/gui",
   "version": "2.1.2",
-  "description": "aaronmeese.com GUI",
+  "description": "meeseOS GUI",
   "module": "dist/esm.js",
   "main": "dist/main.js",
   "style": "dist/main.css",
@@ -88,8 +88,8 @@
         "name": "esdoc-standard-plugin",
         "option": {
           "brand": {
-            "title": "aaronmeese.com GUI API",
-            "description": "aaronmeese.com GUI API Documentation"
+            "title": "meeseOS GUI API",
+            "description": "meeseOS GUI API Documentation"
           },
           "lint": {
             "enable": false
@@ -104,6 +104,12 @@
       },
       {
         "name": "esdoc-publish-html-plugin"
+      },
+      {
+        "name": "esdoc-ecmascript-proposal-plugin",
+        "option": {
+          "all": true
+        }
       }
     ]
   }
