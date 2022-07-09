@@ -1,9 +1,10 @@
 # Modified from https://github.com/os-js/osjs-server/blob/master/.github/workflows/www-esdoc.yml
 name: Deploy esdoc
 on:
+  workflow_dispatch:
   push:
     branches:
-      - master
+      - ci-testing
 jobs:
   build:
     name: Build and deploy
