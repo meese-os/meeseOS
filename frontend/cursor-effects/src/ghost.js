@@ -28,14 +28,19 @@
  * @licence Simplified BSD License
  */
 
-import none from "./src/none";
-import rainbow from "./src/rainbow";
-import ghost from "./src/ghost";
-import trailing from "./src/trailing";
+import { ghostCursor } from "cursor-effects";
+
+/**
+ * Creates a ghost cursor effect on the page body.
+ * @link https://github.com/tholman/cursor-effects/blob/master/src/ghostCursor.js
+ */
+const ghost = () => {
+	// Create the cursor
+	return new ghostCursor();
+};
 
 export default {
-	none,
-	rainbow,
-	ghost,
-	trailing,
+	label: "Ghost",
+	effect: ghost,
+	options: {},
 };

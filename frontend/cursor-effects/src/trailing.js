@@ -28,14 +28,38 @@
  * @licence Simplified BSD License
  */
 
-import none from "./src/none";
-import rainbow from "./src/rainbow";
-import ghost from "./src/ghost";
-import trailing from "./src/trailing";
+import { trailingCursor } from "cursor-effects";
+
+/**
+ * A mapping of the variable names to their relevant information.
+ */
+const trailingOptions = {
+	particles: {
+		label: "Particles",
+		type: "number",
+		defaultValue: 15,
+	},
+};
+
+/**
+ * Creates a trailing cursor effect on the page body.
+ * @param {Object} options
+ * @link https://github.com/tholman/cursor-effects/blob/master/src/trailingCursor.js
+ */
+const trailing = (options) => {
+	const defaults = Object.keys(trailingOptions).map((key) => ({
+		[key]: trailingOptions[key].defaultValue,
+	}));
+
+	// Override the defaults with any user-provided options
+	const settings = Object.assign({}, ...defaults, options);
+
+	// Create the cursor
+	return new trailingCursor(settings);
+};
 
 export default {
-	none,
-	rainbow,
-	ghost,
-	trailing,
+	label: "Trailing",
+	effect: trailing,
+	options: trailingOptions,
 };
