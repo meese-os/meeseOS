@@ -28,8 +28,62 @@
  * @licence Simplified BSD License
  */
 
-import matrix from "./src/matrix";
+import { resolveSetting } from "./utils";
+import cursorEffects from "@meeseOS/cursor-effects";
 
-export default {
-	matrix,
+/**
+ * Returns all of the settings for a given cursor effect.
+ * @returns {Object[]}
+ */
+export const cursorItems = (state) => {
+	const selectedEffectKey = resolveSetting(
+		state.settings,
+		state.defaults
+	)("desktop.cursor.effect");
+
+	const selectedEffect = cursorEffects[selectedEffectKey];
+	const options = selectedEffect.options || {};
+
+	const items = Object.keys(options).map((key) => {
+		const properties = options[key];
+		return {
+			label: properties.label,
+			path: `desktop.cursor.options.${key}`,
+			type: properties.type,
+			defaultValue: properties.defaultValue,
+		};
+	});
+
+	return items;
 };
+
+/**
+ * Loads all of the available cursor effects.
+ * @returns {Object[]}
+ */
+const getCursorChoices = () =>
+	Object.keys(cursorEffects).map((key) => {
+		const properties = cursorEffects[key];
+
+		return {
+			label: properties.label || "Mystery",
+			value: properties.effect.name,
+		};
+	});
+
+/**
+ * Creates a `select` field for cursor effects.
+ * @returns {Object[]}
+ */
+export const cursorEffectSelect = (state, actions) => [
+	{
+		label: "Effect",
+		path: "desktop.cursor.effect",
+		type: "select",
+		choices: () => getCursorChoices(),
+		oncreate: (ev) =>
+			(ev.value =
+				state.cursorEffect || getCursorChoices()[0].value),
+		onchange: (ev) => actions.setCursorEffect(ev),
+	},
+];

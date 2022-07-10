@@ -28,8 +28,82 @@
  * @licence Simplified BSD License
  */
 
-import matrix from "./src/matrix";
-
-export default {
-	matrix,
-};
+/** MeeseOS tab sections */
+export const tabSections = [
+	{
+		title: "Background",
+		items: [
+			{
+				label: "Type",
+				path: "desktop.background.type",
+				type: "wallpaper",
+				defaultValue: "static",
+			},
+		],
+	},
+	{
+		title: "Themes",
+		items: [
+			{
+				label: "Style",
+				path: "desktop.theme",
+				type: "select",
+				choices: (state) => state.themes.styles,
+			},
+			{
+				label: "Icons",
+				path: "desktop.icons",
+				type: "select",
+				choices: (state) => state.themes.icons,
+			},
+			{
+				label: "Sounds",
+				path: "desktop.sounds",
+				type: "select",
+				choices: (state) => state.themes.sounds,
+			},
+		],
+	},
+	{
+		title: "Desktop",
+		items: [
+			{
+				label: "Cursor effects",
+				path: "desktop.cursor.effect",
+				type: "cursor",
+				defaultValue: "none",
+			},
+			{
+				label: "Enable desktop icons",
+				path: "desktop.iconview.enabled",
+				type: "select",
+				choices: () => [
+					{
+						label: "Yes",
+						value: "true",
+					},
+					{
+						label: "No",
+						value: "false",
+					},
+				],
+			},
+			{
+				label: "Font color style",
+				path: "desktop.iconview.fontColorStyle",
+				type: "select",
+				defaultValue: "system",
+				choices: () => ({
+					system: "System",
+					invert: "Inverted background color",
+					custom: "Custom color",
+				}),
+			},
+			{
+				label: "Custom font color",
+				path: "desktop.iconview.fontColor",
+				type: "color",
+			},
+		],
+	},
+];

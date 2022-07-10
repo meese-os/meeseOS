@@ -28,8 +28,10 @@
  * @licence Simplified BSD License
  */
 
-import matrix from "./src/matrix";
+import none from "./src/none";
+import rainbow from "./src/rainbow";
 
 export default {
-	matrix,
+	none,
+	rainbow,
 };

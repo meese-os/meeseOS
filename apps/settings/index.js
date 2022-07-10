@@ -38,141 +38,22 @@ import {
 	ToggleField,
 	Toolbar,
 } from "@meeseOS/gui";
+import {
+	dynamicBackgroundItems,
+	dynamicBackgroundSelect,
+} from "./src/dynamicBackgrounds";
+import {
+	cursorItems,
+	cursorEffectSelect,
+} from "./src/cursorEffects";
 import { app, h } from "hyperapp";
 import { name as applicationName } from "./metadata.json";
-import merge from "deepmerge";
+import { resolveSetting, resolveNewSetting } from "./src/utils";
+import { staticBackgroundOptions } from "./src/staticBackgrounds";
+import { tabSections } from "./src/tabs";
 import meeseOS from "meeseOS";
-import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 
-/** Resolves an object tree by dot notation. */
-const resolve = (tree, key, defaultValue) => {
-	try {
-		const value = key
-			.split(/\./g)
-			.reduce((result, key) => result[key], { ...tree });
-
-		return typeof value === "undefined" ? defaultValue : value;
-	} catch (e) {
-		return defaultValue;
-	}
-};
-
-/** Resolves settings by dot notation and gets default values. */
-const resolveSetting = (settings, defaults) => (key) =>
-	resolve(settings, key, resolve(defaults, key));
-
-/**
- * An array of settings for static backgrounds in MeeseOS
- * @returns {Object[]}
- */
-const staticBackgroundOptions = (state, actions) => [
-	{
-		// IDEA: Add tooltips, i.e. "This will only work with internet connectivity"
-		label: "Random Wallpaper",
-		path: "desktop.background.random",
-		type: "boolean",
-		defaultValue: false,
-	},
-	...(!resolveSetting(state.settings, state.defaults)("desktop.background.random") ? [{
-		label: "Image",
-		path: "desktop.background.src",
-		type: "dialog",
-		transformValue: (value) =>
-			typeof value === "string" ? value : value.path,
-		dialog: (props, state, actions, currentValue) => [
-			"file",
-			{
-				type: "open",
-				title: "Select background",
-				mime: [/^image/],
-				path: "meeseOS:/",
-			},
-			(btn, value) => {
-				if (btn === "ok") {
-					actions.update({ path: props.path, value });
-				}
-			},
-		],
-		defaultValue: "meeseOS:/wallpapers/Wallpapers/plain.png",
-	}] : []),
-	{
-		label: "Style",
-		path: "desktop.background.style",
-		type: "select",
-		choices: () => ({
-			color: "Color",
-			cover: "Cover",
-			contain: "Contain",
-			repeat: "Repeat",
-		}),
-	},
-	{
-		label: "Color",
-		path: "desktop.background.color",
-		type: "color",
-	},
-];
-
-/**
- * Returns all of the settings for a given dynamic background effect.
- * @returns {Object[]}
- */
-const dynamicBackgroundItems = (state) => {
-	if (state.static) return [];
-
-	const selectedEffectKey = resolveSetting(
-		state.settings,
-		state.defaults
-	)("desktop.background.effect");
-
-	const selectedEffect = dynamicWallpapers[selectedEffectKey];
-	const options = selectedEffect.options || {};
-
-	const items = Object.keys(options).map((key) => {
-		const properties = options[key];
-		return {
-			label: properties.label,
-			path: `desktop.background.options.${key}`,
-			type: properties.type,
-			defaultValue: properties.defaultValue,
-		};
-	});
-
-	return items;
-};
-
-/**
- * Loads all of the available dynamic wallpaper effects.
- * @returns {Object[]}
- */
-const getDynamicWallpaperChoices = () =>
-	Object.keys(dynamicWallpapers).map((key) => {
-		const properties = dynamicWallpapers[key];
-
-		return {
-			label: properties.label || "Mystery",
-			value: properties.effect.name,
-		};
-	});
-
-/**
- * Creates a `select` field for dynamic wallpaper effects.
- * @returns {Object[]}
- */
-const dynamicBackgroundSelect = (state, actions) => [
-	{
-		label: "Effect",
-		path: "desktop.background.effect",
-		type: "select",
-		choices: () => getDynamicWallpaperChoices(),
-		oncreate: (ev) =>
-			(ev.value =
-				state.wallpaperEffect || getDynamicWallpaperChoices()[0].value),
-		onchange: (ev) => actions.setWallpaperEffect(ev),
-	},
-];
-
-/** Maps our section items to a field. */
+/** Maps the section items to a field. */
 const fieldMap = () => {
 	const getValue = (props) =>
 		props.transformValue ? props.transformValue(props.value) : props.value;
@@ -288,6 +169,12 @@ const fieldMap = () => {
 				render(state, actions, dynamicBackgroundItems(state)),
 			]),
 
+		cursor: (props) => (state, actions) =>
+			h(Box, { grow: 1, shrink: 0 }, [
+				render(state, actions, cursorEffectSelect(state, actions)),
+				render(state, actions, cursorItems(state)),
+			]),
+
 		fallback: (props) => (state, actions) =>
 			h(TextField, {
 				value: getValue(props),
@@ -296,107 +183,7 @@ const fieldMap = () => {
 	};
 };
 
-const resolveValue = (key, value) =>
-	key === "desktop.iconview.enabled" // FIXME
-		? value === "true"
-		: value;
-
-/** Resolves a new value in our tree. */
-const resolveNewSetting = (state) => (key, value) => {
-	// FIXME: There must be a better way
-	if (!key) return;
-	const object = {};
-	const keys = key.split(/\./g);
-
-	let previous = object;
-	for (let i = 0; i < keys.length; i++) {
-		const j = keys[i];
-		const last = i >= keys.length - 1;
-
-		previous[j] = last ? resolveValue(key, value) : {};
-		previous = previous[j];
-	}
-
-	const settings = merge(state.settings, object);
-	return { settings };
-};
-
 // https://github.com/os-js/osjs-settings-application/issues/11#issuecomment-1067199781
-
-/** MeeseOS tab sections */
-const tabSections = [
-	{
-		title: "Background",
-		items: [
-			{
-				label: "Type",
-				path: "desktop.background.type",
-				type: "wallpaper",
-				defaultValue: "static",
-			},
-		],
-	},
-	{
-		title: "Themes",
-		items: [
-			{
-				label: "Style",
-				path: "desktop.theme",
-				type: "select",
-				choices: (state) => state.themes.styles,
-			},
-			{
-				label: "Icons",
-				path: "desktop.icons",
-				type: "select",
-				choices: (state) => state.themes.icons,
-			},
-			{
-				label: "Sounds",
-				path: "desktop.sounds",
-				type: "select",
-				choices: (state) => state.themes.sounds,
-			},
-		],
-	},
-	{
-		title: "Desktop",
-		items: [
-			{
-				label: "Enable desktop icons",
-				path: "desktop.iconview.enabled",
-				type: "select",
-				choices: () => [
-					// TODO: This should be a boolean
-					{
-						label: "Yes",
-						value: "true",
-					},
-					{
-						label: "No",
-						value: "false",
-					},
-				],
-			},
-			{
-				label: "Font color style",
-				path: "desktop.iconview.fontColorStyle",
-				type: "select",
-				defaultValue: "system",
-				choices: () => ({
-					system: "System",
-					invert: "Inverted background color",
-					custom: "Custom color",
-				}),
-			},
-			{
-				label: "Custom font color",
-				path: "desktop.iconview.fontColor",
-				type: "color",
-			},
-		],
-	},
-];
 
 // Returns an array of elements for a single item parameter
 const renderItem = (state, actions) => (item) => {
@@ -555,6 +342,10 @@ const renderWindow = (core, proc) => ($content, win) => {
 
 		setWallpaperEffect: (ev) => ({
 			wallpaperEffect: ev.target.value,
+		}),
+
+		setCursorEffect: (ev) => ({
+			cursorEffect: ev.target.value,
 		}),
 
 		update:

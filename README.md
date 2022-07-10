@@ -1,4 +1,4 @@
-# aaronmeese.com
+# meeseOS
 
 <p align="center">
   <img src="./website/src/client/social.png" width="650" />

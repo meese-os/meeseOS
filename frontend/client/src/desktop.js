@@ -30,6 +30,7 @@
 
 import {
 	applyBackgroundStyles,
+	applyCursorEffect,
 	createPanelSubtraction,
 	isDroppingImage,
 	isVisible,
@@ -515,10 +516,11 @@ export default class Desktop extends EventEmitter {
 			}
 		};
 
-		const applyCss = ({ font, background }) => {
+		const applyCss = ({ font, background, cursor }) => {
 			this.core.$root.style.fontFamily = `${font}, sans-serif`;
 
 			applyBackgroundStyles(this.core, background);
+			applyCursorEffect(cursor);
 		};
 
 		applyCss(newSettings);

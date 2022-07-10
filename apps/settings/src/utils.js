@@ -28,8 +28,46 @@
  * @licence Simplified BSD License
  */
 
-import matrix from "./src/matrix";
+import merge from "deepmerge";
 
-export default {
-	matrix,
+/** Resolves an object tree by dot notation. */
+const resolve = (tree, key, defaultValue) => {
+	try {
+		const value = key
+			.split(/\./g)
+			.reduce((result, key) => result[key], { ...tree });
+
+		return typeof value === "undefined" ? defaultValue : value;
+	} catch (e) {
+		return defaultValue;
+	}
+};
+
+/** Resolves settings by dot notation and gets default values. */
+export const resolveSetting = (settings, defaults) => (key) =>
+	resolve(settings, key, resolve(defaults, key));
+
+	const resolveValue = (key, value) =>
+	key === "desktop.iconview.enabled" // FIXME
+		? value === "true"
+		: value;
+
+/** Resolves a new value in our tree. */
+export const resolveNewSetting = (state) => (key, value) => {
+	// FIXME: There must be a better way
+	if (!key) return;
+	const object = {};
+	const keys = key.split(/\./g);
+
+	let previous = object;
+	for (let i = 0; i < keys.length; i++) {
+		const j = keys[i];
+		const last = i >= keys.length - 1;
+
+		previous[j] = last ? resolveValue(key, value) : {};
+		previous = previous[j];
+	}
+
+	const settings = merge(state.settings, object);
+	return { settings };
 };

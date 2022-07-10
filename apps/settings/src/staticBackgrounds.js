@@ -28,8 +28,56 @@
  * @licence Simplified BSD License
  */
 
-import matrix from "./src/matrix";
+import { resolveSetting } from "./utils";
 
-export default {
-	matrix,
-};
+/**
+ * An array of settings for static backgrounds in MeeseOS
+ * @returns {Object[]}
+ */
+export const staticBackgroundOptions = (state, actions) => [
+	{
+		// IDEA: Add tooltips, i.e. "This will only work with internet connectivity"
+		label: "Random Wallpaper",
+		path: "desktop.background.random",
+		type: "boolean",
+		defaultValue: false,
+	},
+	...(!resolveSetting(state.settings, state.defaults)("desktop.background.random") ? [{
+		label: "Image",
+		path: "desktop.background.src",
+		type: "dialog",
+		transformValue: (value) =>
+			typeof value === "string" ? value : value.path,
+		dialog: (props, state, actions, currentValue) => [
+			"file",
+			{
+				type: "open",
+				title: "Select background",
+				mime: [/^image/],
+				path: "meeseOS:/",
+			},
+			(btn, value) => {
+				if (btn === "ok") {
+					actions.update({ path: props.path, value });
+				}
+			},
+		],
+		defaultValue: "meeseOS:/wallpapers/Wallpapers/plain.png",
+	}] : []),
+	{
+		label: "Style",
+		path: "desktop.background.style",
+		type: "select",
+		choices: () => ({
+			color: "Color",
+			cover: "Cover",
+			contain: "Contain",
+			repeat: "Repeat",
+		}),
+	},
+	{
+		label: "Color",
+		path: "desktop.background.color",
+		type: "color",
+	},
+];

@@ -401,7 +401,8 @@ const vfsActionFactory = (core, proc, win, dialog, state) => {
 };
 
 /**
- * Clipboard action Factory
+ * Clipboard action factory
+ * @param {Core} core
  */
 const clipboardActionFactory = (core, state, vfs) => {
 	const clipboard = core.make("meeseOS/clipboard");
@@ -430,6 +431,9 @@ const clipboardActionFactory = (core, state, vfs) => {
 
 /**
  * Dialog Factory
+ * @param {Core} core
+ * @param {Object} proc
+ * @param {Window} win
  */
 const dialogFactory = (core, proc, win) => {
 	const vfs = core.make("meeseOS/vfs");
@@ -539,6 +543,9 @@ const dialogFactory = (core, proc, win) => {
 
 /**
  * Creates Menus
+ * @param {Core} core
+ * @param {Object} proc
+ * @param {Window} win
  */
 const menuFactory = (core, proc, win) => {
 	const fs = core.make("meeseOS/fs");
@@ -709,6 +716,9 @@ const menuFactory = (core, proc, win) => {
 
 /**
  * Creates a new FileManager user interface view
+ * @param {Core} core
+ * @param {Object} proc
+ * @param {Window} win
  */
 const createView = (core, proc, win) => {
 	const { icon } = core.make("meeseOS/theme");
@@ -771,6 +781,8 @@ const createView = (core, proc, win) => {
 
 /**
  * Creates a new FileManager user interface
+ * @param {Core} core
+ * @param {Object} proc
  */
 const createApplication = (core, proc) => {
 	const createColumns = listViewColumnFactory(core, proc);

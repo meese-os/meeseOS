@@ -251,6 +251,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/cursor-effects': workspace:*
       '@meeseOS/dynamic-wallpapers': workspace:*
       '@meeseOS/eslint-config': workspace:*
       '@meeseOS/gui': workspace:*
@@ -279,6 +280,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.17.10
       '@babel/preset-env': 7.17.10
       '@babel/runtime': 7.17.9
+      '@meeseOS/cursor-effects': link:../../frontend/cursor-effects
       '@meeseOS/dynamic-wallpapers': link:../../frontend/dynamic-wallpapers
       '@meeseOS/eslint-config': link:../../development/eslint
       '@meeseOS/stylelint-config': link:../../development/stylelint
@@ -586,6 +588,7 @@ importers:
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
       '@meeseOS/common': workspace:*
+      '@meeseOS/cursor-effects': workspace:*
       '@meeseOS/dynamic-wallpapers': workspace:*
       '@meeseOS/eslint-config': workspace:*
       '@meeseOS/event-emitter': workspace:*
@@ -616,6 +619,7 @@ importers:
       webpack-cli: ^4.9.2
     dependencies:
       '@meeseOS/common': link:../../backend/common
+      '@meeseOS/cursor-effects': link:../cursor-effects
       '@meeseOS/dynamic-wallpapers': link:../dynamic-wallpapers
       '@meeseOS/event-emitter': link:../../backend/event-emitter
       '@meeseOS/gui': link:../gui
@@ -647,6 +651,31 @@ importers:
       stylelint: 14.8.2
       stylelint-config-standard: 25.0.0
       stylelint-config-standard-scss: 4.0.0
+      webpack: 5.72.1_webpack-cli@4.9.2
+      webpack-cli: 4.9.2
+
+  ../../frontend/cursor-effects:
+    specifiers:
+      '@babel/core': ^7.17.2
+      '@babel/plugin-transform-runtime': ^7.17.0
+      '@babel/preset-env': ^7.16.11
+      '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      babel-loader: ^8.2.3
+      cursor-effects: ^1.0.0
+      eslint: ^8.18.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
+    dependencies:
+      cursor-effects: 1.0.3
+    devDependencies:
+      '@babel/core': 7.17.10
+      '@babel/plugin-transform-runtime': 7.17.10
+      '@babel/preset-env': 7.17.10
+      '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      babel-loader: 8.2.5_webpack-cli@4.9.2
+      eslint: 8.18.0
       webpack: 5.72.1_webpack-cli@4.9.2
       webpack-cli: 4.9.2
 
@@ -4699,6 +4728,10 @@ packages:
   /culvert/0.1.2:
     resolution: {integrity: sha1-lQL18BVKLVoioCPnn3HMk2+m728=}
     dev: true
+
+  /cursor-effects/1.0.3:
+    resolution: {integrity: sha512-xEdTTzsKCUigXObNW5wydrkUS1Z6BhVQ6cJezZrQdE3grL0EO79mfaNW5QUZW1prmhW79tmT7EujH33YM/XCvQ==}
+    dev: false
 
   /data-uri-to-buffer/3.0.1:
     resolution: {integrity: sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==}

@@ -1,0 +1,52 @@
+{
+  "name": "@meeseOS/cursor-effects",
+  "version": "1.0.0",
+  "description": "meeseOS Cursor Effects",
+  "files": [
+    "dist/",
+    "metadata.json"
+  ],
+  "scripts": {
+    "eslint": "eslint index.js",
+    "test": "npm run eslint",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "prepublishOnly": "npm run eslint && rm -rf ./dist/* && NODE_ENV=production npm run build"
+  },
+  "devDependencies": {
+    "@meeseOS/eslint-config": "workspace:*",
+    "@babel/core": "^7.17.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "babel-loader": "^8.2.3",
+    "eslint": "^8.18.0",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "cursor-effects": "^1.0.0"
+  },
+  "meeseOS": {
+    "type": "package"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 8
+    },
+    "extends": "@meeseOS/eslint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
+}

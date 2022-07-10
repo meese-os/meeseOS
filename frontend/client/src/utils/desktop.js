@@ -30,18 +30,22 @@
 
 import logger from "../logger";
 import { supportedMedia } from "./dom";
+import cursorEffects from "@meeseOS/cursor-effects";
 import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
+import Core from "../core";
 
 const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
 
 /**
  * Check if droppable data is a VFS type
+ * @param {Object} data
  * @return {boolean}
  */
 export const validVfsDrop = (data) => data && data.path;
 
 /**
  * Check if droppable data contains image
+ * @param {Object} data
  * @return {boolean}
  */
 export const isDroppingImage = (data) =>
@@ -107,6 +111,8 @@ const getRandomWallpaper = () => {
 
 /**
  * Creates a static background with an image and a color, if applicable
+ * @param {Core} core
+ * @param {Object} background
  */
 const createStaticBackground = (core, background) => {
 	const { $root } = core;
@@ -150,6 +156,7 @@ const createStaticBackground = (core, background) => {
 
 /**
  * Creates a dynamic background based on the specified settings
+ * @param {Object} background
  */
 const createDynamicBackground = (background) => {
 	const canvas = document.querySelector(".meeseOS-dynamic-background");
@@ -173,7 +180,9 @@ const hideDynamicBackground = () => {
 };
 
 /**
- * Creates a set of styles based on background settings
+ * Applies a set of styles based on background settings
+ * @param {Core} core
+ * @param {Object} background
  */
 export const applyBackgroundStyles = (core, background) => {
 	if (background.type === "static") {
@@ -182,6 +191,25 @@ export const applyBackgroundStyles = (core, background) => {
 	} else if (background.type === "dynamic") {
 		createDynamicBackground(background);
 	}
+};
+
+/**
+ * Applies a cursor effect based on the specified settings
+ * @param {Object} cursor
+ */
+export const applyCursorEffect = (cursor) => {
+	// Get the second to last element of the body and remove it if it is a canvas,
+	// which removes any previous cursor effects
+	const body = document.querySelector("body");
+	const secondToLastChild = body.children[body.children.length - 2];
+	if (secondToLastChild && secondToLastChild.tagName === "CANVAS") {
+		body.removeChild(secondToLastChild);
+	}
+
+	// Calls the cursor effect function by name
+	const effectName = cursor.effect || "none";
+	const options = cursor.options || {};
+	cursorEffects[effectName].effect(options);
 };
 
 /**

@@ -1,0 +1,6 @@
+{
+  "name": "CursorEffects",
+  "title": "Cursor Effects",
+  "description": "A collection of cursor effects for the MeeseOS desktop.",
+  "files": ["main.js"]
+}

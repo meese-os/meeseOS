@@ -28,8 +28,59 @@
  * @licence Simplified BSD License
  */
 
-import matrix from "./src/matrix";
+import { rainbowCursor } from "cursor-effects";
+
+/**
+ * A mapping of the variable names to their relevant information.
+ */
+const rainbowOptions = {
+	length: {
+		label: "Rainbow Length",
+		type: "number",
+		defaultValue: 20,
+	},
+	/*
+	colors: {
+		label: "Rainbow Colors",
+		// TODO: Generate a type that works for color arrays,
+		// or a way to add more/less stops to the rainbow
+		type: "color",
+		defaultValue: [
+			"#FE0000",
+			"#FD8C00",
+			"#FFE500",
+			"#119F0B",
+			"#0644B3",
+			"#C22EDC",
+		],
+	},
+	*/
+	size: {
+		label: "Rainbow Size",
+		type: "number",
+		defaultValue: 3,
+	},
+};
+
+/**
+ * Creates a rainbow cursor effect on the page body.
+ * @param {Object} options
+ * @link https://github.com/tholman/cursor-effects/blob/master/src/rainbowCursor.js
+ */
+const rainbow = (options) => {
+	const defaults = Object.keys(rainbowOptions).map((key) => ({
+		[key]: rainbowOptions[key].defaultValue,
+	}));
+
+	// Override the defaults with any user-provided options
+	const settings = Object.assign({}, ...defaults, options);
+
+	// Create the cursor
+	return new rainbowCursor(settings);
+};
 
 export default {
-	matrix,
+	label: "Rainbow",
+	effect: rainbow,
+	options: rainbowOptions,
 };

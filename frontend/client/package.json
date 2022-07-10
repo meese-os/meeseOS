@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/client",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "meeseOS client",
   "main": "dist/main.js",
   "style": "dist/main.css",
@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "@meeseOS/common": "workspace:*",
+    "@meeseOS/cursor-effects": "workspace:*",
     "@meeseOS/dynamic-wallpapers": "workspace:*",
     "@meeseOS/event-emitter": "workspace:*",
     "@meeseOS/gui": "workspace:*",

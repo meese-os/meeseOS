@@ -209,6 +209,9 @@ export const defaultConfiguration = {
 				color: "#572a79",
 				style: "cover",
 			},
+			cursor: {
+				effect: "none",
+			},
 			iconview: {
 				enabled: true,
 				path: "home:/.desktop",
