@@ -79,7 +79,7 @@ export default class Packages {
 	/**
 	 * Create package manage
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**

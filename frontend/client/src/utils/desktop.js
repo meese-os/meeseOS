@@ -111,7 +111,7 @@ const getRandomWallpaper = () => {
 
 /**
  * Creates a static background with an image and a color, if applicable
- * @param {Core} core
+ * @param {Core} core MeeseOS Core instance reference
  * @param {Object} background
  */
 const createStaticBackground = (core, background) => {
@@ -181,7 +181,7 @@ const hideDynamicBackground = () => {
 
 /**
  * Applies a set of styles based on background settings
- * @param {Core} core
+ * @param {Core} core MeeseOS Core instance reference
  * @param {Object} background
  */
 export const applyBackgroundStyles = (core, background) => {

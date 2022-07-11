@@ -61,7 +61,7 @@ const nullAdapter = require("./adapters/auth/null.js");
 class Auth {
 	/**
 	 * Creates a new instance
-	 * @param {Core} core Core instance reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {AuthOptions} [options={}] Service Provider arguments
 	 */
 	constructor(core, options = {}) {

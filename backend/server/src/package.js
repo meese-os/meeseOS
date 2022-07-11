@@ -49,7 +49,7 @@ const chokidar = require("chokidar");
 class Package {
 	/**
 	 * Create new instance
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {PackageOptions} [options] Instance options
 	 */
 	constructor(core, options = {}) {

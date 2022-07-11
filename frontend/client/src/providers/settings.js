@@ -53,7 +53,7 @@ import Settings from "../settings";
  */
 export default class SettingsServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core MeeseOS Core
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {SettingsServiceOptions} [options={}]
 	 */
 	constructor(core, options = {}) {

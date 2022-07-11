@@ -175,7 +175,7 @@ export default class Window extends EventEmitter {
 	/**
 	 * Create window
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {WindowOptions} [options={}] Options
 	 */
 	constructor(core, options = {}) {

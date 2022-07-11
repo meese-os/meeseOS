@@ -53,7 +53,7 @@ import Auth from "../auth";
  */
 export default class AuthServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core MeeseOS Core
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {AuthServiceOptions} [options={}]
 	 */
 	constructor(core, options = {}) {

@@ -402,7 +402,7 @@ const vfsActionFactory = (core, proc, win, dialog, state) => {
 
 /**
  * Clipboard action factory
- * @param {Core} core
+ * @param {Core} core MeeseOS Core instance reference
  */
 const clipboardActionFactory = (core, state, vfs) => {
 	const clipboard = core.make("meeseOS/clipboard");
@@ -431,7 +431,7 @@ const clipboardActionFactory = (core, state, vfs) => {
 
 /**
  * Dialog Factory
- * @param {Core} core
+ * @param {Core} core MeeseOS Core instance reference
  * @param {Object} proc
  * @param {Window} win
  */
@@ -543,7 +543,7 @@ const dialogFactory = (core, proc, win) => {
 
 /**
  * Creates Menus
- * @param {Core} core
+ * @param {Core} core MeeseOS Core instance reference
  * @param {Object} proc
  * @param {Window} win
  */
@@ -716,7 +716,7 @@ const menuFactory = (core, proc, win) => {
 
 /**
  * Creates a new FileManager user interface view
- * @param {Core} core
+ * @param {Core} core MeeseOS Core instance reference
  * @param {Object} proc
  * @param {Window} win
  */
@@ -781,7 +781,7 @@ const createView = (core, proc, win) => {
 
 /**
  * Creates a new FileManager user interface
- * @param {Core} core
+ * @param {Core} core MeeseOS Core instance reference
  * @param {Object} proc
  */
 const createApplication = (core, proc) => {

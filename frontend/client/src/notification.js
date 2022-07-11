@@ -51,7 +51,7 @@ export default class Notification {
 	/**
 	 * Create notification
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Element} root Root DOM element
 	 * @param {NotificationOptions} options Options
 	 */

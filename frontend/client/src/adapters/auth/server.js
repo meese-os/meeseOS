@@ -30,7 +30,7 @@
 
 /**
  * Server Auth adapter
- * @param {Core} core Core reference
+ * @param {Core} core MeeseOS Core instance reference
  * @param {object} [options] Adapter options
  */
 const serverAuth = (core, options) => {

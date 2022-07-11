@@ -38,7 +38,7 @@ export default class Session {
 	/**
 	 * Creates the Session Handler
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**

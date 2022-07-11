@@ -41,6 +41,9 @@ import logger from "./logger";
 import merge from "deepmerge";
 import systemAdapter from "./adapters/vfs/system";
 
+// TODO: Maybe try to add selection in this file
+// https://github.com/DustinBrett/daedalOS/blob/main/components/system/Files/FileManager/Selection/
+
 /**
  * VFS Mountpoint attributes
  *
@@ -103,7 +106,7 @@ export default class Filesystem extends EventEmitter {
 	/**
 	 * Create filesystem manager
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {FilesystemOptions} [options] Options
 	 */
 	constructor(core, options = {}) {

@@ -37,7 +37,7 @@ import loadingScreen from "./loading-screen/loading.html";
 export default class Splash {
 	/**
 	 * Create Splash
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**

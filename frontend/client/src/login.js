@@ -46,7 +46,7 @@ export default class Login extends EventEmitter {
 	/**
 	 * Create authentication handler
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {LoginOptions} [options] Options
 	 */
 	constructor(core, options) {

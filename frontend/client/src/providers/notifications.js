@@ -36,7 +36,7 @@ import { ServiceProvider } from "@meeseOS/common";
  */
 export default class NotificationServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core MeeseOS Core
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		super(core);

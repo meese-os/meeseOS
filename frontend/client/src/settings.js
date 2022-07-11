@@ -89,7 +89,7 @@ export default class Settings {
 	/**
 	 * Create application
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {SettingsOptions} options Options
 	 */
 	constructor(core, options) {

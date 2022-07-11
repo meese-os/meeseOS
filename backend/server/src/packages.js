@@ -53,7 +53,7 @@ const readOrDefault = (filename) =>
 class Packages {
 	/**
 	 * Create new instance
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {PackagesOptions} [options] Instance options
 	 */
 	constructor(core, options = {}) {

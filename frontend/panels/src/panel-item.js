@@ -39,7 +39,7 @@ export default class PanelItem extends EventEmitter {
 	/**
 	 * Create panel item
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Panel} panel Panel reference
 	 * @param {Object} options Options
 	 */

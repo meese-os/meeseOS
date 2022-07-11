@@ -48,7 +48,7 @@ import Desktop from "../desktop";
  */
 export default class DesktopServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core MeeseOS Core
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core, options = {}) {
 		super(core, options || {});

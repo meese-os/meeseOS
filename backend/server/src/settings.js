@@ -48,7 +48,7 @@ const fsAdapter = require("./adapters/settings/fs");
 class Settings {
 	/**
 	 * Create new instance
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {SettingsOptions} [options] Instance options
 	 */
 	constructor(core, options = {}) {

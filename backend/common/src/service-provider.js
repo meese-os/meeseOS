@@ -38,7 +38,7 @@
 export class ServiceProvider {
 	/**
 	 * Constructor
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core, options = {}) {
 		/**

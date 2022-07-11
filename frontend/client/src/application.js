@@ -75,7 +75,7 @@ export default class Application extends EventEmitter {
 	/**
 	 * Create application
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {ApplicationData} data Application data
 	 */
 	constructor(core, data) {

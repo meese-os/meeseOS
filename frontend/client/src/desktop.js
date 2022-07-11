@@ -84,7 +84,7 @@ export default class Desktop extends EventEmitter {
 	/**
 	 * Create Desktop
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {DesktopOptions} [options={}] Options
 	 */
 	constructor(core, options = {}) {

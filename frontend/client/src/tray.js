@@ -56,7 +56,7 @@ export default class Tray {
 	/**
 	 * Creates the Tray Handler
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**

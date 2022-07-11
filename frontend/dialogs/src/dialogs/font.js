@@ -38,7 +38,7 @@ import Dialog from "../dialog";
 export default class FontDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core MeeseOS Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {number} [args.minSize=6] Minimum size
 	 * @param {number} [args.maxSize] Maximum size

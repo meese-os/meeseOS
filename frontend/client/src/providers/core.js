@@ -145,7 +145,7 @@ import logger from "../logger";
  */
 export default class CoreServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core MeeseOS Core
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {CoreProviderOptions} [options={}] Arguments
 	 */
 	constructor(core, options = {}) {

@@ -58,7 +58,7 @@ export default class WindowBehavior {
 	/**
 	 * Create window behavior
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**

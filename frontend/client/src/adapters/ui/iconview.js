@@ -199,7 +199,7 @@ const readDesktopFolder = (root, readdir, shortcuts) => {
  */
 export class DesktopIconView extends EventEmitter {
 	/**
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		super("DesktopIconView");

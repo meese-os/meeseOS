@@ -38,7 +38,7 @@ import Dialog from "../dialog";
 export default class DefaultApplicationDialog extends Dialog {
 	/**
 	 * Constructor
-	 * @param {Core} core MeeseOS Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
 	 * @param {String} [args.message] Dialog message

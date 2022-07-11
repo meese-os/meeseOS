@@ -75,7 +75,7 @@ const logger = consola.withTag("Filesystem");
 class Filesystem {
 	/**
 	 * Create new instance
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {FilesystemOptions} [options] Instance options
 	 */
 	constructor(core, options = {}) {

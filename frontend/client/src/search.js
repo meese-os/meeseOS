@@ -37,7 +37,7 @@ import logger from "./logger";
 export default class Search {
 	/**
 	 * Create Search instance
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**

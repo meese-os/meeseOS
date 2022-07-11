@@ -78,7 +78,7 @@ import Filesystem from "../filesystem";
  */
 export default class VFSServiceProvider extends ServiceProvider {
 	/**
-	 * @param {Core} core MeeseOS Core
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {VFSServiceOptions} [options={}]
 	 */
 	constructor(core, options = {}) {

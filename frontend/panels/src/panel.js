@@ -40,7 +40,7 @@ export default class Panel extends EventEmitter {
 	/**
 	 * Create panel
 	 *
-	 * @param {Core} core Core reference
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} options Options
 	 */
 	constructor(core, options = {}) {
