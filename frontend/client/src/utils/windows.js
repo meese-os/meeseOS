@@ -1,4 +1,4 @@
-/*
+/**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
@@ -38,8 +38,9 @@ const MINIMUM_HEIGHT = 100;
 const ONTOP_ZINDEX = 8388635;
 const BOTTOM_ZINDEX = 10;
 
-/*
+/**
  * Creates window attributes from an object
+ * @param {Object} attrs
  */
 export const createAttributes = (attrs) => ({
 	classNames: [],
@@ -75,8 +76,11 @@ export const createAttributes = (attrs) => ({
 	...attrs,
 });
 
-/*
+/**
  * Creates window state from an object
+ * @param {WindowState} state
+ * @param {Object} options
+ * @param {WindowAttributes} attrs
  */
 export const createState = (state, options, attrs) => ({
 	title: options.title || options.id,
@@ -108,7 +112,7 @@ export const createState = (state, options, attrs) => ({
  * @param {string} id
  * @param {WindowState} state
  * @param {WindowAttributes} attributes
- * @return {object}
+ * @return {Object}
  */
 export const createDOMAttributes = (id, state, attributes) => ({
 	id: id,
@@ -131,7 +135,7 @@ export const createDOMAttributes = (id, state, attributes) => ({
  * Creates styles for window DOM
  * @param {WindowState} state
  * @param {WindowAttributes} attributes
- * @return {object}
+ * @return {Object}
  */
 export const createDOMStyles = (
 	{ zIndex, styles, position: { top, left }, dimension: { width, height } },
@@ -145,8 +149,9 @@ export const createDOMStyles = (
 	...styles,
 });
 
-/*
+/**
  * Clamps position to viewport
+ * @param {Object} rect
  */
 export const clampPosition = (rect, { dimension, position }) => {
 	const maxLeft = rect.width - dimension.width;
@@ -162,8 +167,10 @@ export const clampPosition = (rect, { dimension, position }) => {
 	};
 };
 
-/*
+/**
  * Window rendering callback function
+ * @param {Window} win
+ * @param {Function} callback
  */
 export const renderCallback = (win, callback) => {
 	if (typeof callback === "function") {
@@ -188,8 +195,11 @@ export const renderCallback = (win, callback) => {
 	}
 };
 
-/*
+/**
  * Gets new position based on "gravity"
+ * @param {Window} win
+ * @param {Object} rect
+ * @param {string} gravity
  */
 export const positionFromGravity = (win, rect, gravity) => {
 	let { left, top } = win.state.position;
@@ -223,8 +233,11 @@ export const positionFromGravity = (win, rect, gravity) => {
 	return { left, top };
 };
 
-/*
+/**
  * Gets new dimension based on container
+ * @param {Window} win
+ * @param {Object} rect
+ * @param {HTMLElement} container
  */
 export const dimensionFromElement = (win, rect, container) => {
 	const innerBox = (
@@ -264,8 +277,9 @@ export const dimensionFromElement = (win, rect, container) => {
 	return { width, height };
 };
 
-/*
- * Transforms vector values (ex float to integer)
+/**
+ * Transforms vector values (ex. float to integer)
+ * @param {Object} rect
  */
 export const transformVectors = (rect, { width, height }, { top, left }) => {
 	const transform = (val, attr) => {
@@ -290,8 +304,9 @@ export const transformVectors = (rect, { width, height }, { top, left }) => {
 	};
 };
 
-/*
+/**
  * Creates a clamper for resize/move
+ * @param {Window} win
  */
 const clamper = (win) => {
 	const { maxDimension, minDimension } = win.attributes;
@@ -315,8 +330,9 @@ const clamper = (win) => {
 	});
 };
 
-/*
+/**
  * Creates a resize handler
+ * @param {Window} win
  */
 export const resizer = (win, handle) => {
 	const clamp = clamper(win);
@@ -336,8 +352,9 @@ export const resizer = (win, handle) => {
 	};
 };
 
-/*
+/**
  * Creates a movement handler
+ * @param {Window} win
  */
 export const mover = (win, rect) => {
 	const { position } = win.state;
@@ -350,8 +367,10 @@ export const mover = (win, rect) => {
 	};
 };
 
-/*
+/**
  * Calculates a new initial position for window
+ * @param {Window} win
+ * @param {Object} rect
  */
 export const getCascadePosition = (win, rect, pos) => {
 	const startX = CASCADE_DISTANCE + rect.left;
@@ -376,8 +395,10 @@ const getScreenOrientation = (screen) =>
 			? "portrait"
 			: "landscape";
 
-/*
+/**
  * Gets a media query name from a map
+ * @param {Window} win
+ * @returns {string}
  */
 export const getMediaQueryName = (win) =>
 	Object.keys(win.attributes.mediaQueries)

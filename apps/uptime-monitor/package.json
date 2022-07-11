@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/uptime-monitor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
     "test": "npm run eslint",
     "eslint": "eslint *.js",

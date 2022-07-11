@@ -1,4 +1,4 @@
-/*!
+/**
  * DomAnimator.js
  *
  * MIT licensed

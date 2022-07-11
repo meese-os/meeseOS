@@ -1,4 +1,4 @@
-/*!
+/**
  * MeeseOS - JavaScript Cloud/Web Desktop Platform
  *
  * Copyright (c) 2022-Present, Aaron Meese <aaronjmeese@gmail.com>

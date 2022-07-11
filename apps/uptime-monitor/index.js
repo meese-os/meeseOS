@@ -14,7 +14,6 @@ const register = (core, args, options, metadata) => {
 		.createWindow({
 			id: "UptimeMonitorWindow",
 			title: metadata.title,
-			icon: proc.resource(proc.metadata.icon),
 			dimension: { width: 650, height: 450 },
 			position: { left: 600, top: 200 },
 		})
