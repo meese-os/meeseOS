@@ -30,12 +30,12 @@
 
 //
 // This is the client bootstrapping script.
-// This is where you can register service providers or set up
-// your libraries etc.
+// This is where you can register service providers,
+// set up your libraries, etc.
 //
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
+// https://manual.aaronmeese.com/guide/provider/
+// https://manual.aaronmeese.com/install/
+// https://manual.aaronmeese.com/resource/official/
 //
 
 import {
@@ -47,11 +47,11 @@ import {
 	SettingsServiceProvider,
 	VFSServiceProvider,
 } from "@meeseOS/client";
-
 import { DialogServiceProvider } from "@meeseOS/dialogs";
 import { GUIServiceProvider } from "@meeseOS/gui";
 import { PanelServiceProvider } from "@meeseOS/panels";
 import { WidgetServiceProvider } from "@meeseOS/widgets";
+import { WirelessToolsServiceProvider } from "@meeseOS/wireless-tools-provider";
 import "./index.scss";
 import config from "./config.js";
 
@@ -69,6 +69,7 @@ const init = () => {
 	meeseOS.register(DialogServiceProvider);
 	meeseOS.register(GUIServiceProvider);
 	meeseOS.register(WidgetServiceProvider);
+	meeseOS.register(WirelessToolsServiceProvider);
 
 	meeseOS.boot();
 };

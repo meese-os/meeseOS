@@ -37,26 +37,32 @@ declare class ServiceProvider {
 	 * Core instance reference
 	 */
 	readonly core: CoreBase;
+
 	/**
 	 * Provider options
 	 */
 	readonly options: any;
+
 	/**
 	 * Constructor
 	 */
 	constructor(core: CoreBase, options: any);
+
 	/**
 	 * List of provided services
 	 */
 	provides(): string[];
+
 	/**
 	 * Initializes Provider
 	 */
 	init(): Promise<any>;
+
 	/**
 	 * Starts Provider
 	 */
 	start(): Promise<any>;
+
 	/**
 	 * Destroys Provider
 	 */
@@ -68,66 +74,82 @@ declare class CoreBase extends EventEmitter {
 	 * Logger module
 	 */
 	readonly logger: any;
+
 	/**
 	 * Configuration Tree
 	 */
 	readonly configuration: any;
+
 	/**
 	 * Options
 	 */
 	readonly options: any;
+
 	/**
 	 * Boot has been initiated
 	 */
 	booted: boolean;
+
 	/**
 	 * Fully started
 	 */
 	started: boolean;
+
 	/**
 	 * Fully destroyped
 	 */
 	destroyd: boolean;
+
 	/**
 	 * Service Provider Handler
 	 */
 	providers: any;
+
 	/**
 	 * Constructor
 	 */
 	constructor(name?: string);
+
 	/**
 	 * Destroy core instance
 	 */
 	destroy(): void;
+
 	/**
 	 * Boots up MeeseOS
 	 */
 	boot(): Promise<boolean>;
+
 	/**
 	 * Starts all core services
 	 */
 	start(): Promise<boolean>;
+
 	/**
 	 * Gets a configuration entry by key
 	 */
 	config(key: string, defaultValue: any): any;
+
 	/**
 	 * Register a service provider
 	 */
 	register(ref: typeof ServiceProvider, options: any): void;
+
 	/**
 	 * Register a instanciator provider
 	 */
 	instance(name: string, callback: Function): void;
+
 	/**
 	 * Register a singleton provider
 	 */
 	singleton(name: string, callback: Function): void;
+
 	/**
 	 * Create an instance of a provided service
 	 */
 	make<T>(name: string, ...args: any[]): T;
+
 	/**
 	 * Check if a service exists
 	 */
@@ -139,54 +161,67 @@ declare class Websocket extends EventEmitter {
 	 * Create a new Websocket
 	 */
 	constructor(name: string, uri: string, options?: WebsocketOptions);
+
 	/**
 	 * Socket URI
 	 */
 	readonly uri: string;
+
 	/**
 	 * If socket is closed
 	 */
 	closed: boolean;
+
 	/**
 	 * If socket is connected
 	 */
 	connected: boolean;
+
 	/**
 	 * If socket is connecting
 	 */
 	connecting: boolean;
+
 	/**
 	 * If socket is reconnecting
 	 */
 	reconnecting: boolean;
+
 	/**
 	 * If socket failed to connect
 	 */
 	connectfailed: boolean;
+
 	/**
 	 * Options
 	 */
 	readonly options: WebsocketOptions;
+
 	/**
 	 * The Websocket
 	 */
 	connection: WebSocket;
+
 	/**
 	 * Destroys the current connection
 	 */
 	private _destroyConnection;
+
 	/**
 	 * Attaches internal events
 	 */
 	private _attachEvents;
+
 	/**
 	 * Opens the connection
 	 */
 	open(reconnect?: boolean): void;
+
 	/**
 	 * Wrapper for sending data
 	 */
 	send(...args: any[]): void;
+
 	/**
 	 * Wrapper for closing
 	 */
@@ -201,10 +236,12 @@ export type WebsocketOptions = {
 	 * Enable reconnection
 	 */
 	reconnect?: boolean;
+
 	/**
 	 * Reconnect interval
 	 */
 	interval?: number;
+
 	/**
 	 * Immediately open socket after creation
 	 */
@@ -216,22 +253,27 @@ declare class Splash {
 	 * Create Splash
 	 */
 	constructor(core: Core);
+
 	/**
 	 * Core instance reference
 	 */
 	readonly core: Core;
+
 	/**
 	 * Splash root element
 	 */
 	readonly $loading: Element;
+
 	/**
 	 * Initializes splash
 	 */
 	init(): void;
+
 	/**
 	 * Shows splash
 	 */
 	show(): void;
+
 	/**
 	 * Destroys splash
 	 */
@@ -243,245 +285,305 @@ declare class Window extends EventEmitter {
 	 * Get a list of all windows
 	 */
 	static getWindows(): Window[];
+
 	/**
 	 * Gets the lastly focused Window
 	 */
 	static lastWindow(): Window;
+
 	/**
 	 * Create window
 	 */
 	constructor(core: Core, options?: WindowOptions);
+
 	/**
 	 * The Window ID
 	 */
 	readonly id: string;
+
 	/**
 	 * The Window ID
 	 */
 	readonly wid: number;
+
 	/**
 	 * Parent Window reference
 	 */
 	readonly parent: Window;
+
 	/**
 	 * Child windows (via 'parent')
 	 */
 	children: Window[];
+
 	/**
 	 * Core instance reference
 	 */
 	readonly core: Core;
+
 	/**
 	 * The window destruction state
 	 */
 	destroyed: boolean;
+
 	/**
 	 * The window rendered state
 	 */
 	rendered: boolean;
+
 	/**
 	 * The window was inited
 	 */
 	inited: boolean;
+
 	/**
 	 * The window attributes
 	 */
 	attributes: WindowAttributes;
+
 	/**
 	 * The window state
 	 */
 	state: WindowState;
+
 	/**
 	 * The window container
 	 */
 	readonly $element: Element;
+
 	/**
 	 * The content container
 	 */
 	$content: Element;
+
 	/**
 	 * The header container
 	 */
 	$header: Element;
+
 	/**
 	 * The icon container
 	 */
 	$icon: Element;
+
 	/**
 	 * The title container
 	 */
 	$title: Element;
+
 	/**
 	 * Internal variable to signal not to use default position
 	 * given by user (used for restore)
 	 */
 	private _preventDefaultPosition;
+
 	/**
 	 * Internal timeout reference used for triggering the loading
 	 * overlay.
 	 */
 	private _loadingDebounce;
+
 	/**
 	 * The window template
 	 */
 	private _template;
+
 	/**
 	 * Custom destructor callback
 	 */
 	private readonly _ondestroy;
+
 	/**
 	 * Last DOM update CSS text
 	 */
 	private _lastCssText;
+
 	/**
 	 * Last DOM update data attributes
 	 */
 	private _lastAttributes;
+
 	/**
 	 * Destroy window
 	 */
 	destroy(): void;
+
 	/**
 	 * Initialize window
 	 */
 	init(): Window;
+
 	/**
 	 * Initializes window template
 	 */
 	private _initTemplate;
+
 	/**
 	 * Initializes window behavior
 	 */
 	private _initBehavior;
+
 	/**
 	 * Checks the modal state of the window upon render
 	 */
 	private _checkModal;
+
 	/**
 	 * Sets the initial class names
 	 */
 	private _setClassNames;
+
 	/**
 	 * Render window
 	 */
 	render(callback?: Function): Window;
+
 	/**
 	 * Close the window
 	 */
 	close(): boolean;
+
 	/**
 	 * Focus the window
 	 */
 	focus(): boolean;
+
 	/**
 	 * Internal for focus
 	 */
 	private _focus;
+
 	/**
 	 * Blur (un-focus) the window
 	 */
 	blur(): boolean;
+
 	/**
 	 * Minimize (hide) the window
 	 */
 	minimize(): boolean;
+
 	/**
 	 * Raise (un-minimize) the window
 	 */
 	raise(): boolean;
+
 	/**
 	 * Maximize the window
 	 */
 	maximize(): boolean;
+
 	/**
 	 * Restore (un-maximize) the window
 	 */
 	restore(): boolean;
+
 	/**
 	 * Internal for Maximize or restore
 	 */
 	private _maximize;
+
 	/**
 	 * Resize to fit to current container
 	 */
 	resizeFit(container?: Element): void;
+
 	/**
 	 * Clamps the position to viewport
 	 */
 	clampToViewport(update?: boolean): void;
+
 	/**
 	 * Set the Window icon
 	 */
 	setIcon(uri: string): void;
+
 	/**
 	 * Set the Window title
 	 */
 	setTitle(title: string): void;
+
 	/**
 	 * Set the Window dimension
 	 */
 	setDimension(dimension: WindowDimension): void;
+
 	/**
 	 * Set the Window position
 	 */
 	setPosition(position: WindowPosition, preventDefault?: boolean): void;
+
 	/**
 	 * Set the Window z index
 	 */
 	setZindex(zIndex: number): void;
+
 	/**
 	 * Sets the Window to next z index
 	 */
 	setNextZindex(force?: boolean): void;
+
 	/**
 	 * Set a state by value
 	 */
 	setState(name: string, value: any, update?: boolean): void;
+
 	/**
 	 * Gravitates window towards a certain area
 	 */
 	gravitate(gravity: string): void;
+
 	/**
 	 * Gets a astate
 	 */
 	getState(n: any): any;
+
 	/**
 	 * Get a snapshot of the Window session
 	 */
 	getSession(): WindowSession;
+
 	/**
 	 * Internal method for setting state
 	 */
 	private _setState;
+
 	/**
 	 * Internal method for toggling state
 	 */
 	private _toggleState;
+
 	/**
 	 * Check if we have to set next zindex
 	 */
 	private _checkNextZindex;
 	_updateDOM(): void;
+
 	/**
 	 * Updates the window buttons in DOM
 	 */
 	private _updateButtons;
+
 	/**
 	 * Updates window title in DOM
 	 */
 	private _updateTitle;
+
 	/**
 	 * Updates window icon decoration in DOM
 	 */
 	private _updateIconStyles;
+
 	/**
 	 * Updates window header decoration in DOM
 	 */
 	private _updateHeaderStyles;
+
 	/**
 	 * Updates window data in DOM
 	 */
 	private _updateAttributes;
+
 	/**
 	 * Updates window style in DOM
 	 */
@@ -496,6 +598,7 @@ export type WindowDimension = {
 	 * Width in pixels (or float for percentage in setters)
 	 */
 	width: number;
+
 	/**
 	 * Height in pixels (or float for percentage in setters)
 	 */
@@ -510,6 +613,7 @@ export type WindowPosition = {
 	 * Left in pixels (or float for percentage in setters)
 	 */
 	left: number;
+
 	/**
 	 * Top in pixels (or float for percentage in setters)
 	 */
@@ -535,66 +639,82 @@ export type WindowAttributes = {
 	 * A list of class names
 	 */
 	classNames?: string[];
+
 	/**
 	 * If always on top
 	 */
 	ontop?: boolean;
+
 	/**
 	 * Gravity (center/top/left/right/bottom or any combination)
 	 */
 	gravity?: string;
+
 	/**
 	 * If resizable
 	 */
 	resizable?: boolean;
+
 	/**
 	 * If focusable
 	 */
 	focusable?: boolean;
+
 	/**
 	 * If window if maximizable
 	 */
 	maximizable?: boolean;
+
 	/**
 	 * If minimizable
 	 */
 	minimizable?: boolean;
+
 	/**
 	 * If moveable
 	 */
 	moveable?: boolean;
+
 	/**
 	 * If closeable
 	 */
 	closeable?: boolean;
+
 	/**
 	 * Show header
 	 */
 	header?: boolean;
+
 	/**
 	 * Show controls
 	 */
 	controls?: boolean;
+
 	/**
 	 * Global visibility, 'restricted' to hide from window lists etc.
 	 */
 	visibility?: string;
+
 	/**
 	 * Clamp the window position upon creation
 	 */
 	clamp?: boolean;
+
 	/**
 	 * If window should have the default drop action
 	 */
 	droppable?: boolean;
+
 	/**
 	 * Minimum dimension
 	 */
 	minDimension?: WindowDimension;
+
 	/**
 	 * Maximum dimension
 	 */
 	maxDimension?: WindowDimension;
+
 	/**
 	 * A map of matchMedia to name
 	 */
@@ -611,46 +731,57 @@ export type WindowState = {
 	 * Title
 	 */
 	title: string;
+
 	/**
 	 * Icon
 	 */
 	icon: string;
+
 	/**
 	 * If moving
 	 */
 	moving?: boolean;
+
 	/**
 	 * If resizing
 	 */
 	resizing?: boolean;
+
 	/**
 	 * If loading
 	 */
 	loading?: boolean;
+
 	/**
 	 * If focused
 	 */
 	focused?: boolean;
+
 	/**
 	 * If maximized
 	 */
 	maximized?: boolean;
+
 	/**
 	 * If mimimized
 	 */
 	mimimized?: boolean;
+
 	/**
 	 * If modal to the parent
 	 */
 	modal?: boolean;
+
 	/**
 	 * The z-index (auto calculated)
 	 */
 	zIndex?: number;
+
 	/**
 	 * Position
 	 */
 	position?: WindowPosition;
+
 	/**
 	 * Dimension
 	 */
@@ -665,38 +796,47 @@ export type WindowOptions = {
 	 * Window Id (not globaly unique)
 	 */
 	id: string;
+
 	/**
 	 * Window Title
 	 */
 	title?: string;
+
 	/**
 	 * Window Icon
 	 */
 	icon?: string;
+
 	/**
 	 * The parent Window reference
 	 */
 	parent?: Window;
+
 	/**
 	 * The Window HTML template (or function with signature (el, win) for programatic construction)
 	 */
 	template?: string | Function;
+
 	/**
 	 * A callback function when window destructs to interrupt the procedure
 	 */
 	ondestroy?: Function;
+
 	/**
 	 * Window position
 	 */
 	position?: WindowPosition | string;
+
 	/**
 	 * Window dimension
 	 */
 	dimension?: WindowDimension;
+
 	/**
 	 * Apply Window attributes
 	 */
 	attributes?: WindowAttributes;
+
 	/**
 	 * Apply Window state
 	 */
@@ -708,110 +848,135 @@ declare class Application extends EventEmitter {
 	 * Get a list of all running applications
 	 */
 	static getApplications(): Application[];
+
 	/**
 	 * Kills all running applications
 	 */
 	static destroyAll(): void;
+
 	/**
 	 * Create application
 	 */
 	constructor(core: Core, data: ApplicationData);
+
 	/**
 	 * The Application ID
 	 */
 	readonly pid: number;
+
 	/**
 	 * Core instance reference
 	 */
 	readonly core: Core;
+
 	/**
 	 * Application arguments
 	 */
 	args: {
 		foo: any;
 	};
+
 	/**
 	 * Application options
 	 */
 	options: ApplicationOptions;
+
 	/**
 	 * Application metadata
 	 */
 	readonly metadata: any;
+
 	/**
 	 * Window list
 	 */
 	windows: Window[];
+
 	/**
 	 * Worker instances
 	 */
 	workers: Worker[];
+
 	/**
 	 * Options for internal fetch/requests
 	 */
 	requestOptions: object;
+
 	/**
 	 * The application destruction state
 	 */
 	destroyed: boolean;
+
 	/**
 	 * Application settings
 	 */
 	settings: {
 		foo: any;
 	};
+
 	/**
 	 * Application started time
 	 */
 	readonly started: Date;
+
 	/**
 	 * Application WebSockets
 	 */
 	sockets: Websocket[];
+
 	/**
 	 * Destroy application
 	 */
 	destroy(remove?: boolean): void;
+
 	/**
 	 * Re-launch this application
 	 */
 	relaunch(): void;
+
 	/**
 	 * Gets a URI to a resource for this application
 	 * If given path is an URI it will just return itself.
 	 */
 	resource(path?: string, options?: object): string;
+
 	/**
 	 * Performs a request to the MeeseOS server with the application
 	 * as the endpoint.
 	 */
 	request(path?: string, options?: any, type?: string): Promise<any>;
+
 	/**
 	 * Creates a new Websocket
 	 */
 	socket(path?: string, options?: any): Websocket;
+
 	/**
 	 * Sends a message over websocket via the core connection.
 	 * This does not create a new connection, but rather uses the core connection.
 	 * For subscribing to messages from the server use the 'ws:message' event
 	 */
 	send(...args: any[]): void;
+
 	/**
 	 * Creates a new Worker
 	 */
 	worker(filename: string, options?: object): Worker;
+
 	/**
 	 * Create a new window belonging to this application
 	 */
 	createWindow(options?: any): Window;
+
 	/**
 	 * Removes window(s) based on given filter
 	 */
 	removeWindow(filter: Function): void;
+
 	/**
 	 * Gets a snapshot of the application session
 	 */
 	getSession(): ApplicationSession;
+
 	/**
 	 * Saves settings
 	 */
@@ -826,14 +991,17 @@ export type ApplicationOptions = {
 	 * Initial settings
 	 */
 	settings?: object;
+
 	/**
 	 * Restore data
 	 */
 	restore?: object;
+
 	/**
 	 * Auto-focus first created window
 	 */
 	windowAutoFocus?: boolean;
+
 	/**
 	 * Allow session storage
 	 */
@@ -850,10 +1018,12 @@ export type ApplicationData = {
 	args: {
 		foo: any;
 	};
+
 	/**
 	 * Options
 	 */
 	options?: ApplicationOptions;
+
 	/**
 	 * Package Metadata
 	 */
@@ -876,54 +1046,67 @@ declare class Core extends CoreBase {
 	 * Create core instance
 	 */
 	constructor(config?: any, options?: CoreOptions);
+
 	/**
 	 * Websocket connection
 	 */
 	ws: Websocket;
+
 	/**
 	 * Ping (stay alive) interval
 	 */
 	ping: number;
+
 	/**
 	 * Splash instance
 	 */
 	readonly splash: Splash;
+
 	/**
 	 * Main DOM element
 	 */
 	readonly $root: Element;
+
 	/**
 	 * Windows etc DOM element
 	 */
 	readonly $contents: Element;
+
 	/**
 	 * Resource script container DOM element
 	 */
 	readonly $resourceRoot: Element;
+
 	/**
 	 * Default fetch request options
 	 */
 	requestOptions: any;
+
 	/**
 	 * Url Resolver
 	 */
 	readonly urlResolver: () => string;
+
 	/**
 	 * Current user data
 	 */
 	readonly user: CoreUserData;
+
 	/**
 	 * Attaches some internal events
 	 */
 	private _attachEvents;
+
 	/**
 	 * Creates the main connection to server
 	 */
 	private _createConnection;
+
 	/**
 	 * Creates event listeners*
 	 */
 	private _createListeners;
+
 	/**
 	 * Creates an URL based on configured public path
 	 * If you give a options.type, the URL will be resolved
@@ -937,12 +1120,14 @@ declare class Core extends CoreBase {
 		},
 		metadata?: any
 	): string;
+
 	/**
 	 * Make a HTTP request
 	 * This is a wrapper for making a 'fetch' request with some helpers
 	 * and integration with MeeseOS
 	 */
 	request(url: string, options?: any, type?: string, force?: boolean): any;
+
 	/**
 	 * Create an application from a package
 	 */
@@ -953,32 +1138,39 @@ declare class Core extends CoreBase {
 		},
 		options?: any
 	): Promise<Application>;
+
 	/**
 	 * Spawns an application based on the file given
 	 */
 	open(file: any, options?: any): boolean | Application;
+
 	/**
 	 * Wrapper method to create an application choice dialog
 	 */
 	private _openApplicationDialog;
+
 	/**
 	 * Sends a 'broadcast' event with given arguments
 	 * to all applications matching given filter
 	 */
 	broadcast(pkg: string | Function, name: string, ...args: any[]): string[];
+
 	/**
 	 * Sends a signal to the server over websocket.
 	 * This will be interpreted as an event in the server core.
 	 */
 	send(name: string, ...params: any[]);
+
 	/**
 	 * Set the internal fetch/request options
 	 */
 	setRequestOptions(options: object): void;
+
 	/**
 	 * Gets the current user
 	 */
 	getUser(): CoreUserData;
+
 	/**
 	 * Add middleware function to a group
 	 */

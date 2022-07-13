@@ -67,6 +67,7 @@
     "@meeseOS/textpad": "workspace:*",
     "@meeseOS/uptime-monitor": "workspace:*",
     "@meeseOS/widgets": "workspace:*",
+    "@meeseOS/wireless-tools-provider": "workspace:*",
     "dotenv": "^16.0.0",
     "hyperapp": "^1.2.10",
     "typeface-roboto": "^1.1.13"

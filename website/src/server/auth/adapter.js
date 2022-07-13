@@ -1,8 +1,8 @@
 /*
  * For more information about authentication adapters, visit:
- * - https://manual.os-js.org/v3/tutorial/auth/
- * - https://manual.os-js.org/v3/guide/auth/
- * - https://manual.os-js.org/v3/development/
+ * - https://manual.aaronmeese.com/tutorial/auth/
+ * - https://manual.aaronmeese.com/guide/auth/
+ * - https://manual.aaronmeese.com/development/
  */
 
 const { readFileSync } = require("fs");

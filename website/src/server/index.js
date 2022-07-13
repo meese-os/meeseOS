@@ -33,9 +33,9 @@
 // This is where you can register service providers or set up
 // your libraries etc.
 //
-// https://manual.os-js.org/v3/guide/provider/
-// https://manual.os-js.org/v3/install/
-// https://manual.os-js.org/v3/resource/official/
+// https://manual.aaronmeese.com/guide/provider/
+// https://manual.aaronmeese.com/install/
+// https://manual.aaronmeese.com/resource/official/
 //
 
 const {
@@ -46,6 +46,7 @@ const {
 	AuthServiceProvider,
 	SettingsServiceProvider,
 } = require("@meeseOS/server");
+const { WirelessToolsServiceProvider } = require("@meeseOS/wireless-tools-provider/src/server.js");
 
 const config = require("./config.js");
 const meeseOS = new Core(config, {});
@@ -61,6 +62,7 @@ meeseOS.register(AuthServiceProvider, {
 	},
 });
 meeseOS.register(SettingsServiceProvider);
+meeseOS.register(WirelessToolsServiceProvider);
 
 const shutdown = (signal) => (error) => {
 	if (error instanceof Error) {

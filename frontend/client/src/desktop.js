@@ -795,7 +795,7 @@ export default class Desktop extends EventEmitter {
 						},
 					})),
 				},
-			  ];
+			];
 
 		if (hasIconview && this.iconview) {
 			defaultItems.push({

@@ -127,7 +127,7 @@ export const providerHandler = (core) => {
 				options,
 			});
 		} catch (e) {
-			console.error("Provider register error", e);
+			console.error("Provider register error -", e);
 		}
 	};
 

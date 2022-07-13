@@ -1,6 +1,6 @@
 export default class ServiceProvider {
 	/**
-	 * Constructor
+	 * Create new instance
 	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core, options = {}) {

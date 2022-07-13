@@ -49,7 +49,7 @@ class Settings {
 	/**
 	 * Create new instance
 	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {SettingsOptions} [options] Instance options
+	 * @param {SettingsOptions} [options={}] Instance options
 	 */
 	constructor(core, options = {}) {
 		/**

@@ -29,8 +29,8 @@
  */
 
 // This is the client configuration tree.
-// Guide: https://manual.os-js.org/v3/config/#client
-// Complete config tree: https://github.com/os-js/osjs-client/blob/master/src/config.js
+// Guide: https://manual.aaronmeese.com/config/#client
+// Complete config tree: https://github.com/meese-enterprises/meeseOS/blob/master/frontend/client/src/config.js
 
 export default {
 	desktop: {

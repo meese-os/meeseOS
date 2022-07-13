@@ -29,7 +29,7 @@
    * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
-  "pnpmVersion": "7.5.0",
+  "pnpmVersion": "7.5.1",
 
   /**
    * Options that are only used when the PNPM package manager is selected
@@ -559,6 +559,10 @@
     {
       "packageName": "@meeseOS/widgets",
       "projectFolder": "frontend/widgets"
+    },
+    {
+      "packageName": "@meeseOS/wireless-tools-provider",
+      "projectFolder": "backend/wireless-tools-provider"
     }
   ]
 }

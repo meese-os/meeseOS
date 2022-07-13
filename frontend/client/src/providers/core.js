@@ -186,7 +186,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @return {string}
+	 * @return {string[]}
 	 */
 	provides() {
 		return [

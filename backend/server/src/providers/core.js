@@ -41,17 +41,28 @@ const { isAuthenticated, closeWatches } = require("../utils/core.js");
  * MeeseOS Core Service Provider
  */
 class CoreServiceProvider extends ServiceProvider {
+	/**
+	 * Create new instance
+	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {Object} [options] Arguments
+	 */
 	constructor(core, options) {
 		super(core, options);
 
 		this.watches = [];
 	}
 
+	/**
+	 * Destroys provider
+	 */
 	async destroy() {
 		await closeWatches(this.watches);
 		super.destroy();
 	}
 
+	/**
+	 * Initializes provider
+	 */
 	async init() {
 		this.initService();
 		this.initExtensions();
@@ -60,12 +71,19 @@ class CoreServiceProvider extends ServiceProvider {
 		this.initProxies();
 	}
 
+	/**
+	 * Starts provider
+	 */
 	start() {
 		if (this.core.configuration.development) {
 			this.initDeveloperTools();
 		}
 	}
 
+	/**
+	 * Get a list of services this provider registers
+	 * @return {string[]}
+	 */
 	provides() {
 		return ["meeseOS/express"];
 	}

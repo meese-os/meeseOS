@@ -540,6 +540,27 @@ importers:
       jest-express: 1.12.0
       temp: 0.9.4
 
+  ../../backend/wireless-tools-provider:
+    specifiers:
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/event-emitter': workspace:*
+      babel-loader: ^8.2.3
+      eslint: ^8.18.0
+      uuid: ^8.3.2
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
+      wireless-tools: ^0.19.0
+    dependencies:
+      '@meeseOS/event-emitter': link:../event-emitter
+      uuid: 8.3.2
+      wireless-tools: 0.19.0
+    devDependencies:
+      '@meeseOS/eslint-config': link:../../development/eslint
+      babel-loader: 8.2.5_webpack-cli@4.9.2
+      eslint: 8.18.0
+      webpack: 5.72.1_webpack-cli@4.9.2
+      webpack-cli: 4.9.2
+
   ../../development/cli:
     specifiers:
       '@meeseOS/eslint-config': workspace:*
@@ -1035,6 +1056,7 @@ importers:
       '@meeseOS/textpad': workspace:*
       '@meeseOS/uptime-monitor': workspace:*
       '@meeseOS/widgets': workspace:*
+      '@meeseOS/wireless-tools-provider': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       css-loader: ^6.6.0
@@ -1075,6 +1097,7 @@ importers:
       '@meeseOS/textpad': link:../apps/textpad
       '@meeseOS/uptime-monitor': link:../apps/uptime-monitor
       '@meeseOS/widgets': link:../frontend/widgets
+      '@meeseOS/wireless-tools-provider': link:../backend/wireless-tools-provider
       dotenv: 16.0.1
       hyperapp: 1.2.10
       typeface-roboto: 1.1.13
@@ -10423,7 +10446,7 @@ packages:
     dev: true
 
   /tr46/1.0.1:
-    resolution: {integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=}
+    resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
     dependencies:
       punycode: 2.1.1
     dev: true
@@ -10922,7 +10945,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.1
       acorn: 8.7.1
       acorn-import-assertions: 1.8.0
-      browserslist: 4.20.3
+      browserslist: 4.21.0
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.9.3
       es-module-lexer: 0.9.3
@@ -11006,6 +11029,10 @@ packages:
   /wildcard/2.0.0:
     resolution: {integrity: sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==}
     dev: true
+
+  /wireless-tools/0.19.0:
+    resolution: {integrity: sha512-WlD5YsEx2FkjuDkQ05XuLmFMxe8r+Hf+EWitReXz44USu1Bi2BahFH7Qr7ttzTlHLLfnHezzHts5ruHRegbMEQ==}
+    dev: false
 
   /word-wrap/1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}

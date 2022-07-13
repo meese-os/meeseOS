@@ -38,7 +38,7 @@ describe("Url Resolver Utils", () => {
 
 	test("Should return itself on absolute", () => {
 		const resolver = createResolver("/");
-		expect(resolver("https://os-js.org")).toBe("https://os-js.org");
+		expect(resolver("https://manual.aaronmeese.com")).toBe("https://manual.aaronmeese.com");
 	});
 
 	test("Should resolve package urls", () => {
