@@ -21,7 +21,7 @@ const register = (core, args, options, metadata) => {
 
 	win.on("destroy", () => {
 		proc.destroy();
-		// TODO: Destroy the game
+		// TODO: Destroy the game and JS-DOS processes
 	});
 	win.render(($content) => ReactDOM.render(React.createElement(App), $content));
 
