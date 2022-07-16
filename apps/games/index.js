@@ -15,11 +15,14 @@ const register = (core, args, options, metadata) => {
 		id: "GamesWindow",
 		title: metadata.title,
 		icon: proc.resource(proc.metadata.icon),
-		dimension: { width: 650, height: 525 },
-		position: { left: 600, top: 200 },
+		dimension: { width: 725, height: 525 },
+		position: { left: 700, top: 300 },
 	});
 
-	win.on("destroy", () => proc.destroy());
+	win.on("destroy", () => {
+		proc.destroy();
+		// TODO: Destroy the game
+	});
 	win.render(($content) => ReactDOM.render(React.createElement(App), $content));
 
 	return proc;

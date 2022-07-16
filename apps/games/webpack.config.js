@@ -53,6 +53,7 @@ module.exports = {
 				"icon.png",
 				{ from: "node_modules/js-dos/dist", to: "js-dos" },
 				{ from: "dos-files/*" },
+				{ from: "images/*" },
 			],
 		}),
 		new MiniCssExtractPlugin({

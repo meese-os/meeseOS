@@ -1,5 +1,6 @@
 {
   "name": "@meeseOS/games",
+  "version": "1.0.0",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
@@ -7,6 +8,13 @@
     "eslint": "eslint index.js",
     "stylelint": "stylelint index.scss --fix",
     "prepublishOnly": "npm run test && rm ./dist/* && npm run build"
+  },
+  "files": [
+    "dist/",
+    "metadata.json"
+  ],
+  "meeseOS": {
+    "type": "package"
   },
   "devDependencies": {
     "@meeseOS/eslint-config": "workspace:*",
@@ -54,8 +62,5 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  },
-  "meeseOS": {
-    "type": "package"
   }
 }
