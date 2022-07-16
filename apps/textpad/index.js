@@ -37,7 +37,10 @@ import meeseOS from "meeseOS";
 const createMenu = (current, actions) => [
 	{ label: "New", onclick: () => actions.menuNew() },
 	{ label: "Open", onclick: () => actions.menuOpen() },
-	{ label: "Save", disabled: !current, onclick: () => actions.menuSave() },
+	{ label: "Save", onclick: () => {
+		// "Save" behaves as "Save As" when no file exists
+		current ? actions.menuSave() : actions.menuSaveAs();
+	}},
 	{ label: "Save As", onclick: () => actions.menuSaveAs() },
 	{ label: "Quit", onclick: () => actions.menuQuit() },
 ];
@@ -128,7 +131,8 @@ const createMainWindow = (core, proc) => {
 		.createWindow({
 			id: "TextpadWindow",
 			icon: proc.resource(proc.metadata.icon),
-			dimension: { width: 400, height: 400 },
+			dimension: { width: 500, height: 400 },
+			position: { left: 500, top: 200 },
 		})
 		.on("destroy", () => proc.destroy())
 		.on("render", (win) => win.focus())
