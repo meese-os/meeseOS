@@ -176,12 +176,12 @@ export default class MenuPanelItem extends PanelItem {
 		};
 
 		const onmenuopen = () => {
-			const els = Array.from(
+			const elements = Array.from(
 				this.panel.$element.querySelectorAll(
 					".meeseOS-panel-item[data-name=\"menu\"]"
 				)
 			);
-			els.forEach((el) =>
+			elements.forEach((el) =>
 				el.querySelector(".meeseOS-panel-item--icon").click()
 			);
 		};

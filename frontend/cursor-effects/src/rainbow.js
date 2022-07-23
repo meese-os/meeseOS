@@ -66,6 +66,7 @@ const rainbowOptions = {
  * Creates a rainbow cursor effect on the page body.
  * @param {Object} options
  * @link https://github.com/tholman/cursor-effects/blob/master/src/rainbowCursor.js
+ * @todo Make sure the last edge is deleted when exiting the page.
  */
 const rainbow = (options) => {
 	const defaults = Object.keys(rainbowOptions).map((key) => ({

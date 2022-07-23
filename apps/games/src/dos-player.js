@@ -14,8 +14,7 @@ export default function DosPlayer(props) {
 
 		const root = rootRef.current;
 		const config = {
-			// TODO: Try to get support for closing the sidebar by default
-			// style: "none",
+			style: "hidden",
 			noSideBar: true,
 			noSocialLinks: true,
 			onExit: () => {

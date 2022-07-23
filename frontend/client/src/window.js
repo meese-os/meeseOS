@@ -135,7 +135,7 @@ let windowCount = 0;
 let nextZindex = 1;
 let lastWindow = null;
 
-/*
+/**
  * Default window template
  */
 const TEMPLATE = `<div class="meeseOS-window-inner">
@@ -327,6 +327,11 @@ export default class Window extends EventEmitter {
 		 */
 		this._ondestroy = options.ondestroy || (() => true);
 
+		// For whatever reason, these need to be included up here to be
+		// bound to the window instance.
+		this.setState = this.setState.bind(this);
+		this.focus = this.focus.bind(this);
+
 		/**
 		 * Last DOM update CSS text
 		 * @private
@@ -479,10 +484,8 @@ export default class Window extends EventEmitter {
 	 * @private
 	 */
 	_checkModal() {
-		// TODO: Global modal
 		if (!this.parent) return;
 		if (this.attributes.modal) {
-			// TODO: Handle this occasionally throwing errors with `settings`
 			this.on("render", () => this.parent.setState("loading", true));
 			this.on("destroy", () => this.parent.setState("loading", false));
 		}
@@ -861,7 +864,6 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Get a list of all windows
-	 *
 	 * @return {Window[]}
 	 */
 	static getWindows() {

@@ -143,7 +143,7 @@ export default class Auth {
 	}
 
 	/**
-	 * Initializes authentication handler
+	 * Initializes the authentication handler
 	 */
 	init() {
 		this.ui.on("login:post", (values) => this.login(values));

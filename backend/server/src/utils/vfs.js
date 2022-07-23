@@ -186,7 +186,7 @@ const mountpointResolver = (core) => async (path) => {
 	return Object.freeze({ mount, adapter });
 };
 
-/*
+/**
  * Parses URL Body
  */
 const parseGet = (req) => {
@@ -195,8 +195,8 @@ const parseGet = (req) => {
 	return Promise.resolve({ fields: query, files: {} });
 };
 
-/*
- * Parses Json Body
+/**
+ * Parses JSON Body
  */
 const parseJson = (req) => {
 	const isJson =
@@ -210,7 +210,7 @@ const parseJson = (req) => {
 	return false;
 };
 
-/*
+/**
  * Parses Form Body
  */
 const parseFormData = (req, { maxFieldsSize, maxFileSize }) => {

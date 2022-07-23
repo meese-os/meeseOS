@@ -110,14 +110,14 @@ export default class Core extends CoreBase {
 		this.ping = null;
 
 		/**
-		 * Main DOM element
+		 * Main DOM element (typically `<body>`)
 		 * @type {Element}
 		 * @readonly
 		 */
 		this.$root = options.root;
 
 		/**
-		 * Windows etc DOM element
+		 * DOM element that contains all windows, the desktop, etc.
 		 * @type {Element}
 		 * @readonly
 		 */
@@ -137,7 +137,7 @@ export default class Core extends CoreBase {
 		this.requestOptions = {};
 
 		/**
-		 * Url Resolver
+		 * URL Resolver
 		 * TODO: typedef
 		 * @type {function(): string}
 		 * @readonly
@@ -232,7 +232,6 @@ export default class Core extends CoreBase {
 		this._attachEvents();
 		this.emit("meeseOS/core:boot");
 
-		// TODO: Listen for meeseOS/splash:finished based on settings
 		// TODO: Prevent flash of login UI if the local cookie is set
 
 		return super

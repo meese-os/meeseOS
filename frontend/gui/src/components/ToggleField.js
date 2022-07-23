@@ -31,7 +31,7 @@
 import { createField } from "../element";
 import { h } from "hyperapp";
 
-/*
+/**
  * Parses option value
  */
 const parseValue = (value) => {

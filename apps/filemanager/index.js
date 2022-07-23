@@ -66,8 +66,8 @@ const createWindowOptions = (core, proc, title) => ({
 		},
 	},
 	dimension: {
-		width: 400,
-		height: 400,
+		width: 600,
+		height: 450,
 		...core.config("filemanager.defaultWindowSize", {}),
 	},
 });
@@ -84,7 +84,7 @@ const divertDropAction = (browser, virtual) => (ev, data, files) => {
 };
 
 /**
- * HoF for dialogs
+ * Higher-Order Function (HoF) for dialogs
  */
 const usingPositiveButton = (cb) => (btn, value) => {
 	if (["yes", "ok"].indexOf(btn) !== -1) {
@@ -107,7 +107,7 @@ const triggerBrowserUpload = (cb) => {
 };
 
 /**
- * Checks if given fielname is a dotted
+ * Checks if given filename is a dotted
  */
 const isSpecialFile = (filename) => ["..", "."].indexOf(filename) !== -1;
 
@@ -1004,7 +1004,6 @@ const createProcess = (core, args, options, metadata) => {
 		options: { ...options, settings: createDefaultSettings() },
 	});
 
-	const emitter = core.broadcast();
 	const win = createWindow(core, proc);
 
 	const onSettingsUpdate = (settings) => {
@@ -1017,7 +1016,7 @@ const createProcess = (core, args, options, metadata) => {
 
 		proc
 			.saveSettings()
-			.then(() => emitter("meeseOS:filemanager:remote", proc.settings))
+			.then(() => core.broadcast("meeseOS:filemanager:remote", proc.settings))
 			.catch((error) => console.warn(error));
 	};
 

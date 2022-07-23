@@ -28,15 +28,15 @@
  * @licence Simplified BSD License
  */
 
-//
-// This is the client bootstrapping script.
-// This is where you can register service providers,
-// set up your libraries, etc.
-//
-// https://manual.aaronmeese.com/guide/provider/
-// https://manual.aaronmeese.com/install/
-// https://manual.aaronmeese.com/resource/official/
-//
+/*
+ * This is the client bootstrapping script.
+ * This is where you can register service providers,
+ * set up your libraries, etc.
+ *
+ * https://manual.aaronmeese.com/guide/provider/
+ * https://manual.aaronmeese.com/install/
+ * https://manual.aaronmeese.com/resource/official/
+ */
 
 import {
 	AuthServiceProvider,
