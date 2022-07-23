@@ -33,7 +33,7 @@ module.exports = {
 		"prefer-rest-params": 1,
 		"template-curly-spacing": ["warn", "never"],
 		"no-multiple-empty-lines": ["error"],
-		"no-unused-vars": ["error", { vars: "all", args: "none" }],
+		"no-unused-vars": ["warn", { vars: "all", args: "none" }],
 		"no-useless-constructor": 1,
 		"no-var": 2,
 		"no-duplicate-imports": 2,

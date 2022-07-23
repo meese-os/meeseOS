@@ -155,6 +155,9 @@ export const defaultConfiguration = {
 	settings: {
 		lock: [],
 
+		// localStorage settings adapter key prefix
+		prefix: "meeseOS__",
+
 		defaults: {
 			"meeseOS/default-application": {},
 			"meeseOS/session": [],

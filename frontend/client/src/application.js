@@ -44,8 +44,8 @@ const getSettingsKey = (metadata) => "meeseOS/application/" + metadata.name;
  * Application Options
  *
  * @typedef {Object} ApplicationOptions
- * @property {object} [settings] Initial settings
- * @property {object} [restore] Restore data
+ * @property {Object} [settings] Initial settings
+ * @property {Object} [restore] Restore data
  * @property {boolean} [windowAutoFocus=true] Auto-focus first created window
  * @property {boolean} [sessionable=true] Allow session storage
  */
@@ -150,7 +150,7 @@ export default class Application extends EventEmitter {
 
 		/**
 		 * Options for internal fetch/requests
-		 * @type {object}
+		 * @type {Object}
 		 */
 		this.requestOptions = {};
 
@@ -250,7 +250,7 @@ export default class Application extends EventEmitter {
 	 * If given path is an URI it will just return itself.
 	 *
 	 * @param {string} path The path
-	 * @param {object} [options] Options for url() in core
+	 * @param {Object} [options] Options for url() in core
 	 * @return {string} A complete URI
 	 */
 	resource(path = "/", options = {}) {
@@ -310,7 +310,7 @@ export default class Application extends EventEmitter {
 	/**
 	 * Creates a new Worker
 	 * @param {string} filename Worker filename
-	 * @param {object} [options] Worker options
+	 * @param {Object} [options] Worker options
 	 * @return {Worker}
 	 */
 	worker(filename, options = {}) {

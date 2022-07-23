@@ -31,7 +31,7 @@
 /**
  * Server Settings adapter
  * @param {Core} core MeeseOS Core instance reference
- * @param {object} [options] Adapter options
+ * @param {Object} [options] Adapter options
  */
 const serverSettings = (core) => ({
 	save: (settings) =>

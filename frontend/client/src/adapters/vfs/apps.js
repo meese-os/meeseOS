@@ -31,7 +31,7 @@
 /**
  * Application VFS adapter
  * @param {Core} core MeeseOS Core instance reference
- * @param {object} [options] Adapter options
+ * @param {Object} [options] Adapter options
  */
 const adapter = (core) => {
 	const pkgs = core.make("meeseOS/packages");

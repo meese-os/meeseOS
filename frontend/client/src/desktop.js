@@ -64,7 +64,7 @@ import merge from "deepmerge";
  * Desktop Options
  *
  * @typedef {Object} DeskopOptions
- * @property {object[]} [contextmenu={}] Default Context menu items
+ * @property {Object[]} [contextmenu={}] Default Context menu items
  */
 
 /**

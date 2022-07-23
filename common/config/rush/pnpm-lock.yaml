@@ -61,7 +61,7 @@ importers:
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
       eslint: ^8.18.0
-      js-dos: ^7.4.4
+      js-dos: ^7.4.7
       mini-css-extract-plugin: ^2.5.3
       react: ^16.8.6
       react-dom: ^16.8.6
@@ -73,6 +73,7 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
+      js-dos: 7.4.7
       react: 16.14.0
       react-dom: 16.14.0
     devDependencies:
@@ -87,7 +88,6 @@ importers:
       css-loader: 6.7.1_webpack-cli@4.9.2
       css-minimizer-webpack-plugin: 3.4.1_webpack-cli@4.9.2
       eslint: 8.18.0
-      js-dos: 7.4.4
       mini-css-extract-plugin: 2.6.0_webpack-cli@4.9.2
       sass: 1.53.0
       sass-loader: 13.0.2_sass@1.53.0+webpack@5.72.1
@@ -7078,11 +7078,11 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /js-dos/7.4.4:
-    resolution: {integrity: sha512-vjwbeQuI8Af34BOeTzStRioowwqdHjOPZSpKQexWSOE7T+uSoldQu1Sy08ycL8WY3jJjvsWRtuddq2fIAvoUJg==}
+  /js-dos/7.4.7:
+    resolution: {integrity: sha512-lNtvMNXXpRnYHJQZfLAfhA3iobV+jcg4yh65h3jjCMG4HTafYUOrK77uUEJ8htS1kO/jSJCIkmH3OT6hyRPkXw==}
     dependencies:
       nanoid: 3.3.4
-    dev: true
+    dev: false
 
   /js-git/0.7.8:
     resolution: {integrity: sha1-UvplWrYYd9bxB578ZTS1VPMeVEQ=}
@@ -7678,7 +7678,6 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /nanomatch/1.2.13:
     resolution: {integrity: sha512-fpoe2T0RbHwBTBUOftAfBPaDEi06ufaUai0mE6Yn1kacc3SnTErfb/h+X94VXzI64rKFHYImXSvdwGGCmwOqCA==}

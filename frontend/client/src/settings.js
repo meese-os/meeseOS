@@ -102,7 +102,7 @@ export default class Settings {
 
 		/**
 		 * Internal timeout reference used for debouncing
-		 * @type {object}
+		 * @type {Object}
 		 */
 		this.debounce = null;
 

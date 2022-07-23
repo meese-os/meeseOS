@@ -94,7 +94,7 @@ const getResolutionDistance = (realSize, standard) =>
  */
 const getRandomWallpaper = () => {
 	const realWidth = window.screen.width * window.devicePixelRatio;
-  const realHeight = window.screen.height * window.devicePixelRatio;
+	const realHeight = window.screen.height * window.devicePixelRatio;
 	const realSize = { width: realWidth, height: realHeight };
 	const closestResolution = standardResolutions.reduce((prev, curr) =>
 		getResolutionDistance(prev, realSize) < getResolutionDistance(curr, realSize)
@@ -107,7 +107,7 @@ const getRandomWallpaper = () => {
 	const orientationParam = `orientation=${orientation}`;
 	const sigParam = `sig=${Math.random()}`;
 	return `https://source.unsplash.com/random/${resolution}?${orientationParam}&${sigParam}`;
-}
+};
 
 /**
  * Creates a static background with an image and a color, if applicable

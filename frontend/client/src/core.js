@@ -456,7 +456,7 @@ export default class Core extends CoreBase {
 	 * to the correct resource.
 	 *
 	 * @param {string} [endpoint=/] Endpoint
-	 * @param {object} [options] Additional options for resolving url
+	 * @param {Object} [options] Additional options for resolving url
 	 * @param {boolean} [options.prefix=false] Returns a full URL complete with scheme, etc. (will always be true on websocket)
 	 * @param {string} [options.type] Optional URL type (websocket)
 	 * @param {PackageMetadata} [metadata] A package metadata
@@ -646,7 +646,7 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Set the internal fetch/request options
-	 * @param {object} options Request options
+	 * @param {Object} options Request options
 	 */
 	setRequestOptions(options) {
 		this.requestOptions = { ...options };

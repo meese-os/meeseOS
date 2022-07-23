@@ -134,7 +134,7 @@ const methods = (core, request) => {
 /**
  * System VFS adapter
  * @param {Core} core MeeseOS Core instance reference
- * @param {object} [options] Adapter options
+ * @param {Object} [options] Adapter options
  */
 const adapter = (core) => {
 	const request = requester(core);

@@ -118,7 +118,7 @@ export class BasicApplication extends EventEmitter {
 	/**
 	 * Gets options for a dialog
 	 * @param {string} type Dialog type
-	 * @return {object}
+	 * @return {Object}
 	 */
 	getDialogOptions(type, options = {}) {
 		const { file, ...rest } = options;
@@ -168,7 +168,7 @@ export class BasicApplication extends EventEmitter {
 	 * Creates a new dialog of a type
 	 * @param {string} type Dialog type
 	 * @param {Function} cb Callback
-	 * @param {object} [options] Override options
+	 * @param {Object} [options] Override options
 	 */
 	createDialog(type, cb, options = {}) {
 		const [args, opts] = this.getDialogOptions(type, options);
@@ -227,7 +227,7 @@ export class BasicApplication extends EventEmitter {
 
 	/**
 	 * Creates a new save dialog
-	 * @param {object} [options] Dialog options
+	 * @param {Object} [options] Dialog options
 	 */
 	createSaveDialog(options = {}) {
 		this.createDialog("save", (item) => this.save(item), options);
@@ -235,7 +235,7 @@ export class BasicApplication extends EventEmitter {
 
 	/**
 	 * Creates a new load dialog
-	 * @param {object} [options] Dialog options
+	 * @param {Object} [options] Dialog options
 	 */
 	createOpenDialog(options = {}) {
 		this.createDialog("open", (item) => this.open(item), options);

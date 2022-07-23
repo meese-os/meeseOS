@@ -31,7 +31,7 @@
 /**
  * Null VFS adapter
  * @param {Core} core MeeseOS Core instance reference
- * @param {object} [options] Adapter options
+ * @param {Object} [options] Adapter options
  */
 const nullAdapter = {
 	readdir: (path, options) => Promise.resolve([]),

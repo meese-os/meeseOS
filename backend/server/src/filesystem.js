@@ -42,7 +42,7 @@ const logger = consola.withTag("Filesystem");
  * @typedef {Object} Mountpoint
  * @property {string} [uuid]
  * @property {string} [root]
- * @property {object} [attributes]
+ * @property {Object} [attributes]
  */
 
 /**
@@ -65,8 +65,8 @@ const logger = consola.withTag("Filesystem");
  * Filesystem Internal Call Options
  * @typedef {Object} FilesystemCallOptions
  * @property {string} method VFS Method name
- * @property {object} [user] User session data
- * @property {object} [session] Session data
+ * @property {Object} [user] User session data
+ * @property {Object} [session] Session data
  */
 
 /**

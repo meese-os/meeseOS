@@ -57,7 +57,7 @@ import {
  * @property {boolean} [isDirectory]
  * @property {boolean} [isFile]
  * @property {string} [mime]
- * @property {object} [stat]
+ * @property {Object} [stat]
  */
 
 // Makes sure our input paths are object(s)

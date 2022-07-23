@@ -111,8 +111,8 @@ const removeSoftDeleted = (logger, disabled) => (iter) => {
 const action = async ({ logger, options, args, commander }) => {
 	const dist = options.dist();
 	// TODO: Allow this param to be set on a per-package basis,
-		// to allow things like the "Wallpapers" package files to be copied
-		// but not necessarily everything else
+	// to allow things like the "Wallpapers" package files to be copied
+	// but not necessarily everything else
 	const copyFiles = args.copy === true;
 	const relativeSymlinks = !copyFiles && args.relative === true;
 	const discoveryDest = path.resolve(args.discover || options.packages);

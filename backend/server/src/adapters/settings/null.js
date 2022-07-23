@@ -31,7 +31,7 @@
 /**
  * Null Settings adapter
  * @param {Core} core MeeseOS Core instance reference
- * @param {object} [options] Adapter options
+ * @param {Object} [options] Adapter options
  */
 module.exports = (core, options) => ({
 	init: async () => true,

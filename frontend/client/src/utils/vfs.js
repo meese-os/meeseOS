@@ -173,9 +173,9 @@ export const humanFileSize = (bytes, si = false) => {
 
 /**
  * Transforms a readdir result
- * @param {object} root The path to the readdir root
+ * @param {Object} root The path to the readdir root
  * @param Object[] files An array of readdir results
- * @param {object} options Options
+ * @param {Object} options Options
  * @param {Boolean} [options.showHiddenFiles=false] Show hidden files
  * @param {Function} [options.filter] A filter
  * @param {string} [options.sortBy='filename'] Sort by this attribute
@@ -254,7 +254,7 @@ export const transformArrayBuffer = (ab, mime, type) => {
 
 /**
  * Gets an icon from file stat
- * @param {object} file The file stat object
+ * @param {Object} file The file stat object
  * @return {string|object}
  */
 export const getFileIcon = (map) => {
@@ -272,8 +272,8 @@ export const getFileIcon = (map) => {
 
 /**
  * Creates a file iter for scandir
- * @param {object} stat file stat
- * @return {object}
+ * @param {Object} stat file stat
+ * @return {Object}
  */
 export const createFileIter = (stat) => ({
 	isDirectory: false,
@@ -344,7 +344,7 @@ export const filterMountByGroups =
 /**
  * Creates a list of VFS events to simulate server-side
  * file watching
- * @return {object[]}
+ * @return {Object[]}
  */
 export const createWatchEvents = (method, args) => {
 	const events = [];

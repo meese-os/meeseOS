@@ -54,7 +54,7 @@ export class EventEmitter {
 
 		/**
 		 * Registered events
-		 * @type {object}
+		 * @type {Object}
 		 */
 		this.events = {};
 	}
@@ -73,7 +73,7 @@ export class EventEmitter {
 	 *
 	 * @param {string|string[]} name Event name
 	 * @param {Function} callback Callback function
-	 * @param {object} [options] Options
+	 * @param {Object} [options] Options
 	 * @param {boolean} [options.persist] This even handler cannot be removed unless forced
 	 * @param {boolean} [options.once] Fire only once
 	 * @return {EventEmitter} Returns current instance

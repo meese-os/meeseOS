@@ -96,12 +96,12 @@ class Core extends CoreBase {
 			: http.createServer(this.app);
 
 		/**
-		 * @type {object}
+		 * @type {Object}
 		 */
 		this.session = createSession(this.app, this.configuration);
 
 		/**
-		 * @type {object}
+		 * @type {Object}
 		 */
 		this.ws = createWebsocket(
 			this.app,
@@ -111,7 +111,7 @@ class Core extends CoreBase {
 		);
 
 		/**
-		 * @type {object}
+		 * @type {Object}
 		 */
 		this.wss = this.ws.getWss();
 

@@ -36,7 +36,7 @@ import createUI from "./adapters/ui/login";
  *
  * @typedef {Object} LoginOptions
  * @property {string} [title] Title
- * @property {object[]} [fields] Fields
+ * @property {Object[]} [fields] Fields
  */
 
 /**

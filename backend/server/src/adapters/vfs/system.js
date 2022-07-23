@@ -123,7 +123,7 @@ const getRealPath = (core, session, mount, file) => {
 /**
  * System VFS adapter
  * @param {Core} core MeeseOS Core instance reference
- * @param {object} [options] Adapter options
+ * @param {Object} [options] Adapter options
  */
 module.exports = (core) => {
 	const wrapper =

@@ -88,7 +88,7 @@ export const escapeHtml = (text) => {
 
 /**
  * Serialize an object to CSS
- * @param {object} obj Object
+ * @param {Object} obj Object
  * @return {string} CSS text
  */
 export const createCssText = (obj) =>
@@ -155,7 +155,7 @@ export const supportsPassive = (function() {
 /**
  * Plays a sound
  * @param {string} src Sound source
- * @param {object} [options] Options
+ * @param {Object} [options] Options
  * @return {Promise<HTMLAudioElement>}
  */
 export const playSound = (src, options = {}) => {
@@ -184,7 +184,7 @@ export const playSound = (src, options = {}) => {
 
 /**
  * Gets supported media types
- * @return {object}
+ * @return {Object}
  */
 export const supportedMedia = () => {
 	const videoFormats = {
@@ -231,7 +231,7 @@ export const supportsTransition = (function() {
 
 /**
  * Creates a native notification
- * @param {object} options Notification options
+ * @param {Object} options Notification options
  * @param {Function} [onclick] Callback on click
  * @return {Promise<window.Notification>}
  */

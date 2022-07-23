@@ -33,43 +33,66 @@ import logger from "../../logger";
 /**
  * LocalStorage Settings adapter
  * @param {Core} core MeeseOS Core instance reference
- * @param {object} [options] Adapter options
+ * @param {Object} [options] Adapter options
  */
-const localStorageSettings = (core) => ({
-	clear: (ns) => {
-		if (ns) {
-			localStorage.removeItem(ns);
-		} else {
-			localStorage.clear();
+const localStorageSettings = (core) => {
+	// Prevents collisions with other localStorage keys not
+	// directly related to MeeseOS
+	const prefix = core.config("settings.prefix", "");
+
+	return {
+		/**
+		 * Clears the localStorage for the specified namespace
+		 * @param {string} [ns] The namespace
+		 * @return {Promise<boolean>}
+		 */
+		clear(ns) {
+			if (ns) {
+				localStorage.removeItem(prefix + ns);
+			} else {
+				localStorage.clear();
+			}
+
+			return Promise.resolve(true);
+		},
+
+		/**
+		 * Saves settings to localStorage
+		 * @param {Object} settings The settings to save
+		 * @return {Promise<boolean>}
+		 */
+		save(settings) {
+			Object.keys(settings).forEach((key) => {
+				localStorage.setItem(prefix + key, JSON.stringify(settings[key]));
+			});
+
+			return Promise.resolve(true);
+		},
+
+		/**
+		 * Loads settings from localStorage
+		 * @return {Promise<boolean>}
+		 */
+		load() {
+			const entries = Object
+				.keys(localStorage)
+				.filter((key) => prefix ? key.startsWith(prefix) : true)
+				.map((key) => {
+					const value = localStorage.getItem(key);
+					const prefixedKey = prefix ? key.substring(prefix.length) : key;
+
+					try {
+						return [prefixedKey, JSON.parse(value)];
+					} catch (err) {
+						logger.warn(`localStorageAdapter parse failed for '${key}':`, err);
+					}
+
+					return [prefixedKey, value];
+				});
+
+			return Promise.resolve(Object.fromEntries(entries));
 		}
-
-		return Promise.resolve(true);
-	},
-
-	save: (settings) => {
-		Object.keys(settings).forEach((k) => {
-			localStorage.setItem(k, JSON.stringify(settings[k]));
-		});
-
-		return Promise.resolve(true);
-	},
-
-	load: () =>
-		Promise.resolve(
-			Object.keys(localStorage).reduce((o, v) => {
-				let value = localStorage.getItem(v);
-				try {
-					// Parse all localStorage values as JSON, except emulator items
-					// since they are just strings
-					if (!v.startsWith("emulators"))
-						value = JSON.parse(value);
-				} catch (e) {
-					logger.warn("localStorageAdapter parse error", e);
-				}
-
-				return Object.assign(o, { [v]: value });
-			}, {})
-		),
-});
+	};
+};
 
 export default localStorageSettings;
