@@ -227,8 +227,8 @@ module.exports = (core) => {
 					fs.readdir(realPath).then((files) => ({ realPath, files }))
 				)
 				.then(({ realPath, files }) => {
-					const promises = files.map((f) =>
-						createFileIter(core, realPath, root.replace(/\/?$/, "/") + f)
+					const promises = files.map((file) =>
+						createFileIter(core, realPath, root.replace(/\/?$/, "/") + file)
 					);
 					return Promise.all(promises);
 				}),
@@ -361,8 +361,8 @@ module.exports = (core) => {
 								});
 						})
 						.then(({ realPath, files }) => {
-							const promises = files.map((f) => {
-								const rf = f.substr(realPath.length);
+							const promises = files.map((file) => {
+								const rf = file.substr(realPath.length);
 								return createFileIter(
 									core,
 									path.dirname(realPath.replace(/\/?$/, "/") + rf),

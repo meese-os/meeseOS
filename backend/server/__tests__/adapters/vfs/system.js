@@ -165,8 +165,8 @@ describe("VFS System adapter", () => {
 		const files = ["home:/test", "home:/test-directory", "home:/test-rename"];
 
 		return Promise.all(
-			files.map((f) => {
-				return expect(request("unlink", f, createOptions())).resolves.toBe(
+			files.map((file) => {
+				return expect(request("unlink", file, createOptions())).resolves.toBe(
 					true
 				);
 			})

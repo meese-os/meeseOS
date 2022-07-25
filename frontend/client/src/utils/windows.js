@@ -398,7 +398,7 @@ const getScreenOrientation = (screen) =>
 /**
  * Gets a media query name from a map
  * @param {Window} win
- * @returns {string}
+ * @return {String}
  */
 export const getMediaQueryName = (win) =>
 	Object.keys(win.attributes.mediaQueries)

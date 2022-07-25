@@ -28,62 +28,50 @@
  * @licence Simplified BSD License
  */
 
-import { resolveSetting } from "./utils";
-import cursorEffects from "@meeseOS/cursor-effects";
+/**
+ * Diverts callback based on drop action event
+ * @param {Function} browser
+ * @param {Function} virtual
+ */
+export const divertDropAction = (browser, virtual) =>
+	(ev, data, files) => {
+		if (files.length) {
+			browser(files);
+		} else if (data && data.path && data.filename) {
+			virtual(data);
+		}
+	};
 
 /**
- * Returns all of the settings for a given cursor effect.
- * @return {Object[]}
- */
-export const cursorItems = (state) => {
-	const selectedEffectKey = resolveSetting(
-		state.settings,
-		state.defaults
-	)("desktop.cursor.effect");
+* Higher-Order Function (HoF) for dialogs
+* @param {Function} cb The callback function
+*/
+export const usingPositiveButton = (cb) =>
+	(btn, value) => {
+		if (["yes", "ok"].indexOf(btn) !== -1) {
+			cb(value);
+		}
+	};
 
-	const selectedEffect = cursorEffects[selectedEffectKey];
-	const options = selectedEffect.options || {};
-
-	const items = Object.keys(options).map((key) => {
-		const properties = options[key];
-		return {
-			label: properties.label,
-			path: `desktop.cursor.options.${key}`,
-			type: properties.type,
-			defaultValue: properties.defaultValue,
-		};
-	});
-
-	return items;
+/**
+* Triggers a browser upload
+* @param {Function} cb The callback function
+*/
+export const triggerBrowserUpload = (cb) => {
+	const field = document.createElement("input");
+	field.type = "file";
+	field.onchange = () => {
+		if (field.files.length > 0) {
+			cb(field.files);
+		}
+	};
+	field.click();
 };
 
 /**
- * Loads all of the available cursor effects.
- * @return {Object[]}
- */
-const getCursorChoices = () =>
-	Object.keys(cursorEffects).map((key) => {
-		const properties = cursorEffects[key];
-
-		return {
-			label: properties.label || "Mystery",
-			value: properties.effect.name,
-		};
-	});
-
-/**
- * Creates a `select` field for cursor effects.
- * @return {Object[]}
- */
-export const cursorEffectSelect = (state, actions) => [
-	{
-		label: "Effect",
-		path: "desktop.cursor.effect",
-		type: "select",
-		choices: () => getCursorChoices(),
-		oncreate: (ev) =>
-			(ev.value =
-				state.cursorEffect || getCursorChoices()[0].value),
-		onchange: (ev) => actions.setCursorEffect(ev),
-	},
-];
+* Checks if the given filename is a dotted
+* @param {String} filename The filename to check
+* @return {Boolean} Whether or not the file is special
+*/
+export const isSpecialFile = (filename) =>
+	["..", "."].indexOf(filename) !== -1;

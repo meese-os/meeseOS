@@ -32,7 +32,7 @@ import { resolveSetting } from "./utils";
 
 /**
  * An array of settings for static backgrounds in MeeseOS
- * @returns {Object[]}
+ * @return {Object[]}
  */
 export const staticBackgroundOptions = (state, actions) => [
 	{

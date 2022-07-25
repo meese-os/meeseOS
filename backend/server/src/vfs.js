@@ -55,10 +55,12 @@ const requestFile = (req) => [
 	streamFromRequest(req),
 ];
 
-/*
+/**
  * Parses the range request headers
+ * @param {String} range
+ * @return {Array}
  */
-const parseRangeHeader = (range, size) => {
+const parseRangeHeader = (range) => {
 	const [pstart, pend] = range.replace(/bytes=/, "").split("-");
 	const start = parseInt(pstart, 10);
 	const end = pend ? parseInt(pend, 10) : undefined;
@@ -77,7 +79,7 @@ const onDone = (req, res) => {
 };
 
 /**
- * Wraps a vfs adapter request
+ * Wraps a VFS adapter request
  */
 const wrapper = (fn) => (req, res, next) =>
 	fn(req, res)
@@ -143,7 +145,11 @@ const createOptions = (req) => {
 	};
 };
 
-// Standard request with only a target
+/**
+ * Standard request with only a target
+ * @param {Function} findMountpoint
+ * @return {*}
+ */
 const createRequestFactory =
 	(findMountpoint) =>
 		(getter, method, readOnly, respond) =>
@@ -212,7 +218,9 @@ const createRequestFactory =
 				return respond ? respond(result) : result;
 			};
 
-// Request that has a source and target
+/**
+ * Request that has a source and target
+ */
 const createCrossRequestFactory =
 	(findMountpoint) => (getter, method, respond) => async (req, res) => {
 		const [from, to, options] = [...getter(req, res), createOptions(req)];

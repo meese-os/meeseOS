@@ -78,7 +78,7 @@ const standardResolutions = [
  * Calculates the size difference between the real size and a standard screen size.
  * @param {Object} realSize The real size of the screen
  * @param {Object} standard The point to check for distance
- * @returns {number} The distance between the real resolution and the standard resolution
+ * @return {Number} The distance between the real resolution and the standard resolution
  * @link https://stackoverflow.com/a/56306192/6456163
  */
 const getResolutionDistance = (realSize, standard) =>
@@ -89,7 +89,7 @@ const getResolutionDistance = (realSize, standard) =>
 
 /**
  * Uses the screen resolution to find an Unsplash wallpaper that matches the screen resolution.
- * @returns {string}
+ * @return {String}
  * @link https://stackoverflow.com/a/56306192/6456163
  */
 const getRandomWallpaper = () => {

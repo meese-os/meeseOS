@@ -156,12 +156,12 @@ export class BasicApplication extends EventEmitter {
 	 * Updates the window title to match open file
 	 */
 	updateWindowTitle() {
-		if (this.win) {
-			const prefix = this.proc.metadata.title;
-			const title = this._createTitle(prefix);
+		if (!this.win) return;
 
-			this.win.setTitle(title);
-		}
+		const prefix = this.proc.metadata.title;
+		const title = this._createTitle(prefix);
+
+		this.win.setTitle(title);
 	}
 
 	/**
@@ -183,10 +183,8 @@ export class BasicApplication extends EventEmitter {
 	}
 
 	/**
-	 * Opens given file
-	 *
-	 * Does not do any actual VFS operation
-	 *
+	 * Opens the given file.
+	 * Does not perform any actual VFS operations.
 	 * @param {VFSFile} file A file
 	 */
 	open(item) {
@@ -194,10 +192,8 @@ export class BasicApplication extends EventEmitter {
 	}
 
 	/**
-	 * Saves given file
-	 *
-	 * Does not do any actual VFS operation
-	 *
+	 * Saves the given file.
+	 * Does not perform any actual VFS operations.
 	 * @param {VFSFile} file A file
 	 */
 	save(item) {
@@ -205,9 +201,8 @@ export class BasicApplication extends EventEmitter {
 	}
 
 	/**
-	 * Create new file
-	 *
-	 * Does not do any actual VFS operation
+	 * Create a new file.
+	 * Does not perform any actual VFS operations.
 	 */
 	create() {
 		this.proc.args.file = null;
@@ -218,7 +213,7 @@ export class BasicApplication extends EventEmitter {
 	}
 
 	/**
-	 * Create new file
+	 * Create a new file
 	 * @see BasicApplication#create
 	 */
 	createNew() {

@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/server",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "meeseOS Server",
   "main": "index.js",
   "scripts": {
@@ -40,7 +40,7 @@
     "express-ws": "^5.0.2",
     "fast-glob": "^2.2.7",
     "filehound": "^1.17.5",
-    "formidable": "^2.0.1",
+    "formidable": "^1.2.2",
     "fs-extra": "^10.0.0",
     "mime": "^3.0.0",
     "minimist": "^1.2.5",
