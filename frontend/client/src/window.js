@@ -511,7 +511,7 @@ export default class Window extends EventEmitter {
 	/**
 	 * Render window
 	 * @param {Function} [callback] Callback when window DOM has been constructed
-	 * @return {Window} this instance
+	 * @returns {Window} this instance
 	 */
 	render(callback = function() {}) {
 		if (this.rendered) {
@@ -556,7 +556,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Close the window
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	close() {
 		if (this.destroyed) return false;
@@ -569,7 +569,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Focus the window
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	focus() {
 		if (!this.state.minimized && this._toggleState("focused", true, "focus")) {
@@ -597,7 +597,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Blur (un-focus) the window
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	blur() {
 		// Forces blur-ing of browser input element belonging to this window
@@ -609,7 +609,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Minimize (hide) the window
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	minimize() {
 		if (this.attributes.minimizable) {
@@ -625,7 +625,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Raise (un-minimize) the window
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	raise() {
 		return this._toggleState("minimized", false, "raise");
@@ -633,7 +633,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Maximize the window
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	maximize() {
 		if (this.attributes.maximizable) {
@@ -645,7 +645,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Restore (un-maximize) the window
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	restore() {
 		return this._maximize(false);
@@ -655,7 +655,7 @@ export default class Window extends EventEmitter {
 	 * Internal for Maximize or restore
 	 * @private
 	 * @param {boolean} toggle Maximize or restore
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	_maximize(toggle) {
 		if (
@@ -836,7 +836,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Gets a astate
-	 * @return {*}
+	 * @returns {*}
 	 */
 	getState(n) {
 		const value = this.state[n];
@@ -848,7 +848,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Get a snapshot of the Window session
-	 * @return {WindowSession}
+	 * @returns {WindowSession}
 	 */
 	getSession() {
 		return this.attributes.sessionable === false
@@ -864,7 +864,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Get a list of all windows
-	 * @return {Window[]}
+	 * @returns {Window[]}
 	 */
 	static getWindows() {
 		return windows;
@@ -872,7 +872,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Gets the lastly focused Window
-	 * @return {Window}
+	 * @returns {Window}
 	 */
 	static lastWindow() {
 		return lastWindow;
@@ -928,7 +928,7 @@ export default class Window extends EventEmitter {
 	/**
 	 * Check if we have to set next zindex
 	 * @private
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	_checkNextZindex() {
 		const { ontop } = this.attributes;

@@ -163,7 +163,7 @@ export default class Splash {
 /**
  * Convert a template string into HTML DOM nodes
  * @param  {String} str The template string
- * @return {Node}       The template HTML
+ * @returns {Node}       The template HTML
  */
 const stringToHTML = (str) => {
 	const parser = new DOMParser();

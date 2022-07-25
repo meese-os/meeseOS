@@ -121,7 +121,7 @@ class Core extends CoreBase {
 	/**
 	 * Destroys the instance
 	 * @param {Function} [done] Callback when done
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async destroy(done = () => {}) {
 		if (this.destroyed) {
@@ -158,7 +158,7 @@ class Core extends CoreBase {
 
 	/**
 	 * Starts the server
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	async start() {
 		if (!this.started) {
@@ -176,7 +176,7 @@ class Core extends CoreBase {
 
 	/**
 	 * Initializes the server
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	async boot() {
 		if (this.booted) return true;
@@ -299,7 +299,7 @@ class Core extends CoreBase {
 
 	/**
 	 * Gets the server instance
-	 * @return {Core}
+	 * @returns {Core}
 	 */
 	static getInstance() {
 		return _instance;

@@ -37,7 +37,7 @@
 /**
  * Resolves a URL
  * @param {CoreConfig} configuration
- * @return {function(): string}
+ * @returns {function(): string}
  */
 export const urlResolver = (configuration) => {
 	const { http, ws } = configuration;

@@ -1,0 +1,7 @@
+Welcome to the secure terminal!
+
+Either you were lucky and got to this point by chance, or you followed the clues and they led you to this point in the CTF.
+
+Whichever is the case, you are now in it to find the flag.
+
+Grab your caffeine and buckle up, it's time to put on your adventurer's bag and complete the challenges ahead of you.

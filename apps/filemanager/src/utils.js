@@ -71,7 +71,7 @@ export const triggerBrowserUpload = (cb) => {
 /**
 * Checks if the given filename is a dotted
 * @param {String} filename The filename to check
-* @return {Boolean} Whether or not the file is special
+* @returns {Boolean} Whether or not the file is special
 */
 export const isSpecialFile = (filename) =>
 	["..", "."].indexOf(filename) !== -1;

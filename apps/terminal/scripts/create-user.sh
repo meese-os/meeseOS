@@ -74,7 +74,9 @@ fi
 # Configure what is accessible to the new user
 bash ./configure-jail.sh
 
-# TODO: Copy custom README template to /home/xterm/README.md
+# Copy custom welcome document to /home/USERNAME/welcome.txt
+sudo cp "$PWD/welcome.txt" "/jail/home/$USERNAME/welcome.txt"
+
 # TODO: Add an intentional vulnerability somewhere for CTF
 # https://www.linuxquestions.org/questions/linux-server-73/motd-or-login-banner-per-user-699925/
 

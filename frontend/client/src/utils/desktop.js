@@ -39,14 +39,14 @@ const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
 /**
  * Check if droppable data is a VFS type
  * @param {Object} data
- * @return {boolean}
+ * @returns {boolean}
  */
 export const validVfsDrop = (data) => data && data.path;
 
 /**
  * Check if droppable data contains image
  * @param {Object} data
- * @return {boolean}
+ * @returns {boolean}
  */
 export const isDroppingImage = (data) =>
 	validVfsDrop(data) &&
@@ -78,7 +78,7 @@ const standardResolutions = [
  * Calculates the size difference between the real size and a standard screen size.
  * @param {Object} realSize The real size of the screen
  * @param {Object} standard The point to check for distance
- * @return {Number} The distance between the real resolution and the standard resolution
+ * @returns {Number} The distance between the real resolution and the standard resolution
  * @link https://stackoverflow.com/a/56306192/6456163
  */
 const getResolutionDistance = (realSize, standard) =>
@@ -89,7 +89,7 @@ const getResolutionDistance = (realSize, standard) =>
 
 /**
  * Uses the screen resolution to find an Unsplash wallpaper that matches the screen resolution.
- * @return {String}
+ * @returns {String}
  * @link https://stackoverflow.com/a/56306192/6456163
  */
 const getRandomWallpaper = () => {

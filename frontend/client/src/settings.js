@@ -69,7 +69,7 @@ const createAdapter = (core, options) => {
 /**
  * @callback SettingsAdapterCallback
  * @param {Core} core
- * @return {SettingsAdapterCallback}
+ * @returns {SettingsAdapterCallback}
  */
 
 /**
@@ -129,7 +129,7 @@ export default class Settings {
 
 	/**
 	 * Saves settings
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	save() {
 		return new Promise((resolve, reject) => {
@@ -157,7 +157,7 @@ export default class Settings {
 
 	/**
 	 * Loads settings
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	load() {
 		const defaults = this.core.config("settings.defaults", {});
@@ -187,7 +187,7 @@ export default class Settings {
 	 * @param {string} [ns] The namespace
 	 * @param {string} [key] The key to get the value from
 	 * @param {*} [defaultValue] If result is undefined, return this instead
-	 * @return {*}
+	 * @returns {*}
 	 */
 	get(ns, key, defaultValue) {
 		if (typeof ns === "undefined") {
@@ -207,7 +207,7 @@ export default class Settings {
 	 * @param {string} ns The namespace
 	 * @param {string} [key] The key to set
 	 * @param {*} [value] The value to set
-	 * @return {Settings} This
+	 * @returns {Settings} This
 	 */
 	set(ns, key, value) {
 		const lock = this.core.config("settings.lock", []);
@@ -237,7 +237,7 @@ export default class Settings {
 	/**
 	 * Clears a namespace by root key
 	 * @param {string} ns The namespace
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	clear(ns) {
 		return this.adapter.clear(ns).then((result) => {

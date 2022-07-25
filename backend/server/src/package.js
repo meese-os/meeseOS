@@ -93,7 +93,7 @@ class Package {
 	 * Run method on package script
 	 * @param {string} method Method name
 	 * @param {*} [...args] Pass arguments
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	action(method, ...args) {
 		try {
@@ -112,7 +112,7 @@ class Package {
 	/**
 	 * Validates this package
 	 * @param {PackageMetadata[]} manifest Global manifest
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	validate(manifest) {
 		return (
@@ -124,7 +124,7 @@ class Package {
 
 	/**
 	 * Initializes this package
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	init() {
 		const mod = require(this.script);
@@ -141,7 +141,7 @@ class Package {
 
 	/**
 	 * Starts server scripts
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	start() {
 		return this.action("start");
@@ -150,7 +150,7 @@ class Package {
 	/**
 	 * Creates a watch in package dist
 	 * @param {Function} cb Callback function on watch changes
-	 * @return {string} Watched path
+	 * @returns {string} Watched path
 	 */
 	watch(cb) {
 		const pub = this.core.config("public");
@@ -165,7 +165,7 @@ class Package {
 	/**
 	 * Resolve an URL for resource
 	 * @param {string} path Input path
-	 * @return {string}
+	 * @returns {string}
 	 */
 	resource(path) {
 		if (path.charAt(0) !== "/") {

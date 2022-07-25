@@ -105,7 +105,7 @@ class Auth {
 
 	/**
 	 * Initializes adapter
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	async init() {
 		if (this.adapter.init) {
@@ -119,7 +119,7 @@ class Auth {
 	 * Performs a login request
 	 * @param {Request} req HTTP request
 	 * @param {Response} res HTTP response
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async login(req, res) {
 		const result = await this.adapter.login(req, res);
@@ -151,7 +151,7 @@ class Auth {
 	 * Performs a logout request
 	 * @param {Request} req HTTP request
 	 * @param {Response} res HTTP response
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async logout(req, res) {
 		this.core.emit(
@@ -176,7 +176,7 @@ class Auth {
 	 * Performs a register request
 	 * @param {Request} req HTTP request
 	 * @param {Response} res HTTP response
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async register(req, res) {
 		if (this.adapter.register) {
@@ -191,7 +191,7 @@ class Auth {
 	/**
 	 * Checks if login is allowed for this user
 	 * @param {AuthUserProfile} profile User profile
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	checkLoginPermissions(profile) {
 		const { requiredGroups, denyUsers } = this.options;
@@ -215,7 +215,7 @@ class Auth {
 	 * Creates user profile object
 	 * @param {Object} fields Input fields
 	 * @param {Object} result Login result
-	 * @return {AuthUserProfile|boolean}
+	 * @returns {AuthUserProfile|boolean}
 	 */
 	createUserProfile(fields, result) {
 		const ignores = ["password"];
@@ -244,7 +244,7 @@ class Auth {
 	/**
 	 * Tries to create home directory for a user
 	 * @param {AuthUserProfile} profile User profile
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async createHomeDirectory(profile) {
 		const vfs = this.core.make("meeseOS/vfs");

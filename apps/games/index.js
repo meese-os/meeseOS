@@ -23,7 +23,10 @@ const register = (core, args, options, metadata) => {
 		proc.destroy();
 		// TODO: Destroy the game and JS-DOS processes
 	});
-	win.render(($content) => ReactDOM.render(React.createElement(App), $content));
+	win.render(($content) => ReactDOM.render(
+		React.createElement(App, { pid: proc.pid }),
+		$content
+	));
 
 	return proc;
 };

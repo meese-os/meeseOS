@@ -49,7 +49,7 @@ const defaultButtons = () => ({
 /**
  * Creates a button from a name
  * @param {String} name button name
- * @return {Object} button
+ * @returns {Object} button
  */
 const defaultButton = (name) => {
 	const defs = defaultButtons();
@@ -202,7 +202,7 @@ export default class Dialog {
 	 * Creates the default view
 	 * @param {Object[]} children Child nodes
 	 * @param {Object} [state] Pass on application state (mainly used for buttons)
-	 * @return {Object} Virtual dom node
+	 * @returns {Object} Virtual dom node
 	 */
 	createView(children, state = {}) {
 		return h(Box, { grow: 1, shrink: 1 }, [
@@ -216,7 +216,7 @@ export default class Dialog {
 	/**
 	 * Gets the button (virtual) DOM elements
 	 * @param {Object} [states] Button states
-	 * @return {Object[]} Virtual dom node children list
+	 * @returns {Object[]} Virtual dom node children list
 	 */
 	createButtons(states = {}) {
 		const onclick = (name, event) => {
@@ -257,7 +257,7 @@ export default class Dialog {
 
 	/**
 	 * Plays a sound
-	 * @return {boolean} whether the sound was played
+	 * @returns {boolean} whether the sound was played
 	 */
 	playSound() {
 		if (this.core.has("meeseOS/sounds")) {
@@ -274,7 +274,7 @@ export default class Dialog {
 
 	/**
 	 * Gets the first positive button
-	 * @return {String|undefined}
+	 * @returns {String|undefined}
 	 */
 	getPositiveButton() {
 		const found = this.buttons.find((button) => button.positive === true);
@@ -283,7 +283,7 @@ export default class Dialog {
 
 	/**
 	 * Gets the first negative button
-	 * @return {String|undefined}
+	 * @returns {String|undefined}
 	 */
 	getNegativeButton() {
 		const found = this.buttons.find((button) => !button.positive);
@@ -292,7 +292,7 @@ export default class Dialog {
 
 	/**
 	 * Gets the dialog result value
-	 * @return {*}
+	 * @returns {*}
 	 */
 	getValue() {
 		// TODO: Customize this so it can take other values

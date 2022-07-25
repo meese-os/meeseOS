@@ -76,7 +76,7 @@ export class EventEmitter {
 	 * @param {Object} [options] Options
 	 * @param {boolean} [options.persist] This even handler cannot be removed unless forced
 	 * @param {boolean} [options.once] Fire only once
-	 * @return {EventEmitter} Returns current instance
+	 * @returns {EventEmitter} Returns current instance
 	 */
 	on(name, callback, options = {}) {
 		options = options || {};
@@ -98,7 +98,7 @@ export class EventEmitter {
 
 	/**
 	 * Adds an event handler that only fires once
-	 * @return {EventEmitter} Returns current instance
+	 * @returns {EventEmitter} Returns current instance
 	 */
 	once(name, callback) {
 		return this.on(name, callback, { once: true });
@@ -114,7 +114,7 @@ export class EventEmitter {
 	 * @param {string|string[]} name Event name
 	 * @param {Function} [callback] Callback function
 	 * @param {boolean} [force=false] Forces removal even if set to persis
-	 * @return {EventEmitter} Returns current instance
+	 * @returns {EventEmitter} Returns current instance
 	 */
 	off(name, callback = null, force = false) {
 		getEventNames(name)
@@ -146,7 +146,7 @@ export class EventEmitter {
 	 *
 	 * @param {string|string[]} name Event name
 	 * @param {*} [args] Arguments
-	 * @return {EventEmitter} Returns current instance
+	 * @returns {EventEmitter} Returns current instance
 	 */
 	emit(name, ...args) {
 		getEventNames(name).forEach((n) => {

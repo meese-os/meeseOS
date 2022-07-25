@@ -103,7 +103,7 @@ export class BasicApplication extends EventEmitter {
 
 	/**
 	 * Initializes the application
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	init() {
 		if (this.proc.args.file) {
@@ -118,7 +118,7 @@ export class BasicApplication extends EventEmitter {
 	/**
 	 * Gets options for a dialog
 	 * @param {string} type Dialog type
-	 * @return {Object}
+	 * @returns {Object}
 	 */
 	getDialogOptions(type, options = {}) {
 		const { file, ...rest } = options;
@@ -254,7 +254,7 @@ export class BasicApplication extends EventEmitter {
 	 *
 	 * @private
 	 * @param {string} prefix Title prefix
-	 * @return {string}
+	 * @returns {string}
 	 */
 	_createTitle(prefix) {
 		const title = this.proc.args.file

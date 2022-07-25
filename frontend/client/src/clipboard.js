@@ -78,7 +78,7 @@ export default class Clipboard {
 	/**
 	 * Checks if current clipboard data has this type
 	 * @param {string|RegExp} type Data type
-	 * @return {boolean}
+	 * @returns {boolean}
 	 */
 	has(type) {
 		if (type instanceof RegExp) {
@@ -93,7 +93,7 @@ export default class Clipboard {
 	/**
 	 * Gets clipboard data
 	 * @param {boolean} [clear=false] Clear clipboard
-	 * @return {Promise<*>}
+	 * @returns {Promise<*>}
 	 */
 	get(clear = false) {
 		const { data } = this.clipboard;

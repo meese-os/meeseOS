@@ -80,7 +80,7 @@ const handleDirectoryList = (path, options) => (result) =>
  *
  * @param {string|VFSFile} path The path to read
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<object[]>} A list of files
+ * @returns {Promise<object[]>} A list of files
  */
 export const readdir =
 	(adapter, mount) =>
@@ -97,7 +97,7 @@ export const readdir =
  * @param {string|VFSFile} path The path to read
  * @param {string} [type=string] Return this content type
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<ArrayBuffer>}
+ * @returns {Promise<ArrayBuffer>}
  */
 export const readfile =
 	(adapter, mount) =>
@@ -113,7 +113,7 @@ export const readfile =
  * @param {string|VFSFile} path The path to write
  * @param {ArrayBuffer|Blob|string} data The data
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<number>} File size
+ * @returns {Promise<number>} File size
  */
 export const writefile =
 	(adapter, mount) =>
@@ -131,7 +131,7 @@ export const writefile =
  * @param {string|VFSFile} from The source (from)
  * @param {string|VFSFile} to The destination (to)
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<boolean>}
+ * @returns {Promise<boolean>}
  */
 export const copy =
 	(adapter, mount) =>
@@ -143,7 +143,7 @@ export const copy =
  * @param {string|VFSFile} from The source (from)
  * @param {string|VFSFile} to The destination (to)
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<boolean>}
+ * @returns {Promise<boolean>}
  */
 export const rename =
 	(adapter, mount) =>
@@ -155,7 +155,7 @@ export const rename =
  * @param {string|VFSFile} from The source (from)
  * @param {string|VFSFile} to The destination (to)
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<boolean>}
+ * @returns {Promise<boolean>}
  */
 export const move = rename;
 
@@ -163,7 +163,7 @@ export const move = rename;
  * Creates a directory
  * @param {string|VFSFile} path The path to new directory
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<boolean>}
+ * @returns {Promise<boolean>}
  */
 export const mkdir =
 	(adapter, mount) =>
@@ -174,7 +174,7 @@ export const mkdir =
  * Removes a file or directory
  * @param {string|VFSFile} path The path to remove
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<boolean>}
+ * @returns {Promise<boolean>}
  */
 export const unlink =
 	(adapter, mount) =>
@@ -185,7 +185,7 @@ export const unlink =
  * Checks if path exists
  * @param {string|VFSFile} path The path to check
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<boolean>}
+ * @returns {Promise<boolean>}
  */
 export const exists =
 	(adapter, mount) =>
@@ -196,7 +196,7 @@ export const exists =
  * Gets the stats of the file or directory
  * @param {string|VFSFile} path The path to check
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<object>}
+ * @returns {Promise<object>}
  */
 export const stat =
 	(adapter, mount) =>
@@ -209,7 +209,7 @@ export const stat =
  * Gets an URL to a resource defined by file
  * @param {string|VFSFile} path The file
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<string>}
+ * @returns {Promise<string>}
  */
 export const url =
 	(adapter, mount) =>
@@ -220,7 +220,7 @@ export const url =
  * Initiates a native browser download of the file
  * @param {string|VFSFile} path The file
  * @param {VFSDownloadOptions} [options] Options
- * @return {Promise<any>}
+ * @returns {Promise<any>}
  */
 export const download =
 	(adapter, mount) =>
@@ -250,7 +250,7 @@ export const download =
  * @param {string|VFSFile} root The root
  * @param {string} pattern Search pattern
  * @param {VFSMethodOptions} [options] Options
- * @return {Promise<object[]>} A list of files
+ * @returns {Promise<object[]>} A list of files
  */
 export const search =
 	(adapter, mount) =>
@@ -267,7 +267,7 @@ export const search =
 /**
  * Touches a file
  * @param {string|VFSFile} path File path
- * @return {Promise<boolean>}
+ * @returns {Promise<boolean>}
  */
 export const touch =
 	(adapter, mount) =>

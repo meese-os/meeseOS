@@ -186,7 +186,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @return {string[]}
+	 * @returns {string[]}
 	 */
 	provides() {
 		return [
@@ -224,7 +224,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Initializes provider
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	init() {
 		this.registerContracts();
@@ -238,7 +238,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Starts provider
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	start() {
 		if (this.core.config("development")) {
@@ -402,7 +402,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides window contract
-	 * @return {CoreProviderWindowContract}
+	 * @returns {CoreProviderWindowContract}
 	 */
 	createWindowContract() {
 		return {
@@ -414,7 +414,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides DnD contract
-	 * @return {CoreProviderDnDContract}
+	 * @returns {CoreProviderDnDContract}
 	 */
 	createDnDContract() {
 		return dnd;
@@ -422,7 +422,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides DOM contract
-	 * @return {CoreProviderDOMContract}
+	 * @returns {CoreProviderDOMContract}
 	 */
 	createDOMContract() {
 		return {
@@ -433,7 +433,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides Theme contract
-	 * @return {CoreProviderThemeContract}
+	 * @returns {CoreProviderThemeContract}
 	 */
 	createThemeContract() {
 		const { themeResource, icon } = resourceResolver(this.core);
@@ -446,7 +446,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides Sounds contract
-	 * @return {CoreProviderSoundContract}
+	 * @returns {CoreProviderSoundContract}
 	 */
 	createSoundsContract() {
 		const { soundResource, soundsEnabled } = resourceResolver(this.core);
@@ -471,7 +471,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides Session contract
-	 * @return {CoreProviderSessionContract}
+	 * @returns {CoreProviderSessionContract}
 	 */
 	createSessionContract() {
 		return {
@@ -482,7 +482,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides Packages contract
-	 * @return {CoreProviderPackagesContract}
+	 * @returns {CoreProviderPackagesContract}
 	 */
 	createPackagesContract() {
 		return {
@@ -499,7 +499,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides Clipboard contract
-	 * @return {CoreProviderClipboardContract}
+	 * @returns {CoreProviderClipboardContract}
 	 */
 	createClipboardContract() {
 		return {
@@ -512,7 +512,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides Middleware contract
-	 * @return {CoreProviderMiddlewareContract}
+	 * @returns {CoreProviderMiddlewareContract}
 	 */
 	createMiddlewareContract() {
 		return {
@@ -523,7 +523,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Provides Tray contract
-	 * @return {CoreProviderTrayContract}
+	 * @returns {CoreProviderTrayContract}
 	 */
 	createTrayContract() {
 		return {

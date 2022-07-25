@@ -111,7 +111,7 @@ class Filesystem {
 
 	/**
 	 * Destroys instance
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async destroy() {
 		const watches = this.watches
@@ -127,7 +127,7 @@ class Filesystem {
 
 	/**
 	 * Initializes Filesystem
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	async init() {
 		const adapters = {
@@ -162,7 +162,7 @@ class Filesystem {
 	/**
 	 * Gets MIME
 	 * @param {string} filename Input filename or path
-	 * @return {string}
+	 * @returns {string}
 	 */
 	mime(filename) {
 		const { filenames } = this.core.config("mime", {
@@ -179,7 +179,7 @@ class Filesystem {
 	 * Crates a VFS request
 	 * @param {Request|object} req HTTP Request object
 	 * @param {Response|object} [res] HTTP Response object
-	 * @return {Promise<*>}
+	 * @returns {Promise<*>}
 	 */
 	request(name, req, res = {}) {
 		return this.methods[name](req, res);
@@ -189,7 +189,7 @@ class Filesystem {
 	 * Performs a VFS request with simulated HTTP request
 	 * @param {FilesystemCallOptions} options Request options
 	 * @param {*} ...args Arguments to pass to VFS method
-	 * @return {Promise<*>}
+	 * @returns {Promise<*>}
 	 */
 	call(options, ...args) {
 		const { method, user, session } = {
@@ -224,7 +224,7 @@ class Filesystem {
 	 * Creates realpath VFS request
 	 * @param {string} filename The path
 	 * @param {AuthUserProfile} [user] User session object
-	 * @return {Promise<string>}
+	 * @returns {Promise<string>}
 	 */
 	realpath(filename, user = {}) {
 		return this.methods.realpath({
@@ -243,7 +243,7 @@ class Filesystem {
 	/**
 	 * Mounts given mountpoint
 	 * @param {Mountpoint} mount Mountpoint
-	 * @return {Mountpoint} the mountpoint
+	 * @returns {Mountpoint} the mountpoint
 	 */
 	async mount(mount) {
 		const mountpoint = {
@@ -265,7 +265,7 @@ class Filesystem {
 	/**
 	 * Unmounts given mountpoint
 	 * @param {Mountpoint} mount Mountpoint
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	async unmount(mountpoint) {
 		const found = this.watches.find((w) => w.id === mountpoint.id);
@@ -288,7 +288,7 @@ class Filesystem {
 	/**
 	 * Set up a watch for given mountpoint
 	 * @param {Mountpoint} mountpoint The mountpoint
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async watch(mountpoint) {
 		if (
@@ -312,7 +312,7 @@ class Filesystem {
 	 * Internal method for setting up watch for given mountpoint adapter
 	 * @param {Mountpoint} mountpoint The mountpoint
 	 * @param {FilesystemAdapter} adapter The adapter
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async _watch(mountpoint, adapter) {
 		const watch = await adapter.watch(mountpoint, (args, dir, type) => {

@@ -82,19 +82,19 @@ const createAdapter = (core, options) => {
 /**
  * @callback AuthAdapterCallback
  * @param {Core} core
- * @return {AuthAdapter}
+ * @returns {AuthAdapter}
  */
 
 /**
  * @callback LoginAdapterCallback
  * @param {Core} core
- * @return {Login}
+ * @returns {Login}
  */
 
 /**
  * @callback AuthCallback
  * @param {AuthForm} data
- * @return {boolean}
+ * @returns {boolean}
  */
 
 /**
@@ -186,7 +186,7 @@ export default class Auth {
 	/**
 	 * Shows Login UI
 	 * @param {AuthCallback} cb Authentication callback
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	show(cb) {
 		const login = this.core.config("auth.login", {});
@@ -218,7 +218,7 @@ export default class Auth {
 	/**
 	 * Performs a login
 	 * @param {AuthForm} values Form values as JSON
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	login(values) {
 		this.ui.emit("login:start");
@@ -262,7 +262,7 @@ export default class Auth {
 	/**
 	 * Performs a logout
 	 * @param {boolean} [reload=true] Reload client afterwards
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	logout(reload = true) {
 		return this.adapter.logout(reload).then((response) => {
@@ -280,7 +280,7 @@ export default class Auth {
 	/**
 	 * Performs a register call
 	 * @param {AuthForm} values Form values as JSON
-	 * @return {Promise<*>}
+	 * @returns {Promise<*>}
 	 */
 	register(values) {
 		this.ui.emit("register:start");

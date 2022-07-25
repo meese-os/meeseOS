@@ -68,7 +68,7 @@ export default class AuthServiceProvider extends ServiceProvider {
 
 	/**
 	 * Initializes authentication
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	init() {
 		this.core.singleton("meeseOS/auth", () => this.createAuthContract());
@@ -87,14 +87,14 @@ export default class AuthServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @return {string[]}
+	 * @returns {string[]}
 	 */
 	provides() {
 		return ["meeseOS/auth"];
 	}
 
 	/**
-	 * @return {AuthProviderContract}
+	 * @returns {AuthProviderContract}
 	 */
 	createAuthContract() {
 		return {

@@ -92,7 +92,7 @@ class Packages {
 
 	/**
 	 * Loads package manager
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	load() {
 		return this.createLoader().then((packages) => {
@@ -104,7 +104,7 @@ class Packages {
 
 	/**
 	 * Loads all packages
-	 * @return {Promise<Package[]>}
+	 * @returns {Promise<Package[]>}
 	 */
 	createLoader() {
 		const result = [];
@@ -157,7 +157,7 @@ class Packages {
 	 * Loads package data
 	 * @param {string} filename Filename
 	 * @param {PackageMetadata} manifest Manifest
-	 * @return {Promise<Package>}
+	 * @returns {Promise<Package>}
 	 */
 	loadPackage(filename, manifest) {
 		const done = (pkg, error) => {
@@ -180,7 +180,7 @@ class Packages {
 
 	/**
 	 * Initializes a package
-	 * @return {Promise<Package>}
+	 * @returns {Promise<Package>}
 	 */
 	initializePackage(pkg, manifest, done) {
 		if (pkg.validate(manifest)) {
@@ -214,7 +214,7 @@ class Packages {
 
 	/**
 	 * Destroys packages
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async destroy() {
 		await Promise.all(this.packages.map((pkg) => pkg.destroy()));

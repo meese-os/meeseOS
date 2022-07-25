@@ -12,6 +12,7 @@ export SHELL=/nice/try
 # Alias commands that are hard to disable to useless cryptic messages
 alias ssh="echo \"You wanted a secure shell, you got one!\""
 alias whoami="echo \"The better question is, *why* are you?\""
+alias ip="echo \"127.0.0.1\""
 
 # Implement "cat" so `oh-my-posh` can be used without error;
 # clever users can also use this to view the contents of files,

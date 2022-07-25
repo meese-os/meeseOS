@@ -31,7 +31,7 @@
 /**
  * Get parent directory
  * @param {string} path Directory
- * @return {string} Parent directory
+ * @returns {string} Parent directory
  */
 export const parentDirectory = (path) =>
 	path
@@ -44,7 +44,7 @@ export const parentDirectory = (path) =>
 /**
  * Joins paths
  * @param {string[]} args paths
- * @return {string}
+ * @returns {string}
  */
 export const pathJoin = (...args) =>
 	args
@@ -104,7 +104,7 @@ const sortMap = {
 /**
  * Creates "special" directory entries
  * @param {string} path The path to the readdir root
- * @return {Object[]}
+ * @returns {Object[]}
  */
 const createSpecials = (path) => {
 	const specials = [];
@@ -131,7 +131,7 @@ const createSpecials = (path) => {
  * @param {string} method The method to call
  * @param {ArrayBuffer} ab The ArrayBuffer
  * @param {string} mime The MIME type
- * @return {Promise}
+ * @returns {Promise}
  */
 const createFileReader = (method, ab, mime) =>
 	new Promise((resolve, reject) => {
@@ -146,7 +146,7 @@ const createFileReader = (method, ab, mime) =>
  * Converts a number (bytez) into human-readable string
  * @param {Number} bytes Input
  * @param {Boolean} [si=false] Use SI units
- * @return {string}
+ * @returns {string}
  */
 export const humanFileSize = (bytes, si = false) => {
 	if (isNaN(bytes) || typeof bytes !== "number") {
@@ -180,7 +180,7 @@ export const humanFileSize = (bytes, si = false) => {
  * @param {Function} [options.filter] A filter
  * @param {string} [options.sortBy='filename'] Sort by this attribute
  * @param {string} [options.sortDir='asc'] Sort in this direction
- * @return {Object[]}
+ * @returns {Object[]}
  */
 export const transformReaddir = ({ path }, files, options = {}) => {
 	options = {
@@ -238,7 +238,7 @@ export const transformReaddir = ({ path }, files, options = {}) => {
  * @param {ArrayBuffer} ab The ArrayBuffer
  * @param {string} mime The MIME type
  * @param {string} type Transform to this type
- * @return {DOMString|string|Blob|ArrayBuffer}
+ * @returns {DOMString|string|Blob|ArrayBuffer}
  */
 export const transformArrayBuffer = (ab, mime, type) => {
 	if (type === "string") {
@@ -255,7 +255,7 @@ export const transformArrayBuffer = (ab, mime, type) => {
 /**
  * Gets an icon from file stat
  * @param {Object} file The file stat object
- * @return {string|object}
+ * @returns {string|object}
  */
 export const getFileIcon = (map) => {
 	const find = (file) => {
@@ -273,7 +273,7 @@ export const getFileIcon = (map) => {
 /**
  * Creates a file iter for scandir
  * @param {Object} stat file stat
- * @return {Object}
+ * @returns {Object}
  */
 export const createFileIter = (stat) => ({
 	isDirectory: false,
@@ -293,14 +293,14 @@ export const createFileIter = (stat) => ({
 /**
  * Get basename of a file
  * @param {string} path The path
- * @return {string}
+ * @returns {string}
  */
 export const basename = (path) => path.split("/").reverse()[0];
 
 /**
  * Get path of a file
  * @param {string} path The path
- * @return {string}
+ * @returns {string}
  */
 export const pathname = (path) => {
 	const split = path.split("/");
@@ -316,7 +316,7 @@ export const pathname = (path) => {
 /**
  * Gets prefix from a VFS path
  * @param {string} str Input
- * @return {string}
+ * @returns {string}
  */
 export const parseMountpointPrefix = (str) => {
 	const re = /^([\w-_]+):+(.*)/;
@@ -330,7 +330,7 @@ export const parseMountpointPrefix = (str) => {
 
 /**
  * Filters a mountpoint by user groups
- * @return {boolean}
+ * @returns {boolean}
  */
 export const filterMountByGroups =
 	(userGroups) =>
@@ -344,7 +344,7 @@ export const filterMountByGroups =
 /**
  * Creates a list of VFS events to simulate server-side
  * file watching
- * @return {Object[]}
+ * @returns {Object[]}
  */
 export const createWatchEvents = (method, args) => {
 	const events = [];

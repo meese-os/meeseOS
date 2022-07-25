@@ -65,7 +65,7 @@ export default class PanelItem extends EventEmitter {
 	 * Initializes panel item
 	 * @param {Object} state State
 	 * @param {Object} actions Actions
-	 * @return {Object} Bound actions
+	 * @returns {Object} Bound actions
 	 */
 	init(state = {}, actions = {}) {
 		if (this.inited) {
@@ -89,7 +89,7 @@ export default class PanelItem extends EventEmitter {
 	 * Renders the panel item
 	 * @param {String} name The panel item virtual name
 	 * @param {Object[]} children The panel item children
-	 * @return {Node} A *virtual* node
+	 * @returns {Node} A *virtual* node
 	 */
 	render(name, children = []) {
 		return h(

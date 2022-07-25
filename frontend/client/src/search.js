@@ -106,7 +106,7 @@ export default class Search {
 	/**
 	 * Performs a search across all mounts
 	 * @param {string} pattern Search query
-	 * @return {Promise<FileMetadata[]>}
+	 * @returns {Promise<FileMetadata[]>}
 	 */
 	search(pattern) {
 		const vfs = this.core.make("meeseOS/vfs");

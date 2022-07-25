@@ -56,7 +56,7 @@ export default class Session {
 
 	/**
 	 * Saves session
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	save() {
 		const apps = Application.getApplications().filter(
@@ -74,7 +74,7 @@ export default class Session {
 	/**
 	 * Loads session
 	 * @param {boolean} [fresh=false] Kill all current applications first
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	load(fresh = false) {
 		if (fresh) {

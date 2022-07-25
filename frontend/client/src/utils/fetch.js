@@ -143,7 +143,7 @@ const fetchXhr = (target, fetchOptions) =>
  * @param {string} url The endpoint
  * @param {Options} [options] fetch options
  * @param {string} [type] Request / Response type
- * @return {Promise<*>}
+ * @returns {Promise<*>}
  */
 export const fetch = (url, options = {}, type = null) => {
 	const [target, fetchOptions] = createFetchOptions(url, options, type);

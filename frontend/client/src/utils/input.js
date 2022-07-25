@@ -42,7 +42,7 @@ const modifierNames = ["ctrl", "shift", "alt", "meta"];
  * Checks if keycombo matches
  * @param {string} combo Key combo
  * @param {Event} ev Event
- * @return {boolean}
+ * @returns {boolean}
  */
 export const matchKeyCombo = (combo, ev) => {
 	const checkKeys = String(combo).toLowerCase().split("+");
@@ -57,7 +57,7 @@ export const matchKeyCombo = (combo, ev) => {
 /**
  * Normalizes event input (position)
  * @param {Event} ev Event
- * @return {NormalizedEventPosition}
+ * @returns {NormalizedEventPosition}
  */
 export const getEvent = (ev) => {
 	let { clientX, clientY, target } = ev;
@@ -74,7 +74,7 @@ export const getEvent = (ev) => {
 /**
  * Creates a double-tap event handler
  * @param {number} [timeout=250] Timeout
- * @return {Function} Handler with => (ev, cb)
+ * @returns {Function} Handler with => (ev, cb)
  */
 export const doubleTap = (timeout = 250) => {
 	let tapped = false;

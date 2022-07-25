@@ -38,7 +38,7 @@ class Subscriptions {
 
 	/**
 	 * Starts provider
-	 * @return {Promise<undefined>|null}
+	 * @returns {Promise<undefined>|null}
 	 */
 	start() {
 		if (this.started) return;
@@ -169,7 +169,7 @@ export class WirelessToolsServiceProvider {
 	/**
 	 * A list of services this provider can create
 	 * @desc Used for resolving a dependency graph
-	 * @return {string[]}
+	 * @returns {string[]}
 	 */
 	provides() {
 		return [
@@ -187,7 +187,7 @@ export class WirelessToolsServiceProvider {
 
 	/**
 	 * Initializes provider
-	 * @return {Promise<void>}
+	 * @returns {Promise<void>}
 	 */
 	init() {
 		this.core.singleton("meeseOS/wireless-tools", () => ({
@@ -200,7 +200,7 @@ export class WirelessToolsServiceProvider {
 
 	/**
 	 * Starts provider
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	start() {
 		// This is disabled by default because it currently has no functioning

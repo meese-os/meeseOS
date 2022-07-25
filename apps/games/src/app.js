@@ -2,47 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import DosPlayer from "./dos-player";
 import "./games.scss";
+const games = require("./games.json");
 
-function App() {
-	const games = [
-		{
-			name: "Bomberman",
-			description: "Bomberman is a tile-based, turn-based, 2D action-adventure game.",
-			image: "bomberman.gif",
-			bundle: "bomberman.jsdos",
-		},
-		{
-			name: "Bureacracy",
-			description: "You need to change your address. Good luck.",
-			image: "bureaucracy.png",
-			bundle: "bureaucracy.jsdos",
-		},
-		{
-			name: "DOOM",
-			description: "DOOM is a first-person shooter video game.",
-			image: "doom.png",
-			bundle: "doom.jsdos",
-		},
-		{
-			name: "Grand Theft Auto",
-			description: "Unlock your inner criminal.",
-			image: "gta.png",
-			bundle: "grand-theft-auto.jsdos",
-		},
-		{
-			name: "Mortal Kombat",
-			description: "Fight, win, repeat.",
-			image: "mortal-kombat.png",
-			bundle: "mortal-kombat.jsdos",
-		},
-		{
-			// TODO: Make an issue on the JS-DOS repo to handle the quit button
-			name: "Oregon Trail",
-			description: "A game of adventure and discovery.",
-			image: "oregon-trail.jpeg",
-			bundle: "oregon-trail.jsdos",
-		},
-	];
+function App({ pid }) {
+	// TODO: Figure out how to make this PID useful
 
 	return <>
 		<div id="gamesContainer">

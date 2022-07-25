@@ -32,7 +32,7 @@
  * Filter an object based on keys
  * @param {Object} props Props
  * @param {String[]} filterKeys List of keys to filter
- * @return {Object}
+ * @returns {Object}
  */
 export const filteredProps = (props, filterKeys) => {
 	const keys = Object.keys(props);
@@ -51,7 +51,7 @@ export const filteredProps = (props, filterKeys) => {
 /**
  * Creates a double-tap event handler
  * @param {number} [timeout=250] Timeout
- * @return {Function} Handler with => (ev, cb)
+ * @returns {Function} Handler with => (ev, cb)
  */
 export const doubleTap = (timeout = 250) => {
 	let tapped = false;

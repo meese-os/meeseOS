@@ -112,7 +112,7 @@ export const createState = (state, options, attrs) => ({
  * @param {string} id
  * @param {WindowState} state
  * @param {WindowAttributes} attributes
- * @return {Object}
+ * @returns {Object}
  */
 export const createDOMAttributes = (id, state, attributes) => ({
 	id: id,
@@ -135,7 +135,7 @@ export const createDOMAttributes = (id, state, attributes) => ({
  * Creates styles for window DOM
  * @param {WindowState} state
  * @param {WindowAttributes} attributes
- * @return {Object}
+ * @returns {Object}
  */
 export const createDOMStyles = (
 	{ zIndex, styles, position: { top, left }, dimension: { width, height } },
@@ -398,7 +398,7 @@ const getScreenOrientation = (screen) =>
 /**
  * Gets a media query name from a map
  * @param {Window} win
- * @return {String}
+ * @returns {String}
  */
 export const getMediaQueryName = (win) =>
 	Object.keys(win.attributes.mediaQueries)

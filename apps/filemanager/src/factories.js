@@ -39,7 +39,7 @@ import dateformat from "dateformat";
 /**
  * Mount view rows factory
  * @param {Core} core MeeseOS Core instance reference
- * @return {Function} The mount view rows factory
+ * @returns {Function} The mount view rows factory
  */
 export const mountViewRowsFactory = (core) => {
 	const fs = core.make("meeseOS/fs");
@@ -63,12 +63,10 @@ export const mountViewRowsFactory = (core) => {
  * File view columns factory
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @return {Function} The file view columns factory
+ * @returns {Function} The file view columns factory
  */
 export const listViewColumnFactory = (core, proc) => {
 	return () => {
-		// TODO: Allow these to be resized without resizing the window
-		// TODO: Allow clicking the column name to sort by that column
 		const columns = [
 			{
 				label: "Name",
@@ -107,7 +105,7 @@ export const listViewColumnFactory = (core, proc) => {
  * File view rows factory
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @return {Function} The file view rows factory
+ * @returns {Function} The file view rows factory
  */
 export const listViewRowFactory = (core, proc) => {
 	const fs = core.make("meeseOS/fs");
@@ -155,7 +153,7 @@ export const listViewRowFactory = (core, proc) => {
  * @param {Window} win
  * @param {Dialog} dialog
  * @param {Object} state
- * @return {Object}
+ * @returns {Object}
  */
 export const vfsActionFactory = (core, proc, win, dialog, state) => {
 	const vfs = core.make("meeseOS/vfs");
@@ -321,7 +319,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} state
  * @param {Object} vfs
- * @return {Object}
+ * @returns {Object}
  */
 export const clipboardActionFactory = (core, state, vfs) => {
 	const clipboard = core.make("meeseOS/clipboard");
@@ -469,7 +467,7 @@ export const dialogFactory = (core, proc, win) => {
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @param {Window} win
- * @return {Function}
+ * @returns {Function}
  */
 export const menuFactory = (core, proc, win) => {
 	const fs = core.make("meeseOS/fs");

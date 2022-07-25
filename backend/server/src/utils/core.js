@@ -46,7 +46,7 @@ module.exports.argvToConfig = {
 	manifest: (manifest) => ({ packages: { manifest } }),
 };
 
-/*
+/**
  * Create session parser
  */
 module.exports.createSession = (app, configuration) => {
@@ -91,7 +91,6 @@ module.exports.parseJson = (str) => {
 const validateGroups = (req, groups, all) => {
 	if (groups instanceof Array && groups.length) {
 		const userGroups = req.session.user.groups;
-
 		const method = all ? "every" : "some";
 
 		return groups[method]((g) => userGroups.indexOf(g) !== -1);

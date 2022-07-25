@@ -92,7 +92,7 @@ export default class Middleware {
 	/**
 	 * Gets middleware functions for a group
 	 * @param {string} group Middleware group
-	 * @return {Function[]}
+	 * @returns {Function[]}
 	 */
 	get(group) {
 		return this.middleware[group] || [];

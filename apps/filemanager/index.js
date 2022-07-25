@@ -55,7 +55,7 @@ import meeseOS from "meeseOS";
 
 /**
  * Creates default settings
- * @return {Object} The default settings
+ * @returns {Object} The default settings
  */
 const createDefaultSettings = () => ({
 	showHiddenFiles: false,
@@ -67,7 +67,7 @@ const createDefaultSettings = () => ({
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @param {String} title The window title
- * @return {Object} The window options
+ * @returns {Object} The window options
  */
 const createWindowOptions = (core, proc, title) => ({
 	id: "FileManager",
@@ -89,7 +89,7 @@ const createWindowOptions = (core, proc, title) => ({
  * Creates the initial paths
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @return {Object} The initial paths
+ * @returns {Object} The initial paths
  */
 const createInitialPaths = (core, proc) => {
 	const homePath = { path: core.config("vfs.defaultPath", "home:/") };
@@ -110,7 +110,7 @@ const getTotalSize = (files) =>
 /**
  * Formats the file selection status message
  * @param {Array} files The selected files
- * @return {String} The file selection status message
+ * @returns {String} The file selection status message
  */
 const formatStatusMessage = (files) => {
 	const directoryCount = getDirectoryCount(files);
@@ -133,7 +133,7 @@ const formatStatusMessage = (files) => {
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @param {Window} win Window instance reference
- * @return {Function}
+ * @returns {Function}
  */
 const createView = (core, proc, win) => {
 	const { icon } = core.make("meeseOS/theme");
@@ -198,7 +198,7 @@ const createView = (core, proc, win) => {
  * Creates a new FileManager user interface
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @return {Function}
+ * @returns {Function}
  */
 const createApplication = (core, proc) => {
 	const createColumns = listViewColumnFactory(core, proc);
@@ -328,7 +328,7 @@ const createApplication = (core, proc) => {
  * Creates a new FileManager window
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @return {Window}
+ * @returns {Window}
  */
 const createWindow = (core, proc) => {
 	let wired;
@@ -434,7 +434,7 @@ const createWindow = (core, proc) => {
  * @param {*} args
  * @param {Object} options
  * @param {Object} metadata
- * @return {Application}
+ * @returns {Application}
  */
 const createProcess = (core, args, options, metadata) => {
 	const proc = core.make("meeseOS/application", {

@@ -145,7 +145,7 @@ export const listView = {
 		 * Creates a range of indexes from start to end
 		 * @param {Number} start
 		 * @param {Number} end
-		 * @return {Array}
+		 * @returns {Array}
 		 */
 		const createSelectionRange = (start, end) => {
 			// Swaps start and end if start is greater than end
@@ -161,6 +161,13 @@ export const listView = {
 			return [...new Set(indices)];
 		}
 
+		/**
+		 * Creates an updated selection based on the user's most recent selection.
+		 * 'ctrl' and 'shift' keys are used to create a range of indexes.
+		 * @param {Number} index The index to add to the selection
+		 * @param {Object} ev The event object
+		 * @returns {Object}
+		 */
 		const getSelection = (index, ev) => {
 			const selected = state.multiselect
 				? (ev.shiftKey

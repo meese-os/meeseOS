@@ -78,7 +78,7 @@ export default class Notifications {
 	/**
 	 * Create a new notification
 	 * @param {NotificationOptions} options See notification class for options
-	 * @return {Notification}
+	 * @returns {Notification}
 	 */
 	create(options) {
 		if (!options) {
@@ -100,7 +100,7 @@ export default class Notifications {
 
 	/**
 	 * Creates a new CSS style object
-	 * @return {{property: string}}
+	 * @returns {{property: string}}
 	 */
 	createElementStyles() {
 		const defaultPosition = this.core.config(

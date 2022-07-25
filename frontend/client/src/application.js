@@ -251,7 +251,7 @@ export default class Application extends EventEmitter {
 	 *
 	 * @param {string} path The path
 	 * @param {Object} [options] Options for url() in core
-	 * @return {string} A complete URI
+	 * @returns {string} A complete URI
 	 */
 	resource(path = "/", options = {}) {
 		return this.core.url(path, options, this.metadata);
@@ -263,7 +263,7 @@ export default class Application extends EventEmitter {
 	 * @param {string} [path=/] Append this to endpoint
 	 * @param {Options} [options] fetch options
 	 * @param {string} [type='json'] Request / Response type
-	 * @return {Promise<*>} ArrayBuffer or JSON
+	 * @returns {Promise<*>} ArrayBuffer or JSON
 	 */
 	request(path = "/", options = {}, type = "json") {
 		const uri = this.resource(path);
@@ -275,7 +275,7 @@ export default class Application extends EventEmitter {
 	 * Creates a new Websocket
 	 * @param {string} [path=/socket] Append this to endpoint
 	 * @param {WebsocketOptions} [options={}] Connection options
-	 * @return {Websocket}
+	 * @returns {Websocket}
 	 */
 	socket(path = "/socket", options = {}) {
 		options = {
@@ -311,7 +311,7 @@ export default class Application extends EventEmitter {
 	 * Creates a new Worker
 	 * @param {string} filename Worker filename
 	 * @param {Object} [options] Worker options
-	 * @return {Worker}
+	 * @returns {Worker}
 	 */
 	worker(filename, options = {}) {
 		const uri = this.resource(filename);
@@ -328,7 +328,7 @@ export default class Application extends EventEmitter {
 	/**
 	 * Create a new window belonging to this application
 	 * @param {WindowOptions} [options={}] Window options
-	 * @return {Window}
+	 * @returns {Window}
 	 */
 	createWindow(options = {}) {
 		const found = this.windows.find((w) => w.id === options.id);
@@ -398,7 +398,7 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Gets a snapshot of the application session
-	 * @return {ApplicationSession}
+	 * @returns {ApplicationSession}
 	 */
 	getSession() {
 		const session = {
@@ -414,7 +414,7 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Saves settings
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	saveSettings() {
 		const service = this.core.make("meeseOS/settings");
@@ -428,7 +428,7 @@ export default class Application extends EventEmitter {
 	/**
 	 * Get a list of all running applications
 	 *
-	 * @return {Application[]}
+	 * @returns {Application[]}
 	 */
 	static getApplications() {
 		return applications;

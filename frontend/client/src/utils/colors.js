@@ -32,7 +32,7 @@
  * Inverts a HEX color
  * @link https://stackoverflow.com/a/51568508
  * @param {string} hex Color hex code
- * @return {string} Inverted hex code
+ * @returns {string} Inverted hex code
  */
 export const invertHex = (hex) =>
 	"#" +

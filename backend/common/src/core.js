@@ -111,7 +111,7 @@ export class CoreBase extends EventEmitter {
 	 * @param {String} key The key to get the value from
 	 * @param {*} [defaultValue] If result is undefined, return this instead
 	 * @see {resolveTreeByKey}
-	 * @return {*}
+	 * @returns {*}
 	 */
 	config(key, defaultValue) {
 		return key
@@ -156,7 +156,7 @@ export class CoreBase extends EventEmitter {
 	 *
 	 * @param {String} name Service name
 	 * @param {*} args Constructor arguments
-	 * @return {*} An instance of a service
+	 * @returns {*} An instance of a service
 	 */
 	make(name, ...args) {
 		return this.providers.make(name, ...args);
@@ -165,7 +165,7 @@ export class CoreBase extends EventEmitter {
 	/**
 	 * Check if a service exists
 	 * @param {String} name Provider name
-	 * @return {Boolean}
+	 * @returns {Boolean}
 	 */
 	has(name) {
 		return this.providers.has(name);

@@ -188,7 +188,7 @@ module.exports = (core) => {
 		 * Checks if file exists
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {Promise<boolean, Error>}
+		 * @returns {Promise<boolean, Error>}
 		 */
 		exists: wrapper(
 			"access",
@@ -202,7 +202,7 @@ module.exports = (core) => {
 		 * Get file statistics
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {Object}
+		 * @returns {Object}
 		 */
 		stat:
 			(vfs) =>
@@ -219,7 +219,7 @@ module.exports = (core) => {
 		 * Reads directory
 		 * @param {String} root The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {Object[]}
+		 * @returns {Object[]}
 		 */
 		readdir: (vfs) => (root, options) =>
 			Promise.resolve(getRealPath(core, options.session, vfs.mount, root))
@@ -237,7 +237,7 @@ module.exports = (core) => {
 		 * Reads file stream
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {stream.Readable}
+		 * @returns {stream.Readable}
 		 */
 		readfile:
 			(vfs) =>
@@ -263,7 +263,7 @@ module.exports = (core) => {
 		 * Creates directory
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {boolean}
+		 * @returns {boolean}
 		 */
 		mkdir: wrapper("mkdir", (promise, options = {}) => {
 			return promise
@@ -282,7 +282,7 @@ module.exports = (core) => {
 		 * @param {String} file The file path from client
 		 * @param {stream.Readable} data The stream
 		 * @param {Object} [options={}] Options
-		 * @return {Promise<boolean, Error>}
+		 * @returns {Promise<boolean, Error>}
 		 */
 		writefile:
 			(vfs) =>
@@ -316,7 +316,7 @@ module.exports = (core) => {
 		 * @param {String} src The source file path from client
 		 * @param {String} dest The destination file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {boolean}
+		 * @returns {boolean}
 		 */
 		rename: crossWrapper("rename"),
 
@@ -325,7 +325,7 @@ module.exports = (core) => {
 		 * @param {String} src The source file path from client
 		 * @param {String} dest The destination file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {boolean}
+		 * @returns {boolean}
 		 */
 		copy: crossWrapper("copy"),
 
@@ -333,7 +333,7 @@ module.exports = (core) => {
 		 * Removes given file or directory
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {boolean}
+		 * @returns {boolean}
 		 */
 		unlink: wrapper("remove"),
 
@@ -341,7 +341,7 @@ module.exports = (core) => {
 		 * Searches for files and folders
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {boolean}
+		 * @returns {boolean}
 		 */
 		search:
 			(vfs) =>
@@ -376,7 +376,7 @@ module.exports = (core) => {
 		 * Touches a file
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {boolean}
+		 * @returns {boolean}
 		 */
 		touch: wrapper("ensureFile"),
 
@@ -384,7 +384,7 @@ module.exports = (core) => {
 		 * Gets the real filesystem path (internal only)
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @return {string}
+		 * @returns {string}
 		 */
 		realpath:
 			(vfs) =>

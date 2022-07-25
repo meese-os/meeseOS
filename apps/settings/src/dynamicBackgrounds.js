@@ -34,7 +34,7 @@ import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 /**
  * Returns all of the settings for a given dynamic background effect.
  * @param {Object} state
- * @return {Object[]}
+ * @returns {Object[]}
  */
 export const dynamicBackgroundItems = (state) => {
 	if (state.static) return [];
@@ -62,7 +62,7 @@ export const dynamicBackgroundItems = (state) => {
 
 /**
  * Loads all of the available dynamic wallpaper effects.
- * @return {Object[]}
+ * @returns {Object[]}
  */
 const getDynamicWallpaperChoices = () =>
 	Object.keys(dynamicWallpapers).map((key) => {
@@ -78,7 +78,7 @@ const getDynamicWallpaperChoices = () =>
  * Creates a `select` field for dynamic wallpaper effects.
  * @param {Object} state
  * @param {Object} actions
- * @return {Object[]}
+ * @returns {Object[]}
  */
 export const dynamicBackgroundSelect = (state, actions) => [
 	{

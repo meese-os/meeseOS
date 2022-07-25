@@ -57,7 +57,7 @@ export default class NotificationServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @return {string[]}
+	 * @returns {string[]}
 	 */
 	provides() {
 		return ["meeseOS/notification"];
@@ -65,7 +65,7 @@ export default class NotificationServiceProvider extends ServiceProvider {
 
 	/**
 	 * Initializes authentication
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	init() {
 		this.core.instance("meeseOS/notification", (options) => {

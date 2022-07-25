@@ -84,7 +84,7 @@ export default class Tray {
 	 * Creates a new Tray entry
 	 * @param {TrayEntryData} options Options
 	 * @param {Function} [handler] The callback function for all events
-	 * @return {TrayEntry}
+	 * @returns {TrayEntry}
 	 */
 	create(options, handler) {
 		const defaultTitle = "Tray Entry";
@@ -136,14 +136,14 @@ export default class Tray {
 	}
 
 	/**
-	 * @return {TrayEntry[]}
+	 * @returns {TrayEntry[]}
 	 */
 	list() {
 		return this.entries;
 	}
 
 	/**
-	 * @return {Boolean}
+	 * @returns {Boolean}
 	 */
 	has(key) {
 		return this.entries.findIndex((entry) => entry.key === key) !== -1;

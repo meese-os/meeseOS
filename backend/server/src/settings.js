@@ -86,7 +86,7 @@ class Settings {
 
 	/**
 	 * Initializes adapter
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	async init() {
 		if (this.adapter.init) {
@@ -100,7 +100,7 @@ class Settings {
 	 * Sends save request to adapter
 	 * @param {Request} req Express request
 	 * @param {Response} res Express response
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async save(req, res) {
 		const result = await this.adapter.save(req, res);
@@ -111,7 +111,7 @@ class Settings {
 	 * Sends load request to adapter
 	 * @param {Request} req Express request
 	 * @param {Response} res Express response
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	async load(req, res) {
 		const result = await this.adapter.load(req, res);

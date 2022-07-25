@@ -74,7 +74,7 @@ export default class Preloader {
 	 * Loads all resources required for a package
 	 * @param {string[]} list A list of resources
 	 * @param {boolean} [force=false] Force loading even though previously cached
-	 * @return {Promise<PreloaderResult>} A list of failed resources
+	 * @returns {Promise<PreloaderResult>} A list of failed resources
 	 */
 	load(list, force = false) {
 		const cached = (entry) =>
@@ -102,7 +102,7 @@ export default class Preloader {
 	 * @private
 	 * @param {Object[]} results Preload results
 	 * @param {string[]} cached Already cached preloads
-	 * @return {PreloaderResult}
+	 * @returns {PreloaderResult}
 	 */
 	_load(results, cached) {
 		const successes = results.filter((res) => res.success);

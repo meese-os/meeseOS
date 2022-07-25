@@ -123,7 +123,7 @@ export default class Notification {
 
 	/**
 	 * Render notification
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	render() {
 		const onclick = () => this.destroy();

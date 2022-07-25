@@ -33,7 +33,7 @@ import cursorEffects from "@meeseOS/cursor-effects";
 
 /**
  * Returns all of the settings for a given cursor effect.
- * @return {Object[]}
+ * @returns {Object[]}
  */
 export const cursorItems = (state) => {
 	const selectedEffectKey = resolveSetting(
@@ -59,7 +59,7 @@ export const cursorItems = (state) => {
 
 /**
  * Loads all of the available cursor effects.
- * @return {Object[]}
+ * @returns {Object[]}
  */
 const getCursorChoices = () =>
 	Object.keys(cursorEffects).map((key) => {
@@ -73,7 +73,7 @@ const getCursorChoices = () =>
 
 /**
  * Creates a `select` field for cursor effects.
- * @return {Object[]}
+ * @returns {Object[]}
  */
 export const cursorEffectSelect = (state, actions) => [
 	{

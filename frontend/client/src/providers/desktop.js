@@ -69,7 +69,7 @@ export default class DesktopServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @return {string[]}
+	 * @returns {string[]}
 	 */
 	provides() {
 		return ["meeseOS/desktop"];
@@ -77,7 +77,7 @@ export default class DesktopServiceProvider extends ServiceProvider {
 
 	/**
 	 * Initializes desktop
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	init() {
 		this.desktop.init();
@@ -91,14 +91,14 @@ export default class DesktopServiceProvider extends ServiceProvider {
 
 	/**
 	 * Starts desktop
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	start() {
 		this.desktop.start();
 	}
 
 	/**
-	 * @return {DeskopProviderContract}
+	 * @returns {DeskopProviderContract}
 	 */
 	createDesktopContract() {
 		return {

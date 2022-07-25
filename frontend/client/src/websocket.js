@@ -122,7 +122,7 @@ export default class Websocket extends EventEmitter {
 
 	/**
 	 * Destroys the current connection
-	 * @return {void}
+	 * @returns {void}
 	 * @private
 	 */
 	_destroyConnection() {

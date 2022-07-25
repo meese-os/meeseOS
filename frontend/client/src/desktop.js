@@ -490,7 +490,7 @@ export default class Desktop extends EventEmitter {
 	/**
 	 * Applies settings and updates desktop
 	 * @param {DesktopSettings} [settings] Use this set instead of loading from settings
-	 * @return {DesktopSettings} New settings
+	 * @returns {DesktopSettings} New settings
 	 */
 	applySettings(settings) {
 		const lockSettings = this.core.config("desktop.lock");
@@ -592,7 +592,7 @@ export default class Desktop extends EventEmitter {
 	/**
 	 * Sets the current icon theme from settings
 	 * @param {string} name Icon theme name
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	applyIcons(name) {
 		name = name || this.core.config("desktop.icons");
@@ -610,7 +610,7 @@ export default class Desktop extends EventEmitter {
 	/**
 	 * Sets the current style theme from settings
 	 * @param {string} name Theme name
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	applyTheme(name) {
 		name = name || this.core.config("desktop.theme");
@@ -638,7 +638,7 @@ export default class Desktop extends EventEmitter {
 	 * Apply theme wrapper
 	 * @private
 	 * @param {string} name Theme name
-	 * @return {Promise<undefined>}
+	 * @returns {Promise<undefined>}
 	 */
 	_applyTheme(name) {
 		return this.core
@@ -658,7 +658,7 @@ export default class Desktop extends EventEmitter {
 	 * @private
 	 * @param {string} k Key
 	 * @param {*} v Value
-	 * @return {Promise<boolean>}
+	 * @returns {Promise<boolean>}
 	 */
 	_applySettingsByKey(k, v) {
 		return this.core
@@ -671,7 +671,7 @@ export default class Desktop extends EventEmitter {
 	/**
 	 * Create drop context menu entries
 	 * @param {Object} data Drop data
-	 * @return {Object[]}
+	 * @returns {Object[]}
 	 */
 	createDropContextMenu(data) {
 		const settings = this.core.make("meeseOS/settings");
@@ -840,7 +840,7 @@ export default class Desktop extends EventEmitter {
 	 *
 	 * This is based on any panels etc taking up space
 	 *
-	 * @return {DesktopViewportRectangle}
+	 * @returns {DesktopViewportRectangle}
 	 */
 	getRect() {
 		const root = this.core.$root;
