@@ -302,7 +302,6 @@ const createApplication = (core, proc) => {
 		}),
 
 		fileview: listView.actions({
-			// TODO: Make sure the double click triggers the correct action
 			select: ({ data }) => win.emit("filemanager:select", data),
 			activate: ({ data }) =>
 				data.forEach((item) =>
@@ -407,7 +406,6 @@ const createWindow = (core, proc) => {
 		.on("filemanager:contextmenu", onContextMenu)
 		.on("filemanager:readdir", onReaddirRender)
 		.on("filemanager:refresh", onRefresh)
-		// TODO: Make sure the double click is triggering this emit, not anything else
 		.on("filemanager:open", onOpen)
 		.on("filemanager:openWith", onOpenWith)
 		.on("filemanager:historyPush", onHistoryPush)
