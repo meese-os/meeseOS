@@ -93,9 +93,7 @@ const ul = (props, children = [], level = 0) => {
 							// TODO: Figure out how to open an app for
 							// frontend/client/src/desktop.js
 							onclick: (ev) => {
-								if (child.items) {
-									return;
-								}
+								if (child.items) return;
 
 								if (child.onclick) {
 									child.onclick(child, ev);

@@ -58,6 +58,14 @@ import config from "./config.js";
 const init = () => {
 	const meeseOS = new Core(config);
 
+	// Disables the base folder if the user's settings require it
+	if (meeseOS.config("vfs.enableBaseFolder") === false) {
+		// https://github.com/os-js/OS.js/issues/796
+		const baseFolder = meeseOS.config("vfs.mountpoints", [])
+			.find((mount) => mount.name === "meeseOS");
+		if (baseFolder) baseFolder.enabled = false;
+	}
+
 	// Register your service providers
 	meeseOS.register(CoreServiceProvider);
 	meeseOS.register(DesktopServiceProvider);

@@ -43,10 +43,6 @@ export default {
 		},
 	},
 
-	filemanager: {
-		disableDownload: false,
-	},
-
 	auth: {
 		// Prevents the user from automatically logging in as "demo"
 		login: {

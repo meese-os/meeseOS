@@ -165,6 +165,10 @@ export const defaultConfiguration = {
 		},
 	},
 
+	filemanager: {
+		disableDownload: false,
+	},
+
 	search: {
 		enabled: true,
 	},
@@ -237,6 +241,7 @@ export const defaultConfiguration = {
 		defaultPath: "home:/",
 		defaultAdapter: "system",
 		adapters: {},
+		enableBaseFolder: true,
 		mountpoints: [
 			{
 				name: "apps",

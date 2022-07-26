@@ -10,7 +10,7 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Default MeeseOS Multiple Colors Dialog
+ * Default MeeseOS multiple colors dialog
  */
 export default class MultipleColorsDialog extends Dialog {
 	/**

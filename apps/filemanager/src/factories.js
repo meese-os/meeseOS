@@ -45,8 +45,6 @@ export const mountViewRowsFactory = (core) => {
 	const fs = core.make("meeseOS/fs");
 	const getMountpoints = () => fs.mountpoints(true);
 
-	// https://github.com/os-js/OS.js/issues/796
-	// TODO: Turn the above into a setting in config
 	return () =>
 		getMountpoints().map((mountpoint) => ({
 			columns: [
