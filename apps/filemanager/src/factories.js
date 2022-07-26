@@ -486,7 +486,7 @@ export const menuFactory = (core, proc, win) => {
 		const promises = items.map((fn) => fn(middlewareArgs));
 
 		const resolved = await Promise.all(promises);
-		const result = resolved.filter((items) => items instanceof Array);
+		const result = resolved.filter((item) => item instanceof Array);
 
 		return [].concat(...result);
 	};
@@ -516,9 +516,9 @@ export const menuFactory = (core, proc, win) => {
 		}
 
 		const canDownload = items.some(
-			(item) => !item.isDirectory && !isSpecialFile(item.filename)
+			(file) => !file.isDirectory && !isSpecialFile(file.filename)
 		);
-		const hasValidFile = items.some((item) => !isSpecialFile(item.filename));
+		const hasValidFile = items.some((file) => !isSpecialFile(file.filename));
 		const isDirectory = items.length === 1 && item.isDirectory;
 
 		const openMenu = isDirectory ?
