@@ -69,7 +69,7 @@ export const triggerBrowserUpload = (cb) => {
 };
 
 /**
-* Checks if the given filename is a dotted
+* Checks if the given filename is a single or double dot
 * @param {String} filename The filename to check
 * @returns {Boolean} Whether or not the file is special
 */

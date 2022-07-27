@@ -209,4 +209,26 @@ describe("Core", () => {
 			app.destroy();
 		});
 	});
+
+	test("#kill - kill valid application by PID", () => {
+		return core.run("ValidApplication").then((app) => {
+			const pid = app.pid;
+			core.kill(pid);
+
+			const apps = Application.getApplications();
+			const found = apps.filter((proc) => proc.pid === pid);
+			expect(found).toStrictEqual([]);
+		});
+	});
+
+	test("#pkill - kill valid application by name", () => {
+		return core.run("ValidApplication").then((app) => {
+			const name = app.name;
+			core.pkill(name);
+
+			const apps = Application.getApplications();
+			const found = apps.filter((proc) => proc.metadata.name === name);
+			expect(found).toStrictEqual([]);
+		});
+	});
 });

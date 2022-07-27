@@ -190,6 +190,7 @@ const mountpointResolver = (core) => async (path) => {
  * Parses URL body
  */
 const parseGet = (req) => {
+	// skipcq: JS-0272
 	const { query } = url.parse(req.url, true);
 
 	return Promise.resolve({ fields: query, files: {} });

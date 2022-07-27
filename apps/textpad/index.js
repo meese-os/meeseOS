@@ -140,7 +140,11 @@ const createMainWindow = (core, proc) => {
 };
 
 const createProcess = (core, args, options, metadata) => {
-	const proc = core.make("meeseOS/application", { args, options, metadata });
+	const proc = core.make("meeseOS/application", {
+		args,
+		options,
+		metadata,
+	});
 	createMainWindow(core, proc);
 	return proc;
 };

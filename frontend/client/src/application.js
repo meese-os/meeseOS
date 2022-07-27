@@ -331,7 +331,7 @@ export default class Application extends EventEmitter {
 	 * @returns {Window}
 	 */
 	createWindow(options = {}) {
-		const found = this.windows.find((w) => w.id === options.id);
+		const found = this.windows.find((window) => window.id === options.id);
 		if (found) {
 			const msg = `Window with ID '${options.id}' already exists`;
 			throw new Error(msg);
@@ -347,7 +347,7 @@ export default class Application extends EventEmitter {
 
 		if (this.options.restore) {
 			const windows = this.options.restore.windows || [];
-			const found = windows.findIndex((r) => r.id === instance.id);
+			const found = windows.findIndex((win) => win.id === instance.id);
 
 			if (found !== -1) {
 				const restore = windows[found];
@@ -371,7 +371,7 @@ export default class Application extends EventEmitter {
 		this.emit("create-window", instance);
 		instance.on("destroy", () => {
 			if (!this.destroyed) {
-				const foundIndex = this.windows.findIndex((w) => w === instance);
+				const foundIndex = this.windows.findIndex((win) => win === instance);
 				if (foundIndex !== -1) {
 					this.windows.splice(foundIndex, 1);
 				}
@@ -427,7 +427,6 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Get a list of all running applications
-	 *
 	 * @returns {Application[]}
 	 */
 	static getApplications() {

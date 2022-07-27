@@ -7,7 +7,11 @@ const register = (core, args, options, metadata) => {
 	const url = "https://meese-enterprises.github.io/uptime-monitor/";
 
 	// Create a new Application instance
-	const proc = core.make("meeseOS/application", { args, options, metadata });
+	const proc = core.make("meeseOS/application", {
+		args,
+		options,
+		metadata,
+	});
 
 	// Create a new Window instance
 	proc

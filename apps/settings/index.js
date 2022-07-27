@@ -365,7 +365,11 @@ const renderWindow = (core, proc) => ($content, win) => {
 
 /** Create our application */
 const register = (core, args, options, metadata) => {
-	const proc = core.make("meeseOS/application", { args, options, metadata });
+	const proc = core.make("meeseOS/application", {
+		args,
+		options,
+		metadata,
+	});
 
 	const win = proc.createWindow({
 		id: "SettingsMainWindow",

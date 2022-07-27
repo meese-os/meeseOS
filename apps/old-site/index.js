@@ -8,7 +8,11 @@ import meeseOS from "meeseOS";
 // Our launcher
 const register = (core, args, options, metadata) => {
 	// Create a new Application instance
-	const proc = core.make("meeseOS/application", { args, options, metadata });
+	const proc = core.make("meeseOS/application", {
+		args,
+		options,
+		metadata,
+	});
 
 	// Create a new Window instance
 	const win = proc.createWindow({

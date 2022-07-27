@@ -506,7 +506,6 @@ export const menuFactory = (core, proc, win) => {
 		const item = items[items.length - 1];
 
 		if (items.length === 1 && item && isSpecialFile(item.filename)) {
-			// TODO: See if the `special` query is still needed above
 			return [
 				{
 					label: "Go",

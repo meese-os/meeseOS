@@ -139,7 +139,7 @@ export default class Core extends CoreBase {
 		/**
 		 * URL Resolver
 		 * TODO: typedef
-		 * @type {function(): string}
+		 * @type {Function(): String}
 		 * @readonly
 		 */
 		this.urlResolver = urlResolver(this.configuration);
@@ -178,7 +178,7 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Destroy core instance
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	destroy() {
 		if (this.destroyed) {
@@ -375,7 +375,7 @@ export default class Core extends CoreBase {
 	 *
 	 * @private
 	 * @param {Function} cb Callback function
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	_createConnection(cb) {
 		if (this.configuration.standalone || this.configuration.ws.disabled) {
@@ -433,7 +433,9 @@ export default class Core extends CoreBase {
 	_createListeners() {
 		const handle = (data) => {
 			const { pid, wid, args } = data;
-			const proc = Application.getApplications().find((p) => p.pid === pid);
+			const proc = Application.getApplications().find(
+				(proc) => proc.pid === pid
+			);
 			const win = proc ? proc.windows.find((w) => w.wid === wid) : null;
 
 			if (win) {
@@ -455,12 +457,12 @@ export default class Core extends CoreBase {
 	 * If you give a options.type, the URL will be resolved
 	 * to the correct resource.
 	 *
-	 * @param {string} [endpoint=/] Endpoint
+	 * @param {String} [endpoint=/] Endpoint
 	 * @param {Object} [options] Additional options for resolving url
-	 * @param {boolean} [options.prefix=false] Returns a full URL complete with scheme, etc. (will always be true on websocket)
-	 * @param {string} [options.type] Optional URL type (websocket)
+	 * @param {Boolean} [options.prefix=false] Returns a full URL complete with scheme, etc. (will always be true on websocket)
+	 * @param {String} [options.type] Optional URL type (websocket)
 	 * @param {PackageMetadata} [metadata] A package metadata
-	 * @returns {string}
+	 * @returns {String}
 	 */
 	url(endpoint = "/", options = {}, metadata = {}) {
 		return this.urlResolver(endpoint, options, metadata);
@@ -472,10 +474,10 @@ export default class Core extends CoreBase {
 	 * This is a wrapper for making a 'fetch' request with some helpers
 	 * and integration with MeeseOS
 	 *
-	 * @param {string} url The endpoint
+	 * @param {String} url The endpoint
 	 * @param {Options} [options] fetch options
-	 * @param {string} [type] Request / Response type
-	 * @param {boolean} [force=false] Force request even when in standalone mode
+	 * @param {String} [type] Request / Response type
+	 * @param {Boolean} [force=false] Force request even when in standalone mode
 	 * @returns {*}
 	 */
 	request(url, options = {}, type = null, force = false) {
@@ -500,7 +502,7 @@ export default class Core extends CoreBase {
 	/**
 	 * Create an application from a package
 	 *
-	 * @param {string} name Package name
+	 * @param {String} name Package name
 	 * @param {{foo: *}} [args] Launch arguments
 	 * @param {PackageLaunchOptions} [options] Launch options
 	 * @see {Packages}
@@ -514,6 +516,7 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Spawns an application based on the file given
+	 *
 	 * @param {VFSFile} file A file object
 	 * @param {CoreOpenOptions} [options] Options
 	 * @returns {Boolean|Application}
@@ -595,9 +598,10 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Removes an event handler
-	 * @param {string} name
+	 *
+	 * @param {String} name
 	 * @param {Function} [callback=null]
-	 * @param {boolean} [force=false]
+	 * @param {Boolean} [force=false]
 	 * @returns {Core} this
 	 */
 	off(name, callback = null, force = false) {
@@ -611,10 +615,11 @@ export default class Core extends CoreBase {
 	/**
 	 * Sends a 'broadcast' event with given arguments
 	 * to all applications matching given filter
-	 * @param {string|Function} pkg The filter
-	 * @param {string} name The event name
+	 *
+	 * @param {String|Function} pkg The filter
+	 * @param {String} name The event name
 	 * @param {*} ...args Arguments to pass to emit
-	 * @returns {string[]} List of application names emitted to
+	 * @returns {String[]} List of application names emitted to
 	 */
 	broadcast(pkg, name, ...args) {
 		const filter =
@@ -632,7 +637,7 @@ export default class Core extends CoreBase {
 	/**
 	 * Sends a signal to the server over websocket.
 	 * This will be interpreted as an event in the server core.
-	 * @param {string} name Event name
+	 * @param {String} name Event name
 	 * @param {*} ...params Event callback parameters
 	 */
 	send(name, ...params) {
@@ -662,7 +667,7 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Add middleware function to a group
-	 * @param {string} group Middleware group
+	 * @param {String} group Middleware group
 	 * @param {Function} callback Middleware function to add
 	 */
 	middleware(group, callback) {
@@ -671,11 +676,21 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Kills the specified application by name
-	 * @param {string} name Application name
+	 * @param {String} name Application name
 	 */
-	kill(name) {
+	pkill(name) {
 		const apps = Application.getApplications();
-		const found = apps.filter(proc => proc.metadata.name === name);
-		found.forEach(proc => proc.destroy());
+		const found = apps.filter((proc) => proc.metadata.name === name);
+		found.forEach((proc) => proc.destroy());
+	}
+
+	/**
+	 * Kills the specified application by PID
+	 * @param {Number} pid Application PID
+	 */
+	kill(pid) {
+		const apps = Application.getApplications();
+		const found = apps.filter((proc) => proc.pid === pid);
+		found.forEach((proc) => proc.destroy());
 	}
 }

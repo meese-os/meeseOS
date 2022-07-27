@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/client",
-  "version": "2.4.5",
+  "version": "2.4.6",
   "description": "meeseOS client",
   "main": "dist/main.js",
   "style": "dist/main.css",

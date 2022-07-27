@@ -58,7 +58,11 @@ export const createInstance = () => {
 			core
 				.make("meeseOS/packages")
 				.register("ValidApplication", (core, args, options, metadata) => {
-					return core.make("meeseOS/application", { args, options, metadata });
+					return core.make("meeseOS/application", {
+						args,
+						options,
+						metadata,
+					});
 				});
 
 			return core;
