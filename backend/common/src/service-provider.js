@@ -51,7 +51,7 @@ export class ServiceProvider {
 
 	/**
 	 * A list of services this provider can create
-	 * @returns {string[]}
+	 * @returns {String[]}
 	 */
 	provides() {
 		return [];
@@ -59,7 +59,7 @@ export class ServiceProvider {
 
 	/**
 	 * A list of services this provider depends on
-	 * @returns {string[]}
+	 * @returns {String[]}
 	 */
 	depends() {
 		return [];

@@ -71,7 +71,7 @@ export default class SettingsServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @returns {string[]}
+	 * @returns {String[]}
 	 */
 	provides() {
 		return ["meeseOS/settings"];

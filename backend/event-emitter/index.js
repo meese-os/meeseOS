@@ -43,12 +43,12 @@ const getEventNames = (name) =>
 export class EventEmitter {
 	/**
 	 * Create Event Handler
-	 * @param {string} [name] A name for logging
+	 * @param {String} [name] A name for logging
 	 */
 	constructor(name = "undefined") {
 		/**
 		 * The name of the handler
-		 * @type {string}
+		 * @type {String}
 		 */
 		this.name = name;
 
@@ -71,11 +71,11 @@ export class EventEmitter {
 	 *
 	 * You can supply an array of event names or a comma separated list with a string
 	 *
-	 * @param {string|string[]} name Event name
+	 * @param {String|string[]} name Event name
 	 * @param {Function} callback Callback function
 	 * @param {Object} [options] Options
-	 * @param {boolean} [options.persist] This even handler cannot be removed unless forced
-	 * @param {boolean} [options.once] Fire only once
+	 * @param {Boolean} [options.persist] This even handler cannot be removed unless forced
+	 * @param {Boolean} [options.once] Fire only once
 	 * @returns {EventEmitter} Returns current instance
 	 */
 	on(name, callback, options = {}) {
@@ -111,9 +111,9 @@ export class EventEmitter {
 	 *
 	 * You can supply an array of event names or a comma separated list with a string
 	 *
-	 * @param {string|string[]} name Event name
+	 * @param {String|string[]} name Event name
 	 * @param {Function} [callback] Callback function
-	 * @param {boolean} [force=false] Forces removal even if set to persis
+	 * @param {Boolean} [force=false] Forces removal even if set to persis
 	 * @returns {EventEmitter} Returns current instance
 	 */
 	off(name, callback = null, force = false) {
@@ -144,7 +144,7 @@ export class EventEmitter {
 	 *
 	 * You can supply an array of event names or a comma separated list with a string
 	 *
-	 * @param {string|string[]} name Event name
+	 * @param {String|string[]} name Event name
 	 * @param {*} [args] Arguments
 	 * @returns {EventEmitter} Returns current instance
 	 */

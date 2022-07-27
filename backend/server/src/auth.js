@@ -42,17 +42,17 @@ const nullAdapter = require("./adapters/auth/null.js");
 /**
  * Authentication User Profile
  * @typedef {Object} AuthUserProfile
- * @property {string} username
- * @property {string} name
- * @property {string[]} groups
+ * @property {String} username
+ * @property {String} name
+ * @property {String[]} groups
  */
 
 /**
  * Authentication Service Options
  * @typedef {Object} AuthOptions
  * @property {AuthAdapter} [adapter]
- * @property {string[]} [requiredGroups]
- * @property {string[]} [denyUsers]
+ * @property {String[]} [requiredGroups]
+ * @property {String[]} [denyUsers]
  */
 
 /**
@@ -191,7 +191,7 @@ class Auth {
 	/**
 	 * Checks if login is allowed for this user
 	 * @param {AuthUserProfile} profile User profile
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	checkLoginPermissions(profile) {
 		const { requiredGroups, denyUsers } = this.options;

@@ -46,10 +46,11 @@ import merge from "deepmerge";
 
 /**
  * User Data
+ *
  * @typedef {Object} CoreUserData
- * @property {string} username
- * @property {number} [id]
- * @property {string[]} [groups=[]]
+ * @property {String} username
+ * @property {Number} [id]
+ * @property {String[]} [groups=[]]
  */
 
 /**
@@ -66,8 +67,8 @@ import merge from "deepmerge";
  * Core Open File Options
  *
  * @typedef {Object} CoreOpenOptions
- * @property {boolean} [useDefault] Use saved default application preference
- * @property {boolean} [forceDialog] Force application choice dialog on multiple choices
+ * @property {Boolean} [useDefault] Use saved default application preference
+ * @property {Boolean} [forceDialog] Force application choice dialog on multiple choices
  */
 
 /**
@@ -105,7 +106,7 @@ export default class Core extends CoreBase {
 
 		/**
 		 * Ping (stay alive) interval
-		 * @type {number}
+		 * @type {Number}
 		 */
 		this.ping = null;
 

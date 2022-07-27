@@ -34,9 +34,9 @@ import logger from "./logger";
 /**
  * Tray Icon Data
  * @typedef {Object} TrayEntryData
- * @property {string} [key] Used as internal index for tray entry
- * @property {string} [icon] Icon source
- * @property {string} [title] The title and tooltip
+ * @property {String} [key] Used as internal index for tray entry
+ * @property {String} [icon] Icon source
+ * @property {String} [title] The title and tooltip
  * @property {Function} [onclick] The callback function for clicks
  * @property {Function} [oncontextmenu] The callback function for contextmenu
  */

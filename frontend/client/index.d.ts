@@ -2619,10 +2619,10 @@ declare namespace instance {
 
 /**
  * Basic Application Options
- * @property {string[]} [mimeTypes] What MIME types to support (all/fallback)
- * @property {string[]} [loadMimeTypes] What MIME types to support on load
- * @property {string[]} [saveMimeTypes] What MIME types to support on save
- * @property {string} [defaultFilename] Default filename of a new file
+ * @property {String[]} [mimeTypes] What MIME types to support (all/fallback)
+ * @property {String[]} [loadMimeTypes] What MIME types to support on load
+ * @property {String[]} [saveMimeTypes] What MIME types to support on save
+ * @property {String} [defaultFilename] Default filename of a new file
  */
 /**
  * Basic Application Helper

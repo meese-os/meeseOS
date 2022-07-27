@@ -45,8 +45,8 @@ const parseValue = (value) => {
 /**
  * A text field
  * @param {Object} props Properties
- * @param {string} [props.checked] Value
- * @param {string} [props.type=checkbox] Type
+ * @param {String} [props.checked] Value
+ * @param {String} [props.type=checkbox] Type
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */

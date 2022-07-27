@@ -32,7 +32,7 @@
  * Middleware Data
  *
  * @typedef {Object} MiddlewareData
- * @property {string} [group] Middleware group
+ * @property {String} [group] Middleware group
  */
 
 /**
@@ -65,7 +65,7 @@ export default class Middleware {
 
 	/**
 	 * Add middleware function to a group
-	 * @param {string} group Middleware group
+	 * @param {String} group Middleware group
 	 * @param {Function} callback Middleware function to add
 	 */
 	add(group, callback) {
@@ -78,7 +78,7 @@ export default class Middleware {
 
 	/**
 	 * Remove middleware function from a group
-	 * @param {string} group Middleware group
+	 * @param {String} group Middleware group
 	 * @param {Function} callback Middleware function to remove
 	 */
 	remove(group, callback) {
@@ -91,7 +91,7 @@ export default class Middleware {
 
 	/**
 	 * Gets middleware functions for a group
-	 * @param {string} group Middleware group
+	 * @param {String} group Middleware group
 	 * @returns {Function[]}
 	 */
 	get(group) {

@@ -36,9 +36,9 @@ const eventNames = ["open", "close", "message", "error"];
 /**
  * Websocket options
  * @typedef {Object} WebsocketOptions
- * @property {boolean} [reconnect=true] Enable reconnection
- * @property {number} [interval=1000] Reconnect interval
- * @property {boolean} [open=true] Immediately open socket after creation
+ * @property {Boolean} [reconnect=true] Enable reconnection
+ * @property {Number} [interval=1000] Reconnect interval
+ * @property {Boolean} [open=true] Immediately open socket after creation
  */
 
 /**
@@ -50,8 +50,8 @@ const eventNames = ["open", "close", "message", "error"];
 export default class Websocket extends EventEmitter {
 	/**
 	 * Create a new Websocket
-	 * @param {string} name Instance name
-	 * @param {string} uri Connection URI
+	 * @param {String} name Instance name
+	 * @param {String} uri Connection URI
 	 * @param {WebsocketOptions} [options={}] Websocket options
 	 */
 	constructor(name, uri, options = {}) {
@@ -60,38 +60,38 @@ export default class Websocket extends EventEmitter {
 
 		/**
 		 * Socket URI
-		 * @type {string}
+		 * @type {String}
 		 * @readonly
 		 */
 		this.uri = uri;
 
 		/**
 		 * If socket is closed
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.closed = false;
 
 		/**
 		 * If socket is connected
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.connected = false;
 
 		/**
 		 * If socket is connecting
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.connecting = false;
 
 		/**
 		 * If socket is reconnecting
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.reconnecting = false;
 
 		/**
 		 * If socket failed to connect
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.connectfailed = false;
 
@@ -178,7 +178,7 @@ export default class Websocket extends EventEmitter {
 
 	/**
 	 * Opens the connection
-	 * @param {boolean} [reconnect=false] Force reconnection
+	 * @param {Boolean} [reconnect=false] Force reconnection
 	 */
 	open(reconnect = false) {
 		if (this.connection && !reconnect) {

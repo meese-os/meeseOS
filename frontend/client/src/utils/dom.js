@@ -35,7 +35,7 @@ const supportsNativeNotification = "Notification" in window;
 /**
  * Creates a new CSS DOM element
  * @param {Element} root Root node
- * @param {string} src Source
+ * @param {String} src Source
  * @returns {Promise<ScriptElement>}
  */
 export const style = (root, src) =>
@@ -55,7 +55,7 @@ export const style = (root, src) =>
 /**
  * Creates a new Script DOM element
  * @param {Element} root Root node
- * @param {string} src Source
+ * @param {String} src Source
  * @returns {Promise<StyleElement>}
  */
 export const script = (root, src) =>
@@ -77,8 +77,8 @@ export const script = (root, src) =>
 
 /**
  * Escape text so it is "safe" for HTML usage
- * @param {string} text Input text
- * @returns {string}
+ * @param {String} text Input text
+ * @returns {String}
  */
 export const escapeHtml = (text) => {
 	const div = document.createElement("div");
@@ -89,7 +89,7 @@ export const escapeHtml = (text) => {
 /**
  * Serialize an object to CSS
  * @param {Object} obj Object
- * @returns {string} CSS text
+ * @returns {String} CSS text
  */
 export const createCssText = (obj) =>
 	Object.keys(obj)
@@ -134,7 +134,7 @@ export const getActiveElement = (root) => {
 /**
  * Checks if passive events is supported
  * @link https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
- * @returns {boolean}
+ * @returns {Boolean}
  */
 export const supportsPassive = (function() {
 	let supportsPassive = false;
@@ -154,7 +154,7 @@ export const supportsPassive = (function() {
 
 /**
  * Plays a sound
- * @param {string} src Sound source
+ * @param {String} src Sound source
  * @param {Object} [options] Options
  * @returns {Promise<HTMLAudioElement>}
  */
@@ -214,7 +214,7 @@ export const supportedMedia = () => {
 
 /**
  * Gets if CSS transitions is supported
- * @returns {boolean}
+ * @returns {Boolean}
  */
 export const supportsTransition = (function() {
 	const el = document.createElement("div");

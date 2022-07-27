@@ -263,7 +263,7 @@ module.exports = (core) => {
 		 * Creates directory
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {boolean}
+		 * @returns {Boolean}
 		 */
 		mkdir: wrapper("mkdir", (promise, options = {}) => {
 			return promise
@@ -316,7 +316,7 @@ module.exports = (core) => {
 		 * @param {String} src The source file path from client
 		 * @param {String} dest The destination file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {boolean}
+		 * @returns {Boolean}
 		 */
 		rename: crossWrapper("rename"),
 
@@ -325,7 +325,7 @@ module.exports = (core) => {
 		 * @param {String} src The source file path from client
 		 * @param {String} dest The destination file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {boolean}
+		 * @returns {Boolean}
 		 */
 		copy: crossWrapper("copy"),
 
@@ -333,7 +333,7 @@ module.exports = (core) => {
 		 * Removes given file or directory
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {boolean}
+		 * @returns {Boolean}
 		 */
 		unlink: wrapper("remove"),
 
@@ -341,7 +341,7 @@ module.exports = (core) => {
 		 * Searches for files and folders
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {boolean}
+		 * @returns {Boolean}
 		 */
 		search:
 			(vfs) =>
@@ -376,7 +376,7 @@ module.exports = (core) => {
 		 * Touches a file
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {boolean}
+		 * @returns {Boolean}
 		 */
 		touch: wrapper("ensureFile"),
 
@@ -384,7 +384,7 @@ module.exports = (core) => {
 		 * Gets the real filesystem path (internal only)
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {string}
+		 * @returns {String}
 		 */
 		realpath:
 			(vfs) =>

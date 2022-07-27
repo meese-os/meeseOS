@@ -109,7 +109,7 @@ export const createState = (state, options, attrs) => ({
 
 /**
  * Creates data attributes for window DOM
- * @param {string} id
+ * @param {String} id
  * @param {WindowState} state
  * @param {WindowAttributes} attributes
  * @returns {Object}
@@ -199,7 +199,7 @@ export const renderCallback = (win, callback) => {
  * Gets new position based on "gravity"
  * @param {Window} win
  * @param {Object} rect
- * @param {string} gravity
+ * @param {String} gravity
  */
 export const positionFromGravity = (win, rect, gravity) => {
 	let { left, top } = win.state.position;

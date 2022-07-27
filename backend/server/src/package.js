@@ -39,7 +39,7 @@ const chokidar = require("chokidar");
 /**
  * Package Options
  * @typedef {Object} PackageOptions
- * @property {string} filename
+ * @property {String} filename
  * @property {PackageMetadata} metadata
  */
 
@@ -63,7 +63,7 @@ class Package {
 			: null;
 
 		/**
-		 * @type {string}
+		 * @type {String}
 		 */
 		this.filename = options.filename;
 
@@ -91,9 +91,9 @@ class Package {
 
 	/**
 	 * Run method on package script
-	 * @param {string} method Method name
+	 * @param {String} method Method name
 	 * @param {*} [...args] Pass arguments
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	action(method, ...args) {
 		try {
@@ -112,7 +112,7 @@ class Package {
 	/**
 	 * Validates this package
 	 * @param {PackageMetadata[]} manifest Global manifest
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	validate(manifest) {
 		return (
@@ -150,7 +150,7 @@ class Package {
 	/**
 	 * Creates a watch in package dist
 	 * @param {Function} cb Callback function on watch changes
-	 * @returns {string} Watched path
+	 * @returns {String} Watched path
 	 */
 	watch(cb) {
 		const pub = this.core.config("public");
@@ -164,8 +164,8 @@ class Package {
 
 	/**
 	 * Resolve an URL for resource
-	 * @param {string} path Input path
-	 * @returns {string}
+	 * @param {String} path Input path
+	 * @returns {String}
 	 */
 	resource(path) {
 		if (path.charAt(0) !== "/") {

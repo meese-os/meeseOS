@@ -35,10 +35,10 @@ import { basename, pathname } from "./utils/vfs";
  * Basic Application Options
  *
  * @typedef {Object} BasicApplicationOptions
- * @property {string[]} [mimeTypes] What MIME types to support (all/fallback)
- * @property {string[]} [loadMimeTypes] What MIME types to support on load
- * @property {string[]} [saveMimeTypes] What MIME types to support on save
- * @property {string} [defaultFilename] Default filename of a new file
+ * @property {String[]} [mimeTypes] What MIME types to support (all/fallback)
+ * @property {String[]} [loadMimeTypes] What MIME types to support on load
+ * @property {String[]} [saveMimeTypes] What MIME types to support on save
+ * @property {String} [defaultFilename] Default filename of a new file
  */
 
 /**
@@ -117,7 +117,7 @@ export class BasicApplication extends EventEmitter {
 
 	/**
 	 * Gets options for a dialog
-	 * @param {string} type Dialog type
+	 * @param {String} type Dialog type
 	 * @returns {Object}
 	 */
 	getDialogOptions(type, options = {}) {
@@ -166,7 +166,7 @@ export class BasicApplication extends EventEmitter {
 
 	/**
 	 * Creates a new dialog of a type
-	 * @param {string} type Dialog type
+	 * @param {String} type Dialog type
 	 * @param {Function} cb Callback
 	 * @param {Object} [options] Override options
 	 */
@@ -241,7 +241,7 @@ export class BasicApplication extends EventEmitter {
 	 *
 	 * @private
 	 * @param {VFSFile} item File
-	 * @param {string} eventName Event to fire
+	 * @param {String} eventName Event to fire
 	 */
 	_setFile(item, eventName) {
 		this.proc.args.file = { ...item };
@@ -253,8 +253,8 @@ export class BasicApplication extends EventEmitter {
 	 * Creates the window title
 	 *
 	 * @private
-	 * @param {string} prefix Title prefix
-	 * @returns {string}
+	 * @param {String} prefix Title prefix
+	 * @returns {String}
 	 */
 	_createTitle(prefix) {
 		const title = this.proc.args.file

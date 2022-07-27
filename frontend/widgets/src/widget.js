@@ -242,8 +242,8 @@ export default class Widget {
 
 	/**
 	 * @param {Object} options
-	 * @param {number} options.width
-	 * @param {number} options.height
+	 * @param {Number} options.width
+	 * @param {Number} options.height
 	 * @param {HTMLCanvasElement} options.canvas
 	 * @param {CanvasRenderingContext2D} options.context
 	 */

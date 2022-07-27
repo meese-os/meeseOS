@@ -186,7 +186,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @returns {string[]}
+	 * @returns {String[]}
 	 */
 	provides() {
 		return [
@@ -364,7 +364,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	/**
 	 * Event when dist changes from a build or deployment
 	 * @private
-	 * @param {string} filename The resource filename
+	 * @param {String} filename The resource filename
 	 */
 	_onDistChanged(filename) {
 		const url = this.core.url(filename).replace(/^\//, "");
@@ -391,7 +391,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	/**
 	 * Event when package dist changes from a build or deployment
 	 * @private
-	 * @param {string} name The package name
+	 * @param {String} name The package name
 	 */
 	_onPackageChanged(name) {
 		// TODO: Reload themes as well

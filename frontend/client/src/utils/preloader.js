@@ -37,16 +37,16 @@ import logger from "../logger";
 
 /**
  * @typedef {Object} PreloaderEntry
- * @property {boolean} success
+ * @property {Boolean} success
  * @property {PreloaderEntryElement} [el]
- * @property {string} [entry]
- * @property {string} [error]
+ * @property {String} [entry]
+ * @property {String} [error]
  */
 
 /**
  * @typedef {Object} PreloaderResult
- * @property {string[]} errors
- * @property {{string: PreloaderEntryElement}} elements
+ * @property {String[]} errors
+ * @property {{String: PreloaderEntryElement}} elements
  */
 
 /**
@@ -72,8 +72,8 @@ export default class Preloader {
 
 	/**
 	 * Loads all resources required for a package
-	 * @param {string[]} list A list of resources
-	 * @param {boolean} [force=false] Force loading even though previously cached
+	 * @param {String[]} list A list of resources
+	 * @param {Boolean} [force=false] Force loading even though previously cached
 	 * @returns {Promise<PreloaderResult>} A list of failed resources
 	 */
 	load(list, force = false) {
@@ -101,7 +101,7 @@ export default class Preloader {
 	 * Checks the loaded list
 	 * @private
 	 * @param {Object[]} results Preload results
-	 * @param {string[]} cached Already cached preloads
+	 * @param {String[]} cached Already cached preloads
 	 * @returns {PreloaderResult}
 	 */
 	_load(results, cached) {

@@ -33,8 +33,8 @@ import { h } from "hyperapp";
 /**
  * An icon
  * @param {Object} props Properties
- * @param {string} props.src Icon src
- * @param {string} [props.name] Icon name
+ * @param {String} props.src Icon src
+ * @param {String} [props.name] Icon name
  * @param {h[]} children Children
  */
 export const Icon = (props, children) => {

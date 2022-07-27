@@ -46,8 +46,8 @@ const getSettingsKey = (metadata) => "meeseOS/application/" + metadata.name;
  * @typedef {Object} ApplicationOptions
  * @property {Object} [settings] Initial settings
  * @property {Object} [restore] Restore data
- * @property {boolean} [windowAutoFocus=true] Auto-focus first created window
- * @property {boolean} [sessionable=true] Allow session storage
+ * @property {Boolean} [windowAutoFocus=true] Auto-focus first created window
+ * @property {Boolean} [sessionable=true] Allow session storage
  */
 
 /**
@@ -64,7 +64,7 @@ const getSettingsKey = (metadata) => "meeseOS/application/" + metadata.name;
  *
  * @typedef {Object} ApplicationSession
  * @property {{foo: string}} args
- * @property {string} name
+ * @property {String} name
  * @property {WindowSession[]} windows
  */
 
@@ -156,7 +156,7 @@ export default class Application extends EventEmitter {
 
 		/**
 		 * The application destruction state
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.destroyed = false;
 
@@ -249,9 +249,9 @@ export default class Application extends EventEmitter {
 	 *
 	 * If given path is an URI it will just return itself.
 	 *
-	 * @param {string} path The path
+	 * @param {String} path The path
 	 * @param {Object} [options] Options for url() in core
-	 * @returns {string} A complete URI
+	 * @returns {String} A complete URI
 	 */
 	resource(path = "/", options = {}) {
 		return this.core.url(path, options, this.metadata);
@@ -260,9 +260,9 @@ export default class Application extends EventEmitter {
 	/**
 	 * Performs a request to the MeeseOS server with the application
 	 * as the endpoint.
-	 * @param {string} [path=/] Append this to endpoint
+	 * @param {String} [path=/] Append this to endpoint
 	 * @param {Options} [options] fetch options
-	 * @param {string} [type='json'] Request / Response type
+	 * @param {String} [type='json'] Request / Response type
 	 * @returns {Promise<*>} ArrayBuffer or JSON
 	 */
 	request(path = "/", options = {}, type = "json") {
@@ -273,7 +273,7 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Creates a new Websocket
-	 * @param {string} [path=/socket] Append this to endpoint
+	 * @param {String} [path=/socket] Append this to endpoint
 	 * @param {WebsocketOptions} [options={}] Connection options
 	 * @returns {Websocket}
 	 */
@@ -309,7 +309,7 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Creates a new Worker
-	 * @param {string} filename Worker filename
+	 * @param {String} filename Worker filename
 	 * @param {Object} [options] Worker options
 	 * @returns {Worker}
 	 */

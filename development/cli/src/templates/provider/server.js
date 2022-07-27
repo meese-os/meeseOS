@@ -15,7 +15,7 @@ class ServiceProvider {
 	/**
 	 * A list of services this provider can create
 	 * @desc Used for resolving a dependency graph
-	 * @returns {string[]}
+	 * @returns {String[]}
 	 */
 	provides() {
 		return [];

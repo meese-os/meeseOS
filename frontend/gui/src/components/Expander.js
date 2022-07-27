@@ -97,7 +97,7 @@ const inner = nestable(
 /**
  * A status bar
  * @param {Object} props Properties
- * @param {boolean} [props.active] Active state
+ * @param {Boolean} [props.active] Active state
  * @param {Function} [props.ontoggle] Toggle callback => (ev, active)
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children

@@ -39,14 +39,14 @@ const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
 /**
  * Check if droppable data is a VFS type
  * @param {Object} data
- * @returns {boolean}
+ * @returns {Boolean}
  */
 export const validVfsDrop = (data) => data && data.path;
 
 /**
  * Check if droppable data contains image
  * @param {Object} data
- * @returns {boolean}
+ * @returns {Boolean}
  */
 export const isDroppingImage = (data) =>
 	validVfsDrop(data) &&

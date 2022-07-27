@@ -48,21 +48,21 @@ import systemAdapter from "./adapters/vfs/system";
  * VFS Mountpoint attributes
  *
  * @typedef {Object} FilesystemMountpointAttributes
- * @property {string} [visibility='global'] Visibility in UI
- * @property {boolean} [local=true] Local filesystem ?
- * @property {boolean} [searchable=true] If can be searched
- * @property {boolean} [readOnly=false] Readonly
+ * @property {String} [visibility='global'] Visibility in UI
+ * @property {Boolean} [local=true] Local filesystem ?
+ * @property {Boolean} [searchable=true] If can be searched
+ * @property {Boolean} [readOnly=false] Readonly
  */
 
 /**
  * VFS Mountpoint
  *
  * @typedef {Object} FilesystemMountpoint
- * @property {string} name Name
- * @property {string} label Label
- * @property {string} adapter Adater name
- * @property {string} [root] System adapter root
- * @property {boolean} [enabled=true] Enabled state
+ * @property {String} name Name
+ * @property {String} label Label
+ * @property {String} adapter Adater name
+ * @property {String} [root] System adapter root
+ * @property {Boolean} [enabled=true] Enabled state
  * @property {FilesystemMountpointAttributes} [attributes] Attributes
  */
 
@@ -164,7 +164,7 @@ export default class Filesystem extends EventEmitter {
 
 	/**
 	 * Mounts all configured mountpoints
-	 * @param {boolean} [stopOnError=true] Stop on first error
+	 * @param {Boolean} [stopOnError=true] Stop on first error
 	 * @returns {Promise<boolean[]>}
 	 */
 	mountAll(stopOnError = true) {
@@ -183,7 +183,7 @@ export default class Filesystem extends EventEmitter {
 	/**
 	 * Adds a new mountpoint
 	 * @param {FilesystemMountpoint} props Mountpoint props
-	 * @param {boolean} [automount=true] Automount after creation
+	 * @param {Boolean} [automount=true] Automount after creation
 	 * @returns {Promise<boolean>}
 	 */
 	addMountpoint(props, automount = true) {
@@ -199,7 +199,7 @@ export default class Filesystem extends EventEmitter {
 
 	/**
 	 * Mount given mountpoint
-	 * @param {string|FilesystemMountpoint} mountpoint Mountpoint name or object
+	 * @param {String|FilesystemMountpoint} mountpoint Mountpoint name or object
 	 * @throws {Error} On invalid name or if already mounted
 	 * @returns {Promise<boolean>}
 	 */
@@ -213,7 +213,7 @@ export default class Filesystem extends EventEmitter {
 
 	/**
 	 * Unmount given filesystem
-	 * @param {string} name Filesystem name
+	 * @param {String} name Filesystem name
 	 * @throws {Error} On invalid name or if already unmounted
 	 * @returns {Promise<boolean>}
 	 */
@@ -226,7 +226,7 @@ export default class Filesystem extends EventEmitter {
 	 *
 	 * @private
 	 * @param {FilesystemMountpoint} mountpoint The mountpoint
-	 * @param {boolean} [unmount=false] If action is unmounting
+	 * @param {Boolean} [unmount=false] If action is unmounting
 	 * @returns {Promise<boolean>}
 	 */
 	_mountpointAction(mountpoint, unmount = false) {
@@ -249,8 +249,8 @@ export default class Filesystem extends EventEmitter {
 	 * Internal wrapper for mounting/unmounting by name
 	 *
 	 * @private
-	 * @param {string} name Mountpoint name
-	 * @param {boolean} [unmount=false] If action is unmounting
+	 * @param {String} name Mountpoint name
+	 * @param {Boolean} [unmount=false] If action is unmounting
 	 * @returns {Promise<boolean>}
 	 */
 	_mountAction(name, unmount) {
@@ -283,7 +283,7 @@ export default class Filesystem extends EventEmitter {
 	 * Perform a VFS method request
 	 *
 	 * @private
-	 * @param {string} method VFS method name
+	 * @param {String} method VFS method name
 	 * @param {*} ...args Arguments
 	 * @returns {*}
 	 */
@@ -316,7 +316,7 @@ export default class Filesystem extends EventEmitter {
 	 * Request action wrapper
 	 *
 	 * @private
-	 * @param {string} method
+	 * @param {String} method
 	 * @param {*} ...args Arguments
 	 * @returns {Promise<*>}
 	 */
@@ -382,7 +382,7 @@ export default class Filesystem extends EventEmitter {
 
 	/**
 	 * Gets mountpoint from given path
-	 * @param {string|VFSFile} file The file
+	 * @param {String|VFSFile} file The file
 	 * @returns {FilesystemMountpoint|null}
 	 */
 	getMountpointFromPath(file) {

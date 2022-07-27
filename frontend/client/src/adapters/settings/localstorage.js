@@ -43,7 +43,7 @@ const localStorageSettings = (core) => {
 	return {
 		/**
 		 * Clears the localStorage for the specified namespace
-		 * @param {string} [ns] The namespace
+		 * @param {String} [ns] The namespace
 		 * @returns {Promise<boolean>}
 		 */
 		clear(ns) {

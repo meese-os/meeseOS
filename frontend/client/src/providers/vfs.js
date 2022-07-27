@@ -96,7 +96,7 @@ export default class VFSServiceProvider extends ServiceProvider {
 
 	/**
 	 * Get a list of services this provider registers
-	 * @returns {string[]}
+	 * @returns {String[]}
 	 */
 	provides() {
 		return ["meeseOS/vfs", "meeseOS/fs"];

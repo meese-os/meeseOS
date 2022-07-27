@@ -137,8 +137,8 @@ const inner = nestable(
 /**
  * Resizable panes
  * @param {Object} props Properties
- * @param {string} [props.orientation='vertical'] Pane orientation
- * @param {number[]} [props.sizes] Pane sizes
+ * @param {String} [props.orientation='vertical'] Pane orientation
+ * @param {Number[]} [props.sizes] Pane sizes
  * @param {h[]} children Children
  */
 export const Panes = (props, children) =>

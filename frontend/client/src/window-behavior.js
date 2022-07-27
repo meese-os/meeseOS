@@ -70,7 +70,7 @@ export default class WindowBehavior {
 
 		/**
 		 * Last action
-		 * @type {string}
+		 * @type {String}
 		 */
 		this.lastAction = null;
 

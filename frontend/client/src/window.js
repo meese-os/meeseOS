@@ -52,23 +52,23 @@ import logger from "./logger";
 /**
  * Window dimension definition
  * @typedef {Object} WindowDimension
- * @property {number} width Width in pixels (or float for percentage in setters)
- * @property {number} height Height in pixels (or float for percentage in setters)
+ * @property {Number} width Width in pixels (or float for percentage in setters)
+ * @property {Number} height Height in pixels (or float for percentage in setters)
  */
 
 /**
  * Window position definition
  * @typedef {Object} WindowPosition
- * @property {number} left Left in pixels (or float for percentage in setters)
- * @property {number} top Top in pixels (or float for percentage in setters)
+ * @property {Number} left Left in pixels (or float for percentage in setters)
+ * @property {Number} top Top in pixels (or float for percentage in setters)
  */
 
 /**
  * Window session
  * @typedef {Object} WindowSession
- * @property {number} id
- * @property {boolean} maximized
- * @property {boolean} minimized
+ * @property {Number} id
+ * @property {Boolean} maximized
+ * @property {Boolean} minimized
  * @property {WindowPosition} position
  * @property {WindowDimension} dimension
  */
@@ -77,20 +77,20 @@ import logger from "./logger";
  * Window attributes definition
  *
  * @typedef {Object} WindowAttributes
- * @property {string[]} [classNames=[]] A list of class names
- * @property {boolean} [ontop=false] If always on top
- * @property {string} [gravity] Gravity (center/top/left/right/bottom or any combination)
- * @property {boolean} [resizable=true] If resizable
- * @property {boolean} [focusable=true] If focusable
- * @property {boolean} [maximizable=true] If window if maximizable
- * @property {boolean} [minimizable=true] If minimizable
- * @property {boolean} [moveable=true] If moveable
- * @property {boolean} [closeable=true] If closeable
- * @property {boolean} [header=true] Show header
- * @property {boolean} [controls=true] Show controls
- * @property {string} [visibility=global] Global visibility, 'restricted' to hide from window lists etc.
- * @property {boolean} [clamp=true] Clamp the window position upon creation
- * @property {boolean} [droppable=true] If window should have the default drop action
+ * @property {String[]} [classNames=[]] A list of class names
+ * @property {Boolean} [ontop=false] If always on top
+ * @property {String} [gravity] Gravity (center/top/left/right/bottom or any combination)
+ * @property {Boolean} [resizable=true] If resizable
+ * @property {Boolean} [focusable=true] If focusable
+ * @property {Boolean} [maximizable=true] If window if maximizable
+ * @property {Boolean} [minimizable=true] If minimizable
+ * @property {Boolean} [moveable=true] If moveable
+ * @property {Boolean} [closeable=true] If closeable
+ * @property {Boolean} [header=true] Show header
+ * @property {Boolean} [controls=true] Show controls
+ * @property {String} [visibility=global] Global visibility, 'restricted' to hide from window lists etc.
+ * @property {Boolean} [clamp=true] Clamp the window position upon creation
+ * @property {Boolean} [droppable=true] If window should have the default drop action
  * @property {WindowDimension} [minDimension] Minimum dimension
  * @property {WindowDimension} [maxDimension] Maximum dimension
  * @property {{name: string}} [mediaQueries] A map of matchMedia to name
@@ -100,16 +100,16 @@ import logger from "./logger";
  * Window state definition
  *
  * @typedef {Object} WindowState
- * @property {string} title Title
- * @property {string} icon Icon
- * @property {boolean} [moving=false] If moving
- * @property {boolean} [resizing=false] If resizing
- * @property {boolean} [loading=false] If loading
- * @property {boolean} [focused=false] If focused
- * @property {boolean} [maximized=false] If maximized
- * @property {boolean} [mimimized=false] If mimimized
- * @property {boolean} [modal=false] If modal to the parent
- * @property {number} [zIndex=10] The z-index (auto calculated)
+ * @property {String} title Title
+ * @property {String} icon Icon
+ * @property {Boolean} [moving=false] If moving
+ * @property {Boolean} [resizing=false] If resizing
+ * @property {Boolean} [loading=false] If loading
+ * @property {Boolean} [focused=false] If focused
+ * @property {Boolean} [maximized=false] If maximized
+ * @property {Boolean} [mimimized=false] If mimimized
+ * @property {Boolean} [modal=false] If modal to the parent
+ * @property {Number} [zIndex=10] The z-index (auto calculated)
  * @property {WindowPosition} [position] Position
  * @property {WindowDimension} [dimension] Dimension
  */
@@ -118,11 +118,11 @@ import logger from "./logger";
  * Window options definition
  *
  * @typedef {Object} WindowOptions
- * @property {string} id Window Id (not globaly unique)
- * @property {string} [title] Window Title
- * @property {string} [icon] Window Icon
+ * @property {String} id Window Id (not globaly unique)
+ * @property {String} [title] Window Title
+ * @property {String} [icon] Window Icon
  * @property {Window} [parent] The parent Window reference
- * @property {string|Function} [template] The Window HTML template (or function with signature (el, win) for programatic construction)
+ * @property {String|Function} [template] The Window HTML template (or function with signature (el, win) for programatic construction)
  * @property {Function} [ondestroy] A callback function when window destructs to interrupt the procedure
  * @property {WindowPosition|string} [position] Window position
  * @property {WindowDimension} [dimension] Window dimension
@@ -203,7 +203,7 @@ export default class Window extends EventEmitter {
 
 		/**
 		 * The Window ID
-		 * @type {string}
+		 * @type {String}
 		 * @readonly
 		 */
 		this.id = options.id;
@@ -237,19 +237,19 @@ export default class Window extends EventEmitter {
 
 		/**
 		 * The window destruction state
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.destroyed = false;
 
 		/**
 		 * The window rendered state
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.rendered = false;
 
 		/**
 		 * The window was inited
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.inited = false;
 
@@ -300,7 +300,7 @@ export default class Window extends EventEmitter {
 		 * Internal variable to signal not to use default position
 		 * given by user (used for restore)
 		 * @private
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this._preventDefaultPosition = false;
 
@@ -308,14 +308,14 @@ export default class Window extends EventEmitter {
 		 * Internal timeout reference used for triggering the loading
 		 * overlay.
 		 * @private
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this._loadingDebounce = null;
 
 		/**
 		 * The window template
 		 * @private
-		 * @type {string|Function}
+		 * @type {String|Function}
 		 */
 		this._template = options.template;
 
@@ -335,7 +335,7 @@ export default class Window extends EventEmitter {
 		/**
 		 * Last DOM update CSS text
 		 * @private
-		 * @type {string}
+		 * @type {String}
 		 */
 		this._lastCssText = "";
 
@@ -556,7 +556,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Close the window
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	close() {
 		if (this.destroyed) return false;
@@ -569,7 +569,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Focus the window
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	focus() {
 		if (!this.state.minimized && this._toggleState("focused", true, "focus")) {
@@ -597,7 +597,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Blur (un-focus) the window
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	blur() {
 		// Forces blur-ing of browser input element belonging to this window
@@ -609,7 +609,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Minimize (hide) the window
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	minimize() {
 		if (this.attributes.minimizable) {
@@ -625,7 +625,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Raise (un-minimize) the window
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	raise() {
 		return this._toggleState("minimized", false, "raise");
@@ -633,7 +633,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Maximize the window
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	maximize() {
 		if (this.attributes.maximizable) {
@@ -645,7 +645,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Restore (un-maximize) the window
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	restore() {
 		return this._maximize(false);
@@ -654,8 +654,8 @@ export default class Window extends EventEmitter {
 	/**
 	 * Internal for Maximize or restore
 	 * @private
-	 * @param {boolean} toggle Maximize or restore
-	 * @returns {boolean}
+	 * @param {Boolean} toggle Maximize or restore
+	 * @returns {Boolean}
 	 */
 	_maximize(toggle) {
 		if (
@@ -704,7 +704,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Clamps the position to viewport
-	 * @param {boolean} [update=true] Update DOM
+	 * @param {Boolean} [update=true] Update DOM
 	 */
 	clampToViewport(update = true) {
 		if (!this.core.has("meeseOS/desktop")) return;
@@ -723,7 +723,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Set the Window icon
-	 * @param {string} uri Icon URI
+	 * @param {String} uri Icon URI
 	 */
 	setIcon(uri) {
 		this.state.icon = uri;
@@ -733,7 +733,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Set the Window title
-	 * @param {string} title Title
+	 * @param {String} title Title
 	 */
 	setTitle(title) {
 		this.state.title = title || "";
@@ -758,7 +758,7 @@ export default class Window extends EventEmitter {
 	/**
 	 * Set the Window position
 	 * @param {WindowPosition} position The position
-	 * @param {boolean} [preventDefault=false] Prevents any future position setting in init procedure
+	 * @param {Boolean} [preventDefault=false] Prevents any future position setting in init procedure
 	 */
 	setPosition(position, preventDefault = false) {
 		const { left, top } = { ...this.state.position, ...(position || {}) };
@@ -786,7 +786,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Sets the Window to next z index
-	 * @param {boolean} [force] Force next index
+	 * @param {Boolean} [force] Force next index
 	 */
 	setNextZindex(force) {
 		const setNext = force || this._checkNextZindex();
@@ -799,9 +799,9 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Set a state by value
-	 * @param {string} name State name
+	 * @param {String} name State name
 	 * @param {*} value State value
-	 * @param {boolean} [update=true] Update the DOM
+	 * @param {Boolean} [update=true] Update the DOM
 	 * @see {WindowState}
 	 */
 	setState(name, value, update = true) {
@@ -823,7 +823,7 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Gravitates window towards a certain area
-	 * @param {string} gravity Gravity
+	 * @param {String} gravity Gravity
 	 */
 	gravitate(gravity) {
 		if (!this.core.has("meeseOS/desktop")) return;
@@ -881,10 +881,10 @@ export default class Window extends EventEmitter {
 	/**
 	 * Internal method for setting state
 	 * @private
-	 * @param {string} name State name
+	 * @param {String} name State name
 	 * @param {*} value State value
-	 * @param {boolean} [update=true] Update the DOM
-	 * @param {boolean} [updateAll=true] Update the entire DOM
+	 * @param {Boolean} [update=true] Update the DOM
+	 * @param {Boolean} [updateAll=true] Update the entire DOM
 	 */
 	_setState(name, value, update = true) {
 		const oldValue = this.state[name];
@@ -902,10 +902,10 @@ export default class Window extends EventEmitter {
 	/**
 	 * Internal method for toggling state
 	 * @private
-	 * @param {string} name State name
+	 * @param {String} name State name
 	 * @param {any} value State value
-	 * @param {string} eventName Name of event to emit
-	 * @param {boolean} [update=true] Update the DOM
+	 * @param {String} eventName Name of event to emit
+	 * @param {Boolean} [update=true] Update the DOM
 	 */
 	_toggleState(name, value, eventName, update = true) {
 		if (this.state[name] === value) {
@@ -928,7 +928,7 @@ export default class Window extends EventEmitter {
 	/**
 	 * Check if we have to set next zindex
 	 * @private
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	_checkNextZindex() {
 		const { ontop } = this.attributes;

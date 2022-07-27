@@ -35,8 +35,8 @@ import { h } from "hyperapp";
  * @param {Object} props Properties
  * @param {String} props.src The image source
  * @param {String} [props.alt] The image alternate text
- * @param {number} [props.width] Image width
- * @param {number} [props.height] Image height
+ * @param {Number} [props.width] Image width
+ * @param {Number} [props.height] Image height
  * @param {Function} [props.onload] On loaded data event
  * @param {Function} [props.oncreate] Hyperapp oncreate function
  * @param {Function} [props.onupdate] Hyperapp onupdate function

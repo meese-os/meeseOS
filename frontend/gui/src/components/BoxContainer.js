@@ -34,7 +34,7 @@ import { h } from "hyperapp";
 /**
  * A flexbox container
  * @param {BoxProperties} props Properties
- * @param {string} [props.orientation='vertical'] Box orientation
+ * @param {String} [props.orientation='vertical'] Box orientation
  * @param {h[]} children Children
  */
 export const BoxContainer = (props, children) =>

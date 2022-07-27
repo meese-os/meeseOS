@@ -34,9 +34,9 @@ import { h } from "hyperapp";
 /**
  * A range field
  * @param {Object} props Properties
- * @param {string} [props.min] Minimum value
- * @param {string} [props.max] Maximum value
- * @param {string} [props.value] Value
+ * @param {String} [props.min] Minimum value
+ * @param {String} [props.max] Maximum value
+ * @param {String} [props.value] Value
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */

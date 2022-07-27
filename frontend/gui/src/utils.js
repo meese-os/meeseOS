@@ -50,7 +50,7 @@ export const filteredProps = (props, filterKeys) => {
 
 /**
  * Creates a double-tap event handler
- * @param {number} [timeout=250] Timeout
+ * @param {Number} [timeout=250] Timeout
  * @returns {Function} Handler with => (ev, cb)
  */
 export const doubleTap = (timeout = 250) => {

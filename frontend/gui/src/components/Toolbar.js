@@ -35,7 +35,7 @@ import { h } from "hyperapp";
  * A toolbar
  * @desc Contains entries with spacing
  * @param {BoxProperties} props Properties
- * @param {string} [props.orientation='vertical'] Box orientation
+ * @param {String} [props.orientation='vertical'] Box orientation
  * @param {h[]} children Children
  */
 export const Toolbar = (props, children) =>

@@ -35,8 +35,8 @@ import { h } from "hyperapp";
 /**
  * A button
  * @param {Object} props Properties
- * @param {string} [props.icon] Icon source
- * @param {string} [props.label] Use this as label instead of children
+ * @param {String} [props.icon] Icon source
+ * @param {String} [props.label] Use this as label instead of children
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */

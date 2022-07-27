@@ -34,9 +34,9 @@ import { h } from "hyperapp";
 /**
  * A label element
  * @param {Object} props Properties
- * @param {string} [props.text] Label Text
- * @param {string} [props.placement] Placement
- * @param {string} [props.for] The "for" attribute
+ * @param {String} [props.text] Label Text
+ * @param {String} [props.placement] Placement
+ * @param {String} [props.for] The "for" attribute
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */

@@ -49,13 +49,13 @@ import logger from "../logger";
 
 /**
  * @typedef {Object} DroppableOptions
- * @property {string} [type=application/json] Content Type
- * @property {string} [effect=move] DnD effect (cursor)
+ * @property {String} [type=application/json] Content Type
+ * @property {String} [effect=move] DnD effect (cursor)
  * @property {DroppableEvent} [ondragenter] Callback to event (ev) => {}
  * @property {DroppableEvent} [ondragover] Callback to event (ev) => {}
  * @property {DroppableEvent} [ondragleave] Callback to event (ev) => {}
  * @property {DroppedEvent} [ondrop] Callback to event (ev, data, files) => {}
- * @property {boolean} [strict=false] Drop element must match exactly
+ * @property {Boolean} [strict=false] Drop element must match exactly
  */
 
 /**
@@ -65,8 +65,8 @@ import logger from "../logger";
 
 /**
  * @typedef {Object} DraggableOptions
- * @property {string} [type=application/json] Content Type
- * @property {string} [effect=move] DnD effect (cursor)
+ * @property {String} [type=application/json] Content Type
+ * @property {String} [effect=move] DnD effect (cursor)
  * @property {DraggableEvent} [ondragstart] Callback to event (ev) => {}
  * @property {DraggableEvent} [ondragend] Callback to event (ev) => {}
  * @property {DraggableEvent} [setDragImage] Set custom drag image (browser dependent)

@@ -75,8 +75,8 @@ const createAdapter = (core, options) => {
 
 /**
  * @typedef {Object} AuthForm
- * @property {string} [username]
- * @property {string} [password]
+ * @property {String} [username]
+ * @property {String} [password]
  */
 
 /**
@@ -94,7 +94,7 @@ const createAdapter = (core, options) => {
 /**
  * @callback AuthCallback
  * @param {AuthForm} data
- * @returns {boolean}
+ * @returns {Boolean}
  */
 
 /**
@@ -161,7 +161,7 @@ export default class Auth {
 
 	/**
 	 * Run the shutdown procedure
-	 * @param {boolean} [reload] Reload afterwards
+	 * @param {Boolean} [reload] Reload afterwards
 	 */
 	shutdown(reload) {
 		try {
@@ -261,7 +261,7 @@ export default class Auth {
 
 	/**
 	 * Performs a logout
-	 * @param {boolean} [reload=true] Reload client afterwards
+	 * @param {Boolean} [reload=true] Reload client afterwards
 	 * @returns {Promise<boolean>}
 	 */
 	logout(reload = true) {

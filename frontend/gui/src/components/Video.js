@@ -40,8 +40,8 @@ const isTrue = (v) => typeof v === "undefined" || v === true;
  * @param {String} [props.class] Append this className
  * @param {Object} [props.style] CSS Style object
  * @param {String} props.src The video source
- * @param {number} [props.width] Video width
- * @param {number} [props.height] Video height
+ * @param {Number} [props.width] Video width
+ * @param {Number} [props.height] Video height
  * @param {String} [props.poster] Poster image source
  * @param {Boolean} [props.loop] Loop video
  * @param {Boolean} [props.autoplay] Autoplay video

@@ -34,7 +34,7 @@ import { h } from "hyperapp";
 /**
  * A text field
  * @param {Object} props Properties
- * @param {string} [props.value] Value
+ * @param {String} [props.value] Value
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */

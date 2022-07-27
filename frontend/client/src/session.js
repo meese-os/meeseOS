@@ -73,7 +73,7 @@ export default class Session {
 
 	/**
 	 * Loads session
-	 * @param {boolean} [fresh=false] Kill all current applications first
+	 * @param {Boolean} [fresh=false] Kill all current applications first
 	 * @returns {Promise<boolean>}
 	 */
 	load(fresh = false) {

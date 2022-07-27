@@ -36,12 +36,12 @@ import logger from "./logger";
  * Notification Options
  *
  * @typedef {Object} NotificationOptions
- * @property {string} title Title
- * @property {string} message Message
- * @property {string} [sound=message] Sound to play
- * @property {string} [icon] Icon source
- * @property {number} [timeout=5000] Timeout value (0=infinite)
- * @property {string} [className] Adds a DOM class name to notification
+ * @property {String} title Title
+ * @property {String} message Message
+ * @property {String} [sound=message] Sound to play
+ * @property {String} [icon] Icon source
+ * @property {Number} [timeout=5000] Timeout value (0=infinite)
+ * @property {String} [className] Adds a DOM class name to notification
  */
 
 /**

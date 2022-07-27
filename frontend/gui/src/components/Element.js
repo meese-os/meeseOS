@@ -32,15 +32,15 @@ import { h } from "hyperapp";
 
 /**
  * Elemet Box definition
- * @property {string} [class] Container class name
- * @property {number} [grow] Flexbox grow value
- * @property {number} [shrink] Flexbox shrink value
- * @property {number|string} [basis] Flexbox basis value
- * @property {string} [align] Flexbox alignItems value
- * @property {string} [justify] Flexbox justifyContent value
- * @property {number|string} [padding] Margin
- * @property {number|string} [margin] Margin
- * @property {string} [key] Hyperapp element key
+ * @property {String} [class] Container class name
+ * @property {Number} [grow] Flexbox grow value
+ * @property {Number} [shrink] Flexbox shrink value
+ * @property {Number|string} [basis] Flexbox basis value
+ * @property {String} [align] Flexbox alignItems value
+ * @property {String} [justify] Flexbox justifyContent value
+ * @property {Number|string} [padding] Margin
+ * @property {Number|string} [margin] Margin
+ * @property {String} [key] Hyperapp element key
  * @property {Function} [oncreate] Hyperapp oncreate function
  * @property {Function} [onupdate] Hyperapp onupdate function
  * @property {Function} [ondestroy] Hyperapp ondestroy function

@@ -184,8 +184,8 @@ export default class Settings {
 	/**
 	 * Gets a settings entry by key (cached)
 	 *
-	 * @param {string} [ns] The namespace
-	 * @param {string} [key] The key to get the value from
+	 * @param {String} [ns] The namespace
+	 * @param {String} [key] The key to get the value from
 	 * @param {*} [defaultValue] If result is undefined, return this instead
 	 * @returns {*}
 	 */
@@ -204,8 +204,8 @@ export default class Settings {
 	/**
 	 * Sets a settings entry by root key (but does not save).
 	 *
-	 * @param {string} ns The namespace
-	 * @param {string} [key] The key to set
+	 * @param {String} ns The namespace
+	 * @param {String} [key] The key to set
 	 * @param {*} [value] The value to set
 	 * @returns {Settings} This
 	 */
@@ -236,7 +236,7 @@ export default class Settings {
 
 	/**
 	 * Clears a namespace by root key
-	 * @param {string} ns The namespace
+	 * @param {String} ns The namespace
 	 * @returns {Promise<boolean>}
 	 */
 	clear(ns) {

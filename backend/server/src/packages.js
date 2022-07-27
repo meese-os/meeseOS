@@ -43,8 +43,8 @@ const readOrDefault = (filename) =>
 /**
  * Package Service Options
  * @typedef {Object} PackagesOptions
- * @property {string} [manifestFile] Manifest filename
- * @property {string} [discoveredFile] Discovery output file
+ * @property {String} [manifestFile] Manifest filename
+ * @property {String} [discoveredFile] Discovery output file
  */
 
 /**
@@ -155,7 +155,7 @@ class Packages {
 
 	/**
 	 * Loads package data
-	 * @param {string} filename Filename
+	 * @param {String} filename Filename
 	 * @param {PackageMetadata} manifest Manifest
 	 * @returns {Promise<Package>}
 	 */

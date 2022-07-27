@@ -105,7 +105,7 @@ export default class Search {
 
 	/**
 	 * Performs a search across all mounts
-	 * @param {string} pattern Search query
+	 * @param {String} pattern Search query
 	 * @returns {Promise<FileMetadata[]>}
 	 */
 	search(pattern) {

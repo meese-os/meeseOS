@@ -71,10 +71,10 @@ import merge from "deepmerge";
  * Desktop Viewport Rectangle
  *
  * @typedef {Object} DesktopViewportRectangle
- * @property {number} left
- * @property {number} top
- * @property {number} right
- * @property {number} bottom
+ * @property {Number} left
+ * @property {Number} top
+ * @property {Number} right
+ * @property {Number} bottom
  */
 
 /**
@@ -591,7 +591,7 @@ export default class Desktop extends EventEmitter {
 
 	/**
 	 * Sets the current icon theme from settings
-	 * @param {string} name Icon theme name
+	 * @param {String} name Icon theme name
 	 * @returns {Promise<undefined>}
 	 */
 	applyIcons(name) {
@@ -609,7 +609,7 @@ export default class Desktop extends EventEmitter {
 
 	/**
 	 * Sets the current style theme from settings
-	 * @param {string} name Theme name
+	 * @param {String} name Theme name
 	 * @returns {Promise<undefined>}
 	 */
 	applyTheme(name) {
@@ -637,7 +637,7 @@ export default class Desktop extends EventEmitter {
 	/**
 	 * Apply theme wrapper
 	 * @private
-	 * @param {string} name Theme name
+	 * @param {String} name Theme name
 	 * @returns {Promise<undefined>}
 	 */
 	_applyTheme(name) {
@@ -656,7 +656,7 @@ export default class Desktop extends EventEmitter {
 	/**
 	 * Apply settings by key
 	 * @private
-	 * @param {string} k Key
+	 * @param {String} k Key
 	 * @param {*} v Value
 	 * @returns {Promise<boolean>}
 	 */

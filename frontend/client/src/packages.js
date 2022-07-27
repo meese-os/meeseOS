@@ -50,24 +50,24 @@ import logger from "./logger";
  * A package metadata
  *
  * @typedef {Object} PackageMetadata
- * @property {string} name The package name
- * @property {string} [category] Package category
- * @property {string} [icon] Package icon
- * @property {boolean} [singleton] If only one instance allowed
- * @property {boolean} [autostart] Autostart on boot
- * @property {boolean} [hidden] Hide from launch menus etc.
- * @property {string} [server] Server script filename
- * @property {string[]} [groups] Only available for users in this group
+ * @property {String} name The package name
+ * @property {String} [category] Package category
+ * @property {String} [icon] Package icon
+ * @property {Boolean} [singleton] If only one instance allowed
+ * @property {Boolean} [autostart] Autostart on boot
+ * @property {Boolean} [hidden] Hide from launch menus etc.
+ * @property {String} [server] Server script filename
+ * @property {String[]} [groups] Only available for users in this group
  * @property {Object[]|string[]} [files] Files to preload
- * @property {string} title String title of package
- * @property {string} description String description of package
+ * @property {String} title String title of package
+ * @property {String} description String description of package
  */
 
 /**
  * Package Launch Options
  *
  * @typedef {Object} PackageLaunchOptions
- * @property {boolean} [forcePreload=false] Force preload reloading
+ * @property {Boolean} [forcePreload=false] Force preload reloading
  */
 
 /**
@@ -107,7 +107,7 @@ export default class Packages {
 		 * Mainly used for singleton awareness
 		 *
 		 * @private
-		 * @type {string[]}
+		 * @type {String[]}
 		 */
 		this._running = [];
 
@@ -120,7 +120,7 @@ export default class Packages {
 
 		/**
 		 * If inited
-		 * @type {boolean}
+		 * @type {Boolean}
 		 */
 		this.inited = false;
 	}
@@ -167,7 +167,7 @@ export default class Packages {
 	/**
 	 * Launches a (application) package
 	 *
-	 * @param {string} name Package name
+	 * @param {String} name Package name
 	 * @param {{foo: *}} [args={}] Launch arguments
 	 * @param {PackageLaunchOptions} [options={}] Launch options
 	 * @see PackageServiceProvider
@@ -193,7 +193,7 @@ export default class Packages {
 	 * Launches an application package
 	 *
 	 * @private
-	 * @param {string} name Application package name
+	 * @param {String} name Application package name
 	 * @param {Metadata} metadata Application metadata
 	 * @param {{foo: *}} args Launch arguments
 	 * @param {PackageLaunchOptions} options Launch options
@@ -241,7 +241,7 @@ export default class Packages {
 	 * Launches a (theme) package
 	 *
 	 * @private
-	 * @param {string} name Package name
+	 * @param {String} name Package name
 	 * @param {Metadata} metadata Application metadata
 	 * @throws {Error}
 	 * @returns {Promise<object>}
@@ -263,9 +263,9 @@ export default class Packages {
 	 *
 	 * @private
 	 * @param {Metadata} metadata Application metadata
-	 * @param {string} fileType Files type
-	 * @param {string} packageType Package type
-	 * @returns {string[]}
+	 * @param {String} fileType Files type
+	 * @param {String} packageType Package type
+	 * @returns {String[]}
 	 */
 	_getPreloads(metadata, fileType, packageType) {
 		return metadataFilesToFilenames(
@@ -277,7 +277,7 @@ export default class Packages {
 	 * Wrapper for launching a (application) package
 	 *
 	 * @private
-	 * @param {string} name Package name
+	 * @param {String} name Package name
 	 * @param {{foo: *}} args Launch arguments
 	 * @param {PackageLaunchOptions} options Launch options
 	 * @returns {Promise<Application>}
@@ -390,7 +390,7 @@ export default class Packages {
 	/**
 	 * Registers a package
 	 *
-	 * @param {string} name Package name
+	 * @param {String} name Package name
 	 * @param {Function} callback Callback function to construct application instance
 	 * @throws {Error}
 	 */
@@ -458,7 +458,7 @@ export default class Packages {
 
 	/**
 	 * Gets a list of packages compatible with the given mime type
-	 * @param {string} mimeType MIME Type
+	 * @param {String} mimeType MIME Type
 	 * @see PackageManager#getPackages
 	 * @returns {PackageMetadata[]}
 	 */
@@ -503,7 +503,7 @@ export default class Packages {
 
 	/**
 	 * Gets a list of running packages
-	 * @returns {string[]}
+	 * @returns {String[]}
 	 */
 	running() {
 		return this._running;

@@ -32,7 +32,7 @@
  * Clipboard Data
  *
  * @typedef {Object} ClipboardData
- * @property {string} [type] Optional data type
+ * @property {String} [type] Optional data type
  * @property {*} data
  */
 
@@ -69,7 +69,7 @@ export default class Clipboard {
 	/**
 	 * Set clipboard data
 	 * @param {*} data Clipboard data. For async data, provide a function that returns a promise
-	 * @param {string} [type] Optional type used by applications for identifying content
+	 * @param {String} [type] Optional type used by applications for identifying content
 	 */
 	set(data, type) {
 		this.clipboard = { data, type };
@@ -77,8 +77,8 @@ export default class Clipboard {
 
 	/**
 	 * Checks if current clipboard data has this type
-	 * @param {string|RegExp} type Data type
-	 * @returns {boolean}
+	 * @param {String|RegExp} type Data type
+	 * @returns {Boolean}
 	 */
 	has(type) {
 		if (type instanceof RegExp) {
@@ -92,7 +92,7 @@ export default class Clipboard {
 
 	/**
 	 * Gets clipboard data
-	 * @param {boolean} [clear=false] Clear clipboard
+	 * @param {Boolean} [clear=false] Clear clipboard
 	 * @returns {Promise<*>}
 	 */
 	get(clear = false) {

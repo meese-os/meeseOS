@@ -30,20 +30,20 @@
 
 /**
  * @typedef {Object} URLResolverOptions
- * @property {string} [type] URL type (ws/http)
- * @property {string} [boolean] Add prefix to URL
+ * @property {String} [type] URL type (ws/http)
+ * @property {String} [boolean] Add prefix to URL
  */
 
 /**
  * Resolves a URL
  * @param {CoreConfig} configuration
- * @returns {function(): string}
+ * @returns {Function(): String}
  */
 export const urlResolver = (configuration) => {
 	const { http, ws } = configuration;
 
 	/**
-	 * @param {string} [endpoint='/']
+	 * @param {String} [endpoint='/']
 	 * @param {URLResolverOptions} [options={}]
 	 * @param {PackageMetadata} [metadata={}] Metadata for package resolving
 	 */

@@ -40,14 +40,14 @@ export default class FontDialog extends Dialog {
 	 * Constructor
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
-	 * @param {number} [args.minSize=6] Minimum size
-	 * @param {number} [args.maxSize] Maximum size
-	 * @param {string} [args.unit=px] Unit
-	 * @param {string} [args.name] Initial font name
-	 * @param {number} [args.size] Initial font size
-	 * @param {string} [args.text] What text to preview
-	 * @param {string[]} [args.controls] What controls to show
-	 * @param {string[]} [args.fonts] List of fonts
+	 * @param {Number} [args.minSize=6] Minimum size
+	 * @param {Number} [args.maxSize] Maximum size
+	 * @param {String} [args.unit=px] Unit
+	 * @param {String} [args.name] Initial font name
+	 * @param {Number} [args.size] Initial font size
+	 * @param {String} [args.text] What text to preview
+	 * @param {String[]} [args.controls] What controls to show
+	 * @param {String[]} [args.fonts] List of fonts
 	 * @param {Function} callback The callback function
 	 */
 	constructor(core, args, callback) {

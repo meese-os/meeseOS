@@ -257,7 +257,7 @@ export default class Dialog {
 
 	/**
 	 * Plays a sound
-	 * @returns {boolean} whether the sound was played
+	 * @returns {Boolean} whether the sound was played
 	 */
 	playSound() {
 		if (this.core.has("meeseOS/sounds")) {

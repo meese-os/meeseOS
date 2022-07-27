@@ -40,8 +40,8 @@ const logger = consola.withTag("Filesystem");
 
 /**
  * @typedef {Object} Mountpoint
- * @property {string} [uuid]
- * @property {string} [root]
+ * @property {String} [uuid]
+ * @property {String} [root]
  * @property {Object} [attributes]
  */
 
@@ -64,7 +64,7 @@ const logger = consola.withTag("Filesystem");
 /**
  * Filesystem Internal Call Options
  * @typedef {Object} FilesystemCallOptions
- * @property {string} method VFS Method name
+ * @property {String} method VFS Method name
  * @property {Object} [user] User session data
  * @property {Object} [session] Session data
  */
@@ -161,8 +161,8 @@ class Filesystem {
 
 	/**
 	 * Gets MIME
-	 * @param {string} filename Input filename or path
-	 * @returns {string}
+	 * @param {String} filename Input filename or path
+	 * @returns {String}
 	 */
 	mime(filename) {
 		const { filenames } = this.core.config("mime", {
@@ -222,7 +222,7 @@ class Filesystem {
 
 	/**
 	 * Creates realpath VFS request
-	 * @param {string} filename The path
+	 * @param {String} filename The path
 	 * @param {AuthUserProfile} [user] User session object
 	 * @returns {Promise<string>}
 	 */
