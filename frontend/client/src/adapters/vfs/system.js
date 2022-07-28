@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,40 +30,38 @@
 
 const getters = ["exists", "stat", "readdir", "readfile"];
 
-const requester =
-	(core) =>
-		(fn, body, type, options = {}) =>
-			core
-				.request(
-					`/vfs/${fn}`,
-					{
-						body,
-						method: getters.indexOf(fn) !== -1 ? "get" : "post",
-						...options,
-					},
-					type
-				)
-				.then((response) => {
-					if (type === "json") {
-						return { mime: "application/json", body: response };
-					} else if (fn === "writefile") {
-						return response.json();
-					}
+const requester = (core) =>
+	(fn, body, type, options = {}) =>
+		core
+			.request(
+				`/vfs/${fn}`,
+				{
+					body,
+					method: getters.indexOf(fn) !== -1 ? "get" : "post",
+					...options,
+				},
+				type
+			)
+			.then((response) => {
+				if (type === "json") {
+					return { mime: "application/json", body: response };
+				} else if (fn === "writefile") {
+					return response.json();
+				}
 
-					const contentType =
-					response.headers.get("content-type") || "application/octet-stream";
+				const contentType = response.headers.get("content-type")
+					|| "application/octet-stream";
 
-					return response.arrayBuffer().then((result) => ({
-						mime: contentType,
-						body: result,
-					}));
-				});
+				return response.arrayBuffer().then((result) => ({
+					mime: contentType,
+					body: result,
+				}));
+			});
 
 const methods = (core, request) => {
-	const passthrough =
-		(name) =>
-			({ path }, options) =>
-				request(name, { path, options }, "json").then(({ body }) => body);
+	const passthrough = (name) =>
+		({ path }, options) =>
+			request(name, { path, options }, "json").then(({ body }) => body);
 
 	return {
 		readdir: ({ path }, options) =>

@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -96,79 +96,81 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 		metadata,
 	});
 
-	proc
-		.createWindow({
-			id: "PreviewWindow",
-			title: metadata.title,
-			icon: proc.resource(metadata.icon),
-			dimension: { width: 400, height: 400 },
-		})
-		.on("destroy", () => proc.destroy())
-		.on("render", (win) => win.focus())
-		.on("drop", (ev, data) => {
-			if (data.isFile && data.mime) {
-				const found = metadata.mimes.find((m) => new RegExp(m).test(data.mime));
-				if (found) {
-					proc.emit("readFile", data, false);
-				}
+	const win = proc.createWindow({
+		id: "PreviewWindow",
+		title: metadata.title,
+		icon: proc.resource(metadata.icon),
+		dimension: { width: 400, height: 400 },
+	});
+
+	win.on("destroy", () => proc.destroy());
+	win.on("render", (win) => win.focus());
+	win.on("drop", (ev, data) => {
+		if (data.isFile && data.mime) {
+			const found = metadata.mimes.find((m) => new RegExp(m).test(data.mime));
+			if (found) {
+				proc.emit("readFile", data, false);
 			}
-		})
-		.render(($content, win) => {
-			const a = app(
-				{
-					image: null,
-					video: null,
-					restore: false,
-				},
-				{
-					resizeFit: (target) => (state) => {
-						if (!state.restore) {
-							try {
-								win.resizeFit(target);
-							} catch (e) {
-								console.warn(e);
-							}
+		}
+	});
+
+	// TODO: Decompose this
+	win.render(($content, win) => {
+		const a = app(
+			{
+				image: null,
+				video: null,
+				restore: false,
+			},
+			{
+				resizeFit: (target) => (state) => {
+					if (!state.restore) {
+						try {
+							win.resizeFit(target);
+						} catch (e) {
+							console.warn(e);
 						}
-					},
-
-					setVideo: ({ video, restore }) => ({ video, restore }),
-					setImage: ({ image, restore }) => ({ image, restore }),
-					menu: (ev) => {
-						core.make("meeseOS/contextmenu").show({
-							menu: [
-								{
-									label: "Open",
-									onclick: () => {
-										core.make(
-											"meeseOS/dialog",
-											"file",
-											{ type: "open", mime: metadata.mimes },
-											(btn, item) => {
-												if (btn === "ok") {
-													proc.emit("readFile", item, false);
-												}
-											}
-										);
-									},
-								},
-								{ label: "Quit", onclick: () => proc.destroy() },
-							],
-							position: ev.target,
-						});
-					},
+					}
 				},
-				view(core, proc, win),
-				$content
-			);
 
-			proc.on("readFile", (file, restore) =>
-				openFile(core, proc, win, a, file, restore)
-			);
+				setVideo: ({ video, restore }) => ({ video, restore }),
+				setImage: ({ image, restore }) => ({ image, restore }),
+				menu: (ev) => {
+					core.make("meeseOS/contextmenu").show({
+						menu: [
+							{
+								label: "Open",
+								onclick: () => {
+									core.make(
+										"meeseOS/dialog",
+										"file",
+										{ type: "open", mime: metadata.mimes },
+										(btn, item) => {
+											if (btn === "ok") {
+												proc.emit("readFile", item, false);
+											}
+										}
+									);
+								},
+							},
+							{ label: "Quit", onclick: () => proc.destroy() },
+						],
+						position: ev.target,
+					});
+				},
+			},
+			view(core, proc, win),
+			$content
+		);
 
-			if (args.file) {
-				proc.emit("readFile", args.file, Boolean(proc.options.restore));
-			}
-		});
+		proc.on("readFile", (file, restore) =>
+			openFile(core, proc, win, a, file, restore)
+		);
+
+		if (args.file) {
+			proc.emit("readFile", args.file, Boolean(proc.options.restore));
+		}
+	});
 
 	return proc;
 });

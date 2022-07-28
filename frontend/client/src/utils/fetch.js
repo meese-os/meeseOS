@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -113,8 +113,9 @@ const fetchXhr = (target, fetchOptions) =>
 		};
 
 		if (typeof fetchOptions.onProgress === "function") {
-			const rel =
-				fetchOptions.method.toUpperCase() === "GET" ? req : req.upload;
+			const rel = fetchOptions.method.toUpperCase() === "GET"
+				? req
+				: req.upload;
 			rel.addEventListener("progress", (ev) => {
 				if (ev.lengthComputable) {
 					const percentComplete = Math.round((ev.loaded / ev.total) * 100);

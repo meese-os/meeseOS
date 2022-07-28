@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,15 +44,19 @@ const errorCodes = {
 
 /**
  * Gets prefix of a VFS path
+ * @param {String} path
+ * @returns {String}
  */
 const getPrefix = (path) => String(path).split(":")[0];
 
 /**
  * Sanitizes a path
+ * @param {String} path
+ * @returns {String}
  */
-const sanitize = (filename) => {
+const sanitize = (path) => {
 	const [name, str] = (
-		filename.replace(/\/+/g, "/").match(/^([\w-_]+):+(.*)/) || []
+		path.replace(/\/+/g, "/").match(/^([\w-_]+):+(.*)/) || []
 	).slice(1);
 
 	const sane = str
@@ -132,10 +136,9 @@ const checkMountpointPermission = (req, res, method, readOnly, strict) => {
 			const { attributes, name } = mount;
 
 			if (attributes.readOnly) {
-				const failed =
-					typeof readOnly === "function"
-						? getPrefix(readOnly(req, res)) === name
-						: readOnly;
+				const failed = typeof readOnly === "function"
+					? getPrefix(readOnly(req, res)) === name
+					: readOnly;
 
 				if (failed) {
 					return Promise.reject(
@@ -160,31 +163,37 @@ const checkMountpointPermission = (req, res, method, readOnly, strict) => {
 
 /**
  * Creates a new custom Error
+ * @param {Number} code
+ * @param {String} message
+ * @return {Error}
  */
 const createError = (code, message) => {
-	const e = new Error(message);
-	e.code = code;
-	return e;
+	const error = new Error(message);
+	error.code = code;
+	return error;
 };
 
 /**
  * Resolves a mountpoint
+ * @param {Core} core MeeseOS Core instance reference
+ * @returns {Object}
  */
-const mountpointResolver = (core) => async (path) => {
-	const { adapters, mountpoints } = core.make("meeseOS/vfs");
-	const prefix = getPrefix(path);
-	const mount = mountpoints.find((m) => m.name === prefix);
+const mountpointResolver = (core) =>
+	async (path) => {
+		const { adapters, mountpoints } = core.make("meeseOS/vfs");
+		const prefix = getPrefix(path);
+		const mount = mountpoints.find((m) => m.name === prefix);
 
-	if (!mount) {
-		throw createError(403, `Mountpoint not found for '${prefix}'`);
-	}
+		if (!mount) {
+			throw createError(403, `Mountpoint not found for '${prefix}'`);
+		}
 
-	const adapter = await (mount.adapter
-		? adapters[mount.adapter]
-		: adapters.system);
+		const adapter = await (mount.adapter
+			? adapters[mount.adapter]
+			: adapters.system);
 
-	return Object.freeze({ mount, adapter });
-};
+		return Object.freeze({ mount, adapter });
+	};
 
 /**
  * Parses URL body
@@ -202,8 +211,7 @@ const parseGet = (req) => {
  * @returns {Object|Boolean}
  */
 const parseJson = (req) => {
-	const isJson =
-		req.headers["content-type"] &&
+	const isJson = req.headers["content-type"] &&
 		req.headers["content-type"].indexOf("application/json") !== -1;
 
 	if (isJson) {
@@ -215,6 +223,7 @@ const parseJson = (req) => {
 
 /**
  * Parses form body
+ *
  * @param {Object} req
  * @param {Number} config.maxFieldsSize
  * @param {Number} config.maxFileSize
@@ -237,16 +246,17 @@ const parseFormData = (req, { maxFieldsSize, maxFileSize }) => {
  * @param {Object} config
  * @returns {Promise<any>}
  */
-const parseFields = (config) => (req, res) => {
-	if (["get", "head"].indexOf(req.method.toLowerCase()) !== -1) {
-		return Promise.resolve(parseGet(req));
-	}
+const parseFields = (config) =>
+	(req, res) => {
+		if (["get", "head"].indexOf(req.method.toLowerCase()) !== -1) {
+			return Promise.resolve(parseGet(req));
+		}
 
-	const json = parseJson(req);
-	if (json) return Promise.resolve(json);
+		const json = parseJson(req);
+		if (json) return Promise.resolve(json);
 
-	return parseFormData(req, config);
-};
+		return parseFormData(req, config);
+	};
 
 /**
  * A map of methods and their arguments.

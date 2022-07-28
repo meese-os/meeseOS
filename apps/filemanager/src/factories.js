@@ -59,6 +59,7 @@ export const mountViewRowsFactory = (core) => {
 
 /**
  * File view columns factory
+ *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @returns {Function} The file view columns factory
@@ -101,6 +102,7 @@ export const listViewColumnFactory = (core, proc) => {
 
 /**
  * File view rows factory
+ *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @returns {Function} The file view rows factory
@@ -146,9 +148,10 @@ export const listViewRowFactory = (core, proc) => {
 
 /**
  * VFS action factory
+ *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @param {Window} win
+ * @param {Window} win Window reference
  * @param {Dialog} dialog
  * @param {Object} state
  * @returns {Object}
@@ -314,6 +317,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 
 /**
  * Clipboard action factory
+ *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} state
  * @param {Object} vfs
@@ -346,9 +350,10 @@ export const clipboardActionFactory = (core, state, vfs) => {
 
 /**
  * Dialog factory
+ *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @param {Window} win
+ * @param {Window} win Window reference
  */
 export const dialogFactory = (core, proc, win) => {
 	const vfs = core.make("meeseOS/vfs");
@@ -462,9 +467,10 @@ export const dialogFactory = (core, proc, win) => {
 
 /**
  * Creates menus
+ *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
- * @param {Window} win
+ * @param {Window} win Window reference
  * @returns {Function}
  */
 export const menuFactory = (core, proc, win) => {
@@ -484,7 +490,6 @@ export const menuFactory = (core, proc, win) => {
 			.get(`meeseOS/filemanager:menu:${type}`);
 
 		const promises = items.map((fn) => fn(middlewareArgs));
-
 		const resolved = await Promise.all(promises);
 		const result = resolved.filter((item) => item instanceof Array);
 

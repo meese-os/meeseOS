@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,25 +48,25 @@ const register = (core, args, options, metadata) => {
 		metadata,
 	});
 
-	// Create  a new Window instance
-	proc
-		.createWindow({
-			id: "image-to-8bit",
-			title: metadata.title,
-			icon: proc.resource(proc.metadata.icon),
-			dimension: { width: 600, height: 650 },
-			position: { left: 700, top: 200 },
-		})
-		.on("destroy", () => proc.destroy())
-		.render(($content) => {
-			const iframe = document.createElement("iframe");
-			iframe.style.width = "100%";
-			iframe.style.height = "100%";
-			iframe.style.backgroundColor = "white";
-			iframe.src = proc.resource(url);
-			iframe.setAttribute("border", "0");
-			$content.appendChild(iframe);
-		});
+	// Create a new Window instance
+	const win = proc.createWindow({
+		id: "image-to-8bit",
+		title: metadata.title,
+		icon: proc.resource(proc.metadata.icon),
+		dimension: { width: 600, height: 650 },
+		position: { left: 700, top: 200 },
+	});
+
+	win.on("destroy", () => proc.destroy());
+	win.render(($content) => {
+		const iframe = document.createElement("iframe");
+		iframe.style.width = "100%";
+		iframe.style.height = "100%";
+		iframe.style.backgroundColor = "white";
+		iframe.src = proc.resource(url);
+		iframe.setAttribute("border", "0");
+		$content.appendChild(iframe);
+	});
 
 	return proc;
 };

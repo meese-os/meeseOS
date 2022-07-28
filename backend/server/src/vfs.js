@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -80,26 +80,29 @@ const onDone = (req, res) => {
 
 /**
  * Wraps a VFS adapter request
+ * @param {Function} fn The wrapper function to apply
  */
-const wrapper = (fn) => (req, res, next) =>
-	fn(req, res)
-		.then((result) => {
-			if (result instanceof Stream) {
-				result.pipe(res);
-			} else {
-				res.json(result);
-			}
+const wrapper = (fn) =>
+	(req, res, next) =>
+		fn(req, res)
+			.then((result) => {
+				if (result instanceof Stream) {
+					result.pipe(res);
+				} else {
+					res.json(result);
+				}
 
-			onDone(req, res);
-		})
-		.catch((error) => {
-			onDone(req, res);
-
-			next(error);
-		});
+				onDone(req, res);
+			})
+			.catch((error) => {
+				onDone(req, res);
+				next(error);
+			});
 
 /**
  * Creates the middleware
+ * @param {Core} core MeeseOS Core instance reference
+ * @returns {Function}
  */
 const createMiddleware = (core) => {
 	const parse = parseFields(core.config("express"));
@@ -150,130 +153,133 @@ const createOptions = (req) => {
  * @param {Function} findMountpoint
  * @returns {*}
  */
-const createRequestFactory =
-	(findMountpoint) =>
-		(getter, method, readOnly, respond) =>
-			async (req, res) => {
-				const options = createOptions(req);
-				const args = [...getter(req, res), options];
+const createRequestFactory = (findMountpoint) =>
+	(getter, method, readOnly, respond) =>
+		async (req, res) => {
+			const options = createOptions(req);
+			const args = [...getter(req, res), options];
 
-				const found = await findMountpoint(args[0]);
-				if (method === "search") {
-					if (
-						found.mount.attributes &&
-						found.mount.attributes.searchable === false
-					) {
-						return [];
-					}
+			const found = await findMountpoint(args[0]);
+			if (method === "search") {
+				if (
+					found.mount.attributes &&
+					found.mount.attributes.searchable === false
+				) {
+					return [];
 				}
+			}
 
-				const { attributes } = found.mount;
-				const strict = attributes.strictGroups !== false;
-				const ranges =
-					!attributes.adapter ||
-					attributes.adapter === "system" ||
-					attributes.ranges === true;
-				const vfsMethodWrapper = (m) =>
-					found.adapter[m]
-						? found.adapter[m](found)(...args)
-						: Promise.reject(new Error(`Adapter does not support ${m}`));
-				const readstat = () => vfsMethodWrapper("stat").catch(() => ({}));
-				await checkMountpointPermission(req, res, method, readOnly, strict)(found);
+			const { attributes } = found.mount;
+			const strict = attributes.strictGroups !== false;
+			const ranges = !attributes.adapter ||
+				attributes.adapter === "system" ||
+				attributes.ranges === true;
+			const vfsMethodWrapper = (m) =>
+				found.adapter[m]
+					? found.adapter[m](found)(...args)
+					: Promise.reject(new Error(`Adapter does not support ${m}`));
+			const readstat = () => vfsMethodWrapper("stat").catch(() => ({}));
+			await checkMountpointPermission(req, res, method, readOnly, strict)(found);
 
-				const result = await vfsMethodWrapper(method);
-				if (method === "readfile") {
-					const stat = await readstat();
+			const result = await vfsMethodWrapper(method);
+			if (method === "readfile") {
+				const stat = await readstat();
 
-					if (ranges && options.range) {
-						try {
-							if (stat.size) {
-								const size = stat.size;
-								const [start, end] = options.range;
-								const realEnd = end || size - 1;
-								const chunksize = realEnd - start + 1;
+				if (ranges && options.range) {
+					try {
+						if (stat.size) {
+							const size = stat.size;
+							const [start, end] = options.range;
+							const realEnd = end || size - 1;
+							const chunksize = realEnd - start + 1;
 
-								res.writeHead(206, {
-									"Content-Range": `bytes ${start}-${realEnd}/${size}`,
-									"Accept-Ranges": "bytes",
-									"Content-Length": chunksize,
-									"Content-Type": stat.mime,
-								});
-							}
-						} catch (e) {
-							console.warn("Failed to send a ranged response", e);
+							res.writeHead(206, {
+								"Content-Range": `bytes ${start}-${realEnd}/${size}`,
+								"Accept-Ranges": "bytes",
+								"Content-Length": chunksize,
+								"Content-Type": stat.mime,
+							});
 						}
-					} else if (stat.mime) {
-						res.append("Content-Type", stat.mime);
+					} catch (e) {
+						console.warn("Failed to send a ranged response", e);
 					}
-
-					if (options.download) {
-						const filename = encodeURIComponent(path.basename(args[0]));
-						res.append(
-							"Content-Disposition",
-							`attachment; filename*=utf-8''${filename}`
-						);
-					}
+				} else if (stat.mime) {
+					res.append("Content-Type", stat.mime);
 				}
 
-				return respond ? respond(result) : result;
-			};
+				if (options.download) {
+					const filename = encodeURIComponent(path.basename(args[0]));
+					res.append(
+						"Content-Disposition",
+						`attachment; filename*=utf-8''${filename}`
+					);
+				}
+			}
+
+			return respond ? respond(result) : result;
+		};
 
 /**
  * Request that has a source and target
+ * @param {Function} findMountpoint
+ * @returns {Boolean}
  */
-const createCrossRequestFactory =
-	(findMountpoint) => (getter, method, respond) => async (req, res) => {
-		const [from, to, options] = [...getter(req, res), createOptions(req)];
+const createCrossRequestFactory = (findMountpoint) =>
+	(getter, method, respond) =>
+		async (req, res) => {
+			const [from, to, options] = [...getter(req, res), createOptions(req)];
 
-		const srcMount = await findMountpoint(from);
-		const destMount = await findMountpoint(to);
-		const sameAdapter = srcMount.adapter === destMount.adapter;
+			const srcMount = await findMountpoint(from);
+			const destMount = await findMountpoint(to);
+			const sameAdapter = srcMount.adapter === destMount.adapter;
 
-		const srcStrict = srcMount.mount.attributes.strictGroups !== false;
-		const destStrict = destMount.mount.attributes.strictGroups !== false;
-		await checkMountpointPermission(
-			req,
-			res,
-			"readfile",
-			false,
-			srcStrict
-		)(srcMount);
-		await checkMountpointPermission(
-			req,
-			res,
-			"writefile",
-			true,
-			destStrict
-		)(destMount);
+			const srcStrict = srcMount.mount.attributes.strictGroups !== false;
+			const destStrict = destMount.mount.attributes.strictGroups !== false;
+			await checkMountpointPermission(
+				req,
+				res,
+				"readfile",
+				false,
+				srcStrict
+			)(srcMount);
+			await checkMountpointPermission(
+				req,
+				res,
+				"writefile",
+				true,
+				destStrict
+			)(destMount);
 
-		if (sameAdapter) {
-			const result = await srcMount.adapter[method](srcMount, destMount)(
-				from,
+			if (sameAdapter) {
+				const result = await srcMount.adapter[method](srcMount, destMount)(
+					from,
+					to,
+					options
+				);
+
+				return Boolean(result);
+			}
+
+			// Simulates a copy/move
+			const stream = await srcMount.adapter.readfile(srcMount)(from, options);
+
+			const result = await destMount.adapter.writefile(destMount)(
 				to,
+				stream,
 				options
 			);
 
+			if (method === "rename") {
+				await srcMount.adapter.unlink(srcMount)(from, options);
+			}
+
 			return Boolean(result);
-		}
-
-		// Simulates a copy/move
-		const stream = await srcMount.adapter.readfile(srcMount)(from, options);
-
-		const result = await destMount.adapter.writefile(destMount)(
-			to,
-			stream,
-			options
-		);
-
-		if (method === "rename") {
-			await srcMount.adapter.unlink(srcMount)(from, options);
-		}
-
-		return Boolean(result);
-	};
+		};
 
 /**
  * VFS Methods
+ * @param {Core} core MeeseOS Core instance reference
+ * @returns {Object}
  */
 const vfs = (core) => {
 	const findMountpoint = mountpointResolver(core);
@@ -299,6 +305,8 @@ const vfs = (core) => {
 
 /**
  * Creates a new VFS Express router
+ * @param {Core} core MeeseOS Core instance reference
+ * @returns {Object}
  */
 module.exports = (core) => {
 	const router = express.Router();
@@ -328,10 +336,9 @@ module.exports = (core) => {
 	// Finally catch promise exceptions
 	router.use((error, req, res, next) => {
 		// TODO: Better error messages
-		const code =
-			typeof error.code === "number"
-				? error.code
-				: errorCodes[error.code] || 400;
+		const code = typeof error.code === "number"
+			? error.code
+			: errorCodes[error.code] || 400;
 
 		if (logEnabled) {
 			console.error(error);

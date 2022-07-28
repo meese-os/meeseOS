@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -239,8 +239,9 @@ const createApplication = (core, proc) => {
 					({ index, list }) => {
 						const newList = index === -1 ? [] : list;
 						const lastHistory = newList[newList.length - 1];
-						const newIndex =
-						lastHistory === path ? newList.length - 1 : newList.push(path) - 1;
+						const newIndex = lastHistory === path
+							? newList.length - 1
+							: newList.push(path) - 1;
 
 						return { list: newList, index: newIndex };
 					},

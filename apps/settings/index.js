@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -291,11 +291,10 @@ const renderWindow = (core, proc) => ($content, win) => {
 		settings: getSettings(),
 	};
 
-	initialState.static =
-		resolveSetting(
-			initialState.settings,
-			initialState.defaults
-		)("desktop.background.type") === "static";
+	initialState.static = resolveSetting(
+		initialState.settings,
+		initialState.defaults
+	)("desktop.background.type") === "static";
 
 	const actions = {
 		save: () => (state, actions) => {

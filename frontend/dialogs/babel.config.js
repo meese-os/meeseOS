@@ -1,4 +1,4 @@
-module.exports = function (api) {
+module.exports = function(api) {
 	api.cache(() => process.env.NODE_ENV === "production");
 
 	return {

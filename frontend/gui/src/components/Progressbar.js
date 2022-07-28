@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,10 +39,9 @@ import { h } from "hyperapp";
  * @param {h[]} children Children
  */
 export const Progressbar = (props, children = []) => {
-	const value =
-		typeof props.value === "number"
-			? Math.min(100, Math.max(0, Math.abs(props.value)))
-			: 0;
+	const value = typeof props.value === "number"
+		? Math.min(100, Math.max(0, Math.abs(props.value)))
+		: 0;
 
 	const c = h("div", { class: "meeseOS-gui-progressbar-wrapper" }, [
 		h("div", {

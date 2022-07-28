@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,11 +55,10 @@ const ul = (props, children = [], level = 0) => {
 			return child.element();
 		}
 
-		const className =
-			child.type === "separator"
-				? "meeseOS-gui-menu-separator"
-				: "meeseOS-gui-menu-label " +
-				  (child.disabled ? "meeseOS__disabled" : "");
+		const className = child.type === "separator"
+			? "meeseOS-gui-menu-separator"
+			: "meeseOS-gui-menu-label " +
+				(child.disabled ? "meeseOS__disabled" : "");
 
 		const children = [h("span", { class: className }, label(child))];
 

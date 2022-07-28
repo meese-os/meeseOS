@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,7 +74,7 @@ const logger = consola.withTag("Filesystem");
  */
 class Filesystem {
 	/**
-	 * Create new instance
+	 * Creates a new instance
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {FilesystemOptions} [options] Instance options
 	 */
@@ -110,7 +110,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Destroys instance
+	 * Destroys the instance
 	 * @returns {Promise<undefined>}
 	 */
 	async destroy() {
@@ -126,7 +126,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Initializes Filesystem
+	 * Initializes the Filesystem
 	 * @returns {Promise<boolean>}
 	 */
 	async init() {
@@ -160,7 +160,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Gets MIME
+	 * Gets the MIME type of a file
 	 * @param {String} filename Input filename or path
 	 * @returns {String}
 	 */
@@ -318,10 +318,9 @@ class Filesystem {
 		const watch = await adapter.watch(mountpoint, (args, dir, type) => {
 			const target = mountpoint.name + ":/" + dir;
 			const keys = Object.keys(args);
-			const filter =
-				keys.length === 0
-					? () => true
-					: (ws) => keys.every((k) => ws._meeseOS_client[k] === args[k]);
+			const filter = keys.length === 0
+				? () => true
+				: (ws) => keys.every((k) => ws._meeseOS_client[k] === args[k]);
 
 			this.core.emit("meeseOS/vfs:watch:change", {
 				mountpoint,

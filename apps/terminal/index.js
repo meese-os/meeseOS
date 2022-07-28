@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@ import meeseOS from "meeseOS";
 import { name as applicationName } from "./metadata.json";
 import { Terminal } from "xterm";
 
-/*
+/**
  * Creates a new Terminal connection
  */
 const createConnection = async (core, proc, win, term, fit) => {
@@ -126,7 +126,7 @@ const createConnection = async (core, proc, win, term, fit) => {
 	fit();
 };
 
-/*
+/**
  * Creates a new Terminal and Window
  */
 const createTerminal = (core, proc, index) => {
@@ -171,29 +171,28 @@ const createTerminal = (core, proc, index) => {
 		});
 	};
 
-	proc
-		.createWindow({
-			id: "Xterm_" + String(index),
-			title: proc.metadata.title,
-			icon: proc.resource(proc.metadata.icon),
-			dimension: { width: 625, height: 360 },
-			attributes: {
-				classNames: ["Window_Xterm"],
-			},
-		})
-		.on("resized", fit)
-		.on("maximize", fit)
-		.on("restore", fit)
-		.on("moved", () => term.focus())
-		.on("focus", () => term.focus())
-		.on("blur", () => term.blur())
-		.on("render", (win) => createConnection(core, proc, win, term, fit))
-		.render(render);
+	const win = proc.createWindow({
+		id: "Xterm_" + String(index),
+		title: proc.metadata.title,
+		icon: proc.resource(proc.metadata.icon),
+		dimension: { width: 625, height: 360 },
+		attributes: {
+			classNames: ["Window_Xterm"],
+		},
+	});
+
+	win.on("resized", fit);
+	win.on("maximize", fit);
+	win.on("restore", fit);
+	win.on("moved", () => term.focus());
+	win.on("focus", () => term.focus());
+	win.on("blur", () => term.blur());
+	win.on("render", (win) => createConnection(core, proc, win, term, fit));
+
+	proc.render(render);
 };
 
-//
 // Callback for launching application
-//
 meeseOS.register(applicationName, (core, args, options, metadata) => {
 	const proc = core.make("meeseOS/application", {
 		args,
@@ -226,7 +225,6 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 	}
 
 	createWindow();
-
 	proc.on("attention", () => createWindow());
 
 	return proc;

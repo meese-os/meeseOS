@@ -37,6 +37,7 @@
   "dependencies": {
     "@meeseOS/gui": "workspace:*",
     "dateformat": "^3.0.3",
+    "file-type": "^17.1.4",
     "hyperapp": "^1.2.10"
   },
   "eslintConfig": {

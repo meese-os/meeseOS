@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,15 +37,14 @@ import { pathJoin } from "../../utils/vfs";
 
 const tapper = doubleTap();
 
-const onDropAction =
-	(actions) =>
-		(ev, data, files, shortcut = true) => {
-			if (validVfsDrop(data)) {
-				actions.addEntry({ entry: data, shortcut });
-			} else if (files.length > 0) {
-				actions.uploadEntries(files);
-			}
-		};
+const onDropAction = (actions) =>
+	(ev, data, files, shortcut = true) => {
+		if (validVfsDrop(data)) {
+			actions.addEntry({ entry: data, shortcut });
+		} else if (files.length > 0) {
+			actions.uploadEntries(files);
+		}
+	};
 
 const isRootElement = (ev) =>
 	ev.target &&
@@ -239,9 +238,7 @@ export class DesktopIconView extends EventEmitter {
 	}
 
 	render(root) {
-		if (!this._render(root)) {
-			return;
-		}
+		if (!this._render(root)) return;
 
 		this.$root = document.createElement("div");
 		this.$root.className = "meeseOS-desktop-iconview";
@@ -301,51 +298,52 @@ export class DesktopIconView extends EventEmitter {
 					// TODO
 				},
 
-				addEntry:
-					({ entry, shortcut }) =>
-						(state, actions) => {
-							const dest = `${root}/${entry.filename}`;
+				addEntry: ({ entry, shortcut }) =>
+					(state, actions) => {
+						const dest = `${root}/${entry.filename}`;
 
-							mkdir(root)
-								.catch(() => true)
-								.then(() => {
-									if (shortcut || entry.mime === "meeseOS/application") {
-										return shortcuts.add(entry);
-									}
+						mkdir(root)
+							.catch(() => true)
+							.then(() => {
+								if (shortcut || entry.mime === "meeseOS/application") {
+									return shortcuts.add(entry);
+								}
 
-									return copy(entry, dest)
-										.then(() => actions.reload(true))
-										.catch(error);
-								})
-								.then(() => actions.reload(true));
+								return copy(entry, dest)
+									.then(() => actions.reload(true))
+									.catch(error);
+							})
+							.then(() => actions.reload(true));
 
-							return { selected: -1 };
-						},
+						return { selected: -1 };
+					},
 
-				removeEntry: (entry) => (state, actions) => {
-					if (entry.shortcut !== false) {
-						shortcuts
-							.remove(entry.shortcut)
-							.then(() => actions.reload(true))
-							.catch(error);
-					} else {
-						unlink(entry)
-							.then(() => actions.reload(true))
-							.catch(error);
-					}
+				removeEntry: (entry) =>
+					(state, actions) => {
+						if (entry.shortcut !== false) {
+							shortcuts
+								.remove(entry.shortcut)
+								.then(() => actions.reload(true))
+								.catch(error);
+						} else {
+							unlink(entry)
+								.then(() => actions.reload(true))
+								.catch(error);
+						}
 
-					return { selected: -1 };
-				},
+						return { selected: -1 };
+					},
 
-				reload: (fromUI) => (state, actions) => {
-					if (fromUI && this.core.config("vfs.watch")) {
-						return;
-					}
+				reload: (fromUI) =>
+					(state, actions) => {
+						if (fromUI && this.core.config("vfs.watch")) {
+							return;
+						}
 
-					read()
-						.then((entries) => entries.filter((e) => e.filename !== ".."))
-						.then((entries) => actions.setEntries(entries));
-				},
+						read()
+							.then((entries) => entries.filter((e) => e.filename !== ".."))
+							.then((entries) => actions.setEntries(entries));
+					},
 			},
 			view(fileIcon, themeIcon, droppable),
 			this.$root
@@ -354,6 +352,8 @@ export class DesktopIconView extends EventEmitter {
 		this.applySettings();
 		this.iconview.reload();
 		this._createWatcher();
+
+		this.core.on("meeseOS/settings:save", () => this.iconview.reload());
 	}
 
 	createFileContextMenu(ev, entry) {

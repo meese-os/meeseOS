@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -426,10 +426,9 @@ export default class Window extends EventEmitter {
 	_initTemplate() {
 		const tpl = this.core.config("windows.template") || TEMPLATE;
 		if (this._template) {
-			this.$element.innerHTML =
-				typeof this._template === "function"
-					? this._template(this, tpl)
-					: this._template;
+			this.$element.innerHTML = typeof this._template === "function"
+				? this._template(this, tpl)
+				: this._template;
 		} else {
 			this.$element.innerHTML = tpl;
 		}

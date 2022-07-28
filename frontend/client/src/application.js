@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -92,10 +92,9 @@ export default class Application extends EventEmitter {
 			? { ...data.options.settings }
 			: {};
 
-		const name =
-			data.metadata && data.metadata.name
-				? "Application@" + data.metadata.name
-				: "Application" + String(applicationCount);
+		const name = data.metadata && data.metadata.name
+			? "Application@" + data.metadata.name
+			: "Application" + String(applicationCount);
 
 		super(name);
 

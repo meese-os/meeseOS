@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,10 +75,9 @@ export default class PanelServiceProvider {
 			},
 
 			remove: (panel) => {
-				const index =
-					typeof panel === "number"
-						? panel
-						: this.panels.findIndex((p) => p === panel);
+				const index = typeof panel === "number"
+					? panel
+					: this.panels.findIndex((p) => p === panel);
 
 				if (index >= 0) {
 					this.panels[index].destroy();

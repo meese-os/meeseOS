@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -66,8 +66,9 @@ const boxPropNames = {
  * @param {h[]} children Children
  */
 export const Element = (props, children = []) => {
-	const givenClassNames =
-		props.class instanceof Array ? props.class : [props.class];
+	const givenClassNames = props.class instanceof Array
+		? props.class
+		: [props.class];
 
 	const classNames = ["meeseOS-gui", ...givenClassNames];
 
@@ -75,8 +76,9 @@ export const Element = (props, children = []) => {
 		classNames.push("meeseOS-gui-" + props.orientation);
 	}
 
-	const defaultStyle =
-		typeof props.style === "string" ? {} : ({ ...props.style || {} });
+	const defaultStyle = typeof props.style === "string"
+		? {}
+		: ({ ...props.style || {} });
 
 	const style = Object.keys(props).reduce((result, prop) => {
 		const value = boxPropNames[prop]

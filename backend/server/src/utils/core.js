@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,7 +75,8 @@ module.exports.createWebsocket = (app, configuration, session, httpServer) =>
 	});
 
 /**
- * Wrapper for parsing json
+ * Wrapper for parsing JSON
+ * @param {String} str
  */
 module.exports.parseJson = (str) => {
 	try {
@@ -101,19 +102,23 @@ const validateGroups = (req, groups, all) => {
 
 /**
  * Authentication middleware wrapper
+ * @param {Array} groups
+ * @param {Boolean} all
+ * @returns {*}
  */
-module.exports.isAuthenticated =
-	(groups = [], all = false) =>
-		(req, res, next) => {
-			if (req.session.user && validateGroups(req, groups, all)) {
-				return next();
-			}
+module.exports.isAuthenticated = (groups = [], all = false) =>
+	(req, res, next) => {
+		if (req.session.user && validateGroups(req, groups, all)) {
+			return next();
+		}
 
-			return res.status(403).send("Access denied");
-		};
+		return res.status(403).send("Access denied");
+	};
 
 /**
  * Closes an array of watches
+ * @param {Array} watches
+ * @returns {Promise<any[]>}
  */
 module.exports.closeWatches = (watches) =>
 	Promise.all(

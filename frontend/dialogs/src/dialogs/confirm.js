@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,12 +49,11 @@ export default class ConfirmDialog extends Dialog {
 	constructor(core, args, callback) {
 		const yesno = typeof args.yesno === "undefined" || args.yesno === true;
 
-		const buttons =
-			args.buttons instanceof Array
-				? args.buttons
-				: yesno
-					? ["yes", "no"]
-					: ["ok", "cancel"];
+		const buttons = args.buttons instanceof Array
+			? args.buttons
+			: yesno
+				? ["yes", "no"]
+				: ["ok", "cancel"];
 
 		super(
 			core,

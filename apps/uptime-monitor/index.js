@@ -14,23 +14,23 @@ const register = (core, args, options, metadata) => {
 	});
 
 	// Create a new Window instance
-	proc
-		.createWindow({
-			id: "UptimeMonitorWindow",
-			title: metadata.title,
-			dimension: { width: 650, height: 450 },
-			position: { left: 600, top: 200 },
-		})
-		.on("destroy", () => proc.destroy())
-		.render(($content) => {
-			const iframe = document.createElement("iframe");
-			iframe.style.width = "100%";
-			iframe.style.height = "100%";
-			iframe.style.backgroundColor = "white";
-			iframe.src = url;
-			iframe.setAttribute("border", "0");
-			$content.appendChild(iframe);
-		});
+	const win = proc.createWindow({
+		id: "UptimeMonitorWindow",
+		title: metadata.title,
+		dimension: { width: 650, height: 450 },
+		position: { left: 600, top: 200 },
+	});
+
+	win.on("destroy", () => proc.destroy());
+	win.render(($content) => {
+		const iframe = document.createElement("iframe");
+		iframe.style.width = "100%";
+		iframe.style.height = "100%";
+		iframe.style.backgroundColor = "white";
+		iframe.src = url;
+		iframe.setAttribute("border", "0");
+		$content.appendChild(iframe);
+	});
 
 	return proc;
 };

@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -127,16 +127,18 @@ const createApplication = (core, proc, win, $content) => {
 
 // MeeseOS window
 const createMainWindow = (core, proc) => {
-	proc
-		.createWindow({
-			id: "TextpadWindow",
-			icon: proc.resource(proc.metadata.icon),
-			dimension: { width: 500, height: 400 },
-			position: { left: 500, top: 200 },
-		})
-		.on("destroy", () => proc.destroy())
-		.on("render", (win) => win.focus())
-		.render(($content, win) => createApplication(core, proc, win, $content));
+	// Create a new Window instance
+	const win = proc.createWindow({
+		id: "TextpadWindow",
+		icon: proc.resource(proc.metadata.icon),
+		dimension: { width: 500, height: 400 },
+		position: { left: 500, top: 200 },
+	});
+
+	win.on("destroy", () => proc.destroy());
+	win.on("render", (win) => win.focus());
+
+	proc.render(($content, win) => createApplication(core, proc, win, $content));
 };
 
 const createProcess = (core, args, options, metadata) => {

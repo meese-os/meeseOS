@@ -1,7 +1,7 @@
 /**
  * OS.js - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-2020, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -102,8 +102,9 @@ const getDataTransfer = (ev, type) => {
 
 			try {
 				if (type === "application/json") {
-					data =
-						typeof transfer === "undefined" ? transfer : JSON.parse(transfer);
+					data = typeof transfer === "undefined"
+						? transfer
+						: JSON.parse(transfer);
 				} else {
 					data = transfer;
 				}
@@ -121,8 +122,9 @@ const getDataTransfer = (ev, type) => {
 
 const setDataTransfer = (type, effect, data, setDragImage) => {
 	const hasDragImage = typeof setDragImage === "function";
-	const transferData =
-		type === "application/json" ? JSON.stringify(data) : data;
+	const transferData = type === "application/json"
+		? JSON.stringify(data)
+		: data;
 
 	return (ev, el, options) => {
 		if (ev.dataTransfer) {
