@@ -676,22 +676,16 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Kills the specified application by name
-	 * @param {String} name Application name
+	 * Kills the specified application
+	 * @param {String|Number} match Application name or PID
 	 */
-	pkill(name) {
+	kill(match) {
 		const apps = Application.getApplications();
-		const found = apps.filter((proc) => proc.metadata.name === name);
-		found.forEach((proc) => proc.destroy());
-	}
+		const matcher = typeof match === "number"
+			? app => app.pid === match
+			: app => app.metadata.name === match;
 
-	/**
-	 * Kills the specified application by PID
-	 * @param {Number} pid Application PID
-	 */
-	kill(pid) {
-		const apps = Application.getApplications();
-		const found = apps.filter((proc) => proc.pid === pid);
-		found.forEach((proc) => proc.destroy());
+		const found = apps.filter(matcher);
+		found.forEach(app => app.destroy());
 	}
 }

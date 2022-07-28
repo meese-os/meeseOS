@@ -221,10 +221,10 @@ describe("Core", () => {
 		});
 	});
 
-	test("#pkill - kill valid application by name", () => {
+	test("#kill - kill valid application by name", () => {
 		return core.run("ValidApplication").then((app) => {
 			const name = app.name;
-			core.pkill(name);
+			core.kill(name);
 
 			const apps = Application.getApplications();
 			const found = apps.filter((proc) => proc.metadata.name === name);
