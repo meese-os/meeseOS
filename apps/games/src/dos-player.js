@@ -1,7 +1,9 @@
+/* global Dos, emulators */
 import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import { DosPlayer as Instance } from "js-dos";
 
-export default function DosPlayer(props) {
+export default function DosPlayer({ bundleUrl }) {
 	const rootRef = useRef(HTMLDivElement);
 	const [dos, setDos] = useState(Instance);
 
@@ -18,13 +20,17 @@ export default function DosPlayer(props) {
 			noSideBar: true,
 			noSocialLinks: true,
 			onExit: () => {
-				document.getElementById("game").style.display = "none";
+				const parent = root.parentElement;
+				parent.style.display = "none";
+				ReactDOM.unmountComponentAtNode(parent);
+				root.remove();
 			}
 		};
 
 		const instance = Dos(root, config);
 		setDos(instance);
 
+		// Cleanup function
 		return () => { instance.stop(); };
 	}, [rootRef]);
 
@@ -32,8 +38,8 @@ export default function DosPlayer(props) {
 		if (!dos) return;
 
 		emulators.pathPrefix = "apps/games/js-dos/";
-		dos.run(props.bundleUrl);
-	}, [dos, props.bundleUrl]);
+		dos.run(bundleUrl);
+	}, [dos, bundleUrl]);
 
 	return <div ref={rootRef} style={{ width: "100%", height: "100%" }}></div>;
 }

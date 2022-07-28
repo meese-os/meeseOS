@@ -191,11 +191,9 @@ export default class Application extends EventEmitter {
 	 * Destroy application
 	 */
 	destroy(remove = true) {
-		if (this.destroyed) {
-			return;
-		}
-		this.destroyed = true;
+		if (this.destroyed) return;
 
+		this.destroyed = true;
 		this.emit("destroy");
 		this.core.emit("meeseOS/application:destroy", this);
 

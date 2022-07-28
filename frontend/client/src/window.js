@@ -360,7 +360,6 @@ export default class Window extends EventEmitter {
 		}
 
 		this.destroyed = true;
-
 		logger.debug("Window::destroy()");
 
 		this.emit("destroy", this);
@@ -396,9 +395,7 @@ export default class Window extends EventEmitter {
 	 * Initialize window
 	 */
 	init() {
-		if (this.inited) {
-			return this;
-		}
+		if (this.inited) return this;
 
 		if (this.parent) {
 			// Assign the window if it is a child
@@ -448,7 +445,7 @@ export default class Window extends EventEmitter {
 	 * @private
 	 */
 	_initBehavior() {
-		// Transform percentages in dimension to pixels etc
+		// Transform percentages in dimension to pixels
 		if (this.core.has("meeseOS/desktop")) {
 			const rect = this.core.make("meeseOS/desktop").getRect();
 			const { dimension, position } = transformVectors(

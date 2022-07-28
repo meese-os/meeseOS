@@ -16,21 +16,22 @@ const register = (core, args, options, metadata) => {
 
 	// Create a new Window instance
 	const win = proc.createWindow({
-		id: "GamesWindow",
+		id: "Games_" + String(proc.pid),
 		title: metadata.title,
 		icon: proc.resource(proc.metadata.icon),
 		dimension: { width: 725, height: 525 },
-		position: { left: 700, top: 300 },
+		position: { left: 600, top: 300 },
 	});
 
+	const app = React.createElement(App, { pid: proc.pid });
+	win.render(($content) => ReactDOM.render(app, $content));
+
 	win.on("destroy", () => {
+		ReactDOM.unmountComponentAtNode(
+			document.getElementById(`pid_${proc.pid}_game`)
+		);
 		proc.destroy();
-		// TODO: Destroy the game and JS-DOS processes
 	});
-	win.render(($content) => ReactDOM.render(
-		React.createElement(App, { pid: proc.pid }),
-		$content
-	));
 
 	return proc;
 };
