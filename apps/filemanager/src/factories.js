@@ -305,7 +305,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 		};
 
 	return {
-		download: files => files.forEach(file => vfs.download(file)),
+		download: (files) => files.forEach((file) => vfs.download(file)),
 		action,
 		upload,
 		refresh,
@@ -354,6 +354,7 @@ export const clipboardActionFactory = (core, state, vfs) => {
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @param {Window} win Window reference
+ * @returns {Function}
  */
 export const dialogFactory = (core, proc, win) => {
 	const vfs = core.make("meeseOS/vfs");

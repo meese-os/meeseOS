@@ -68,7 +68,7 @@ import systemAdapter from "./adapters/vfs/system";
 
 /**
  * Filesystem Adapter Methods
- * TODO: typedef
+ * @todo: typedef
  * @typedef {Object} FilesystemAdapterMethods
  * @property {Function} readdir
  * @property {Function} readfile
@@ -406,6 +406,7 @@ export default class Filesystem extends EventEmitter {
 
 	/**
 	 * Gets all mountpoints
+	 * @param {Boolean} [all=false] If true, also returns unmounted mountpoints
 	 * @returns {FilesystemMountpoint[]}
 	 */
 	getMounts(all = false) {
@@ -419,19 +420,19 @@ export default class Filesystem extends EventEmitter {
 				: theme.icon("drive-harddisk");
 
 		return this.mounts
-			.filter((m) => all || m.mounted)
-			.filter((m) => m.enabled !== false)
-			.filter((m) => {
-				const mg = m.attributes ? m.attributes.groups : [];
-				const ms = m.attributes ? m.attributes.strictGroups !== false : true;
+			.filter((mount) => all || mount.mounted)
+			.filter((mount) => mount.enabled !== false)
+			.filter((mount) => {
+				const mg = mount.attributes ? mount.attributes.groups : [];
+				const ms = mount.attributes ? mount.attributes.strictGroups !== false : true;
 				return filterMountByGroups(user.groups)(mg, ms);
 			})
-			.map((m) => ({
-				attributes: { ...m.attributes },
-				icon: icon(m.icon),
-				name: m.name,
-				label: m.label,
-				root: m.root,
+			.map((mount) => ({
+				attributes: { ...mount.attributes },
+				icon: icon(mount.icon),
+				name: mount.name,
+				label: mount.label,
+				root: mount.root,
 			}));
 	}
 

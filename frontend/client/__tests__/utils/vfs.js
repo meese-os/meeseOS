@@ -2,21 +2,32 @@ import * as vfs from "../../src/utils/vfs";
 
 const ab2str = (ab) => new Uint8Array(ab).toString();
 
+/**
+ * Converts a string to an ArrayBuffer
+ * @param {String} str The string to convert
+ * @returns {ArrayBuffer}
+ */
 const str2ab = (str) => {
-	const buf = new ArrayBuffer(str.length * 2);
-	const bufView = new Uint16Array(buf);
+	const buffer = new ArrayBuffer(str.length * 2);
+	const bufferView = new Uint16Array(buffer);
 	for (let i = 0, strLen = str.length; i < strLen; i++) {
-		bufView[i] = str.charCodeAt(i);
+		bufferView[i] = str.charCodeAt(i);
 	}
-	return buf;
+
+	return buffer;
 };
 
+/**
+ * Converts a blob to a string
+ * @param {Blob} blob The blob to convert
+ * @returns {String}
+ */
 const blob2str = (blob) =>
 	new Promise((resolve, reject) => {
-		const r = new FileReader();
-		r.onload = () => resolve(r.result);
-		r.onerror = (e) => reject(e);
-		r.readAsText(blob);
+		const reader = new FileReader();
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = (err) => reject(err);
+		reader.readAsText(blob);
 	});
 
 describe("utils.vfs#getFileIcon", () => {

@@ -60,20 +60,30 @@ import {
  * @property {Object} [stat]
  */
 
-// Makes sure our input paths are object(s)
+/**
+ * Makes sure our input paths are object(s)
+ * @param {String|Object} path
+ * @returns {Object}
+ */
 const pathToObject = (path) => ({
 	id: null,
 	...(typeof path === "string" ? { path } : path),
 });
 
-// Handles directory listing result(s)
-const handleDirectoryList = (path, options) => (result) =>
-	Promise.resolve(result.map((stat) => createFileIter(stat))).then((result) =>
-		transformReaddir(pathToObject(path), result, {
-			showHiddenFiles: options.showHiddenFiles !== false,
-			filter: options.filter,
-		})
-	);
+/**
+ * Handles directory listing result(s)
+ * @param {String|Object} path
+ * @param {Object} options
+ * @returns {Promise<any[]>}
+ */
+const handleDirectoryList = (path, options) =>
+	(result) =>
+		Promise.resolve(result.map((stat) => createFileIter(stat))).then((result) =>
+			transformReaddir(pathToObject(path), result, {
+				showHiddenFiles: options.showHiddenFiles !== false,
+				filter: options.filter,
+			})
+		);
 
 /**
  * Read a directory
