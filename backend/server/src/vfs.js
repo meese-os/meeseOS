@@ -151,7 +151,7 @@ const createOptions = (req) => {
 /**
  * Standard request with only a target
  * @param {Function} findMountpoint
- * @returns {*}
+ * @returns {Function}
  */
 const createRequestFactory = (findMountpoint) =>
 	(getter, method, readOnly, respond) =>

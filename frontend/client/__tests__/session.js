@@ -28,4 +28,8 @@ describe("Session", () => {
 	test("#load - fresh", () => {
 		return expect(session.load(true)).resolves.toEqual(true);
 	});
+
+	test("#destroy", () => {
+		return expect(session.destroy()).resolves.toEqual(true);
+	});
 });

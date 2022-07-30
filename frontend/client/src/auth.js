@@ -161,9 +161,12 @@ export default class Auth {
 
 	/**
 	 * Run the shutdown procedure
-	 * @param {Boolean} [reload] Reload afterwards
+	 * @param {Boolean} [reload=false] Reload afterwards
 	 */
-	shutdown(reload) {
+	async shutdown(reload = false) {
+		// Destroys the current session
+		await this.core.make("meeseOS/session").destroy();
+
 		try {
 			this.core.destroy();
 		} catch (e) {
@@ -172,14 +175,14 @@ export default class Auth {
 
 		this.core.emit("meeseOS/core:logged-out");
 
-		// TODO: Decide on a better desired behavior here
 		if (reload) {
 			setTimeout(() => {
-				// IDEA: Close all applications so session doesn't remember for next time?
+				// Reloads the page
 				window.location.reload();
-				// FIXME Reload, not refresh
-				// this.core.boot();
 			}, 1);
+		} else {
+			// NOTE: This does not work in most browsers, but eventually support may return
+			window.close();
 		}
 	}
 
