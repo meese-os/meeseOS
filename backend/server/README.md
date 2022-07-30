@@ -11,15 +11,17 @@ Contains all services and interfaces required to run a node server for MeeseOS.
 
 <!-- https://mermaid-js.github.io/mermaid/#/flowchart -->
 ```mermaid
-flowchart LR;
-	subgraph Client;
-		Application-->VFS function call-->VFS Client Adapter-->HTTP Request;
-	end;
-	subgraph Server;
-		HTTP endpoint matching VFS function name-->VFS Server Adapter-->Actual Filesystem;
-	end;
+flowchart TD
+	subgraph Client
+		direction LR
+		A1["Application"] --> B1["VFS function call"] --> C1["VFS Client Adapter"] --> D1["HTTP Request"]
+	end
+	subgraph Server
+		direction LR
+		A2["HTTP endpoint matching VFS function name"] --> B2["VFS Server Adapter"] --> C2["Actual Filesystem"]
+	end
 
-	Client --> Server;
+	Client --> Server
 ```
 
 The client always represents stuff with virtual paths, wihch the VFS server adapter is able to resolve to access a physical filesystem.
