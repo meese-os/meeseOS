@@ -510,8 +510,9 @@ export const menuFactory = (core, proc, win) => {
 	const createEditMenu = async (items, isContextMenu) => {
 		const emitter = (name) => win.emit(name, items);
 		const item = items[items.length - 1];
+		const singleFile = items.length === 1;
 
-		if (items.length === 1 && item && isSpecialFile(item.filename)) {
+		if (singleFile && item && isSpecialFile(item.filename)) {
 			return [
 				{
 					label: "Go",
@@ -524,7 +525,7 @@ export const menuFactory = (core, proc, win) => {
 			(file) => !file.isDirectory && !isSpecialFile(file.filename)
 		);
 		const hasValidFile = items.some((file) => !isSpecialFile(file.filename));
-		const isDirectory = items.length === 1 && item.isDirectory;
+		const isDirectory = singleFile && item.isDirectory;
 
 		const openMenu = isDirectory ?
 			[

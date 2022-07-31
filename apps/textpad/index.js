@@ -37,10 +37,12 @@ import meeseOS from "meeseOS";
 const createMenu = (current, actions) => [
 	{ label: "New", onclick: () => actions.menuNew() },
 	{ label: "Open", onclick: () => actions.menuOpen() },
-	{ label: "Save", onclick: () => {
-		// "Save" behaves as "Save As" when no file exists
-		current ? actions.menuSave() : actions.menuSaveAs();
-	}},
+	{
+		label: "Save", onclick: () => {
+			// "Save" behaves as "Save As" when no file exists
+			current ? actions.menuSave() : actions.menuSaveAs();
+		}
+	},
 	{ label: "Save As", onclick: () => actions.menuSaveAs() },
 	{ label: "Quit", onclick: () => actions.menuQuit() },
 ];

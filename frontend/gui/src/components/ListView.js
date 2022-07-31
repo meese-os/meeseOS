@@ -159,7 +159,7 @@ export const listView = {
 
 			// Remove duplicates from the array
 			return [...new Set(indices)];
-		}
+		};
 
 		/**
 		 * Creates an updated selection based on the user's most recent selection.

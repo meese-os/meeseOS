@@ -1,6 +1,12 @@
 import * as vfs from "../../src/utils/vfs";
 
-const ab2str = (ab) => new Uint8Array(ab).toString();
+/**
+ * Converts an ArrayBuffer to a string
+ * @param {ArrayBuffer} ab The ArrayBuffer to convert
+ * @returns {String}
+ */
+const ab2str = (ab) =>
+	String.fromCharCode.apply(null, new Uint16Array(ab));
 
 /**
  * Converts a string to an ArrayBuffer
@@ -241,11 +247,10 @@ describe("utils.vfs#transformArrayBuffer", () => {
 	const testAbString = ab2str(testAb);
 	const create = (type) => vfs.transformArrayBuffer(testAb, "text/plain", type);
 
-	/* FIXME
-  test('Should create string', () =>
-    create('string')
-      .then(result => expect(result).toBe('foo')));
-      */
+	test("Should create string", () =>
+		create("string")
+			.then((result) => result.replace(/\0/g, ""))
+			.then((result) => expect(result).toBe(testText)));
 
 	test("Should create data url", async () => {
 		const result = await create("uri");
@@ -257,12 +262,11 @@ describe("utils.vfs#transformArrayBuffer", () => {
 		expect(index).not.toBe(-1);
 	});
 
-	/* FIXME
-  test('Should create blob', () =>
-    create('blob')
-      .then(blob2str)
-      .then(result => expect(result).toBe(testText)));
-      */
+	test("Should create blob", () =>
+		create("blob")
+			.then(blob2str)
+			.then((result) => result.replace(/\0/g, ""))
+			.then((result) => expect(result).toBe(testText)));
 
 	test("Should create arraybuffer (default)", () =>
 		create("arraybuffer")

@@ -940,10 +940,8 @@ export default class Window extends EventEmitter {
 		return zIndex < max;
 	}
 
-	/*
+	/**
 	 * Updates window styles and attributes
-	 * FIXME: Backward compability with themes
-	 * @deprecated
 	 */
 	_updateDOM() {
 		this._updateAttributes();

@@ -13,7 +13,7 @@ module.exports = {
 		quotes: ["error", "double", { allowTemplateLiterals: true }],
 		"linebreak-style": ["error", "unix"],
 		semi: ["error", "always"],
-		indent: ["error", "tab"],
+		indent: ["error", "tab", { SwitchCase: 1 }],
 		"eol-last": ["error", "always"],
 		"consistent-return": 0,
 		"space-in-parens": ["error", "never"],

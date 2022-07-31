@@ -776,24 +776,9 @@ export default class Desktop extends EventEmitter {
 
 		const useDefaults = config === true || config.defaults; // NOTE: Backward compability
 
-		const themes = this.core
-			.make("meeseOS/packages")
-			.getPackages((p) => p.type === "theme");
-
 		const defaultItems = lockSettings
 			? []
-			: [
-				// TODO: Hotlink this to the settings app
-				{
-					label: "Select theme",
-					items: themes.map((theme) => ({
-						label: theme.title,
-						onclick: () => {
-							this._applySettingsByKey("theme", theme.name);
-						},
-					})),
-				},
-			];
+			: [/* TODO: Add default context menu entries */];
 
 		if (hasIconview && this.iconview) {
 			defaultItems.push({

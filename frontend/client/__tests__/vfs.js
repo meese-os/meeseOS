@@ -139,10 +139,6 @@ describe("VFS", () => {
 		return expect(call("touch", "null:/")).resolves.toBe(false);
 	});
 
-	test("#download", () => {
-		return expect(call("download", "null:/")).resolves.toBe(undefined);
-	});
-
 	test("#stat", () => {
 		return expect(call("stat", "null:/filename")).resolves.toEqual({
 			filename: null,
@@ -157,5 +153,9 @@ describe("VFS", () => {
 			size: -1,
 			stat: {},
 		});
+	});
+
+	test("#download", () => {
+		return expect(call("download", "null:/")).resolves.toBe(undefined);
 	});
 });

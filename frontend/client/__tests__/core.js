@@ -127,8 +127,8 @@ describe("Core", () => {
 
 	test("#getUser", () => {
 		expect(core.getUser()).toEqual({
-			username: "guest",
-			groups: ["guest"],
+			username: "user",
+			groups: ["user"],
 		});
 	});
 
