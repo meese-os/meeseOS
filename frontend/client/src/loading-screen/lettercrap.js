@@ -87,17 +87,17 @@ function getTextContentWithImageAtSize(
 	// This code is for scaling the canvas size appropriately for smaller screens
 	let charWidth = 6, charHeight = 10;
 	if (window.innerWidth < 800 && window.innerWidth > 600) {
-		charWidth *= .8;
-		charHeight *= .8;
+		charWidth *= 0.8;
+		charHeight *= 0.8;
 	} else if (window.innerWidth <= 600 && window.innerWidth > 500) {
-		charWidth *= .5;
-		charHeight *= .5;
+		charWidth *= 0.5;
+		charHeight *= 0.5;
 	} else if (window.innerWidth <= 500 && window.innerWidth > 400) {
-		charWidth *= .55;
-		charHeight *= .55;
+		charWidth *= 0.55;
+		charHeight *= 0.55;
 	} else if (window.innerWidth <= 400) {
-		charWidth *= .6;
-		charHeight *= .6;
+		charWidth *= 0.6;
+		charHeight *= 0.6;
 	}
 
 	const canvas = document.createElement("canvas");

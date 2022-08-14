@@ -22,28 +22,23 @@ $loading-offset: 25px;
 	}
 
 	[data-letter-crap] {
-		/* TODO: Conditional font size */
 		position: relative;
 		white-space: pre;
 		overflow: hidden;
-		font-size: 10px;
-		line-height: 10px;
 		font-family: monospace;
 		padding: 0;
 		color: $green;
 		width: 90%;
 		max-width: 1200px;
-	}
+		font-size: 10px;
+		line-height: 10px;
 
-	@media (max-width: 800px) {
-		[data-letter-crap] {
+		@media (max-width: 800px) {
 			font-size: 6.5px;
 			line-height: 6.5px;
 		}
-	}
 
-	@media (max-width: 600px) {
-		[data-letter-crap] {
+		@media (max-width: 600px) {
 			font-size: 5px;
 			line-height: 5px;
 		}
