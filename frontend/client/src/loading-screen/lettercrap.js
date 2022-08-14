@@ -1,5 +1,3 @@
-const charWidth = 6;
-const charHeight = 10;
 const updateInterval = 150;
 const likelihoodOfReplacingWord = 0.05;
 const likelihoodOfChangingExistingText = 0.1;
@@ -85,6 +83,22 @@ function getTextContentWithImageAtSize(
 	existingText = existingText ? existingText.replace(/\r?\n|\r/g, "") : null;
 	const shouldReplaceExisting = () =>
 		!existingText || Math.random() < likelihoodOfChangingExistingText;
+
+	// This code is for scaling the canvas size appropriately for smaller screens
+	let charWidth = 6, charHeight = 10;
+	if (window.innerWidth < 800 && window.innerWidth > 600) {
+		charWidth *= 0.8;
+		charHeight *= 0.8;
+	} else if (window.innerWidth <= 600 && window.innerWidth > 500) {
+		charWidth *= 0.5;
+		charHeight *= 0.5;
+	} else if (window.innerWidth <= 500 && window.innerWidth > 400) {
+		charWidth *= 0.55;
+		charHeight *= 0.55;
+	} else if (window.innerWidth <= 400) {
+		charWidth *= 0.6;
+		charHeight *= 0.6;
+	}
 
 	const canvas = document.createElement("canvas");
 	canvas.width = parseInt(width / charWidth);
