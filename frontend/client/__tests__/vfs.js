@@ -48,10 +48,10 @@ const callOther = (method, ...args) =>
 
 describe("VFS", () => {
 	test("#capabilities", () => {
-    return expect(call("capabilities", "null:/"))
-      .resolves
-      .toMatchObject({});
-  });
+		return expect(call("capabilities", "null:/"))
+			.resolves
+			.toMatchObject({});
+	});
 
 	test("#readdir", () => {
 		return expect(call("readdir", "null:/")).resolves.toMatchObject([

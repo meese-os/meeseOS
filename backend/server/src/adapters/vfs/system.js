@@ -498,15 +498,22 @@ module.exports = (core) => {
 						const output = fs.createWriteStream(realPaths[0] + ".zip");
 						zipfile.outputStream.pipe(output);
 
-						// Add the files to the archive
-						for (const realPath of realPaths) {
-							await addToArchive(zipfile, realPath);
+						try {
+							// Add the files to the archive
+							for (const realPath of realPaths) {
+								await addToArchive(zipfile, realPath);
 
-							// Delete the original file
-							// fs.unlink(realPath);
+								// Delete the original file
+								// fs.unlink(realPath);
+							}
+
+							zipfile.end();
+						} catch (err) {
+							// If there is an error, end the archive and delete the file
+							zipfile.end();
+							fs.unlink(realPaths[0] + ".zip");
+							throw err;
 						}
-
-						zipfile.end();
 
 						break;
 					}
