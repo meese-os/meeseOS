@@ -28,51 +28,57 @@
  * @license Simplified BSD License
  */
 
-const getters = ["exists", "stat", "readdir", "readfile"];
+const getters = ["capabilities", "exists", "stat", "readdir", "readfile"];
 
+/**
+ * Middleware for the VFS system adapter.
+ *
+ * @param {String} fn The function to call
+ * @param {*} body The body to pass to the function
+ * @param {String} type The content type
+ * @param {Object} [options] Adapter options
+ * @returns {Object}
+ */
 const requester = (core) =>
 	(fn, body, type, options = {}) =>
-		core
-			.request(
-				`/vfs/${fn}`,
-				{
-					body,
-					method: getters.indexOf(fn) !== -1 ? "get" : "post",
-					...options,
-				},
-				type
-			)
-			.then((response) => {
-				if (type === "json") {
-					return { mime: "application/json", body: response };
-				} else if (fn === "writefile") {
-					return response.json();
-				}
+		core.request(`/vfs/${fn}`,
+			{
+				// FIXME: The `options` here is being stringified to `[object Object]`
+				body,
+				method: getters.indexOf(fn) !== -1 ? "get" : "post",
+				...options,
+			},
+			type
+		).then((response) => {
+			if (type === "json") {
+				return { mime: "application/json", body: response };
+			} else if (fn === "writefile") {
+				return response.json();
+			}
 
-				const contentType = response.headers.get("content-type")
-					|| "application/octet-stream";
+			const contentType = response.headers.get("content-type")
+				|| "application/octet-stream";
 
-				return response.arrayBuffer().then((result) => ({
-					mime: contentType,
-					body: result,
-				}));
-			});
+			return response.arrayBuffer().then((result) => ({
+				mime: contentType,
+				body: result,
+			}));
+		});
 
+/**
+ * Provides the methods for VFS system adapter.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {Function} request VFS abstraction function
+ * @returns {Object}
+ */
 const methods = (core, request) => {
 	const passthrough = (name) =>
 		({ path }, options) =>
 			request(name, { path, options }, "json").then(({ body }) => body);
 
 	return {
-		readdir: ({ path }, options) =>
-			request(
-				"readdir",
-				{
-					path,
-					options: {},
-				},
-				"json"
-			).then(({ body }) => body),
+		capabilities: passthrough("capabilities"),
+		readdir: passthrough("readdir"),
 
 		readfile: ({ path }, type, options) =>
 			request("readfile", { path, options }),
@@ -126,13 +132,21 @@ const methods = (core, request) => {
 				return (options.target || window).open(url);
 			});
 		},
+
+		archive: (selection, options = {}) => {
+			const paths = selection.map((item) => item.path);
+			return request("archive", { selection: paths, options }, "json").then(
+				({ body }) => body
+			);
+		},
 	};
 };
 
 /**
- * System VFS adapter
+ * System VFS adapter.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} [options] Adapter options
+ * @returns {Object}
  */
 const adapter = (core) => {
 	const request = requester(core);

@@ -34,6 +34,7 @@
  * @param {Object} [options] Adapter options
  */
 const nullAdapter = {
+	capabilities: (path, options) => Promise.resolve({}),
 	readdir: (path, options) => Promise.resolve([]),
 	readfile: (path, type, options) =>
 		Promise.resolve({
@@ -52,6 +53,7 @@ const nullAdapter = {
 	unmount: (options) => Promise.resolve(true),
 	search: (root, pattern, options) => Promise.resolve([]),
 	touch: (path, options) => Promise.resolve(false),
+	archive: (selection, options) => Promise.resolve(false),
 };
 
 export default nullAdapter;

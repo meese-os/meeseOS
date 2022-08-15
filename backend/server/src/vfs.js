@@ -45,6 +45,7 @@ const respondNumber = (result) => (typeof result === "number" ? result : -1);
 const respondBoolean = (result) =>
 	typeof result === "boolean" ? result : Boolean(result);
 const requestPath = (req) => [sanitize(req.fields.path)];
+const requestSelection = (req) => [req.fields.selection];
 const requestSearch = (req) => [sanitize(req.fields.root), req.fields.pattern];
 const requestCross = (req) => [
 	sanitize(req.fields.from),
@@ -56,7 +57,7 @@ const requestFile = (req) => [
 ];
 
 /**
- * Parses the range request headers
+ * Parses the range request headers.
  * @param {String} range
  * @returns {Array}
  */
@@ -68,18 +69,20 @@ const parseRangeHeader = (range) => {
 };
 
 /**
- * A "finally" for our chain
+ * A "finally" for our chain.
+ * @param {Request} req
+ * @param {Response} res
  */
 const onDone = (req, res) => {
 	if (req.files) {
 		for (const fieldname in req.files) {
-			fs.unlink(req.files[fieldname].path, () => ({}));
+			fs.unlink(req.files[fieldname].filepath, () => ({}));
 		}
 	}
 };
 
 /**
- * Wraps a VFS adapter request
+ * Wraps a VFS adapter request.
  * @param {Function} fn The wrapper function to apply
  */
 const wrapper = (fn) =>
@@ -100,7 +103,7 @@ const wrapper = (fn) =>
 			});
 
 /**
- * Creates the middleware
+ * Creates the middleware.
  * @param {Core} core MeeseOS Core instance reference
  * @returns {Function}
  */
@@ -132,7 +135,7 @@ const createOptions = (req) => {
 
 	if (typeof options === "string") {
 		try {
-			result = JSON.parse(req.fields.options) || {};
+			result = JSON.parse(options) || {};
 		} catch (e) {
 			// Allow to fall through
 		}
@@ -149,7 +152,7 @@ const createOptions = (req) => {
 };
 
 /**
- * Standard request with only a target
+ * Standard request with only a target.
  * @param {Function} findMountpoint
  * @returns {Function}
  */
@@ -174,10 +177,12 @@ const createRequestFactory = (findMountpoint) =>
 			const ranges = !attributes.adapter ||
 				attributes.adapter === "system" ||
 				attributes.ranges === true;
-			const vfsMethodWrapper = (m) =>
-				found.adapter[m]
-					? found.adapter[m](found)(...args)
-					: Promise.reject(new Error(`Adapter does not support ${m}`));
+
+			const vfsMethodWrapper = (method) =>
+				found.adapter[method]
+					? found.adapter[method](found)(...args)
+					: Promise.reject(new Error(`Adapter does not support ${method}`));
+
 			const readstat = () => vfsMethodWrapper("stat").catch(() => ({}));
 			await checkMountpointPermission(req, res, method, readOnly, strict)(found);
 
@@ -220,7 +225,7 @@ const createRequestFactory = (findMountpoint) =>
 		};
 
 /**
- * Request that has a source and target
+ * Request that has a source and target.
  * @param {Function} findMountpoint
  * @returns {Boolean}
  */
@@ -235,6 +240,7 @@ const createCrossRequestFactory = (findMountpoint) =>
 
 			const srcStrict = srcMount.mount.attributes.strictGroups !== false;
 			const destStrict = destMount.mount.attributes.strictGroups !== false;
+
 			await checkMountpointPermission(
 				req,
 				res,
@@ -242,6 +248,7 @@ const createCrossRequestFactory = (findMountpoint) =>
 				false,
 				srcStrict
 			)(srcMount);
+
 			await checkMountpointPermission(
 				req,
 				res,
@@ -288,6 +295,7 @@ const vfs = (core) => {
 
 	// Wire up all available VFS events
 	return {
+		capabilities: createRequest(requestPath, "capabilities", false),
 		realpath: createRequest(requestPath, "realpath", false),
 		exists: createRequest(requestPath, "exists", false, respondBoolean),
 		stat: createRequest(requestPath, "stat", false),
@@ -300,11 +308,12 @@ const vfs = (core) => {
 		search: createRequest(requestSearch, "search", false),
 		copy: createCrossRequest(requestCross, "copy"),
 		rename: createCrossRequest(requestCross, "rename"),
+		archive: createRequest(requestSelection, "archive", false),
 	};
 };
 
 /**
- * Creates a new VFS Express router
+ * Creates a new VFS Express router.
  * @param {Core} core MeeseOS Core instance reference
  * @returns {Object}
  */
@@ -321,6 +330,7 @@ module.exports = (core) => {
 	router.use(middleware);
 
 	// Then all VFS routes (needs implementation above)
+	router.get("/capabilities", wrapper(methods.capabilities));
 	router.get("/exists", wrapper(methods.exists));
 	router.get("/stat", wrapper(methods.stat));
 	router.get("/readdir", wrapper(methods.readdir));
@@ -332,6 +342,7 @@ module.exports = (core) => {
 	router.post("/unlink", wrapper(methods.unlink));
 	router.post("/touch", wrapper(methods.touch));
 	router.post("/search", wrapper(methods.search));
+	router.post("/archive", wrapper(methods.archive));
 
 	// Finally catch promise exceptions
 	router.use((error, req, res, next) => {

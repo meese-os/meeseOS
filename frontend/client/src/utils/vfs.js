@@ -29,7 +29,7 @@
  */
 
 /**
- * Get parent directory
+ * Get parent directory.
  * @param {String} path Directory
  * @returns {String} Parent directory
  */
@@ -42,7 +42,7 @@ export const parentDirectory = (path) =>
 		.replace(/(\/+)?$/, "/");
 
 /**
- * Joins paths
+ * Joins paths.
  * @param {String[]} args paths
  * @returns {String}
  */
@@ -57,7 +57,7 @@ export const pathJoin = (...args) =>
 		.join("/");
 
 /**
- * Sort by locale string
+ * Sort by locale string.
  */
 const sortString = (k, d) => (a, b) =>
 	d === "asc"
@@ -65,7 +65,7 @@ const sortString = (k, d) => (a, b) =>
 		: String(b[k]).localeCompare(a[k]);
 
 /**
- * Sort by date
+ * Sort by date.
  */
 const sortDate = (k, d) => (a, b) =>
 	d === "asc"
@@ -73,13 +73,13 @@ const sortDate = (k, d) => (a, b) =>
 		: new Date(b[k]) > new Date(a[k]);
 
 /**
- * Sort by educated guess
+ * Sort by educated guess.
  */
 const sortDefault = (k, d) => (a, b) =>
 	a[k] < b[k] ? -1 : a[k] > b[k] ? (d === "asc" ? 1 : 0) : d === "asc" ? 0 : 1;
 
 /**
- * Sorts an array of files
+ * Sorts an array of files.
  */
 const sortFn = (t) => {
 	if (t === "string") {
@@ -92,7 +92,7 @@ const sortFn = (t) => {
 };
 
 /**
- * Map of sorters from readdir attributes
+ * Map of sorters from readdir attributes.
  */
 const sortMap = {
 	size: sortFn("number"),
@@ -102,7 +102,7 @@ const sortMap = {
 };
 
 /**
- * Creates "special" directory entries
+ * Creates "special" directory entries.
  * @param {String} path The path to the readdir root
  * @returns {Object[]}
  */
@@ -128,6 +128,7 @@ const createSpecials = (path) => {
 
 /**
  * Creates a FileReader (promisified)
+ *
  * @param {String} method The method to call
  * @param {ArrayBuffer} ab The ArrayBuffer
  * @param {String} mime The MIME type
@@ -143,10 +144,10 @@ const createFileReader = (method, ab, mime) =>
 	});
 
 /**
- * Converts a number (bytez) into human-readable string
+ * Converts a number (bytes) into human-readable string.
  * @param {Number} bytes Input
  * @param {Boolean} [si=false] Use SI units
- * @returns {String}
+ * @returns {String} The human-readable file size
  */
 export const humanFileSize = (bytes, si = false) => {
 	if (isNaN(bytes) || typeof bytes !== "number") {
@@ -162,17 +163,18 @@ export const humanFileSize = (bytes, si = false) => {
 		return bytes + " B";
 	}
 
-	let u = -1;
+	let unitIndex = -1;
 	do {
 		bytes /= thresh;
-		++u;
+		++unitIndex;
 	} while (bytes >= thresh);
 
-	return `${bytes.toFixed(1)} ${units[u]}`;
+	return `${bytes.toFixed(1)} ${units[unitIndex]}`;
 };
 
 /**
- * Transforms a readdir result
+ * Transforms a readdir result.
+ *
  * @param {Object} root The path to the readdir root
  * @param Object[] files An array of readdir results
  * @param {Object} options Options
@@ -234,11 +236,12 @@ export const transformReaddir = ({ path }, files, options = {}) => {
 };
 
 /**
- * Transform an ArrayBuffer
+ * Transform an ArrayBuffer into a specified type.
+ *
  * @param {ArrayBuffer} ab The ArrayBuffer
  * @param {String} mime The MIME type
  * @param {String} type Transform to this type
- * @returns {DOMString|string|Blob|ArrayBuffer}
+ * @returns {DOMString|String|Blob|ArrayBuffer}
  */
 export const transformArrayBuffer = (ab, mime, type) => {
 	if (type === "string") {
@@ -253,9 +256,9 @@ export const transformArrayBuffer = (ab, mime, type) => {
 };
 
 /**
- * Gets an icon from file stat
+ * Gets an icon from file stat.
  * @param {Object} file The file stat object
- * @returns {String|object}
+ * @returns {String|Object}
  */
 export const getFileIcon = (map) => {
 	const find = (file) => {
@@ -271,7 +274,7 @@ export const getFileIcon = (map) => {
 };
 
 /**
- * Creates a file iter for scandir
+ * Creates a file iter for scandir.
  * @param {Object} stat file stat
  * @returns {Object}
  */
@@ -291,14 +294,14 @@ export const createFileIter = (stat) => ({
 });
 
 /**
- * Get basename of a file
+ * Get basename of a file.
  * @param {String} path The path
  * @returns {String}
  */
 export const basename = (path) => path.split("/").reverse()[0];
 
 /**
- * Get path of a file
+ * Get path of a file.
  * @param {String} path The path
  * @returns {String}
  */
@@ -314,7 +317,7 @@ export const pathname = (path) => {
 };
 
 /**
- * Gets prefix from a VFS path
+ * Gets prefix from a VFS path.
  * @param {String} str Input
  * @returns {String}
  */
@@ -329,7 +332,7 @@ export const parseMountpointPrefix = (str) => {
 };
 
 /**
- * Filters a mountpoint by user groups
+ * Filters a mountpoint by user groups.
  * @returns {Boolean}
  */
 export const filterMountByGroups =
@@ -343,14 +346,14 @@ export const filterMountByGroups =
 
 /**
  * Creates a list of VFS events to simulate server-side
- * file watching
+ * file watching.
  * @returns {Object[]}
  */
 export const createWatchEvents = (method, args) => {
 	const events = [];
 	const options = args[args.length - 1] || {};
-
 	const movement = ["move", "rename", "copy"].indexOf(method) !== -1;
+	const path = (i) => (typeof i === "string" ? i : i.path);
 	const invalid =
 		[
 			"readdir",
@@ -361,7 +364,6 @@ export const createWatchEvents = (method, args) => {
 			"search",
 			"stat",
 		].indexOf(method) !== -1;
-	const path = (i) => (typeof i === "string" ? i : i.path);
 
 	if (!invalid) {
 		const obj = {
@@ -370,11 +372,14 @@ export const createWatchEvents = (method, args) => {
 			pid: options.pid,
 		};
 
+		let target = args[0];
+		if (Array.isArray(args[0])) target = target[0];
+
 		events.push([
 			"meeseOS/vfs:directoryChanged",
 			{
 				...obj,
-				path: pathname(path(args[0])),
+				path: pathname(path(target)),
 			},
 		]);
 

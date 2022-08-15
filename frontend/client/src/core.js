@@ -37,6 +37,7 @@ import logger from "./logger";
 import Splash from "./splash";
 import Websocket from "./websocket";
 import merge from "deepmerge";
+import { isPlainObject } from "is-plain-object";
 
 /**
  * @callback SplashCallback
@@ -470,7 +471,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Make a HTTP request
+	 * Make an HTTP request
 	 *
 	 * This is a wrapper for making a 'fetch' request with some helpers
 	 * and integration with MeeseOS
@@ -490,7 +491,12 @@ export default class Core extends CoreBase {
 
 		if (!url.match(/^((http|ws|ftp)s?:)/i)) {
 			url = this.url(url);
-			options = merge(options, this.requestOptions);
+
+			options = merge(
+				options,
+				this.requestOptions,
+				{ isMergeableObject: isPlainObject }
+			);
 		}
 
 		return fetch(url, options, type).catch((error) => {

@@ -63,3 +63,5 @@ To run GitHub Actions locally, do the following:
 - Caching for "rush-project.json"
   - "Project does not have a rush-project.json configuration file, or one provided by a rig, so it does not support caching."
   - "rush build --verbose"
+- Fix the xterm problem
+  - Prevent "WebSocket is already in CLOSING or CLOSED state" error when closing terminal

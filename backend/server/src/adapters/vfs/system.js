@@ -32,13 +32,16 @@ const fs = require("fs-extra");
 const path = require("path");
 const fh = require("filehound");
 const chokidar = require("chokidar");
+const extract = require("extract-zip");
+const yazl = require("yazl");
 
 /**
- * Creates an object readable by client
+ * Creates an object readable by the client.
+ *
  * @param {Core} core MeeseOS Core instance reference
- * @param {String} realRoot
- * @param {String} file
- * @returns {Object}
+ * @param {String} realRoot Real root path
+ * @param {String} file File path
+ * @returns {Object} Information about the file
  */
 const createFileIter = (core, realRoot, file) => {
 	const filename = path.basename(file);
@@ -70,7 +73,7 @@ const createFileIter = (core, realRoot, file) => {
 };
 
 /**
- * Segment value map
+ * Segment value map.
  */
 const segments = {
 	root: {
@@ -90,22 +93,30 @@ const segments = {
 };
 
 /**
- * Gets a segment value
+ * Gets a segment value.
+ *
  * @param {Core} core MeeseOS Core instance reference
+ * @param {Object} session
+ * @param {String} segment
+ * @returns {String}
  */
 const getSegment = (core, session, seg) =>
 	segments[seg] ? segments[seg].fn(core, session) : "";
 
 /**
- * Matches a string for segments
+ * Matches a string for segments.
  * @param {String} str
  * @returns {Array}
  */
 const matchSegments = (str) => str.match(/(\{\w+\})/g) || [];
 
 /**
- * Resolves a string with segments
+ * Resolves a string with segments.
+ *
  * @param {Core} core MeeseOS Core instance reference
+ * @param {Object} session
+ * @param {String} str
+ * @returns {String}
  */
 const resolveSegments = (core, session, str) =>
 	matchSegments(str).reduce(
@@ -118,19 +129,19 @@ const resolveSegments = (core, session, str) =>
 	);
 
 /**
- * Resolves a given file path based on a request
+ * Resolves a given file path based on a request.
  * Will take out segments from the resulting string
  * and replace them with a list of defined variables.
  *
  * @param {Core} core MeeseOS Core instance reference
- * @param {*} session
+ * @param {Object} session
  * @param {Object} mount
  * @param {String} file
  * @returns {String}
  */
 const getRealPath = (core, session, mount, file) => {
 	const root = resolveSegments(core, session, mount.attributes.root);
-	const str = file.substr(mount.root.length - 1);
+	const str = file.substring(mount.root.length - 1);
 	return path.join(root, str);
 };
 
@@ -161,6 +172,53 @@ module.exports = (core) => {
 				})
 					.then(({ realSource, realDest }) => fs[method](realSource, realDest))
 					.then(() => true);
+
+	const addFileToArchive = (zipfile, realPath) => {
+		const zipfileLocation = zipfile.outputStream._readableState.pipes[0].path;
+		const archiveRoot = path.parse(zipfileLocation).dir + path.sep;
+
+		const readStream = fs.createReadStream(realPath);
+		const destination = realPath.replace(archiveRoot, "");
+		zipfile.addReadStream(readStream, destination);
+	};
+
+	const addDirToArchive = async (zipfile, realPath) => {
+		const files = await fs.readdir(realPath)
+			.then((files) => ({ realPath, files }))
+			.then(({ realPath, files }) => {
+				const promises = files.map((fileName) => {
+					const filePath = realPath.replace(/\/?$/, "/") + fileName;
+					return createFileIter(
+						core,
+						path.dirname(filePath),
+						filePath
+					);
+				});
+				return Promise.all(promises);
+			});
+
+		for (const file of files) {
+			if (file.isDirectory) {
+				await addToArchive(zipfile, file.path);
+			} else {
+				addFileToArchive(zipfile, file.path);
+			}
+		}
+	};
+
+	/**
+	 * Adds everything in the given directory to the VFS archive.
+	 * @param {yazl.ZipFile} zipfile The ZIP file to add to
+	 * @param {String} realPath The real path to the file/directory
+	 */
+	const addToArchive = async (zipfile, realPath) => {
+		const isDirectory = await fs.stat(realPath).then((stat) => stat.isDirectory());
+		if (isDirectory) {
+			await addDirToArchive(zipfile, realPath);
+		} else {
+			await addFileToArchive(zipfile, realPath);
+		}
+	};
 
 	return {
 		watch: (mount, callback) => {
@@ -197,10 +255,33 @@ module.exports = (core) => {
 		},
 
 		/**
-		 * Checks if file exists
+		 * Get filesystem capabilities.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {Promise<boolean, Error>}
+		 * @return {Object[]}
+		 */
+		capabilities: (vfs) =>
+			(file, options = {}) =>
+				Promise.resolve({
+					sort: false,
+					pagination: false
+				}),
+
+		/**
+		 * Gets the real filesystem path (internal only)
+		 * @param {String} file The file path from client
+		 * @param {Object} [options={}] Options
+		 * @returns {String}
+		 */
+		realpath: (vfs) =>
+			(file, options = {}) =>
+				Promise.resolve(getRealPath(core, options.session, vfs.mount, file)),
+
+		/**
+		 * Checks if file exists.
+		 * @param {String} file The file path from client
+		 * @param {Object} [options={}] Options
+		 * @returns {Promise<Boolean, Error>}
 		 */
 		exists: wrapper(
 			"access",
@@ -211,7 +292,7 @@ module.exports = (core) => {
 		),
 
 		/**
-		 * Get file statistics
+		 * Get file statistics.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
 		 * @returns {Object}
@@ -227,7 +308,7 @@ module.exports = (core) => {
 				}),
 
 		/**
-		 * Reads directory
+		 * Reads directory.
 		 * @param {String} root The file path from client
 		 * @param {Object} [options={}] Options
 		 * @returns {Object[]}
@@ -246,10 +327,10 @@ module.exports = (core) => {
 					}),
 
 		/**
-		 * Reads file stream
+		 * Reads file stream.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {stream.Readable}
+		 * @returns {Stream.Readable}
 		 */
 		readfile: (vfs) =>
 			(file, options = {}) =>
@@ -271,7 +352,7 @@ module.exports = (core) => {
 					}),
 
 		/**
-		 * Creates directory
+		 * Creates directory.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
 		 * @returns {Boolean}
@@ -289,11 +370,12 @@ module.exports = (core) => {
 		}),
 
 		/**
-		 * Writes file stream
+		 * Writes file stream.
+		 *
 		 * @param {String} file The file path from client
-		 * @param {stream.Readable} data The stream
+		 * @param {Stream.Readable} data The stream
 		 * @param {Object} [options={}] Options
-		 * @returns {Promise<boolean, Error>}
+		 * @returns {Promise<Boolean, Error>}
 		 */
 		writefile: (vfs) =>
 			(file, data, options = {}) =>
@@ -318,11 +400,14 @@ module.exports = (core) => {
 								write();
 							}
 						})
+						// We are not worried about the file not existing, so if that is
+						// the error message, we can just go ahead and write to create it.
 						.catch((err) => (err.code === "ENOENT" ? write() : reject(err)));
 				}),
 
 		/**
-		 * Renames given file or directory
+		 * Renames given file or directory.
+		 *
 		 * @param {String} src The source file path from client
 		 * @param {String} dest The destination file path from client
 		 * @param {Object} [options={}] Options
@@ -331,7 +416,8 @@ module.exports = (core) => {
 		rename: crossWrapper("rename"),
 
 		/**
-		 * Copies given file or directory
+		 * Copies given file or directory.
+		 *
 		 * @param {String} src The source file path from client
 		 * @param {String} dest The destination file path from client
 		 * @param {Object} [options={}] Options
@@ -348,7 +434,7 @@ module.exports = (core) => {
 		unlink: wrapper("remove"),
 
 		/**
-		 * Searches for files and folders
+		 * Searches for files and folders.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
 		 * @returns {Boolean}
@@ -382,7 +468,7 @@ module.exports = (core) => {
 					}),
 
 		/**
-		 * Touches a file
+		 * Touches a file.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
 		 * @returns {Boolean}
@@ -390,13 +476,61 @@ module.exports = (core) => {
 		touch: wrapper("ensureFile"),
 
 		/**
-		 * Gets the real filesystem path (internal only)
-		 * @param {String} file The file path from client
+		 * Compresses or decompresses a given selection.
+		 * @param {Array} selection The selection from the client
 		 * @param {Object} [options={}] Options
-		 * @returns {String}
+		 * @returns {Promise<Boolean, Error>}
 		 */
-		realpath: (vfs) =>
-			(file, options = {}) =>
-				Promise.resolve(getRealPath(core, options.session, vfs.mount, file)),
+		archive: (vfs) =>
+			async (selection, options = {}) => {
+				const realPaths = selection.map(
+					(file) => getRealPath(core, options.session, vfs.mount, file)
+				);
+
+				const action = options.action || "compress";
+				switch (action) {
+					case "compress": {
+						// Define the archive instance
+						const zipfile = new yazl.ZipFile();
+
+						// Create a stream for the archive output
+						// IDEA: Dialog for the archive name on the client side?
+						const output = fs.createWriteStream(realPaths[0] + ".zip");
+						zipfile.outputStream.pipe(output);
+
+						// Add the files to the archive
+						for (const realPath of realPaths) {
+							await addToArchive(zipfile, realPath);
+
+							// Delete the original file
+							// fs.unlink(realPath);
+						}
+
+						zipfile.end();
+
+						break;
+					}
+					case "extract":
+						for (const realPath of realPaths) {
+							// Remove the `.zip` extension from the path
+							// IDEA: Dialog for the target name on the client side?
+							const target = realPath.split(".").slice(0, -1).join(".");
+
+							// Extract the archive
+							await extract(realPath, { dir: target });
+
+							// Delete the archive file
+							// fs.unlink(realPath);
+						}
+
+						break;
+					default:
+						return Promise.reject(
+							new Error(`Unknown archive action: '${action}'`)
+						);
+				}
+
+				return Promise.resolve(true);
+			}
 	};
 };

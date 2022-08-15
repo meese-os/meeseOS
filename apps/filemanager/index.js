@@ -376,6 +376,8 @@ const createWindow = (core, proc) => {
 	const onHistoryPush = (file) => wired.history.push(file);
 	const onHistoryClear = () => wired.history.clear();
 	const onMenu = (props, args) => createMenu(props, args || state.currentFile);
+	const onMenuCompress = (files) => vfs.archive(files, "compress");
+	const onMenuExtract = (files) => vfs.archive(files, "extract");
 	const onMenuUpload = (...args) => vfs.upload(...args);
 	const onMenuMkdir = () => dialog("mkdir", vfs.action, state.currentPath);
 	const onMenuQuit = () => proc.destroy();
@@ -424,6 +426,8 @@ const createWindow = (core, proc) => {
 		.on("filemanager:menu:rename", onMenuRename)
 		.on("filemanager:menu:delete", onMenuDelete)
 		.on("filemanager:menu:download", onMenuDownload)
+		.on("filemanager:menu:extract", onMenuExtract)
+		.on("filemanager:menu:compress", onMenuCompress)
 		.render(($content, win) => (wired = render($content, win)));
 };
 

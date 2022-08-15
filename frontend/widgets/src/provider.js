@@ -130,6 +130,7 @@ export default class WidgetServiceProvider {
 			desktop.addContextMenuEntries(() => {
 				const widgets = this.core.make("meeseOS/widgets");
 
+				// TODO: In the parent, implement the "Add Shortcut" menu item
 				return [
 					{
 						label: "Add Widget",

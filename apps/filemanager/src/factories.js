@@ -35,9 +35,26 @@ import {
 	isSpecialFile,
 } from "./utils.js";
 import dateformat from "dateformat";
+import { fileTypeFromBuffer } from "file-type";
 
 /**
- * Mount view rows factory
+ * The file types supported by "file-type" that are considered to be archives.
+ */
+const archiveTypes = [
+	"7z",
+	"ar",
+	"bz2",
+	"gz",
+	"lz",
+	"lzh",
+	"rar",
+	"tar",
+	"zip",
+	"zst",
+];
+
+/**
+ * Mount view rows factory.
  * @param {Core} core MeeseOS Core instance reference
  * @returns {Function} The mount view rows factory
  */
@@ -58,8 +75,7 @@ export const mountViewRowsFactory = (core) => {
 };
 
 /**
- * File view columns factory
- *
+ * File view columns factory.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @returns {Function} The file view columns factory
@@ -101,8 +117,7 @@ export const listViewColumnFactory = (core, proc) => {
 };
 
 /**
- * File view rows factory
- *
+ * File view rows factory.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @returns {Function} The file view rows factory
@@ -147,7 +162,7 @@ export const listViewRowFactory = (core, proc) => {
 };
 
 /**
- * VFS action factory
+ * VFS action factory.
  *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
@@ -188,33 +203,33 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 	};
 
 	const writeRelative = (file) => {
-		const d = dialog("progress", file);
+		const popup = dialog("progress", file);
+		const path = pathJoin(state.currentPath.path, file.name);
 
 		return vfs
 			.writefile(
-				{
-					path: pathJoin(state.currentPath.path, file.name),
-				},
+				{ path },
 				file,
 				{
 					pid: proc.pid,
-					onProgress: (ev, p) => d.setProgress(p),
+					onProgress: (ev, progress) => popup.setProgress(progress),
 				}
 			)
 			.then((result) => {
-				d.destroy();
+				popup.destroy();
 				return result;
 			})
 			.catch((error) => {
-				d.destroy();
+				popup.destroy();
 				throw error;
 			});
 	};
 
 	const uploadBrowserFiles = (files) => {
-		Promise.all(files.map(writeRelative))
-			.then(() => refresh(files[0].name)) // FIXME: Select all ?
-			.catch((error) => dialog("error", error, "Failed to upload file(s)"));
+		Promise.all(files.map((file) => writeRelative(file)
+			.then(() => refresh(file.name))
+			.catch((error) => dialog("error", error, "Failed to upload file"))
+		));
 	};
 
 	const uploadVirtualFile = (data) => {
@@ -270,11 +285,18 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 		}
 	};
 
+	const archive = (selection, action) =>
+		vfs.archive(selection, { action });
+
 	const upload = () =>
 		triggerBrowserUpload((files) => {
-			writeRelative(files[0])
-				.then(() => refresh(files[0].name))
-				.catch((error) => dialog("error", error, "Failed to upload file(s)"));
+			// Converts the FileList to an array for the map function below
+			const fileArray = Array.from(files);
+
+			fileArray.map((file) => writeRelative(file)
+				.then(() => refresh(file.name))
+				.catch((error) => dialog("error", error, "Failed to upload file"))
+			);
 		});
 
 	// TODO: Trigger this via keyboard shortcut
@@ -307,6 +329,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 	return {
 		download: (files) => files.forEach((file) => vfs.download(file)),
 		action,
+		archive,
 		upload,
 		refresh,
 		drop,
@@ -316,7 +339,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 };
 
 /**
- * Clipboard action factory
+ * Clipboard action factory.
  *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} state
@@ -349,7 +372,7 @@ export const clipboardActionFactory = (core, state, vfs) => {
 };
 
 /**
- * Dialog factory
+ * Dialog factory.
  *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
@@ -467,7 +490,7 @@ export const dialogFactory = (core, proc, win) => {
 };
 
 /**
- * Creates menus
+ * Creates menus.
  *
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
@@ -476,6 +499,7 @@ export const dialogFactory = (core, proc, win) => {
  */
 export const menuFactory = (core, proc, win) => {
 	const fs = core.make("meeseOS/fs");
+	const vfs = core.make("meeseOS/vfs");
 	const clipboard = core.make("meeseOS/clipboard");
 	const contextmenu = core.make("meeseOS/contextmenu");
 
@@ -497,7 +521,6 @@ export const menuFactory = (core, proc, win) => {
 		return [].concat(...result);
 	};
 
-	// TODO: Add "Upload" item to right click, not exclusively in the top bar menu
 	const createFileMenu = () => [
 		{ label: "Upload", onclick: () => win.emit("filemanager:menu:upload") },
 		{
@@ -527,25 +550,46 @@ export const menuFactory = (core, proc, win) => {
 		const hasValidFile = items.some((file) => !isSpecialFile(file.filename));
 		const isDirectory = singleFile && item.isDirectory;
 
-		const openMenu = isDirectory ?
+		const buffer = await vfs.readfile(item.path, "arraybuffer");
+		const fileType = singleFile && !isDirectory
+			? await fileTypeFromBuffer(buffer)
+			: null;
+		const isArchive = fileType && archiveTypes.includes(fileType.ext);
+
+		const openMenu = isArchive ?
 			[
 				{
-					label: "Go",
-					disabled: !items.length,
-					onclick: () => emitter("filemanager:navigate"),
+					label: "Extract archive",
+					onclick: () => emitter("filemanager:menu:extract"),
 				},
-			] : [
-				{
-					label: "Open",
-					disabled: !items.length,
-					onclick: () => emitter("filemanager:open"),
-				},
-				{
-					label: "Open with...",
-					disabled: !items.length,
-					onclick: () => emitter("filemanager:openWith"),
-				},
-			];
+			] :
+			isDirectory ?
+				[
+					{
+						label: "Go",
+						disabled: !items.length,
+						onclick: () => emitter("filemanager:navigate"),
+					},
+					{
+						label: "Compress",
+						onclick: () => emitter("filemanager:menu:compress"),
+					},
+				] : [
+					{
+						label: "Open",
+						disabled: !items.length,
+						onclick: () => emitter("filemanager:open"),
+					},
+					{
+						label: "Open with...",
+						disabled: !items.length,
+						onclick: () => emitter("filemanager:openWith"),
+					},
+					{
+						label: "Compress",
+						onclick: () => emitter("filemanager:menu:compress"),
+					},
+				];
 
 		const clipboardMenu = [
 			{

@@ -74,7 +74,7 @@ const logger = consola.withTag("Filesystem");
  */
 class Filesystem {
 	/**
-	 * Creates a new instance
+	 * Creates a new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {FilesystemOptions} [options] Instance options
 	 */
@@ -110,7 +110,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Destroys the instance
+	 * Destroys the instance.
 	 * @returns {Promise<undefined>}
 	 */
 	async destroy() {
@@ -126,7 +126,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Initializes the Filesystem
+	 * Initializes the Filesystem.
 	 * @returns {Promise<boolean>}
 	 */
 	async init() {
@@ -135,12 +135,10 @@ class Filesystem {
 			...this.options.adapters,
 		};
 
-		this.adapters = Object.keys(adapters).reduce((result, iter) => {
-			return {
-				[iter]: adapters[iter](this.core),
-				...result,
-			};
-		}, {});
+		this.adapters = Object.keys(adapters).reduce((result, iter) => ({
+			[iter]: adapters[iter](this.core),
+			...result,
+		}), {});
 
 		// Routes
 		const { router, methods } = vfs(this.core);
@@ -160,7 +158,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Gets the MIME type of a file
+	 * Gets the MIME type of a file.
 	 * @param {String} filename Input filename or path
 	 * @returns {String}
 	 */
@@ -176,9 +174,9 @@ class Filesystem {
 	}
 
 	/**
-	 * Crates a VFS request
-	 * @param {Request|object} req HTTP Request object
-	 * @param {Response|object} [res] HTTP Response object
+	 * Crates a VFS request.
+	 * @param {Request|Object} req HTTP Request object
+	 * @param {Response|Object} [res] HTTP Response object
 	 * @returns {Promise<*>}
 	 */
 	request(name, req, res = {}) {
@@ -186,7 +184,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Performs a VFS request with simulated HTTP request
+	 * Performs a VFS request with simulated HTTP request.
 	 * @param {FilesystemCallOptions} options Request options
 	 * @param {*} ...args Arguments to pass to VFS method
 	 * @returns {Promise<*>}
@@ -221,7 +219,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Creates realpath VFS request
+	 * Creates realpath VFS request.
 	 * @param {String} filename The path
 	 * @param {AuthUserProfile} [user] User session object
 	 * @returns {Promise<string>}
@@ -241,7 +239,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Mounts given mountpoint
+	 * Mounts given mountpoint.
 	 * @param {Mountpoint} mount Mountpoint
 	 * @returns {Mountpoint} the mountpoint
 	 */
@@ -263,7 +261,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Unmounts given mountpoint
+	 * Unmounts given mountpoint.
 	 * @param {Mountpoint} mount Mountpoint
 	 * @returns {Promise<boolean>}
 	 */
@@ -286,7 +284,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Set up a watch for given mountpoint
+	 * Set up a watch for given mountpoint.
 	 * @param {Mountpoint} mountpoint The mountpoint
 	 * @returns {Promise<undefined>}
 	 */
@@ -309,7 +307,7 @@ class Filesystem {
 	}
 
 	/**
-	 * Internal method for setting up watch for given mountpoint adapter
+	 * Internal method for setting up watch for given mountpoint adapter.
 	 * @param {Mountpoint} mountpoint The mountpoint
 	 * @param {FilesystemAdapter} adapter The adapter
 	 * @returns {Promise<undefined>}

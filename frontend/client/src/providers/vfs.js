@@ -64,6 +64,7 @@ import Filesystem from "../filesystem";
  * @property {Function} download
  * @property {Function} search
  * @property {Function} touch
+ * @property {Function} archive
  */
 
 /**

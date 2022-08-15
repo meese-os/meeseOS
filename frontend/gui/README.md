@@ -15,3 +15,6 @@ The MeeseOS distribution uses the UMD build to load _stylesheets_, and everythin
 So effectively you need to run both in order for this to work while developing.
 
 _The UMD javascript bundle is currently only used for environments like Codepen._
+
+## TODO
+- Add GUI testing

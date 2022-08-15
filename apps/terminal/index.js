@@ -189,7 +189,7 @@ const createTerminal = (core, proc, index) => {
 	win.on("blur", () => term.blur());
 	win.on("render", (win) => createConnection(core, proc, win, term, fit));
 
-	proc.render(render);
+	win.render(render);
 };
 
 // Callback for launching application

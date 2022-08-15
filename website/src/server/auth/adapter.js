@@ -16,6 +16,7 @@ module.exports = (core, config) => ({
 	async login(req, res) {
 		const { username, password } = req.body;
 
+		// TODO: Also make this dependent on the configuration
 		// The guest user's credentials will be passed automatically
 		// when the "Login as Guest" button is clicked
 		if (username === "guest" && password === "guest") {

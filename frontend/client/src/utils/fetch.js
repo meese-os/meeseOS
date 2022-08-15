@@ -29,12 +29,14 @@
  */
 
 /**
- * Creates URL request path
+ * Creates URL request path.
+ * @param {Object} data
+ * @returns {String}
  */
 const encodeQueryData = (data) =>
 	Object.keys(data)
-		.filter((k) => typeof data[k] !== "object")
-		.map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(data[k]))
+		.filter((key) => typeof data[key] !== "object")
+		.map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
 		.join("&");
 
 const bodyTypes = [
@@ -44,10 +46,15 @@ const bodyTypes = [
 	window.File,
 	window.URLSearchParams,
 	window.FormData,
-].filter((t) => Boolean(t));
+].filter((type) => Boolean(type));
 
 /**
- * Creates fetch() options
+ * Creates fetch() options.
+ *
+ * @param {String} url
+ * @param {Object} options
+ * @param {String} type
+ * @returns {Array}
  */
 const createFetchOptions = (url, options, type) => {
 	const fetchOptions = {
@@ -75,7 +82,7 @@ const createFetchOptions = (url, options, type) => {
 
 	if (type === "json" && hasBody && !stringBody) {
 		if (!(fetchOptions.body instanceof FormData)) {
-			const found = bodyTypes.find((t) => fetchOptions.body instanceof t);
+			const found = bodyTypes.find((type) => fetchOptions.body instanceof type);
 			if (!found) {
 				fetchOptions.body = JSON.stringify(fetchOptions.body);
 			}
@@ -88,6 +95,9 @@ const createFetchOptions = (url, options, type) => {
 /**
  * This is a fetch polyfill for XMLHttpRequest.
  * Mainly used to get upload progress indicator.
+ * @param {String} target The target URL
+ * @param {Object} fetchOptions The request options
+ * @returns {Promise}
  */
 const fetchXhr = (target, fetchOptions) =>
 	new Promise((resolve, reject) => {
@@ -131,15 +141,15 @@ const fetchXhr = (target, fetchOptions) =>
 		);
 		req.addEventListener("abort", onError("XHR request was aborted"));
 		req.open(fetchOptions.method, target);
-		Object.entries(fetchOptions.headers).forEach(([k, v]) =>
-			req.setRequestHeader(k, v)
+		Object.entries(fetchOptions.headers).forEach(([key, val]) =>
+			req.setRequestHeader(key, val)
 		);
 		req.responseType = fetchOptions.responseType || "";
 		req.send(fetchOptions.body);
 	});
 
 /**
- * Make a HTTP request
+ * Make an HTTP request.
  *
  * @param {String} url The endpoint
  * @param {Options} [options] fetch options

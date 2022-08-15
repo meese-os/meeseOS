@@ -39,3 +39,5 @@ To set up a default set of widgets in the user settings, modify your client conf
 ```
 
 A contextmenu entry on the desktop is automatically added so users can add these themselves.
+
+TODO: Figure out how to move the widgets on mobile.

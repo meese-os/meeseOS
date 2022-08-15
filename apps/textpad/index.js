@@ -140,7 +140,7 @@ const createMainWindow = (core, proc) => {
 	win.on("destroy", () => proc.destroy());
 	win.on("render", (win) => win.focus());
 
-	proc.render(($content, win) => createApplication(core, proc, win, $content));
+	win.render(($content, win) => createApplication(core, proc, win, $content));
 };
 
 const createProcess = (core, args, options, metadata) => {

@@ -70,6 +70,7 @@ import systemAdapter from "./adapters/vfs/system";
  * Filesystem Adapter Methods
  * @todo: typedef
  * @typedef {Object} FilesystemAdapterMethods
+ * @property {Function} capabilities
  * @property {Function} readdir
  * @property {Function} readfile
  * @property {Function} writefile
@@ -84,6 +85,7 @@ import systemAdapter from "./adapters/vfs/system";
  * @property {Function} download
  * @property {Function} search
  * @property {Function} touch
+ * @property {Function} archive
  */
 
 /**
@@ -104,7 +106,7 @@ import systemAdapter from "./adapters/vfs/system";
  */
 export default class Filesystem extends EventEmitter {
 	/**
-	 * Create filesystem manager
+	 * Create filesystem manager.
 	 *
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {FilesystemOptions} [options] Options
@@ -150,7 +152,7 @@ export default class Filesystem extends EventEmitter {
 		this.options = {};
 
 		/**
-		 * A wrapper for VFS method requests
+		 * A wrapper for VFS method requests.
 		 * @type {{key: Function}}
 		 * @readonly
 		 */
@@ -163,7 +165,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Mounts all configured mountpoints
+	 * Mounts all configured mountpoints.
 	 * @param {Boolean} [stopOnError=true] Stop on first error
 	 * @returns {Promise<boolean[]>}
 	 */
@@ -181,7 +183,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Adds a new mountpoint
+	 * Adds a new mountpoint.
 	 * @param {FilesystemMountpoint} props Mountpoint props
 	 * @param {Boolean} [automount=true] Automount after creation
 	 * @returns {Promise<boolean>}
@@ -198,7 +200,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Mount given mountpoint
+	 * Mount given mountpoint.
 	 * @param {String|FilesystemMountpoint} mountpoint Mountpoint name or object
 	 * @throws {Error} On invalid name or if already mounted
 	 * @returns {Promise<boolean>}
@@ -212,7 +214,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Unmount given filesystem
+	 * Unmount given filesystem.
 	 * @param {String} name Filesystem name
 	 * @throws {Error} On invalid name or if already unmounted
 	 * @returns {Promise<boolean>}
@@ -222,7 +224,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Internal wrapper for mounting/unmounting
+	 * Internal wrapper for mounting/unmounting.
 	 *
 	 * @private
 	 * @param {FilesystemMountpoint} mountpoint The mountpoint
@@ -238,7 +240,7 @@ export default class Filesystem extends EventEmitter {
 				mountpoint.mounted = !unmount;
 
 				this.emit(eventName, mountpoint);
-				this.core.emit("meeseOS/fs:" + coreEventName);
+				this.core.emit(`meeseOS/fs:${coreEventName}`);
 			}
 
 			return result;
@@ -246,7 +248,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Internal wrapper for mounting/unmounting by name
+	 * Internal wrapper for mounting/unmounting by name.
 	 *
 	 * @private
 	 * @param {String} name Mountpoint name
@@ -271,8 +273,8 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Gets the proxy for VFS methods
-	 * FIXME: Not correct type, but works for documentation atm
+	 * Gets the proxy for VFS methods.
+	 * @todo: Not the correct type
 	 * @returns {FilesystemAdapterMethods} A map of VFS functions
 	 */
 	request() {
@@ -280,7 +282,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Perform a VFS method request
+	 * Perform a VFS method request.
 	 *
 	 * @private
 	 * @param {String} method VFS method name
@@ -294,8 +296,8 @@ export default class Filesystem extends EventEmitter {
 			this.core.emit(`${ev}:done`, ...args);
 
 			if (!error && this.core.config("vfs.watch")) {
-				const eva = createWatchEvents(method, args);
-				eva.forEach(([e, a]) => this.core.emit(e, a));
+				const events = createWatchEvents(method, args);
+				events.forEach(([event, args]) => this.core.emit(event, args));
 			}
 		};
 
@@ -313,7 +315,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Request action wrapper
+	 * Request action wrapper.
 	 *
 	 * @private
 	 * @param {String} method
@@ -339,6 +341,13 @@ export default class Filesystem extends EventEmitter {
 							: result;
 					});
 			}
+		} else if (method === "archive") {
+			const [selection] = args;
+
+			const mount = this.getMountpointFromPath(selection[0].path);
+			if (!mount) return Promise.reject(new Error("No selection was specified"));
+
+			return VFS[method](mount._adapter, mount)(...args);
 		}
 
 		const [file] = args;
@@ -349,7 +358,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Creates a new mountpoint based on given properties
+	 * Creates a new mountpoint based on given properties.
 	 * @param {FilesystemMountpoint} props Properties
 	 * @returns {FilesystemMountpoint}
 	 */
@@ -381,7 +390,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Gets mountpoint from given path
+	 * Gets mountpoint from given path.
 	 * @param {String|VFSFile} file The file
 	 * @returns {FilesystemMountpoint|null}
 	 */
@@ -405,7 +414,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Gets all mountpoints
+	 * Gets all mountpoints.
 	 * @param {Boolean} [all=false] If true, also returns unmounted mountpoints
 	 * @returns {FilesystemMountpoint[]}
 	 */
@@ -437,7 +446,7 @@ export default class Filesystem extends EventEmitter {
 	}
 
 	/**
-	 * Gets configured mountpoints
+	 * Gets configured mountpoints.
 	 * @returns {FilesystemMountpoint[]}
 	 */
 	_getConfiguredMountpoints() {

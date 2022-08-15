@@ -60,6 +60,7 @@ export const usingPositiveButton = (cb) =>
 export const triggerBrowserUpload = (cb) => {
 	const field = document.createElement("input");
 	field.type = "file";
+	field.multiple = true;
 	field.onchange = () => {
 		if (field.files.length > 0) {
 			cb(field.files);

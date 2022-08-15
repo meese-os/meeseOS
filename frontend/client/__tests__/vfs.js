@@ -47,6 +47,12 @@ const callOther = (method, ...args) =>
 	VFS[method](testAdapter, otherMount)(...args);
 
 describe("VFS", () => {
+	test("#capabilities", () => {
+    return expect(call("capabilities", "null:/"))
+      .resolves
+      .toMatchObject({});
+  });
+
 	test("#readdir", () => {
 		return expect(call("readdir", "null:/")).resolves.toMatchObject([
 			{
@@ -81,7 +87,7 @@ describe("VFS", () => {
 		).resolves.toBeInstanceOf(ArrayBuffer);
 	});
 
-	test("writefile - blob", () => {
+	test("#writefile - blob", () => {
 		return expect(
 			call("writefile", "null:/filename", new Blob())
 		).resolves.toBe(-1);
@@ -157,5 +163,27 @@ describe("VFS", () => {
 
 	test("#download", () => {
 		return expect(call("download", "null:/")).resolves.toBe(undefined);
+	});
+
+	test("#archive - compress file", () => {
+		return expect(call("archive", ["null:/filename"])).resolves.toBe(false);
+	});
+
+	test("#archive - decompress file", () => {
+		return expect(call("archive", ["null:/filename"])).resolves.toBe(false);
+	});
+
+	test("#archive - compress directory", () => {
+		return expect(call("archive", ["null:/directory"])).resolves.toBe(false);
+	});
+
+	test("#archive - decompress directory", () => {
+		return expect(call("archive", ["null:/directory"])).resolves.toBe(false);
+	});
+
+	test("#archive - compress multiple selections", () => {
+		return expect(
+			call("archive", ["null:/selection1", "null:/selection2"])
+		).resolves.toBe(false);
 	});
 });

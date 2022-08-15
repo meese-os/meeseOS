@@ -72,6 +72,10 @@ const createView = (props) => {
 		);
 	};
 
+	// TODO: Allow horizontal resizing here
+	// IDEA: https://stackoverflow.com/a/53220241/6456163
+	// or https://stackoverflow.com/a/63195505/6456163
+	// or https://stackoverflow.com/a/33523184/6456163
 	const pane = (index, col) => h(
 		"div",
 		{
@@ -103,6 +107,7 @@ const createView = (props) => {
 	return h(
 		"div",
 		{
+			// TODO: Allow clicking the column name to sort by that column
 			class: "meeseOS-gui-list-view-wrapper",
 			onscroll: (ev) => {
 				debounceScroll = clearTimeout(debounceScroll);
@@ -136,13 +141,22 @@ export const ListView = (props) => h(
 
 export const listView = {
 	component: (state, actions) => {
-		// TODO: Ability to deselect with control and shift key
-		const createSelection = (index) => state.selectedIndex.indexOf(index) === -1
-			? [...state.selectedIndex, index]
-			: state.selectedIndex;
+		const createSelection = (index) => {
+			if (!state.multiselect) return state.selectedIndex;
+
+			const foundIndex = state.selectedIndex.indexOf(index);
+			const newSelection = [...state.selectedIndex];
+			if (foundIndex === -1) {
+				newSelection.push(index);
+			} else {
+				newSelection.splice(foundIndex, 1);
+			}
+
+			return newSelection;
+		};
 
 		/**
-		 * Creates a range of indexes from start to end
+		 * Creates a range of indexes from start to end.
 		 * @param {Number} start
 		 * @param {Number} end
 		 * @returns {Array}
@@ -183,7 +197,7 @@ export const listView = {
 
 			// Store the previous index in the state to use for calculating the
 			// range if the shift key is pressed
-			if (state.multiselect) state.previousSelectedIndex = index;
+			if (state.multiselect) actions.setPreviousSelectedIndex(index);
 			return { selected, data };
 		};
 
@@ -248,6 +262,7 @@ export const listView = {
 		setColumns: (columns) => ({ columns }),
 		setScrollTop: (scrollTop) => ({ scrollTop }),
 		setSelectedIndex: (selectedIndex) => ({ selectedIndex }),
+		setPreviousSelectedIndex: (previousSelectedIndex) => ({ previousSelectedIndex }),
 		...actions || {}
 	}),
 };

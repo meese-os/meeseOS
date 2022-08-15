@@ -27,6 +27,7 @@
  * @author  Anders Evenrud <andersevenrud@gmail.com>
  * @license Simplified BSD License
  */
+
 import Cookies from "js-cookie";
 import localStorageAuth from "./adapters/auth/localstorage";
 import logger from "./logger";
@@ -164,9 +165,6 @@ export default class Auth {
 	 * @param {Boolean} [reload=false] Reload afterwards
 	 */
 	async shutdown(reload = false) {
-		// Destroys the current session
-		await this.core.make("meeseOS/session").destroy();
-
 		try {
 			this.core.destroy();
 		} catch (e) {
@@ -204,11 +202,9 @@ export default class Auth {
 			return this.login(login);
 		} else if (settings.enabled) {
 			const cookie = Cookies.get(settings.name);
-			// IDEA: Transition to a password hash in the cookie, not the actual password
-
 			if (cookie) {
 				if (this.core.config("development")) {
-					logger.warn("Authentication cookie:", cookie);
+					logger.debug("Authentication cookie:", cookie);
 				}
 
 				return this.login(JSON.parse(cookie));
