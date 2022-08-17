@@ -299,7 +299,6 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 			);
 		});
 
-	// TODO: Trigger this via keyboard shortcut
 	const paste = (move, currentPath) =>
 		({ items, callback }) => {
 			const promises = items.map((item) => {

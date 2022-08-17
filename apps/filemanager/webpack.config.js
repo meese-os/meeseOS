@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -15,6 +16,14 @@ module.exports = {
 	mode,
 	devtool: "source-map",
 	entry: [path.resolve(__dirname, "index.js")],
+	resolve: {
+		fallback: {
+			url: require.resolve("url"),
+			fs: require.resolve("graceful-fs"),
+			buffer: require.resolve("buffer/"),
+			stream: require.resolve("stream-browserify"),
+		},
+	},
 	externals: {
 		meeseOS: "MeeseOS",
 	},
@@ -28,6 +37,24 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
 			chunkFilename: "[id].css",
+		}),
+		// https://stackoverflow.com/a/71129826/6456163
+		new webpack.ProvidePlugin({
+			process: "process/browser",
+			Buffer: ["buffer", "Buffer"],
+		}),
+		new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
+			const mod = resource.request.replace(/^node:/, "");
+			switch (mod) {
+				case "buffer":
+					resource.request = "buffer";
+					break;
+				case "stream":
+					resource.request = "readable-stream";
+					break;
+				default:
+					throw new Error(`Not found ${mod}`);
+			}
 		}),
 		...plugins,
 	],
@@ -55,6 +82,9 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules\/(?!@meeseOS)/,
+				resolve: {
+					fullySpecified: false,
+				},
 				use: {
 					loader: "babel-loader",
 				},

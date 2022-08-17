@@ -11,7 +11,6 @@ const NavItem = ({ name, href }) => {
 		<li className="nav-item">
 			<a
 				className="nav-link lead"
-				// TODO: Test for PDF
 				href={href}
 				target={isPdf ? "_blank" : "_self"}
 				rel={isPdf ? "noreferrer noopener" : ""}
