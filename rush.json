@@ -553,6 +553,10 @@
       "projectFolder": "apps/uptime-monitor"
     },
     {
+      "packageName": "@meeseOS/We10X-icons",
+      "projectFolder": "frontend/We10X-icons"
+    },
+    {
       "packageName": "@meeseOS/website",
       "projectFolder": "website"
     },

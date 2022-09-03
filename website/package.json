@@ -67,6 +67,7 @@
     "@meeseOS/terminal": "workspace:*",
     "@meeseOS/textpad": "workspace:*",
     "@meeseOS/uptime-monitor": "workspace:*",
+    "@meeseOS/We10X-icons": "workspace:*",
     "@meeseOS/widgets": "workspace:*",
     "@meeseOS/wireless-tools-provider": "workspace:*",
     "dotenv": "^16.0.0",

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="b" x1="399.57" x2="399.57" y1="545.8" y2="517.8" gradientTransform="matrix(2.1429,0,0,2.1429,-826.36,-1107.5)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#3889e9" offset="0"/>
+   <stop stop-color="#5ea5fb" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient1053-9" x1="68" x2="128" y1="62" y2="2" gradientTransform="matrix(.91665 0 0 .91665 -10.505 24.367)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#e0e4e9" offset="0"/>
+   <stop stop-color="#fefeff" offset="1"/>
+  </linearGradient>
+  <filter id="filter957" x="-.2325" y="-.051667" width="1.465" height="1.1033" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="0.775"/>
+  </filter>
+  <linearGradient id="linearGradient911" x1="23" x2="23" y1="14" y2="50" gradientTransform="matrix(1.0312 0 0 1.0312 46.328 20.701)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient880"/>
+  <linearGradient id="linearGradient880" x1="15.938" x2="44.062" y1="44.845" y2="44.845" gradientTransform="rotate(2.3768,118.86,41.374)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#f41e00" offset="0"/>
+   <stop stop-color="#00d500" offset="1"/>
+  </linearGradient>
+  <filter id="filter961" x="-.2325" y="-.051667" width="1.465" height="1.1033" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="0.775"/>
+  </filter>
+  <linearGradient id="linearGradient919" x1="41" x2="41" y1="14" y2="50" gradientTransform="matrix(1.0312 0 0 1.0312 46.328 20.701)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient880"/>
+ </defs>
+ <circle cx="164.7" cy="32.044" r="30.001" fill-opacity="0" stroke-width="1.5715"/>
+ <circle cx="32.02" cy="32.044" r="0" fill="url(#b)" stroke-width="1.5715"/>
+ <g transform="translate(-47.327 -21.7)">
+  <rect x="51.827" y="26.2" width="55" height="55" ry="2.75" fill="url(#linearGradient1053-9)" stroke-width="3.4646"/>
+  <rect transform="matrix(1.0312 0 0 1.0312 49.2 19.821)" x="16.215" y="14.853" width="8" height="36" rx="2" ry="2" filter="url(#filter957)" opacity=".15" style="paint-order:stroke fill markers"/>
+  <rect x="65.921" y="35.139" width="8.2499" height="37.124" rx="2.0625" ry="2.0625" fill="url(#linearGradient911)" stroke-width="1.0312" style="paint-order:stroke fill markers"/>
+  <rect transform="matrix(1.0312 0 0 1.0312 49.2 19.821)" x="34.215" y="14.853" width="8" height="36" rx="2" ry="2" filter="url(#filter961)" opacity=".15" style="paint-order:stroke fill markers"/>
+  <rect x="84.483" y="35.139" width="8.2499" height="37.124" rx="2.0625" ry="2.0625" fill="url(#linearGradient919)" stroke-width="1.0312" style="paint-order:stroke fill markers"/>
+  <g stroke-width="1.0312">
+   <rect x="65.921" y="45.451" width="8.2499" height="18.562" rx="0" ry="0" opacity=".35" style="paint-order:stroke fill markers"/>
+   <rect x="84.483" y="45.451" width="8.2499" height="18.562" rx="0" ry="0" opacity=".15" style="paint-order:stroke fill markers"/>
+   <rect x="84.483" y="45.451" width="8.2499" height="18.562" rx="0" ry="0" opacity=".35" style="paint-order:stroke fill markers"/>
+   <rect x="59.734" y="35.139" width="2.0625" height="37.124" rx="1.0312" ry="1.0312" opacity=".15" style="paint-order:stroke fill markers"/>
+   <rect x="78.296" y="35.139" width="2.0625" height="37.124" rx="1.0312" ry="1.0312" opacity=".15" style="paint-order:stroke fill markers"/>
+   <rect x="96.858" y="35.139" width="2.0625" height="37.124" rx="1.0312" ry="1.0312" opacity=".15" style="paint-order:stroke fill markers"/>
+  </g>
+  <g fill="#808080" stroke-width="1.0312">
+   <rect x="58.702" y="54.732" width="4.1249" height="8.2499" rx="1.0312" ry=".91665" style="paint-order:stroke fill markers"/>
+   <rect x="77.265" y="43.388" width="4.1249" height="8.2499" rx="1.0312" ry=".91665" style="paint-order:stroke fill markers"/>
+   <rect x="95.827" y="50.607" width="4.1249" height="8.2499" rx="1.0312" ry=".91665" style="paint-order:stroke fill markers"/>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <linearGradient id="linearGradient1005-5" x1="3.7292" x2="12.359" y1="13.306" y2="4.676" gradientTransform="matrix(.99999 0 0 .99999 1.7979 1.4147)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#232223" offset="0"/>
+   <stop stop-color="#49484d" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-1.8332 -1.408)">
+  <path d="m18.237 9.8747c0 0.95155-0.16749 1.8638-0.47464 2.7094-0.2135 0.58769-0.49437 1.1433-0.83392 1.6572-0.14222 0.21608-0.29515 0.42476-0.45747 0.62529-0.51964 0.6418-1.1372 1.2007-1.8304 1.6542-0.2553 0.16717-0.52065 0.3201-0.79537 0.45712-1.0668 0.53388-2.271 0.83421-3.5457 0.83421-1.2745 0-2.4788-0.30033-3.5457-0.83424-0.27475-0.13705-0.54041-0.28996-0.79571-0.45712-0.70207-0.45971-1.327-1.0274-1.8508-1.6798-0.16262-0.20215-0.31523-0.41275-0.45747-0.63077-0.33047-0.50538-0.6042-1.0507-0.81349-1.627-0.30711-0.84529-0.47429-1.7572-0.47429-2.7086 0-4.3839 3.5536-7.9375 7.9375-7.9375 2.2004 0 4.1915 0.89548 5.6295 2.3416 0.41437 0.41661 0.78275 0.87929 1.0963 1.3794 0.29644 0.47106 0.54427 0.97581 0.73705 1.5067 0.30719 0.84559 0.47466 1.7579 0.47466 2.7094z" fill="url(#linearGradient1005-5)" stroke-width=".031007"/>
+  <path d="m14.666 13.708c0.14657 0 0.26458-0.11801 0.26458-0.26459v-4.498c0-0.14657-0.11801-0.26459-0.26458-0.26459h-1.5875v3.7043c0 0.14658-0.11801 0.2646-0.26458 0.2646h-2.6459c-0.14657 0-0.26459-0.11801-0.26459-0.2646v-3.7043h-1.5875c-0.14657 0-0.26459 0.11801-0.26459 0.26459v4.498c0 0.14657 0.11801 0.26459 0.26459 0.26459z" fill="#fdc409" style="paint-order:stroke fill markers"/>
+  <path d="m7.5212 8.6864v2.3813l2.3813-2.3813z" fill="#b61f1d" stroke-width=".26458" style="paint-order:stroke fill markers"/>
+  <path d="m5.9337 6.0381c-0.14657 0-0.26459 0.11801-0.26459 0.26459v4.498c0 0.14657 0.11801 0.26458 0.26459 0.26458h1.5875v-3.7043c0-0.14658 0.11801-0.2646 0.26459-0.2646h2.6459c0.14657 0 0.26458 0.11801 0.26458 0.2646v3.7043h1.5875c0.14657 0 0.26458-0.11801 0.26458-0.26458v-4.498c0-0.14657-0.11801-0.26459-0.26458-0.26459z" fill="#e5381f" style="paint-order:stroke fill markers"/>
+  <path d="m13.077 8.6864-2.3813 2.3813h2.3813z" fill="#e76f08" stroke-width=".26458" style="paint-order:stroke fill markers"/>
+  <rect x="13.343" y="6.8281" width="1.0583" height="1.0583" ry="0" fill="#e76f08" style="paint-order:stroke fill markers"/>
+  <rect transform="rotate(45)" x="12.987" y="3.4721" width="1.0583" height="1.0583" ry="0" fill="#f6aa08" style="paint-order:stroke fill markers"/>
+ </g>
+</svg>

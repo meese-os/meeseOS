@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient2128" x1="6.8266" x2="57.051" y1="17.973" y2="48.567" gradientTransform="matrix(.26076 0 0 .31711 -2.0647 3.6698)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#1492de" offset="0"/>
+   <stop stop-color="#066abd" offset="1"/>
+  </linearGradient>
+  <filter id="filter2146" x="-.087891" y="-.065407" width="1.1758" height="1.1308" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="1.171875"/>
+  </filter>
+  <linearGradient id="linearGradient2142" x1="30.865" x2="30.865" y1="-23.355" y2="-65.948" gradientTransform="matrix(.24253 0 0 .24013 -1.222 22.282)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#3cc85a" offset="0"/>
+   <stop stop-color="#50eb50" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g transform="translate(2.2028 -4.2139)">
+  <rect x="-1.0122" y="8.6416" width="14.552" height="11.157" ry=".7276" fill="#b9b9b9" fill-opacity=".8" image-rendering="optimizeSpeed" opacity=".8" stroke-linecap="round" stroke-width=".65011"/>
+  <rect x="-.28455" y="9.3692" width="13.097" height="9.7014" ry="0" fill="url(#linearGradient2128)" image-rendering="optimizeSpeed" opacity=".8" stroke-linecap="round" stroke-width=".57512"/>
+  <path d="m2.6703 9.3691c0.65194 3.4597 3.6971 6.1319 7.3298 6.1319 0.99848 0 1.946-0.2389 2.8122-0.62632v-5.5056z" fill="#fff" opacity=".2" stroke-width=".26458"/>
+  <path transform="matrix(.24253 0 0 .24253 -1.4972 5.4515)" d="m25 3.2718v26h-9l16 17 16-17h-9v-26z" filter="url(#filter2146)" image-rendering="optimizeSpeed" opacity=".3" stroke-linecap="round" stroke-width="1.9901"/>
+  <path d="m4.5661 6.245v6.3059h-2.1828l3.8806 4.1231 3.8806-4.1231h-2.1828v-6.3059z" fill="url(#linearGradient2142)" image-rendering="optimizeSpeed" stroke-linecap="round" stroke-width=".48266"/>
+ </g>
+</svg>

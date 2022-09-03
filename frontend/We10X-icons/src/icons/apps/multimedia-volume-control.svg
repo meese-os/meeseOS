@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="SimpleNote" width="64" height="64" enable-background="new 0 0 1024 1024" image-rendering="optimizeSpeed" version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <linearGradient id="i" x1="400.4" x2="400.4" y1="545.62" y2="517.62" gradientTransform="matrix(1.5862 0 0 1.5862 -585.75 -804.34)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#d3d3d3" offset="0"/>
+   <stop stop-color="#fcf9f9" offset="1"/>
+  </linearGradient>
+  <linearGradient id="f" x1="400.4" x2="400.4" y1="545.62" y2="517.62" gradientTransform="matrix(1.6382 0 0 1.6382 -660.38 -809.85)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#8d3aff" offset="0"/>
+   <stop stop-color="#ff3680" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient1368" x1="-150.42" x2="-150.42" y1="73.048" y2="-7.1855" gradientTransform="matrix(.72563 -.19443 .19443 .72563 134.78 -21.005)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#323232" offset="0"/>
+   <stop stop-color="#191919" offset="1"/>
+  </linearGradient>
+  <radialGradient id="radialGradient899-2" cx="-6.2855" cy="5.9178" r="1.9843" gradientTransform="matrix(3.4646 0 0 3.4646 53.78 12.26)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#b9c3cd" offset="0"/>
+   <stop stop-color="#464b50" offset="1"/>
+  </radialGradient>
+  <linearGradient id="linearGradient1236" x1="1.6756" x2="15.257" y1="1.6756" y2="15.257" gradientTransform="matrix(3.7313 0 0 3.7313 .40859 1.2601)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#909aa4" offset="0"/>
+   <stop stop-color="#646e78" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient1450" x1=".52916" x2="16.404" y1=".52916" y2="16.404" gradientTransform="matrix(3.4203 0 0 3.4203 3.0412 3.8927)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient1368"/>
+  <linearGradient id="linearGradient1452" x1="8.3938" x2="8.3938" y1="3.2419" y2="13.719" gradientTransform="matrix(3.8477 0 0 3.8477 -.57849 .27302)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient1368"/>
+  <linearGradient id="linearGradient1459" x1="3.2037" x2="13.723" y1="3.2096" y2="13.717" gradientTransform="matrix(3.4793 0 0 3.4793 2.5416 3.3931)" gradientUnits="userSpaceOnUse" xlink:href="#radialGradient899-2"/>
+  <linearGradient id="linearGradient1461" x1="3.2925" x2="13.876" y1="3.0573" y2="13.64" gradientTransform="matrix(3.2493 0 0 3.2493 4.4891 -60.361)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#b9c3cd" offset="0"/>
+   <stop stop-color="#464b50" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient1463" x1="1.5003" x2="15.397" y1="1.0166" y2="1.0166" gradientTransform="matrix(3.7313 0 0 3.7313 .40859 1.2601)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient1368"/>
+  <linearGradient id="linearGradient2593" x1="8.3938" x2="8.3938" y1="3.2419" y2="13.719" gradientTransform="matrix(3.6249 0 0 3.6249 1.3078 2.1593)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#00bffb" offset="0"/>
+   <stop stop-color="#01a1f3" offset="1"/>
+  </linearGradient>
+ </defs>
+ <circle cx="49.639" cy="39.205" r="0" fill="url(#i)"/>
+ <circle cx="-4.1496" cy="61.361" r="0" fill="none" stroke="url(#f)" stroke-width="2.1297"/>
+ <g stroke-width="3.4203">
+  <rect x="4.8511" y="5.7026" width="54.298" height="54.298" ry="2.7148" fill="url(#linearGradient1450)"/>
+  <rect x="6.6608" y="7.5123" width="50.675" height="50.675" ry="1.8099" fill="url(#linearGradient1236)"/>
+  <circle cx="31.999" cy="32.851" r="20.361" fill="url(#linearGradient1452)"/>
+ </g>
+ <g>
+  <circle cx="31.999" cy="32.851" r="19.182" fill="url(#linearGradient2593)" stroke-width="3.2223"/>
+  <circle cx="31.999" cy="32.851" r="18.411" fill="url(#linearGradient1459)" stroke-width="3.4793"/>
+  <circle transform="scale(1,-1)" cx="31.999" cy="-32.851" r="17.194" fill="url(#linearGradient1461)" stroke-width="3.4203"/>
+ </g>
+ <path d="m57.859 6.1071-2.8556-2.1074h-46.145l-2.8556 2.1074z" fill="url(#linearGradient1463)" stroke-width="3.7313"/>
+ <circle cx="32" cy="32.763" r="6.8747" fill="url(#radialGradient899-2)" stroke-width="3.4646"/>
+</svg>

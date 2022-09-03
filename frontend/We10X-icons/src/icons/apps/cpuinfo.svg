@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-16.031 -9.8551)">
+  <path d="m18.016 11.046c-0.43972 0-0.79373 0.35402-0.79373 0.79373v12.964c0 0.43972 0.35402 0.79374 0.79373 0.79374h12.964c0.43972 0 0.79373-0.35402 0.79373-0.79374v-12.964c0-0.43972-0.35402-0.79373-0.79373-0.79373z" fill="#008237" stroke-width=".79373"/>
+  <path d="m19.598 19.871-2.376 1.9006v1.0263l1.1363-0.75756v0.61907l-1.1363 0.75808v0.48162h0.51675v0.94308c0.26437 0.29126 0.56862 0.545 0.90277 0.7555h0.95651v-2.6282l1.8588-1.5492h0.92964l-1.8593 1.5492v2.6282h10.453c0.43972 0 0.79373-0.35402 0.79373-0.79374v-2.6189l-1.3312-1.6939h-0.6201l-0.61907-0.6201z" fill="#43a047" fill-rule="evenodd" stroke-width=".30985"/>
+  <path d="m18.016 11.046c-0.43972 0-0.79373 0.35402-0.79373 0.79373v4.1066l0.2067 0.20618h11.775l2.1683-2.4784h0.40204v-0.31005h-0.40204v-1.2397l-2.4789 2.7894h-0.92912l2.4789-2.7894v-1.0785z" fill="#43a047" fill-rule="evenodd" stroke-width=".30985"/>
+  <g stroke-width=".26458">
+   <circle cx="30.186" cy="24.01" r=".39687" fill="#fbc02d"/>
+   <circle cx="30.186" cy="24.01" r=".13229" fill="#263238"/>
+   <circle cx="30.186" cy="12.633" r=".39687" fill="#fbc02d"/>
+   <circle cx="30.186" cy="12.633" r=".13229" fill="#263238"/>
+   <circle cx="18.81" cy="24.01" r=".39687" fill="#fbc02d"/>
+   <circle cx="18.81" cy="24.01" r=".13229" fill="#263238"/>
+  </g>
+  <rect x="18.677" y="13.295" width="4.4978" height="1.5875" ry=".26458" fill="#263238" stroke-width=".29154"/>
+  <rect x="25.821" y="21.497" width="4.4978" height="1.5875" ry=".26458" fill="#eceff1" stroke-width=".26458"/>
+  <g fill="#37474f" stroke-width=".26458">
+   <rect x="26.085" y="21.761" width="2.3812" height=".26458" ry="0"/>
+   <path d="m26.085 22.29h1.3229v0.26458h-1.3229z"/>
+   <path d="m28.996 22.82 0.52916-0.79373 0.52916 0.79373z" fill-rule="evenodd"/>
+  </g>
+  <circle cx="18.809" cy="12.633" r=".39687" fill="#fbc02d" stroke-width=".26458"/>
+  <circle cx="18.809" cy="12.633" r=".13229" fill="#263238" stroke-width=".26458"/>
+  <g fill="#fff" stroke-width=".26458">
+   <rect x="18.942" y="13.559" width="1.0583" height=".26458" opacity=".5" style="paint-order:stroke fill markers"/>
+   <rect x="18.942" y="14.088" width="2.1166" height=".26458" opacity=".5" style="paint-order:stroke fill markers"/>
+   <rect x="21.852" y="14.088" width=".79373" height=".52916" opacity=".5" style="paint-order:stroke fill markers"/>
+  </g>
+  <rect x="20.794" y="16.205" width="7.4082" height="4.2333" ry=".26458" fill="#263238" stroke-width=".26458"/>
+  <path d="m21.588 16.999h0.52916v2.6458h-0.52916zm1.0583 0h0.52916v2.6458h-0.52916zm1.0583 0h0.52916v2.6458h-0.52916zm1.0583 0h0.52916v2.6458h-0.52916zm1.0583 0h0.52916v2.6458h-0.52916zm1.0583 0h0.52916v2.6458h-0.52916z" fill="#fbc02d" fill-rule="evenodd" stroke-width=".26458" style="paint-order:fill markers stroke"/>
+ </g>
+</svg>
