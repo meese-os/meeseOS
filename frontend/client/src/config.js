@@ -267,7 +267,6 @@ export const defaultConfiguration = {
 			},
 		],
 		icons: {
-			"^application/zip": { name: "package-x-generic" },
 			"^application/javascript": { name: "text-x-script" },
 			"^application/json": { name: "text-x-script" },
 			"^application/x-python": { name: "text-x-script" },
@@ -275,7 +274,7 @@ export const defaultConfiguration = {
 			"^application/pdf": { name: "x-office-document" },
 			"^application/rtf": { name: "x-office-document" },
 			"^application/msword": { name: "x-office-document" },
-			"^application/(xz|tar|gzip)": { name: "package-x-generic" },
+			"^application/(xz|tar|g?zip)": { name: "package-x-generic" },
 			"^text/css": { name: "text-x-script" },
 			"^text/html": { name: "text-html" },
 			"^(application|text)/xml": { name: "text-html" },

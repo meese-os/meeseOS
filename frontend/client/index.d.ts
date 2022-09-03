@@ -136,7 +136,7 @@ declare class CoreBase extends EventEmitter {
 	register(ref: typeof ServiceProvider, options: any): void;
 
 	/**
-	 * Register a instanciator provider
+	 * Register a instantiator provider
 	 */
 	instance(name: string, callback: Function): void;
 

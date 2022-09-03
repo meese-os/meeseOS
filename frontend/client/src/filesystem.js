@@ -167,7 +167,7 @@ export default class Filesystem extends EventEmitter {
 	/**
 	 * Mounts all configured mountpoints.
 	 * @param {Boolean} [stopOnError=true] Stop on first error
-	 * @returns {Promise<boolean[]>}
+	 * @returns {Promise<Boolean[]>}
 	 */
 	mountAll(stopOnError = true) {
 		this.mounts = this._getConfiguredMountpoints();
@@ -186,7 +186,7 @@ export default class Filesystem extends EventEmitter {
 	 * Adds a new mountpoint.
 	 * @param {FilesystemMountpoint} props Mountpoint props
 	 * @param {Boolean} [automount=true] Automount after creation
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	addMountpoint(props, automount = true) {
 		const mount = this.createMountpoint(props);
@@ -203,7 +203,7 @@ export default class Filesystem extends EventEmitter {
 	 * Mount given mountpoint.
 	 * @param {String|FilesystemMountpoint} mountpoint Mountpoint name or object
 	 * @throws {Error} On invalid name or if already mounted
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	mount(mountpoint) {
 		if (typeof mountpoint === "string") {
@@ -217,7 +217,7 @@ export default class Filesystem extends EventEmitter {
 	 * Unmount given filesystem.
 	 * @param {String} name Filesystem name
 	 * @throws {Error} On invalid name or if already unmounted
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	unmount(name) {
 		return this._mountAction(name, true);
@@ -229,7 +229,7 @@ export default class Filesystem extends EventEmitter {
 	 * @private
 	 * @param {FilesystemMountpoint} mountpoint The mountpoint
 	 * @param {Boolean} [unmount=false] If action is unmounting
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	_mountpointAction(mountpoint, unmount = false) {
 		const eventName = unmount ? "unmounted" : "mounted";
@@ -253,7 +253,7 @@ export default class Filesystem extends EventEmitter {
 	 * @private
 	 * @param {String} name Mountpoint name
 	 * @param {Boolean} [unmount=false] If action is unmounting
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	_mountAction(name, unmount) {
 		return Promise.resolve(this.mounts.find((m) => m.name === name)).then(

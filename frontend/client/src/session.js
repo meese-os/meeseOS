@@ -37,7 +37,6 @@ import logger from "./logger";
 export default class Session {
 	/**
 	 * Creates the Session Handler
-	 *
 	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
@@ -50,8 +49,8 @@ export default class Session {
 	}
 
 	/**
-	 * Destroys the session
-	 * @returns {Promise<boolean>}
+	 * Destroys the session, logging out the user
+	 * @returns {Promise<Boolean>}
 	 */
 	destroy() {
 		Application.destroyAll();
@@ -63,7 +62,7 @@ export default class Session {
 
 	/**
 	 * Saves the session
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	save() {
 		const apps = Application.getApplications().filter(
@@ -81,7 +80,7 @@ export default class Session {
 	/**
 	 * Loads session
 	 * @param {Boolean} [fresh=false] Kill all current applications first
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	load(fresh = false) {
 		if (fresh) {

@@ -39,6 +39,10 @@ const { closeWatches } = require("../utils/core");
  * MeeseOS Package Service Provider
  */
 class PackageServiceProvider extends ServiceProvider {
+	/**
+	 * Create new instance.
+	 * @param {Core} core MeeseOS Core instance reference
+	 */
 	constructor(core) {
 		super(core);
 
@@ -84,7 +88,7 @@ class PackageServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes some developer features
+	 * Initializes some developer features.
 	 */
 	initDeveloperTools() {
 		const { manifestFile } = this.packages.options;
@@ -94,6 +98,7 @@ class PackageServiceProvider extends ServiceProvider {
 			watcher.on("change", () => {
 				this.core.broadcast("meeseOS/packages:metadata:changed");
 			});
+
 			this.watches.push(watcher);
 		}
 	}

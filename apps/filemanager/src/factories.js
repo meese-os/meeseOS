@@ -38,7 +38,9 @@ import dateformat from "dateformat";
 import { fileTypeFromBuffer } from "file-type";
 
 /**
- * The file types supported by "file-type" that are considered to be archives.
+ * The file types supported by "file-type" and "yazul" that are
+ * considered to be archives.
+ * @todo Update based on the response to https://github.com/thejoshwolfe/yauzl/issues/142
  */
 const archiveTypes = [
 	"7z",
@@ -559,6 +561,7 @@ export const menuFactory = (core, proc, win) => {
 			[
 				{
 					label: "Extract archive",
+					disabled: !items.length,
 					onclick: () => emitter("filemanager:menu:extract"),
 				},
 			] :
@@ -571,6 +574,7 @@ export const menuFactory = (core, proc, win) => {
 					},
 					{
 						label: "Compress",
+						disabled: !items.length,
 						onclick: () => emitter("filemanager:menu:compress"),
 					},
 				] : [
@@ -586,6 +590,7 @@ export const menuFactory = (core, proc, win) => {
 					},
 					{
 						label: "Compress",
+						disabled: !items.length,
 						onclick: () => emitter("filemanager:menu:compress"),
 					},
 				];

@@ -36,6 +36,7 @@ import { ServiceProvider } from "@meeseOS/common";
  */
 export default class NotificationServiceProvider extends ServiceProvider {
 	/**
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
@@ -49,14 +50,14 @@ export default class NotificationServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Destroys notifications
+	 * Destroys notifications.
 	 */
 	destroy() {
 		this.notifications.destroy();
 	}
 
 	/**
-	 * Get a list of services this provider registers
+	 * Get a list of services this provider registers.
 	 * @returns {String[]}
 	 */
 	provides() {
@@ -64,7 +65,7 @@ export default class NotificationServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes authentication
+	 * Initializes authentication.
 	 * @returns {Promise<undefined>}
 	 */
 	init() {

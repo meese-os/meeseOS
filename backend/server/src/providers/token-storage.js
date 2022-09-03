@@ -1,7 +1,7 @@
 /**
- * OS.js - JavaScript Cloud/Web Desktop Platform
+ * MeeseOS - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2022-Present, Aaron Meese <aaronjmeese@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,40 +24,60 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @author  Aaron Meese <aaronjmeese@gmail.com>
  * @licence Simplified BSD License
  */
 
-//
-// This is the server configuration tree.
-// Guide: https://manual.aaronmeese.com/config/#server
-// Complete config tree: https://github.com/os-js/osjs-server/blob/master/src/config.js
-//
+const { ServiceProvider } = require("@meeseOS/common");
+const TokenStorage = require("../utils/token-storage");
 
-const path = require("path");
-const root = path.resolve(__dirname, "../../");
-const dotenvJSON = require("complex-dotenv-json");
-const envFile = path.resolve(__dirname, "auth/.env.json");
-dotenvJSON({ path: envFile });
+/**
+ * MeeseOS Token Storage Service Provider
+ */
+class TokenStorageServiceProvider extends ServiceProvider {
+	/**
+	 * Create new instance.
+	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {Object} [options={}] Arguments
+	 */
+	constructor(core, options = {}) {
+		super(core, options);
 
-const sessionSecret = process.env.SESSION_SECRET;
-const accessTokenSecret = process.env.JWT_SECRET;
-const refreshTokenSecret = process.env.JWT_REFRESH;
+		/**
+		 * @type {Core}
+		 */
+		this.core = core;
+		this.options = options;
 
-module.exports = {
-	root,
-	port: 8000,
-	public: path.resolve(root, "dist"),
-	xterm: {
-		hostname: process.env.XTERM_HOSTNAME,
-	},
-	session: {
-		jwt: {
-			...(accessTokenSecret && { accessTokenSecret }),
-			...(refreshTokenSecret && { refreshTokenSecret }),
-		},
-		options: {
-			...(sessionSecret && { secret: sessionSecret }),
-		},
-	},
-};
+		/**
+		 * @type {TokenStorage}
+		 */
+		this.storage = new TokenStorage(this.core, this.options);
+	}
+
+	/**
+	 * Get a list of services this provider registers.
+	 * @returns {String[]}
+	 */
+	provides() {
+		return ["meeseOS/token-storage"];
+	}
+
+	/**
+	 * Initializes provider.
+	 */
+	async init() {
+		await this.storage.init();
+
+		this.core.singleton("meeseOS/token-storage", () => this.storage);
+	}
+
+	/**
+	 * Destroys provider.
+	 */
+	destroy() {
+		this.storage.destroy();
+	}
+}
+
+module.exports = TokenStorageServiceProvider;

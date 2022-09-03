@@ -35,33 +35,32 @@ const bodyParser = require("body-parser");
 const proxy = require("express-http-proxy");
 const nocache = require("nocache");
 const { ServiceProvider } = require("@meeseOS/common");
-const { isAuthenticated, closeWatches } = require("../utils/core.js");
+const {
+	useWebTokens,
+	isAuthenticated,
+	closeWatches
+} = require("../utils/core.js");
 
 /**
  * MeeseOS Core Service Provider
  */
 class CoreServiceProvider extends ServiceProvider {
 	/**
-	 * Create new instance
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} [options] Arguments
 	 */
 	constructor(core, options) {
 		super(core, options);
 
+		/**
+		 * @type {Array}
+		 */
 		this.watches = [];
 	}
 
 	/**
-	 * Destroys provider
-	 */
-	async destroy() {
-		await closeWatches(this.watches);
-		super.destroy();
-	}
-
-	/**
-	 * Initializes provider
+	 * Initializes provider.
 	 */
 	async init() {
 		this.initService();
@@ -72,7 +71,7 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Starts provider
+	 * Starts provider.
 	 */
 	start() {
 		if (this.core.configuration.development) {
@@ -81,7 +80,7 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Get a list of services this provider registers
+	 * Get a list of services this provider registers.
 	 * @returns {String[]}
 	 */
 	provides() {
@@ -89,7 +88,15 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes the service APIs
+	 * Destroys provider.
+	 */
+	async destroy() {
+		await closeWatches(this.watches);
+		super.destroy();
+	}
+
+	/**
+	 * Initializes the service APIs.
 	 */
 	initService() {
 		const { app } = this.core;
@@ -101,6 +108,7 @@ class CoreServiceProvider extends ServiceProvider {
 		};
 
 		this.core.singleton("meeseOS/express", () => ({
+			useWebTokens,
 			isAuthenticated,
 
 			call: (method, ...args) => app[method](...args),
@@ -124,7 +132,11 @@ class CoreServiceProvider extends ServiceProvider {
 			) =>
 				app[method.toLowerCase()](
 					uri,
-					[...middleware.routeAuthenticated, isAuthenticated(groups, strict)],
+					[
+						...middleware.routeAuthenticated,
+						useWebTokens(app),
+						isAuthenticated(groups, strict)
+					],
 					cb
 				),
 
@@ -137,6 +149,7 @@ class CoreServiceProvider extends ServiceProvider {
 			routerAuthenticated: (groups = [], strict = requireAllGroups) => {
 				const router = express.Router();
 				router.use(...middleware.routeAuthenticated);
+				router.use(useWebTokens(app));
 				router.use(isAuthenticated(groups, strict));
 				return router;
 			},
@@ -144,7 +157,7 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes Express extensions
+	 * Initializes Express extensions.
 	 */
 	initExtensions() {
 		const { app, session, configuration } = this.core;
@@ -181,7 +194,7 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes Express base routes, etc
+	 * Initializes Express base routes, etc.
 	 */
 	initResourceRoutes() {
 		const { app, configuration } = this.core;
@@ -205,7 +218,7 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes Socket routes
+	 * Initializes Socket routes.
 	 */
 	initSocketRoutes() {
 		const { app } = this.core;
@@ -266,7 +279,7 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes Express proxies
+	 * Initializes Express proxies.
 	 */
 	initProxies() {
 		const { app, configuration } = this.core;
@@ -286,7 +299,7 @@ class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes some developer features
+	 * Initializes some developer features.
 	 */
 	initDeveloperTools() {
 		try {

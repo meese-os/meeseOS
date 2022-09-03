@@ -33,7 +33,6 @@ import Desktop from "../desktop";
 
 /**
  * Desktop Service Contract
- * TODO: typedef
  * @typedef {Object} DeskopProviderContract
  * @property {Function} setKeyboardContext
  * @property {Function} openContextMenu
@@ -48,7 +47,9 @@ import Desktop from "../desktop";
  */
 export default class DesktopServiceProvider extends ServiceProvider {
 	/**
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {Object} [options={}] Arguments
 	 */
 	constructor(core, options = {}) {
 		super(core, options || {});
@@ -61,14 +62,14 @@ export default class DesktopServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Destroys instance
+	 * Destroys instance.
 	 */
 	destroy() {
 		this.desktop = this.desktop.destroy();
 	}
 
 	/**
-	 * Get a list of services this provider registers
+	 * Get a list of services this provider registers.
 	 * @returns {String[]}
 	 */
 	provides() {
@@ -76,7 +77,7 @@ export default class DesktopServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes desktop
+	 * Initializes desktop.
 	 * @returns {Promise<undefined>}
 	 */
 	init() {
@@ -90,7 +91,7 @@ export default class DesktopServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Starts desktop
+	 * Starts desktop.
 	 * @returns {Promise<undefined>}
 	 */
 	start() {

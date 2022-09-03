@@ -43,6 +43,8 @@ const {
 	CoreServiceProvider,
 	PackageServiceProvider,
 	VFSServiceProvider,
+	TokenStorageServiceProvider,
+	TokenFactoryServiceProvider,
 	AuthServiceProvider,
 	SettingsServiceProvider,
 } = require("@meeseOS/server");
@@ -55,6 +57,8 @@ const customAdapter = require("./auth/adapter.js");
 meeseOS.register(CoreServiceProvider, { before: true });
 meeseOS.register(PackageServiceProvider);
 meeseOS.register(VFSServiceProvider);
+meeseOS.register(TokenStorageServiceProvider);
+meeseOS.register(TokenFactoryServiceProvider);
 meeseOS.register(AuthServiceProvider, {
 	args: {
 		adapter: customAdapter,

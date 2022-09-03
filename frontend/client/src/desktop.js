@@ -658,7 +658,7 @@ export default class Desktop extends EventEmitter {
 	 * @private
 	 * @param {String} k Key
 	 * @param {*} v Value
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	_applySettingsByKey(k, v) {
 		return this.core

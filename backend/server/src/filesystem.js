@@ -127,7 +127,7 @@ class Filesystem {
 
 	/**
 	 * Initializes the Filesystem.
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	async init() {
 		const adapters = {
@@ -222,7 +222,7 @@ class Filesystem {
 	 * Creates realpath VFS request.
 	 * @param {String} filename The path
 	 * @param {AuthUserProfile} [user] User session object
-	 * @returns {Promise<string>}
+	 * @returns {Promise<String>}
 	 */
 	realpath(filename, user = {}) {
 		return this.methods.realpath({
@@ -263,7 +263,7 @@ class Filesystem {
 	/**
 	 * Unmounts given mountpoint.
 	 * @param {Mountpoint} mount Mountpoint
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	async unmount(mountpoint) {
 		const found = this.watches.find((w) => w.id === mountpoint.id);

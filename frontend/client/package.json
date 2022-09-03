@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/client",
-  "version": "2.4.9",
+  "version": "2.5.0",
   "description": "meeseOS client",
   "main": "dist/main.js",
   "style": "dist/main.css",
@@ -61,7 +61,8 @@
     "hyperapp": "^1.2.10",
     "js-cookie": "^3.0.1",
     "simplejsonconf": "^2.0.7",
-    "is-plain-object": "^5.0.0"
+    "is-plain-object": "^5.0.0",
+    "express-session": "^1.17.3"
   },
   "eslintConfig": {
     "env": {

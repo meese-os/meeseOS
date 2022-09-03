@@ -89,15 +89,20 @@ const defaultConfiguration = {
 	session: {
 		store: {
 			module: require.resolve("connect-loki"),
-			options: {
+			databaseName: "meeseOS.db",
+			collectionName: "tokens",
+			databaseOptions: {
 				autosave: true,
-				// ttl: maxAge
 			},
+		},
+		jwt: {
+			accessTokenSecret: "meeseOS",
+			refreshTokenSecret: "meeseOSrefresh",
+			accessTokenDuration: "10m",
 		},
 		options: {
 			name: "meeseOS.sid",
-			// NOTE: You should DEFINITELY override this in production
-			secret: "meeseOS",
+			secret: "meeseOSSession",
 			rolling: true,
 			resave: false,
 			saveUninitialized: false,

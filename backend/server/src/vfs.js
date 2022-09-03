@@ -206,7 +206,7 @@ const createRequestFactory = (findMountpoint) =>
 							});
 						}
 					} catch (e) {
-						console.warn("Failed to send a ranged response", e);
+						core.logger.warn("Failed to send a ranged response", e);
 					}
 				} else if (stat.mime) {
 					res.append("Content-Type", stat.mime);
@@ -321,11 +321,12 @@ module.exports = (core) => {
 	const router = express.Router();
 	const methods = vfs(core);
 	const middleware = createMiddleware(core);
-	const { isAuthenticated } = core.make("meeseOS/express");
+	const { useWebTokens, isAuthenticated } = core.make("meeseOS/express");
 	const vfsGroups = core.config("auth.vfsGroups", []);
 	const logEnabled = core.config("development");
 
 	// Middleware first
+	router.use(useWebTokens(core));
 	router.use(isAuthenticated(vfsGroups));
 	router.use(middleware);
 
@@ -346,13 +347,12 @@ module.exports = (core) => {
 
 	// Finally catch promise exceptions
 	router.use((error, req, res, next) => {
-		// TODO: Better error messages
 		const code = typeof error.code === "number"
 			? error.code
 			: errorCodes[error.code] || 400;
 
 		if (logEnabled) {
-			console.error(error);
+			core.logger.error(error);
 		}
 
 		res.status(code).json({

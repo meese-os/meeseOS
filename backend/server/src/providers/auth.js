@@ -41,10 +41,12 @@ class AuthServiceProvider extends ServiceProvider {
 		this.auth = new Auth(core, options);
 	}
 
-	destroy() {
-		this.auth.destroy();
-
-		super.destroy();
+	/**
+	 * A list of services this provider depends on.
+	 * @returns {String[]}
+	 */
+	depends() {
+		return ["meeseOS/token-factory"];
 	}
 
 	async init() {
@@ -52,11 +54,15 @@ class AuthServiceProvider extends ServiceProvider {
 
 		route("post", "/register", (req, res) => this.auth.register(req, res));
 		route("post", "/login", (req, res) => this.auth.login(req, res));
-		routeAuthenticated("post", "/logout", (req, res) =>
-			this.auth.logout(req, res)
-		);
+		// TODO: fix the issue of this not working when `routeAuthenticated` is used
+		route("post", "/logout", (req, res) => this.auth.logout(req, res));
 
 		await this.auth.init();
+	}
+
+	destroy() {
+		this.auth.destroy();
+		super.destroy();
 	}
 }
 

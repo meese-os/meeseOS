@@ -145,6 +145,7 @@ import logger from "../logger";
  */
 export default class CoreServiceProvider extends ServiceProvider {
 	/**
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {CoreProviderOptions} [options={}] Arguments
 	 */
@@ -185,7 +186,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Get a list of services this provider registers
+	 * Get a list of services this provider registers.
 	 * @returns {String[]}
 	 */
 	provides() {
@@ -210,7 +211,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Destroys provider
+	 * Destroys provider.
 	 */
 	destroy() {
 		this.tray.destroy();
@@ -223,7 +224,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes provider
+	 * Initializes provider.
 	 * @returns {Promise<undefined>}
 	 */
 	init() {
@@ -237,7 +238,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Starts provider
+	 * Starts provider.
 	 * @returns {Promise<undefined>}
 	 */
 	start() {
@@ -257,7 +258,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Registers contracts
+	 * Registers contracts.
 	 */
 	registerContracts() {
 		this.core.instance(
@@ -325,7 +326,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Expose some internals to global
+	 * Expose some internals to global.
 	 */
 	createGlobalApi() {
 		const globalBlacklist = this.core.config("providers.globalBlacklist", []);
@@ -362,7 +363,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Event when dist changes from a build or deployment
+	 * Event when dist changes from a build or deployment.
 	 * @private
 	 * @param {String} filename The resource filename
 	 */
@@ -389,7 +390,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Event when package dist changes from a build or deployment
+	 * Event when package dist changes from a build or deployment.
 	 * @private
 	 * @param {String} name The package name
 	 */
@@ -401,7 +402,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides window contract
+	 * Provides window contract.
 	 * @returns {CoreProviderWindowContract}
 	 */
 	createWindowContract() {
@@ -413,7 +414,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides DnD contract
+	 * Provides DnD contract.
 	 * @returns {CoreProviderDnDContract}
 	 */
 	createDnDContract() {
@@ -421,7 +422,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides DOM contract
+	 * Provides DOM contract.
 	 * @returns {CoreProviderDOMContract}
 	 */
 	createDOMContract() {
@@ -432,7 +433,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides Theme contract
+	 * Provides Theme contract.
 	 * @returns {CoreProviderThemeContract}
 	 */
 	createThemeContract() {
@@ -445,7 +446,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides Sounds contract
+	 * Provides Sounds contract.
 	 * @returns {CoreProviderSoundContract}
 	 */
 	createSoundsContract() {
@@ -470,7 +471,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides Session contract
+	 * Provides Session contract.
 	 * @returns {CoreProviderSessionContract}
 	 */
 	createSessionContract() {
@@ -481,7 +482,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides Packages contract
+	 * Provides Packages contract.
 	 * @returns {CoreProviderPackagesContract}
 	 */
 	createPackagesContract() {
@@ -498,7 +499,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides Clipboard contract
+	 * Provides Clipboard contract.
 	 * @returns {CoreProviderClipboardContract}
 	 */
 	createClipboardContract() {
@@ -511,7 +512,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides Middleware contract
+	 * Provides Middleware contract.
 	 * @returns {CoreProviderMiddlewareContract}
 	 */
 	createMiddlewareContract() {
@@ -522,7 +523,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Provides Tray contract
+	 * Provides Tray contract.
 	 * @returns {CoreProviderTrayContract}
 	 */
 	createTrayContract() {

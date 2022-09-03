@@ -99,7 +99,6 @@ class Subscriptions {
 }
 
 class WirelessToolsServiceProvider {
-
 	constructor(core, options = {}) {
 		this.core = core;
 		this.options = Object.assign({
@@ -114,9 +113,7 @@ class WirelessToolsServiceProvider {
 	}
 
 	provides() {
-		return [
-			"meeseOS/wireless-tools"
-		];
+		return ["meeseOS/wireless-tools"];
 	}
 
 	init() {

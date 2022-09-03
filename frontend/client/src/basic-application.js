@@ -103,7 +103,7 @@ export class BasicApplication extends EventEmitter {
 
 	/**
 	 * Initializes the application
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	init() {
 		if (this.proc.args.file) {

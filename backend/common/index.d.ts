@@ -144,7 +144,7 @@ export class CoreBase extends EventEmitter {
 	register(ref: typeof ServiceProvider, options: ServiceProviderOptions): void;
 
 	/**
-	 * Register a instanciator provider
+	 * Register a instantiator provider
 	 */
 	instance(name: string, callback: Function): void;
 

@@ -129,7 +129,7 @@ export default class Settings {
 
 	/**
 	 * Saves settings
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	save() {
 		return new Promise((resolve, reject) => {
@@ -157,7 +157,7 @@ export default class Settings {
 
 	/**
 	 * Loads settings
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	load() {
 		const defaults = this.core.config("settings.defaults", {});
@@ -237,7 +237,7 @@ export default class Settings {
 	/**
 	 * Clears a namespace by root key
 	 * @param {String} ns The namespace
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	clear(ns) {
 		return this.adapter.clear(ns).then((result) => {

@@ -33,7 +33,6 @@ import Settings from "../settings";
 
 /**
  * Settings Service Contract
- * TODO: typedef
  * @typedef {Object} SettingsProviderContract
  * @property {Function} save
  * @property {Function} load
@@ -53,8 +52,9 @@ import Settings from "../settings";
  */
 export default class SettingsServiceProvider extends ServiceProvider {
 	/**
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {SettingsServiceOptions} [options={}]
+	 * @param {SettingsProviderContract} [options={}]
 	 */
 	constructor(core, options = {}) {
 		super(core);
@@ -70,7 +70,7 @@ export default class SettingsServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Get a list of services this provider registers
+	 * Get a list of services this provider registers.
 	 * @returns {String[]}
 	 */
 	provides() {
@@ -78,7 +78,7 @@ export default class SettingsServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes settings
+	 * Initializes settings.
 	 * @returns {Promise<undefined>}
 	 */
 	init() {

@@ -30,10 +30,12 @@
 
 const express_session = require("express-session");
 const express_ws = require("express-ws");
+const Auth = require("../auth");
+const TokenFactory = require("./token-factory");
 
 /**
- * Converts an input argument to configuration entry
- * Overrides the user-created configuration file
+ * Converts an input argument to configuration entry.
+ * Overrides the user-created configuration file.
  */
 module.exports.argvToConfig = {
 	logging: (logging) => ({ logging }),
@@ -41,26 +43,37 @@ module.exports.argvToConfig = {
 	port: (port) => ({ port }),
 	"ws-port": (port) => ({ ws: { port } }),
 	secret: (secret) => ({ session: { options: { secret } } }),
+	accessTokenSecret: (accessTokenSecret) => ({ session: { jwt: { accessTokenSecret } } }),
+	refreshTokenSecret: (refreshTokenSecret) => ({ session: { jwt: { refreshTokenSecret } } }),
 	morgan: (morgan) => ({ morgan }),
 	discovery: (discovery) => ({ packages: { discovery } }),
 	manifest: (manifest) => ({ packages: { manifest } }),
 };
 
 /**
- * Create session parser
+ * Create session parser.
+ * @param {Object} configuration
+ * @returns {express.RequestHandler}
  */
-module.exports.createSession = (app, configuration) => {
+module.exports.createSession = (configuration) => {
 	const Store = require(configuration.session.store.module)(express_session);
 	const store = new Store(configuration.session.store.options);
 
 	return express_session({
 		store,
+		secret: configuration.session.options.accessTokenSecret,
 		...configuration.session.options,
 	});
 };
 
 /**
- * Create WebSocket server
+ * Creates a WebSocket server.
+ *
+ * @param {express.Application} app
+ * @param {Object} configuration
+ * @param {express.RequestHandler} session
+ * @param {http.Server} httpServer
+ * @returns {express_ws.Instance}
  */
 module.exports.createWebsocket = (app, configuration, session, httpServer) =>
 	express_ws(app, httpServer, {
@@ -75,8 +88,9 @@ module.exports.createWebsocket = (app, configuration, session, httpServer) =>
 	});
 
 /**
- * Wrapper for parsing JSON
+ * Wrapper for parsing JSON.
  * @param {String} str
+ * @returns {Object|String}
  */
 module.exports.parseJson = (str) => {
 	try {
@@ -87,7 +101,13 @@ module.exports.parseJson = (str) => {
 };
 
 /**
- * Checks groups for a request
+ * Checks groups for a request.
+ *
+ * @private
+ * @param {Request} req
+ * @param {Array} groups
+ * @param {Boolean} all
+ * @returns {Boolean}
  */
 const validateGroups = (req, groups, all) => {
 	if (groups instanceof Array && groups.length) {
@@ -101,7 +121,44 @@ const validateGroups = (req, groups, all) => {
 };
 
 /**
- * Authentication middleware wrapper
+ * JSON web token middleware wrapper.
+ * @param {Core} core MeeseOS Core instance reference
+ * @returns {*}
+ */
+module.exports.useWebTokens = (core) =>
+	async (req, res, next) => {
+		const user = req.session.user;
+
+		if (user && core.configuration) {
+			let accessToken = user.accessToken;
+			const tokenFactory = core.make("meeseOS/token-factory");
+			const accessTokenUser = await tokenFactory.validateAccessToken(accessToken);
+
+			if (accessTokenUser.username !== user.username) {
+				// Access token is invalid, check if refresh token is valid
+				const refreshTokenUser = await tokenFactory.refreshToAccessToken(user.refreshToken);
+
+				if (refreshTokenUser && refreshTokenUser.username === user.username) {
+					// Refresh token is valid, update access token
+					accessToken = refreshTokenUser.accessToken;
+				} else {
+					// Refresh token is invalid, user is not authenticated
+					accessToken = null;
+				}
+
+				req.session.user.accessToken = accessToken;
+			}
+
+			if (accessToken) {
+				return next();
+			}
+		}
+
+		return res.status(403).send("Access denied");
+	};
+
+/**
+ * Authentication middleware wrapper.
  * @param {Array} groups
  * @param {Boolean} all
  * @returns {*}
@@ -116,7 +173,7 @@ module.exports.isAuthenticated = (groups = [], all = false) =>
 	};
 
 /**
- * Closes an array of watches
+ * Closes an array of watches.
  * @param {Array} watches
  * @returns {Promise<any[]>}
  */

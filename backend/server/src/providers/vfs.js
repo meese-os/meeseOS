@@ -35,6 +35,11 @@ const Filesystem = require("../filesystem");
  * MeeseOS Virtual Filesystem Service Provider
  */
 class VFSServiceProvider extends ServiceProvider {
+	/**
+	 * Create new instance.
+	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {Object} [options={}] Arguments
+	 */
 	constructor(core, options = {}) {
 		super(core, options);
 

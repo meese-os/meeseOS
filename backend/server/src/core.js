@@ -98,7 +98,7 @@ class Core extends CoreBase {
 		/**
 		 * @type {Object}
 		 */
-		this.session = createSession(this.app, this.configuration);
+		this.session = createSession(this.configuration);
 
 		/**
 		 * @type {Object}
@@ -158,7 +158,7 @@ class Core extends CoreBase {
 
 	/**
 	 * Starts the server
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	async start() {
 		if (!this.started) {
@@ -176,7 +176,7 @@ class Core extends CoreBase {
 
 	/**
 	 * Initializes the server
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	async boot() {
 		if (this.booted) return true;

@@ -11,9 +11,7 @@ describe("Core", () => {
 	});
 
 	beforeEach(() => {
-		if (!core) {
-			return;
-		}
+		if (!core) return;
 
 		const clients = [
 			{

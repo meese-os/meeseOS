@@ -42,7 +42,7 @@ export class ServiceProvider {
 	 */
 	constructor(core, options = {}) {
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 */
 		this.core = core;
@@ -50,7 +50,7 @@ export class ServiceProvider {
 	}
 
 	/**
-	 * A list of services this provider can create
+	 * A list of services this provider can create.
 	 * @returns {String[]}
 	 */
 	provides() {
@@ -58,7 +58,7 @@ export class ServiceProvider {
 	}
 
 	/**
-	 * A list of services this provider depends on
+	 * A list of services this provider depends on.
 	 * @returns {String[]}
 	 */
 	depends() {
@@ -66,17 +66,17 @@ export class ServiceProvider {
 	}
 
 	/**
-	 * Initializes provider
+	 * Initializes provider.
 	 */
 	async init() {}
 
 	/**
-	 * Starts provider
+	 * Starts provider.
 	 */
 	start() {}
 
 	/**
-	 * Destroys provider
+	 * Destroys provider.
 	 */
 	destroy() {}
 }
