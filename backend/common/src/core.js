@@ -40,7 +40,7 @@ import omitDeep from "omit-deep";
  */
 export class CoreBase extends EventEmitter {
 	/**
-	 * Create core instance
+	 * Create core instance.
 	 * @param {Object} defaultConfiguration Default configuration
 	 * @param {Object} configuration Configuration given
 	 * @param {Object} options Options
@@ -59,7 +59,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Destroy core instance
+	 * Destroy core instance.
 	 */
 	destroy() {
 		if (this.destroyed) {
@@ -78,7 +78,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Boots up MeeseOS
+	 * Boots up MeeseOS.
 	 */
 	boot() {
 		if (this.booted) {
@@ -93,7 +93,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Starts all core services
+	 * Starts all core services.
 	 */
 	start() {
 		if (this.started) {
@@ -106,7 +106,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Gets a configuration entry by key
+	 * Gets a configuration entry by key.
 	 *
 	 * @param {String} key The key to get the value from
 	 * @param {*} [defaultValue] If result is undefined, return this instead
@@ -120,7 +120,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Register a service provider
+	 * Register a service provider.
 	 *
 	 * @param {Class} ref A class reference
 	 * @param {Object} [options] Options for handling of provider
@@ -132,8 +132,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Register a instanciator provider
-	 *
+	 * Register a instantiator provider.
 	 * @param {String} name Provider name
 	 * @param {Function} callback Callback that returns an instance
 	 */
@@ -142,8 +141,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Register a singleton provider
-	 *
+	 * Register a singleton provider.
 	 * @param {String} name Provider name
 	 * @param {Function} callback Callback that returns an instance
 	 */
@@ -152,8 +150,7 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Create an instance of a provided service
-	 *
+	 * Create an instance of a provided service.
 	 * @param {String} name Service name
 	 * @param {*} args Constructor arguments
 	 * @returns {*} An instance of a service
@@ -163,9 +160,9 @@ export class CoreBase extends EventEmitter {
 	}
 
 	/**
-	 * Check if a service exists
+	 * Check if a service exists.
 	 * @param {String} name Provider name
-	 * @returns {Boolean}
+	 * @returns {Boolean} Whether the service exists
 	 */
 	has(name) {
 		return this.providers.has(name);

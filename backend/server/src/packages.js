@@ -52,9 +52,9 @@ const readOrDefault = (filename) =>
  */
 class Packages {
 	/**
-	 * Create new instance
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {PackagesOptions} [options] Instance options
+	 * @param {PackagesOptions} [options={}] Instance options
 	 */
 	constructor(core, options = {}) {
 		/**
@@ -80,7 +80,7 @@ class Packages {
 	}
 
 	/**
-	 * Initializes packages
+	 * Initializes packages.
 	 */
 	init() {
 		this.core.on("meeseOS/application:socket:message", (ws, ...params) => {
@@ -91,8 +91,8 @@ class Packages {
 	}
 
 	/**
-	 * Loads package manager
-	 * @returns {Promise<boolean>}
+	 * Loads package manager.
+	 * @returns {Promise<Boolean>}
 	 */
 	load() {
 		return this.createLoader().then((packages) => {
@@ -103,7 +103,7 @@ class Packages {
 	}
 
 	/**
-	 * Loads all packages
+	 * Loads all packages.
 	 * @returns {Promise<Package[]>}
 	 */
 	createLoader() {
@@ -139,7 +139,7 @@ class Packages {
 	}
 
 	/**
-	 * When a package dist has changed
+	 * When a package dist has changed.
 	 * @param {Package} pkg Package instance
 	 */
 	onPackageChanged(pkg) {
@@ -154,7 +154,7 @@ class Packages {
 	}
 
 	/**
-	 * Loads package data
+	 * Loads package data.
 	 * @param {String} filename Filename
 	 * @param {PackageMetadata} manifest Manifest
 	 * @returns {Promise<Package>}
@@ -179,7 +179,7 @@ class Packages {
 	}
 
 	/**
-	 * Initializes a package
+	 * Initializes a package.
 	 * @returns {Promise<Package>}
 	 */
 	initializePackage(pkg, manifest, done) {
@@ -206,14 +206,14 @@ class Packages {
 	}
 
 	/**
-	 * Starts packages
+	 * Starts packages.
 	 */
 	start() {
 		this.packages.forEach((pkg) => pkg.start());
 	}
 
 	/**
-	 * Destroys packages
+	 * Destroys packages.
 	 * @returns {Promise<undefined>}
 	 */
 	async destroy() {
@@ -223,9 +223,9 @@ class Packages {
 	}
 
 	/**
-	 * Handles an incoming message and signals an application
+	 * Handles an incoming message and signals an application.
 	 *
-	 * This will call the 'onmessage' event in your application server script
+	 * This will call the 'onmessage' event in your application server script.
 	 *
 	 * @param {WebSocket} ws Websocket Connection client
 	 * @param {Array} params A list of incoming parameters

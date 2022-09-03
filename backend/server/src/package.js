@@ -48,9 +48,9 @@ const chokidar = require("chokidar");
  */
 class Package {
 	/**
-	 * Create new instance
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {PackageOptions} [options] Instance options
+	 * @param {PackageOptions} [options={}] Instance options
 	 */
 	constructor(core, options = {}) {
 		/**
@@ -78,7 +78,7 @@ class Package {
 	}
 
 	/**
-	 * Destroys instance
+	 * Destroys instance.
 	 */
 	async destroy() {
 		this.action("destroy");
@@ -90,7 +90,7 @@ class Package {
 	}
 
 	/**
-	 * Run method on package script
+	 * Run method on package script.
 	 * @param {String} method Method name
 	 * @param {*} [...args] Pass arguments
 	 * @returns {Boolean}
@@ -110,7 +110,7 @@ class Package {
 	}
 
 	/**
-	 * Validates this package
+	 * Validates this package.
 	 * @param {PackageMetadata[]} manifest Global manifest
 	 * @returns {Boolean}
 	 */
@@ -123,7 +123,7 @@ class Package {
 	}
 
 	/**
-	 * Initializes this package
+	 * Initializes this package.
 	 * @returns {Promise<undefined>}
 	 */
 	init() {
@@ -140,7 +140,7 @@ class Package {
 	}
 
 	/**
-	 * Starts server scripts
+	 * Starts server scripts.
 	 * @returns {Promise<undefined>}
 	 */
 	start() {
@@ -148,7 +148,7 @@ class Package {
 	}
 
 	/**
-	 * Creates a watch in package dist
+	 * Creates a watch in package dist.
 	 * @param {Function} cb Callback function on watch changes
 	 * @returns {String} Watched path
 	 */
@@ -163,7 +163,7 @@ class Package {
 	}
 
 	/**
-	 * Resolve an URL for resource
+	 * Resolve an URL for resource.
 	 * @param {String} path Input path
 	 * @returns {String}
 	 */

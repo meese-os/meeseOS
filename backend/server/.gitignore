@@ -1,2 +1,2 @@
-session-store.db
+*.db
 !/__mocks__/**/*

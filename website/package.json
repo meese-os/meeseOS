@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/website",
-  "version": "2.0.10",
+  "version": "2.1.0",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
@@ -71,7 +71,9 @@
     "@meeseOS/wireless-tools-provider": "workspace:*",
     "dotenv": "^16.0.0",
     "hyperapp": "^1.2.10",
-    "typeface-roboto": "^1.1.13"
+    "typeface-roboto": "^1.1.13",
+    "jsonwebtoken": "^8.5.1",
+    "complex-dotenv-json": "^1.1.0"
   },
   "engines": {
     "node": ">=10.0.0"

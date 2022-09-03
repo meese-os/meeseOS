@@ -32,7 +32,9 @@ const fs = require("fs-extra");
 const consola = require("consola");
 const pathLib = require("path");
 const logger = consola.withTag("Auth");
-const nullAdapter = require("./adapters/auth/null.js");
+const nullAdapter = require("./adapters/auth/null");
+const TokenStorage = require("./utils/token-storage");
+const TokenFactory = require("./utils/token-factory");
 
 /**
  * TODO: typedef
@@ -60,7 +62,7 @@ const nullAdapter = require("./adapters/auth/null.js");
  */
 class Auth {
 	/**
-	 * Creates a new instance
+	 * Creates a new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {AuthOptions} [options={}] Service Provider arguments
 	 */
@@ -90,24 +92,29 @@ class Auth {
 		try {
 			this.adapter = this.options.adapter(core, this.options.config);
 		} catch (e) {
-			this.core.logger.warn(e);
+			logger.warn(e);
 		}
 	}
 
 	/**
-	 * Destroys instance
-	 */
-	destroy() {
-		if (this.adapter.destroy) {
-			this.adapter.destroy();
-		}
-	}
-
-	/**
-	 * Initializes adapter
-	 * @returns {Promise<boolean>}
+	 * Initializes adapter.
+	 * @returns {Promise<Boolean>}
 	 */
 	async init() {
+		/**
+		 * @type {TokenFactory}
+		 */
+		this.tokenFactory = this.core.make("meeseOS/token-factory");
+
+		await this.tokenFactory.init();
+
+		/**
+		 * @type {TokenStorage}
+		 */
+		this.storage = this.core.make("meeseOS/token-storage");
+
+		await this.storage.init();
+
 		if (this.adapter.init) {
 			return this.adapter.init();
 		}
@@ -116,30 +123,67 @@ class Auth {
 	}
 
 	/**
-	 * Performs a login request
+	 * Destroys instance.
+	 */
+	destroy() {
+		if (this.adapter.destroy) {
+			this.adapter.destroy();
+		}
+	}
+
+	/**
+	 * Performs a login request.
 	 * @param {Request} req HTTP request
 	 * @param {Response} res HTTP response
 	 * @returns {Promise<undefined>}
 	 */
 	async login(req, res) {
-		const result = await this.adapter.login(req, res);
+		let result = {};
+		const refreshToken = req.body.refreshToken;
 
-		if (result) {
+		if (refreshToken) {
+			// Decodes the JWT refresh token and returns the user information
+			const refreshTokenUser =
+			  await this.tokenFactory.refreshToAccessToken(refreshToken);
+
+			if (refreshTokenUser && refreshTokenUser.accessToken) {
+				result.username = refreshTokenUser.username;
+				result.groups = refreshTokenUser.groups;
+				result.accessToken = refreshTokenUser.accessToken;
+			}
+		} else {
+			// Attempts to log the user in using the adapter
+			const standardAuthResult = await this.adapter.login(req, res);
+
+			if (standardAuthResult) {
+				result = standardAuthResult;
+				result.refreshToken = this.tokenFactory.createRefreshToken(
+					standardAuthResult.username,
+					standardAuthResult.groups
+				);
+				result.accessToken = this.tokenFactory.createAccessToken(
+					standardAuthResult.username,
+					standardAuthResult.groups
+				);
+
+				this.storage.create(result.refreshToken);
+			}
+		}
+
+		if (Object.keys(result).length !== 0) {
 			const profile = this.createUserProfile(req.body, result);
-
 			if (profile && this.checkLoginPermissions(profile)) {
-				await this.createHomeDirectory(profile, req, res);
+				await this.createHomeDirectory(profile);
 				req.session.user = profile;
 				req.session.save(() => {
 					this.core.emit(
 						"meeseOS/core:logged-in",
-						Object.freeze({
-							...req.session,
-						})
+						Object.freeze({ ...req.session, })
 					);
 
 					res.status(200).json(profile);
 				});
+
 				return;
 			}
 		}
@@ -148,7 +192,7 @@ class Auth {
 	}
 
 	/**
-	 * Performs a logout request
+	 * Performs a logout request.
 	 * @param {Request} req HTTP request
 	 * @param {Response} res HTTP response
 	 * @returns {Promise<undefined>}
@@ -156,9 +200,7 @@ class Auth {
 	async logout(req, res) {
 		this.core.emit(
 			"meeseOS/core:logging-out",
-			Object.freeze({
-				...req.session,
-			})
+			Object.freeze({ ...req.session, })
 		);
 
 		await this.adapter.logout(req, res);
@@ -173,7 +215,7 @@ class Auth {
 	}
 
 	/**
-	 * Performs a register request
+	 * Performs a register request.
 	 * @param {Request} req HTTP request
 	 * @param {Response} res HTTP response
 	 * @returns {Promise<undefined>}
@@ -189,7 +231,7 @@ class Auth {
 	}
 
 	/**
-	 * Checks if login is allowed for this user
+	 * Checks if login is allowed for this user.
 	 * @param {AuthUserProfile} profile User profile
 	 * @returns {Boolean}
 	 */
@@ -201,9 +243,9 @@ class Auth {
 		}
 
 		if (requiredGroups.length > 0) {
-			const passes = requiredGroups.every((name) => {
-				return profile.groups.indexOf(name) !== -1;
-			});
+			const passes = requiredGroups.every((name) =>
+				profile.groups.indexOf(name) !== -1
+			);
 
 			return passes;
 		}
@@ -212,37 +254,38 @@ class Auth {
 	}
 
 	/**
-	 * Creates user profile object
+	 * Creates user profile object.
 	 * @param {Object} fields Input fields
 	 * @param {Object} result Login result
-	 * @returns {AuthUserProfile|boolean}
+	 * @returns {AuthUserProfile|Boolean}
 	 */
 	createUserProfile(fields, result) {
 		const ignores = ["password"];
 		const required = ["username"];
 		const template = {
 			username: fields.username,
+			id: fields.username,
 			name: fields.username,
 			groups: this.core.config("auth.defaultGroups", []),
+			refreshToken: fields.refreshToken,
 		};
 
-		const missing = required.filter((k) => typeof result[k] === "undefined");
-
+		const mergedArrays = { ...fields, ...result };
+		const missing = required.filter((k) => typeof mergedArrays[k] === "undefined");
 		if (missing.length) {
-			logger.warn("Missing user attributes", missing);
-		} else {
-			const values = Object.keys(result)
-				.filter((k) => ignores.indexOf(k) === -1)
-				.reduce((o, k) => ({ ...o, [k]: result[k] }), {});
-
-			return { ...template, ...values };
+			logger.warn("Missing user attributes:", missing);
+			return false;
 		}
 
-		return false;
+		const values = Object.keys(mergedArrays)
+			.filter((key) => ignores.indexOf(key) === -1)
+			.reduce((obj, key) => ({ ...obj, [key]: mergedArrays[key] }), {});
+
+		return { ...template, ...values };
 	}
 
 	/**
-	 * Tries to create home directory for a user
+	 * Tries to create home directory for a user.
 	 * @param {AuthUserProfile} profile User profile
 	 * @returns {Promise<undefined>}
 	 */
@@ -263,7 +306,7 @@ class Auth {
 
 	/**
 	 * If the template is an array, it is a list of files that should be copied
-	 * to the user's home directory
+	 * to the user's home directory.
 	 * @param {Object[]} template Array of objects with a specified path,
 	 * optionally with specified content but defaulting to an empty string
 	 * @param {VFSServiceProvider} vfs An instance of the virtual file system
@@ -280,8 +323,8 @@ class Auth {
 					await fs.writeFile(shortcutsFile, contents);
 				}
 			} catch (e) {
-				console.warn(`There was a problem writing '${file.path}' to the home directory template`);
-				console.error("ERROR:", e);
+				logger.warn(`There was a problem writing '${file.path}' to the home directory template`);
+				logger.error("ERROR:", e);
 			}
 		}
 	}

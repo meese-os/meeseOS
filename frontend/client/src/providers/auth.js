@@ -33,7 +33,6 @@ import Auth from "../auth";
 
 /**
  * Auth Service Contract
- * TODO: typedef
  * @typedef {Object} AuthProviderContract
  * @property {Function} show
  * @property {Function} login
@@ -67,7 +66,15 @@ export default class AuthServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Initializes authentication
+	 * Get a list of services this provider registers.
+	 * @returns {String[]}
+	 */
+	provides() {
+		return ["meeseOS/auth"];
+	}
+
+	/**
+	 * Initializes authentication.
 	 * @returns {Promise<undefined>}
 	 */
 	init() {
@@ -77,20 +84,12 @@ export default class AuthServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Destroys authentication
+	 * Destroys authentication.
 	 */
 	destroy() {
 		this.auth.destroy();
 
 		return super.destroy();
-	}
-
-	/**
-	 * Get a list of services this provider registers
-	 * @returns {String[]}
-	 */
-	provides() {
-		return ["meeseOS/auth"];
 	}
 
 	/**

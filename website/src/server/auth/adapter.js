@@ -5,56 +5,55 @@
  * - https://manual.aaronmeese.com/development/
  */
 
-const { readFileSync } = require("fs");
-const { resolve } = require("path");
-const { parse } = require("dotenv");
+const dotenvJSON = require("complex-dotenv-json");
+const path = require("path");
+const jwt = require("jsonwebtoken");
 
-// https://stackoverflow.com/a/72708267/6456163
-const authInfo = parse(readFileSync(resolve(__dirname, ".env")));
+const envFile = path.resolve(__dirname, ".env.json");
+dotenvJSON({ path: envFile });
 
-module.exports = (core, config) => ({
+/**
+ * JSON-based Auth adapter
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {Object} [options] Adapter options
+ */
+module.exports = (core, options) => ({
+	init: async () => true,
+
+	destroy: async () => true,
+
 	async login(req, res) {
 		const { username, password } = req.body;
+		let groups = [];
 
 		// TODO: Also make this dependent on the configuration
-		// The guest user's credentials will be passed automatically
-		// when the "Login as Guest" button is clicked
 		if (username === "guest" && password === "guest") {
-			return {
-				username,
-				groups: ["guest"],
-			};
+			// The guest user's credentials will be passed automatically
+			// when the "Login as Guest" button is clicked
+			groups = ["guest"];
+		} else {
+			// Validate the user against the 'database'
+			const users = JSON.parse(process.env.meeseOS_users);
+			const usernameExists = users.hasOwnProperty(username);
+			if (usernameExists) {
+				const passwordCorrect = users[username].password === password;
+				if (passwordCorrect) {
+					groups = users[username].groups;
+				}
+			}
 		}
 
-		// For the server administrator, give them the "admin" group;
-		// this will need to be modified if you want multiple administrators
-		if (authInfo["ADMIN_USERNAME"] === username && authInfo[username] === password) {
-			return {
-				username,
-				groups: ["admin"],
-			};
+		if (groups.length === 0) {
+			// Default deny if no match
+			return false;
 		}
 
-		// For general users, give them the "user" group
-		if (authInfo[username] === password) {
-			return {
-				username,
-				groups: ["user"],
-			};
-		}
-
-		// IDEA: Some kind of web3 integration here
-		// IDEA: Add other providers here, like social login
-
-		// Default deny if no match
-		return false;
-	},
-
-	async logout(req, res) {
-		return true;
+		return ({ username: req.body.username });
 	},
 
 	async register(req, res) {
 		throw new Error("Registration not available");
 	},
+
+	logout: async (req, res) => true,
 });

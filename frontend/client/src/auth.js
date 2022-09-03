@@ -81,6 +81,11 @@ const createAdapter = (core, options) => {
  */
 
 /**
+ * @typedef {Object} RefreshToken
+ * @property {String} [refreshToken]
+ */
+
+/**
  * @callback AuthAdapterCallback
  * @param {Core} core
  * @returns {AuthAdapter}
@@ -106,7 +111,7 @@ const createAdapter = (core, options) => {
  */
 
 /**
- * Handles Authentication
+ * Handles Authentication.
  */
 export default class Auth {
 	/**
@@ -115,28 +120,28 @@ export default class Auth {
 	 */
 	constructor(core, options = {}) {
 		/**
-		 * Authentication UI
+		 * Authentication UI.
 		 * @type {Login}
 		 * @readonly
 		 */
 		this.ui = createUi(core, options);
 
 		/**
-		 * Authentication adapter
+		 * Authentication adapter.
 		 * @type {AuthAdapter}
 		 * @readonly
 		 */
 		this.adapter = createAdapter(core, options);
 
 		/**
-		 * Authentication callback function
+		 * Authentication callback function.
 		 * @type {AuthCallback}
 		 * @readonly
 		 */
 		this.callback = function() {};
 
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 * @readonly
 		 */
@@ -144,7 +149,7 @@ export default class Auth {
 	}
 
 	/**
-	 * Initializes the authentication handler
+	 * Initializes the authentication handler.
 	 */
 	init() {
 		this.ui.on("login:post", (values) => this.login(values));
@@ -154,14 +159,14 @@ export default class Auth {
 	}
 
 	/**
-	 * Destroy authentication handler
+	 * Destroy authentication handler.
 	 */
 	destroy() {
 		this.ui.destroy();
 	}
 
 	/**
-	 * Run the shutdown procedure
+	 * Run the shutdown procedure.
 	 * @param {Boolean} [reload=false] Reload afterwards
 	 */
 	async shutdown(reload = false) {
@@ -185,9 +190,9 @@ export default class Auth {
 	}
 
 	/**
-	 * Shows Login UI
+	 * Shows Login UI.
 	 * @param {AuthCallback} cb Authentication callback
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	show(cb) {
 		const login = this.core.config("auth.login", {});
@@ -197,7 +202,6 @@ export default class Auth {
 		this.callback = cb;
 		this.ui.init(autologin);
 
-		// IDEA: Emitting of the events here?
 		if (autologin) {
 			return this.login(login);
 		} else if (settings.enabled) {
@@ -207,7 +211,7 @@ export default class Auth {
 					logger.debug("Authentication cookie:", cookie);
 				}
 
-				return this.login(JSON.parse(cookie));
+				return this.login({ refreshToken: cookie });
 			}
 		}
 
@@ -215,11 +219,12 @@ export default class Auth {
 	}
 
 	/**
-	 * Performs a login
-	 * @param {AuthForm} values Form values as JSON
-	 * @returns {Promise<boolean>}
+	 * Performs a login.
+	 * @param {AuthForm|RefreshToken} values Form values as JSON or refresh token
+	 * @returns {Promise<Boolean>}
 	 */
 	login(values) {
+		const settings = this.core.config("auth.cookie");
 		this.ui.emit("login:start");
 
 		return this.adapter
@@ -227,9 +232,10 @@ export default class Auth {
 			.then((response) => {
 				if (!response) return false;
 
-				const settings = this.core.config("auth.cookie");
 				if (settings.enabled) {
-					Cookies.set(settings.name, JSON.stringify(values), {
+					const refreshToken = response.refreshToken;
+
+					Cookies.set(settings.name, refreshToken, {
 						expires: settings.expires,
 						sameSite: "strict",
 					});
@@ -248,20 +254,21 @@ export default class Auth {
 			})
 			.catch((e) => {
 				if (this.core.config("development")) {
-					logger.warn("Exception on login", e);
+					logger.warn("Exception on login:", e);
 				}
 
 				this.ui.emit("login:error", "Login failed");
 				this.ui.emit("login:stop");
 
+				Cookies.remove(settings.name);
 				return false;
 			});
 	}
 
 	/**
-	 * Performs a logout
+	 * Performs a logout.
 	 * @param {Boolean} [reload=true] Reload client afterwards
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	logout(reload = true) {
 		return this.adapter.logout(reload).then((response) => {
@@ -277,7 +284,7 @@ export default class Auth {
 	}
 
 	/**
-	 * Performs a register call
+	 * Performs a register call.
 	 * @param {AuthForm} values Form values as JSON
 	 * @returns {Promise<*>}
 	 */

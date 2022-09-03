@@ -47,7 +47,7 @@ const fsAdapter = require("./adapters/settings/fs");
  */
 class Settings {
 	/**
-	 * Create new instance
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {SettingsOptions} [options={}] Instance options
 	 */
@@ -76,7 +76,7 @@ class Settings {
 	}
 
 	/**
-	 * Destroy instance
+	 * Destroy instance.
 	 */
 	destroy() {
 		if (this.adapter.destroy) {
@@ -85,8 +85,8 @@ class Settings {
 	}
 
 	/**
-	 * Initializes adapter
-	 * @returns {Promise<boolean>}
+	 * Initializes adapter.
+	 * @returns {Promise<Boolean>}
 	 */
 	async init() {
 		if (this.adapter.init) {
@@ -97,7 +97,7 @@ class Settings {
 	}
 
 	/**
-	 * Sends save request to adapter
+	 * Sends save request to adapter.
 	 * @param {Request} req Express request
 	 * @param {Response} res Express response
 	 * @returns {Promise<undefined>}
@@ -108,7 +108,7 @@ class Settings {
 	}
 
 	/**
-	 * Sends load request to adapter
+	 * Sends load request to adapter.
 	 * @param {Request} req Express request
 	 * @param {Response} res Express response
 	 * @returns {Promise<undefined>}

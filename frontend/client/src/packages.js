@@ -137,7 +137,7 @@ export default class Packages {
 
 	/**
 	 * Initializes package manager
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	init() {
 		logger.debug("Packages::init()");

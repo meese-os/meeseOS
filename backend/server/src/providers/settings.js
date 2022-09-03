@@ -35,6 +35,11 @@ const { ServiceProvider } = require("@meeseOS/common");
  * MeeseOS Settings Service Provider
  */
 class SettingsServiceProvider extends ServiceProvider {
+	/**
+	 * Create new instance.
+	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {Object} [options] Arguments
+	 */
 	constructor(core, options) {
 		super(core, options);
 
@@ -42,8 +47,8 @@ class SettingsServiceProvider extends ServiceProvider {
 	}
 
 	destroy() {
-		super.destroy();
 		this.settings.destroy();
+		super.destroy();
 	}
 
 	async init() {

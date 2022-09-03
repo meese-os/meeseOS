@@ -1,7 +1,7 @@
 /**
- * OS.js - JavaScript Cloud/Web Desktop Platform
+ * MeeseOS - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2022-Present, Aaron Meese <aaronjmeese@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,40 +24,63 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @author  Aaron Meese <aaronjmeese@gmail.com>
  * @licence Simplified BSD License
  */
 
-//
-// This is the server configuration tree.
-// Guide: https://manual.aaronmeese.com/config/#server
-// Complete config tree: https://github.com/os-js/osjs-server/blob/master/src/config.js
-//
+const { ServiceProvider } = require("@meeseOS/common");
+const TokenFactory = require("../utils/token-factory");
 
-const path = require("path");
-const root = path.resolve(__dirname, "../../");
-const dotenvJSON = require("complex-dotenv-json");
-const envFile = path.resolve(__dirname, "auth/.env.json");
-dotenvJSON({ path: envFile });
+/**
+ * MeeseOS Token Factory Service Provider
+ */
+class TokenFactoryServiceProvider extends ServiceProvider {
+	/**
+	 * Create new instance.
+	 * @param {Core} core MeeseOS Core instance reference
+	 */
+	constructor(core) {
+		super(core);
 
-const sessionSecret = process.env.SESSION_SECRET;
-const accessTokenSecret = process.env.JWT_SECRET;
-const refreshTokenSecret = process.env.JWT_REFRESH;
+		/**
+		 * @type {Core}
+		 */
+		this.core = core;
 
-module.exports = {
-	root,
-	port: 8000,
-	public: path.resolve(root, "dist"),
-	xterm: {
-		hostname: process.env.XTERM_HOSTNAME,
-	},
-	session: {
-		jwt: {
-			...(accessTokenSecret && { accessTokenSecret }),
-			...(refreshTokenSecret && { refreshTokenSecret }),
-		},
-		options: {
-			...(sessionSecret && { secret: sessionSecret }),
-		},
-	},
-};
+		/**
+		 * @type {TokenFactory}
+		 */
+		this.tokenFactory = new TokenFactory(this.core);
+	}
+
+	/**
+	 * A list of services this provider depends on.
+	 * @returns {String[]}
+	 */
+	depends() {
+		return ["meeseOS/token-storage"];
+	}
+
+	/**
+	 * Get a list of services this provider registers.
+	 * @returns {String[]}
+	 */
+	provides() {
+		return ["meeseOS/token-factory"];
+	}
+
+	/**
+	 * Initializes provider.
+	 */
+	async init() {
+		await this.tokenFactory.init();
+
+		this.core.singleton("meeseOS/token-factory", () => this.tokenFactory);
+	}
+
+	destroy() {
+		super.destroy();
+	}
+}
+
+module.exports = TokenFactoryServiceProvider;

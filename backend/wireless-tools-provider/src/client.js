@@ -149,9 +149,8 @@ class WifiTrayIcon {
 }
 
 export class WirelessToolsServiceProvider {
-
 	/**
-	 * Create new instance
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} [options={}] Arguments
 	 */
@@ -167,18 +166,15 @@ export class WirelessToolsServiceProvider {
 	}
 
 	/**
-	 * A list of services this provider can create
-	 * @desc Used for resolving a dependency graph
+	 * A list of services this provider can create.
 	 * @returns {String[]}
 	 */
 	provides() {
-		return [
-			"meeseOS/wireless-tools",
-		];
+		return ["meeseOS/wireless-tools"];
 	}
 
 	/**
-	 * Destroys provider
+	 * Destroys provider.
 	 */
 	destroy() {
 		this.subscriptions.clear();
@@ -186,7 +182,7 @@ export class WirelessToolsServiceProvider {
 	}
 
 	/**
-	 * Initializes provider
+	 * Initializes provider.
 	 * @returns {Promise<void>}
 	 */
 	init() {
@@ -199,7 +195,7 @@ export class WirelessToolsServiceProvider {
 	}
 
 	/**
-	 * Starts provider
+	 * Starts provider.
 	 * @returns {Promise<undefined>}
 	 */
 	start() {

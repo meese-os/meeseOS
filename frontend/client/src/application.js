@@ -269,7 +269,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Creates a new Websocket
+	 * Creates a new Websocket.
 	 * @param {String} [path=/socket] Append this to endpoint
 	 * @param {WebsocketOptions} [options={}] Connection options
 	 * @returns {Websocket}
@@ -289,7 +289,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Sends a message over websocket via the core connection.
+	 * Sends a message over Websocket via the core connection.
 	 *
 	 * This does not create a new connection, but rather uses the core connection.
 	 * For subscribing to messages from the server use the 'ws:message' event
@@ -411,7 +411,7 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Saves settings
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<Boolean>}
 	 */
 	saveSettings() {
 		const service = this.core.make("meeseOS/settings");

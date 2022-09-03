@@ -77,7 +77,7 @@ import { isPlainObject } from "is-plain-object";
  */
 export default class Core extends CoreBase {
 	/**
-	 * Create core instance
+	 * Create core instance.
 	 * @param {CoreConfig} [config={}] Configuration tree
 	 * @param {CoreOptions} [options={}] Options
 	 */
@@ -100,13 +100,13 @@ export default class Core extends CoreBase {
 		this.logger = logger;
 
 		/**
-		 * Websocket connection
+		 * Websocket connection.
 		 * @type {Websocket}
 		 */
 		this.ws = null;
 
 		/**
-		 * Ping (stay alive) interval
+		 * Ping (stay alive) interval.
 		 * @type {Number}
 		 */
 		this.ping = null;
@@ -126,14 +126,14 @@ export default class Core extends CoreBase {
 		this.$contents = $contents;
 
 		/**
-		 * Resource script container DOM element
+		 * Resource script container DOM element.
 		 * @type {Element}
 		 * @readonly
 		 */
 		this.$resourceRoot = options.resourceRoot || document.querySelector("head");
 
 		/**
-		 * Default fetch request options
+		 * Default fetch request options.
 		 * @type {Object}
 		 */
 		this.requestOptions = {};
@@ -147,7 +147,7 @@ export default class Core extends CoreBase {
 		this.urlResolver = urlResolver(this.configuration);
 
 		/**
-		 * Current user data
+		 * Current user data.
 		 * @type {CoreUserData}
 		 * @readonly
 		 */
@@ -179,7 +179,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Destroy core instance
+	 * Destroy core instance.
 	 * @returns {Boolean}
 	 */
 	destroy() {
@@ -210,8 +210,8 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Boots up MeeseOS
-	 * @returns {Promise<boolean>}
+	 * Boots up MeeseOS.
+	 * @returns {Promise<Boolean>}
 	 */
 	boot() {
 		const done = (e) => {
@@ -267,8 +267,8 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Starts all core services
-	 * @returns {Promise<boolean>}
+	 * Starts all core services.
+	 * @returns {Promise<Boolean>}
 	 */
 	start() {
 		const connect = () =>
@@ -322,7 +322,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Attaches some internal events
+	 * Attaches some internal events.
 	 * @private
 	 */
 	_attachEvents() {
@@ -373,7 +373,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Creates the main connection to server
+	 * Creates the main connection to server.
 	 *
 	 * @private
 	 * @param {Function} cb Callback function
@@ -429,7 +429,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Creates event listeners*
+	 * Creates event listeners.
 	 * @private
 	 */
 	_createListeners() {
@@ -454,14 +454,15 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Creates an URL based on configured public path
+	 * Creates an URL based on configured public path.
 	 *
 	 * If you give a options.type, the URL will be resolved
 	 * to the correct resource.
 	 *
 	 * @param {String} [endpoint=/] Endpoint
 	 * @param {Object} [options] Additional options for resolving url
-	 * @param {Boolean} [options.prefix=false] Returns a full URL complete with scheme, etc. (will always be true on websocket)
+	 * @param {Boolean} [options.prefix=false] Returns a full URL complete with
+	 * scheme, etc. (will always be true on websocket)
 	 * @param {String} [options.type] Optional URL type (websocket)
 	 * @param {PackageMetadata} [metadata] A package metadata
 	 * @returns {String}
@@ -471,10 +472,10 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Make an HTTP request
+	 * Makes an HTTP request.
 	 *
 	 * This is a wrapper for making a 'fetch' request with some helpers
-	 * and integration with MeeseOS
+	 * and integration with MeeseOS.
 	 *
 	 * @param {String} url The endpoint
 	 * @param {Options} [options] fetch options
@@ -507,7 +508,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Create an application from a package
+	 * Create an application from a package.
 	 *
 	 * @param {String} name Package name
 	 * @param {{foo: *}} [args] Launch arguments
@@ -522,7 +523,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Spawns an application based on the file given
+	 * Spawns an application based on the file given.
 	 *
 	 * @param {VFSFile} file A file object
 	 * @param {CoreOpenOptions} [options] Options
@@ -558,7 +559,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Wrapper method to create an application choice dialog
+	 * Wrapper method to create an application choice dialog.
 	 * @private
 	 */
 	_openApplicationDialog(options, compatible, file, run) {
@@ -604,7 +605,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Removes an event handler
+	 * Removes an event handler.
 	 *
 	 * @param {String} name
 	 * @param {Function} [callback=null]
@@ -621,7 +622,7 @@ export default class Core extends CoreBase {
 
 	/**
 	 * Sends a 'broadcast' event with given arguments
-	 * to all applications matching given filter
+	 * to all applications matching given filter.
 	 *
 	 * @param {String|Function} pkg The filter
 	 * @param {String} name The event name
@@ -657,7 +658,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Set the internal fetch/request options
+	 * Set the internal fetch/request options.
 	 * @param {Object} options Request options
 	 */
 	setRequestOptions(options) {
@@ -665,7 +666,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Gets the current user
+	 * Gets the current user.
 	 * @returns {CoreUserData} User object
 	 */
 	getUser() {
@@ -673,7 +674,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Add middleware function to a group
+	 * Add middleware function to a group.
 	 * @param {String} group Middleware group
 	 * @param {Function} callback Middleware function to add
 	 */
@@ -682,7 +683,7 @@ export default class Core extends CoreBase {
 	}
 
 	/**
-	 * Kills the specified application
+	 * Kills the specified application.
 	 * @param {String|Number} match Application name or PID
 	 */
 	kill(match) {
