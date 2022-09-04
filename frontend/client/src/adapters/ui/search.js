@@ -49,7 +49,7 @@ const createView = (core, fs, icon) => {
 					].join(" "),
 				},
 				[
-					h("img", { src: icon(fs.icon(r).name + ".png") }),
+					h("img", { src: icon(fs.icon(r).name) }),
 					h("span", {}, `${r.path} (${r.mime})`),
 				]
 			)
@@ -130,7 +130,10 @@ const createView = (core, fs, icon) => {
 };
 
 /**
- * Search UI Adapter
+ * Search UI Adapter.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {HTMLElement} $element Element to mount to
+ * @returns {EventEmitter} The SearchUI event emitter
  */
 const create = (core, $element) => {
 	const fs = core.make("meeseOS/fs");

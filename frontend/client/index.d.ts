@@ -1083,7 +1083,7 @@ declare class Core extends CoreBase {
 	requestOptions: any;
 
 	/**
-	 * Url Resolver
+	 * URL Resolver
 	 */
 	readonly urlResolver: () => string;
 
@@ -1103,12 +1103,12 @@ declare class Core extends CoreBase {
 	private _createConnection;
 
 	/**
-	 * Creates event listeners*
+	 * Creates event listeners
 	 */
 	private _createListeners;
 
 	/**
-	 * Creates an URL based on configured public path
+	 * Creates an URL based on configured public path.
 	 * If you give a options.type, the URL will be resolved
 	 * to the correct resource.
 	 */
@@ -1122,9 +1122,9 @@ declare class Core extends CoreBase {
 	): string;
 
 	/**
-	 * Make a HTTP request
+	 * Make an HTTP request.
 	 * This is a wrapper for making a 'fetch' request with some helpers
-	 * and integration with MeeseOS
+	 * and integration with MeeseOS.
 	 */
 	request(url: string, options?: any, type?: string, force?: boolean): any;
 

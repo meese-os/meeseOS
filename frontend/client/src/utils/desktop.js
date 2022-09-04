@@ -34,7 +34,13 @@ import cursorEffects from "@meeseOS/cursor-effects";
 import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 import Core from "../core";
 
-const imageDropMimes = ["image/png", "image/jpe?g", "image/webp", "image/gif"];
+const imageDropMimes = [
+	"image/png",
+	"image/jpe?g",
+	"image/webp",
+	"image/gif",
+	"image/svg",
+];
 
 /**
  * Check if droppable data is a VFS type
@@ -233,6 +239,20 @@ export const createPanelSubtraction = (panel, panels) => {
 export const isVisible = (w) =>
 	w && !w.getState("minimized") && w.getState("focused");
 
+/**
+ * Allows for requesting whether a file exists without `async`.
+ * @todo Move to MeeseOS VFS, so the 404 error doesn't log to console
+ * @param {String} urlToFile
+ * @returns {Boolean}
+ */
+const syncRequest = (urlToFile) => {
+	const xhr = new XMLHttpRequest();
+	xhr.open("HEAD", urlToFile, false);
+	xhr.send();
+
+	return xhr.status > 199 && xhr.status < 300;
+};
+
 /*
  * Resolves various resources
  * TODO: Move all of this (and related) stuff to a Theme class
@@ -274,7 +294,32 @@ export const resourceResolver = (core) => {
 
 	const icon = (path) => {
 		const theme = getThemeName("icons");
-		return core.url(`icons/${theme}/icons/${path}`); // FIXME: Use metadata ?
+		const urlBase = `icons/${theme}/icons`;
+
+		if (!path.match(/\.([a-z]+)$/)) {
+			const defaultExtension = "png";
+			const defaultImage = core.url(`${urlBase}/${path}.${defaultExtension}`);
+			const defaultImageExists = syncRequest(defaultImage);
+			if (defaultImageExists) {
+				path += "." + defaultExtension;
+			} else {
+				const checkExtensions = ["svg", "gif"];
+				for (const ext of checkExtensions) {
+					const url = core.url(`${urlBase}/${path}.${ext}`);
+					const urlExists = syncRequest(url);
+					if (urlExists) {
+						path += "." + ext;
+						break;
+					}
+				}
+
+				if (!path.match(/\.([a-z]+)$/)) {
+					path += "." + defaultExtension;
+				}
+			}
+		}
+
+		return core.url(`${urlBase}/${path}`);
 	};
 
 	return { themeResource, soundResource, soundsEnabled, icon };

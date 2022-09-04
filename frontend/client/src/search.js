@@ -88,7 +88,7 @@ export default class Search {
 		this.core.make("meeseOS/tray").create(
 			{
 				title: "Search Filesystem (F3)",
-				icon: icon("system-search.png"),
+				icon: icon("system-search"),
 			},
 			() => this.show()
 		);
