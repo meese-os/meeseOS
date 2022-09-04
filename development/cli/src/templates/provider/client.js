@@ -1,11 +1,11 @@
 export default class ServiceProvider {
 	/**
-	 * Create new instance
+	 * Create new instance.
 	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core, options = {}) {
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 */
 		this.core = core;
@@ -13,7 +13,7 @@ export default class ServiceProvider {
 	}
 
 	/**
-	 * A list of services this provider can create
+	 * A list of services this provider can create.
 	 * @desc Used for resolving a dependency graph
 	 * @returns {String[]}
 	 */
@@ -22,19 +22,19 @@ export default class ServiceProvider {
 	}
 
 	/**
-	 * Initializes provider
+	 * Initializes provider.
 	 */
 	init() {
 		return Promise.resolve();
 	}
 
 	/**
-	 * Starts provider
+	 * Starts provider.
 	 */
 	start() {}
 
 	/**
-	 * Destroys provider
+	 * Destroys provider.
 	 */
 	destroy() {}
 }

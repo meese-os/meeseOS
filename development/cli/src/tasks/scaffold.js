@@ -34,12 +34,9 @@ const inquirer = require("inquirer");
 const utils = require("../utils.js");
 const templates = path.resolve(__dirname, "../templates");
 
-const isWindows = /^win/.test(process.platform);
-const npmBinary = isWindows ? "npm.cmd" : "npm";
-
 const filterInput = (input) =>
 	String(input)
-		.replace(/[^A-z0-9_]/g, "")
+		.replace(/[^A-z0-9_@/]/g, "")
 		.trim();
 
 const scaffolds = {
@@ -182,7 +179,7 @@ const scaffoldPackage = (type) =>
 						return true;
 					}
 
-					const binary = filename.match(/\.png$/);
+					const binary = filename.match(/\.(png|svg)$/);
 
 					return fs
 						.ensureDir(path.dirname(destination))
@@ -200,7 +197,7 @@ const scaffoldPackage = (type) =>
 		const choices = force || (await inquirer.prompt([
 			{
 				name: "name",
-				message: "Enter name of package ([A-z0-9_])",
+				message: "Enter name of package ([A-z0-9_@/])",
 				default: defaultName,
 				filter: filterInput,
 				validate: (input) => {
@@ -273,23 +270,12 @@ const scaffoldPackage = (type) =>
 		await fs.ensureDir(destination);
 
 		return Promise.all(promises(choices.name, destination, replace))
-			.then(() => logger.info("Running \"npm install\""))
-			.then(() =>
-				args.dry
-					? false
-					: utils.spawnAsync(npmBinary, ["install"], { cwd: destination })
-			)
-			.then(() => logger.success("...dependencies installed"))
-			.then(() => logger.info("Running \"npm run build\""))
-			.then(() =>
-				args.dry
-					? false
-					: utils.spawnAsync(npmBinary, ["run", "build"], { cwd: destination })
-			)
-			.then(() => logger.success("...build complete"))
 			.then(() => {
-				logger.info("Package was generated and built.");
-				logger.info("Run \"npm run package:discover\" to make it available.");
+				logger.info("Package was generated.");
+				logger.info("Please add the package to your \"rush.json\".");
+				logger.info("Once you have done that, run \"rush update\" to install the dependencies.");
+				logger.info("Then you can run \"rush build\" to build the package.");
+				logger.info("Once it is built, run \"npm run package:discover\" to make it available.");
 
 				console.log(`
 For more information about packages, visit:

@@ -39,7 +39,7 @@ const imageDropMimes = [
 	"image/jpe?g",
 	"image/webp",
 	"image/gif",
-	"image/svg",
+	"image/svg(\\+xml)?",
 ];
 
 /**
