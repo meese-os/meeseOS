@@ -1,8 +1,6 @@
 version = 1
 
-[[analyzers]]
-name = "shell"
-enabled = true
+exclude_patterns = ["common/**"]
 
 [[analyzers]]
 name = "javascript"
@@ -10,3 +8,16 @@ enabled = true
 
   [analyzers.meta]
   plugins = ["react"]
+  environment = ["nodejs","browser","jest"]
+
+[[analyzers]]
+name = "docker"
+enabled = true
+
+[[analyzers]]
+name = "secrets"
+enabled = true
+
+[[analyzers]]
+name = "shell"
+enabled = true
