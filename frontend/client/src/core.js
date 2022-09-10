@@ -435,7 +435,7 @@ export default class Core extends CoreBase {
 		const handle = (data) => {
 			const { pid, wid, args } = data;
 			const proc = Application.getApplications().find(
-				(proc) => proc.pid === pid
+				(app) => app.pid === pid
 			);
 			const win = proc ? proc.windows.find((w) => w.wid === wid) : null;
 
