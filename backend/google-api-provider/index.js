@@ -112,7 +112,7 @@ export class GapiServiceProvider {
 	 * A list of services this provider depends on.
 	 * @returns {String[]}
 	 */
-	depends() {
+	static depends() {
 		return ["meeseOS/dom", "meeseOS/event-emitter"];
 	}
 
@@ -120,7 +120,7 @@ export class GapiServiceProvider {
 	 * Get a list of provided services.
 	 * @returns {String[]}
 	 */
-	provides() {
+	static provides() {
 		return ["google/api", "meeseOS/gapi"];
 	}
 
