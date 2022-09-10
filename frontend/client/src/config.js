@@ -169,6 +169,19 @@ export const defaultConfiguration = {
 		disableDownload: false,
 	},
 
+	gapi: {
+		enabled: false,
+		src: "https://apis.google.com/js/api.js",
+		timeout: 30000,
+		libraries: "client:auth2",
+		client: {
+			apiKey: null,
+			clientId: null,
+			discoveryDocs: [],
+			scope: [],
+		},
+	},
+
 	search: {
 		enabled: true,
 	},

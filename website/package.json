@@ -54,6 +54,7 @@
     "@meeseOS/filemanager": "workspace:*",
     "@meeseOS/games": "workspace:*",
     "@meeseOS/gnome-icons": "workspace:*",
+    "@meeseOS/google-api-provider": "workspace:*",
     "@meeseOS/gui": "workspace:*",
     "@meeseOS/image-to-8bit": "workspace:*",
     "@meeseOS/old-site": "workspace:*",

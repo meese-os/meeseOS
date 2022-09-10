@@ -497,6 +497,10 @@
       "projectFolder": "frontend/gnome-icons"
     },
     {
+      "packageName": "@meeseOS/google-api-provider",
+      "projectFolder": "backend/google-api-provider"
+    },
+    {
       "packageName": "@meeseOS/gui",
       "projectFolder": "frontend/gui"
     },
