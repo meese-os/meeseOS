@@ -562,7 +562,11 @@ export const menuFactory = (core, proc, win) => {
 				{
 					label: "Extract archive",
 					disabled: !items.length,
-					onclick: () => emitter("filemanager:menu:extract"),
+					onclick: () => {
+						if (items.length) {
+							emitter("filemanager:menu:extract");
+						}
+					}
 				},
 			] :
 			isDirectory ?
@@ -570,28 +574,48 @@ export const menuFactory = (core, proc, win) => {
 					{
 						label: "Go",
 						disabled: !items.length,
-						onclick: () => emitter("filemanager:navigate"),
+						onclick: () => {
+							if (items.length) {
+								emitter("filemanager:navigate");
+							}
+						}
 					},
 					{
 						label: "Compress",
 						disabled: !items.length,
-						onclick: () => emitter("filemanager:menu:compress"),
+						onclick: () => {
+							if (items.length) {
+								emitter("filemanager:menu:compress");
+							}
+						}
 					},
 				] : [
 					{
 						label: "Open",
 						disabled: !items.length,
-						onclick: () => emitter("filemanager:open"),
+						onclick: () => {
+							if (items.length) {
+								emitter("filemanager:open");
+							}
+						}
 					},
 					{
 						label: "Open with...",
 						disabled: !items.length,
-						onclick: () => emitter("filemanager:openWith"),
+						onclick: () => {
+							if (items.length) {
+								emitter("filemanager:openWith");
+							}
+						}
 					},
 					{
 						label: "Compress",
 						disabled: !items.length,
-						onclick: () => emitter("filemanager:menu:compress"),
+						onclick: () => {
+							if (items.length) {
+								emitter("filemanager:menu:compress");
+							}
+						}
 					},
 				];
 
@@ -599,20 +623,33 @@ export const menuFactory = (core, proc, win) => {
 			{
 				label: "Copy",
 				disabled: !hasValidFile,
-				onclick: () => emitter("filemanager:menu:copy"),
+				onclick: () => {
+					if (hasValidFile) {
+						emitter("filemanager:menu:copy");
+					}
+				}
 			},
 			{
 				label: "Cut",
 				disabled: !hasValidFile,
-				onclick: () => emitter("filemanager:menu:cut"),
+				onclick: () => {
+					if (hasValidFile) {
+						emitter("filemanager:menu:cut");
+					}
+				}
 			},
 		];
 
 		if (!isContextMenu) {
+			const canPaste = clipboard.has(/^filemanager:/);
 			clipboardMenu.push({
 				label: "Paste",
-				disabled: !clipboard.has(/^filemanager:/),
-				onclick: () => emitter("filemanager:menu:paste"),
+				disabled: !canPaste,
+				onclick: () => {
+					if (canPaste) {
+						emitter("filemanager:menu:paste");
+					}
+				},
 			});
 		}
 
@@ -626,7 +663,11 @@ export const menuFactory = (core, proc, win) => {
 			configuredItems.push({
 				label: "Download",
 				disabled: !canDownload,
-				onclick: () => emitter("filemanager:menu:download"),
+				onclick: () => {
+					if (canDownload) {
+						emitter("filemanager:menu:download");
+					}
+				},
 			});
 		}
 
@@ -635,12 +676,20 @@ export const menuFactory = (core, proc, win) => {
 			{
 				label: "Rename",
 				disabled: !hasValidFile,
-				onclick: () => emitter("filemanager:menu:rename"),
+				onclick: () => {
+					if (hasValidFile) {
+						emitter("filemanager:menu:rename");
+					}
+				}
 			},
 			{
 				label: "Delete",
 				disabled: !hasValidFile,
-				onclick: () => emitter("filemanager:menu:delete"),
+				onclick: () => {
+					if (hasValidFile) {
+						emitter("filemanager:menu:delete");
+					}
+				}
 			},
 			...clipboardMenu,
 			...configuredItems,
