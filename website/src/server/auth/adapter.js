@@ -34,7 +34,7 @@ module.exports = (core, options) => ({
 		} else {
 			// Validate the user against the 'database'
 			const users = JSON.parse(process.env.meeseOS_users);
-			const usernameExists = users.hasOwnProperty(username);
+			const usernameExists = Object.prototype.hasOwnProperty.call(users, username);
 			if (usernameExists) {
 				const passwordCorrect = users[username].password === password;
 				if (passwordCorrect) {
