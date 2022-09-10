@@ -32,23 +32,34 @@ import { createLettercrap } from "./loading-screen/lettercrap.js";
 import loadingScreen from "./loading-screen/loading.html";
 
 /**
+ * Convert a template string into HTML DOM nodes
+ * @param  {String} str The template string
+ * @returns {Node} The template HTML
+ */
+const stringToHTML = (str) => {
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(str, "text/html");
+	return doc.body;
+};
+
+/**
  * Splash Screen UI
  */
 export default class Splash {
 	/**
-	 * Create Splash
+	 * Create Splash.
 	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 * @readonly
 		 */
 		this.core = core;
 
 		/**
-		 * Splash root element
+		 * Splash root element.
 		 * @type {Element}
 		 * @readonly
 		 */
@@ -56,22 +67,23 @@ export default class Splash {
 		this.$loading.className = "meeseOS-boot-splash";
 
 		/**
-		 * The transition time for `.loadingPage` in `styles/_loading.scss`
+		 * The transition time for `.loadingPage` in `styles/_loading.scss`.
+		 * @idea https://stackoverflow.com/q/56523785/6456163
 		 * @type {Number}
 		 * @readonly
 		 */
 		this.pageTransitionTime = 1000;
 
 		/**
-		 * The time between quips, in milliseconds
+		 * The time between quips, in milliseconds.
 		 * @type {Number}
 		 * @readonly
 		 */
 		this.timePerQuip = 1500;
 
 		/**
-		 * The array of quips to display
-		 * @type {Array}
+		 * The array of quips to display.
+		 * @type {String[]}
 		 * @readonly
 		 */
 		this.quips = [
@@ -82,17 +94,15 @@ export default class Splash {
 		];
 
 		core.on("meeseOS/core:boot", () => this.show());
-		// TODO: Replace this with the cookie login event or something
-		// core.on("meeseOS/core:logged-in", () => this.show());
+		core.on("meeseOS/core:logged-in", () => this.show());
 		core.on("meeseOS/splash:finished", () => this.destroy());
 	}
 
 	/**
-	 * Initializes splash with listener for user interaction
+	 * Initializes splash with listener for user interaction.
 	 */
 	init() {
 		this.$loading.appendChild(stringToHTML(loadingScreen));
-		this.$loading.style.transition = "1s";
 		this.core.emit("meeseOS/splash:loaded");
 
 		// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#specifying_this_using_bind
@@ -102,7 +112,7 @@ export default class Splash {
 	}
 
 	/**
-	 * Starts splash screen functionality after user interaction
+	 * Starts splash screen functionality after user interaction.
 	 */
 	start() {
 		this.core.emit("meeseOS/splash:started");
@@ -121,6 +131,7 @@ export default class Splash {
 		for (let i = 1; i <= this.quips.length; i++) {
 			setTimeout(() => {
 				loadingBar.innerText = this.quips[i - 1];
+				// IDEA: Attempt CSS animation here using the transition time variable
 				loadingBar.style.width = (i / this.quips.length) * 100 + "%";
 			}, this.timePerQuip * i);
 		}
@@ -128,7 +139,6 @@ export default class Splash {
 		// Fade out the loading screen after all the quips have been displayed
 		window.setTimeout(() => {
 			this.$loading.style.opacity = 0;
-			this.core.$contents.style.opacity = 1;
 
 			setTimeout(() => {
 				this.core.emit("meeseOS/splash:finished");
@@ -137,21 +147,16 @@ export default class Splash {
 	}
 
 	/**
-	 * Shows splash
+	 * Shows splash.
 	 */
 	show() {
-		// Hide the normal MeeseOS content
-		const content = document.querySelector(".meeseOS-contents");
-		content.style.transition = "1s";
-		content.style.opacity = 0;
-
 		if (!this.$loading.parentNode) {
 			this.core.$root.appendChild(this.$loading);
 		}
 	}
 
 	/**
-	 * Destroys splash
+	 * Destroys splash.
 	 */
 	destroy() {
 		if (this.$loading.parentNode) {
@@ -159,14 +164,3 @@ export default class Splash {
 		}
 	}
 }
-
-/**
- * Convert a template string into HTML DOM nodes
- * @param  {String} str The template string
- * @returns {Node}       The template HTML
- */
-const stringToHTML = (str) => {
-	const parser = new DOMParser();
-	const doc = parser.parseFromString(str, "text/html");
-	return doc.body;
-};

@@ -234,8 +234,7 @@ export default class Core extends CoreBase {
 		this._attachEvents();
 		this.emit("meeseOS/core:boot");
 
-		// TODO: Prevent flash of login UI if the local cookie is set
-
+		// TODO: Start the service providers before auth, not after
 		return super
 			.boot()
 			.then(() => {
