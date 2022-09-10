@@ -40,12 +40,7 @@ export const createInstance = () => {
 		})
 	);
 
-	core.logger = new Proxy(
-		{},
-		{
-			get: () => () => {},
-		}
-	);
+	core.logger = new Proxy({}, { get: () => () => {} });
 
 	core.register(CoreServiceProvider);
 	core.register(SettingsServiceProvider, { before: true });

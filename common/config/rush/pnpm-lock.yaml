@@ -25,8 +25,8 @@ importers:
       graceful-fs: ^4.2.10
       hyperapp: ^1.2.10
       mini-css-extract-plugin: ^2.5.3
-      process: ~0.11.10
-      read-chunk: ~4.0.2
+      process: ^0.11.10
+      read-chunk: ^4.0.2
       sass: ^1.53.0
       sass-loader: ^13.0.2
       stream-browserify: ^3.0.0
@@ -510,7 +510,7 @@ importers:
       eslint-plugin-jest: ^26.5.3
       express: ^4.17.2
       express-http-proxy: ^1.6.3
-      express-session: ~1.17.3
+      express-session: ^1.17.3
       express-ws: ^5.0.2
       extract-zip: ^2.0.1
       fast-glob: ^2.2.7
@@ -623,6 +623,48 @@ importers:
       stylelint: ^13.8.0
     dependencies:
       stylelint: 13.13.1
+
+  ../../frontend/We10X-icons:
+    specifiers:
+      '@babel/core': ^7.17.2
+      '@babel/plugin-transform-runtime': ^7.17.0
+      '@babel/preset-env': ^7.16.11
+      '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      '@meeseOS/stylelint-config': workspace:*
+      babel-loader: ^8.2.3
+      copy-webpack-plugin: ^10.2.4
+      css-loader: ^6.6.0
+      css-minimizer-webpack-plugin: ^3.4.1
+      eslint: ^8.18.0
+      mini-css-extract-plugin: ^2.5.3
+      sass: ^1.53.0
+      sass-loader: ^13.0.2
+      stylelint: ^14.5.0
+      stylelint-config-standard: ^25.0.0
+      stylelint-config-standard-scss: ^4.0.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
+    devDependencies:
+      '@babel/core': 7.17.10
+      '@babel/plugin-transform-runtime': 7.17.10
+      '@babel/preset-env': 7.17.10
+      '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meeseOS/stylelint-config': link:../../development/stylelint
+      babel-loader: 8.2.5_webpack-cli@4.9.2
+      copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
+      css-loader: 6.7.1_webpack-cli@4.9.2
+      css-minimizer-webpack-plugin: 3.4.1_webpack-cli@4.9.2
+      eslint: 8.18.0
+      mini-css-extract-plugin: 2.6.0_webpack-cli@4.9.2
+      sass: 1.53.0
+      sass-loader: 13.0.2_sass@1.53.0+webpack@5.72.1
+      stylelint: 14.8.2
+      stylelint-config-standard: 25.0.0
+      stylelint-config-standard-scss: 4.0.0
+      webpack: 5.72.1_webpack-cli@4.9.2
+      webpack-cli: 4.9.2
 
   ../../frontend/client:
     specifiers:
@@ -786,8 +828,11 @@ importers:
       '@meeseOS/eslint-config': workspace:*
       babel-loader: ^8.2.3
       eslint: ^8.18.0
+      hexells: ^1.1.3
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
+    dependencies:
+      hexells: 1.1.3
     devDependencies:
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
@@ -1060,6 +1105,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
+      '@meeseOS/We10X-icons': workspace:*
       '@meeseOS/cli': workspace:*
       '@meeseOS/client': workspace:*
       '@meeseOS/dialogs': workspace:*
@@ -1105,6 +1151,7 @@ importers:
       webpack: ^5.68.0
       webpack-cli: ^4.9.2
     dependencies:
+      '@meeseOS/We10X-icons': link:../frontend/We10X-icons
       '@meeseOS/cli': link:../development/cli
       '@meeseOS/client': link:../frontend/client
       '@meeseOS/dialogs': link:../frontend/dialogs
@@ -4818,6 +4865,10 @@ packages:
     resolution: {integrity: sha512-xEdTTzsKCUigXObNW5wydrkUS1Z6BhVQ6cJezZrQdE3grL0EO79mfaNW5QUZW1prmhW79tmT7EujH33YM/XCvQ==}
     dev: false
 
+  /dat.gui/0.7.9:
+    resolution: {integrity: sha512-sCNc1OHobc+Erc1HqiswYgHdVNpSJUlk/Hz8vzOCsER7rl+oF/4+v8GXFUyCgtXpoCX6+bnmg07DedLvBLwYKQ==}
+    dev: false
+
   /data-uri-to-buffer/3.0.1:
     resolution: {integrity: sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==}
     engines: {node: '>= 6'}
@@ -6160,6 +6211,14 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
     dev: true
+
+  /hexells/1.1.3:
+    resolution: {integrity: sha512-y24Dy8+3lnihpA9ElBTWkxdGRI75FJKKsiWaSjMwMtktdKYqaCSdJ8H8Xslh/10lQNAOkrLHquZRA3ivfroP4A==}
+    dependencies:
+      dat.gui: 0.7.9
+      twgl.js: 4.24.0
+      upng-js: 2.1.0
+    dev: false
 
   /hexoid/1.0.0:
     resolution: {integrity: sha512-QFLV0taWQOZtvIRIAdBChesmogZrtuXvVWsFHZTk2SU+anspqZ2vMnoLg7IE1+Uk16N19APic1BuF8bC8c2m5g==}
@@ -8206,6 +8265,10 @@ packages:
   /pako/0.2.9:
     resolution: {integrity: sha1-8/dSL073gjSNqBYbrZ7P1Rv4OnU=}
     dev: true
+
+  /pako/1.0.11:
+    resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
+    dev: false
 
   /param-case/2.1.1:
     resolution: {integrity: sha1-35T9jPZTHs915r75oIWPvHK+Ikc=}
@@ -10743,6 +10806,10 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
+  /twgl.js/4.24.0:
+    resolution: {integrity: sha512-JGVTxuV9dqaBmajXyvuZIlhCHrTbIaoNjQvtdoLHyK74OtbmNwZUj6rfdp+pz9htitI/tVxiVQ2nuw+KmD29vg==}
+    dev: false
+
   /tx2/1.0.5:
     resolution: {integrity: sha512-sJ24w0y03Md/bxzK4FU8J8JveYYUbSs2FViLJ2D/8bytSiyPRbuE3DyL/9UKYXTZlV3yXq0L8GLlhobTnekCVg==}
     dependencies:
@@ -10853,6 +10920,7 @@ packages:
   /unified/9.2.2:
     resolution: {integrity: sha512-Sg7j110mtefBD+qunSLO1lqOEKdrwBFBrR6Qd8f4uwkhWNlbkaqwHse6e7QvD3AP/MNoJdEDLaf8OxYyoWgorQ==}
     dependencies:
+      '@types/unist': 2.0.6
       bail: 1.0.5
       extend: 3.0.2
       is-buffer: 2.0.5
@@ -10928,7 +10996,12 @@ packages:
       browserslist: 4.21.0
       escalade: 3.1.1
       picocolors: 1.0.0
-    dev: true
+
+  /upng-js/2.1.0:
+    resolution: {integrity: sha512-d3xzZzpMP64YkjP5pr8gNyvBt7dLk/uGI67EctzDuVp4lCZyVMo0aJO6l/VDlgbInJYDY6cnClLoBp29eKWI6g==}
+    dependencies:
+      pako: 1.0.11
+    dev: false
 
   /upper-case/1.1.3:
     resolution: {integrity: sha1-9rRQHC7EzdJrp4vnIilh3ndiFZg=}

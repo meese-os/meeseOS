@@ -135,8 +135,7 @@ const makeTree = (core, icon) => {
 };
 
 /**
- * Menu
- * @desc Menu Panel Item
+ * Menu Panel Item
  */
 export default class MenuPanelItem extends PanelItem {
 	render(state, actions) {
