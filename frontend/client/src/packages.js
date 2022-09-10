@@ -77,34 +77,32 @@ import logger from "./logger";
  */
 export default class Packages {
 	/**
-	 * Create package manage
-	 *
+	 * Create package manager.
 	 * @param {Core} core MeeseOS Core instance reference
 	 */
 	constructor(core) {
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 * @readonly
 		 */
 		this.core = core;
 
 		/**
-		 * A list of registered packages
+		 * A list of registered packages.
 		 * @type {PackageReference[]}
 		 */
 		this.packages = [];
 
 		/**
-		 * The lost of loaded package metadata
+		 * The list of loaded package metadata.
 		 * @type {PackageMetadata[]}
 		 */
 		this.metadata = [];
 
 		/**
-		 * A list of running application names
-		 *
-		 * Mainly used for singleton awareness
+		 * A list of running application names.
+		 * Mainly used for singleton awareness.
 		 *
 		 * @private
 		 * @type {String[]}
@@ -112,7 +110,7 @@ export default class Packages {
 		this._running = [];
 
 		/**
-		 * Preloader
+		 * Preloader.
 		 * @type {Preloader}
 		 * @readonly
 		 */
@@ -126,7 +124,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Destroy package manager
+	 * Destroy package manager.
 	 */
 	destroy() {
 		this.packages = [];
@@ -136,7 +134,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Initializes package manager
+	 * Initializes package manager.
 	 * @returns {Promise<Boolean>}
 	 */
 	init() {
@@ -165,7 +163,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Launches a (application) package
+	 * Launches a (application) package.
 	 *
 	 * @param {String} name Package name
 	 * @param {{foo: *}} [args={}] Launch arguments
@@ -190,7 +188,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Launches an application package
+	 * Launches an application package.
 	 *
 	 * @private
 	 * @param {String} name Application package name
@@ -238,7 +236,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Launches a (theme) package
+	 * Launches a (theme) package.
 	 *
 	 * @private
 	 * @param {String} name Package name
@@ -259,7 +257,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Returns preloads
+	 * Returns preloads.
 	 *
 	 * @private
 	 * @param {Metadata} metadata Application metadata
@@ -274,7 +272,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Wrapper for launching a (application) package
+	 * Wrapper for launching a (application) package.
 	 *
 	 * @private
 	 * @param {String} name Package name
@@ -372,7 +370,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Autostarts tagged packages
+	 * Autostarts tagged packages.
 	 * @private
 	 */
 	_autostart() {
@@ -388,7 +386,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Registers a package
+	 * Registers a package.
 	 *
 	 * @param {String} name Package name
 	 * @param {Function} callback Callback function to construct application instance
@@ -418,7 +416,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Adds a set of packages
+	 * Adds a set of packages.
 	 * @param {PackageMetadata[]} list Package list
 	 * @returns {PackageMetadata[]} Current list of packages
 	 */
@@ -436,7 +434,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Gets a list of packages (metadata)
+	 * Gets a list of packages (metadata).
 	 * @param {Function} [filter] A filter function
 	 * @returns {PackageMetadata[]}
 	 */
@@ -457,7 +455,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Gets a list of packages compatible with the given mime type
+	 * Gets a list of packages compatible with the given mime type.
 	 * @param {String} mimeType MIME Type
 	 * @see PackageManager#getPackages
 	 * @returns {PackageMetadata[]}
@@ -484,7 +482,7 @@ export default class Packages {
 	}
 
 	/**
-	 * Preloads background files of a set of packages
+	 * Preloads background files of a set of packages.
 	 * @param {PackageMetadata[]} list Package list
 	 */
 	_preloadBackgroundFiles(list) {
@@ -502,10 +500,20 @@ export default class Packages {
 	}
 
 	/**
-	 * Gets a list of running packages
+	 * Gets a list of running packages.
 	 * @returns {String[]}
 	 */
 	running() {
 		return this._running;
+	}
+
+	/**
+	 * Gets the package metadata for a given package name.
+	 * @param {String} name
+	 * @returns {PackageMetadata|null}
+	 */
+	getMetadataFromName(name) {
+		const found = this.metadata.find((pkg) => pkg.name === name);
+		return found ? { ...found } : null;
 	}
 }

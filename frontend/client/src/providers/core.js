@@ -316,7 +316,6 @@ export default class CoreServiceProvider extends ServiceProvider {
 				: new WindowBehavior(this.core)
 		);
 
-		// FIXME: deprecated
 		this.core.instance("meeseOS/event-handler", (...args) => {
 			logger.warn(
 				"meeseOS/event-handler is deprecated, use meeseOS/event-emitter"
@@ -495,6 +494,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 			getCompatiblePackages: (mimeType) =>
 				this.pm.getCompatiblePackages(mimeType),
 			running: () => this.pm.running(),
+			getMetadataFromName: (name) => this.pm.getMetadataFromName(name),
 		};
 	}
 

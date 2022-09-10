@@ -28,4 +28,48 @@
  * @licence Simplified BSD License
  */
 
-import "./index.scss";
+const path = require("path");
+
+class IconThemePlugin {
+	apply(compiler) {
+		const pluginName = IconThemePlugin.name;
+		const { webpack } = compiler;
+		const { RawSource } = webpack.sources;
+
+		compiler.hooks.emit.tap(pluginName, (compilation) => {
+			const icons = compilation.getAssets().map(
+				(asset) => asset.name.split("/").pop()
+			);
+
+			const metadataFile = `${compiler.context}/metadata.json`;
+			const metadata = require(metadataFile);
+
+			// Create an object with the property name as the asset name
+			// and the value as the file extension
+			const iconEntries = icons.map((file) => [
+				file.substr(0, file.lastIndexOf(".")),
+				file.substr(file.lastIndexOf(".") + 1, file.length)
+			]);
+
+			// Sort the icons by name
+			const sortedIcons = Object.fromEntries(
+				iconEntries.sort((a, b) => a[0].localeCompare(b[0]))
+			);
+
+			// Remove "icons" that aren't actually icons
+			const badFileTypes = ["map", "js"];
+			metadata.icons = Object.fromEntries(
+				Object.entries(sortedIcons).filter(
+					([key, value]) => !badFileTypes.includes(value)
+				)
+			);
+
+			// Write the new metadata to the file
+			const json = JSON.stringify(metadata, null, 2);
+			const relativePath = path.relative(compiler.outputPath, metadataFile);
+			compilation.emitAsset(relativePath, new RawSource(json));
+		});
+	}
+}
+
+module.exports = IconThemePlugin;
