@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./website/src/client/social_transparent.png">
     <source media="(prefers-color-scheme: light)" srcset="./website/src/client/social.png" width="650">
-    <img alt="meeseOS logo">
+    <img alt="meeseOS logo" title="meeseOS logo">
   </picture>
 </p>
 <br />
