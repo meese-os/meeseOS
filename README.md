@@ -1,7 +1,11 @@
 # meeseOS
 
 <p align="center">
-  <img src="./website/src/client/social.png" width="650" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./website/src/client/social_transparent.png">
+    <source media="(prefers-color-scheme: light)" srcset="./website/src/client/social.png" width="650">
+    <img alt="Black background meeseOS logo in light mode and a transparent one in dark mode." src="">
+  </picture>
 </p>
 
 <p align="center">
