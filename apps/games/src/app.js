@@ -10,7 +10,7 @@ function App({ pid }) {
 			{games.map((game, index) =>
 				<div className="gameCard" key={index}>
 					<h1>{game.name}</h1>
-					<img src={`apps/games/images/${game.image}`} />
+					<img src={`apps/games/images/${game.image}`} alt={`${game.name} logo`} />
 					<p className="description">{game.description}</p>
 
 					<button className="playButton" onClick={() => {
