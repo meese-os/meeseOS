@@ -30,7 +30,7 @@
 
 // This is the client configuration tree.
 // Guide: https://manual.aaronmeese.com/config/#client
-// Complete config tree: https://github.com/meese-enterprises/meeseOS/blob/master/frontend/client/src/config.js
+// Complete config tree: https://github.com/meeseOS/meeseOS/blob/master/frontend/client/src/config.js
 
 export default {
 	desktop: {

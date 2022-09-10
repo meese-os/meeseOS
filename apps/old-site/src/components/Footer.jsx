@@ -10,7 +10,7 @@ const Footer = () => {
 				className="text-dark"
 				target="_blank"
 				rel="noopener noreferrer"
-				href="https://github.com/meese-enterprises/meeseOS"
+				href="https://github.com/meeseOS/meeseOS"
 				aria-label="Website Code"
 			>
 				<i className="fas fa-code" />
