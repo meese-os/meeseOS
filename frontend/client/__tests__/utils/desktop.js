@@ -3,9 +3,13 @@ import { resourceResolver } from "../../src/utils/desktop";
 
 describe("#resourceResolver icon themes", () => {
 	let resolver;
+	let core;
 
 	beforeAll(() => createInstance().then(
-		(core) => (resolver = resourceResolver(core))
+		(c) => {
+			resolver = resourceResolver(c);
+			core = c;
+		}
 	));
 	afterAll(() => core.destroy());
 

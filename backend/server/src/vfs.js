@@ -206,7 +206,7 @@ const createRequestFactory = (findMountpoint) =>
 							});
 						}
 					} catch (e) {
-						core.logger.warn("Failed to send a ranged response", e);
+						console.warn("Failed to send a ranged response", e);
 					}
 				} else if (stat.mime) {
 					res.append("Content-Type", stat.mime);
