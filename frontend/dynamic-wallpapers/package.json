@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/dynamic-wallpapers",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "meeseOS Dynamic Wallpapers",
   "files": [
     "dist/",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@meeseOS/common": "workspace:*",
-    "hexells":"^1.1.4"
+    "hexells": "^1.1.7"
   },
   "meeseOS": {
     "type": "package"

@@ -34,6 +34,16 @@ const Hexells = require("hexells");
  * A mapping of the variable names to their relevant information.
  */
 const hexellsOptions = {
+	powerPreference: {
+		label: "Power Preference",
+		type: "select",
+		defaultValue: "default",
+		choices: () => ({
+			default: "Default",
+			"low-power": "Low Power",
+			"high-performance": "High Performance",
+		}),
+	},
 	brushRadius: {
 		label: "Brush Radius",
 		type: "number",
@@ -53,6 +63,11 @@ const hexellsOptions = {
 		label: "Responsive",
 		type: "boolean",
 		defaultValue: false,
+	},
+	fps: {
+		label: "FPS",
+		type: "number",
+		defaultValue: 10,
 	},
 };
 

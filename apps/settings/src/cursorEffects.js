@@ -82,8 +82,7 @@ export const cursorEffectSelect = (state, actions) => [
 		type: "select",
 		choices: () => getCursorChoices(),
 		oncreate: (ev) =>
-			(ev.value =
-				state.cursorEffect || getCursorChoices()[0].value),
+			(ev.value = state.cursorEffect || getCursorChoices()[0].value),
 		onchange: (ev) => actions.setCursorEffect(ev),
 	},
 ];

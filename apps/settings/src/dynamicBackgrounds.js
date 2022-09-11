@@ -53,6 +53,7 @@ export const dynamicBackgroundItems = (state) => {
 			path: `desktop.background.options.${key}`,
 			type: properties.type,
 			defaultValue: properties.defaultValue,
+			choices: properties.choices || [],
 		};
 	});
 
