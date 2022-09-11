@@ -31,7 +31,6 @@
 import logger from "../logger";
 import { supportedMedia } from "./dom";
 import cursorEffects from "@meeseOS/cursor-effects";
-import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 import Core from "../core";
 
 const imageDropMimes = [
@@ -50,7 +49,7 @@ const imageDropMimes = [
 export const validVfsDrop = (data) => data && data.path;
 
 /**
- * Check if droppable data contains image
+ * Check if droppable data contains an image.
  * @param {Object} data
  * @returns {Boolean}
  */
@@ -116,7 +115,7 @@ const getRandomWallpaper = () => {
 };
 
 /**
- * Creates a static background with an image and a color, if applicable
+ * Creates a static background with an image and a color, if applicable.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} background
  */
@@ -161,46 +160,24 @@ const createStaticBackground = (core, background) => {
 };
 
 /**
- * Creates a dynamic background based on the specified settings
- * @param {Object} background
- */
-const createDynamicBackground = (background) => {
-	const canvas = document.querySelector(".meeseOS-dynamic-background");
-	canvas.style.display = "inherit";
-
-	// TODO: Destroy and re-create canvas as opposed to just hiding it
-	// when transitioning between static and dynamic backgrounds
-
-	// Calls the background effect function by name
-	const effectName = background.effect || "default";
-	const options = background.options || {};
-	dynamicWallpapers[effectName].effect(canvas, options);
-};
-
-/**
- * Hides the dynamic background canvas
- */
-const hideDynamicBackground = () => {
-	const canvas = document.querySelector(".meeseOS-dynamic-background");
-	canvas.style.display = "none";
-};
-
-/**
- * Applies a set of styles based on background settings
+ * Applies a set of styles based on background settings.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} background
  */
 export const applyBackgroundStyles = (core, background) => {
 	if (background.type === "static") {
-		hideDynamicBackground();
+		core.make("meeseOS/background-canvas").removeAll();
 		createStaticBackground(core, background);
 	} else if (background.type === "dynamic") {
-		createDynamicBackground(background);
+		core.make("meeseOS/background-canvas").start(
+			background.effect,
+			background.options
+		);
 	}
 };
 
 /**
- * Applies a cursor effect based on the specified settings
+ * Applies a cursor effect based on the specified settings.
  * @param {Object} cursor
  */
 export const applyCursorEffect = (cursor) => {
@@ -219,7 +196,7 @@ export const applyCursorEffect = (cursor) => {
 };
 
 /**
- * Creates a rectangle with the realestate panels takes up
+ * Creates a rectangle with the realestate panels takes up.
  */
 export const createPanelSubtraction = (panel, panels) => {
 	const subtraction = { top: 0, left: 0, right: 0, bottom: 0 };
@@ -240,7 +217,7 @@ export const isVisible = (w) =>
 	w && !w.getState("minimized") && w.getState("focused");
 
 /**
- * Resolves various resources
+ * Resolves various resources.
  * @todo: Move all of this (and related) stuff to a Theme class
  * @param {Core} core MeeseOS Core instance reference
  */

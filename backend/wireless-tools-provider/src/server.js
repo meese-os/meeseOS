@@ -108,11 +108,7 @@ class WirelessToolsServiceProvider {
 		this.subscriptions = new Subscriptions(core);
 	}
 
-	destroy() {
-		this.subscriptions.destroy();
-	}
-
-	provides() {
+	static provides() {
 		return ["meeseOS/wireless-tools"];
 	}
 
@@ -150,6 +146,10 @@ class WirelessToolsServiceProvider {
 		this.core.singleton("meeseOS/wireless-tools", () => wireless_tools);
 
 		return Promise.resolve();
+	}
+
+	destroy() {
+		this.subscriptions.destroy();
 	}
 
 	start() {

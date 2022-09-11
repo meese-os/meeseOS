@@ -7,11 +7,12 @@
     "metadata.json"
   ],
   "scripts": {
+    "test": "npm run eslint && npm run stylelint",
     "eslint": "eslint index.js",
-    "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && rm -rf ./dist/* && NODE_ENV=production npm run build"
+    "stylelint": "stylelint index.scss src/**/*.scss --fix",
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
     "@meeseOS/eslint-config": "workspace:*",
@@ -20,11 +21,22 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/runtime": "^7.17.2",
     "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.18.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "stylelint": "^14.5.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-config-standard-scss": "^4.0.0",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@meeseOS/common": "workspace:*",
+    "hexells":"^1.1.4"
+  },
   "meeseOS": {
     "type": "package"
   },
@@ -38,6 +50,9 @@
       "ecmaVersion": 8
     },
     "extends": "@meeseOS/eslint-config"
+  },
+  "stylelint": {
+    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
   },
   "babel": {
     "presets": [

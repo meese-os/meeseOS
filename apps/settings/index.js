@@ -289,6 +289,7 @@ const renderWindow = (core, proc) => ($content, win) => {
 		themes: getThemes(),
 		defaults: getDefaults(),
 		settings: getSettings(),
+		core,
 	};
 
 	initialState.static = resolveSetting(

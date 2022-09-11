@@ -28,6 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import "./index.scss";
-
-export { default as BackgroundCanvasServiceProvider } from "./src/provider";
+.meeseOS-dynamic-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: inherit;
+}

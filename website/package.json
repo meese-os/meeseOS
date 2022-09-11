@@ -51,6 +51,7 @@
     "@meeseOS/cli": "workspace:*",
     "@meeseOS/client": "workspace:*",
     "@meeseOS/dialogs": "workspace:*",
+    "@meeseOS/dynamic-wallpapers": "workspace:*",
     "@meeseOS/filemanager": "workspace:*",
     "@meeseOS/games": "workspace:*",
     "@meeseOS/gnome-icons": "workspace:*",

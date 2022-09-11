@@ -17,7 +17,6 @@
   ],
   "devDependencies": {
     "@meeseOS/cursor-effects": "workspace:*",
-    "@meeseOS/dynamic-wallpapers": "workspace:*",
     "@meeseOS/eslint-config": "workspace:*",
     "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",

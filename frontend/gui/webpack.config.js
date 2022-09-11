@@ -6,7 +6,7 @@ const mode = process.env.NODE_ENV || "development";
 const minimize = mode === "production";
 const plugins = [];
 
-if (mode === "production") {
+if (minimize) {
 	plugins.push(new CssMinimizerPlugin());
 }
 
