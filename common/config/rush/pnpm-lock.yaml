@@ -851,7 +851,7 @@ importers:
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
       eslint: ^8.18.0
-      hexells: file:../../../hexells
+      hexells: ^1.1.7
       mini-css-extract-plugin: ^2.5.3
       sass: ^1.53.0
       sass-loader: ^13.0.2
@@ -862,7 +862,7 @@ importers:
       webpack-cli: ^4.9.2
     dependencies:
       '@meeseOS/common': link:../../backend/common
-      hexells: file:../../../hexells
+      hexells: 1.1.7
     devDependencies:
       '@babel/core': 7.17.10
       '@babel/plugin-transform-runtime': 7.17.10
@@ -6254,6 +6254,14 @@ packages:
     hasBin: true
     dev: true
 
+  /hexells/1.1.7:
+    resolution: {integrity: sha512-YE1yKLUF9oq+CW6IWMZCO0VcRfXClmsb/iC7EJFe1HuryS3PjtuqPt1MUnmY7BhQIVL+asP/2ZdtFGayuFuNdA==}
+    dependencies:
+      dat.gui: 0.7.9
+      twgl.js: 4.24.0
+      upng-js: 2.1.0
+    dev: false
+
   /hexoid/1.0.0:
     resolution: {integrity: sha512-QFLV0taWQOZtvIRIAdBChesmogZrtuXvVWsFHZTk2SU+anspqZ2vMnoLg7IE1+Uk16N19APic1BuF8bC8c2m5g==}
     engines: {node: '>=8'}
@@ -11524,14 +11532,4 @@ packages:
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
-    dev: false
-
-  file:../../../hexells:
-    resolution: {directory: ../../../hexells, type: directory}
-    name: hexells
-    version: 1.1.6
-    dependencies:
-      dat.gui: 0.7.9
-      twgl.js: 4.24.0
-      upng-js: 2.1.0
     dev: false

@@ -31,17 +31,20 @@
 const path = require("path");
 
 class IconThemePlugin {
+	constructor(options = {}) {
+		this.metadataPath = options.metadataPath;
+	}
+
 	apply(compiler) {
 		const pluginName = IconThemePlugin.name;
-		const { webpack } = compiler;
-		const { RawSource } = webpack.sources;
+		const { webpack: { RawSource } } = compiler;
 
 		compiler.hooks.emit.tap(pluginName, (compilation) => {
 			const icons = compilation.getAssets().map(
 				(asset) => asset.name.split("/").pop()
 			);
 
-			const metadataFile = `${compiler.context}/metadata.json`;
+			const metadataFile = `${this.metadataPath || compiler.context}/metadata.json`;
 			const metadata = require(metadataFile);
 
 			// Create an object with the property name as the asset name
@@ -50,17 +53,13 @@ class IconThemePlugin {
 				file.substr(0, file.lastIndexOf(".")),
 				file.substr(file.lastIndexOf(".") + 1, file.length)
 			]);
+			iconEntries.sort(([a], [b]) => a.localeCompare(b));
 
-			// Sort the icons by name
-			const sortedIcons = Object.fromEntries(
-				iconEntries.sort((a, b) => a[0].localeCompare(b[0]))
-			);
-
-			// Remove "icons" that aren't actually icons
-			const badFileTypes = ["map", "js"];
+			// Filter `icons` to only image file types
+			const imageTypes = ["png", "jpg", "jpeg", "gif", "svg", "webp"];
 			metadata.icons = Object.fromEntries(
-				Object.entries(sortedIcons).filter(
-					([key, value]) => !badFileTypes.includes(value)
+				Object.entries(iconEntries).filter(
+					([key, value]) => imageTypes.includes(value)
 				)
 			);
 
