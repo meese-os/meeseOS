@@ -1,10 +1,15 @@
 const path = require("path");
+const webpack = require("webpack");
 const mode = process.env.NODE_ENV || "development";
 const minimize = mode === "production";
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const dotenv = require("dotenv");
+const client_env_vars = dotenv.config({
+	path: path.resolve(__dirname, "src/client/.env"),
+}).parsed;
 const plugins = [];
 
 if (mode === "production") {
@@ -43,6 +48,16 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
+		}),
+		new webpack.DefinePlugin({
+			"process.env": {
+				"GOOGLE_API_KEY": JSON.stringify(
+					process.env.GOOGLE_API_KEY || client_env_vars.GOOGLE_API_KEY
+				),
+				"GOOGLE_CLIENT_ID": JSON.stringify(
+					process.env.GOOGLE_CLIENT_ID || client_env_vars.GOOGLE_CLIENT_ID
+				),
+			},
 		}),
 		...plugins,
 	],

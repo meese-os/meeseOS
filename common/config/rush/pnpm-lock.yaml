@@ -495,6 +495,28 @@ importers:
       webpack: 5.72.1_webpack-cli@4.9.2
       webpack-cli: 4.9.2
 
+  ../../backend/google-api-provider:
+    specifiers:
+      '@babel/core': ^7.17.2
+      '@babel/plugin-transform-runtime': ^7.17.0
+      '@babel/preset-env': ^7.16.11
+      '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      babel-loader: ^8.2.3
+      eslint: ^8.18.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
+    devDependencies:
+      '@babel/core': 7.17.10
+      '@babel/plugin-transform-runtime': 7.17.10
+      '@babel/preset-env': 7.17.10
+      '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      babel-loader: 8.2.5_webpack-cli@4.9.2
+      eslint: 8.18.0
+      webpack: 5.72.1_webpack-cli@4.9.2
+      webpack-cli: 4.9.2
+
   ../../backend/server:
     specifiers:
       '@meeseOS/common': workspace:*
@@ -1130,6 +1152,7 @@ importers:
       '@meeseOS/filemanager': workspace:*
       '@meeseOS/games': workspace:*
       '@meeseOS/gnome-icons': workspace:*
+      '@meeseOS/google-api-provider': workspace:*
       '@meeseOS/gui': workspace:*
       '@meeseOS/image-to-8bit': workspace:*
       '@meeseOS/old-site': workspace:*
@@ -1176,6 +1199,7 @@ importers:
       '@meeseOS/filemanager': link:../apps/filemanager
       '@meeseOS/games': link:../apps/games
       '@meeseOS/gnome-icons': link:../frontend/gnome-icons
+      '@meeseOS/google-api-provider': link:../backend/google-api-provider
       '@meeseOS/gui': link:../frontend/gui
       '@meeseOS/image-to-8bit': link:../apps/image-to-8bit
       '@meeseOS/old-site': link:../apps/old-site

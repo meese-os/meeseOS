@@ -49,6 +49,7 @@ import {
 } from "@meeseOS/client";
 import { BackgroundCanvasServiceProvider } from "@meeseOS/dynamic-wallpapers";
 import { DialogServiceProvider } from "@meeseOS/dialogs";
+import { GapiServiceProvider } from "@meeseOS/google-api-provider";
 import { GUIServiceProvider } from "@meeseOS/gui";
 import { PanelServiceProvider } from "@meeseOS/panels";
 import { WidgetServiceProvider } from "@meeseOS/widgets";
@@ -77,6 +78,9 @@ const init = () => {
 	meeseOS.register(AuthServiceProvider, { before: true });
 	meeseOS.register(PanelServiceProvider);
 	meeseOS.register(DialogServiceProvider);
+	if (meeseOS.config("gapi.enabled")) {
+		meeseOS.register(GapiServiceProvider);
+	}
 	meeseOS.register(GUIServiceProvider);
 	meeseOS.register(WidgetServiceProvider);
 	meeseOS.register(WirelessToolsServiceProvider);

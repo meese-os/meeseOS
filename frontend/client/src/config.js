@@ -169,6 +169,20 @@ export const defaultConfiguration = {
 		disableDownload: false,
 	},
 
+	gapi: {
+		enabled: false,
+		src: "https://accounts.google.com/gsi/client",
+		client: {
+			api_key: null,
+			client_id: null,
+			scope: [
+				"openid",
+				"profile",
+				"email",
+			],
+		},
+	},
+
 	search: {
 		enabled: true,
 	},

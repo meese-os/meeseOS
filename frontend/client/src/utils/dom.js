@@ -53,23 +53,31 @@ export const style = (root, src) =>
 	});
 
 /**
- * Creates a new Script DOM element
+ * Creates a new Script DOM element.
  * @param {Element} root Root node
  * @param {String} src Source
+ * @param {Object} [options={}] Options
  * @returns {Promise<StyleElement>}
  */
-export const script = (root, src) =>
+export const script = (root, src, options = {}) =>
 	new Promise((resolve, reject) => {
 		const el = document.createElement("script");
+		const opts = {
+			async: false,
+			defer: false,
+			...options,
+			src,
+			onerror: (err) => reject(err),
+			onload: () => resolve(el),
+		};
+
 		el.onreadystatechange = function() {
 			if (this.readyState === "complete" || this.readyState === "loaded") {
 				resolve(el);
 			}
 		};
-		el.onerror = (err) => reject(err);
-		el.onload = () => resolve(el);
-		el.src = src;
 
+		Object.assign(el, opts);
 		root.appendChild(el);
 
 		return el;
@@ -137,10 +145,10 @@ export const getActiveElement = (root) => {
  * @returns {Boolean}
  */
 export const supportsPassive = (function() {
-	let supportsPassive = false;
+	let doesSupportPassive = false;
 	try {
 		const opts = Object.defineProperty({}, "passive", {
-			get: () => (supportsPassive = true),
+			get: () => (doesSupportPassive = true),
 		});
 
 		window.addEventListener("testPassive", null, opts);
@@ -149,7 +157,7 @@ export const supportsPassive = (function() {
 		// noop
 	}
 
-	return () => supportsPassive;
+	return () => doesSupportPassive;
 })();
 
 /**

@@ -26,12 +26,11 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Setup
 
-- `cp apps/old-site/.env.template apps/old-site/.env`
-  - Update the new .env file by replacing the template information with your own
-- `cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env`
-  - Update the new .env file by replacing the template information with your own
-- `cp website/src/server/auth/.env.template website/src/server/auth/.env`
-  - Update the new .env file by replacing the template information with your own
+- Run the following commands and update the generated files with your own information:
+	- `cp apps/old-site/.env.template apps/old-site/.env`
+	- `cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env`
+	- `cp website/src/client/.env.template website/src/client/.env`
+	- `cp website/src/server/auth/template.env.json website/src/server/auth/.env.json`
 - `bash ./setup.sh`
 
 ## Deploy
