@@ -47,6 +47,7 @@ import {
 	SettingsServiceProvider,
 	VFSServiceProvider,
 } from "@meeseOS/client";
+import { BackgroundCanvasServiceProvider } from "@meeseOS/dynamic-wallpapers";
 import { DialogServiceProvider } from "@meeseOS/dialogs";
 import { GapiServiceProvider } from "@meeseOS/google-api-provider";
 import { GUIServiceProvider } from "@meeseOS/gui";
@@ -69,6 +70,7 @@ const init = () => {
 
 	// Register your service providers
 	meeseOS.register(CoreServiceProvider);
+	meeseOS.register(BackgroundCanvasServiceProvider);
 	meeseOS.register(DesktopServiceProvider);
 	meeseOS.register(VFSServiceProvider);
 	meeseOS.register(NotificationServiceProvider);

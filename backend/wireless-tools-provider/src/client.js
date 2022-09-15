@@ -169,7 +169,7 @@ export class WirelessToolsServiceProvider {
 	 * A list of services this provider can create.
 	 * @returns {String[]}
 	 */
-	provides() {
+	static provides() {
 		return ["meeseOS/wireless-tools"];
 	}
 

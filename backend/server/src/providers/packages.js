@@ -63,7 +63,7 @@ class PackageServiceProvider extends ServiceProvider {
 		});
 	}
 
-	provides() {
+	static provides() {
 		return ["meeseOS/packages"];
 	}
 

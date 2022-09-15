@@ -28,8 +28,6 @@
  * @licence Simplified BSD License
  */
 
-import matrix from "./src/matrix";
+import "./index.scss";
 
-export default {
-	matrix,
-};
+export { default as BackgroundCanvasServiceProvider } from "./src/provider";

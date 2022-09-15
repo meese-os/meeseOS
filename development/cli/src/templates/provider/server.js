@@ -17,7 +17,7 @@ class ServiceProvider {
 	 * @desc Used for resolving a dependency graph
 	 * @returns {String[]}
 	 */
-	provides() {
+	static provides() {
 		return [];
 	}
 

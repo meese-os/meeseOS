@@ -62,17 +62,10 @@ export default class DesktopServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Destroys instance.
-	 */
-	destroy() {
-		this.desktop = this.desktop.destroy();
-	}
-
-	/**
 	 * Get a list of services this provider registers.
 	 * @returns {String[]}
 	 */
-	provides() {
+	static provides() {
 		return ["meeseOS/desktop"];
 	}
 
@@ -88,6 +81,13 @@ export default class DesktopServiceProvider extends ServiceProvider {
 		this.core.on("meeseOS/core:started", () => {
 			this.desktop.applySettings();
 		});
+	}
+
+	/**
+	 * Destroys instance.
+	 */
+	destroy() {
+		this.desktop = this.desktop.destroy();
 	}
 
 	/**

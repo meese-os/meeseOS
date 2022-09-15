@@ -55,7 +55,7 @@ export class ServiceProvider {
 	/**
 	 * List of provided services
 	 */
-	provides(): string[];
+	static provides(): string[];
 
 	/**
 	 * Initializes Provider

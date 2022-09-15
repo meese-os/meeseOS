@@ -83,8 +83,11 @@ const matrix = (canvas, options) => {
 	// Set the canvas width and height to the screen width and height;
 	// NOTE: Disabling alpha here makes the rain the wrong size (too big), so don't :)
 	const ctx = canvas.getContext("2d");
+
+	// Set the canvas width and height to the screen width and height
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
+	canvas.classList += " matrix";
 
 	// Define variables above the resize function
 	const fontSizeValue = window
@@ -188,8 +191,20 @@ const matrix = (canvas, options) => {
 	}, timeForWholeScreen);
 };
 
+/**
+ * Destroys the Matrix effect.
+ */
+const destroy = () => {
+	if (matrixObject.interval) {
+		console.debug("Destroying Matrix effect");
+		clearInterval(matrixObject.interval);
+		matrixObject.interval = null;
+	}
+};
+
 export default {
 	label: "Matrix",
 	effect: matrix,
 	options: matrixOptions,
+	destroy,
 };

@@ -83,7 +83,7 @@ class CoreServiceProvider extends ServiceProvider {
 	 * Get a list of services this provider registers.
 	 * @returns {String[]}
 	 */
-	provides() {
+	static provides() {
 		return ["meeseOS/express"];
 	}
 

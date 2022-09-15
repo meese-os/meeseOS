@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/website",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
@@ -51,6 +51,7 @@
     "@meeseOS/cli": "workspace:*",
     "@meeseOS/client": "workspace:*",
     "@meeseOS/dialogs": "workspace:*",
+    "@meeseOS/dynamic-wallpapers": "workspace:*",
     "@meeseOS/filemanager": "workspace:*",
     "@meeseOS/games": "workspace:*",
     "@meeseOS/gnome-icons": "workspace:*",

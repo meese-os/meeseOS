@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/settings",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "MeeseOS Settings Application",
   "scripts": {
     "eslint": "eslint *.js",
@@ -17,7 +17,6 @@
   ],
   "devDependencies": {
     "@meeseOS/cursor-effects": "workspace:*",
-    "@meeseOS/dynamic-wallpapers": "workspace:*",
     "@meeseOS/eslint-config": "workspace:*",
     "@meeseOS/stylelint-config": "workspace:*",
     "@babel/core": "^7.17.2",

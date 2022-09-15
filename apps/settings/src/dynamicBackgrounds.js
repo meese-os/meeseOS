@@ -29,7 +29,6 @@
  */
 
 import { resolveSetting } from "./utils";
-import dynamicWallpapers from "@meeseOS/dynamic-wallpapers";
 
 /**
  * Returns all of the settings for a given dynamic background effect.
@@ -44,7 +43,7 @@ export const dynamicBackgroundItems = (state) => {
 		state.defaults
 	)("desktop.background.effect");
 
-	const selectedEffect = dynamicWallpapers[selectedEffectKey];
+	const selectedEffect = state.core.make("meeseOS/background-canvas").effects[selectedEffectKey];
 	const options = selectedEffect.options || {};
 
 	const items = Object.keys(options).map((key) => {
@@ -54,6 +53,7 @@ export const dynamicBackgroundItems = (state) => {
 			path: `desktop.background.options.${key}`,
 			type: properties.type,
 			defaultValue: properties.defaultValue,
+			choices: properties.choices || [],
 		};
 	});
 
@@ -62,17 +62,20 @@ export const dynamicBackgroundItems = (state) => {
 
 /**
  * Loads all of the available dynamic wallpaper effects.
+ * @param {Core} core
  * @returns {Object[]}
  */
-const getDynamicWallpaperChoices = () =>
-	Object.keys(dynamicWallpapers).map((key) => {
-		const properties = dynamicWallpapers[key];
+const getDynamicWallpaperChoices = (core) => {
+	const effects = core.make("meeseOS/background-canvas").effects;
+	return Object.keys(effects).map((key) => {
+		const properties = effects[key];
 
 		return {
 			label: properties.label || "Mystery",
 			value: properties.effect.name,
 		};
 	});
+}
 
 /**
  * Creates a `select` field for dynamic wallpaper effects.
@@ -85,10 +88,9 @@ export const dynamicBackgroundSelect = (state, actions) => [
 		label: "Effect",
 		path: "desktop.background.effect",
 		type: "select",
-		choices: () => getDynamicWallpaperChoices(),
+		choices: () => getDynamicWallpaperChoices(state.core),
 		oncreate: (ev) =>
-			(ev.value =
-				state.wallpaperEffect || getDynamicWallpaperChoices()[0].value),
+			(ev.value = state.wallpaperEffect || getDynamicWallpaperChoices(state.core)[0].value),
 		onchange: (ev) => actions.setWallpaperEffect(ev),
 	},
 ];
