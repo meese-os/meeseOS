@@ -37,7 +37,7 @@ class IconThemePlugin {
 
 	apply(compiler) {
 		const pluginName = IconThemePlugin.name;
-		const { webpack: { RawSource } } = compiler;
+		const { webpack: { sources: { RawSource } } } = compiler;
 
 		compiler.hooks.emit.tap(pluginName, (compilation) => {
 			const icons = compilation.getAssets().map(
