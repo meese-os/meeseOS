@@ -51,6 +51,7 @@ const createGapiClient = (options = {}) => {
 		throw new Error("gapi client requires scope");
 	}
 
+	console.debug("Creating gapi client with", opts);
 	return window.google.accounts.oauth2.initCodeClient(opts);
 };
 
@@ -191,8 +192,8 @@ export class GapiServiceProvider {
 		const { script } = this.core.make("meeseOS/dom");
 		const { $resourceRoot } = this.core;
 
-		const onload = () => createGapiClient(client);
-		return script($resourceRoot, src, { onload });
+		return script($resourceRoot, src)
+		  .then(() => createGapiClient(client));
 	}
 
 	/**

@@ -1135,6 +1135,7 @@ importers:
       '@meeseOS/filemanager': workspace:*
       '@meeseOS/games': workspace:*
       '@meeseOS/gnome-icons': workspace:*
+      '@meeseOS/google-api-provider': workspace:*
       '@meeseOS/gui': workspace:*
       '@meeseOS/image-to-8bit': workspace:*
       '@meeseOS/old-site': workspace:*
@@ -1180,6 +1181,7 @@ importers:
       '@meeseOS/filemanager': link:../apps/filemanager
       '@meeseOS/games': link:../apps/games
       '@meeseOS/gnome-icons': link:../frontend/gnome-icons
+      '@meeseOS/google-api-provider': link:../backend/google-api-provider
       '@meeseOS/gui': link:../frontend/gui
       '@meeseOS/image-to-8bit': link:../apps/image-to-8bit
       '@meeseOS/old-site': link:../apps/old-site

@@ -64,9 +64,10 @@ export const script = (root, src, options = {}) =>
 		const opts = {
 			async: false,
 			defer: false,
+			...options,
+			src,
 			onerror: (err) => reject(err),
 			onload: () => resolve(el),
-			...options,
 		};
 
 		const el = document.createElement("script");
@@ -75,12 +76,8 @@ export const script = (root, src, options = {}) =>
 				resolve(el);
 			}
 		};
-		el.onerror = opts.onerror;
-		el.onload = opts.onload;
-		el.async = opts.async;
-		el.defer = opts.defer;
-		el.src = src;
 
+		Object.assign(el, opts);
 		root.appendChild(el);
 
 		return el;
