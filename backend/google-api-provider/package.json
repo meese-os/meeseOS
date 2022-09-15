@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/google-api-provider",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Google API Service Provider for meeseOS",
   "main": "dist/main.js",
   "module": "dist/main.js",

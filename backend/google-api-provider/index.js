@@ -29,63 +29,34 @@
  */
 
 /**
- * Alias
- */
-const gapiAuthInstance = () => window.gapi.auth2.getAuthInstance();
-
-/**
  * Creates gapi client instance
+ * @param {Object} [options={}] Options
  */
-const createGapiClient = (options) => {
+const createGapiClient = (options = {}) => {
 	const opts = {
-		apiKey: null,
-		clientId: null,
-		discoveryDocs: [],
+		api_key: null,
+		client_id: null,
+		// Full list: https://developers.google.com/identity/protocols/googlescopes
 		scope: [],
 		...options
 	};
 
 	opts.scope = opts.scope.join(" ");
 
-	if (!opts.apiKey || !opts.clientId) {
-		throw new Error("gapi client requires apiKey and clientId");
-	}
-
-	if (!opts.discoveryDocs.length) {
-		throw new Error("gapi client requires discoveryDocs");
+	if (!opts.api_key || !opts.client_id) {
+		throw new Error("gapi client requires api_key and client_id");
 	}
 
 	if (!opts.scope.length) {
 		throw new Error("gapi client requires scope");
 	}
 
-	return window.gapi.client.init(opts);
+	return window.google.accounts.oauth2.initCodeClient(opts);
 };
 
 /**
- * Loads the gapi client.
- * @param {String} libraries The Google API libraries to load
- * @param {Integer} timeout Timeout in milliseconds
- * @returns {Promise}
- */
-const loadGapiClient = (libraries, timeout) =>
-	new Promise((resolve, reject) => {
-		if (libraries) {
-			console.debug("Loading gapi client with", libraries);
-
-			window.gapi.load(libraries, {
-				timeout,
-				callback: () => resolve(),
-				onerror: err => reject(new Error(err)),
-				ontimeout: () => reject(new Error("Timed out"))
-			});
-		} else {
-			reject(new Error("gapi load requires libraries"));
-		}
-	});
-
-/**
  * Google API Service Provider.
+ * @see https://github.com/google/google-api-javascript-client
  */
 export class GapiServiceProvider {
 	/**
@@ -130,17 +101,17 @@ export class GapiServiceProvider {
 	 */
 	init() {
 		this.core.singleton("google/api", () => {
-			if (!("gapi" in window)) {
-				throw new Error("gapi was not loaded");
+			if (!("google" in window)) {
+				throw new Error("The Google API was not loaded");
 			}
 
-			return window.gapi;
+			return window.google;
 		});
 
 		this.core.singleton("meeseOS/gapi", () => ({
 			login: () => this.login(),
 			logout: () => this.login(),
-			create: () => this.createInstance()
+			create: () => this.createInstance(),
 		}));
 	}
 
@@ -171,14 +142,14 @@ export class GapiServiceProvider {
 	createTray() {
 		this.tray = this.core.make("meeseOS/tray").create({
 			title: "Google API",
-			icon: require("./logo.svg")
+			//icon: require("./logo.svg")
 		}, ev => {
 			this.core.make("meeseOS/contextmenu").show({
 				position: ev.target,
 				menu: [{
 					label: "Scopes",
-					items: this.options.client.scope.map((s) => ({
-						label: s
+					items: this.options.client.scope.map((label) => ({
+						label,
 					}))
 				}, {
 					label: "Sign In",
@@ -196,7 +167,7 @@ export class GapiServiceProvider {
 
 		this.bus.on("signed-in", () => {
 			this.core.make("meeseOS/notification", {
-				icon: require("./logo.svg"),
+				//icon: require("./logo.svg"),
 				title: "Google API",
 				message: "You have signed on to Google"
 			});
@@ -216,14 +187,12 @@ export class GapiServiceProvider {
 	 * @returns {Promise}
 	 */
 	createApi() {
-		const { src, libraries, timeout, client } = this.options;
+		const { src, client } = this.options;
 		const { script } = this.core.make("meeseOS/dom");
 		const { $resourceRoot } = this.core;
 
-		return script($resourceRoot, src)
-			.then(() => loadGapiClient(libraries, timeout))
-			.then(() => createGapiClient(client))
-			.then(() => this.listen());
+		const onload = () => createGapiClient(client);
+		return script($resourceRoot, src, { onload });
 	}
 
 	/**
@@ -257,30 +226,9 @@ export class GapiServiceProvider {
 	 * @see EventHandler#emit
 	 */
 	emitAll(name, ...args) {
-		args.push(window.gapi);
+		args.push(window.google);
 
 		this.clients.forEach(bus => bus.emit(name, ...args));
-	}
-
-	/**
-	 * Sets up the gapi auth listening.
-	 */
-	listen() {
-		const emit = () => this.bus.emit(this.signedIn ? "signed-in" : "signed-out");
-
-		if (!this.loaded) {
-			gapiAuthInstance().isSignedIn.listen((s) => {
-				this.signedIn = s;
-
-				emit();
-			});
-
-			this.signedIn = gapiAuthInstance().isSignedIn.get();
-
-			emit();
-		}
-
-		this.loaded = true;
 	}
 
 	/**
@@ -289,11 +237,12 @@ export class GapiServiceProvider {
 	 */
 	login() {
 		if (!this.signedIn) {
-			return gapiAuthInstance().signIn()
-				.then(() => window.gapi);
+			google.accounts.id.renderButton();
+			this.signedIn = true;
+			this.bus.emit("signed-in");
 		}
 
-		return Promise.resolve(window.gapi);
+		return Promise.resolve(window.google);
 	}
 
 	/**
@@ -302,10 +251,11 @@ export class GapiServiceProvider {
 	 */
 	logout() {
 		if (this.signedIn) {
-			return gapiAuthInstance().signOut()
-				.then(() => window.gapi);
+			window.google.accounts.id.disableAutoSelect();
+			this.signedIn = false;
+			this.bus.emit("signed-out");
 		}
 
-		return Promise.resolve(window.gapi);
+		return Promise.resolve(window.google);
 	}
 }

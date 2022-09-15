@@ -32,8 +32,8 @@
 // Guide: https://manual.aaronmeese.com/config/#client
 // Complete config tree: https://github.com/meeseOS/meeseOS/blob/master/frontend/client/src/config.js
 
-const apiKey = process.env.GOOGLE_API_KEY;
-const clientId = process.env.GOOGLE_CLIENT_ID;
+const api_key = process.env.GOOGLE_API_KEY;
+const client_id = process.env.GOOGLE_CLIENT_ID;
 
 export default {
 	desktop: {
@@ -58,8 +58,8 @@ export default {
 		enabled: true,
 		client: {
 			// Adds the Google information from the `.env.json` file if it exists
-			...(apiKey && { apiKey }),
-			...(clientId && { clientId }),
+			...(api_key && { api_key }),
+			...(client_id && { client_id }),
 		},
 	},
 };

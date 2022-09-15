@@ -15,16 +15,13 @@ import { GapiServiceProvider } from "@meeseOS/google-api-provider";
 
 meeseOS.register(GapiServiceProvider, {
   args: {
-    // These are set for you by default
-    src: "https://apis.google.com/js/api.js",
-    libraries: "client:auth2",
-    timeout: 30000,
+    enabled: true,
+    src: "https://accounts.google.com/gsi/client",
 
     // You have to define these
     client: {
-      apiKey: "",
-      clientId: "",
-      discoveryDocs: [],
+      api_key: "",
+      client_id: "",
       scope: []
     }
   }

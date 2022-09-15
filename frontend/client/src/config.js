@@ -171,14 +171,15 @@ export const defaultConfiguration = {
 
 	gapi: {
 		enabled: false,
-		src: "https://apis.google.com/js/api.js",
-		timeout: 30000,
-		libraries: "client:auth2",
+		src: "https://accounts.google.com/gsi/client",
 		client: {
-			apiKey: null,
-			clientId: null,
-			discoveryDocs: [],
-			scope: [],
+			api_key: null,
+			client_id: null,
+			scope: [
+				"openid",
+				"profile",
+				"email",
+			],
 		},
 	},
 
