@@ -238,7 +238,7 @@ export class GapiServiceProvider {
 	 */
 	login() {
 		if (!this.signedIn) {
-			google.accounts.id.renderButton();
+			window.google.accounts.id.renderButton();
 			this.signedIn = true;
 			this.bus.emit("signed-in");
 		}

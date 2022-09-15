@@ -61,6 +61,7 @@ export const style = (root, src) =>
  */
 export const script = (root, src, options = {}) =>
 	new Promise((resolve, reject) => {
+		const el = document.createElement("script");
 		const opts = {
 			async: false,
 			defer: false,
@@ -70,7 +71,6 @@ export const script = (root, src, options = {}) =>
 			onload: () => resolve(el),
 		};
 
-		const el = document.createElement("script");
 		el.onreadystatechange = function() {
 			if (this.readyState === "complete" || this.readyState === "loaded") {
 				resolve(el);
@@ -145,10 +145,10 @@ export const getActiveElement = (root) => {
  * @returns {Boolean}
  */
 export const supportsPassive = (function() {
-	let supportsPassive = false;
+	let doesSupportPassive = false;
 	try {
 		const opts = Object.defineProperty({}, "passive", {
-			get: () => (supportsPassive = true),
+			get: () => (doesSupportPassive = true),
 		});
 
 		window.addEventListener("testPassive", null, opts);
@@ -157,7 +157,7 @@ export const supportsPassive = (function() {
 		// noop
 	}
 
-	return () => supportsPassive;
+	return () => doesSupportPassive;
 })();
 
 /**
