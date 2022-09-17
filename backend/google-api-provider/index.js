@@ -28,6 +28,8 @@
  * @licence Simplified BSD License
  */
 
+import GoogleLogo from "./logo.svg";
+
 /**
  * Creates gapi client instance
  * @param {Object} [options={}] Options
@@ -143,7 +145,7 @@ export class GapiServiceProvider {
 	createTray() {
 		this.tray = this.core.make("meeseOS/tray").create({
 			title: "Google API",
-			//icon: require("./logo.svg")
+			icon: GoogleLogo,
 		}, ev => {
 			this.core.make("meeseOS/contextmenu").show({
 				position: ev.target,
@@ -168,7 +170,7 @@ export class GapiServiceProvider {
 
 		this.bus.on("signed-in", () => {
 			this.core.make("meeseOS/notification", {
-				//icon: require("./logo.svg"),
+				icon: GoogleLogo,
 				title: "Google API",
 				message: "You have signed on to Google"
 			});

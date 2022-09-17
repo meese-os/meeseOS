@@ -2,20 +2,16 @@
   "name": "@meeseOS/google-api-provider",
   "version": "2.0.0",
   "description": "Google API Service Provider for meeseOS",
-  "main": "dist/main.js",
-  "module": "dist/main.js",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run eslint",
     "eslint": "eslint *.js",
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && rm ./dist/* && npm run build"
-  },
-  "files": ["dist/"],
-  "author": "Aaron Meese <aaronjmeese@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/meeseOS/meeseOS/issues"
   },
   "dependencies": {},
   "devDependencies": {
@@ -35,7 +31,8 @@
       "node": true
     },
     "parserOptions": {
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaVersion": 8
     },
     "extends": "@meeseOS/eslint-config"
   },
