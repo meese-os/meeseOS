@@ -60,7 +60,7 @@ export default class DialogServiceProvider {
 
 	destroy() {}
 
-	async init() {
+	 init() {
 		this.core.instance("meeseOS/dialog", (name, args = {}, ...eargs) => {
 			const options = eargs.length > 1 ? eargs[0] : {};
 			const callback = eargs[eargs.length > 1 ? 1 : 0];

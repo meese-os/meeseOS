@@ -74,7 +74,7 @@ class TokenFactory {
 	 * @param {String} accessToken The access token to validate
 	 * @returns {Promise<Boolean|Object>} The user if valid, otherwise `false`
 	 */
-	async validateAccessToken(accessToken) {
+	 validateAccessToken(accessToken) {
 		return new Promise((resolve, reject) => {
 			jwt.verify(accessToken, this.options.accessTokenSecret, (err, user) => {
 				if (err) {
@@ -107,7 +107,7 @@ class TokenFactory {
 	 * @param {String} refreshToken The refresh token to validate
 	 * @returns {Promise<Boolean|Object>} The user if valid, otherwise `false`
 	 */
-	async validateRefreshToken(refreshToken) {
+	 validateRefreshToken(refreshToken) {
 		return new Promise((resolve, reject) => {
 			jwt.verify(refreshToken, this.options.refreshTokenSecret, (err, user) => {
 				if (err) {
@@ -128,7 +128,7 @@ class TokenFactory {
 	 * @param {String} refreshToken Refresh token
 	 * @returns {Promise<*>}
 	 */
-	async refreshToAccessToken(refreshToken) {
+	 refreshToAccessToken(refreshToken) {
 		// Need to ensure that the refreshToken hasn't been revoked
 		if (!refreshToken || !this.storage.find(refreshToken)) {
 			return false;

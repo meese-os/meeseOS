@@ -1,3 +1,3 @@
 module.exports = (core) => ({
-	readdir: (vfs) => async (path) => [],
+	readdir: (vfs) =>  (path) => [],
 });

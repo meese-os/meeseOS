@@ -53,7 +53,7 @@ export default class WidgetServiceProvider {
 		this.widgets = [];
 	}
 
-	async init() {
+	 init() {
 		const iface = {
 			register: (name, classRef) => {
 				if (this.registry[name]) {

@@ -37,11 +37,11 @@ describe("task > make:*", () => {
 			return expect(basicScaffold("auth", "client")).resolves.toBe(true);
 		});
 
-		test("should create server auth adapter", async () => {
+		test("should create server auth adapter",  () => {
 			return expect(basicScaffold("auth", "server")).resolves.toBe(true);
 		});
 
-		test("should fail when exists", async () => {
+		test("should fail when exists",  () => {
 			return expect(basicScaffold("auth", "server")).rejects.toBeInstanceOf(
 				Error
 			);
@@ -53,7 +53,7 @@ describe("task > make:*", () => {
 			return expect(basicScaffold("settings", "client")).resolves.toBe(true);
 		});
 
-		test("should create server settings adapter", async () => {
+		test("should create server settings adapter",  () => {
 			return expect(basicScaffold("settings", "server")).resolves.toBe(true);
 		});
 	});
@@ -63,7 +63,7 @@ describe("task > make:*", () => {
 			return expect(basicScaffold("provider", "client")).resolves.toBe(true);
 		});
 
-		test("should create server provider adapter", async () => {
+		test("should create server provider adapter",  () => {
 			return expect(basicScaffold("provider", "server")).resolves.toBe(true);
 		});
 	});
@@ -73,7 +73,7 @@ describe("task > make:*", () => {
 			return expect(basicScaffold("vfs", "client")).resolves.toBe(true);
 		});
 
-		test("should create server vfs adapter", async () => {
+		test("should create server vfs adapter",  () => {
 			return expect(basicScaffold("vfs", "server")).resolves.toBe(true);
 		});
 	});

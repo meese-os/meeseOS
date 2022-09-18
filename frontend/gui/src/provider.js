@@ -54,7 +54,7 @@ export class GUIServiceProvider {
 		this.contextmenu = new ContextMenu(core);
 	}
 
-	async init() {
+	 init() {
 		const contextmenuApi = {
 			show: (...args) => this.contextmenu.show(...args),
 			hide: (...args) => this.contextmenu.hide(...args),
