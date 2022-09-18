@@ -469,6 +469,10 @@
       "projectFolder": "frontend/cursor-effects"
     },
     {
+      "packageName": "@meeseOS/cyberchef",
+      "projectFolder": "apps/cyberchef"
+    },
+    {
       "packageName": "@meeseOS/dialogs",
       "projectFolder": "frontend/dialogs"
     },

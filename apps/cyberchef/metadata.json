@@ -1,0 +1,9 @@
+{
+  "type": "application",
+  "name": "@meeseOS/cyberchef",
+  "icon": "icon.svg",
+  "category": "utilities",
+  "title": "CyberChef",
+  "description": "The Cyber Swiss Army Knife - a web app for encryption, encoding, compression and data analysis.",
+  "files": ["main.js"]
+}
