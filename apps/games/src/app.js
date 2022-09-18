@@ -34,7 +34,7 @@ function App({ pid }) {
 		</div>
 
 		{/* IDEA: Build a custom UI with https://js-dos.com/v7/build/docs/ui-components/ */}
-		<div id={`pid_${pid}_game`} className="game-window"></div>
+		<div id={`pid_${pid}_game`} className="game-window" />
 	</>
 }
 
