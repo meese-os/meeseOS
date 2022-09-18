@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * os.js - javascript cloud/web desktop platform
  *
