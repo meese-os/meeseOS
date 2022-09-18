@@ -41,5 +41,5 @@ export default function DosPlayer({ bundleUrl }) {
 		dos.run(bundleUrl);
 	}, [dos, bundleUrl]);
 
-	return <div ref={rootRef} style={{ width: "100%", height: "100%" }}></div>;
+	return <div ref={rootRef} style={{ width: "100%", height: "100%" }} />;
 }
