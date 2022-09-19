@@ -498,7 +498,7 @@
     },
     {
       "packageName": "@meeseOS/google-api-provider",
-      "projectFolder": "backend/google-api-provider"
+      "projectFolder": "frontend/google-api-provider"
     },
     {
       "packageName": "@meeseOS/gui",

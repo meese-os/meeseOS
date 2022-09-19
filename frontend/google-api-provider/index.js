@@ -156,8 +156,12 @@ export class GapiServiceProvider {
 					}))
 				}, {
 					label: "Sign In",
+					id: "g_id_onload",
+					attributes: {
+						"data-client_id": this.options.client.client_id,
+						"data-type": "standard",
+					},
 					disabled: this.signedIn,
-					onclick: () => this.login()
 				}, {
 					label: "Sign Out",
 					disabled: !this.signedIn,
@@ -240,7 +244,6 @@ export class GapiServiceProvider {
 	 */
 	login() {
 		if (!this.signedIn) {
-			window.google.accounts.id.renderButton();
 			this.signedIn = true;
 			this.bus.emit("signed-in");
 		}

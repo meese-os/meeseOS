@@ -57,7 +57,7 @@ export default {
 	gapi: {
 		enabled: true,
 		client: {
-			// Adds the Google information from the `.env.json` file if it exists
+			// Adds the Google information from the `.env` file if it exists
 			...(api_key && { api_key }),
 			...(client_id && { client_id }),
 		},
