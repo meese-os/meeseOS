@@ -1,6 +1,6 @@
 {
   "name": "@meeseOS/gui",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "meeseOS GUI",
   "module": "dist/esm.js",
   "main": "dist/main.js",

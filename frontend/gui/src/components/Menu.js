@@ -85,6 +85,8 @@ const ul = (props, children = [], level = 0) => {
 						"div",
 						{
 							class: "meeseOS-gui-menu-container",
+							id: child.id,
+							...child.attributes,
 							"data-has-image": child.icon ? true : undefined,
 							"data-has-children": child.items ? true : undefined,
 							onmouseover: child.items ? props.onshow : undefined,
