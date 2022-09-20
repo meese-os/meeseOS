@@ -62,7 +62,7 @@ const load = (filename) => {
 	return result;
 };
 
-const cli =  (argv = [], opts = {}) => {
+const cli = (argv = [], opts = {}) => {
 	commander
 		.version(version)
 		.option("--dist [dist]", "Target dist directory ('dist/' by default)")

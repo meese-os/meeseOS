@@ -59,7 +59,7 @@ export default class PanelServiceProvider {
 		this.panels = [];
 	}
 
-	 init() {
+	init() {
 		this.core.singleton("meeseOS/panels", () => ({
 			register: (name, classRef) => {
 				if (this.registry[name]) {

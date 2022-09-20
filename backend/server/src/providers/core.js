@@ -62,7 +62,7 @@ class CoreServiceProvider extends ServiceProvider {
 	/**
 	 * Initializes provider.
 	 */
-	 init() {
+	init() {
 		this.initService();
 		this.initExtensions();
 		this.initResourceRoutes();

@@ -1,3 +1,3 @@
 module.exports = (core) => ({
-	readdir: (vfs) =>  (path) => [],
+	readdir: (vfs) => (path) => [],
 });

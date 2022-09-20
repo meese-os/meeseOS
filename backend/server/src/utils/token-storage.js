@@ -65,7 +65,7 @@ class TokenStorage {
 	/**
 	 * Initializes the instance.
 	 */
-	 init() {
+	init() {
 		this.db = new loki(
 			this.options.databaseName,
 			this.options.databaseOptions
@@ -79,7 +79,7 @@ class TokenStorage {
 	 * @param {String} refreshToken The refresh token to look for
 	 * @returns {Object|null} The token if found or `null` if not
 	 */
-	 find(refreshToken) {
+	find(refreshToken) {
 		return this.collection.findOne({ refreshToken });
 	}
 
@@ -87,7 +87,7 @@ class TokenStorage {
 	 * Adds a refresh token to the database.
 	 * @param {String} refreshToken The refresh token to add
 	 */
-	 create(refreshToken) {
+	create(refreshToken) {
 		// The timestamp is used to make pruning old data easier
 		const timestamp = new Date().getTime();
 		this.collection.insert({ refreshToken, timestamp });
@@ -98,7 +98,7 @@ class TokenStorage {
 	 * @param {String} refreshToken The refresh token to remove
 	 * @returns {Promise<Boolean>} `true` if the token was removed, otherwise `false`
 	 */
-	 remove(refreshToken) {
+	remove(refreshToken) {
 		const row = this.collection.findOne({ refreshToken });
 		if (row) {
 			this.collection.remove(row);
@@ -111,7 +111,7 @@ class TokenStorage {
 	/**
 	 * Destroys the instance.
 	 */
-	 destroy() {
+	destroy() {
 		this.db.close();
 	}
 }

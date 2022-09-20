@@ -312,7 +312,7 @@ class Auth {
 	 * @param {VFSServiceProvider} vfs An instance of the virtual file system
 	 * @param {AuthUserProfile} profile User profile
 	 */
-	 async createHomeDirectoryFromArray(template, vfs, profile) {
+	async createHomeDirectoryFromArray(template, vfs, profile) {
 		for (const file of template) {
 			try {
 				const { path, contents = "" } = file;

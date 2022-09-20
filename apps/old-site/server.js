@@ -1,7 +1,7 @@
 // Methods MeeseOS server requires
 module.exports = (core, proc) => ({
 	// When server initializes
-	init:  () => {
+	init: () => {
 		// HTTP Route example (see index.js)
 		core.app.post(proc.resource("/test"), (req, res) => {
 			res.json({ hello: "World" });

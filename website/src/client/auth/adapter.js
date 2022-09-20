@@ -1,10 +1,10 @@
 module.exports = (core, config) => ({
-	 login(values) {
+	login(values) {
 		// You can transform the form values from login here if you want
 		return values;
 	},
 
-	 logout() {
+	logout() {
 		// And perform special operations on logout
 		return true;
 	}

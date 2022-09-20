@@ -18,11 +18,11 @@ dotenvJSON({ path: envFile });
  * @param {Object} [options] Adapter options
  */
 module.exports = (core, options) => ({
-	init:  () => true,
+	init: () => true,
 
-	destroy:  () => true,
+	destroy: () => true,
 
-	 login(req, res) {
+	login(req, res) {
 		const { username, password } = req.body;
 		let groups = [];
 
@@ -51,9 +51,9 @@ module.exports = (core, options) => ({
 		return ({ username: req.body.username });
 	},
 
-	 register(req, res) {
+	register(req, res) {
 		throw new Error("Registration not available");
 	},
 
-	logout:  (req, res) => true,
+	logout: (req, res) => true,
 });
