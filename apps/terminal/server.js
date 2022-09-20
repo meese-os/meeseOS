@@ -145,7 +145,7 @@ const createConnection = (core, ws) => {
 /**
  * Add routes for application
  */
-const init = async (core, proc) => {
+const init = (core, proc) => {
 	const { app } = core;
 
 	app.post(proc.resource("/create"), (req, res) => {

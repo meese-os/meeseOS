@@ -2,7 +2,7 @@ const { version } = require("../../package.json");
 const { inspect } = require("util");
 const path = require("path");
 
-const action = async ({ logger, options, argv, commander }) => {
+const action = ({ logger, options, argv, commander }) => {
 	const { dependencies, devDependencies } = require(path.resolve(options.npm));
 
 	logger.info("Dumping installation information");

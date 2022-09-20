@@ -206,7 +206,7 @@ class Core extends CoreBase {
 	/**
 	 * Opens HTTP server
 	 */
-	async listen() {
+	listen() {
 		const httpPort = this.config("port");
 		const httpHost = this.config("bind");
 		const wsPort = this.config("ws.port") || httpPort;

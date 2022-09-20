@@ -1,5 +1,5 @@
 const myAdapter = (core) => ({
-	readdir: async (path, options) => [],
+	readdir: (path, options) => [],
 });
 
 export default myAdapter;

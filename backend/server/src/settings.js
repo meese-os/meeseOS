@@ -88,7 +88,7 @@ class Settings {
 	 * Initializes adapter.
 	 * @returns {Promise<Boolean>}
 	 */
-	async init() {
+	init() {
 		if (this.adapter.init) {
 			return this.adapter.init();
 		}

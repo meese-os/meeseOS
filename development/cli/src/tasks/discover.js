@@ -55,7 +55,7 @@ const glob = async (dir) => {
 	return result.filter((f) => Boolean(f));
 };
 
-const clean = async (copyFiles, dir) =>
+const clean = (copyFiles, dir) =>
 	glob(dir).then((files) =>
 		Promise.all(
 			files.map((file) => {

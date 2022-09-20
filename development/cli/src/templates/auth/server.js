@@ -1,5 +1,5 @@
 module.exports = (core, config) => ({
-	async login(req, res) {
+	login(req, res) {
 		const { username } = req.body;
 
 		return {
@@ -8,11 +8,11 @@ module.exports = (core, config) => ({
 		};
 	},
 
-	async logout(req, res) {
+	logout(req, res) {
 		return true;
 	},
 
-	async register(req, res) {
+	register(req, res) {
 		throw new Error("Registration not available");
 	},
 });

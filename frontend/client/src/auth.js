@@ -169,7 +169,7 @@ export default class Auth {
 	 * Run the shutdown procedure.
 	 * @param {Boolean} [reload=false] Reload afterwards
 	 */
-	async shutdown(reload = false) {
+	shutdown(reload = false) {
 		try {
 			this.core.destroy();
 		} catch (e) {
