@@ -12,12 +12,14 @@
     <img
       src="https://deepsource.io/gh/meeseOS/meeseOS.svg/?label=active+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
       title="Active issues on DeepSource"
+      alt="Active issues on DeepSource"
     />
   </a>
   <a href="https://deepsource.io/gh/meeseOS/meeseOS/?ref=repository-badge">
     <img
       src="https://deepsource.io/gh/meeseOS/meeseOS.svg/?label=resolved+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
       title="Resolved issues on DeepSource"
+			alt="Resolved issues on DeepSource"
     />
   </a>
 </p>
