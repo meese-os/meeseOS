@@ -22,6 +22,13 @@
 			alt="Resolved issues on DeepSource"
     />
   </a>
+	<a href="https://gitter.im/meeseOS/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
+		<img
+			src="https://badges.gitter.im/meeseOS/community.svg"
+			title="Gitter"
+			alt="Gitter"
+		/>
+	</a>
 </p>
 
 This redesign of my website would not be possible without the _incredible_ work by [Anders Evenrud](https://github.com/andersevenrud) on [OS.js](https://github.com/os-js/OS.js). As you can see in the majority of the files, this monorepo is a modified amalgamation of the OS.js source code.
