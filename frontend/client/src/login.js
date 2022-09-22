@@ -47,9 +47,9 @@ export default class Login extends EventEmitter {
 	 * Create authentication handler
 	 *
 	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {LoginOptions} [options] Options
+	 * @param {LoginOptions} [options={}] Options
 	 */
-	constructor(core, options) {
+	constructor(core, options = {}) {
 		super("Login");
 
 		/**
@@ -87,7 +87,7 @@ export default class Login extends EventEmitter {
 						name: "username",
 						type: "text",
 						placeholder: "Username",
-						autocomplete: false
+						autocomplete: "username",
 					},
 				},
 				{
