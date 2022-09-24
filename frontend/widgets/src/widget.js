@@ -356,9 +356,9 @@ export default class Widget {
 			return false;
 		}
 
-		const callbackButton = (btn, options) => {
+		const callbackButton = (btn, callbackOptions) => {
 			if (btn === "ok") {
-				this.options = merge(this.options, options);
+				this.options = merge(this.options, callbackOptions);
 				this.saveSettings();
 			}
 		};
