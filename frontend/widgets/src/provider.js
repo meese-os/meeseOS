@@ -30,6 +30,7 @@
 
 import DigitalClock from "./items/digitalclock";
 import AnalogClock from "./items/analogclock";
+import QuoteDisplay from "./items/quotedisplay";
 
 /**
  * Widget Service Provider
@@ -44,6 +45,7 @@ export default class WidgetServiceProvider {
 		this.registry = {
 			digitalclock: DigitalClock,
 			analogclock: AnalogClock,
+			quotedisplay: QuoteDisplay,
 			...(args.registry || {}),
 		};
 	}

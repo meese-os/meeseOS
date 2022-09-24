@@ -1,7 +1,7 @@
 /**
- * OS.js - JavaScript Cloud/Web Desktop Platform
+ * MeeseOS - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2022-Present, Aaron Meese <aaronjmeese@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,49 +24,36 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @author  Aaron Meese <aaronjmeese@gmail.com>
  * @licence Simplified BSD License
  */
 
 import Widget from "../widget";
 
+Array.prototype.random = function () {
+  return this[Math.floor((Math.random() * this.length))];
+}
+
 /**
- * Digital Clock Widget Options
- * @typedef {Object} DigitalClockOptions
- * @property {String} [fontFamily="Monospace"] Font family
- * @property {String} [color="#ffffff"] Font color
+ * Quote Object
+ * @typedef {Object} Quote
+ * @property {String} quote
+ * @property {String} author
  */
 
-const getFont = (fontFamily, size) => String(size) + "px " + fontFamily;
+/**
+ * Quote Display Widget Options
+ * @typedef {Object} QuoteDisplayOptions
+ * @property {String} [fontFamily="Monospace"] Font family
+ * @property {String} [color="#ffffff"] Font color
+ * @property {Quote[]} [quotes] Quotes to display
+ */
 
-const getTime = (now) =>
-	[now.getHours(), now.getMinutes(), now.getSeconds()]
-		.map((int) => String(int).padStart(2, "0"))
-		.join(":");
-
-const getFontSize = (fontFamily, initialSize, maxWidth, context) => {
-	const txt = "99:99:99";
-
-	let size = initialSize;
-	while (size > 0) {
-		context.font = getFont(fontFamily, size);
-
-		const measuredWidth = context.measureText(txt).width;
-		if (measuredWidth < maxWidth) {
-			break;
-		}
-
-		size--;
-	}
-
-	return size;
-};
-
-export default class DigitalClockWidget extends Widget {
+export default class QuoteDisplayWidget extends Widget {
 	/**
 	 * Creates a new instance.
 	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {DigitalClockOptions} [options] Instance options
+	 * @param {QuoteDisplayOptions} [options] Instance options
 	 */
 	constructor(core, options) {
 		super(
@@ -74,51 +61,44 @@ export default class DigitalClockWidget extends Widget {
 			options,
 			{
 				dimension: {
-					width: 300,
-					height: 50,
+					width: 400,
+					height: 150,
 				},
+				minDimension: {
+					width: 200,
+					height: 100,
+				},
+				canvas: false,
 			},
 			{
 				fontFamily: "Monospace",
 				fontColor: "#ffffff",
+				quotes: [
+					{
+						quote: "You should override this with your own quotes in the config file.",
+						author: "Aaron Meese",
+					},
+				],
 			}
 		);
 
-		this.$tmpCanvas = document.createElement("canvas");
-		this.tmpContext = this.$tmpCanvas.getContext("2d");
+		this.quoteDisplayElem = document.createElement("div");
+		this.quoteDisplayElem.classList.add("quote-display");
+		this.$element.appendChild(this.quoteDisplayElem);
 	}
 
-	compute() {
-		const { fontFamily, fontColor } = this.options;
-		const { width, height } = this.$canvas;
-		const { $tmpCanvas, tmpContext } = this;
-		const size = getFontSize(fontFamily, height, width, tmpContext);
-
-		$tmpCanvas.width = width;
-		$tmpCanvas.height = size;
-
-		tmpContext.font = getFont(fontFamily, size);
-		tmpContext.fillStyle = fontColor;
-		tmpContext.textAlign = "center";
-		tmpContext.textBaseline = "middle";
+	applySettings() {
+		this.quoteDisplayElem.style.fontFamily = this.options.fontFamily;
+		this.quoteDisplayElem.style.color = this.options.fontColor;
 	}
 
-	onResize() {
-		this.compute();
-	}
-
-	render({ context, width, height }) {
-		const { $tmpCanvas, tmpContext } = this;
-		const tmpWidth = $tmpCanvas.width;
-		const tmpHeight = $tmpCanvas.height;
-		const x = width / 2 - tmpWidth / 2;
-		const y = height / 2 - tmpHeight / 2;
-		const text = getTime(new Date());
-
-		tmpContext.clearRect(0, 0, tmpWidth, tmpHeight);
-		tmpContext.fillText(text, tmpWidth / 2, tmpHeight / 2);
-		context.clearRect(0, 0, width, height);
-		context.drawImage($tmpCanvas, x, y, tmpWidth, tmpHeight);
+	render() {
+		const quote = this.options.quotes.random() || {};
+		this.quoteDisplayElem.innerHTML = `
+			<blockquote>${quote.quote}</blockquote>
+			<div class="author">${quote.author}</div>
+		`;
+		this.applySettings();
 	}
 
 	getContextMenu() {
@@ -131,6 +111,7 @@ export default class DigitalClockWidget extends Widget {
 				label: "Set Font",
 				onclick: () => this.createFontDialog(),
 			},
+			// IDEA: Add a way to add quotes to the list
 		];
 	}
 
@@ -145,7 +126,7 @@ export default class DigitalClockWidget extends Widget {
 			(btn, value) => {
 				if (btn === "ok") {
 					this.options.fontFamily = value.name;
-					this.compute();
+					this.applySettings();
 					this.saveSettings();
 				}
 			}
@@ -162,7 +143,7 @@ export default class DigitalClockWidget extends Widget {
 			(btn, value) => {
 				if (btn === "ok") {
 					this.options.fontColor = value.hex;
-					this.compute();
+					this.applySettings();
 					this.saveSettings();
 				}
 			}
@@ -172,7 +153,7 @@ export default class DigitalClockWidget extends Widget {
 	static metadata() {
 		return {
 			...super.metadata(),
-			title: "Digital Clock",
+			title: "Quote Display",
 		};
 	}
 }
