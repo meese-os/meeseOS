@@ -1,7 +1,7 @@
 /**
- * OS.js - JavaScript Cloud/Web Desktop Platform
+ * MeeseOS - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
+ * Copyright (c) 2022-Present, Aaron Meese <aaronjmeese@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,9 +24,42 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @author  Aaron Meese <aaronjmeese@gmail.com>
  * @licence Simplified BSD License
  */
 
-@import "./src/styles/widgets";
-@import "./src/styles/quotedisplay";
+.quote-display {
+	blockquote {
+		text-indent: -0.8em;
+		font-size: 1.1em;
+		quotes: "“" "”" "‘" "’";
+		margin-inline-start: 20px;
+		margin-inline-end: 15px;
+	}
+
+	blockquote::before {
+		content: open-quote;
+		font-size: 1.2em;
+		margin-left: -3px;
+		margin-right: 3px;
+		font-weight: bold;
+	}
+
+	blockquote::after {
+		content: close-quote;
+		font-size: 1.2em;
+		margin: 0 1px;
+		font-weight: bold;
+	}
+
+	.author {
+		text-align: right;
+		font-style: italic;
+		font-size: 0.925em;
+		padding-right: 1em;
+
+		&:before {
+			content: "— ";
+		}
+	}
+}

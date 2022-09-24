@@ -33,7 +33,28 @@
 
 import Widget from "../widget";
 
+/**
+ * Analog Clock Colors Options
+ * @typedef {Object} AnalogClockColors
+ * @property {String} [number="#000000"] Number color
+ * @property {String} [hour="#000000"] Hour color
+ * @property {String} [minute="#000000"] Minute color
+ * @property {String} [second="#000000"] Second color
+ */
+
+/**
+ * Analog Clock Widget Options
+ * @typedef {Object} AnalogClockOptions
+ * @property {String} [fontFamily="Monospace"] Font family
+ * @property {AnalogClockColors} [color] Clock colors
+ */
+
 export default class AnalogClockWidget extends Widget {
+	/**
+	 * Creates a new instance.
+	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {AnalogClockOptions} [options] Instance options
+	 */
 	constructor(core, options) {
 		/** The default starting size for this widget. */
 		const startingSize = 250;

@@ -240,21 +240,13 @@ export default class Widget {
 		this.attributes = {};
 	}
 
-	/**
-	 * @param {Object} options
-	 * @param {Number} options.width
-	 * @param {Number} options.height
-	 * @param {HTMLCanvasElement} options.canvas
-	 * @param {CanvasRenderingContext2D} options.context
-	 */
 	render(viewport) {}
 
 	start() {
 		const render = () =>
 			this.render({
-				// Occasionally throws "Uncaught TypeError: Cannot read properties of undefined (reading 'width')"
-				width: this.options.dimension.width,
-				height: this.options.dimension.height,
+				width: this.options.dimension?.width ?? 0,
+				height: this.options.dimension?.height ?? 0,
 				canvas: this.$canvas,
 				context: this.context,
 			});
@@ -301,8 +293,10 @@ export default class Widget {
 		const { width, height } = this.options.dimension;
 		this.$element.style.width = String(width) + "px";
 		this.$element.style.height = String(height) + "px";
-		this.$canvas.width = width;
-		this.$canvas.height = height;
+		if (this.attributes.canvas) {
+			this.$canvas.width = width;
+			this.$canvas.height = height;
+		}
 	}
 
 	updatePosition() {
@@ -362,9 +356,9 @@ export default class Widget {
 			return false;
 		}
 
-		const callbackButton = (btn, options) => {
+		const callbackButton = (btn, callbackOptions) => {
 			if (btn === "ok") {
-				this.options = merge(this.options, options);
+				this.options = merge(this.options, callbackOptions);
 				this.saveSettings();
 			}
 		};
@@ -385,13 +379,11 @@ export default class Widget {
 	}
 
 	clampToViewport() {
-		// TODO: Uncaught TypeError: Cannot read properties of undefined (reading 'top')
-		// after changing the wallpaper type
 		const { top, left } = this.options.position;
 		const rect = this.core.make("meeseOS/desktop").getRect();
 		const pos = clampPosition(rect, this.options);
 
-		if (pos.left !== left || pos.top !== top) {
+		if (pos?.left !== left || pos?.top !== top) {
 			this.options.position = { ...pos };
 			this.updatePosition();
 		}
