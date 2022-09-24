@@ -73,12 +73,12 @@ export default class QuoteDisplayWidget extends Widget {
 			{
 				fontFamily: "Monospace",
 				fontColor: "#ffffff",
-				quotes: [
+				quotes: core.config("quotes", [
 					{
-						quote: "You should override this with your own quotes in the config file.",
+						quote: "You should override this with your own quotes in your config file.",
 						author: "Aaron Meese",
 					},
-				],
+				]),
 			}
 		);
 

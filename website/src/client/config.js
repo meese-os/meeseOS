@@ -34,6 +34,7 @@
 
 const api_key = process.env.GOOGLE_API_KEY;
 const client_id = process.env.GOOGLE_CLIENT_ID;
+const quotes = require("./quotes.js");
 
 export default {
 	desktop: {
@@ -62,4 +63,7 @@ export default {
 			...(client_id && { client_id }),
 		},
 	},
+
+	// Adds the quotes from the `quotes.js` file
+	quotes: quotes,
 };
