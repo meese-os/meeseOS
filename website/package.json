@@ -64,6 +64,7 @@
     "@meeseOS/server": "workspace:*",
     "@meeseOS/settings": "workspace:*",
     "@meeseOS/sounds": "workspace:*",
+    "@meeseOS/standard-dark-theme": "workspace:*",
     "@meeseOS/standard-theme": "workspace:*",
     "@meeseOS/static-wallpapers": "workspace:*",
     "@meeseOS/terminal": "workspace:*",

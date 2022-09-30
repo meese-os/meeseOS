@@ -533,6 +533,10 @@
       "projectFolder": "frontend/sounds"
     },
     {
+      "packageName": "@meeseOS/standard-dark-theme",
+      "projectFolder": "frontend/standard-dark-theme"
+    },
+    {
       "packageName": "@meeseOS/standard-theme",
       "projectFolder": "frontend/standard-theme"
     },

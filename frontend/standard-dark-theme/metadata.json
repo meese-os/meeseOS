@@ -1,0 +1,7 @@
+{
+  "type": "theme",
+  "name": "StandardDarkTheme",
+  "title": "Standard Dark Theme",
+  "description": "Standard Dark Theme",
+  "files": ["main.js", "main.css"]
+}
