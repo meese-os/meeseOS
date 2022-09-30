@@ -569,6 +569,10 @@
       "projectFolder": "frontend/widgets"
     },
     {
+      "packageName": "@meeseOS/windows8-theme",
+      "projectFolder": "frontend/windows8-theme"
+    },
+    {
       "packageName": "@meeseOS/wireless-tools-provider",
       "projectFolder": "backend/wireless-tools-provider"
     }

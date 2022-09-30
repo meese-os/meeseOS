@@ -1,0 +1,7 @@
+{
+  "type": "theme",
+  "name": "Windows8Theme",
+  "title": "Windows 8 Style Theme",
+  "description": "A style theme that imitates the Windows 8 look",
+  "files": ["main.js", "main.css"]
+}

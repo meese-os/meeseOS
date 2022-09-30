@@ -71,6 +71,7 @@
     "@meeseOS/uptime-monitor": "workspace:*",
     "@meeseOS/We10X-icons": "workspace:*",
     "@meeseOS/widgets": "workspace:*",
+    "@meeseOS/windows8-theme": "workspace:*",
     "@meeseOS/wireless-tools-provider": "workspace:*",
     "dotenv": "^16.0.0",
     "hyperapp": "^1.2.10",

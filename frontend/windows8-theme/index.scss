@@ -1,0 +1,145 @@
+/**
+ * OS.js - JavaScript Cloud/Web Desktop Platform
+ *
+ * Copyright (c) 2011-Present, Anders Evenrud <andersevenrud@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author  Anders Evenrud <andersevenrud@gmail.com>
+ * @licence Simplified BSD License
+ */
+
+@import "@meeseOS/standard-theme";
+@import "src/variables";
+
+::-webkit-scrollbar {
+	width: 1.5em;
+}
+
+.meeseOS-window {
+	@include window;
+
+	border-radius: 0;
+
+	&[data-focused=false] {
+		opacity: 0.5;
+	}
+
+	&[data-loading=true] {
+		pointer-events: none;
+
+		&::after {
+			background: rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+
+.meeseOS-window-button {
+	position: relative;
+	min-width: 2em;
+
+	&:not(:last-child) {
+		margin-right: 0;
+	}
+
+	& > div {
+		width: 100%;
+		height: 1.5em;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+
+		// Removes the stylings provided by the standard theme
+		&::before, &::after,
+		&:hover::before, &:hover::after {
+			content: none;
+		}
+	}
+
+	&:hover > div {
+		background-color: lighten($window-background, 10%);
+	}
+
+	&[data-action=maximize] > div {
+		background-image: url("./src/maximize.png");
+	}
+
+	&[data-action=minimize] > div {
+		background-image: url("./src/minimize.png");
+	}
+
+	&[data-action=close] {
+		min-width: 3em;
+		margin-right: 0.5em;
+
+		& > div {
+			background-position: 50% 50%;
+			background-color: #c75050;
+			background-image: url("./src/close.png");
+		}
+
+		&:hover > div {
+			background-color: lighten(#c75050, 10%);
+		}
+	}
+}
+
+.meeseOS-window-content {
+	background-color: #fff;
+	margin: $base-margin / 4;
+	height: calc(100% - #{$base-margin / 2});
+	width: calc(100% - #{$base-margin / 2});
+	max-width: calc(100% - #{$base-margin / 2});
+}
+
+.meeseOS-window-title {
+	text-align: center;
+	margin-left: 3em;
+	padding: $base-margin / 2;
+}
+
+.meeseOS-window-icon {
+	padding: $base-margin / 2;
+	margin-right: $base-margin /  2;
+}
+
+.meeseOS-gui-menu {
+	ul {
+		background-color: #f0f0f0;
+		border: 1px solid #979797;
+		color: inherit;
+	}
+
+	li:hover > div > span {
+		background-color: $active-background;
+	}
+}
+
+.meeseOS-gui-menu-separator::after {
+	background-color: #d7d7d7;
+}
+
+.meeseOS-gui-button {
+	& > button {
+		// Fallback
+		background-color: #eaeaec;
+	}
+}
