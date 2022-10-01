@@ -68,11 +68,11 @@ const russianCharacters =
 
 /**
  * Creates a Matrix falling rain effect with Russian characters.
- * @param {HTMLCanvasElement} canvas
- * @param {Object} options
+ * @param {HTMLDivElement} background The background element to add the canvas to
+ * @param {Object} options The options to use for the effect
  * @link https://github.com/ajmeese7/matrix-wallpaper
  */
-const matrix = (canvas, options) => {
+const matrix = (background, options) => {
 	const defaults = Object.keys(matrixOptions).map((key) => ({
 		[key]: matrixOptions[key].defaultValue,
 	}));
@@ -82,6 +82,8 @@ const matrix = (canvas, options) => {
 
 	// Set the canvas width and height to the screen width and height;
 	// NOTE: Disabling alpha here makes the rain the wrong size (too big), so don't :)
+	const canvas = document.createElement("canvas");
+	background.appendChild(canvas);
 	const ctx = canvas.getContext("2d");
 
 	// Set the canvas width and height to the screen width and height

@@ -78,11 +78,11 @@ let effect = {};
 
 /**
  * Creates a Hexells effect.
- * @param {HTMLCanvasElement} canvas
- * @param {Object} options
+ * @param {HTMLDivElement} background The background element to add the canvas to
+ * @param {Object} options The options to use for the effect
  * @link https://znah.net/hexells/
  */
-const hexells = (canvas, options) => {
+const hexells = (background, options) => {
 	const defaults = Object.keys(hexellsOptions).map((key) => ({
 		[key]: hexellsOptions[key].defaultValue,
 	}));
@@ -91,6 +91,9 @@ const hexells = (canvas, options) => {
 	const settings = Object.assign({}, ...defaults, options);
 
 	// Initialize the Hexells effect
+	console.debug("Initializing Hexells effect");
+	const canvas = document.createElement("canvas");
+	background.appendChild(canvas);
 	effect = new Hexells(canvas, settings);
 
 	// Set the canvas width and height to the screen width and height
