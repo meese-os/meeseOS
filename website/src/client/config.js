@@ -55,7 +55,7 @@ export default {
 		},
 	},
 
-	gapi: {
+	gis: {
 		enabled: true,
 		client: {
 			// Adds the Google information from the `.env` file if it exists

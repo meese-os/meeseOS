@@ -31,55 +31,77 @@
 import GoogleLogo from "./logo.svg";
 
 /**
- * Creates gapi client instance
- * @param {Object} [options={}] Options
+ * @typedef {Object} GisConfig
+ * @property {String} [api_key] Google Client API Key
+ * @property {String} [client_id] Google Client ID
+ * @property {String[]} [scope] Google API Scopes
  */
-const createGapiClient = (options = {}) => {
-	const opts = {
-		api_key: null,
-		client_id: null,
-		// Full list: https://developers.google.com/identity/protocols/googlescopes
-		scope: [],
-		...options
-	};
-
-	opts.scope = opts.scope.join(" ");
-
-	if (!opts.api_key || !opts.client_id) {
-		throw new Error("gapi client requires api_key and client_id");
-	}
-
-	if (!opts.scope.length) {
-		throw new Error("gapi client requires scope");
-	}
-
-	console.debug("Creating gapi client with", opts);
-	return window.google.accounts.oauth2.initCodeClient(opts);
-};
 
 /**
- * Google API Service Provider.
- * @see https://github.com/google/google-api-javascript-client
+ * @typedef {Object} GisAccessToken
+ * @property {String} access_token
+ * @property {String} authuser
+ * @property {Number} expires_in Time until expiration (seconds)
+ * @property {String} prompt
+ * @property {String} scope
+ * @property {String} token_type
  */
-export class GapiServiceProvider {
+
+/**
+ * Google Identity Service (GIS) Service Provider.
+ * @see https://developers.google.com/identity/oauth2/web/guides/overview
+ */
+export class GisServiceProvider {
 	/**
 	 * Creates a new instance.
 	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {Object} [options={}] Service Provider arguments
+	 * @param {GisConfig} [options={}] Service Provider arguments
 	 */
-	constructor(core, options) {
-		const defaultSettings = core.config("gapi", {});
+	constructor(core, options = {}) {
+		const defaultSettings = core.config("gis.client", {});
 
+		/**
+		 * @type {GisConfig}
+		 */
 		this.options = {
 			...defaultSettings,
-			...options
+			...options,
 		};
 
+		if (!this.options.api_key || !this.options.client_id) {
+			throw new Error("gis client requires api_key and client_id");
+		} else if (!this.options.scope.length) {
+			throw new Error("gis client requires scope");
+		}
+
+		/**
+		 * @type {Core}
+		 */
 		this.core = core;
+
+		/**
+		 * @type {Boolean}
+		 */
 		this.signedIn = false;
+
+		/**
+		 * @type {Boolean}
+		 */
 		this.loaded = false;
+
+		/**
+		 * @type {EventEmitter[]}
+		 */
 		this.clients = [];
+
 		this.bus = null;
+
+		this.gisClient = null;
+
+		/**
+		 * @type {GisAccessToken}
+		 */
+		this.accessToken = null;
 	}
 
 	/**
@@ -95,7 +117,7 @@ export class GapiServiceProvider {
 	 * @returns {String[]}
 	 */
 	static provides() {
-		return ["google/api", "meeseOS/gapi"];
+		return ["google/api", "meeseOS/gis"];
 	}
 
 	/**
@@ -105,15 +127,15 @@ export class GapiServiceProvider {
 	init() {
 		this.core.singleton("google/api", () => {
 			if (!("google" in window)) {
-				throw new Error("The Google API was not loaded");
+				throw new Error("The GIS API was not loaded");
 			}
 
 			return window.google;
 		});
 
-		this.core.singleton("meeseOS/gapi", () => ({
+		this.core.singleton("meeseOS/gis", () => ({
 			login: () => this.login(),
-			logout: () => this.login(),
+			logout: () => this.logout(),
 			create: () => this.createInstance(),
 		}));
 	}
@@ -131,7 +153,7 @@ export class GapiServiceProvider {
 
 	/**
 	 * Start the service provider.
-	 * @see GapiServiceProvider#createApi
+	 * @see GisServiceProvider#createApi
 	 */
 	start() {
 		this.createTray();
@@ -151,26 +173,22 @@ export class GapiServiceProvider {
 				position: ev.target,
 				menu: [{
 					label: "Scopes",
-					items: this.options.client.scope.map((label) => ({
+					items: this.options.scope.map((label) => ({
 						label,
 					}))
 				}, {
 					label: "Sign In",
-					id: "g_id_onload",
-					attributes: {
-						"data-client_id": this.options.client.client_id,
-						"data-type": "standard",
-					},
 					disabled: this.signedIn,
+					onclick: () => this.login(),
 				}, {
 					label: "Sign Out",
 					disabled: !this.signedIn,
-					onclick: () => this.logout()
+					onclick: () => this.logout(),
 				}]
 			});
 		});
 
-		this.bus = this.core.make("meeseOS/event-emitter", "gapi");
+		this.bus = this.core.make("meeseOS/event-emitter", "gis");
 
 		this.bus.on("signed-in", () => {
 			this.core.make("meeseOS/notification", {
@@ -190,16 +208,29 @@ export class GapiServiceProvider {
 	}
 
 	/**
-	 * Creates google API (gapi) instance.
+	 * Creates Google Identity Service (GIS) instance.
+	 * @link https://developers.google.com/identity/oauth2/web/guides/migration-to-gis#gis-only
 	 * @returns {Promise}
 	 */
 	createApi() {
-		const { src, client } = this.options;
+		const { client_id, scope } = this.options;
 		const { script } = this.core.make("meeseOS/dom");
 		const { $resourceRoot } = this.core;
 
-		return script($resourceRoot, src)
-		  .then(() => createGapiClient(client));
+		return script($resourceRoot, "https://accounts.google.com/gsi/client")
+			.then(() => {
+				this.gisClient = window.google.accounts.oauth2.initTokenClient({
+					client_id,
+					// Full list: https://developers.google.com/identity/protocols/googlescopes
+					scope: scope.join(" "),
+					// This is called on the success of `requestAccessToken`
+					callback: (accessToken) => {
+						this.accessToken = accessToken;
+						this.signedIn = true;
+						this.bus.emit("signed-in");
+					}
+				});
+			});
 	}
 
 	/**
@@ -208,7 +239,7 @@ export class GapiServiceProvider {
 	 * @returns {Object}
 	 */
 	createInstance() {
-		const bus = this.core.make("meeseOS/event-emitter", "gapi-client");
+		const bus = this.core.make("meeseOS/event-emitter", "gis-client");
 
 		this.clients.push(bus);
 
@@ -244,8 +275,7 @@ export class GapiServiceProvider {
 	 */
 	login() {
 		if (!this.signedIn) {
-			this.signedIn = true;
-			this.bus.emit("signed-in");
+			this.gisClient.requestAccessToken();
 		}
 
 		return Promise.resolve(window.google);
@@ -257,7 +287,15 @@ export class GapiServiceProvider {
 	 */
 	logout() {
 		if (this.signedIn) {
-			window.google.accounts.id.disableAutoSelect();
+			try {
+				window.google.accounts.oauth2.revoke(
+					this.accessToken.access_token,
+					() => { /* Currently no operation is required */ }
+				);
+			} catch (err) {
+				console.warn("Failed to revoke GIS access token:", err);
+			}
+
 			this.signedIn = false;
 			this.bus.emit("signed-out");
 		}

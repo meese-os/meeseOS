@@ -169,9 +169,8 @@ export const defaultConfiguration = {
 		disableDownload: false,
 	},
 
-	gapi: {
+	gis: {
 		enabled: false,
-		src: "https://accounts.google.com/gsi/client",
 		client: {
 			api_key: null,
 			client_id: null,
@@ -301,7 +300,7 @@ export const defaultConfiguration = {
 	},
 
 	providers: {
-		globalBlacklist: ["meeseOS/websocket", "meeseOS/clipboard", "meeseOS/gapi"],
+		globalBlacklist: ["meeseOS/websocket", "meeseOS/clipboard", "meeseOS/gis"],
 		globalWhitelist: [],
 	},
 };
