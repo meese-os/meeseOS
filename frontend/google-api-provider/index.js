@@ -290,7 +290,7 @@ export class GisServiceProvider {
 			try {
 				window.google.accounts.oauth2.revoke(
 					this.accessToken.access_token,
-					() => {}
+					() => { /* Currently no operation is required */ }
 				);
 			} catch (err) {
 				console.warn("Failed to revoke GIS access token:", err);
