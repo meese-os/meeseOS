@@ -28,77 +28,81 @@
  * @licence Simplified BSD License
  */
 
-const Hexells = require("hexells");
+import WAVES from "vanta/dist/vanta.waves.min";
+import * as THREE from "three";
 
 /**
  * A mapping of the variable names to their relevant information.
  */
-const hexellsOptions = {
-	powerPreference: {
-		label: "Power Preference",
-		type: "select",
-		defaultValue: "default",
-		choices: () => ({
-			default: "Default",
-			"low-power": "Low Power",
-			"high-performance": "High Performance",
-		}),
-	},
-	brushRadius: {
-		label: "Brush Radius",
-		type: "number",
-		defaultValue: 16,
-	},
-	stepPerFrame: {
-		label: "Steps Per Frame",
-		type: "number",
-		defaultValue: 1,
-	},
-	timePerModel: {
-		label: "Time Per Model",
-		type: "number",
-		defaultValue: 20 * 1000,
-	},
-	responsive: {
-		label: "Responsive",
-		type: "boolean",
-		defaultValue: false,
-	},
-	fps: {
-		label: "FPS",
-		type: "number",
-		defaultValue: 10,
-	},
-};
+const vantaWavesOptions = {};
 
 /**
- * Stores the Hexells effect so it can be destroyed.
+ * Stores the Vanta waves effect so it can be destroyed.
  */
 let effect = {};
 
 /**
- * Creates a Hexells effect.
+ * Creates a Vanta waves effect.
  * @param {HTMLDivElement} background The background element to add the canvas to
- * @param {Object} options The options to use for the effect
- * @link https://znah.net/hexells/
+ * @param {Object} [options={}] The options to pass to the Vanta waves effect
+ * @link https://www.vantajs.com/?effect=waves
  */
-const hexells = (background, options) => {
-	const defaults = Object.keys(hexellsOptions).map((key) => ({
-		[key]: hexellsOptions[key].defaultValue,
+const vantaWaves = (background, options = {}) => {
+	const defaults = Object.keys(vantaWavesOptions).map((key) => ({
+		[key]: vantaWavesOptions[key].defaultValue,
 	}));
 
 	// Override the defaults with any user-provided options
-	const settings = Object.assign({}, ...defaults, options);
+	const settings = {
+		...defaults,
+		...options,
+	};
 
-	// Initialize the Hexells effect
-	console.debug("Initializing Hexells effect");
-	const canvas = document.createElement("canvas");
-	background.appendChild(canvas);
-	effect = new Hexells(canvas, settings);
+	// Initialize the Vanta waves effect
+	console.debug("Initializing Vanta waves effect");
+
+	effect = WAVES({
+		el: background,
+		THREE: THREE,
+		minHeight: 200.00,
+		minWidth: 200.00,
+		scale: 1.0,
+		scaleMobile: 1.0,
+		gyroControls: false,
+		mouseControls: false,
+		mouseEase: false,
+		touchControls: false,
+		camera: {
+			far: 400,
+			fov: 30,
+			near: 0.1,
+		},
+		color: "hsl(225, 40%, 20%)",
+		colorCycleSpeed: 10,
+		forceAnimate: true,
+		hh: 50,
+		hue: 225,
+		lightness: 20,
+		material: {
+			options: {
+				fog: false,
+				wireframe: false,
+			},
+		},
+		saturation: 40,
+		shininess: 35,
+		waveHeight: 20,
+		waveSpeed: 0.25,
+		ww: 50,
+		...settings,
+	});
 
 	// Set the canvas width and height to the screen width and height
+	const canvas = background.querySelector("canvas");
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
+	effect.renderer.setSize(canvas.width, canvas.height);
+	effect.resize();
 
 	/**
 	 * Ensures that the canvas will always be the smallest possible
@@ -107,6 +111,8 @@ const hexells = (background, options) => {
 	function windowResize() {
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
+		effect.renderer.setSize(canvas.width, canvas.height);
+		effect.resize();
 	}
 
 	// Add the window resize event listener
@@ -114,18 +120,18 @@ const hexells = (background, options) => {
 };
 
 /**
- * Destroys the Hexells effect.
+ * Destroys the Vanta waves effect.
  */
 const destroy = () => {
 	if (effect.destroy) {
-		console.debug("Destroying Hexells effect");
+		console.debug("Destroying Vanta waves effect");
 		effect.destroy();
 	}
 };
 
 export default {
-	label: "Hexells",
-	effect: hexells,
-	options: hexellsOptions,
+	label: "Vanta Waves",
+	effect: vantaWaves,
+	options: vantaWavesOptions,
 	destroy,
 };

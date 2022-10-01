@@ -31,6 +31,7 @@
 import { ServiceProvider } from "@meeseOS/common";
 import matrix from "./effects/matrix";
 import hexells from "./effects/hexells";
+import vantaWaves from "./effects/vanta-waves";
 
 /**
  * Background Canvas Service Provider
@@ -51,6 +52,7 @@ export default class BackgroundCanvasServiceProvider extends ServiceProvider {
 		this.effects = {
 			matrix,
 			hexells,
+			vantaWaves,
 		};
 	}
 
@@ -97,20 +99,20 @@ export default class BackgroundCanvasServiceProvider extends ServiceProvider {
 		}
 
 		this.destroyAll();
-		const canvas = this.createCanvas();
+		const background = this.createBackground();
 		const effectFn = this.effects[effectName].effect;
-		effectFn(canvas, options);
+		effectFn(background, options);
 	}
 
 	/**
-	 * Creates and returns a new background canvas element.
-	 * @returns {HTMLCanvasElement} The created canvas element.
+	 * Creates and returns a new background div element.
+	 * @returns {HTMLDivElement} The created background element.
 	 */
-	createCanvas() {
-		const canvas = document.createElement("canvas");
-		canvas.className = "meeseOS-dynamic-background";
-		this.core.$root.appendChild(canvas);
-		return canvas;
+	createBackground() {
+		const div = document.createElement("div");
+		div.className = "meeseOS-dynamic-background";
+		this.core.$root.appendChild(div);
+		return div;
 	}
 
 	/**
@@ -118,8 +120,10 @@ export default class BackgroundCanvasServiceProvider extends ServiceProvider {
 	 * and stops all effects.
 	 */
 	destroyAll() {
-		const canvases = document.querySelectorAll(".meeseOS-dynamic-background");
-		canvases.forEach((canvas) => canvas.remove());
+		// TODO: Something here isn't working, the whole site still slows down after
+		// using the Hexells effect.
+		const backgrounds = document.querySelectorAll(".meeseOS-dynamic-background");
+		backgrounds.forEach((background) => background.remove());
 
 		Object.values(this.effects).forEach((effect) => {
 			if (effect.destroy) effect.destroy();
