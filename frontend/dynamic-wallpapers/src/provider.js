@@ -31,6 +31,7 @@
 import { ServiceProvider } from "@meeseOS/common";
 import matrix from "./effects/matrix";
 import hexells from "./effects/hexells";
+import vantaWaves from "./effects/vanta-waves";
 
 /**
  * Background Canvas Service Provider
@@ -51,6 +52,7 @@ export default class BackgroundCanvasServiceProvider extends ServiceProvider {
 		this.effects = {
 			matrix,
 			hexells,
+			vantaWaves,
 		};
 	}
 
