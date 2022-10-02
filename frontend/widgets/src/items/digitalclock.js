@@ -117,8 +117,10 @@ export default class DigitalClockWidget extends Widget {
 
 		tmpContext.clearRect(0, 0, tmpWidth, tmpHeight);
 		tmpContext.fillText(text, tmpWidth / 2, tmpHeight / 2);
-		context.clearRect(0, 0, width, height);
-		context.drawImage($tmpCanvas, x, y, tmpWidth, tmpHeight);
+		if (context) {
+			context.clearRect(0, 0, width, height);
+			context.drawImage($tmpCanvas, x, y, tmpWidth, tmpHeight);
+		}
 	}
 
 	getContextMenu() {
