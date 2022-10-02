@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@meeseOS/common": "workspace:*",
-    "hexells": "^1.1.7",
+    "hexells": "^1.2.0",
     "vanta": "^0.5.24",
     "three": "^0.145.0"
   },

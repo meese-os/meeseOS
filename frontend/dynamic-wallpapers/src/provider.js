@@ -120,8 +120,6 @@ export default class BackgroundCanvasServiceProvider extends ServiceProvider {
 	 * and stops all effects.
 	 */
 	destroyAll() {
-		// TODO: Something here isn't working, the whole site still slows down after
-		// using the Hexells effect.
 		const backgrounds = document.querySelectorAll(".meeseOS-dynamic-background");
 		backgrounds.forEach((background) => background.remove());
 

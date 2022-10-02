@@ -827,7 +827,7 @@ importers:
       css-loader: ^6.6.0
       css-minimizer-webpack-plugin: ^3.4.1
       eslint: ^8.18.0
-      hexells: ^1.1.7
+      hexells: ^1.2.0
       mini-css-extract-plugin: ^2.5.3
       sass: ^1.53.0
       sass-loader: ^13.0.2
@@ -840,7 +840,7 @@ importers:
       webpack-cli: ^4.9.2
     dependencies:
       '@meeseOS/common': link:../../backend/common
-      hexells: 1.1.7
+      hexells: 1.2.0
       three: 0.145.0
       vanta: 0.5.24
     devDependencies:
@@ -6359,8 +6359,8 @@ packages:
     hasBin: true
     dev: true
 
-  /hexells/1.1.7:
-    resolution: {integrity: sha512-YE1yKLUF9oq+CW6IWMZCO0VcRfXClmsb/iC7EJFe1HuryS3PjtuqPt1MUnmY7BhQIVL+asP/2ZdtFGayuFuNdA==}
+  /hexells/1.2.0:
+    resolution: {integrity: sha512-vFEw1ub9BrYaQ/mmEqZM6DqqgpQln8zzCso6kt4u3/O64veULHwQUU57wvJCn0uBrXeqXZZivR6QLr1jTNQHXw==}
     dependencies:
       dat.gui: 0.7.9
       twgl.js: 4.24.0
