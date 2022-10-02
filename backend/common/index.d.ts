@@ -38,79 +38,79 @@ export interface ServiceProviderOptions {
 
 export class ServiceProvider {
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: CoreBase;
 
 	/**
-	 * Provider options
+	 * Provider options.
 	 */
 	readonly options: any;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	constructor(core: CoreBase, options: any);
 
 	/**
-	 * List of provided services
+	 * List of provided services.
 	 */
 	static provides(): string[];
 
 	/**
-	 * Initializes Provider
+	 * Initializes Provider.
 	 */
 	init(): Promise<any>;
 
 	/**
-	 * Starts Provider
+	 * Starts Provider.
 	 */
 	start(): Promise<any>;
 
 	/**
-	 * Destroys Provider
+	 * Destroys Provider.
 	 */
 	destroy(): void;
 }
 
 export class CoreBase extends EventEmitter {
 	/**
-	 * Logger module
+	 * Logger module.
 	 */
 	readonly logger: any;
 
 	/**
-	 * Configuration Tree
+	 * Configuration Tree.
 	 */
 	readonly configuration: object;
 
 	/**
-	 * Options
+	 * Options.
 	 */
 	readonly options: object;
 
 	/**
-	 * Boot has been initiated
+	 * Boot has been initiated.
 	 */
 	booted: boolean;
 
 	/**
-	 * Fully started
+	 * Fully started.
 	 */
 	started: boolean;
 
 	/**
-	 * Fully destroyped
+	 * Fully destroyped.
 	 */
 	destroyd: boolean;
 
 	/**
-	 * Service Provider Handler
+	 * Service Provider Handler.
 	 */
 	providers: any;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	constructor(
 		defaultConfiguration: object,
@@ -119,47 +119,47 @@ export class CoreBase extends EventEmitter {
 	);
 
 	/**
-	 * Destroy core instance
+	 * Destroy core instance.
 	 */
 	destroy(): void;
 
 	/**
-	 * Boots up MeeseOS
+	 * Boots up MeeseOS.
 	 */
 	boot(): Promise<boolean>;
 
 	/**
-	 * Starts all core services
+	 * Starts all core services.
 	 */
 	start(): Promise<boolean>;
 
 	/**
-	 * Gets a configuration entry by key
+	 * Gets a configuration entry by key.
 	 */
 	config(key: string, defaultValue: any): any;
 
 	/**
-	 * Register a service provider
+	 * Register a service provider.
 	 */
 	register(ref: typeof ServiceProvider, options: ServiceProviderOptions): void;
 
 	/**
-	 * Register a instantiator provider
+	 * Register a instantiator provider.
 	 */
 	instance(name: string, callback: Function): void;
 
 	/**
-	 * Register a singleton provider
+	 * Register a singleton provider.
 	 */
 	singleton(name: string, callback: Function): void;
 
 	/**
-	 * Create an instance of a provided service
+	 * Create an instance of a provided service.
 	 */
 	make<T>(name: string, ...args: any[]): T;
 
 	/**
-	 * Check if a service exists
+	 * Check if a service exists.
 	 */
 	has(name: string): boolean;
 }

@@ -36,61 +36,61 @@ export type EventName = string | string[];
 
 export interface EventOptions {
 	/**
-	 * Do not remove unless forced
+	 * Do not remove unless forced.
 	 */
 	persist?: boolean;
 
 	/**
-	 * Fire only once
+	 * Fire only once.
 	 */
 	once?: boolean;
 }
 
 export interface EventInstance {
 	/**
-	 * Event callback
+	 * Event callback.
 	 */
 	callback: Function;
 
 	/**
-	 * Event options
+	 * Event options.
 	 */
 	options: EventOptions;
 }
 
 export class EventEmitter {
 	/**
-	 * EventEmitter name
+	 * EventEmitter name.
 	 */
 	name: string;
 
 	/**
-	 * Map of registered events
+	 * Map of registered events.
 	 */
 	events: Map<string, EventInstance>;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	constructor(name?: string);
 
 	/**
-	 * Add an event handler
+	 * Add an event handler.
 	 */
 	on(event: EventName, callback: Function, options?: EventOptions): this;
 
 	/**
-	 * Adds an event handler that only fires once
+	 * Adds an event handler that only fires once.
 	 */
 	once(event: EventName, callback: Function): this;
 
 	/**
-	 * Removes an event handler
+	 * Removes an event handler.
 	 */
 	off(event?: EventName, callback?: Function, force?: boolean): this;
 
 	/**
-	 * Emits an event
+	 * Emits an event.
 	 */
 	emit(event: EventName, ...args: any): this;
 }

@@ -50,21 +50,22 @@ import { droppable } from "./utils/dnd";
 import logger from "./logger";
 
 /**
- * Window dimension definition
+ * Window dimension definition.
  * @typedef {Object} WindowDimension
  * @property {Number} width Width in pixels (or float for percentage in setters)
  * @property {Number} height Height in pixels (or float for percentage in setters)
  */
 
 /**
- * Window position definition
+ * Window position definition.
  * @typedef {Object} WindowPosition
  * @property {Number} left Left in pixels (or float for percentage in setters)
  * @property {Number} top Top in pixels (or float for percentage in setters)
  */
 
 /**
- * Window session
+ * Window session.
+ *
  * @typedef {Object} WindowSession
  * @property {Number} id
  * @property {Boolean} maximized
@@ -74,7 +75,7 @@ import logger from "./logger";
  */
 
 /**
- * Window attributes definition
+ * Window attributes definition.
  *
  * @typedef {Object} WindowAttributes
  * @property {String[]} [classNames=[]] A list of class names
@@ -97,7 +98,7 @@ import logger from "./logger";
  */
 
 /**
- * Window state definition
+ * Window state definition.
  *
  * @typedef {Object} WindowState
  * @property {String} title Title
@@ -115,7 +116,7 @@ import logger from "./logger";
  */
 
 /**
- * Window options definition
+ * Window options definition.
  *
  * @typedef {Object} WindowOptions
  * @property {String} id Window Id (not globaly unique)
@@ -136,7 +137,7 @@ let nextZindex = 1;
 let lastWindow = null;
 
 /**
- * Default window template
+ * Default window template.
  */
 const TEMPLATE = `<div class="meeseOS-window-inner">
   <div class="meeseOS-window-header">
@@ -173,7 +174,7 @@ const TEMPLATE = `<div class="meeseOS-window-inner">
  */
 export default class Window extends EventEmitter {
 	/**
-	 * Create window
+	 * Create window.
 	 *
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {WindowOptions} [options={}] Options
@@ -202,21 +203,21 @@ export default class Window extends EventEmitter {
 		}
 
 		/**
-		 * The Window ID
+		 * The Window ID.
 		 * @type {String}
 		 * @readonly
 		 */
 		this.id = options.id;
 
 		/**
-		 * The Window ID
+		 * The Window ID.
 		 * @type {Number}
 		 * @readonly
 		 */
 		this.wid = ++windowCount;
 
 		/**
-		 * Parent Window reference
+		 * Parent Window reference.
 		 * @type {Window}
 		 * @readonly
 		 */
@@ -229,76 +230,76 @@ export default class Window extends EventEmitter {
 		this.children = [];
 
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 * @readonly
 		 */
 		this.core = core;
 
 		/**
-		 * The window destruction state
+		 * The window destruction state.
 		 * @type {Boolean}
 		 */
 		this.destroyed = false;
 
 		/**
-		 * The window rendered state
+		 * The window rendered state.
 		 * @type {Boolean}
 		 */
 		this.rendered = false;
 
 		/**
-		 * The window was inited
+		 * The window was inited.
 		 * @type {Boolean}
 		 */
 		this.inited = false;
 
 		/**
-		 * The window attributes
+		 * The window attributes.
 		 * @type {WindowAttributes}
 		 */
 		this.attributes = createAttributes(options.attributes);
 
 		/**
-		 * The window state
+		 * The window state.
 		 * @type {WindowState}
 		 */
 		this.state = createState(options.state, options, this.attributes);
 
 		/**
-		 * The window container
+		 * The window container.
 		 * @type {Element}
 		 * @readonly
 		 */
 		this.$element = document.createElement("div");
 
 		/**
-		 * The content container
+		 * The content container.
 		 * @type {Element}
 		 */
 		this.$content = null;
 
 		/**
-		 * The header container
+		 * The header container.
 		 * @type {Element}
 		 */
 		this.$header = null;
 
 		/**
-		 * The icon container
+		 * The icon container.
 		 * @type {Element}
 		 */
 		this.$icon = null;
 
 		/**
-		 * The title container
+		 * The title container.
 		 * @type {Element}
 		 */
 		this.$title = null;
 
 		/**
 		 * Internal variable to signal not to use default position
-		 * given by user (used for restore)
+		 * given by user (used for restore).
 		 * @private
 		 * @type {Boolean}
 		 */
@@ -313,14 +314,14 @@ export default class Window extends EventEmitter {
 		this._loadingDebounce = null;
 
 		/**
-		 * The window template
+		 * The window template.
 		 * @private
 		 * @type {String|Function}
 		 */
 		this._template = options.template;
 
 		/**
-		 * Custom destructor callback
+		 * Custom destructor callback.
 		 * @private
 		 * @type {Function}
 		 * @readonly
@@ -333,14 +334,14 @@ export default class Window extends EventEmitter {
 		this.focus = this.focus.bind(this);
 
 		/**
-		 * Last DOM update CSS text
+		 * Last DOM update CSS text.
 		 * @private
 		 * @type {String}
 		 */
 		this._lastCssText = "";
 
 		/**
-		 * Last DOM update data attributes
+		 * Last DOM update data attributes.
 		 * @private
 		 * @type {WindowAttributes}
 		 */
@@ -350,7 +351,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Destroy window
+	 * Destroy window.
 	 */
 	destroy() {
 		if (this.destroyed) return;
@@ -392,7 +393,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Initialize window
+	 * Initialize window.
 	 */
 	init() {
 		if (this.inited) return this;
@@ -420,7 +421,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Initializes window template
+	 * Initializes window template.
 	 * @private
 	 */
 	_initTemplate() {
@@ -440,7 +441,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Initializes window behavior
+	 * Initializes window behavior.
 	 * @private
 	 */
 	_initBehavior() {
@@ -476,7 +477,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Checks the modal state of the window upon render
+	 * Checks the modal state of the window upon render.
 	 * @private
 	 */
 	_checkModal() {
@@ -490,7 +491,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Sets the initial class names
+	 * Sets the initial class names.
 	 * @private
 	 */
 	_setClassNames() {
@@ -505,7 +506,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Render window
+	 * Render window.
 	 * @param {Function} [callback] Callback when window DOM has been constructed
 	 * @returns {Window} this instance
 	 */
@@ -551,7 +552,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Close the window
+	 * Close the window.
 	 * @returns {Boolean}
 	 */
 	close() {
@@ -564,7 +565,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Focus the window
+	 * Focus the window.
 	 * @returns {Boolean}
 	 */
 	focus() {
@@ -578,7 +579,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Internal for focus
+	 * Internal for focus.
 	 * @private
 	 */
 	_focus() {
@@ -592,7 +593,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Blur (un-focus) the window
+	 * Blur (un-focus) the window.
 	 * @returns {Boolean}
 	 */
 	blur() {
@@ -604,7 +605,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Minimize (hide) the window
+	 * Minimize (hide) the window.
 	 * @returns {Boolean}
 	 */
 	minimize() {
@@ -620,7 +621,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Raise (un-minimize) the window
+	 * Raise (un-minimize) the window.
 	 * @returns {Boolean}
 	 */
 	raise() {
@@ -628,7 +629,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Maximize the window
+	 * Maximize the window.
 	 * @returns {Boolean}
 	 */
 	maximize() {
@@ -640,7 +641,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Restore (un-maximize) the window
+	 * Restore (un-maximize) the window.
 	 * @returns {Boolean}
 	 */
 	restore() {
@@ -648,7 +649,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Internal for Maximize or restore
+	 * Internal for Maximize or restore.
 	 * @private
 	 * @param {Boolean} toggle Maximize or restore
 	 * @returns {Boolean}
@@ -680,7 +681,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Resize to fit to current container
+	 * Resize to fit to current container.
 	 * @param {Element} [container] The DOM element to use
 	 */
 	resizeFit(container) {
@@ -699,7 +700,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Clamps the position to viewport
+	 * Clamps the position to viewport.
 	 * @param {Boolean} [update=true] Update DOM
 	 */
 	clampToViewport(update = true) {
@@ -718,7 +719,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Set the Window icon
+	 * Set the Window icon.
 	 * @param {String} uri Icon URI
 	 */
 	setIcon(uri) {
@@ -728,7 +729,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Set the Window title
+	 * Set the Window title.
 	 * @param {String} title Title
 	 */
 	setTitle(title) {
@@ -739,7 +740,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Set the Window dimension
+	 * Set the Window dimension.
 	 * @param {WindowDimension} dimension The dimension
 	 */
 	setDimension(dimension) {
@@ -752,7 +753,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Set the Window position
+	 * Set the Window position.
 	 * @param {WindowPosition} position The position
 	 * @param {Boolean} [preventDefault=false] Prevents any future position setting in init procedure
 	 */
@@ -770,7 +771,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Set the Window z index
+	 * Set the Window z index.
 	 * @param {Number} zIndex the index
 	 */
 	setZindex(zIndex) {
@@ -781,7 +782,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Sets the Window to next z index
+	 * Sets the Window to next z index.
 	 * @param {Boolean} [force] Force next index
 	 */
 	setNextZindex(force) {
@@ -794,7 +795,8 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Set a state by value
+	 * Set a state by value.
+	 *
 	 * @param {String} name State name
 	 * @param {*} value State value
 	 * @param {Boolean} [update=true] Update the DOM
@@ -818,7 +820,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Gravitates window towards a certain area
+	 * Gravitates window towards a certain area.
 	 * @param {String} gravity Gravity
 	 */
 	gravitate(gravity) {
@@ -831,7 +833,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Gets a astate
+	 * Gets a astate.
 	 * @returns {*}
 	 */
 	getState(n) {
@@ -843,7 +845,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Get a snapshot of the Window session
+	 * Get a snapshot of the Window session.
 	 * @returns {WindowSession}
 	 */
 	getSession() {
@@ -859,7 +861,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Get a list of all windows
+	 * Get a list of all windows.
 	 * @returns {Window[]}
 	 */
 	static getWindows() {
@@ -867,7 +869,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Gets the lastly focused Window
+	 * Gets the lastly focused Window.
 	 * @returns {Window}
 	 */
 	static lastWindow() {
@@ -875,7 +877,8 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Internal method for setting state
+	 * Internal method for setting state.
+	 *
 	 * @private
 	 * @param {String} name State name
 	 * @param {*} value State value
@@ -896,7 +899,8 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Internal method for toggling state
+	 * Internal method for toggling state.
+	 *
 	 * @private
 	 * @param {String} name State name
 	 * @param {any} value State value
@@ -922,7 +926,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Check if we have to set next zindex
+	 * Check if we have to set next z index.
 	 * @private
 	 * @returns {Boolean}
 	 */
@@ -941,7 +945,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window styles and attributes
+	 * Updates window styles and attributes.
 	 */
 	_updateDOM() {
 		this._updateAttributes();
@@ -949,7 +953,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates the window buttons in DOM
+	 * Updates the window buttons in DOM.
 	 * @private
 	 */
 	_updateButtons() {
@@ -978,7 +982,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window title in DOM
+	 * Updates window title in DOM.
 	 * @private
 	 */
 	_updateTitle() {
@@ -991,7 +995,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window icon decoration in DOM
+	 * Updates window icon decoration in DOM.
 	 * @private
 	 */
 	_updateIconStyles() {
@@ -1004,7 +1008,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window header decoration in DOM
+	 * Updates window header decoration in DOM.
 	 * @private
 	 */
 	_updateHeaderStyles() {
@@ -1017,7 +1021,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window data in DOM
+	 * Updates window data in DOM.
 	 * @private
 	 */
 	_updateAttributes() {
@@ -1037,7 +1041,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window style in DOM
+	 * Updates window style in DOM.
 	 * @private
 	 */
 	_updateStyles() {

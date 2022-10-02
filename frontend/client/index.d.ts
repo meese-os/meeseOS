@@ -34,196 +34,196 @@ import { EventEmitter } from "@meeseOS/event-emitter";
 
 declare class ServiceProvider {
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: CoreBase;
 
 	/**
-	 * Provider options
+	 * Provider options.
 	 */
 	readonly options: any;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	constructor(core: CoreBase, options: any);
 
 	/**
-	 * List of provided services
+	 * List of provided services.
 	 */
 	static provides(): string[];
 
 	/**
-	 * Initializes Provider
+	 * Initializes Provider.
 	 */
 	init(): Promise<any>;
 
 	/**
-	 * Starts Provider
+	 * Starts Provider.
 	 */
 	start(): Promise<any>;
 
 	/**
-	 * Destroys Provider
+	 * Destroys Provider.
 	 */
 	destroy(): void;
 }
 
 declare class CoreBase extends EventEmitter {
 	/**
-	 * Logger module
+	 * Logger module.
 	 */
 	readonly logger: any;
 
 	/**
-	 * Configuration Tree
+	 * Configuration Tree.
 	 */
 	readonly configuration: any;
 
 	/**
-	 * Options
+	 * Options.
 	 */
 	readonly options: any;
 
 	/**
-	 * Boot has been initiated
+	 * Boot has been initiated.
 	 */
 	booted: boolean;
 
 	/**
-	 * Fully started
+	 * Fully started.
 	 */
 	started: boolean;
 
 	/**
-	 * Fully destroyped
+	 * Fully destroyped.
 	 */
 	destroyd: boolean;
 
 	/**
-	 * Service Provider Handler
+	 * Service Provider Handler.
 	 */
 	providers: any;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	constructor(name?: string);
 
 	/**
-	 * Destroy core instance
+	 * Destroy core instance.
 	 */
 	destroy(): void;
 
 	/**
-	 * Boots up MeeseOS
+	 * Boots up MeeseOS.
 	 */
 	boot(): Promise<boolean>;
 
 	/**
-	 * Starts all core services
+	 * Starts all core services.
 	 */
 	start(): Promise<boolean>;
 
 	/**
-	 * Gets a configuration entry by key
+	 * Gets a configuration entry by key.
 	 */
 	config(key: string, defaultValue: any): any;
 
 	/**
-	 * Register a service provider
+	 * Register a service provider.
 	 */
 	register(ref: typeof ServiceProvider, options: any): void;
 
 	/**
-	 * Register a instantiator provider
+	 * Register a instantiator provider.
 	 */
 	instance(name: string, callback: Function): void;
 
 	/**
-	 * Register a singleton provider
+	 * Register a singleton provider.
 	 */
 	singleton(name: string, callback: Function): void;
 
 	/**
-	 * Create an instance of a provided service
+	 * Create an instance of a provided service.
 	 */
 	make<T>(name: string, ...args: any[]): T;
 
 	/**
-	 * Check if a service exists
+	 * Check if a service exists.
 	 */
 	has(name: string): boolean;
 }
 
 declare class Websocket extends EventEmitter {
 	/**
-	 * Create a new Websocket
+	 * Create a new Websocket.
 	 */
 	constructor(name: string, uri: string, options?: WebsocketOptions);
 
 	/**
-	 * Socket URI
+	 * Socket URI.
 	 */
 	readonly uri: string;
 
 	/**
-	 * If socket is closed
+	 * If socket is closed.
 	 */
 	closed: boolean;
 
 	/**
-	 * If socket is connected
+	 * If socket is connected.
 	 */
 	connected: boolean;
 
 	/**
-	 * If socket is connecting
+	 * If socket is connecting.
 	 */
 	connecting: boolean;
 
 	/**
-	 * If socket is reconnecting
+	 * If socket is reconnecting.
 	 */
 	reconnecting: boolean;
 
 	/**
-	 * If socket failed to connect
+	 * If socket failed to connect.
 	 */
 	connectfailed: boolean;
 
 	/**
-	 * Options
+	 * Options.
 	 */
 	readonly options: WebsocketOptions;
 
 	/**
-	 * The Websocket
+	 * The Websocket.
 	 */
 	connection: WebSocket;
 
 	/**
-	 * Destroys the current connection
+	 * Destroys the current connection.
 	 */
 	private _destroyConnection;
 
 	/**
-	 * Attaches internal events
+	 * Attaches internal events.
 	 */
 	private _attachEvents;
 
 	/**
-	 * Opens the connection
+	 * Opens the connection.
 	 */
 	open(reconnect?: boolean): void;
 
 	/**
-	 * Wrapper for sending data
+	 * Wrapper for sending data.
 	 */
 	send(...args: any[]): void;
 
 	/**
-	 * Wrapper for closing
+	 * Wrapper for closing.
 	 */
 	close(...args: any[]): void;
 }
@@ -233,141 +233,141 @@ declare class Websocket extends EventEmitter {
  */
 export type WebsocketOptions = {
 	/**
-	 * Enable reconnection
+	 * Enable reconnection.
 	 */
 	reconnect?: boolean;
 
 	/**
-	 * Reconnect interval
+	 * Reconnect interval.
 	 */
 	interval?: number;
 
 	/**
-	 * Immediately open socket after creation
+	 * Immediately open socket after creation.
 	 */
 	open?: boolean;
 };
 
 declare class Splash {
 	/**
-	 * Create Splash
+	 * Create Splash.
 	 */
 	constructor(core: Core);
 
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 
 	/**
-	 * Splash root element
+	 * Splash root element.
 	 */
 	readonly $loading: Element;
 
 	/**
-	 * Initializes splash
+	 * Initializes splash.
 	 */
 	init(): void;
 
 	/**
-	 * Shows splash
+	 * Shows splash.
 	 */
 	show(): void;
 
 	/**
-	 * Destroys splash
+	 * Destroys splash.
 	 */
 	destroy(): void;
 }
 
 declare class Window extends EventEmitter {
 	/**
-	 * Get a list of all windows
+	 * Get a list of all windows.
 	 */
 	static getWindows(): Window[];
 
 	/**
-	 * Gets the lastly focused Window
+	 * Gets the lastly focused Window.
 	 */
 	static lastWindow(): Window;
 
 	/**
-	 * Create window
+	 * Create window.
 	 */
 	constructor(core: Core, options?: WindowOptions);
 
 	/**
-	 * The Window ID
+	 * The Window ID.
 	 */
 	readonly id: string;
 
 	/**
-	 * The Window ID
+	 * The Window ID.
 	 */
 	readonly wid: number;
 
 	/**
-	 * Parent Window reference
+	 * Parent Window reference.
 	 */
 	readonly parent: Window;
 
 	/**
-	 * Child windows (via 'parent')
+	 * Child windows (via 'parent').
 	 */
 	children: Window[];
 
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 
 	/**
-	 * The window destruction state
+	 * The window destruction state.
 	 */
 	destroyed: boolean;
 
 	/**
-	 * The window rendered state
+	 * The window rendered state.
 	 */
 	rendered: boolean;
 
 	/**
-	 * The window was inited
+	 * The window was inited.
 	 */
 	inited: boolean;
 
 	/**
-	 * The window attributes
+	 * The window attributes.
 	 */
 	attributes: WindowAttributes;
 
 	/**
-	 * The window state
+	 * The window state.
 	 */
 	state: WindowState;
 
 	/**
-	 * The window container
+	 * The window container.
 	 */
 	readonly $element: Element;
 
 	/**
-	 * The content container
+	 * The content container.
 	 */
 	$content: Element;
 
 	/**
-	 * The header container
+	 * The header container.
 	 */
 	$header: Element;
 
 	/**
-	 * The icon container
+	 * The icon container.
 	 */
 	$icon: Element;
 
 	/**
-	 * The title container
+	 * The title container.
 	 */
 	$title: Element;
 
@@ -384,208 +384,208 @@ declare class Window extends EventEmitter {
 	private _loadingDebounce;
 
 	/**
-	 * The window template
+	 * The window template.
 	 */
 	private _template;
 
 	/**
-	 * Custom destructor callback
+	 * Custom destructor callback.
 	 */
 	private readonly _ondestroy;
 
 	/**
-	 * Last DOM update CSS text
+	 * Last DOM update CSS text.
 	 */
 	private _lastCssText;
 
 	/**
-	 * Last DOM update data attributes
+	 * Last DOM update data attributes.
 	 */
 	private _lastAttributes;
 
 	/**
-	 * Destroy window
+	 * Destroy window.
 	 */
 	destroy(): void;
 
 	/**
-	 * Initialize window
+	 * Initialize window.
 	 */
 	init(): Window;
 
 	/**
-	 * Initializes window template
+	 * Initializes window template.
 	 */
 	private _initTemplate;
 
 	/**
-	 * Initializes window behavior
+	 * Initializes window behavior.
 	 */
 	private _initBehavior;
 
 	/**
-	 * Checks the modal state of the window upon render
+	 * Checks the modal state of the window upon render.
 	 */
 	private _checkModal;
 
 	/**
-	 * Sets the initial class names
+	 * Sets the initial class names.
 	 */
 	private _setClassNames;
 
 	/**
-	 * Render window
+	 * Render window.
 	 */
 	render(callback?: Function): Window;
 
 	/**
-	 * Close the window
+	 * Close the window.
 	 */
 	close(): boolean;
 
 	/**
-	 * Focus the window
+	 * Focus the window.
 	 */
 	focus(): boolean;
 
 	/**
-	 * Internal for focus
+	 * Internal for focus.
 	 */
 	private _focus;
 
 	/**
-	 * Blur (un-focus) the window
+	 * Blur (un-focus) the window.
 	 */
 	blur(): boolean;
 
 	/**
-	 * Minimize (hide) the window
+	 * Minimize (hide) the window.
 	 */
 	minimize(): boolean;
 
 	/**
-	 * Raise (un-minimize) the window
+	 * Raise (un-minimize) the window.
 	 */
 	raise(): boolean;
 
 	/**
-	 * Maximize the window
+	 * Maximize the window.
 	 */
 	maximize(): boolean;
 
 	/**
-	 * Restore (un-maximize) the window
+	 * Restore (un-maximize) the window.
 	 */
 	restore(): boolean;
 
 	/**
-	 * Internal for Maximize or restore
+	 * Internal for Maximize or restore.
 	 */
 	private _maximize;
 
 	/**
-	 * Resize to fit to current container
+	 * Resize to fit to current container.
 	 */
 	resizeFit(container?: Element): void;
 
 	/**
-	 * Clamps the position to viewport
+	 * Clamps the position to viewport.
 	 */
 	clampToViewport(update?: boolean): void;
 
 	/**
-	 * Set the Window icon
+	 * Set the Window icon.
 	 */
 	setIcon(uri: string): void;
 
 	/**
-	 * Set the Window title
+	 * Set the Window title.
 	 */
 	setTitle(title: string): void;
 
 	/**
-	 * Set the Window dimension
+	 * Set the Window dimension.
 	 */
 	setDimension(dimension: WindowDimension): void;
 
 	/**
-	 * Set the Window position
+	 * Set the Window position.
 	 */
 	setPosition(position: WindowPosition, preventDefault?: boolean): void;
 
 	/**
-	 * Set the Window z index
+	 * Set the Window z index.
 	 */
 	setZindex(zIndex: number): void;
 
 	/**
-	 * Sets the Window to next z index
+	 * Sets the Window to next z index.
 	 */
 	setNextZindex(force?: boolean): void;
 
 	/**
-	 * Set a state by value
+	 * Set a state by value.
 	 */
 	setState(name: string, value: any, update?: boolean): void;
 
 	/**
-	 * Gravitates window towards a certain area
+	 * Gravitates window towards a certain area.
 	 */
 	gravitate(gravity: string): void;
 
 	/**
-	 * Gets a astate
+	 * Gets a astate.
 	 */
 	getState(n: any): any;
 
 	/**
-	 * Get a snapshot of the Window session
+	 * Get a snapshot of the Window session.
 	 */
 	getSession(): WindowSession;
 
 	/**
-	 * Internal method for setting state
+	 * Internal method for setting state.
 	 */
 	private _setState;
 
 	/**
-	 * Internal method for toggling state
+	 * Internal method for toggling state.
 	 */
 	private _toggleState;
 
 	/**
-	 * Check if we have to set next zindex
+	 * Check if we have to set next zindex.
 	 */
 	private _checkNextZindex;
 	_updateDOM(): void;
 
 	/**
-	 * Updates the window buttons in DOM
+	 * Updates the window buttons in DOM.
 	 */
 	private _updateButtons;
 
 	/**
-	 * Updates window title in DOM
+	 * Updates window title in DOM.
 	 */
 	private _updateTitle;
 
 	/**
-	 * Updates window icon decoration in DOM
+	 * Updates window icon decoration in DOM.
 	 */
 	private _updateIconStyles;
 
 	/**
-	 * Updates window header decoration in DOM
+	 * Updates window header decoration in DOM.
 	 */
 	private _updateHeaderStyles;
 
 	/**
-	 * Updates window data in DOM
+	 * Updates window data in DOM.
 	 */
 	private _updateAttributes;
 
 	/**
-	 * Updates window style in DOM
+	 * Updates window style in DOM.
 	 */
 	private _updateStyles;
 }
@@ -595,12 +595,12 @@ declare class Window extends EventEmitter {
  */
 export type WindowDimension = {
 	/**
-	 * Width in pixels (or float for percentage in setters)
+	 * Width in pixels (or float for percentage in setters).
 	 */
 	width: number;
 
 	/**
-	 * Height in pixels (or float for percentage in setters)
+	 * Height in pixels (or float for percentage in setters).
 	 */
 	height: number;
 };
@@ -610,12 +610,12 @@ export type WindowDimension = {
  */
 export type WindowPosition = {
 	/**
-	 * Left in pixels (or float for percentage in setters)
+	 * Left in pixels (or float for percentage in setters).
 	 */
 	left: number;
 
 	/**
-	 * Top in pixels (or float for percentage in setters)
+	 * Top in pixels (or float for percentage in setters).
 	 */
 	top: number;
 };
@@ -636,57 +636,57 @@ export type WindowSession = {
  */
 export type WindowAttributes = {
 	/**
-	 * A list of class names
+	 * A list of class names.
 	 */
 	classNames?: string[];
 
 	/**
-	 * If always on top
+	 * If always on top.
 	 */
 	ontop?: boolean;
 
 	/**
-	 * Gravity (center/top/left/right/bottom or any combination)
+	 * Gravity (center/top/left/right/bottom or any combination).
 	 */
 	gravity?: string;
 
 	/**
-	 * If resizable
+	 * If resizable.
 	 */
 	resizable?: boolean;
 
 	/**
-	 * If focusable
+	 * If focusable.
 	 */
 	focusable?: boolean;
 
 	/**
-	 * If window if maximizable
+	 * If window if maximizable.
 	 */
 	maximizable?: boolean;
 
 	/**
-	 * If minimizable
+	 * If minimizable.
 	 */
 	minimizable?: boolean;
 
 	/**
-	 * If moveable
+	 * If moveable.
 	 */
 	moveable?: boolean;
 
 	/**
-	 * If closeable
+	 * If closeable.
 	 */
 	closeable?: boolean;
 
 	/**
-	 * Show header
+	 * Show header.
 	 */
 	header?: boolean;
 
 	/**
-	 * Show controls
+	 * Show controls.
 	 */
 	controls?: boolean;
 
@@ -696,27 +696,27 @@ export type WindowAttributes = {
 	visibility?: string;
 
 	/**
-	 * Clamp the window position upon creation
+	 * Clamp the window position upon creation.
 	 */
 	clamp?: boolean;
 
 	/**
-	 * If window should have the default drop action
+	 * If window should have the default drop action.
 	 */
 	droppable?: boolean;
 
 	/**
-	 * Minimum dimension
+	 * Minimum dimension.
 	 */
 	minDimension?: WindowDimension;
 
 	/**
-	 * Maximum dimension
+	 * Maximum dimension.
 	 */
 	maxDimension?: WindowDimension;
 
 	/**
-	 * A map of matchMedia to name
+	 * A map of matchMedia to name.
 	 */
 	mediaQueries?: {
 		name: string;
@@ -728,62 +728,62 @@ export type WindowAttributes = {
  */
 export type WindowState = {
 	/**
-	 * Title
+	 * Title.
 	 */
 	title: string;
 
 	/**
-	 * Icon
+	 * Icon.
 	 */
 	icon: string;
 
 	/**
-	 * If moving
+	 * If moving.
 	 */
 	moving?: boolean;
 
 	/**
-	 * If resizing
+	 * If resizing.
 	 */
 	resizing?: boolean;
 
 	/**
-	 * If loading
+	 * If loading.
 	 */
 	loading?: boolean;
 
 	/**
-	 * If focused
+	 * If focused.
 	 */
 	focused?: boolean;
 
 	/**
-	 * If maximized
+	 * If maximized.
 	 */
 	maximized?: boolean;
 
 	/**
-	 * If mimimized
+	 * If mimimized.
 	 */
 	mimimized?: boolean;
 
 	/**
-	 * If modal to the parent
+	 * If modal to the parent.
 	 */
 	modal?: boolean;
 
 	/**
-	 * The z-index (auto calculated)
+	 * The z-index (auto calculated).
 	 */
 	zIndex?: number;
 
 	/**
-	 * Position
+	 * Position.
 	 */
 	position?: WindowPosition;
 
 	/**
-	 * Dimension
+	 * Dimension.
 	 */
 	dimension?: WindowDimension;
 };
@@ -793,143 +793,143 @@ export type WindowState = {
  */
 export type WindowOptions = {
 	/**
-	 * Window Id (not globaly unique)
+	 * Window Id (not globaly unique).
 	 */
 	id: string;
 
 	/**
-	 * Window Title
+	 * Window Title.
 	 */
 	title?: string;
 
 	/**
-	 * Window Icon
+	 * Window Icon.
 	 */
 	icon?: string;
 
 	/**
-	 * The parent Window reference
+	 * The parent Window reference.
 	 */
 	parent?: Window;
 
 	/**
-	 * The Window HTML template (or function with signature (el, win) for programatic construction)
+	 * The Window HTML template (or function with signature (el, win) for programatic construction).
 	 */
 	template?: string | Function;
 
 	/**
-	 * A callback function when window destructs to interrupt the procedure
+	 * A callback function when window destructs to interrupt the procedure.
 	 */
 	ondestroy?: Function;
 
 	/**
-	 * Window position
+	 * Window position.
 	 */
 	position?: WindowPosition | string;
 
 	/**
-	 * Window dimension
+	 * Window dimension.
 	 */
 	dimension?: WindowDimension;
 
 	/**
-	 * Apply Window attributes
+	 * Apply Window attributes.
 	 */
 	attributes?: WindowAttributes;
 
 	/**
-	 * Apply Window state
+	 * Apply Window state.
 	 */
 	state?: WindowState;
 };
 
 declare class Application extends EventEmitter {
 	/**
-	 * Get a list of all running applications
+	 * Get a list of all running applications.
 	 */
 	static getApplications(): Application[];
 
 	/**
-	 * Kills all running applications
+	 * Kills all running applications.
 	 */
 	static destroyAll(): void;
 
 	/**
-	 * Create application
+	 * Create application.
 	 */
 	constructor(core: Core, data: ApplicationData);
 
 	/**
-	 * The Application ID
+	 * The Application ID.
 	 */
 	readonly pid: number;
 
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 
 	/**
-	 * Application arguments
+	 * Application arguments.
 	 */
 	args: {
 		foo: any;
 	};
 
 	/**
-	 * Application options
+	 * Application options.
 	 */
 	options: ApplicationOptions;
 
 	/**
-	 * Application metadata
+	 * Application metadata.
 	 */
 	readonly metadata: any;
 
 	/**
-	 * Window list
+	 * Window list.
 	 */
 	windows: Window[];
 
 	/**
-	 * Worker instances
+	 * Worker instances.
 	 */
 	workers: Worker[];
 
 	/**
-	 * Options for internal fetch/requests
+	 * Options for internal fetch/requests.
 	 */
 	requestOptions: object;
 
 	/**
-	 * The application destruction state
+	 * The application destruction state.
 	 */
 	destroyed: boolean;
 
 	/**
-	 * Application settings
+	 * Application settings.
 	 */
 	settings: {
 		foo: any;
 	};
 
 	/**
-	 * Application started time
+	 * Application started time.
 	 */
 	readonly started: Date;
 
 	/**
-	 * Application WebSockets
+	 * Application WebSockets.
 	 */
 	sockets: Websocket[];
 
 	/**
-	 * Destroy application
+	 * Destroy application.
 	 */
 	destroy(remove?: boolean): void;
 
 	/**
-	 * Re-launch this application
+	 * Re-launch this application.
 	 */
 	relaunch(): void;
 
@@ -946,7 +946,7 @@ declare class Application extends EventEmitter {
 	request(path?: string, options?: any, type?: string): Promise<any>;
 
 	/**
-	 * Creates a new Websocket
+	 * Creates a new Websocket.
 	 */
 	socket(path?: string, options?: any): Websocket;
 
@@ -958,27 +958,27 @@ declare class Application extends EventEmitter {
 	send(...args: any[]): void;
 
 	/**
-	 * Creates a new Worker
+	 * Creates a new Worker.
 	 */
 	worker(filename: string, options?: object): Worker;
 
 	/**
-	 * Create a new window belonging to this application
+	 * Create a new window belonging to this application.
 	 */
 	createWindow(options?: any): Window;
 
 	/**
-	 * Removes window(s) based on given filter
+	 * Removes window(s) based on given filter.
 	 */
 	removeWindow(filter: Function): void;
 
 	/**
-	 * Gets a snapshot of the application session
+	 * Gets a snapshot of the application session.
 	 */
 	getSession(): ApplicationSession;
 
 	/**
-	 * Saves settings
+	 * Saves settings.
 	 */
 	saveSettings(): Promise<boolean>;
 }
@@ -988,22 +988,22 @@ declare class Application extends EventEmitter {
  */
 export type ApplicationOptions = {
 	/**
-	 * Initial settings
+	 * Initial settings.
 	 */
 	settings?: object;
 
 	/**
-	 * Restore data
+	 * Restore data.
 	 */
 	restore?: object;
 
 	/**
-	 * Auto-focus first created window
+	 * Auto-focus first created window.
 	 */
 	windowAutoFocus?: boolean;
 
 	/**
-	 * Allow session storage
+	 * Allow session storage.
 	 */
 	sessionable?: boolean;
 };
@@ -1013,19 +1013,19 @@ export type ApplicationOptions = {
  */
 export type ApplicationData = {
 	/**
-	 * Launch arguments
+	 * Launch arguments.
 	 */
 	args: {
 		foo: any;
 	};
 
 	/**
-	 * Options
+	 * Options.
 	 */
 	options?: ApplicationOptions;
 
 	/**
-	 * Package Metadata
+	 * Package Metadata.
 	 */
 	metadata?: any;
 };
@@ -1043,67 +1043,67 @@ export type ApplicationSession = {
 
 declare class Core extends CoreBase {
 	/**
-	 * Create core instance
+	 * Create core instance.
 	 */
 	constructor(config?: any, options?: CoreOptions);
 
 	/**
-	 * Websocket connection
+	 * Websocket connection.
 	 */
 	ws: Websocket;
 
 	/**
-	 * Ping (stay alive) interval
+	 * Ping (stay alive) interval.
 	 */
 	ping: number;
 
 	/**
-	 * Splash instance
+	 * Splash instance.
 	 */
 	readonly splash: Splash;
 
 	/**
-	 * Main DOM element
+	 * Main DOM element.
 	 */
 	readonly $root: Element;
 
 	/**
-	 * Windows etc DOM element
+	 * Windows etc DOM element.
 	 */
 	readonly $contents: Element;
 
 	/**
-	 * Resource script container DOM element
+	 * Resource script container DOM element.
 	 */
 	readonly $resourceRoot: Element;
 
 	/**
-	 * Default fetch request options
+	 * Default fetch request options.
 	 */
 	requestOptions: any;
 
 	/**
-	 * URL Resolver
+	 * URL Resolver.
 	 */
 	readonly urlResolver: () => string;
 
 	/**
-	 * Current user data
+	 * Current user data.
 	 */
 	readonly user: CoreUserData;
 
 	/**
-	 * Attaches some internal events
+	 * Attaches some internal events.
 	 */
 	private _attachEvents;
 
 	/**
-	 * Creates the main connection to server
+	 * Creates the main connection to server.
 	 */
 	private _createConnection;
 
 	/**
-	 * Creates event listeners
+	 * Creates event listeners.
 	 */
 	private _createListeners;
 
@@ -1129,7 +1129,7 @@ declare class Core extends CoreBase {
 	request(url: string, options?: any, type?: string, force?: boolean): any;
 
 	/**
-	 * Create an application from a package
+	 * Create an application from a package.
 	 */
 	run(
 		name: string,
@@ -1140,12 +1140,12 @@ declare class Core extends CoreBase {
 	): Promise<Application>;
 
 	/**
-	 * Spawns an application based on the file given
+	 * Spawns an application based on the file given.
 	 */
 	open(file: any, options?: any): boolean | Application;
 
 	/**
-	 * Wrapper method to create an application choice dialog
+	 * Wrapper method to create an application choice dialog.
 	 */
 	private _openApplicationDialog;
 
@@ -1162,17 +1162,17 @@ declare class Core extends CoreBase {
 	send(name: string, ...params: any[]);
 
 	/**
-	 * Set the internal fetch/request options
+	 * Set the internal fetch/request options.
 	 */
 	setRequestOptions(options: object): void;
 
 	/**
-	 * Gets the current user
+	 * Gets the current user.
 	 */
 	getUser(): CoreUserData;
 
 	/**
-	 * Add middleware function to a group
+	 * Add middleware function to a group.
 	 */
 	middleware(group: string, callback: Function): void;
 }
@@ -1193,66 +1193,66 @@ export type CoreUserData = {
  */
 export type CoreOptions = {
 	/**
-	 * The root DOM element for elements
+	 * The root DOM element for elements.
 	 */
 	root?: Element;
 	/**
-	 * The root DOM element for resources
+	 * The root DOM element for resources.
 	 */
 	resourceRoot?: Element;
 	/**
-	 * List of class names to apply to root dom element
+	 * List of class names to apply to root dom element.
 	 */
 	classNames?: string[];
 	/**
-	 * Custom callback function for creating splash screen
+	 * Custom callback function for creating splash screen.
 	 */
 	splash?: SplashCallback | Splash;
 };
 
 declare class Search {
 	/**
-	 * Create Search instance
+	 * Create Search instance.
 	 */
 	constructor(core: Core);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Wired actions
+	 * Wired actions.
 	 */
 	ui: any;
 	/**
-	 * Last focused window
+	 * Last focused window.
 	 */
 	focusLastWindow: Window;
 	/**
-	 * Search root DOM element
+	 * Search root DOM element.
 	 */
 	readonly $element: Element;
 	/**
-	 * Destroy Search instance
+	 * Destroy Search instance.
 	 */
 	destroy(): void;
 	/**
-	 * Initializes Search Service
+	 * Initializes Search Service.
 	 */
 	init(): void;
 	/**
-	 * Performs a search across all mounts
+	 * Performs a search across all mounts.
 	 */
 	search(pattern: string): Promise<any[]>;
 	/**
-	 * Focuses UI
+	 * Focuses UI.
 	 */
 	focus(): void;
 	/**
-	 * Hides UI
+	 * Hides UI.
 	 */
 	hide(): void;
 	/**
-	 * Shows UI
+	 * Shows UI.
 	 */
 	show(): void;
 }
@@ -1275,143 +1275,143 @@ declare class DesktopIconView extends EventEmitter {
 
 declare class Desktop extends EventEmitter {
 	/**
-	 * Create Desktop
+	 * Create Desktop.
 	 */
 	constructor(core: Core, options?: any);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Desktop Options
+	 * Desktop Options.
 	 */
 	readonly options: DeskopOptions;
 	/**
-	 * Theme DOM elements
+	 * Theme DOM elements.
 	 */
 	$theme: Element[];
 	/**
-	 * Icon DOM elements
+	 * Icon DOM elements.
 	 */
 	$icons: Element[];
 	/**
-	 * Default context menu entries
+	 * Default context menu entries.
 	 */
 	contextmenuEntries: DesktopContextMenuEntry[];
 	/**
-	 * Search instance
+	 * Search instance.
 	 */
 	readonly search: Search | null;
 	/**
-	 * Icon View instance
+	 * Icon View instance.
 	 */
 	readonly iconview: DesktopIconView;
 	/**
-	 * Keyboard context dom element
+	 * Keyboard context dom element.
 	 */
 	keyboardContext: Element | null;
 	/**
-	 * Desktop subtraction rectangle
+	 * Desktop subtraction rectangle.
 	 */
 	subtract: DesktopViewportRectangle;
 	/**
-	 * Destroy Desktop
+	 * Destroy Desktop.
 	 */
 	destroy(): void;
 	/**
-	 * Initializes Desktop
+	 * Initializes Desktop.
 	 */
 	init(): void;
 	/**
-	 * Initializes connection events
+	 * Initializes connection events.
 	 */
 	initConnectionEvents(): void;
 	/**
-	 * Initializes user interface events
+	 * Initializes user interface events.
 	 */
 	initUIEvents(): void;
 	/**
-	 * Initializes development tray icons
+	 * Initializes development tray icons.
 	 */
 	initDeveloperTray(): void;
 	/**
-	 * Initializes drag-and-drop events
+	 * Initializes drag-and-drop events.
 	 */
 	initDragEvents(): void;
 	/**
-	 * Initializes keyboard events
+	 * Initializes keyboard events.
 	 */
 	initKeyboardEvents(): void;
 	/**
-	 * Initializes global keyboard events
+	 * Initializes global keyboard events.
 	 */
 	initGlobalKeyboardEvents(): void;
 	/**
-	 * Initializes mouse events
+	 * Initializes mouse events.
 	 */
 	initMouseEvents(): void;
 	/**
-	 * Initializes base events
+	 * Initializes base events.
 	 */
 	initBaseEvents(): void;
 	/**
-	 * Starts desktop services
+	 * Starts desktop services.
 	 */
 	start(): void;
 	/**
-	 * Update CSS
+	 * Update CSS.
 	 */
 	private _updateCSS;
 	/**
-	 * Adds something to the default contextmenu entries
+	 * Adds something to the default contextmenu entries.
 	 */
 	addContextMenu(entries: DesktopContextMenuEntry[]): void;
 	/**
-	 * Applies settings and updates desktop
+	 * Applies settings and updates desktop.
 	 */
 	applySettings(settings?: DesktopSettings): DesktopSettings;
 	/**
-	 * Removes current style theme from DOM
+	 * Removes current style theme from DOM.
 	 */
 	private _removeTheme;
 	/**
-	 * Removes current icon theme from DOM
+	 * Removes current icon theme from DOM.
 	 */
 	private _removeIcons;
 	/**
-	 * Adds or removes the icon view
+	 * Adds or removes the icon view.
 	 */
 	applyIconView(settings: DesktopIconViewSettings): void;
 	/**
-	 * Sets the current icon theme from settings
+	 * Sets the current icon theme from settings.
 	 */
 	applyIcons(name: string): Promise<undefined>;
 	/**
-	 * Sets the current style theme from settings
+	 * Sets the current style theme from settings.
 	 */
 	applyTheme(name: string): Promise<undefined>;
 	/**
-	 * Apply theme wrapper
+	 * Apply theme wrapper.
 	 */
 	private _applyTheme;
 	/**
-	 * Apply settings by key
+	 * Apply settings by key.
 	 */
 	private _applySettingsByKey;
 	/**
-	 * Create drop context menu entries
+	 * Create drop context menu entries.
 	 */
 	createDropContextMenu(data: any): any[];
 	/**
-	 * When developer menu is shown
+	 * When developer menu is shown.
 	 */
 	onDeveloperMenu(ev: Event): void;
 	/**
-	 * When drop menu is shown
+	 * When drop menu is shown.
 	 */
 	onDropContextMenu(ev: Event, data: any): void;
 	/**
-	 * When context menu is shown
+	 * When context menu is shown.
 	 */
 	onContextMenu(ev: Event): void;
 	/**
@@ -1437,7 +1437,7 @@ export type DesktopSettings = {
  */
 export type DeskopOptions = {
 	/**
-	 * Default Context menu items
+	 * Default Context menu items.
 	 */
 	contextmenu?: object[];
 };
@@ -1454,35 +1454,35 @@ export type DesktopViewportRectangle = {
 
 declare class Notification {
 	/**
-	 * Create notification
+	 * Create notification.
 	 */
 	constructor(core: Core, root: Element, options?: NotificationOptions);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Root node reference
+	 * Root node reference.
 	 */
 	readonly $root: Element;
 	/**
-	 * Notification DOM node
+	 * Notification DOM node.
 	 */
 	readonly $element: Element;
 	/**
-	 * The notification destruction state
+	 * The notification destruction state.
 	 */
 	readonly destroyed: boolean;
 	/**
-	 * Options
+	 * Options.
 	 */
 	readonly options: NotificationOptions;
 	/**
-	 * Destroy notification
+	 * Destroy notification.
 	 */
 	destroy(): void;
 	/**
-	 * Render notification
+	 * Render notification.
 	 */
 	render(): Promise<boolean>;
 }
@@ -1492,27 +1492,27 @@ declare class Notification {
  */
 export type NotificationOptions = {
 	/**
-	 * Title
+	 * Title.
 	 */
 	title: string;
 	/**
-	 * Message
+	 * Message.
 	 */
 	message: string;
 	/**
-	 * Sound to play
+	 * Sound to play.
 	 */
 	sound?: string;
 	/**
-	 * Icon source
+	 * Icon source.
 	 */
 	icon?: string;
 	/**
-	 * Timeout value (0=infinite)
+	 * Timeout value (0=infinite).
 	 */
 	timeout?: number;
 	/**
-	 * Adds a DOM class name to notification
+	 * Adds a DOM class name to notification.
 	 */
 	className?: string;
 };
@@ -1522,30 +1522,30 @@ declare class Notifications {
 	 */
 	constructor(core: Core);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
 	 */
 	$element: Element;
 	/**
-	 * Destroy notification handler
+	 * Destroy notification handler.
 	 */
 	destroy(): void;
 	/**
-	 * Initialize notification handler
+	 * Initialize notification handler.
 	 */
 	init(): void;
 	/**
-	 * Create a new notification
+	 * Create a new notification.
 	 */
 	create(options: NotificationOptions): Notification;
 	/**
-	 * Sets the element styles
+	 * Sets the element styles.
 	 */
 	setElementStyles(): void;
 	/**
-	 * Creates a new CSS style object
+	 * Creates a new CSS style object.
 	 */
 	createElementStyles(): {
 		property: string;
@@ -1553,74 +1553,74 @@ declare class Notifications {
 }
 declare class WindowBehavior {
 	/**
-	 * Create window behavior
+	 * Create window behavior.
 	 */
 	constructor(core: Core);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Last action
+	 * Last action.
 	 */
 	lastAction: string;
 	/**
-	 * LoFi DOM Element
+	 * LoFi DOM Element.
 	 */
 	readonly $lofi: Element;
 	/**
-	 * Initializes window behavior
+	 * Initializes window behavior.
 	 */
 	init(win: Window): void;
 	/**
-	 * Handles Mouse Click Event
+	 * Handles Mouse Click Event.
 	 */
 	click(ev: Event, win: Window): void;
 	/**
-	 * Handles Mouse Double Click Event
+	 * Handles Mouse Double Click Event.
 	 */
 	dblclick(ev: Event, win: Window): void;
 	/**
-	 * Handles Mouse Down Event
+	 * Handles Mouse Down Event.
 	 */
 	mousedown(ev: Event, win: Window): void;
 	/**
-	 * Handles Icon Double Click Event
+	 * Handles Icon Double Click Event.
 	 */
 	iconDblclick(ev: Event, win: Window): void;
 	/**
-	 * Handles Icon Click Event
+	 * Handles Icon Click Event.
 	 */
 	iconClick(ev: Event, win: Window): void;
 }
 
 declare class Login extends EventEmitter {
 	/**
-	 * Create authentication handler
+	 * Create authentication handler.
 	 */
 	constructor(core: Core, options?: LoginOptions);
 	/**
-	 * Login root DOM element
+	 * Login root DOM element.
 	 */
 	$container: Element;
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Login options
+	 * Login options.
 	 */
 	readonly options: any;
 	/**
-	 * Initializes the UI
+	 * Initializes the UI.
 	 */
 	init(startHidden: any): void;
 	/**
-	 * Destroys the UI
+	 * Destroys the UI.
 	 */
 	destroy(): void;
 	/**
-	 * Renders the UI
+	 * Renders the UI.
 	 */
 	render(startHidden: any): void;
 }
@@ -1630,11 +1630,11 @@ declare class Login extends EventEmitter {
  */
 export type LoginOptions = {
 	/**
-	 * Title
+	 * Title.
 	 */
 	title?: string;
 	/**
-	 * Fields
+	 * Fields.
 	 */
 	fields?: object[];
 };
@@ -1644,47 +1644,47 @@ declare class Auth {
 	 */
 	constructor(core: Core, options?: AuthSettings);
 	/**
-	 * Authentication UI
+	 * Authentication UI.
 	 */
 	readonly ui: Login;
 	/**
-	 * Authentication adapter
+	 * Authentication adapter.
 	 */
 	readonly adapter: AuthAdapter;
 	/**
-	 * Authentication callback function
+	 * Authentication callback function.
 	 */
 	readonly callback: AuthCallback;
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Initializes authentication handler
+	 * Initializes authentication handler.
 	 */
 	init(): any;
 	/**
-	 * Destroy authentication handler
+	 * Destroy authentication handler.
 	 */
 	destroy(): void;
 	/**
-	 * Run the shutdown procedure
+	 * Run the shutdown procedure.
 	 */
 	shutdown(reload?: boolean): void;
 	/**
-	 * Shows Login UI
+	 * Shows Login UI.
 	 */
 	show(cb: AuthCallback): Promise<boolean>;
 	/**
-	 * Performs a login
+	 * Performs a login.
 	 */
 	login(values: AuthForm): Promise<boolean>;
 	/**
-	 * Performs a logout
+	 * Performs a logout.
 	 */
 	logout(reload?: boolean): Promise<boolean>;
 	/**
-	 * Performs a register call
+	 * Performs a register call.
 	 */
 	register(values: AuthForm): Promise<any>;
 }
@@ -1701,64 +1701,64 @@ export type LoginAdapterCallback = (core: Core) => Login;
 export type AuthCallback = (data: AuthForm) => boolean;
 export type AuthSettings = {
 	/**
-	 * Adapter to use
+	 * Adapter to use.
 	 */
 	adapter?: AuthAdapterCallback | AuthAdapter;
 	/**
-	 * Login Adapter to use
+	 * Login Adapter to use.
 	 */
 	login?: LoginAdapterCallback | Login;
 	/**
-	 * Adapter configuration
+	 * Adapter configuration.
 	 */
 	config?: AuthAdapterConfig;
 };
 
 declare class Session {
 	/**
-	 * Creates the Session Handler
+	 * Creates the Session Handler.
 	 */
 	constructor(core: Core);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Destroys instance
+	 * Destroys instance.
 	 */
 	destroy(): void;
 	/**
-	 * Saves session
+	 * Saves session.
 	 */
 	save(): Promise<boolean>;
 	/**
-	 * Loads session
+	 * Loads session.
 	 */
 	load(fresh?: boolean): Promise<boolean>;
 }
 declare class Tray {
 	/**
-	 * Creates the Tray Handler
+	 * Creates the Tray Handler.
 	 */
 	constructor(core: Core);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * All Tray entries
+	 * All Tray entries.
 	 */
 	entries: TrayEntry[];
 	/**
-	 * Destroys instance
+	 * Destroys instance.
 	 */
 	destroy(): void;
 	/**
-	 * Creates a new Tray entry
+	 * Creates a new Tray entry.
 	 */
 	create(options: TrayEntryData, handler?: Function): TrayEntry;
 	/**
-	 * Removes a Tray entry
+	 * Removes a Tray entry.
 	 */
 	remove(entry: TrayEntry): void;
 	/**
@@ -1775,19 +1775,19 @@ declare class Tray {
  */
 export type TrayEntryData = {
 	/**
-	 * Icon source
+	 * Icon source.
 	 */
 	icon?: string;
 	/**
-	 * The title and tooltip
+	 * The title and tooltip.
 	 */
 	title?: string;
 	/**
-	 * The callback function for clicks
+	 * The callback function for clicks.
 	 */
 	onclick?: Function;
 	/**
-	 * The callback function for contextmenu
+	 * The callback function for contextmenu.
 	 */
 	oncontextmenu?: Function;
 };
@@ -1797,22 +1797,22 @@ export type TrayEntryData = {
  */
 export type TrayEntry = {
 	/**
-	 * The given entry data
+	 * The given entry data.
 	 */
 	entry: TrayEntryData;
 	/**
-	 * Updates entry with given data
+	 * Updates entry with given data.
 	 */
 	update: Function;
 	/**
-	 * Destroy the entry
+	 * Destroy the entry.
 	 */
 	destroy: Function;
 };
 declare class Preloader {
 	constructor(root: any);
 	/**
-	 * A list of cached preloads
+	 * A list of cached preloads.
 	 */
 	loaded: string[];
 	/**
@@ -1820,11 +1820,11 @@ declare class Preloader {
 	$root: Element;
 	destroy(): void;
 	/**
-	 * Loads all resources required for a package
+	 * Loads all resources required for a package.
 	 */
 	load(list: string[], force?: boolean): Promise<PreloaderResult>;
 	/**
-	 * Checks the loaded list
+	 * Checks the loaded list.
 	 */
 	private _load;
 }
@@ -1838,19 +1838,19 @@ export type PreloaderResult = {
 };
 declare class Packages {
 	/**
-	 * Create package manage
+	 * Create package manage.
 	 */
 	constructor(core: Core);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * A list of registered packages
+	 * A list of registered packages.
 	 */
 	packages: PackageReference[];
 	/**
-	 * The lost of loaded package metadata
+	 * The lost of loaded package metadata.
 	 */
 	metadata: PackageMetadata[];
 	/**
@@ -1859,23 +1859,23 @@ declare class Packages {
 	 */
 	private _running;
 	/**
-	 * Preloader
+	 * Preloader.
 	 */
 	readonly preloader: Preloader;
 	/**
-	 * If inited
+	 * If inited.
 	 */
 	inited: boolean;
 	/**
-	 * Destroy package manager
+	 * Destroy package manager.
 	 */
 	destroy(): void;
 	/**
-	 * Initializes package manager
+	 * Initializes package manager.
 	 */
 	init(): Promise<boolean>;
 	/**
-	 * Launches a (application) package
+	 * Launches a (application) package.
 	 */
 	launch(
 		name: string,
@@ -1885,39 +1885,39 @@ declare class Packages {
 		options?: PackageLaunchOptions
 	): Promise<Application>;
 	/**
-	 * Launches an application package
+	 * Launches an application package.
 	 */
 	private _launchApplication;
 	/**
-	 * Launches a (theme) package
+	 * Launches a (theme) package.
 	 */
 	private _launchTheme;
 	/**
-	 * Wrapper for launching a (application) package
+	 * Wrapper for launching a (application) package.
 	 */
 	private _launch;
 	/**
-	 * Autostarts tagged packages
+	 * Autostarts tagged packages.
 	 */
 	private _autostart;
 	/**
-	 * Registers a package
+	 * Registers a package.
 	 */
 	register(name: string, callback: Function): void;
 	/**
-	 * Adds a set of packages
+	 * Adds a set of packages.
 	 */
 	addPackages(list: PackageMetadata[]): PackageMetadata[];
 	/**
-	 * Gets a list of packages (metadata)
+	 * Gets a list of packages (metadata).
 	 */
 	getPackages(filter?: Function): PackageMetadata[];
 	/**
-	 * Gets a list of packages compatible with the given mime type
+	 * Gets a list of packages compatible with the given mime type.
 	 */
 	getCompatiblePackages(mimeType: string): PackageMetadata[];
 	/**
-	 * Gets a list of running packages
+	 * Gets a list of running packages.
 	 */
 	running(): string[];
 }
@@ -1927,11 +1927,11 @@ declare class Packages {
  */
 export type PackageReference = {
 	/**
-	 * Package metadata
+	 * Package metadata.
 	 */
 	metadata: PackageMetadata;
 	/**
-	 * Callback to instanciate
+	 * Callback to instanciate.
 	 */
 	callback: Function;
 };
@@ -1941,23 +1941,23 @@ export type PackageReference = {
  */
 export type PackageMetadata = {
 	/**
-	 * The package name
+	 * The package name.
 	 */
 	name: string;
 	/**
-	 * Package category
+	 * Package category.
 	 */
 	category?: string;
 	/**
-	 * Package icon
+	 * Package icon.
 	 */
 	icon?: string;
 	/**
-	 * If only one instance allowed
+	 * If only one instance allowed.
 	 */
 	singleton?: boolean;
 	/**
-	 * Autostart on boot
+	 * Autostart on boot.
 	 */
 	autostart?: boolean;
 	/**
@@ -1965,23 +1965,23 @@ export type PackageMetadata = {
 	 */
 	hidden?: boolean;
 	/**
-	 * Server script filename
+	 * Server script filename.
 	 */
 	server?: string;
 	/**
-	 * Only available for users in this group
+	 * Only available for users in this group.
 	 */
 	groups?: string[];
 	/**
-	 * Files to preload
+	 * Files to preload.
 	 */
 	files?: Array<object | string>;
 	/**
-	 * A string package title
+	 * A string package title.
 	 */
 	title: string;
 	/**
-	 * A string description of a package
+	 * A string description of a package.
 	 */
 	description: string;
 };
@@ -1991,7 +1991,7 @@ export type PackageMetadata = {
  */
 export type PackageLaunchOptions = {
 	/**
-	 * Force preload reloading
+	 * Force preload reloading.
 	 */
 	forcePreload?: boolean;
 };
@@ -2001,23 +2001,23 @@ declare class Clipboard {
 	 */
 	clipboard: ClipboardData;
 	/**
-	 * Destroy clipboard
+	 * Destroy clipboard.
 	 */
 	destroy(): void;
 	/**
-	 * Clear clipboard
+	 * Clear clipboard.
 	 */
 	clear(): void;
 	/**
-	 * Set clipboard data
+	 * Set clipboard data.
 	 */
 	set(data: any, type?: string): void;
 	/**
-	 * Checks if current clipboard data has this type
+	 * Checks if current clipboard data has this type.
 	 */
 	has(type: string | RegExp): boolean;
 	/**
-	 * Gets clipboard data
+	 * Gets clipboard data.
 	 */
 	get(clear?: boolean): Promise<any>;
 }
@@ -2027,7 +2027,7 @@ declare class Clipboard {
  */
 export type ClipboardData = {
 	/**
-	 * Optional data type
+	 * Optional data type.
 	 */
 	type?: string;
 	data: any;
@@ -2036,23 +2036,23 @@ export type ClipboardData = {
 declare class Middleware {
 	middleware: MiddlewareData;
 	/**
-	 * Destroy middleware
+	 * Destroy middleware.
 	 */
 	destroy(): void;
 	/**
-	 * Clear middleware
+	 * Clear middleware.
 	 */
 	clear(): void;
 	/**
-	 * Add middleware function to a group
+	 * Add middleware function to a group.
 	 */
 	add(group: string, callback: Function): void;
 	/**
-	 * Remove middleware function from a group
+	 * Remove middleware function from a group.
 	 */
 	remove(group: string, callback: Function): void;
 	/**
-	 * Gets middleware functions for a group
+	 * Gets middleware functions for a group.
 	 */
 	get(group: string): Function[];
 }
@@ -2072,11 +2072,11 @@ declare class CoreServiceProvider extends ServiceProvider {
 	readonly clipboard: Clipboard;
 	readonly middleware: Middleware;
 	/**
-	 * Registers contracts
+	 * Registers contracts.
 	 */
 	registerContracts(): void;
 	/**
-	 * Expose some internals to global
+	 * Expose some internals to global.
 	 */
 	createGlobalApi(): Readonly<{
 		make: (name: any, ...args: any[]) => any;
@@ -2087,51 +2087,51 @@ declare class CoreServiceProvider extends ServiceProvider {
 		request: (url: any, options: any, type: any) => any;
 	}>;
 	/**
-	 * Event when dist changes from a build or deployment
+	 * Event when dist changes from a build or deployment.
 	 */
 	private _onDistChanged;
 	/**
-	 * Event when package dist changes from a build or deployment
+	 * Event when package dist changes from a build or deployment.
 	 */
 	private _onPackageChanged;
 	/**
-	 * Provides window contract
+	 * Provides window contract.
 	 */
 	createWindowContract(): CoreProviderWindowContract;
 	/**
-	 * Provides DnD contract
+	 * Provides DnD contract.
 	 */
 	createDnDContract(): CoreProviderDnDContract;
 	/**
-	 * Provides DOM contract
+	 * Provides DOM contract.
 	 */
 	createDOMContract(): CoreProviderDOMContract;
 	/**
-	 * Provides Theme contract
+	 * Provides Theme contract.
 	 */
 	createThemeContract(): CoreProviderThemeContract;
 	/**
-	 * Provides Sounds contract
+	 * Provides Sounds contract.
 	 */
 	createSoundsContract(): CoreProviderSoundContract;
 	/**
-	 * Provides Session contract
+	 * Provides Session contract.
 	 */
 	createSessionContract(): CoreProviderSessionContract;
 	/**
-	 * Provides Packages contract
+	 * Provides Packages contract.
 	 */
 	createPackagesContract(): CoreProviderPackagesContract;
 	/**
-	 * Provides Clipboard contract
+	 * Provides Clipboard contract.
 	 */
 	createClipboardContract(): CoreProviderClipboardContract;
 	/**
-	 * Provides Middleware contract
+	 * Provides Middleware contract.
 	 */
 	createMiddlewareContract(): CoreProviderMiddlewareContract;
 	/**
-	 * Provides Tray contract
+	 * Provides Tray contract.
 	 */
 	createTrayContract(): CoreProviderTrayContract;
 }
@@ -2231,7 +2231,7 @@ export type CoreProviderTrayContract = {
  */
 export type CoreProviderOptions = {
 	/**
-	 * Custom Window Behavior
+	 * Custom Window Behavior.
 	 */
 	windowBehavior?: Function;
 };
@@ -2267,86 +2267,86 @@ declare class NotificationServiceProvider extends ServiceProvider {
 
 declare class Filesystem extends EventEmitter {
 	/**
-	 * Create filesystem manager
+	 * Create filesystem manager.
 	 */
 	constructor(core: Core, options?: FilesystemOptions);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Adapter registry
+	 * Adapter registry.
 	 */
 	readonly adapters: {
 		name: FilesystemAdapterWrapper;
 	};
 	/**
-	 * Mountpoints
+	 * Mountpoints.
 	 */
 	mounts: FilesystemMountpoint[];
 	/**
-	 * Options
+	 * Options.
 	 */
 	options: FilesystemOptions;
 	/**
-	 * A wrapper for VFS method requests
+	 * A wrapper for VFS method requests.
 	 */
 	readonly proxy: {
 		key: Function;
 	};
 	/**
-	 * Mounts all configured mountpoints
+	 * Mounts all configured mountpoints.
 	 */
 	mountAll(stopOnError?: boolean): Promise<boolean[]>;
 	/**
-	 * Adds a new mountpoint
+	 * Adds a new mountpoint.
 	 */
 	addMountpoint(
 		props: FilesystemMountpoint,
 		automount?: boolean
 	): Promise<boolean>;
 	/**
-	 * Mount given filesystem
+	 * Mount given filesystem.
 	 */
 	mount(m: string | FilesystemMountpoint): Promise<boolean>;
 	/**
-	 * Unmount given filesystem
+	 * Unmount given filesystem.
 	 */
 	unmount(name: string): Promise<boolean>;
 	/**
-	 * Internal wrapper for mounting/unmounting
+	 * Internal wrapper for mounting/unmounting.
 	 */
 	private _mountpointAction;
 	/**
-	 * Internal wrapper for mounting/unmounting by name
+	 * Internal wrapper for mounting/unmounting by name.
 	 */
 	private _mountAction;
 	/**
-	 * Gets the proxy for VFS methods
+	 * Gets the proxy for VFS methods.
 	 */
 	request(): FilesystemAdapterMethods;
 	/**
-	 * Perform a VFS method request
+	 * Perform a VFS method request.
 	 */
 	private _request;
 	/**
-	 * Request action wrapper
+	 * Request action wrapper.
 	 */
 	private _requestAction;
 	/**
-	 * Creates a new mountpoint based on given properties
+	 * Creates a new mountpoint based on given properties.
 	 */
 	createMountpoint(props: FilesystemMountpoint): FilesystemMountpoint;
 	/**
-	 * Gets mountpoint from given path
+	 * Gets mountpoint from given path.
 	 */
 	getMountpointFromPath(file: string | any): FilesystemMountpoint | null;
 	/**
-	 * Gets all mountpoints
+	 * Gets all mountpoints.
 	 */
 	getMounts(all?: boolean): FilesystemMountpoint[];
 	/**
-	 * Gets configured mountpoints
+	 * Gets configured mountpoints.
 	 */
 	private _getConfiguredMountpoints;
 }
@@ -2356,19 +2356,19 @@ declare class Filesystem extends EventEmitter {
  */
 export type FilesystemMountpointAttributes = {
 	/**
-	 * Visibility in UI
+	 * Visibility in UI.
 	 */
 	visibility?: string;
 	/**
-	 * Local filesystem ?
+	 * Local filesystem ?.
 	 */
 	local?: boolean;
 	/**
-	 * If can be searched
+	 * If can be searched.
 	 */
 	searchable?: boolean;
 	/**
-	 * Readonly
+	 * Readonly.
 	 */
 	readOnly?: boolean;
 };
@@ -2378,27 +2378,27 @@ export type FilesystemMountpointAttributes = {
  */
 export type FilesystemMountpoint = {
 	/**
-	 * Name
+	 * Name.
 	 */
 	name: string;
 	/**
-	 * Label
+	 * Label.
 	 */
 	label: string;
 	/**
-	 * Adater name
+	 * Adater name.
 	 */
 	adapter: string;
 	/**
-	 * System adapter root
+	 * System adapter root.
 	 */
 	root?: string;
 	/**
-	 * Enabled state
+	 * Enabled state.
 	 */
 	enabled?: boolean;
 	/**
-	 * Attributes
+	 * Attributes.
 	 */
 	attributes?: FilesystemMountpointAttributes;
 };
@@ -2430,13 +2430,13 @@ export type FilesystemAdapterWrapper = () => FilesystemAdapterMethods;
  */
 export type FilesystemOptions = {
 	/**
-	 * Adapter registry
+	 * Adapter registry.
 	 */
 	adapters?: {
 		name: FilesystemAdapterWrapper;
 	};
 	/**
-	 * Mountpoints
+	 * Mountpoints.
 	 */
 	mounts?: FilesystemMountpoint[];
 };
@@ -2529,41 +2529,41 @@ export type AuthServiceOptions = any;
 
 declare class Settings {
 	/**
-	 * Create application
+	 * Create application.
 	 */
 	constructor(core: Core, options: SettingsOptions);
 	/**
-	 * The settings adapter
+	 * The settings adapter.
 	 */
 	readonly adapter: SettingsAdapter;
 	/**
-	 * Internal timeout reference used for debouncing
+	 * Internal timeout reference used for debouncing.
 	 */
 	debounce: object;
 	/**
-	 * The settings tree
+	 * The settings tree.
 	 */
 	settings: {
 		name: any;
 	};
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Initializes settings adapter
+	 * Initializes settings adapter.
 	 */
 	init(): any;
 	/**
-	 * Saves settings
+	 * Saves settings.
 	 */
 	save(): Promise<boolean>;
 	/**
-	 * Loads settings
+	 * Loads settings.
 	 */
 	load(): Promise<boolean>;
 	/**
-	 * Gets a settings entry by key (cached)
+	 * Gets a settings entry by key (cached).
 	 */
 	get(ns?: string, key?: string, defaultValue?: any): any;
 	/**
@@ -2571,7 +2571,7 @@ declare class Settings {
 	 */
 	set(ns: string, key?: string, value?: any): Settings;
 	/**
-	 * Clears a namespace by root key
+	 * Clears a namespace by root key.
 	 */
 	clear(ns: string): Promise<boolean>;
 }
@@ -2585,11 +2585,11 @@ export type SettingsAdapterCallback = (core: Core) => SettingsAdapterCallback;
  */
 export type SettingsOptions = {
 	/**
-	 * Adapter to use
+	 * Adapter to use.
 	 */
 	adapter?: SettingsAdapterCallback | SettingsAdapter;
 	/**
-	 * Adapter configuration
+	 * Adapter configuration.
 	 */
 	config?: SettingsAdapterConfiguration;
 };
@@ -2634,7 +2634,7 @@ declare namespace instance {
  */
 export class BasicApplication extends EventEmitter {
 	/**
-	 * Basic Application Constructor
+	 * Basic Application Constructor.
 	 */
 	constructor(
 		core: Core,
@@ -2643,39 +2643,39 @@ export class BasicApplication extends EventEmitter {
 		options?: BasicApplicationOptions
 	);
 	/**
-	 * Core instance reference
+	 * Core instance reference.
 	 */
 	readonly core: Core;
 	/**
-	 * Application instance reference
+	 * Application instance reference.
 	 */
 	readonly proc: Application;
 	/**
-	 * Window instance reference
+	 * Window instance reference.
 	 */
 	readonly win: Window;
 	/**
-	 * Basic Application Options
+	 * Basic Application Options.
 	 */
 	readonly options: BasicApplicationOptions;
 	/**
-	 * Destroys all Basic Application internals
+	 * Destroys all Basic Application internals.
 	 */
 	destroy(): void;
 	/**
-	 * Initializes the application
+	 * Initializes the application.
 	 */
 	init(): Promise<boolean>;
 	/**
-	 * Gets options for a dialog
+	 * Gets options for a dialog.
 	 */
 	getDialogOptions(type: string, options?: {}): object;
 	/**
-	 * Updates the window title to match open file
+	 * Updates the window title to match open file.
 	 */
 	updateWindowTitle(): void;
 	/**
-	 * Creates a new dialog of a type
+	 * Creates a new dialog of a type.
 	 */
 	createDialog(type: string, cb: Function, options?: object): void;
 	/**
@@ -2694,23 +2694,23 @@ export class BasicApplication extends EventEmitter {
 	 */
 	create(): void;
 	/**
-	 * Create new file
+	 * Create new file.
 	 */
 	createNew(): void;
 	/**
-	 * Creates a new save dialog
+	 * Creates a new save dialog.
 	 */
 	createSaveDialog(options?: object): void;
 	/**
-	 * Creates a new load dialog
+	 * Creates a new load dialog.
 	 */
 	createOpenDialog(options?: object): void;
 	/**
-	 * Sets file from open/save action
+	 * Sets file from open/save action.
 	 */
 	private _setFile;
 	/**
-	 * Creates the window title
+	 * Creates the window title.
 	 */
 	private _createTitle;
 }
@@ -2720,19 +2720,19 @@ export class BasicApplication extends EventEmitter {
  */
 export type BasicApplicationOptions = {
 	/**
-	 * What MIME types to support (all/fallback)
+	 * What MIME types to support (all/fallback).
 	 */
 	mimeTypes?: string[];
 	/**
-	 * What MIME types to support on load
+	 * What MIME types to support on load.
 	 */
 	loadMimeTypes?: string[];
 	/**
-	 * What MIME types to support on save
+	 * What MIME types to support on save.
 	 */
 	saveMimeTypes?: string[];
 	/**
-	 * Default filename of a new file
+	 * Default filename of a new file.
 	 */
 	defaultFilename?: string;
 };
