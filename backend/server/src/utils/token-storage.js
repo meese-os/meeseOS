@@ -68,10 +68,19 @@ class TokenStorage {
 	init() {
 		this.db = new loki(
 			this.options.databaseName,
-			this.options.databaseOptions
-		);
+			{
+				autoloadCallback: () => {
+					// Returns the collection if it exists, otherwise creates it
+					let collection = this.db.getCollection(this.options.collectionName);
+					if (!collection) {
+						collection = this.db.addCollection(this.options.collectionName);
+					}
 
-		this.collection = this.db.addCollection(this.options.collectionName);
+					this.collection = collection;
+				},
+				...this.options.databaseOptions,
+			},
+		);
 	}
 
 	/**

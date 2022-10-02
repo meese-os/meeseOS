@@ -93,6 +93,7 @@ const defaultConfiguration = {
 			collectionName: "tokens",
 			databaseOptions: {
 				autosave: true,
+				autoload: true,
 			},
 		},
 		jwt: {
