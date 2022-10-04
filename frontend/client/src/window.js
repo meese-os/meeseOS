@@ -134,7 +134,7 @@ import logger from "./logger";
 const windows = [];
 let windowCount = 0;
 let nextZindex = 1;
-let lastWindow = [];
+const lastWindow = [];
 
 /**
  * Default window template.
