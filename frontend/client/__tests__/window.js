@@ -284,6 +284,24 @@ describe("Window", () => {
 		expect(win.close()).toBe(false);
 	});
 
+	test(".lastWindow - change focus on #close", () => {
+		win = new Window(core, {
+			id: "Jest",
+			title: "Jest Test",
+		});
+
+		const win2 = new Window(core, {
+			id: "Jest2",
+			title: "Jest Test 2",
+		});
+
+		win2.focus();
+		win.focus();
+		win.close();
+
+		expect(Window.lastWindow()).toBe(win2);
+	});
+
 	test("Parent window should handle children", () => {
 		const parentWindow = new Window(core, {
 			position: "center",
