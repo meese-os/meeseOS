@@ -5,6 +5,30 @@ importers:
   .:
     specifiers: {}
 
+  ../../apps/cyberchef:
+    specifiers:
+      '@babel/core': ^7.17.2
+      '@babel/plugin-transform-runtime': ^7.17.0
+      '@babel/preset-env': ^7.16.11
+      '@babel/runtime': ^7.17.2
+      '@meeseOS/eslint-config': workspace:*
+      babel-loader: ^8.2.3
+      copy-webpack-plugin: ^10.2.4
+      eslint: ^8.18.0
+      webpack: ^5.68.0
+      webpack-cli: ^4.9.2
+    devDependencies:
+      '@babel/core': 7.17.10
+      '@babel/plugin-transform-runtime': 7.17.10
+      '@babel/preset-env': 7.17.10
+      '@babel/runtime': 7.17.9
+      '@meeseOS/eslint-config': link:../../development/eslint
+      babel-loader: 8.2.5_webpack-cli@4.9.2
+      copy-webpack-plugin: 10.2.4_webpack-cli@4.9.2
+      eslint: 8.18.0
+      webpack: 5.72.1_webpack-cli@4.9.2
+      webpack-cli: 4.9.2
+
   ../../apps/filemanager:
     specifiers:
       '@babel/core': ^7.19.3
@@ -1240,6 +1264,7 @@ importers:
       '@meeseOS/We10X-icons': workspace:*
       '@meeseOS/cli': workspace:*
       '@meeseOS/client': workspace:*
+      '@meeseOS/cyberchef': workspace:*
       '@meeseOS/dialogs': workspace:*
       '@meeseOS/dynamic-wallpapers': workspace:*
       '@meeseOS/eslint-config': workspace:*
@@ -1290,6 +1315,7 @@ importers:
       '@meeseOS/We10X-icons': link:../frontend/We10X-icons
       '@meeseOS/cli': link:../development/cli
       '@meeseOS/client': link:../frontend/client
+      '@meeseOS/cyberchef': link:../apps/cyberchef
       '@meeseOS/dialogs': link:../frontend/dialogs
       '@meeseOS/dynamic-wallpapers': link:../frontend/dynamic-wallpapers
       '@meeseOS/filemanager': link:../apps/filemanager
