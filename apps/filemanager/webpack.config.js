@@ -22,6 +22,7 @@ module.exports = {
 			fs: require.resolve("graceful-fs"),
 			buffer: require.resolve("buffer/"),
 			stream: require.resolve("stream-browserify"),
+			events: require.resolve("events/"),
 		},
 	},
 	externals: {
@@ -40,8 +41,8 @@ module.exports = {
 		}),
 		// https://stackoverflow.com/a/71129826/6456163
 		new webpack.ProvidePlugin({
-			process: "process/browser",
 			Buffer: ["buffer", "Buffer"],
+			process: "process/browser",
 		}),
 		new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
 			const mod = resource.request.replace(/^node:/, "");

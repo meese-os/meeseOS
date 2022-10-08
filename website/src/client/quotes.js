@@ -11,4 +11,8 @@ module.exports = [
 		quote: "Even the Mona Lisa started out as a portrait of Lisa del Giocondo.",
 		author: "Daniel Bourke",
 	},
+	{
+		quote: "Don't attempt to apply math where it isn’t applicable.",
+		author: "Lucyna Kushinada",
+	},
 ];

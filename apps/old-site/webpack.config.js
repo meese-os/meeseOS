@@ -21,7 +21,7 @@ const cssLoader = {
 };
 const postcssLoader = {
 	// Required for Bootstrap as per the following:
-	// https://getbootstrap.com/docs/4.0/getting-started/webpack/#importing-styles
+	// https://getbootstrap.com/docs/4.1/getting-started/webpack/#importing-styles
 	loader: "postcss-loader",
 	options: {
 		postcssOptions: {

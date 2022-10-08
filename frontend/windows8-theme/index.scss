@@ -40,15 +40,15 @@
 
 	border-radius: 0;
 
-	&[data-focused=false] {
+	&[data-focused="false"] {
 		opacity: 0.5;
 	}
 
-	&[data-loading=true] {
+	&[data-loading="true"] {
 		pointer-events: none;
 
 		&::after {
-			background: rgba(0, 0, 0, 0.5);
+			background: rgb(0 0 0 / 50%);
 		}
 	}
 }
@@ -68,8 +68,10 @@
 		background-repeat: no-repeat;
 
 		// Removes the stylings provided by the standard theme
-		&::before, &::after,
-		&:hover::before, &:hover::after {
+		&::before,
+		&::after,
+		&:hover::before,
+		&:hover::after {
 			content: none;
 		}
 	}
@@ -78,15 +80,15 @@
 		background-color: lighten($window-background, 10%);
 	}
 
-	&[data-action=maximize] > div {
+	&[data-action="maximize"] > div {
 		background-image: url("./src/maximize.png");
 	}
 
-	&[data-action=minimize] > div {
+	&[data-action="minimize"] > div {
 		background-image: url("./src/minimize.png");
 	}
 
-	&[data-action=close] {
+	&[data-action="close"] {
 		min-width: 3em;
 		margin-right: 0.5em;
 

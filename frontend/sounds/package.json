@@ -14,9 +14,9 @@
     "eslint": ""
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^10.2.4",
-    "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2"
+    "copy-webpack-plugin": "^11.0.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {},
   "meeseOS": {

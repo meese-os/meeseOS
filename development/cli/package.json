@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@meeseOS/eslint-config": "workspace:*",
-    "eslint": "^8.18.0",
+    "eslint": "^8.25.0",
     "eslint-plugin-jest": "^26.5.3",
     "jest": "^26.0.0"
   },

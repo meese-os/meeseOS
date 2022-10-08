@@ -67,7 +67,7 @@ module.exports = {
 			jsxLoader,
 			{
 				test: /\.(sa|sc|c)ss$/,
-				exclude: /(node_modules|bower_components)/,
+				exclude: /node_modules/,
 				use: [
 					MiniCssExtractPlugin.loader,
 					{
