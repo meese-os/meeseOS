@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const IconThemePlugin = require("../../development/iconThemePlugin");
 
 const mode = process.env.NODE_ENV || "development";
 const minimize = mode === "production";
@@ -22,6 +23,7 @@ module.exports = {
 			filename: "[name].css",
 			chunkFilename: "[id].css",
 		}),
+		new IconThemePlugin(),
 		...plugins,
 	],
 	module: {
