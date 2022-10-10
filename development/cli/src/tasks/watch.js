@@ -114,7 +114,7 @@ const wlog = (logger, cb) => (err, status) => {
 	}
 };
 
-const action = ({ logger, options, args }) => {
+const action = ({ logger, options }) => {
 	logger.info("Looking up npm packages...");
 
 	const print = (list) => {

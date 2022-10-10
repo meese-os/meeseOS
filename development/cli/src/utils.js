@@ -108,8 +108,6 @@ const createOptions = (options) => ({
 			root,
 			themes: createPath(root, "themes"),
 			icons: createPath(root, "icons"),
-			// TODO: Make these two output to a single directory, not nested and capitalized;
-			// Is it maybe the metadata title that creates the additional file?
 			sounds: createPath(root, "sounds"),
 			wallpapers: createPath(root, "wallpapers"),
 			packages: createPath(root, "apps"),

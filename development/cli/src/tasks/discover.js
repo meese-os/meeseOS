@@ -55,7 +55,7 @@ const glob = async (dir) => {
 	return result.filter((f) => Boolean(f));
 };
 
-const clean = (copyFiles, dir) =>
+const clean = (dir) =>
 	glob(dir).then((files) =>
 		Promise.all(
 			files.map((file) => {
@@ -68,7 +68,7 @@ const clean = (copyFiles, dir) =>
 		)
 	);
 
-const getAllPackages = async (logger, dirs) => {
+const getAllPackages = async (dirs) => {
 	const result = [];
 	for (let i = 0; i < dirs.length; i++) {
 		result.push(await utils.npmPackages(dirs[i]));
@@ -108,11 +108,8 @@ const removeSoftDeleted = (logger, disabled) => (iter) => {
 	return true;
 };
 
-const action = async ({ logger, options, args, commander }) => {
+const action = async ({ logger, options, args }) => {
 	const dist = options.dist();
-	// TODO: Allow this param to be set on a per-package basis,
-	// to allow things like the "Wallpapers" package files to be copied
-	// but not necessarily everything else
 	const copyFiles = args.copy === true;
 	const relativeSymlinks = !copyFiles && args.relative === true;
 	const discoveryDest = path.resolve(args.discover || options.packages);
@@ -124,7 +121,7 @@ const action = async ({ logger, options, args, commander }) => {
 
 	options.config.discover.forEach((d) => logger.info("Including", d));
 
-	const found = await getAllPackages(logger, options.config.discover);
+	const found = await getAllPackages(options.config.discover);
 
 	// This is where the packages are created
 	const packages = found.filter(
@@ -187,9 +184,9 @@ const action = async ({ logger, options, args, commander }) => {
 	await fs.ensureDir(dist.themes);
 	await fs.ensureDir(dist.wallpapers);
 	await fs.ensureDir(dist.packages);
-	await clean(copyFiles, dist.themes);
-	await clean(copyFiles, dist.wallpapers);
-	await clean(copyFiles, dist.packages);
+	await clean(dist.themes);
+	await clean(dist.wallpapers);
+	await clean(dist.packages);
 
 	logger.info("Placing packages in dist...");
 
