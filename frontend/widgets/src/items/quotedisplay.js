@@ -47,6 +47,7 @@ Array.prototype.random = function () {
  * @property {String} [fontFamily="Monospace"] Font family
  * @property {String} [color="#ffffff"] Font color
  * @property {Quote[]} [quotes] Quotes to display
+ * @property {String} [theme="quote-theme-light"] Theme to use
  */
 
 export default class QuoteDisplayWidget extends Widget {
@@ -79,6 +80,7 @@ export default class QuoteDisplayWidget extends Widget {
 						author: "Aaron Meese",
 					},
 				]),
+				theme: "quote-theme-light",
 			}
 		);
 
@@ -90,14 +92,24 @@ export default class QuoteDisplayWidget extends Widget {
 	applySettings() {
 		this.quoteDisplayElem.style.fontFamily = this.options.fontFamily;
 		this.quoteDisplayElem.style.color = this.options.fontColor;
+		this.$element.classList.remove("quote-theme-light", "quote-theme-dark");
+		this.$element.classList.add(this.options.theme);
 	}
 
 	render() {
+		// Load and display a random quote
 		const quote = this.options.quotes.random() || {};
 		this.quoteDisplayElem.innerHTML = `
 			<blockquote>${quote.quote}</blockquote>
 			<div class="author">${quote.author}</div>
+			<div class="refresh-quote" title="Load a new quote"></div>
 		`;
+
+		// Add event listener to refresh button to load a new quote
+		this.quoteDisplayElem.querySelector(".refresh-quote")
+		  .addEventListener("click", () => this.render());
+
+		// Apply the current settings to the widget
 		this.applySettings();
 	}
 

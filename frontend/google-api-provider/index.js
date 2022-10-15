@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import GoogleLogo from "./logo.svg";
+import GoogleLogo from "./icons/gis-logo.svg";
 
 /**
  * @typedef {Object} GisConfig

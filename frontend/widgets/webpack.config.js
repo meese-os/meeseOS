@@ -34,6 +34,14 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.(svg|png|jpe?g|gif|webp)$/,
+				type: "asset/resource",
+				exclude: /node_modules/,
+				generator: {
+					filename: "icons/[name][ext]",
+				},
+			},
+			{
 				test: /\.(sa|sc|c)ss$/,
 				exclude: /node_modules/,
 				use: [

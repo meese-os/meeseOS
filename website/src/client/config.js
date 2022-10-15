@@ -44,6 +44,7 @@ export default {
 				effect: "matrix",
 			},
 			widgets: [{ name: "digitalclock" }],
+			icons: "We10XIcons",
 		},
 	},
 

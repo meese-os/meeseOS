@@ -18,7 +18,7 @@
     "dist/main.js.map",
     "dist/main.css",
     "dist/main.css.map",
-    "dist/*.svg",
+    "dist/icons",
     "README.md"
   ],
   "devDependencies": {
