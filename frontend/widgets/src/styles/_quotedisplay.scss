@@ -29,6 +29,10 @@
  */
 
 .quote-display {
+	.quote-theme-dark {
+		color: #242424;
+	}
+
 	blockquote {
 		text-indent: -0.8em;
 		font-size: 1.1em;
@@ -60,6 +64,27 @@
 
 		&:before {
 			content: "— ";
+		}
+	}
+
+	.refresh-quote {
+		cursor: pointer;
+
+		&::before {
+			content: " ";
+			background-image: url("src/icons/refresh.svg");
+			background-repeat: no-repeat;
+			background-position: contain;
+			background-size: 1.2em;
+			width: 1.2em;
+			height: 1.2em;
+			position: absolute;
+			bottom: 5px;
+			left: 5px;
+
+			.quote-theme-dark {
+				filter: invert(1);
+			}
 		}
 	}
 }

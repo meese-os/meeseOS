@@ -34,3 +34,4 @@ export { default as WidgetServiceProvider } from "./src/provider";
 export { default as Widget } from "./src/widget";
 export { default as AnalogClockWidget } from "./src/items/analogclock";
 export { default as DigitalClockWidget } from "./src/items/digitalclock";
+export { default as QuoteDisplayWidget } from "./src/items/quotedisplay";

@@ -22,7 +22,7 @@ module.exports = {
 				type: "asset/resource",
 				exclude: /node_modules/,
 				generator: {
-					filename: "[name][ext]",
+					filename: "icons/[name][ext]",
 				},
 			},
 			{
