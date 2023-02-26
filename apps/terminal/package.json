@@ -44,7 +44,7 @@
     "uuid": "^7.0.1",
     "xterm": "^4.4.0",
     "xterm-addon-attach": "^0.5.0",
-    "xterm-addon-fit": "^0.3.0"
+    "xterm-addon-fit": "^0.7.0"
   },
   "meeseOS": {
     "type": "package"
