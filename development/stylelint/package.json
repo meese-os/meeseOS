@@ -9,6 +9,6 @@
     "eslint": ""
   },
   "dependencies": {
-    "stylelint": "^13.8.0"
+    "stylelint": "^15.0.0"
   }
 }
