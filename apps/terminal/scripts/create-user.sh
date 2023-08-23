@@ -67,6 +67,7 @@ else
   echo "Setting SSH banner for user '$USERNAME'..."
   echo "Match User $USERNAME" | sudo tee -a /etc/ssh/sshd_config
   echo "  Banner \"none\"" | sudo tee -a /etc/ssh/sshd_config
+  sudo apt install openssh-client openssh-server -y
   sudo service sshd restart
   echo "SSH banner removed for user '$USERNAME'..."
 fi

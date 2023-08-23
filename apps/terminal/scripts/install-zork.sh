@@ -12,6 +12,7 @@ popd
 if ! (sudo git clone "https://$GITHUB_USERNAME:$GITHUB_PAT@github.com/meeseOS/zork.git" "$zork_dir") then
 	echo "ERROR: Failed to clone the repository. Did you set the GITHUB_USERNAME and GITHUB_PAT environment variables?"
 	echo "If you did, do you have permission to clone the repository?"
+	echo
 	exit 1
 fi
 

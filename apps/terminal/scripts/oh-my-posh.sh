@@ -36,7 +36,7 @@ sudo chown -R "$USERNAME:users" "$THEMESPATH"
 
 # /dev/null reference explained: https://unix.stackexchange.com/a/164628/370076
 USERBASH="$USERDIR/.bashrc"
-if ! grep -q -c "oh-my-posh init" /dev/null "$USERBASH";
+if ! sudo grep -q -c "oh-my-posh init" /dev/null "$USERBASH";
 then
   echo "Adding oh-my-posh to the user's '.bashrc'..."
   sudo chattr -i "$USERBASH"
