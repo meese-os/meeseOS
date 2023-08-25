@@ -19,7 +19,7 @@
    * path segment in the "$schema" field for all your Rush config files.  This will ensure
    * correct error-underlining and tab-completion for editors such as VS Code.
    */
-  "rushVersion": "5.81.0",
+  "rushVersion": "5.102.0",
 
   /**
    * The next field selects which package manager should be installed and determines its version.
@@ -29,7 +29,7 @@
    * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
-  "pnpmVersion": "7.13.4",
+  "pnpmVersion": "8.6.12",
 
   /**
    * Options that are only used when the PNPM package manager is selected
