@@ -1,7 +1,7 @@
 /**
  * MeeseOS - JavaScript Cloud/Web Desktop Platform
  *
- * Copyright (c) 2022-Present, Aaron Meese <aaronjmeese@gmail.com>
+ * Copyright (c) 2022-Present, Aaron Meese <aaron@meese.dev>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @author  Aaron Meese <aaronjmeese@gmail.com>
+ * @author  Aaron Meese <aaron@meese.dev>
  * @licence Simplified BSD License
  */
 

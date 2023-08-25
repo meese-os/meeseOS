@@ -22,7 +22,7 @@
     "watch": "webpack --watch",
     "deploy": "NODE_ENV=production npm run serve"
   },
-  "author": "Aaron Meese <aaronjmeese@gmail.com>",
+  "author": "Aaron Meese <aaron@meese.dev>",
   "devDependencies": {
     "@meeseOS/eslint-config": "workspace:*",
     "@meeseOS/stylelint-config": "workspace:*",
