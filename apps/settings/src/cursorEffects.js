@@ -29,7 +29,7 @@
  */
 
 import { resolveSetting } from "./utils";
-import cursorEffects from "@meeseOS/cursor-effects";
+import cursorEffects from "@meese-os/cursor-effects";
 
 /**
  * Returns all of the settings for a given cursor effect.

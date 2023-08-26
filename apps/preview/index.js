@@ -35,7 +35,7 @@ import {
 	Menubar,
 	MenubarItem,
 	Video,
-} from "@meeseOS/gui";
+} from "@meese-os/gui";
 import { app, h } from "hyperapp";
 import { name as applicationName } from "./metadata.json";
 import meeseOS from "meeseOS";

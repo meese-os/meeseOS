@@ -1,4 +1,4 @@
-import { Box, RangeField, TextField } from "@meeseOS/gui";
+import { Box, RangeField, TextField } from "@meese-os/gui";
 import { h } from "hyperapp";
 
 /**

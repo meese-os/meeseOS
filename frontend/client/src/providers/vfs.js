@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { ServiceProvider } from "@meeseOS/common";
+import { ServiceProvider } from "@meese-os/common";
 import * as utils from "../utils/vfs";
 import Filesystem from "../filesystem";
 

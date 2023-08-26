@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { CoreBase } from "@meeseOS/common";
+import { CoreBase } from "@meese-os/common";
 import { defaultConfiguration } from "./config";
 import { fetch } from "./utils/fetch";
 import { urlResolver } from "./utils/url";

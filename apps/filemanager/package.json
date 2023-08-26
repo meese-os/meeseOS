@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/filemanager",
+  "name": "@meese-os/filemanager",
   "version": "2.2.3",
   "description": "meeseOS Filemanager Application",
   "scripts": {
@@ -17,8 +17,8 @@
     "type": "package"
   },
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
-    "@meeseOS/stylelint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
+    "@meese-os/stylelint-config": "workspace:*",
     "@babel/core": "^7.19.3",
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
@@ -38,7 +38,7 @@
     "events": "^3.3.0"
   },
   "dependencies": {
-    "@meeseOS/gui": "workspace:*",
+    "@meese-os/gui": "workspace:*",
     "dateformat": "^3.0.3",
     "file-type": "^17.1.4",
     "hyperapp": "^1.2.10",
@@ -55,7 +55,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@meeseOS/eslint-config"
+    "extends": "@meese-os/eslint-config"
   },
   "babel": {
     "presets": [

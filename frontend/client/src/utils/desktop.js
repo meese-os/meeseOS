@@ -30,7 +30,7 @@
 
 import logger from "../logger";
 import { supportedMedia } from "./dom";
-import cursorEffects from "@meeseOS/cursor-effects";
+import cursorEffects from "@meese-os/cursor-effects";
 import Core from "../core";
 
 const imageDropMimes = [

@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/cyberchef",
+  "name": "@meese-os/cyberchef",
   "version": "1.0.0",
   "scripts": {
     "test": "npm run eslint",
@@ -13,7 +13,7 @@
     "metadata.json"
   ],
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -36,7 +36,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@meeseOS/eslint-config"
+    "extends": "@meese-os/eslint-config"
   },
   "babel": {
     "presets": [

@@ -34,7 +34,7 @@ const chokidar = require("chokidar");
 const bodyParser = require("body-parser");
 const proxy = require("express-http-proxy");
 const nocache = require("nocache");
-const { ServiceProvider } = require("@meeseOS/common");
+const { ServiceProvider } = require("@meese-os/common");
 const {
 	useWebTokens,
 	isAuthenticated,

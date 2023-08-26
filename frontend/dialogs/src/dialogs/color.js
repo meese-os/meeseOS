@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-import { Box, BoxContainer, TextField } from "@meeseOS/gui";
+import { Box, BoxContainer, TextField } from "@meese-os/gui";
 import {
 	componentToHex,
 	colorFromClick,

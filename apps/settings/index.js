@@ -37,7 +37,7 @@ import {
 	TextField,
 	ToggleField,
 	Toolbar,
-} from "@meeseOS/gui";
+} from "@meese-os/gui";
 import {
 	dynamicBackgroundItems,
 	dynamicBackgroundSelect,

@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-const { ServiceProvider } = require("@meeseOS/common");
+const { ServiceProvider } = require("@meese-os/common");
 const TokenStorage = require("../utils/token-storage");
 
 /**

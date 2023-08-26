@@ -1,4 +1,4 @@
-import { ServiceProvider } from "@meeseOS/common";
+import { ServiceProvider } from "@meese-os/common";
 import * as config from "../src/config";
 import Core from "../src/core";
 import CoreServiceProvider from "../src/providers/core";

@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/server",
+  "name": "@meese-os/server",
   "version": "1.3.0",
   "description": "meeseOS Server",
   "main": "index.js",
@@ -20,7 +20,7 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
     "eslint": "^8.25.0",
     "eslint-plugin-jest": "^26.5.3",
     "jest-express": "^1.12.0",
@@ -28,7 +28,7 @@
     "jest": "^26.0.0"
   },
   "dependencies": {
-    "@meeseOS/common": "workspace:*",
+    "@meese-os/common": "workspace:*",
     "body-parser": "^1.19.1",
     "chokidar": "^3.5.3",
     "connect-loki": "^1.2.0",
@@ -63,7 +63,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": ["@meeseOS/eslint-config", "plugin:jest/recommended"]
+    "extends": ["@meese-os/eslint-config", "plugin:jest/recommended"]
   },
   "esdoc": {
     "source": "./src",

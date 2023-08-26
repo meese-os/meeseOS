@@ -453,135 +453,135 @@
     //   "reviewCategory": "tools"
     // }
     {
-      "packageName": "@meeseOS/cli",
+      "packageName": "@meese-os/cli",
       "projectFolder": "development/cli"
     },
     {
-      "packageName": "@meeseOS/client",
+      "packageName": "@meese-os/client",
       "projectFolder": "frontend/client"
     },
     {
-      "packageName": "@meeseOS/common",
+      "packageName": "@meese-os/common",
       "projectFolder": "backend/common"
     },
     {
-      "packageName": "@meeseOS/cursor-effects",
+      "packageName": "@meese-os/cursor-effects",
       "projectFolder": "frontend/cursor-effects"
     },
     {
-      "packageName": "@meeseOS/cyberchef",
+      "packageName": "@meese-os/cyberchef",
       "projectFolder": "apps/cyberchef"
     },
     {
-      "packageName": "@meeseOS/dialogs",
+      "packageName": "@meese-os/dialogs",
       "projectFolder": "frontend/dialogs"
     },
     {
-      "packageName": "@meeseOS/eslint-config",
+      "packageName": "@meese-os/eslint-config",
       "projectFolder": "development/eslint"
     },
     {
-      "packageName": "@meeseOS/dynamic-wallpapers",
+      "packageName": "@meese-os/dynamic-wallpapers",
       "projectFolder": "frontend/dynamic-wallpapers"
     },
     {
-      "packageName": "@meeseOS/event-emitter",
+      "packageName": "@meese-os/event-emitter",
       "projectFolder": "backend/event-emitter"
     },
     {
-      "packageName": "@meeseOS/filemanager",
+      "packageName": "@meese-os/filemanager",
       "projectFolder": "apps/filemanager"
     },
     {
-      "packageName": "@meeseOS/games",
+      "packageName": "@meese-os/games",
       "projectFolder": "apps/games"
     },
     {
-      "packageName": "@meeseOS/gnome-icons",
+      "packageName": "@meese-os/gnome-icons",
       "projectFolder": "frontend/gnome-icons"
     },
     {
-      "packageName": "@meeseOS/google-api-provider",
+      "packageName": "@meese-os/google-api-provider",
       "projectFolder": "frontend/google-api-provider"
     },
     {
-      "packageName": "@meeseOS/gui",
+      "packageName": "@meese-os/gui",
       "projectFolder": "frontend/gui"
     },
     {
-      "packageName": "@meeseOS/image-to-8bit",
+      "packageName": "@meese-os/image-to-8bit",
       "projectFolder": "apps/image-to-8bit"
     },
     {
-      "packageName": "@meeseOS/old-site",
+      "packageName": "@meese-os/old-site",
       "projectFolder": "apps/old-site"
     },
     {
-      "packageName": "@meeseOS/panels",
+      "packageName": "@meese-os/panels",
       "projectFolder": "frontend/panels"
     },
     {
-      "packageName": "@meeseOS/preview",
+      "packageName": "@meese-os/preview",
       "projectFolder": "apps/preview"
     },
     {
-      "packageName": "@meeseOS/server",
+      "packageName": "@meese-os/server",
       "projectFolder": "backend/server"
     },
     {
-      "packageName": "@meeseOS/settings",
+      "packageName": "@meese-os/settings",
       "projectFolder": "apps/settings"
     },
     {
-      "packageName": "@meeseOS/sounds",
+      "packageName": "@meese-os/sounds",
       "projectFolder": "frontend/sounds"
     },
     {
-      "packageName": "@meeseOS/standard-dark-theme",
+      "packageName": "@meese-os/standard-dark-theme",
       "projectFolder": "frontend/standard-dark-theme"
     },
     {
-      "packageName": "@meeseOS/standard-theme",
+      "packageName": "@meese-os/standard-theme",
       "projectFolder": "frontend/standard-theme"
     },
     {
-      "packageName": "@meeseOS/static-wallpapers",
+      "packageName": "@meese-os/static-wallpapers",
       "projectFolder": "frontend/static-wallpapers"
     },
     {
-      "packageName": "@meeseOS/stylelint-config",
+      "packageName": "@meese-os/stylelint-config",
       "projectFolder": "development/stylelint"
     },
     {
-      "packageName": "@meeseOS/terminal",
+      "packageName": "@meese-os/terminal",
       "projectFolder": "apps/terminal"
     },
     {
-      "packageName": "@meeseOS/textpad",
+      "packageName": "@meese-os/textpad",
       "projectFolder": "apps/textpad"
     },
     {
-      "packageName": "@meeseOS/uptime-monitor",
+      "packageName": "@meese-os/uptime-monitor",
       "projectFolder": "apps/uptime-monitor"
     },
     {
-      "packageName": "@meeseOS/We10X-icons",
+      "packageName": "@meese-os/We10X-icons",
       "projectFolder": "frontend/We10X-icons"
     },
     {
-      "packageName": "@meeseOS/website",
+      "packageName": "@meese-os/website",
       "projectFolder": "website"
     },
     {
-      "packageName": "@meeseOS/widgets",
+      "packageName": "@meese-os/widgets",
       "projectFolder": "frontend/widgets"
     },
     {
-      "packageName": "@meeseOS/windows8-theme",
+      "packageName": "@meese-os/windows8-theme",
       "projectFolder": "frontend/windows8-theme"
     },
     {
-      "packageName": "@meeseOS/wireless-tools-provider",
+      "packageName": "@meese-os/wireless-tools-provider",
       "projectFolder": "backend/wireless-tools-provider"
     }
   ]

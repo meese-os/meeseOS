@@ -11,7 +11,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/runtime': ^7.17.2
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
       babel-loader: ^8.2.3
       copy-webpack-plugin: ^10.2.4
       eslint: ^8.18.0
@@ -22,7 +22,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 10.2.4_webpack-cli@4.10.0
       eslint: 8.25.0
@@ -35,9 +35,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/gui': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/gui': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       buffer: ^6.0.3
       copy-webpack-plugin: ^11.0.0
@@ -59,7 +59,7 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/gui': link:../../frontend/gui
+      '@meese-os/gui': link:../../frontend/gui
       dateformat: 3.0.3
       file-type: 17.1.4
       graceful-fs: 4.2.10
@@ -72,8 +72,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       buffer: 6.0.3
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
@@ -94,8 +94,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -121,8 +121,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -143,7 +143,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       eslint: ^8.25.0
@@ -154,7 +154,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       eslint: 8.25.0
@@ -168,8 +168,8 @@ importers:
       '@babel/preset-env': ^7.19.3
       '@babel/preset-react': ^7.18.6
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       '@popperjs/core': ^2.11.6
       '@react-hook/window-size': 3.1.1
       axios: ^1.1.2
@@ -220,8 +220,8 @@ importers:
       '@babel/preset-env': 7.19.3
       '@babel/preset-react': 7.18.6
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -246,9 +246,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/gui': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/gui': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -263,15 +263,15 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/gui': link:../../frontend/gui
+      '@meese-os/gui': link:../../frontend/gui
       hyperapp: 1.2.10
     devDependencies:
       '@babel/core': 7.19.3
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -291,10 +291,10 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/cursor-effects': workspace:*
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/gui': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/cursor-effects': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/gui': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -311,7 +311,7 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/gui': link:../../frontend/gui
+      '@meese-os/gui': link:../../frontend/gui
       deepmerge: 4.2.2
       hyperapp: 1.2.10
     devDependencies:
@@ -319,9 +319,9 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/cursor-effects': link:../../frontend/cursor-effects
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/cursor-effects': link:../../frontend/cursor-effects
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -342,8 +342,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       clipboard-polyfill: ^2.8.6
       copy-webpack-plugin: ^11.0.0
@@ -379,8 +379,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -401,9 +401,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/gui': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/gui': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -418,15 +418,15 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/gui': link:../../frontend/gui
+      '@meese-os/gui': link:../../frontend/gui
       hyperapp: 1.2.10
     devDependencies:
       '@babel/core': 7.19.3
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -446,7 +446,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
       babel-loader: ^8.2.5
       eslint: ^8.25.0
       webpack: ^5.74.0
@@ -456,7 +456,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       eslint: 8.25.0
       webpack: 5.74.0_webpack-cli@4.10.0
@@ -468,8 +468,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/event-emitter': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/event-emitter': workspace:*
       async-dependency-graph: ^1.1.4
       babel-loader: ^8.2.5
       deepmerge: ^4.2.2
@@ -479,7 +479,7 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/event-emitter': link:../event-emitter
+      '@meese-os/event-emitter': link:../event-emitter
       async-dependency-graph: 1.1.5
       deepmerge: 4.2.2
       omit-deep: 0.3.0
@@ -488,7 +488,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       eslint: 8.25.0
       stylelint: 14.13.0
@@ -501,7 +501,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
       babel-loader: ^8.2.5
       eslint: ^8.25.0
       eslint-plugin-jest: ^26.5.3
@@ -513,7 +513,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       eslint: 8.25.0
       eslint-plugin-jest: 26.5.3_jest@26.6.3
@@ -523,8 +523,8 @@ importers:
 
   ../../backend/server:
     specifiers:
-      '@meeseOS/common': workspace:*
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/common': workspace:*
+      '@meese-os/eslint-config': workspace:*
       body-parser: ^1.19.1
       chokidar: ^3.5.3
       connect-loki: ^1.2.0
@@ -554,7 +554,7 @@ importers:
       uuid: ^8.3.2
       yazl: ^2.5.1
     dependencies:
-      '@meeseOS/common': link:../common
+      '@meese-os/common': link:../common
       body-parser: 1.20.0
       chokidar: 3.5.3
       connect-loki: 1.2.0
@@ -579,7 +579,7 @@ importers:
       uuid: 8.3.2
       yazl: 2.5.1
     devDependencies:
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       eslint: 8.25.0
       eslint-plugin-jest: 26.5.3_jest@26.6.3
       jest: 26.6.3
@@ -588,8 +588,8 @@ importers:
 
   ../../backend/wireless-tools-provider:
     specifiers:
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/event-emitter': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/event-emitter': workspace:*
       babel-loader: ^8.2.5
       eslint: ^8.25.0
       uuid: ^8.3.2
@@ -597,11 +597,11 @@ importers:
       webpack-cli: ^4.10.0
       wireless-tools: ^0.19.0
     dependencies:
-      '@meeseOS/event-emitter': link:../event-emitter
+      '@meese-os/event-emitter': link:../event-emitter
       uuid: 8.3.2
       wireless-tools: 0.19.0
     devDependencies:
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       eslint: 8.25.0
       webpack: 5.74.0_webpack-cli@4.10.0
@@ -609,7 +609,7 @@ importers:
 
   ../../development/cli:
     specifiers:
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
       commander: ^4.1.1
       consola: ^2.15.0
       eslint: ^8.25.0
@@ -631,7 +631,7 @@ importers:
       temp: 0.9.4
       which: 2.0.2
     devDependencies:
-      '@meeseOS/eslint-config': link:../eslint
+      '@meese-os/eslint-config': link:../eslint
       eslint: 8.25.0
       eslint-plugin-jest: 26.5.3_jest@26.6.3
       jest: 26.6.3
@@ -654,8 +654,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       css-loader: ^6.7.1
       css-minimizer-webpack-plugin: ^4.2.1
@@ -673,8 +673,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
       css-minimizer-webpack-plugin: 4.2.1_webpack-cli@4.10.0
@@ -694,14 +694,14 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/common': workspace:*
-      '@meeseOS/cursor-effects': workspace:*
-      '@meeseOS/dynamic-wallpapers': workspace:*
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/event-emitter': workspace:*
-      '@meeseOS/gui': workspace:*
-      '@meeseOS/sounds': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/common': workspace:*
+      '@meese-os/cursor-effects': workspace:*
+      '@meese-os/dynamic-wallpapers': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/event-emitter': workspace:*
+      '@meese-os/gui': workspace:*
+      '@meese-os/sounds': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -727,12 +727,12 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/common': link:../../backend/common
-      '@meeseOS/cursor-effects': link:../cursor-effects
-      '@meeseOS/dynamic-wallpapers': link:../dynamic-wallpapers
-      '@meeseOS/event-emitter': link:../../backend/event-emitter
-      '@meeseOS/gui': link:../gui
-      '@meeseOS/sounds': link:../sounds
+      '@meese-os/common': link:../../backend/common
+      '@meese-os/cursor-effects': link:../cursor-effects
+      '@meese-os/dynamic-wallpapers': link:../dynamic-wallpapers
+      '@meese-os/event-emitter': link:../../backend/event-emitter
+      '@meese-os/gui': link:../gui
+      '@meese-os/sounds': link:../sounds
       css-mediaquery: 0.1.2
       deepmerge: 4.2.2
       express-session: 1.17.3
@@ -745,8 +745,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -771,7 +771,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
       babel-loader: ^8.2.5
       cursor-effects: ^1.0.0
       eslint: ^8.25.0
@@ -784,7 +784,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       eslint: 8.25.0
       webpack: 5.74.0_webpack-cli@4.10.0
@@ -796,9 +796,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/gui': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/gui': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -816,7 +816,7 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/gui': link:../gui
+      '@meese-os/gui': link:../gui
       deepmerge: 4.2.2
       hyperapp: 1.2.10
       is-plain-object: 5.0.0
@@ -825,8 +825,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -847,8 +847,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/common': workspace:*
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/common': workspace:*
+      '@meese-os/eslint-config': workspace:*
       babel-loader: ^8.2.5
       css-loader: ^6.7.1
       css-minimizer-webpack-plugin: ^4.2.1
@@ -865,7 +865,7 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/common': link:../../backend/common
+      '@meese-os/common': link:../../backend/common
       hexells: 1.2.0
       three: 0.152.2
       vanta: 0.5.24
@@ -874,7 +874,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
       css-minimizer-webpack-plugin: 4.2.1_webpack-cli@4.10.0
@@ -894,8 +894,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -914,8 +914,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -936,7 +936,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
       babel-loader: ^8.2.5
       eslint: ^8.25.0
       webpack: ^5.74.0
@@ -946,7 +946,7 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
+      '@meese-os/eslint-config': link:../../development/eslint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       eslint: 8.25.0
       webpack: 5.74.0_webpack-cli@4.10.0
@@ -958,8 +958,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       '@rollup/plugin-babel': ^6.0.0
       '@rollup/plugin-commonjs': ^22.0.2
       '@rollup/plugin-node-resolve': ^14.1.0
@@ -988,8 +988,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       '@rollup/plugin-babel': 6.0.0
       '@rollup/plugin-commonjs': 22.0.2
       '@rollup/plugin-node-resolve': 14.1.0
@@ -1015,9 +1015,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/event-emitter': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/event-emitter': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -1034,7 +1034,7 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/event-emitter': link:../../backend/event-emitter
+      '@meese-os/event-emitter': link:../../backend/event-emitter
       dateformat: 3.0.3
       hyperapp: 1.2.10
     devDependencies:
@@ -1042,8 +1042,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -1074,9 +1074,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/standard-theme': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/standard-theme': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -1091,14 +1091,14 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/standard-theme': link:../standard-theme
+      '@meese-os/standard-theme': link:../standard-theme
     devDependencies:
       '@babel/core': 7.19.3
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -1119,8 +1119,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -1139,8 +1139,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -1171,8 +1171,8 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -1194,8 +1194,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -1216,9 +1216,9 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/standard-theme': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/standard-theme': workspace:*
+      '@meese-os/stylelint-config': workspace:*
       babel-loader: ^8.2.5
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -1233,14 +1233,14 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/standard-theme': link:../standard-theme
+      '@meese-os/standard-theme': link:../standard-theme
     devDependencies:
       '@babel/core': 7.19.3
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../../development/eslint
-      '@meeseOS/stylelint-config': link:../../development/stylelint
+      '@meese-os/eslint-config': link:../../development/eslint
+      '@meese-os/stylelint-config': link:../../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0
@@ -1261,35 +1261,35 @@ importers:
       '@babel/plugin-transform-runtime': ^7.19.1
       '@babel/preset-env': ^7.19.3
       '@babel/runtime': ^7.19.0
-      '@meeseOS/We10X-icons': workspace:*
-      '@meeseOS/cli': workspace:*
-      '@meeseOS/client': workspace:*
-      '@meeseOS/cyberchef': workspace:*
-      '@meeseOS/dialogs': workspace:*
-      '@meeseOS/dynamic-wallpapers': workspace:*
-      '@meeseOS/eslint-config': workspace:*
-      '@meeseOS/filemanager': workspace:*
-      '@meeseOS/games': workspace:*
-      '@meeseOS/gnome-icons': workspace:*
-      '@meeseOS/google-api-provider': workspace:*
-      '@meeseOS/gui': workspace:*
-      '@meeseOS/image-to-8bit': workspace:*
-      '@meeseOS/old-site': workspace:*
-      '@meeseOS/panels': workspace:*
-      '@meeseOS/preview': workspace:*
-      '@meeseOS/server': workspace:*
-      '@meeseOS/settings': workspace:*
-      '@meeseOS/sounds': workspace:*
-      '@meeseOS/standard-dark-theme': workspace:*
-      '@meeseOS/standard-theme': workspace:*
-      '@meeseOS/static-wallpapers': workspace:*
-      '@meeseOS/stylelint-config': workspace:*
-      '@meeseOS/terminal': workspace:*
-      '@meeseOS/textpad': workspace:*
-      '@meeseOS/uptime-monitor': workspace:*
-      '@meeseOS/widgets': workspace:*
-      '@meeseOS/windows8-theme': workspace:*
-      '@meeseOS/wireless-tools-provider': workspace:*
+      '@meese-os/We10X-icons': workspace:*
+      '@meese-os/cli': workspace:*
+      '@meese-os/client': workspace:*
+      '@meese-os/cyberchef': workspace:*
+      '@meese-os/dialogs': workspace:*
+      '@meese-os/dynamic-wallpapers': workspace:*
+      '@meese-os/eslint-config': workspace:*
+      '@meese-os/filemanager': workspace:*
+      '@meese-os/games': workspace:*
+      '@meese-os/gnome-icons': workspace:*
+      '@meese-os/google-api-provider': workspace:*
+      '@meese-os/gui': workspace:*
+      '@meese-os/image-to-8bit': workspace:*
+      '@meese-os/old-site': workspace:*
+      '@meese-os/panels': workspace:*
+      '@meese-os/preview': workspace:*
+      '@meese-os/server': workspace:*
+      '@meese-os/settings': workspace:*
+      '@meese-os/sounds': workspace:*
+      '@meese-os/standard-dark-theme': workspace:*
+      '@meese-os/standard-theme': workspace:*
+      '@meese-os/static-wallpapers': workspace:*
+      '@meese-os/stylelint-config': workspace:*
+      '@meese-os/terminal': workspace:*
+      '@meese-os/textpad': workspace:*
+      '@meese-os/uptime-monitor': workspace:*
+      '@meese-os/widgets': workspace:*
+      '@meese-os/windows8-theme': workspace:*
+      '@meese-os/wireless-tools-provider': workspace:*
       babel-loader: ^8.2.5
       complex-dotenv-json: ^1.1.0
       copy-webpack-plugin: ^11.0.0
@@ -1312,33 +1312,33 @@ importers:
       webpack: ^5.74.0
       webpack-cli: ^4.10.0
     dependencies:
-      '@meeseOS/We10X-icons': link:../frontend/We10X-icons
-      '@meeseOS/cli': link:../development/cli
-      '@meeseOS/client': link:../frontend/client
-      '@meeseOS/cyberchef': link:../apps/cyberchef
-      '@meeseOS/dialogs': link:../frontend/dialogs
-      '@meeseOS/dynamic-wallpapers': link:../frontend/dynamic-wallpapers
-      '@meeseOS/filemanager': link:../apps/filemanager
-      '@meeseOS/games': link:../apps/games
-      '@meeseOS/gnome-icons': link:../frontend/gnome-icons
-      '@meeseOS/google-api-provider': link:../frontend/google-api-provider
-      '@meeseOS/gui': link:../frontend/gui
-      '@meeseOS/image-to-8bit': link:../apps/image-to-8bit
-      '@meeseOS/old-site': link:../apps/old-site
-      '@meeseOS/panels': link:../frontend/panels
-      '@meeseOS/preview': link:../apps/preview
-      '@meeseOS/server': link:../backend/server
-      '@meeseOS/settings': link:../apps/settings
-      '@meeseOS/sounds': link:../frontend/sounds
-      '@meeseOS/standard-dark-theme': link:../frontend/standard-dark-theme
-      '@meeseOS/standard-theme': link:../frontend/standard-theme
-      '@meeseOS/static-wallpapers': link:../frontend/static-wallpapers
-      '@meeseOS/terminal': link:../apps/terminal
-      '@meeseOS/textpad': link:../apps/textpad
-      '@meeseOS/uptime-monitor': link:../apps/uptime-monitor
-      '@meeseOS/widgets': link:../frontend/widgets
-      '@meeseOS/windows8-theme': link:../frontend/windows8-theme
-      '@meeseOS/wireless-tools-provider': link:../backend/wireless-tools-provider
+      '@meese-os/We10X-icons': link:../frontend/We10X-icons
+      '@meese-os/cli': link:../development/cli
+      '@meese-os/client': link:../frontend/client
+      '@meese-os/cyberchef': link:../apps/cyberchef
+      '@meese-os/dialogs': link:../frontend/dialogs
+      '@meese-os/dynamic-wallpapers': link:../frontend/dynamic-wallpapers
+      '@meese-os/filemanager': link:../apps/filemanager
+      '@meese-os/games': link:../apps/games
+      '@meese-os/gnome-icons': link:../frontend/gnome-icons
+      '@meese-os/google-api-provider': link:../frontend/google-api-provider
+      '@meese-os/gui': link:../frontend/gui
+      '@meese-os/image-to-8bit': link:../apps/image-to-8bit
+      '@meese-os/old-site': link:../apps/old-site
+      '@meese-os/panels': link:../frontend/panels
+      '@meese-os/preview': link:../apps/preview
+      '@meese-os/server': link:../backend/server
+      '@meese-os/settings': link:../apps/settings
+      '@meese-os/sounds': link:../frontend/sounds
+      '@meese-os/standard-dark-theme': link:../frontend/standard-dark-theme
+      '@meese-os/standard-theme': link:../frontend/standard-theme
+      '@meese-os/static-wallpapers': link:../frontend/static-wallpapers
+      '@meese-os/terminal': link:../apps/terminal
+      '@meese-os/textpad': link:../apps/textpad
+      '@meese-os/uptime-monitor': link:../apps/uptime-monitor
+      '@meese-os/widgets': link:../frontend/widgets
+      '@meese-os/windows8-theme': link:../frontend/windows8-theme
+      '@meese-os/wireless-tools-provider': link:../backend/wireless-tools-provider
       complex-dotenv-json: 1.1.0
       dotenv: 16.0.3
       hyperapp: 1.2.10
@@ -1349,8 +1349,8 @@ importers:
       '@babel/plugin-transform-runtime': 7.19.1
       '@babel/preset-env': 7.19.3
       '@babel/runtime': 7.19.0
-      '@meeseOS/eslint-config': link:../development/eslint
-      '@meeseOS/stylelint-config': link:../development/stylelint
+      '@meese-os/eslint-config': link:../development/eslint
+      '@meese-os/stylelint-config': link:../development/stylelint
       babel-loader: 8.2.5_webpack-cli@4.10.0
       copy-webpack-plugin: 11.0.0_webpack-cli@4.10.0
       css-loader: 6.7.1_webpack-cli@4.10.0

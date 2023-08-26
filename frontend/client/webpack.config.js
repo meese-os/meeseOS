@@ -66,7 +66,7 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!@meeseOS)/,
+				exclude: /node_modules\/(?!@meese-os)/,
 				use: {
 					loader: "babel-loader",
 				},

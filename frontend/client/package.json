@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/client",
+  "name": "@meese-os/client",
   "version": "2.5.8",
   "description": "meeseOS client",
   "main": "dist/main.js",
@@ -25,8 +25,8 @@
     "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
-    "@meeseOS/stylelint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
+    "@meese-os/stylelint-config": "workspace:*",
     "@babel/core": "^7.19.3",
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
@@ -50,12 +50,12 @@
     "jest": "^26.0.0"
   },
   "dependencies": {
-    "@meeseOS/common": "workspace:*",
-    "@meeseOS/cursor-effects": "workspace:*",
-    "@meeseOS/dynamic-wallpapers": "workspace:*",
-    "@meeseOS/event-emitter": "workspace:*",
-    "@meeseOS/gui": "workspace:*",
-    "@meeseOS/sounds": "workspace:*",
+    "@meese-os/common": "workspace:*",
+    "@meese-os/cursor-effects": "workspace:*",
+    "@meese-os/dynamic-wallpapers": "workspace:*",
+    "@meese-os/event-emitter": "workspace:*",
+    "@meese-os/gui": "workspace:*",
+    "@meese-os/sounds": "workspace:*",
     "css-mediaquery": "^0.1.2",
     "deepmerge": "^4.2.2",
     "hyperapp": "^1.2.10",
@@ -74,10 +74,10 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": ["@meeseOS/eslint-config", "plugin:jest/recommended"]
+    "extends": ["@meese-os/eslint-config", "plugin:jest/recommended"]
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meese-os/stylelint-config"]
   },
   "babel": {
     "presets": [

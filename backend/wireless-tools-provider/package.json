@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/wireless-tools-provider",
+  "name": "@meese-os/wireless-tools-provider",
   "version": "1.0.0",
   "description": "meeseOS wireless-tools Provider",
   "files": [
@@ -16,14 +16,14 @@
     "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
     "babel-loader": "^8.2.5",
     "eslint": "^8.25.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "@meeseOS/event-emitter": "workspace:*",
+    "@meese-os/event-emitter": "workspace:*",
     "uuid": "^8.3.2",
     "wireless-tools": "^0.19.0"
   },
@@ -35,6 +35,6 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@meeseOS/eslint-config"
+    "extends": "@meese-os/eslint-config"
   }
 }

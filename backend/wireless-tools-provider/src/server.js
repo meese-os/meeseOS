@@ -57,7 +57,7 @@ class Subscriptions {
 	}
 
 	add(id, username, ns, method, args) {
-		console.debug("@meeseOS/wireless-tools-provider", "Subscriptions#add", {
+		console.debug("@meese-os/wireless-tools-provider", "Subscriptions#add", {
 			id, username, ns, method, args
 		});
 
@@ -69,7 +69,7 @@ class Subscriptions {
 	}
 
 	remove(id) {
-		console.debug("@meeseOS/wireless-tools-provider", "Subscriptions#remove", id);
+		console.debug("@meese-os/wireless-tools-provider", "Subscriptions#remove", id);
 
 		const foundIndex = this.subscriptions.findIndex((iter) => iter.id === id);
 		if (foundIndex !== -1) {
@@ -82,7 +82,7 @@ class Subscriptions {
 	}
 
 	attach(id, ws) {
-		console.debug("@meeseOS/wireless-tools-provider", "Subscriptions#attach", id);
+		console.debug("@meese-os/wireless-tools-provider", "Subscriptions#attach", id);
 
 		ws.on("close", () => this.remove(id));
 	}

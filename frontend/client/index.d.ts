@@ -30,7 +30,7 @@
 
 export as namespace meeseOS__client;
 
-import { EventEmitter } from "@meeseOS/event-emitter";
+import { EventEmitter } from "@meese-os/event-emitter";
 
 declare class ServiceProvider {
 	/**

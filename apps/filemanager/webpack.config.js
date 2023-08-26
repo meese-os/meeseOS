@@ -82,7 +82,7 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!@meeseOS)/,
+				exclude: /node_modules\/(?!@meese-os)/,
 				resolve: {
 					fullySpecified: false,
 				},

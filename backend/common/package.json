@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/common",
+  "name": "@meese-os/common",
   "version": "1.0.1",
   "description": "meeseOS Common Modules",
   "main": "dist/main.js",
@@ -19,7 +19,7 @@
     "prepublishOnly": "npm run eslint && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
     "@babel/core": "^7.19.3",
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
@@ -31,7 +31,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "@meeseOS/event-emitter": "workspace:*",
+    "@meese-os/event-emitter": "workspace:*",
     "async-dependency-graph": "^1.1.4",
     "deepmerge": "^4.2.2",
     "omit-deep": "^0.3.0"
@@ -44,7 +44,7 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "extends": "@meeseOS/eslint-config"
+    "extends": "@meese-os/eslint-config"
   },
   "babel": {
     "sourceType": "unambiguous",

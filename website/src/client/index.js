@@ -46,14 +46,14 @@ import {
 	NotificationServiceProvider,
 	SettingsServiceProvider,
 	VFSServiceProvider,
-} from "@meeseOS/client";
-import { BackgroundCanvasServiceProvider } from "@meeseOS/dynamic-wallpapers";
-import { DialogServiceProvider } from "@meeseOS/dialogs";
-import { GisServiceProvider } from "@meeseOS/google-api-provider";
-import { GUIServiceProvider } from "@meeseOS/gui";
-import { PanelServiceProvider } from "@meeseOS/panels";
-import { WidgetServiceProvider } from "@meeseOS/widgets";
-import { WirelessToolsServiceProvider } from "@meeseOS/wireless-tools-provider";
+} from "@meese-os/client";
+import { BackgroundCanvasServiceProvider } from "@meese-os/dynamic-wallpapers";
+import { DialogServiceProvider } from "@meese-os/dialogs";
+import { GisServiceProvider } from "@meese-os/google-api-provider";
+import { GUIServiceProvider } from "@meese-os/gui";
+import { PanelServiceProvider } from "@meese-os/panels";
+import { WidgetServiceProvider } from "@meese-os/widgets";
+import { WirelessToolsServiceProvider } from "@meese-os/wireless-tools-provider";
 import "./index.scss";
 import config from "./config.js";
 

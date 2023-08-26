@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/We10X-icons",
+  "name": "@meese-os/We10X-icons",
   "version": "1.1.1",
   "description": "meeseOS We10X Icons",
   "files": [
@@ -16,8 +16,8 @@
     "prepublishOnly": "npm run eslint && npm run stylelint && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
-    "@meeseOS/stylelint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
+    "@meese-os/stylelint-config": "workspace:*",
     "@babel/core": "^7.19.3",
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
@@ -48,10 +48,10 @@
       "sourceType": "module",
       "ecmaVersion": 8
     },
-    "extends": "@meeseOS/eslint-config"
+    "extends": "@meese-os/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meese-os/stylelint-config"]
   },
   "babel": {
     "presets": [

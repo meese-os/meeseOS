@@ -1,5 +1,5 @@
 import { createInstance } from "meeseOS";
-import { EventEmitter } from "@meeseOS/event-emitter";
+import { EventEmitter } from "@meese-os/event-emitter";
 import Packages from "../src/packages.js";
 
 const packageList = [

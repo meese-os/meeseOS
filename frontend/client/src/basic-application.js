@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { EventEmitter } from "@meeseOS/event-emitter";
+import { EventEmitter } from "@meese-os/event-emitter";
 import { basename, pathname } from "./utils/vfs";
 
 /**

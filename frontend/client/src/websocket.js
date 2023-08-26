@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { EventEmitter } from "@meeseOS/event-emitter";
+import { EventEmitter } from "@meese-os/event-emitter";
 import logger from "./logger";
 
 const eventNames = ["open", "close", "message", "error"];

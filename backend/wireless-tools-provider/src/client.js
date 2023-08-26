@@ -43,7 +43,7 @@ class Subscriptions {
 	start() {
 		if (this.started) return;
 
-		console.debug("@meeseOS/wireless-tools-provider", "Subscriptions#start");
+		console.debug("@meese-os/wireless-tools-provider", "Subscriptions#start");
 
 		this.started = true;
 
@@ -53,7 +53,7 @@ class Subscriptions {
 	}
 
 	add(subscription) {
-		console.debug("@meeseOS/wireless-tools-provider", "Subscriptions#add", subscription);
+		console.debug("@meese-os/wireless-tools-provider", "Subscriptions#add", subscription);
 
 		this.subscriptions.push(subscription);
 
@@ -64,7 +64,7 @@ class Subscriptions {
 	}
 
 	create(ns, method, ...args) {
-		console.debug("@meeseOS/wireless-tools-provider", "Subscriptions#create", {
+		console.debug("@meese-os/wireless-tools-provider", "Subscriptions#create", {
 			ns, method, args
 		});
 
@@ -79,7 +79,7 @@ class Subscriptions {
 	}
 
 	remove(subscription) {
-		console.debug("@meeseOS/wireless-tools-provider", "Subscriptions#remove", subscription);
+		console.debug("@meese-os/wireless-tools-provider", "Subscriptions#remove", subscription);
 
 		const foundIndex = this.subscriptions
 			.findIndex((iter) => iter.id === subscription.id);
@@ -207,7 +207,7 @@ export class WirelessToolsServiceProvider {
 	}
 
 	callApi(ns, method, ...args) {
-		console.debug("@meeseOS/wireless-tools-provider", "callApi", ns, method, args);
+		console.debug("@meese-os/wireless-tools-provider", "callApi", ns, method, args);
 
 		return this.core
 			.request(`/api/wireless-tools/${ns}/${method}`, {

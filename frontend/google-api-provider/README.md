@@ -5,13 +5,13 @@ This is the Google API Provider for meeseOS.
 ## Installation
 
 ```bash
-npm install @meeseOS/google-api-provider
+npm install @meese-os/google-api-provider
 ```
 
 In your client bootstrap file (`src/client/index.js`):
 
 ```javascript
-import { GapiServiceProvider } from "@meeseOS/google-api-provider";
+import { GapiServiceProvider } from "@meese-os/google-api-provider";
 
 meeseOS.register(GapiServiceProvider, {
   args: {

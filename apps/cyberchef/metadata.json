@@ -1,6 +1,6 @@
 {
   "type": "application",
-  "name": "@meeseOS/cyberchef",
+  "name": "@meese-os/cyberchef",
   "icon": "icon.svg",
   "category": "utilities",
   "title": "CyberChef",

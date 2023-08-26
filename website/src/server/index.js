@@ -47,8 +47,8 @@ const {
 	TokenFactoryServiceProvider,
 	AuthServiceProvider,
 	SettingsServiceProvider,
-} = require("@meeseOS/server");
-const { WirelessToolsServiceProvider } = require("@meeseOS/wireless-tools-provider/src/server.js");
+} = require("@meese-os/server");
+const { WirelessToolsServiceProvider } = require("@meese-os/wireless-tools-provider/src/server.js");
 
 const config = require("./config.js");
 const meeseOS = new Core(config, {});

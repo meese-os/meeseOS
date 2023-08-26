@@ -38,7 +38,7 @@ import {
 	TextField,
 	Toolbar,
 	listView,
-} from "@meeseOS/gui";
+} from "@meese-os/gui";
 import {
 	mountViewRowsFactory,
 	listViewColumnFactory,

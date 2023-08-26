@@ -29,8 +29,8 @@
  */
 
 import { BasicApplication } from "../basic-application.js";
-import { ServiceProvider } from "@meeseOS/common";
-import { EventEmitter } from "@meeseOS/event-emitter";
+import { ServiceProvider } from "@meese-os/common";
+import { EventEmitter } from "@meese-os/event-emitter";
 import { playSound, script, style } from "../utils/dom";
 import { resourceResolver } from "../utils/desktop";
 import * as dnd from "../utils/dnd";

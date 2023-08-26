@@ -5,18 +5,18 @@ This provider simply binds https://github.com/bakerface/wireless-tools to the in
 ## Installation
 
 ```bash
-npm install @meeseOS/wireless-tools-provider
+npm install @meese-os/wireless-tools-provider
 ```
 
 In your initialization scripts:
 
 ```javascript
 // Client index.js file
-import { WirelessToolsServiceProvider } from "@meeseOS/wireless-tools-provider";
+import { WirelessToolsServiceProvider } from "@meese-os/wireless-tools-provider";
 meeseOS.register(WirelessToolsServiceProvider);
 
 // Server index.js file
-const { WirelessToolsServiceProvider } = require("@meeseOS/wireless-tools-provider/src/server.js");
+const { WirelessToolsServiceProvider } = require("@meese-os/wireless-tools-provider/src/server.js");
 meeseOS.register(WirelessToolsServiceProvider);
 ```
 
@@ -27,7 +27,7 @@ By default the server provider is set up to only allow users with the `admin` gr
 You can change this by adding options:
 
 ```javascript
-const {WirelessToolsServiceProvider} = require("@meeseOS/wireless-tools-provider/src/server.js");
+const {WirelessToolsServiceProvider} = require("@meese-os/wireless-tools-provider/src/server.js");
 meeseOS.register(WirelessToolsServiceProvider, {
   args: {
     groups: ["other-group"]

@@ -28,7 +28,7 @@
  * @license Simplified BSD License
  */
 
-import { EventEmitter } from "@meeseOS/event-emitter";
+import { EventEmitter } from "@meese-os/event-emitter";
 import { loadOptionsFromConfig } from "./utils/windows";
 import logger from "./logger";
 import merge from "deepmerge";

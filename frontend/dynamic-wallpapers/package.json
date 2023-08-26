@@ -1,5 +1,5 @@
 {
-  "name": "@meeseOS/dynamic-wallpapers",
+  "name": "@meese-os/dynamic-wallpapers",
   "version": "1.2.3",
   "description": "meeseOS Dynamic Wallpapers",
   "files": [
@@ -15,7 +15,7 @@
     "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "devDependencies": {
-    "@meeseOS/eslint-config": "workspace:*",
+    "@meese-os/eslint-config": "workspace:*",
     "@babel/core": "^7.19.3",
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
@@ -34,7 +34,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "@meeseOS/common": "workspace:*",
+    "@meese-os/common": "workspace:*",
     "hexells": "^1.2.0",
     "vanta": "^0.5.24",
     "three": "^0.152.2"
@@ -51,10 +51,10 @@
       "sourceType": "module",
       "ecmaVersion": 8
     },
-    "extends": "@meeseOS/eslint-config"
+    "extends": "@meese-os/eslint-config"
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard-scss", "@meeseOS/stylelint-config"]
+    "extends": ["stylelint-config-standard-scss", "@meese-os/stylelint-config"]
   },
   "babel": {
     "presets": [
