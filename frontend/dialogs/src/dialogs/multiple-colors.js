@@ -109,7 +109,6 @@ export default class MultipleColorsDialog extends Dialog {
 										actions
 									)
 								),
-								// TODO: Add mapped labels
 								h(SelectField, {
 									choices: Object.keys(state.value),
 									value: state.selectedColor,
