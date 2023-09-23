@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/eslint-config",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "description": "meeseOS ESLint configuration",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,6 @@
 		"eslint": ""
   },
   "dependencies": {
-    "eslint": "^8.25.0"
+    "eslint": "^8.48.0"
   }
 }

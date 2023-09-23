@@ -39,34 +39,40 @@ class IconThemePlugin {
 		const pluginName = IconThemePlugin.name;
 		const { webpack: { sources: { RawSource } } } = compiler;
 
-		compiler.hooks.emit.tap(pluginName, (compilation) => {
-			const icons = compilation.getAssets().map(
-				(asset) => asset.name.split("/").pop()
-			);
+		compiler.hooks.compilation.tap(pluginName, (compilation) => {
+			compilation.hooks.processAssets.tap({
+				name: pluginName,
+				stage: compilation.constructor.PROCESS_ASSETS_STAGE_ADDITIONAL,
+			}, (assets) => {
+				const icons = Object.keys(assets).map((pathname) => {
+					const filename = path.basename(pathname);
+					return filename;
+				});
 
-			const metadataFile = `${this.metadataPath || compiler.context}/metadata.json`;
-			const metadata = require(metadataFile);
+				const metadataFile = `${this.metadataPath || compiler.context}/metadata.json`;
+				const metadata = require(metadataFile);
 
-			// Create an object with the property name as the asset name
-			// and the value as the file extension
-			const iconEntries = icons.map((file) => [
-				file.substr(0, file.lastIndexOf(".")),
-				file.substr(file.lastIndexOf(".") + 1, file.length)
-			]);
-			iconEntries.sort(([a], [b]) => a.localeCompare(b));
+				// Create an object with the property name as the asset name
+				// and the value as the file extension
+				const iconEntries = icons.map((file) => [
+					file.slice(0, file.lastIndexOf(".")),
+					file.slice(file.lastIndexOf(".") + 1)
+				]);
+				iconEntries.sort(([a], [b]) => a.localeCompare(b));
 
-			// Filter `icons` to only image file types
-			const imageTypes = ["png", "jpg", "jpeg", "gif", "svg", "webp"];
-			metadata.icons = Object.fromEntries(
-				iconEntries.filter(
-					([name, ext]) => imageTypes.includes(ext)
-				)
-			);
+				// Filter `icons` to only image file types
+				const imageTypes = ["png", "jpg", "jpeg", "gif", "svg", "webp"];
+				metadata.icons = Object.fromEntries(
+					iconEntries.filter(
+						([name, ext]) => imageTypes.includes(ext)
+					)
+				);
 
-			// Write the new metadata to the file
-			const json = JSON.stringify(metadata, null, 2);
-			const relativePath = path.relative(compiler.outputPath, metadataFile);
-			compilation.emitAsset(relativePath, new RawSource(json));
+				// Write the new metadata to the file
+				const json = JSON.stringify(metadata, null, 2);
+				const relativePath = path.relative(compiler.outputPath, metadataFile);
+				compilation.emitAsset(relativePath, new RawSource(json));
+			});
 		});
 	}
 }

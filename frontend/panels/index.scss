@@ -30,8 +30,10 @@
 
 $base-margin: 1em;
 
-@import "./src/panel";
-@import "./src/items/clock";
-@import "./src/items/menu";
-@import "./src/items/tray";
-@import "./src/items/windows";
+/* stylelint-disable */
+@import "src/panel";
+@import "src/items/clock";
+@import "src/items/menu";
+@import "src/items/tray";
+@import "src/items/windows";
+/* stylelint-enable */

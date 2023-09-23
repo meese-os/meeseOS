@@ -1,15 +1,17 @@
 {
   "name": "@meese-os/website",
-  "version": "2.1.3",
+  "version": "1.0.0",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
-    "eslint": "eslint 'src/client/**/*.js' 'src/server/**/*.js'",
-    "stylelint": "stylelint 'src/client/*.scss' --fix",
+    "eslint": "eslint src/client/**/*.js src/server/**/*.js",
+    "stylelint": "stylelint src/client/*.scss --fix --quiet-deprecation-warnings",
     "serve": "node src/server/index.js",
+		"build": "webpack && npm run build:manifest",
     "build:production": "NODE_ENV=production rush build",
     "build:manifest": "meese-cli package:discover",
+		"watch": "webpack --watch",
     "package:discover": "meese-cli package:discover",
     "package:create": "meese-cli package:create",
     "make:auth": "meese-cli make:auth",
@@ -18,34 +20,36 @@
     "make:application": "meese-cli make:application",
     "make:iframe-application": "meese-cli make:iframe-application",
     "make:provider": "meese-cli make:provider",
-    "build": "webpack && npm run build:manifest",
-    "watch": "webpack --watch",
-    "deploy": "NODE_ENV=production npm run serve"
+    "deploy": "NODE_ENV=production npm run serve",
+    "publish:dry": "rush publish --include-all",
+    "publish": "rush publish --publish --include-all --set-access-level public"
   },
   "author": "Aaron Meese <aaron@meese.dev>",
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@meese-os/stylelint-config": "workspace:*",
-    "@babel/core": "^7.19.3",
-    "@babel/plugin-transform-runtime": "^7.19.1",
-    "@babel/preset-env": "^7.19.3",
-    "@babel/runtime": "^7.19.0",
-    "babel-loader": "^8.2.5",
+    "@babel/core": "^7.22.11",
+    "@babel/plugin-transform-runtime": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "@babel/runtime": "^7.22.11",
+    "babel-loader": "^9.1.3",
+		"clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.1",
-    "css-minimizer-webpack-plugin": "^4.2.1",
-    "eslint": "^8.25.0",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "eslint": "^8.48.0",
     "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.1",
+    "mini-css-extract-plugin": "^2.7.6",
     "pm2": "^5.2.0",
-    "sass": "^1.55.0",
-    "sass-loader": "^13.1.0",
+    "sass": "^1.66.1",
+    "sass-loader": "^13.3.2",
     "source-map-loader": "^3.0.1",
-    "stylelint": "^14.13.0",
-    "stylelint-config-standard": "^28.0.0",
-    "stylelint-config-standard-scss": "^5.0.0",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-scss": "^10.0.0",
+		"uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@meese-os/cli": "workspace:*",
@@ -71,11 +75,11 @@
     "@meese-os/terminal": "workspace:*",
     "@meese-os/textpad": "workspace:*",
     "@meese-os/uptime-monitor": "workspace:*",
-    "@meese-os/We10X-icons": "workspace:*",
+    "@meese-os/we10x-icons": "workspace:*",
     "@meese-os/widgets": "workspace:*",
     "@meese-os/windows8-theme": "workspace:*",
     "@meese-os/wireless-tools-provider": "workspace:*",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "hyperapp": "^1.2.10",
     "typeface-roboto": "^1.1.13",
     "jsonwebtoken": "^8.5.1",
@@ -91,7 +95,7 @@
     },
     "parserOptions": {
       "sourceType": "module",
-      "ecmaVersion": 8
+      "ecmaVersion": 11
     },
     "extends": "@meese-os/eslint-config"
   },
@@ -105,5 +109,9 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
+  },
+  "repository": "https://github.com/meeseOS/meeseOS",
+  "publishConfig": {
+    "access": "public"
   }
 }

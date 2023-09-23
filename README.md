@@ -68,6 +68,11 @@ To run GitHub Actions locally, do the following:
 2. `sudo ./bin/act -s GITHUB_TOKEN=ENTER_YOUR_PAT_HERE`
 3. Select "Medium" as the image size
 
+## Development
+
+To publish changes to the GitHub and NPM registries, run `cd website && pnpm run publish`.
+
+If you want to do a dry run first, run `cd website && pnpm run publish:dry`.
 
 # TODO
 

@@ -144,8 +144,6 @@
 .meeseOS-gui-menu {
 	ul {
 		@include panel;
-
-		// @include window;
 	}
 
 	li:hover > div > span {

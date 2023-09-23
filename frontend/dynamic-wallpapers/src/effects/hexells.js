@@ -28,8 +28,6 @@
  * @licence Simplified BSD License
  */
 
-const Hexells = require("hexells");
-
 /**
  * A mapping of the variable names to their relevant information.
  */
@@ -94,23 +92,31 @@ const hexells = (background, options) => {
 	console.debug("Initializing Hexells effect");
 	const canvas = document.createElement("canvas");
 	background.appendChild(canvas);
-	effect = new Hexells(canvas, settings);
-
-	// Set the canvas width and height to the screen width and height
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
 
 	/**
-	 * Ensures that the canvas will always be the smallest possible
-	 * size that covers the screen.
+	 * Allows us to defer the loading of Hexells (and its dependencies)
+	 * until it's needed, preventing page blocking upon initial load.
+	 * @link https://dev.to/marcinwosinek/lazy-load-library-in-application-build-with-webpack-5757
 	 */
-	function windowResize() {
+	import(/* webpackChunkName: "hexells" */ "hexells").then(() => {
+		effect = new Hexells(canvas, settings);
+
+		// Set the canvas width and height to the screen width and height
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
-	}
 
-	// Add the window resize event listener
-	window.addEventListener("resize", windowResize);
+		/**
+		 * Ensures that the canvas will always be the smallest possible
+		 * size that covers the screen.
+		 */
+		function windowResize() {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		}
+
+		// Add the window resize event listener
+		window.addEventListener("resize", windowResize);
+	});
 };
 
 /**

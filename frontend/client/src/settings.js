@@ -73,7 +73,7 @@ const createAdapter = (core, options) => {
  */
 
 /**
- * Settings Options
+ * Settings Options.
  *
  * @typedef {Object} SettingsOptions
  * @property {SettingsAdapterCallback|SettingsAdapter} [adapter] Adapter to use
@@ -81,39 +81,39 @@ const createAdapter = (core, options) => {
  */
 
 /**
- * MeeseOS Settings Manager
+ * MeeseOS Settings Manager.
  */
 export default class Settings {
 	// TODO: Destroy method
 
 	/**
-	 * Create application
+	 * Create application.
 	 *
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {SettingsOptions} options Options
 	 */
 	constructor(core, options) {
 		/**
-		 * The settings adapter
+		 * The settings adapter.
 		 * @type {SettingsAdapter}
 		 * @readonly
 		 */
 		this.adapter = createAdapter(core, options);
 
 		/**
-		 * Internal timeout reference used for debouncing
+		 * Internal timeout reference used for debouncing.
 		 * @type {Object}
 		 */
 		this.debounce = null;
 
 		/**
-		 * The settings tree
+		 * The settings tree.
 		 * @type {{name: *}}
 		 */
 		this.settings = {};
 
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 * @readonly
 		 */
@@ -121,14 +121,14 @@ export default class Settings {
 	}
 
 	/**
-	 * Initializes settings adapter
+	 * Initializes settings adapter.
 	 */
 	init() {
 		return this.adapter.init();
 	}
 
 	/**
-	 * Saves settings
+	 * Saves settings.
 	 * @returns {Promise<Boolean>}
 	 */
 	save() {
@@ -156,7 +156,7 @@ export default class Settings {
 	}
 
 	/**
-	 * Loads settings
+	 * Loads settings.
 	 * @returns {Promise<Boolean>}
 	 */
 	load() {
@@ -182,7 +182,7 @@ export default class Settings {
 	}
 
 	/**
-	 * Gets a settings entry by key (cached)
+	 * Gets a settings entry by key (cached).
 	 *
 	 * @param {String} [ns] The namespace
 	 * @param {String} [key] The key to get the value from
@@ -235,7 +235,7 @@ export default class Settings {
 	}
 
 	/**
-	 * Clears a namespace by root key
+	 * Clears a namespace by root key.
 	 * @param {String} ns The namespace
 	 * @returns {Promise<Boolean>}
 	 */

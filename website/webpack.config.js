@@ -2,18 +2,28 @@ const path = require("path");
 const webpack = require("webpack");
 const mode = process.env.NODE_ENV || "development";
 const minimize = mode === "production";
+
+// Plugins
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+// Environment variables
 const dotenv = require("dotenv");
 const client_env_vars = dotenv.config({
 	path: path.resolve(__dirname, "src/client/.env"),
 }).parsed;
-const plugins = [];
 
+const plugins = [];
 if (mode === "production") {
 	plugins.push(new CssMinimizerPlugin());
+	plugins.push(new UglifyJsPlugin({
+		sourceMap: true
+	}));
+	plugins.push(new CleanWebpackPlugin());
 }
 
 module.exports = {
@@ -21,6 +31,12 @@ module.exports = {
 	devtool: "source-map",
 	entry: {
 		meeseOS: path.resolve(__dirname, "src/client/index.js"),
+	},
+	output: {
+		// https://medium.com/walkme-engineering/how-and-when-not-to-use-webpack-for-lazy-loading-bef9d37c42c1
+		chunkFilename: "chunks/[name].[chunkhash].bundle.js",
+		filename: "[name].[chunkhash].bundle.js",
+		path: path.resolve(__dirname, "dist")
 	},
 	performance: {
 		maxEntrypointSize: 500 * 1024,

@@ -59,20 +59,19 @@ export class AttachAddon {
 	_sendData(data) {
 		// TODO: do something better than just swallowing
 		// the data if the socket is not in a working condition
-		if (this._socket.readyState !== 1) {
-			return;
-		}
+		if (this._socket.readyState !== 1) return;
+
 		this._socket.send(JSON.stringify({ data }));
 	}
 
 	_sendBinary(data) {
-		if (this._socket.readyState !== 1) {
-			return;
-		}
+		if (this._socket.readyState !== 1) return;
+
 		const buffer = new Uint8Array(data.length);
 		for (let i = 0; i < data.length; ++i) {
 			buffer[i] = data.charCodeAt(i) & 255;
 		}
+
 		this._socket.send(buffer);
 	}
 }

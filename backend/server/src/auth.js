@@ -28,6 +28,7 @@
  * @licence Simplified BSD License
  */
 
+/* eslint-disable no-unused-vars */
 const fs = require("fs-extra");
 const consola = require("consola");
 const pathLib = require("path");
@@ -35,6 +36,7 @@ const logger = consola.withTag("Auth");
 const nullAdapter = require("./adapters/auth/null");
 const TokenStorage = require("./utils/token-storage");
 const TokenFactory = require("./utils/token-factory");
+/* eslint-enable no-unused-vars */
 
 /**
  * TODO: typedef

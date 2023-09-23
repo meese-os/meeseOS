@@ -40,7 +40,7 @@ import { supportsPassive } from "./utils/dom";
 const isPassive = supportsPassive();
 const touchArg = isPassive ? { passive: true } : false;
 
-/*
+/**
  * Map of available "actions"
  */
 const actionMap = {

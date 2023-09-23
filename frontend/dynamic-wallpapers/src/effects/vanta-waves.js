@@ -28,9 +28,6 @@
  * @licence Simplified BSD License
  */
 
-import WAVES from "vanta/dist/vanta.waves.min";
-import * as THREE from "three";
-
 /**
  * A mapping of the variable names to their relevant information.
  */
@@ -61,62 +58,72 @@ const vantaWaves = (background, options = {}) => {
 	// Initialize the Vanta waves effect
 	console.debug("Initializing Vanta waves effect");
 
-	effect = WAVES({
-		el: background,
-		THREE: THREE,
-		minHeight: 200.00,
-		minWidth: 200.00,
-		scale: 1.0,
-		scaleMobile: 1.0,
-		gyroControls: false,
-		mouseControls: false,
-		mouseEase: false,
-		touchControls: false,
-		camera: {
-			far: 400,
-			fov: 30,
-			near: 0.1,
-		},
-		color: "hsl(225, 40%, 20%)",
-		colorCycleSpeed: 10,
-		forceAnimate: true,
-		hh: 50,
-		hue: 225,
-		lightness: 20,
-		material: {
-			options: {
-				fog: false,
-				wireframe: false,
-			},
-		},
-		saturation: 40,
-		shininess: 35,
-		waveHeight: 20,
-		waveSpeed: 0.25,
-		ww: 50,
-		...settings,
-	});
-
-	// Set the canvas width and height to the screen width and height
-	const canvas = background.querySelector("canvas");
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-	effect.renderer.setSize(canvas.width, canvas.height);
-	effect.resize();
-
 	/**
-	 * Ensures that the canvas will always be the smallest possible
-	 * size that covers the screen.
+	 * Allows us to defer the loading of Three.js until it's needed,
+	 * preventing page blocking upon initial load.
+	 * @link https://dev.to/marcinwosinek/lazy-load-library-in-application-build-with-webpack-5757
 	 */
-	function windowResize() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-		effect.renderer.setSize(canvas.width, canvas.height);
-		effect.resize();
-	}
+	import(/* webpackChunkName: "three-js" */ "three").then(THREE => {
+		import(/* webpackChunkName: "vanta-waves" */ "vanta/dist/vanta.waves.min").then(library => {
+			const WAVES = library.default;
+			effect = WAVES({
+				el: background,
+				THREE: THREE,
+				minHeight: 200.00,
+				minWidth: 200.00,
+				scale: 1.0,
+				scaleMobile: 1.0,
+				gyroControls: false,
+				mouseControls: false,
+				mouseEase: false,
+				touchControls: false,
+				camera: {
+					far: 400,
+					fov: 30,
+					near: 0.1,
+				},
+				color: "hsl(225, 40%, 20%)",
+				colorCycleSpeed: 10,
+				forceAnimate: true,
+				hh: 50,
+				hue: 225,
+				lightness: 20,
+				material: {
+					options: {
+						fog: false,
+						wireframe: false,
+					},
+				},
+				saturation: 40,
+				shininess: 35,
+				waveHeight: 20,
+				waveSpeed: 0.25,
+				ww: 50,
+				...settings,
+			});
 
-	// Add the window resize event listener
-	window.addEventListener("resize", windowResize);
+			// Set the canvas width and height to the screen width and height
+			const canvas = background.querySelector("canvas");
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+			effect.renderer.setSize(canvas.width, canvas.height);
+			effect.resize();
+
+			/**
+			 * Ensures that the canvas will always be the smallest possible
+			 * size that covers the screen.
+			 */
+			function windowResize() {
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+				effect.renderer.setSize(canvas.width, canvas.height);
+				effect.resize();
+			}
+
+			// Add the window resize event listener
+			window.addEventListener("resize", windowResize);
+		});
+	});
 };
 
 /**

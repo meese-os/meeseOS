@@ -78,6 +78,9 @@ class TokenFactoryServiceProvider extends ServiceProvider {
 		this.core.singleton("meeseOS/token-factory", () => this.tokenFactory);
 	}
 
+	/**
+	 * Destroys provider.
+	 */
 	destroy() {
 		super.destroy();
 	}

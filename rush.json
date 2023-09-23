@@ -5,9 +5,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
 
-  // TODO: Set the following in this file somehow
-  // max-install-attempts: 1
-
   /**
    * (Required) This specifies the version of the Rush engine to be used in this repo.
    * Rush's "version selector" feature ensures that the globally installed tool will
@@ -19,7 +16,7 @@
    * path segment in the "$schema" field for all your Rush config files.  This will ensure
    * correct error-underlining and tab-completion for editors such as VS Code.
    */
-  "rushVersion": "5.102.0",
+  "rushVersion": "5.104.0",
 
   /**
    * The next field selects which package manager should be installed and determines its version.
@@ -29,7 +26,7 @@
    * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
-  "pnpmVersion": "8.6.12",
+  "pnpmVersion": "8.7.4",
 
   /**
    * Options that are only used when the PNPM package manager is selected
@@ -94,7 +91,7 @@
      *
      * The default value is false.
      */
-    // "preventManualShrinkwrapChanges": true,
+    "preventManualShrinkwrapChanges": true,
 
     /**
      * If true, then `rush install` will use the PNPM workspaces feature to perform the
@@ -124,7 +121,7 @@
    * LTS schedule: https://nodejs.org/en/about/releases/
    * LTS versions: https://nodejs.org/en/download/releases/
    */
-  "nodeSupportedVersionRange": ">=14.15.0 <15.0.0 || >=16.13.0 <17.0.0",
+  "nodeSupportedVersionRange": ">=16.0.0 <17.0.0",
 
   /**
    * Odd-numbered major versions of Node.js are experimental.  Even-numbered releases
@@ -287,7 +284,7 @@
      * your PR branch, and in this situation "rush change" will also automatically invoke "git fetch"
      * to retrieve the latest activity for the remote master branch.
      */
-    // "url": "https://github.com/microsoft/rush-example",
+     "url": "https://github.com/meeseOS/meeseOS",
     /**
      * The default branch name. This tells "rush change" which remote branch to compare against.
      * The default value is "master"
@@ -297,7 +294,7 @@
      * The default remote. This tells "rush change" which remote to compare against if the remote URL is
      * not set or if a remote matching the provided remote URL is not found.
      */
-    // "defaultRemote": "origin"
+     "defaultRemote": "origin"
   },
 
   /**
@@ -454,135 +451,168 @@
     // }
     {
       "packageName": "@meese-os/cli",
-      "projectFolder": "development/cli"
+      "projectFolder": "development/cli",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/client",
-      "projectFolder": "frontend/client"
+      "projectFolder": "frontend/client",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/common",
-      "projectFolder": "backend/common"
+      "projectFolder": "backend/common",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/cursor-effects",
-      "projectFolder": "frontend/cursor-effects"
+      "projectFolder": "frontend/cursor-effects",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/cyberchef",
-      "projectFolder": "apps/cyberchef"
+      "projectFolder": "apps/cyberchef",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/dialogs",
-      "projectFolder": "frontend/dialogs"
+      "projectFolder": "frontend/dialogs",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/eslint-config",
-      "projectFolder": "development/eslint"
+      "projectFolder": "development/eslint",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/dynamic-wallpapers",
-      "projectFolder": "frontend/dynamic-wallpapers"
+      "projectFolder": "frontend/dynamic-wallpapers",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/event-emitter",
-      "projectFolder": "backend/event-emitter"
+      "projectFolder": "backend/event-emitter",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/filemanager",
-      "projectFolder": "apps/filemanager"
+      "projectFolder": "apps/filemanager",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/games",
-      "projectFolder": "apps/games"
+      "projectFolder": "apps/games",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/gnome-icons",
-      "projectFolder": "frontend/gnome-icons"
+      "projectFolder": "frontend/gnome-icons",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/google-api-provider",
-      "projectFolder": "frontend/google-api-provider"
+      "projectFolder": "frontend/google-api-provider",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/gui",
-      "projectFolder": "frontend/gui"
+      "projectFolder": "frontend/gui",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/image-to-8bit",
-      "projectFolder": "apps/image-to-8bit"
+      "projectFolder": "apps/image-to-8bit",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/old-site",
-      "projectFolder": "apps/old-site"
+      "projectFolder": "apps/old-site",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/panels",
-      "projectFolder": "frontend/panels"
+      "projectFolder": "frontend/panels",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/preview",
-      "projectFolder": "apps/preview"
+      "projectFolder": "apps/preview",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/server",
-      "projectFolder": "backend/server"
+      "projectFolder": "backend/server",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/settings",
-      "projectFolder": "apps/settings"
+      "projectFolder": "apps/settings",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/sounds",
-      "projectFolder": "frontend/sounds"
+      "projectFolder": "frontend/sounds",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/standard-dark-theme",
-      "projectFolder": "frontend/standard-dark-theme"
+      "projectFolder": "frontend/standard-dark-theme",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/standard-theme",
-      "projectFolder": "frontend/standard-theme"
+      "projectFolder": "frontend/standard-theme",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/static-wallpapers",
-      "projectFolder": "frontend/static-wallpapers"
+      "projectFolder": "frontend/static-wallpapers",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/stylelint-config",
-      "projectFolder": "development/stylelint"
+      "projectFolder": "development/stylelint",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/terminal",
-      "projectFolder": "apps/terminal"
+      "projectFolder": "apps/terminal",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/textpad",
-      "projectFolder": "apps/textpad"
+      "projectFolder": "apps/textpad",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/uptime-monitor",
-      "projectFolder": "apps/uptime-monitor"
+      "projectFolder": "apps/uptime-monitor",
+      "shouldPublish": true
     },
     {
-      "packageName": "@meese-os/We10X-icons",
-      "projectFolder": "frontend/We10X-icons"
+      "packageName": "@meese-os/we10x-icons",
+      "projectFolder": "frontend/we10x-icons",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/website",
-      "projectFolder": "website"
+      "projectFolder": "website",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/widgets",
-      "projectFolder": "frontend/widgets"
+      "projectFolder": "frontend/widgets",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/windows8-theme",
-      "projectFolder": "frontend/windows8-theme"
+      "projectFolder": "frontend/windows8-theme",
+      "shouldPublish": true
     },
     {
       "packageName": "@meese-os/wireless-tools-provider",
-      "projectFolder": "backend/wireless-tools-provider"
+      "projectFolder": "backend/wireless-tools-provider",
+      "shouldPublish": true
     }
   ]
 }

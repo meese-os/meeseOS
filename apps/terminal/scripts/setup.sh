@@ -37,7 +37,7 @@ bash ./create-user.sh
 uname_motd=/etc/update-motd.d/10-uname
 if [ -f "$uname_motd" ]; then
   echo "Hiding the 'uname' output from the terminal on SSH login..."
-perl -p -e 's/\nuname -snrvm/\n# uname -snrvm/' "$uname_motd" | sudo tee "$uname_motd"
+  perl -p -e 's/\nuname -snrvm/\n# uname -snrvm/' "$uname_motd" | sudo tee "$uname_motd"
 fi
 
 # Installs some helpful packages used by the terminal app

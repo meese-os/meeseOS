@@ -37,8 +37,7 @@ import { EventEmitter } from "@meese-os/event-emitter";
  */
 export default class PanelItem extends EventEmitter {
 	/**
-	 * Create panel item
-	 *
+	 * Create panel item.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Panel} panel Panel reference
 	 * @param {Object} options Options
@@ -55,14 +54,14 @@ export default class PanelItem extends EventEmitter {
 	}
 
 	/**
-	 * Destroy panel item
+	 * Destroys panel item.
 	 */
 	destroy() {
 		this.emit("destroy", this);
 	}
 
 	/**
-	 * Initializes panel item
+	 * Initializes panel item.
 	 * @param {Object} state State
 	 * @param {Object} actions Actions
 	 * @returns {Object} Bound actions
@@ -86,7 +85,7 @@ export default class PanelItem extends EventEmitter {
 	}
 
 	/**
-	 * Renders the panel item
+	 * Renders the panel item.
 	 * @param {String} name The panel item virtual name
 	 * @param {Object[]} children The panel item children
 	 * @returns {Node} A *virtual* node

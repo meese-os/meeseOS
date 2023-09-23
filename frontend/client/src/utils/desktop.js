@@ -28,10 +28,12 @@
  * @license Simplified BSD License
  */
 
+/* eslint-disable no-unused-vars */
 import logger from "../logger";
 import { supportedMedia } from "./dom";
 import cursorEffects from "@meese-os/cursor-effects";
 import Core from "../core";
+/* eslint-enable no-unused-vars */
 
 const imageDropMimes = [
 	"image/png",

@@ -3,7 +3,12 @@ module.exports = {
 		es6: true,
 	},
 	parserOptions: {
-		ecmaVersion: 2018,
+		ecmaVersion: 11,
+		sourceType: "module",
+		ecmaFeatures: {
+      jsx: true,
+			experimentalObjectRestSpread: true,
+    },
 	},
 	extends: "eslint:recommended",
 	rules: {

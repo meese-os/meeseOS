@@ -134,6 +134,7 @@ class TokenFactory {
 			return false;
 		}
 
+		/* eslint-disable no-async-promise-executor */
 		return new Promise(async (resolve, reject) => {
 			const tokenInStorage = this.storage.find(refreshToken);
 			if (!tokenInStorage) {
@@ -156,6 +157,7 @@ class TokenFactory {
 			this.core.logger.error(error);
 			return false;
 		});
+		/* eslint-enable no-async-promise-executor */
 	}
 }
 

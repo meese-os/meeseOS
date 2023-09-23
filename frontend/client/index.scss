@@ -28,6 +28,7 @@
  * @license Simplified BSD License
  */
 
+/* stylelint-disable */
 @import "./src/styles/variables";
 @import "./src/styles/core";
 @import "./src/styles/window";
@@ -36,3 +37,4 @@
 @import "./src/styles/loading";
 @import "./src/styles/search";
 @import "./src/styles/iconview";
+/* stylelint-enable */

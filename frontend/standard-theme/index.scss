@@ -28,6 +28,7 @@
  * @licence Simplified BSD License
  */
 
+/* stylelint-disable */
 @import "src/variables";
 @import "src/mixins";
 @import "src/core";
@@ -35,3 +36,4 @@
 @import "src/windows";
 @import "src/gui";
 @import "src/animations";
+/* stylelint-enable */

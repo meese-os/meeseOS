@@ -78,6 +78,9 @@ export class GUIServiceProvider {
 		});
 	}
 
+	/**
+	 * Destroys the provider.
+	 */
 	destroy() {
 		const menu = document.getElementById("meeseOS-context-menu");
 		if (menu) {

@@ -28,6 +28,7 @@
  * @licence Simplified BSD License
  */
 
+/* stylelint-disable */
 @import "@meese-os/standard-theme/src/variables";
 @import "src/variables";
 @import "@meese-os/standard-theme/src/mixins";
@@ -36,6 +37,7 @@
 @import "@meese-os/standard-theme/src/animations";
 @import "@meese-os/standard-theme/src/windows";
 @import "@meese-os/standard-theme/src/desktop";
+/* stylelint-enable */
 
 .meeseOS-gui-box-styled {
 	background: #fff;

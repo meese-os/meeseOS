@@ -30,18 +30,20 @@
 
 $base-margin: 1em;
 
-@import "./src/styles/common";
-@import "./src/styles/box";
-@import "./src/styles/button";
-@import "./src/styles/input";
-@import "./src/styles/listview";
-@import "./src/styles/iconview";
-@import "./src/styles/media";
-@import "./src/styles/menu";
-@import "./src/styles/panes";
-@import "./src/styles/progressbar";
-@import "./src/styles/statusbar";
-@import "./src/styles/tabs";
-@import "./src/styles/toolbar";
-@import "./src/styles/iframe";
-@import "./src/styles/expander";
+/* stylelint-disable */
+@import "src/styles/common";
+@import "src/styles/box";
+@import "src/styles/button";
+@import "src/styles/input";
+@import "src/styles/listview";
+@import "src/styles/iconview";
+@import "src/styles/media";
+@import "src/styles/menu";
+@import "src/styles/panes";
+@import "src/styles/progressbar";
+@import "src/styles/statusbar";
+@import "src/styles/tabs";
+@import "src/styles/toolbar";
+@import "src/styles/iframe";
+@import "src/styles/expander";
+/* stylelint-enable */

@@ -18,3 +18,10 @@
 #
 #   //registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
 #
+
+# npmjs.org
+//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
+
+# GitHub Packages
+@meeseOS:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_AUTH_TOKEN}

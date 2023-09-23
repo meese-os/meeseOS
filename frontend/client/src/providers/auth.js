@@ -93,6 +93,7 @@ export default class AuthServiceProvider extends ServiceProvider {
 	}
 
 	/**
+	 * Creates the authentication contract.
 	 * @returns {AuthProviderContract}
 	 */
 	createAuthContract() {

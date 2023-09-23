@@ -62,7 +62,7 @@
 		font-size: 0.925em;
 		padding-right: 1em;
 
-		&:before {
+		&::before {
 			content: "— ";
 		}
 	}

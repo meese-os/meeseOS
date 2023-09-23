@@ -39,7 +39,7 @@
 		display: block;
 	}
 
-	&:not([data-moving="true"]):not([data-resizing="true"]) {
+	&:not([data-moving="true"], [data-resizing="true"]) {
 		transition: all ease-in-out 0.1s;
 	}
 }

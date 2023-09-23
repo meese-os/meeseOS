@@ -38,10 +38,7 @@
 .meeseOS-root.login {
 	&::after {
 		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
+		inset: 0;
 		content: "";
 		z-index: 1000;
 		background:
@@ -230,10 +227,6 @@
 	}
 
 	::placeholder {
-		@include placeholder-effect;
-	}
-
-	:placeholder {
 		@include placeholder-effect;
 	}
 }

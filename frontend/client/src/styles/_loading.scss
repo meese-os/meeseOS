@@ -6,7 +6,8 @@ $min-blink-opacity: 0.1;
 $loading-offset: 25px;
 
 @font-face {
-	font-family: Terminal;
+	// https://web.dev/optimize-cls/#web-fonts
+	font-family: Terminal, monospace;
 	src: url("./src/fonts/_terminal.ttf") format("truetype");
 
 	// https://web.dev/font-display/
@@ -34,12 +35,12 @@ $loading-offset: 25px;
 		font-size: 10px;
 		line-height: 10px;
 
-		@media (max-width: 800px) {
+		@media (width <= 800px) {
 			font-size: 6.5px;
 			line-height: 6.5px;
 		}
 
-		@media (max-width: 600px) {
+		@media (width <= 600px) {
 			font-size: 5px;
 			line-height: 5px;
 		}

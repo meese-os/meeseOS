@@ -28,8 +28,12 @@
  * @licence Simplified BSD License
  */
 
+@use "sass:color";
+
+/* stylelint-disable */
 @import "@meese-os/standard-theme";
 @import "src/variables";
+/* stylelint-enable */
 
 ::-webkit-scrollbar {
 	width: 1.5em;
@@ -77,7 +81,7 @@
 	}
 
 	&:hover > div {
-		background-color: lighten($window-background, 10%);
+		background-color: color.adjust($color: $window-background, $lightness: 10%);
 	}
 
 	&[data-action="maximize"] > div {
@@ -99,7 +103,7 @@
 		}
 
 		&:hover > div {
-			background-color: lighten(#c75050, 10%);
+			background-color: color.adjust($color: #c75050, $lightness: 10%);
 		}
 	}
 }
@@ -120,7 +124,7 @@
 
 .meeseOS-window-icon {
 	padding: $base-margin / 2;
-	margin-right: $base-margin /  2;
+	margin-right: $base-margin / 2;
 }
 
 .meeseOS-gui-menu {

@@ -32,7 +32,7 @@ import { EventEmitter } from "@meese-os/event-emitter";
 import PanelItem from "./panel-item";
 
 /**
- * Panel
+ * Panel.
  *
  * @desc Base Panel Class
  */
@@ -68,12 +68,10 @@ export default class Panel extends EventEmitter {
 	}
 
 	/**
-	 * Destroys the panel
+	 * Destroys the panel.
 	 */
 	destroy() {
-		if (this.destroyed) {
-			return;
-		}
+		if (this.destroyed) return;
 
 		this.items = this.items.filter((item) => {
 			try {
@@ -94,12 +92,10 @@ export default class Panel extends EventEmitter {
 	}
 
 	/**
-	 * Initializes the panel
+	 * Initializes the panel.
 	 */
 	init() {
-		if (this.inited) {
-			return;
-		}
+		if (this.inited) return;
 		this.destroyed = false;
 		this.inited = true;
 
@@ -113,9 +109,7 @@ export default class Panel extends EventEmitter {
 				this.core.config("desktop.lock") ||
 				this.core.config("desktop.disablePanelContextMenu");
 
-			if (disabled) {
-				return;
-			}
+			if (disabled) return;
 
 			this.core.make("meeseOS/contextmenu").show({
 				position: ev,
@@ -136,6 +130,7 @@ export default class Panel extends EventEmitter {
 				],
 			});
 		});
+
 		this.$element.setAttribute("data-position", this.options.position);
 		this.$element.setAttribute("data-ontop", String(this.options.ontop));
 
@@ -147,7 +142,7 @@ export default class Panel extends EventEmitter {
 	}
 
 	/**
-	 * Add an item to the panel
+	 * Add an item to the panel.
 	 * @param {PanelItem} item The panel item instance
 	 */
 	addItem(item) {

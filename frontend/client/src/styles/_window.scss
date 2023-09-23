@@ -169,10 +169,7 @@ $direction-list: "nw" "sw" "ne" "se" "n" "s" "w" "e";
 	&::after {
 		content: "";
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		inset: 0;
 		z-index: 9999999999;
 		display: none;
 	}

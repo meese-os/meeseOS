@@ -28,10 +28,12 @@
  * @licence Simplified BSD License
  */
 
+/* eslint-disable no-unused-vars */
 const express_session = require("express-session");
 const express_ws = require("express-ws");
 const Auth = require("../auth");
 const TokenFactory = require("./token-factory");
+/* eslint-enable no-unused-vars */
 
 /**
  * Converts an input argument to configuration entry.

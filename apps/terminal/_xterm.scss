@@ -32,7 +32,7 @@
  */
 
 /**
- *  Default styles for xterm.js
+ * Default styles for xterm.js
  */
 
 .xterm {
@@ -53,17 +53,17 @@
 	position: absolute;
 	top: 0;
 	/**
-     * The z-index of the helpers must be higher than the canvases in order for
-     * IMEs to appear on top.
-     */
+	 * The z-index of the helpers must be higher than the canvases in order for
+	 * IMEs to appear on top.
+	 */
 	z-index: 10;
 }
 
 .xterm .xterm-helper-textarea {
 	/*
-     * HACK: to fix IE's blinking cursor
-     * Move textarea out of the screen to the far left, so that the cursor is not visible.
-     */
+	 * HACK: to fix IE's blinking cursor
+	 * Move textarea out of the screen to the far left, so that the cursor is not visible.
+	 */
 	position: absolute;
 	opacity: 0;
 	left: -9999em;

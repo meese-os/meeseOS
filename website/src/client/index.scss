@@ -32,12 +32,12 @@
 // This is where you add all your dependent styles and override any
 // MeeseOS defaults.
 
-@import "~typeface-roboto/index.css";
-@import "~@meese-os/client/dist/main.css";
-@import "~@meese-os/gui/dist/main.css";
-@import "~@meese-os/dialogs/dist/main.css";
-@import "~@meese-os/panels/dist/main.css";
-@import "~@meese-os/widgets/dist/main.css";
+@import url("~typeface-roboto/index.css");
+@import url("~@meese-os/client/dist/main.css");
+@import url("~@meese-os/gui/dist/main.css");
+@import url("~@meese-os/dialogs/dist/main.css");
+@import url("~@meese-os/panels/dist/main.css");
+@import url("~@meese-os/widgets/dist/main.css");
 
 body,
 html {
