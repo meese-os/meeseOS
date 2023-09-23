@@ -44,7 +44,7 @@ let applicationCount = 0;
 const getSettingsKey = (metadata) => "meeseOS/application/" + metadata.name;
 
 /**
- * Application Options
+ * Application Options.
  *
  * @typedef {Object} ApplicationOptions
  * @property {Object} [settings] Initial settings
@@ -54,7 +54,7 @@ const getSettingsKey = (metadata) => "meeseOS/application/" + metadata.name;
  */
 
 /**
- * Application Data
+ * Application Data.
  *
  * @typedef {Object} ApplicationData
  * @property {{foo: *}} args Launch arguments
@@ -63,7 +63,7 @@ const getSettingsKey = (metadata) => "meeseOS/application/" + metadata.name;
  */
 
 /**
- * Application Session
+ * Application Session.
  *
  * @typedef {Object} ApplicationSession
  * @property {{foo: string}} args
@@ -72,11 +72,11 @@ const getSettingsKey = (metadata) => "meeseOS/application/" + metadata.name;
  */
 
 /**
- * Base class for an Application
+ * Base class for an Application.
  */
 export default class Application extends EventEmitter {
 	/**
-	 * Create application
+	 * Create application.
 	 *
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {ApplicationData} data Application data
@@ -102,27 +102,27 @@ export default class Application extends EventEmitter {
 		super(name);
 
 		/**
-		 * The Application ID
+		 * The Application ID.
 		 * @type {Number}
 		 * @readonly
 		 */
 		this.pid = applicationCount;
 
 		/**
-		 * Core instance reference
+		 * Core instance reference.
 		 * @type {Core}
 		 * @readonly
 		 */
 		this.core = core;
 
 		/**
-		 * Application arguments
+		 * Application arguments.
 		 * @type {{foo: *}}
 		 */
 		this.args = data.args;
 
 		/**
-		 * Application options
+		 * Application options.
 		 * @type {ApplicationOptions}
 		 */
 		this.options = {
@@ -132,38 +132,38 @@ export default class Application extends EventEmitter {
 		};
 
 		/**
-		 * Application metadata
+		 * Application metadata.
 		 * @type {PackageMetadata}
 		 * @readonly
 		 */
 		this.metadata = data.metadata;
 
 		/**
-		 * Window list
+		 * Window list.
 		 * @type {Window[]}
 		 */
 		this.windows = [];
 
 		/**
-		 * Worker instances
+		 * Worker instances.
 		 * @type {Worker[]}
 		 */
 		this.workers = [];
 
 		/**
-		 * Options for internal fetch/requests
+		 * Options for internal fetch/requests.
 		 * @type {Object}
 		 */
 		this.requestOptions = {};
 
 		/**
-		 * The application destruction state
+		 * The application destruction state.
 		 * @type {Boolean}
 		 */
 		this.destroyed = false;
 
 		/**
-		 * Application settings
+		 * Application settings.
 		 * @type {{foo: *}}
 		 */
 		this.settings = core
@@ -171,14 +171,14 @@ export default class Application extends EventEmitter {
 			.get(getSettingsKey(this.metadata), null, defaultSettings);
 
 		/**
-		 * Application started time
+		 * Application started time.
 		 * @type {Date}
 		 * @readonly
 		 */
 		this.started = new Date();
 
 		/**
-		 * Application WebSockets
+		 * Application WebSockets.
 		 * @type {Websocket[]}
 		 */
 		this.sockets = [];
@@ -190,7 +190,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Destroy application
+	 * Destroy application.
 	 */
 	destroy(remove = true) {
 		if (this.destroyed) return;
@@ -224,7 +224,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Re-launch this application
+	 * Re-launch this application.
 	 */
 	relaunch() {
 		const windows = this.windows.map((w) => w.getSession());
@@ -245,7 +245,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Gets a URI to a resource for this application
+	 * Gets a URI to a resource for this application.
 	 *
 	 * If given path is an URI it will just return itself.
 	 *
@@ -295,7 +295,7 @@ export default class Application extends EventEmitter {
 	 * Sends a message over Websocket via the core connection.
 	 *
 	 * This does not create a new connection, but rather uses the core connection.
-	 * For subscribing to messages from the server use the 'ws:message' event
+	 * For subscribing to messages from the server use the 'ws:message' event.
 	 *
 	 * @param {*} ...args Arguments to pass to message
 	 */
@@ -308,7 +308,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Creates a new Worker
+	 * Creates a new Worker.
 	 * @param {String} filename Worker filename
 	 * @param {Object} [options] Worker options
 	 * @returns {Worker}
@@ -326,7 +326,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Create a new window belonging to this application
+	 * Create a new window belonging to this application.
 	 * @param {WindowOptions} [options={}] Window options
 	 * @returns {Window}
 	 */
@@ -388,7 +388,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Removes window(s) based on given filter
+	 * Removes window(s) based on given filter.
 	 * @param {Function} filter Filter function
 	 */
 	removeWindow(filter) {
@@ -413,7 +413,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Saves settings
+	 * Saves settings.
 	 * @returns {Promise<Boolean>}
 	 */
 	saveSettings() {
@@ -426,7 +426,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Get a list of all running applications
+	 * Get a list of all running applications.
 	 * @returns {Application[]}
 	 */
 	static getApplications() {
@@ -434,7 +434,7 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
-	 * Kills all running applications
+	 * Kills all running applications.
 	 */
 	static destroyAll() {
 		applications.forEach((proc) => {

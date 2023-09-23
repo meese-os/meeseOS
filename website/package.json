@@ -22,7 +22,7 @@
     "make:provider": "meese-cli make:provider",
     "deploy": "NODE_ENV=production npm run serve",
     "publish:dry": "rush publish --include-all",
-    "publish": "rush publish --publish --include-all --set-access-level public"
+    "publish": "rush --debug publish --publish --include-all --set-access-level public"
   },
   "author": "Aaron Meese <aaron@meese.dev>",
   "devDependencies": {

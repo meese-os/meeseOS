@@ -31,6 +31,23 @@
 	</a>
 </p>
 
+<p align="center">
+  <a href="https://codeclimate.com/github/meeseOS/meese-cli/test_coverage">
+    <img
+      src="https://api.codeclimate.com/v1/badges/074b81c78fd887a7def5/test_coverage"
+      title="Test Coverage on Code Climate"
+      alt="Test Coverage on Code Climate"
+    />
+  </a>
+  <!--<a href="https://codeclimate.com/github/os-js/meese-cli/maintainability">
+    <img
+      src="https://api.codeclimate.com/v1/badges/074b81c78fd887a7def5/maintainability"
+      title="Maintainability on Code Climate"
+			alt="Maintainability on Code Climate"
+    />
+  </a>-->
+</p>
+
 This redesign of my website would not be possible without the _incredible_ work by [Anders Evenrud](https://github.com/andersevenrud) on [OS.js](https://github.com/os-js/OS.js). As you can see in the majority of the files, this monorepo is a modified amalgamation of the OS.js source code.
 
 ## Setup
