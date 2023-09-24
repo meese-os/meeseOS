@@ -8,16 +8,16 @@
 <br />
 
 <p align="center">
-  <a href="https://deepsource.io/gh/meeseOS/meeseOS/?ref=repository-badge">
+  <a href="https://deepsource.io/gh/meese-os/meeseOS/?ref=repository-badge">
     <img
-      src="https://deepsource.io/gh/meeseOS/meeseOS.svg/?label=active+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
+      src="https://deepsource.io/gh/meese-os/meeseOS.svg/?label=active+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
       title="Active issues on DeepSource"
       alt="Active issues on DeepSource"
     />
   </a>
-  <a href="https://deepsource.io/gh/meeseOS/meeseOS/?ref=repository-badge">
+  <a href="https://deepsource.io/gh/meese-os/meeseOS/?ref=repository-badge">
     <img
-      src="https://deepsource.io/gh/meeseOS/meeseOS.svg/?label=resolved+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
+      src="https://deepsource.io/gh/meese-os/meeseOS.svg/?label=resolved+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
       title="Resolved issues on DeepSource"
 			alt="Resolved issues on DeepSource"
     />
@@ -64,7 +64,7 @@ This redesign of my website would not be possible without the _incredible_ work 
 
 ## Deploy
 
-- `bash ./deploy.sh`
+- `bash ./scripts/deploy.sh`
   - Can use `--no-reset` for local deployment testing, so you don't lose your changes
 - Running `pm2 monit` will allow you to track when the server has finished initializing
 
