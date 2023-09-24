@@ -25,12 +25,8 @@ jobs:
     - name: Detect Version Changes
       run: |
         CHANGED_DIRS=""
-        for DIR in $(find . -name "package.json" -type f); do
-          OLD_VERSION=$(git show HEAD^:$DIR | jq -r '.version')
-          NEW_VERSION=$(git show HEAD:$DIR | jq -r '.version')
-          if [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
-            CHANGED_DIRS="$CHANGED_DIRS $(dirname $DIR)"
-          fi
+        for DIR in $(git diff --name-only HEAD^ HEAD | grep 'package.json' | xargs -I{} dirname {} | grep -v '__mocks__'); do
+          CHANGED_DIRS="$CHANGED_DIRS $DIR"
         done
         echo "Changed directories with package.json version changes: $CHANGED_DIRS"
         echo "::set-output name=changed_dirs::$CHANGED_DIRS"
