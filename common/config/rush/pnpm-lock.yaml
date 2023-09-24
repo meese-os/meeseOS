@@ -1144,8 +1144,8 @@ importers:
         specifier: workspace:*
         version: link:../../backend/common
       hexells:
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^1.2.1
+        version: 1.2.1
       three:
         specifier: ^0.152.2
         version: 0.152.2
@@ -9228,11 +9228,11 @@ packages:
     hasBin: true
     dev: true
 
-  /hexells@1.2.0:
-    resolution: {integrity: sha512-vFEw1ub9BrYaQ/mmEqZM6DqqgpQln8zzCso6kt4u3/O64veULHwQUU57wvJCn0uBrXeqXZZivR6QLr1jTNQHXw==}
+  /hexells@1.2.1:
+    resolution: {integrity: sha512-t9iBfAmTIma8NYEP3KSliVpIyz6UKT8azDOTXfkP2KgkI6Og09hLCe4Q4MccVur9b4GeKX3tYRcukd3QYNX+dQ==}
     dependencies:
       dat.gui: 0.7.9
-      twgl.js: 4.24.0
+      twgl.js: 5.5.3
       upng-js: 2.1.0
     dev: false
 
@@ -14064,8 +14064,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /twgl.js@4.24.0:
-    resolution: {integrity: sha512-JGVTxuV9dqaBmajXyvuZIlhCHrTbIaoNjQvtdoLHyK74OtbmNwZUj6rfdp+pz9htitI/tVxiVQ2nuw+KmD29vg==}
+  /twgl.js@5.5.3:
+    resolution: {integrity: sha512-lUrWxXmEURxQphwu4hMkudIThjhbrej3WUKH2qdTifixuO1FxQRLgxJVQ81rTDw9CBoxx4m4iIEOfgCf02Ip1Q==}
     dev: false
 
   /tx2@1.0.5:
