@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Server",
   "scripts": {
     "build": "echo \"There is no build command for server\" && exit 0",
