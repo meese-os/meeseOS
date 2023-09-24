@@ -93,7 +93,7 @@ export class GUIServiceProvider {
 	start() {
 		const callback = (ev) => {
 			const menu = document.getElementById("meeseOS-context-menu");
-			const hit =  menu?.contains(ev.target);
+			const hit = menu?.contains(ev.target);
 
 			if (!hit && this.contextmenu) {
 				this.contextmenu.hide();

@@ -40,7 +40,7 @@ export const divertDropAction = (browser, virtual) =>
 	(ev, data, files) => {
 		if (files.length) {
 			browser(files);
-		} else if ( data?.path && data.filename) {
+		} else if (data?.path && data.filename) {
 			virtual(data);
 		}
 	};

@@ -301,10 +301,8 @@ export default class Desktop extends EventEmitter {
 			}
 		};
 
-		const isWithinContext = (target) =>
-			 this.keyboardContext?.contains(target);
-
-		const isWithinWindow = (w, target) =>  w?.$element.contains(target);
+		const isWithinContext = (target) => this.keyboardContext?.contains(target);
+		const isWithinWindow = (w, target) => w?.$element.contains(target);
 
 		const isWithin = (w, target) =>
 			isWithinWindow(w, target) || isWithinContext(target);
@@ -551,7 +549,7 @@ export default class Desktop extends EventEmitter {
 		]);
 
 		this.$theme.forEach((el) => {
-			if ( el?.parentNode) {
+			if (el?.parentNode) {
 				el.remove();
 			}
 		});
@@ -565,7 +563,7 @@ export default class Desktop extends EventEmitter {
 	 */
 	_removeIcons() {
 		this.$icons.forEach((el) => {
-			if ( el?.parentNode) {
+			if (el?.parentNode) {
 				el.remove();
 			}
 		});
