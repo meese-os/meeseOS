@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/website",
-  "version": "1.0.3",
+  "version": "99.99.99",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
