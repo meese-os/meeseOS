@@ -25,7 +25,8 @@ jobs:
     - name: Detect Version Changes
       run: |
         CHANGED_DIRS=""
-        for DIR in $(git diff --name-only HEAD^ HEAD | grep 'package.json' | xargs -I{} dirname {} | grep -v '__mocks__'); do
+        PREVIOUS_COMMIT=$(git log -n 1 --skip=1 --pretty=format:"%H")
+        for DIR in $(git diff --name-only $PREVIOUS_COMMIT HEAD | grep 'package.json' | xargs -I{} dirname {} | grep -v '__mocks__'); do
           CHANGED_DIRS="$CHANGED_DIRS $DIR"
         done
         echo "Changed directories with package.json version changes: $CHANGED_DIRS"
