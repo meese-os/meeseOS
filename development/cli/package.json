@@ -1,13 +1,13 @@
 {
   "name": "@meese-os/cli",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "meeseOS CLI",
   "scripts": {
     "build": "echo \"There is no build command for cli\" && exit 0",
-    "test": "npm run eslint && npm run jest",
-    "jest": "jest",
-    "coverage": "jest --coverage",
     "eslint": "eslint index.js src/**/*.js bin/*.js",
+    "jest": "jest",
+    "test": "npm run eslint && npm run jest",
+    "coverage": "jest --coverage",
     "prepublishOnly": "npm run test"
   },
   "license": "BSD-2-Clause",

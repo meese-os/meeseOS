@@ -82,13 +82,26 @@ To monitor the logs from your process, run `pm2 monit`.
 
 ## Development
 
+### Actions
+
 To run GitHub Actions locally, do the following:
+
+#### Linux
 
 1. `curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash`
 2. `sudo ./bin/act -s GITHUB_TOKEN=ENTER_YOUR_PAT_HERE`
 3. Select "Medium" as the image size
 
-## Development
+#### Windows
+
+1. `winget install nektos.act`
+2. Open a new terminal
+3. Ensure that Docker Desktop is running
+4. `docker pull catthehacker/ubuntu:act-latest`
+5. `act --pull=false -s GITHUB_TOKEN=ENTER_YOUR_PAT_HERE`
+6. Select "Medium" as the image size
+
+### Publishing
 
 To publish changes to the NPM registry, run `rush --debug publish --publish --include-all --set-access-level public`. To publish changes to the GitHub registry instead, go into the `common/config/rush/.npmrc-publish` file and uncomment the GitHub Packages line.
 
