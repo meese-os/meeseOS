@@ -23,16 +23,19 @@ jobs:
     - name: Detect Version Changes
       run: |
         CHANGED_DIRS=""
-        for DIR in $(git diff --name-only HEAD^ -- | grep 'package.json' | xargs -I{} dirname {} | grep -v '__mocks__'); do
-          # Get the old version before making any changes
-          OLD_PACKAGE_VERSION=$(git show HEAD:$DIR/package.json | jq -r .version)
-          # Get the current version
-          CURRENT_PACKAGE_VERSION=$(jq -r .version $DIR/package.json)
+        for FILE in $(git diff --name-only HEAD^ HEAD); do
+          DIR=$(dirname "$FILE")
+          if [ -f "$FILE" ] && [ "$(basename "$FILE")" = "package.json" ] && [[ ! "$DIR" =~ "__mocks__" ]]; then
+            # Get the old version before making any changes
+            OLD_PACKAGE_VERSION=$(git show HEAD^:"$FILE" | jq -r .version)
+            # Get the current version
+            CURRENT_PACKAGE_VERSION=$(jq -r .version "$FILE")
 
-          echo "Package version: $CURRENT_PACKAGE_VERSION; old version: $OLD_PACKAGE_VERSION"
+            echo "Package version: $CURRENT_PACKAGE_VERSION; old version: $OLD_PACKAGE_VERSION"
 
-          if [ "$CURRENT_PACKAGE_VERSION" != "$OLD_PACKAGE_VERSION" ]; then
-            CHANGED_DIRS="$CHANGED_DIRS $DIR"
+            if [ "$CURRENT_PACKAGE_VERSION" != "$OLD_PACKAGE_VERSION" ]; then
+              CHANGED_DIRS="$CHANGED_DIRS $DIR"
+            fi
           fi
         done
 
