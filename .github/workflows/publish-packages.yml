@@ -1,0 +1,57 @@
+name: Publish Packages on Version Change
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'pnpm'
+        cache-dependency-path: 'common/config/rush/pnpm-lock.json'
+
+    - name: Detect Version Changes
+      run: |
+        CHANGED_DIRS=""
+        for DIR in $(find . -name "package.json" -type f); do
+          OLD_VERSION=$(git show HEAD^:$DIR | jq -r '.version')
+          NEW_VERSION=$(git show HEAD:$DIR | jq -r '.version')
+          if [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
+            CHANGED_DIRS="$CHANGED_DIRS $(dirname $DIR)"
+          fi
+        done
+        echo "Changed directories with package.json version changes: $CHANGED_DIRS"
+        echo "::set-output name=changed_dirs::$CHANGED_DIRS"
+
+    - name: Publish to GitHub Package Registry
+      run: |
+        CHANGED_DIRS="${{ steps.detect.outputs.changed_dirs }}"
+        for DIR in $CHANGED_DIRS; do
+          echo "Publishing packages in $DIR to GitHub Package Registry..."
+          (cd $DIR && npm publish  --dry-run --registry https://npm.pkg.github.com)
+        done
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
+
+    - name: Publish to npmjs Package Registry
+      run: |
+        CHANGED_DIRS="${{ steps.detect.outputs.changed_dirs }}"
+        for DIR in $CHANGED_DIRS; do
+          echo "Publishing packages in $DIR to npmjs Package Registry..."
+          (cd $DIR && npm publish  --dry-run --registry https://registry.npmjs.org/)
+        done
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
