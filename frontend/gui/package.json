@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/gui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS GUI",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
@@ -12,8 +12,8 @@
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build && npm run build:esm"
   },
-	"license": "BSD-2-Clause",
-	"module": "dist/esm.js",
+  "license": "BSD-2-Clause",
+  "module": "dist/esm.js",
   "main": "dist/main.js",
   "style": "dist/main.css",
   "files": [
@@ -113,5 +113,18 @@
         }
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "frontend/gui"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "gui"
+  ]
 }

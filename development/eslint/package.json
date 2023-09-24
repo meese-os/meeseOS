@@ -1,15 +1,30 @@
 {
   "name": "@meese-os/eslint-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS ESLint configuration",
   "scripts": {
     "test": "echo \"eslint-config has no tests\" && exit 0",
     "build": "echo \"eslint-config does not need to be built\"",
-		"eslint": ""
+    "eslint": ""
   },
-	"license": "BSD-3-Clause",
-	"main": "index.js",
+  "license": "BSD-3-Clause",
+  "main": "index.js",
   "dependencies": {
     "eslint": "^8.48.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "development/eslint"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "lint",
+    "eslint",
+    "eslint-config"
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/windows8-theme",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Windows 8 Style Theme",
   "files": [
     "dist/",
@@ -15,7 +15,7 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
-	"license": "BSD-2-Clause",
+  "license": "BSD-2-Clause",
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@meese-os/stylelint-config": "workspace:*",
@@ -63,5 +63,21 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "frontend/windows8-theme"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "theme",
+    "windows",
+    "windows8",
+    "windows8-theme"
+  ]
 }

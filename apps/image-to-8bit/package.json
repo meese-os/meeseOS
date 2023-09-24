@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/image-to-8bit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MeeseOS Image to 8bit application",
   "scripts": {
     "eslint": "eslint *.js",
@@ -9,7 +9,7 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && npm run build"
   },
-	"license": "MIT",
+  "license": "MIT",
   "files": [
     "dist/",
     "metadata.json"
@@ -47,5 +47,20 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "apps/image-to-8bit"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "app",
+    "image",
+    "8bit"
+  ]
 }

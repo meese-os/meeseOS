@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/static-wallpapers",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Static Wallpapers",
   "scripts": {
     "test": "npm run eslint",
@@ -9,8 +9,8 @@
     "prepublishOnly": "rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build",
     "eslint": ""
   },
-	"license": "BSD-3-Clause",
-	"files": [
+  "license": "BSD-3-Clause",
+  "files": [
     "dist/",
     "metadata.json"
   ],
@@ -22,5 +22,19 @@
   "dependencies": {},
   "meeseOS": {
     "type": "package"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "frontend/static-wallpapers"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "wallpaper",
+    "wallpapers"
+  ]
 }

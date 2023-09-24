@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/common",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Common Modules",
   "scripts": {
     "eslint": "eslint index.js src/**/*.js",
@@ -9,8 +9,8 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
-	"license": "BSD-2-Clause",
-	"main": "dist/main.js",
+  "license": "BSD-2-Clause",
+  "main": "dist/main.js",
   "module": "dist/main.js",
   "typings": "index.d.ts",
   "files": [
@@ -91,5 +91,20 @@
         "name": "./src/esdoc.js"
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "backend/common"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "common",
+    "common modules",
+    "types"
+  ]
 }

@@ -1,19 +1,19 @@
 {
   "name": "@meese-os/widgets",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Widgets",
   "main": "dist/main.js",
   "module": "dist/main.js",
   "style": "dist/main.scss",
   "scripts": {
-		"test": "npm run eslint && npm run stylelint",
+    "test": "npm run eslint && npm run stylelint",
     "eslint": "eslint index.js src/**/*.js",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && npm run stylelint && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
-	"license": "BSD-3-Clause",
+  "license": "BSD-3-Clause",
   "files": [
     "dist/main.js",
     "dist/main.js.map",
@@ -99,5 +99,18 @@
         }
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "frontend/widgets"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "widgets"
+  ]
 }

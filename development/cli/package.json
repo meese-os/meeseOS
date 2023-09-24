@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS CLI",
   "scripts": {
     "build": "echo \"There is no build command for cli\" && exit 0",
@@ -10,8 +10,8 @@
     "eslint": "eslint index.js src/**/*.js bin/*.js",
     "prepublishOnly": "npm run test"
   },
-	"license": "BSD-2-Clause",
-	"main": "index.js",
+  "license": "BSD-2-Clause",
+  "main": "index.js",
   "files": [
     "bin",
     "src",
@@ -68,5 +68,18 @@
       "src/tasks/watch.js",
       "/node_modules/"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "development/cli"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "cli"
+  ]
 }

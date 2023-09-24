@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/event-emitter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple event emitter",
   "scripts": {
     "test": "npm run eslint && npm run jest",
@@ -11,8 +11,8 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run test && NODE_ENV=production npm run build"
   },
-	"license": "BSD-2-Clause",
-	"main": "dist/main.js",
+  "license": "BSD-2-Clause",
+  "main": "dist/main.js",
   "typings": "index.d.ts",
   "files": [
     "dist/",
@@ -90,5 +90,20 @@
         "name": "esdoc-publish-html-plugin"
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "backend/event-emitter"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "event",
+    "emitter",
+    "event emitter"
+  ]
 }

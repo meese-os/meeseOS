@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/sounds",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Sounds",
   "scripts": {
     "test": "npm run eslint",
@@ -9,8 +9,8 @@
     "prepublishOnly": "rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build",
     "eslint": ""
   },
-	"license": "BSD-2-Clause",
-	"files": [
+  "license": "BSD-2-Clause",
+  "files": [
     "dist/",
     "metadata.json"
   ],
@@ -22,5 +22,18 @@
   "dependencies": {},
   "meeseOS": {
     "type": "package"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "frontend/sounds"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "sounds"
+  ]
 }

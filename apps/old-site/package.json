@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/old-site",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Old aaronmeese.com design",
   "scripts": {
     "eslint": "eslint *.js",
@@ -10,7 +10,7 @@
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run eslint && npm run stylelint && rd /s /q dist>nul 2>&1|echo.>nul && npm run build --quiet-deprecation-warnings"
   },
-	"license": "BSD-3-Clause",
+  "license": "BSD-3-Clause",
   "files": [
     "dist/",
     "server.js",
@@ -81,5 +81,19 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "apps/old-site"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "app",
+    "website"
+  ]
 }

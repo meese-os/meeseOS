@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/games",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
@@ -9,7 +9,7 @@
     "stylelint": "stylelint index.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && npm run build"
   },
-	"license": "BSD-3-Clause",
+  "license": "BSD-3-Clause",
   "files": [
     "dist/",
     "metadata.json"
@@ -63,5 +63,19 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "apps/games"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "app",
+    "games"
+  ]
 }

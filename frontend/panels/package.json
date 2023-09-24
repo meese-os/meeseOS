@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/panels",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Panels",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
@@ -10,11 +10,11 @@
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
-	"license": "BSD-2-Clause",
-	"main": "dist/main.js",
+  "license": "BSD-2-Clause",
+  "main": "dist/main.js",
   "module": "dist/main.js",
   "style": "dist/main.css",
-	"files": [
+  "files": [
     "dist/main.js",
     "dist/main.js.map",
     "dist/main.css",
@@ -101,5 +101,18 @@
         }
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "frontend/panels"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "panels"
+  ]
 }

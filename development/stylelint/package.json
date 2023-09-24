@@ -1,15 +1,31 @@
 {
   "name": "@meese-os/stylelint-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Stylelint configuration",
   "scripts": {
     "test": "echo \"stylelint-config has no tests\" && exit 0",
     "build": "echo \"stylelint-config does not need to be built\"",
     "eslint": ""
   },
-	"license": "BSD-3-Clause",
-	"main": "index.js",
+  "license": "BSD-3-Clause",
+  "main": "index.js",
   "dependencies": {
     "stylelint": "^15.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "development/stylelint"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "style",
+		"lint",
+    "stylelint",
+    "stylelint-config"
+  ]
 }

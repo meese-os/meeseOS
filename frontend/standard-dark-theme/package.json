@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/standard-dark-theme",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS Standard Dark Theme",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
@@ -10,8 +10,8 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
-	"license": "BSD-2-Clause",
-	"files": [
+  "license": "BSD-2-Clause",
+  "files": [
     "dist/",
     "metadata.json",
     "README.md"
@@ -63,5 +63,22 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "frontend/standard-dark-theme"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "theme",
+    "standard",
+    "standard theme",
+    "dark",
+    "dark theme"
+  ]
 }

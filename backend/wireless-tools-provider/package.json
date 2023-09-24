@@ -1,13 +1,13 @@
 {
   "name": "@meese-os/wireless-tools-provider",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS wireless-tools Provider",
   "files": [
     "dist/",
     "src/",
     "README.md"
   ],
-	"license": "BSD-2-Clause",
+  "license": "BSD-2-Clause",
   "main": "dist/main.js",
   "scripts": {
     "test": "npm run eslint",
@@ -37,5 +37,19 @@
       "sourceType": "module"
     },
     "extends": "@meese-os/eslint-config"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "backend/wireless-tools-provider"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "wireless",
+    "wireless-tools"
+  ]
 }

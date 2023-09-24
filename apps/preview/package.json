@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/preview",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MeeseOS Preview Application",
   "scripts": {
     "eslint": "eslint *.js",
@@ -9,7 +9,7 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
-	"license": "BSD-2-Clause",
+  "license": "BSD-2-Clause",
   "files": [
     "dist/",
     "metadata.json"
@@ -58,5 +58,20 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "apps/preview"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "app",
+    "images",
+    "preview"
+  ]
 }
