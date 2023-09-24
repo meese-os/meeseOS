@@ -148,7 +148,7 @@ class Auth {
 			const refreshTokenUser =
 			  await this.tokenFactory.refreshToAccessToken(refreshToken);
 
-			if (refreshTokenUser && refreshTokenUser.accessToken) {
+			if (refreshTokenUser?.accessToken) {
 				result.username = refreshTokenUser.username;
 				result.groups = refreshTokenUser.groups;
 				result.accessToken = refreshTokenUser.accessToken;

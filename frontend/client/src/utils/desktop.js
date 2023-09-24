@@ -48,7 +48,7 @@ const imageDropMimes = [
  * @param {Object} data
  * @returns {Boolean}
  */
-export const validVfsDrop = (data) => data && data.path;
+export const validVfsDrop = (data) => data?.path;
 
 /**
  * Check if droppable data contains an image.
