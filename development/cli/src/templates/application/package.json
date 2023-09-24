@@ -6,7 +6,7 @@
     "watch": "webpack --watch",
     "eslint": "eslint index.js server.js",
     "stylelint": "stylelint index.scss --fix --quiet-deprecation-warnings",
-    "prepublishOnly": "npm run test && rm ./dist/* && npm run build"
+    "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && npm run build"
   },
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",

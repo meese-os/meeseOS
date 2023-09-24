@@ -1,8 +1,16 @@
 {
   "name": "@meese-os/common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS Common Modules",
-  "main": "dist/main.js",
+  "scripts": {
+    "eslint": "eslint index.js src/**/*.js",
+    "test": "npm run eslint",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
+  },
+	"license": "BSD-2-Clause",
+	"main": "dist/main.js",
   "module": "dist/main.js",
   "typings": "index.d.ts",
   "files": [
@@ -11,13 +19,6 @@
     "dist/main.js",
     "README.md"
   ],
-  "scripts": {
-    "eslint": "eslint index.js src/**/*.js",
-    "test": "npm run eslint",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && rm ./dist/* && NODE_ENV=production npm run build"
-  },
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@babel/core": "^7.22.11",

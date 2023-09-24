@@ -1,14 +1,7 @@
 {
   "name": "@meese-os/cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "meeseOS CLI",
-  "main": "index.js",
-  "files": [
-    "bin",
-    "src",
-    "index.js",
-    "README.md"
-  ],
   "scripts": {
     "build": "echo \"There is no build command for cli\" && exit 0",
     "test": "npm run eslint && npm run jest",
@@ -17,6 +10,14 @@
     "eslint": "eslint index.js src/**/*.js bin/*.js",
     "prepublishOnly": "npm run test"
   },
+	"license": "BSD-2-Clause",
+	"main": "index.js",
+  "files": [
+    "bin",
+    "src",
+    "index.js",
+    "README.md"
+  ],
   "bin": {
     "meese-cli": "bin/cli.js"
   },

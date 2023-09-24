@@ -1,18 +1,19 @@
 {
   "name": "@meese-os/cursor-effects",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS Cursor Effects",
-  "files": [
-    "dist/",
-    "metadata.json"
-  ],
   "scripts": {
     "eslint": "eslint index.js",
     "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && rm -rf ./dist/* && NODE_ENV=production npm run build"
+    "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
+	"license": "BSD-3-Clause",
+	"files": [
+    "dist/",
+    "metadata.json"
+  ],
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@babel/core": "^7.22.11",

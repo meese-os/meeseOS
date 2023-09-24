@@ -435,9 +435,6 @@ importers:
       '@meese-os/cursor-effects':
         specifier: workspace:*
         version: link:../../frontend/cursor-effects
-      '@meese-os/custom-cursors':
-        specifier: workspace:*
-        version: link:../../frontend/custom-cursors
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
@@ -1068,36 +1065,6 @@ importers:
         specifier: ^5.1.4
         version: 5.1.4
 
-  ../../frontend/custom-cursors:
-    devDependencies:
-      '@babel/core':
-        specifier: ^7.22.11
-        version: 7.22.11
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.22.10
-        version: 7.22.10
-      '@babel/preset-env':
-        specifier: ^7.22.10
-        version: 7.22.10
-      '@babel/runtime':
-        specifier: ^7.22.11
-        version: 7.22.11
-      '@meese-os/eslint-config':
-        specifier: workspace:*
-        version: link:../../development/eslint
-      babel-loader:
-        specifier: ^9.1.3
-        version: 9.1.3(webpack-cli@5.1.4)
-      eslint:
-        specifier: ^8.48.0
-        version: 8.48.0
-      webpack:
-        specifier: ^5.88.2
-        version: 5.88.2(webpack-cli@5.1.4)
-      webpack-cli:
-        specifier: ^5.1.4
-        version: 5.1.4
-
   ../../frontend/dialogs:
     dependencies:
       '@meese-os/gui':
@@ -1367,6 +1334,9 @@ importers:
       '@rollup/plugin-node-resolve':
         specifier: ^14.1.0
         version: 14.1.0
+      '@rollup/plugin-terser':
+        specifier: ^0.4.3
+        version: 0.4.3
       babel-loader:
         specifier: ^9.1.3
         version: 9.1.3(webpack-cli@5.1.4)
@@ -1388,9 +1358,6 @@ importers:
       rollup:
         specifier: ^2.79.1
         version: 2.79.1
-      rollup-plugin-terser:
-        specifier: ^7.0.2
-        version: 7.0.2
       sass:
         specifier: ^1.66.1
         version: 1.66.1
@@ -2000,13 +1967,6 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.19
-    dev: true
-
-  /@babel/code-frame@7.16.7:
-    resolution: {integrity: sha512-iAXqUn8IIeBTNd72xsFlgaXHkMBMt6y4HJp1tIaK465CWLT/fG1aqB7ykr95gHHmlBdGbFeWWfyB4NJJ0nmeIg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/highlight': 7.22.10
     dev: true
 
   /@babel/code-frame@7.18.6:
@@ -5107,6 +5067,19 @@ packages:
       is-module: 1.0.0
       resolve: 1.22.0
       rollup: 2.79.1
+    dev: true
+
+  /@rollup/plugin-terser@0.4.3:
+    resolution: {integrity: sha512-EF0oejTMtkyhrkwCdg0HJ0IpkcaVg1MMSf2olHb2Jp+1mnLM04OhjpJWGma4HobiDTF0WCyViWuvadyE9ch2XA==}
+    engines: {node: '>=14.0.0'}
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 2.79.1
+      serialize-javascript: 6.0.1
+      smob: 1.4.1
+      terser: 5.19.2
     dev: true
 
   /@rollup/pluginutils@3.1.0:
@@ -10243,15 +10216,6 @@ packages:
       string-length: 4.0.2
     dev: true
 
-  /jest-worker@26.6.2:
-    resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
-    engines: {node: '>= 10.13.0'}
-    dependencies:
-      '@types/node': 17.0.33
-      merge-stream: 2.0.0
-      supports-color: 7.2.0
-    dev: true
-
   /jest-worker@27.5.1:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
@@ -10628,10 +10592,6 @@ packages:
   /lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
     dev: false
-
-  /lodash.sortby@4.7.0:
-    resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
-    dev: true
 
   /lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
@@ -12925,16 +12885,6 @@ packages:
       inherits: 2.0.4
     dev: true
 
-  /rollup-plugin-terser@7.0.2:
-    resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
-    dependencies:
-      '@babel/code-frame': 7.16.7
-      jest-worker: 26.6.2
-      rollup: 2.79.1
-      serialize-javascript: 4.0.0
-      terser: 5.13.1
-    dev: true
-
   /rollup@2.79.1:
     resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
     engines: {node: '>=10.0.0'}
@@ -13300,6 +13250,10 @@ packages:
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
     dev: true
 
+  /smob@1.4.1:
+    resolution: {integrity: sha512-9LK+E7Hv5R9u4g4C3p+jjLstaLe11MDsL21UpYaCNmapvMkYhqCV4A/f/3gyH8QjMyh6l68q9xC85vihY9ahMQ==}
+    dev: true
+
   /snapdragon-node@2.1.1:
     resolution: {integrity: sha512-O27l4xaMYt/RSQ5TR3vpWCAB5Kb/czIcqUFOM/C4fYcLnbZUc1PkjTAMjof2pBWaSTwOUd6qUHcFGVGj7aIwnw==}
     engines: {node: '>=0.10.0'}
@@ -13408,13 +13362,6 @@ packages:
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /source-map@0.8.0-beta.0:
-    resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
-    engines: {node: '>= 8'}
-    dependencies:
-      whatwg-url: 7.1.0
     dev: true
 
   /sourcemap-codec@1.4.8:
@@ -13926,17 +13873,6 @@ packages:
       source-map-support: 0.5.21
     dev: true
 
-  /terser@5.13.1:
-    resolution: {integrity: sha512-hn4WKOfwnwbYfe48NgrQjqNOH9jzLqRcIfbYytOXCOv46LBfWr9bDS17MQqOi+BWGD0sJK3Sj5NC/gJjiojaoA==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      acorn: 8.10.0
-      commander: 2.20.3
-      source-map: 0.8.0-beta.0
-      source-map-support: 0.5.21
-    dev: true
-
   /terser@5.19.2:
     resolution: {integrity: sha512-qC5+dmecKJA4cpYxRa5aVkKehYsQKc+AHeKl0Oe62aYjBL8ZA33tTljktDHJSaxxMnbI5ZYw+o/S2DxxLu8OfA==}
     engines: {node: '>=10'}
@@ -14053,12 +13989,6 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
-    dev: true
-
-  /tr46@1.0.1:
-    resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
-    dependencies:
-      punycode: 2.1.1
     dev: true
 
   /tr46@3.0.0:
@@ -14528,10 +14458,6 @@ packages:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
     dev: true
 
-  /webidl-conversions@4.0.2:
-    resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
-    dev: true
-
   /webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
     engines: {node: '>=12'}
@@ -14818,14 +14744,6 @@ packages:
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
-    dev: true
-
-  /whatwg-url@7.1.0:
-    resolution: {integrity: sha512-WUu7Rg1DroM7oQvGWfOiAK21n74Gg+T4elXEQYkOhtyLeWiJFoOGLXPKI/9gzIie9CtwVLm8wtw6YJdKyxSjeg==}
-    dependencies:
-      lodash.sortby: 4.7.0
-      tr46: 1.0.1
-      webidl-conversions: 4.0.2
     dev: true
 
   /which@1.3.1:

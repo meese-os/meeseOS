@@ -1,8 +1,7 @@
 {
   "name": "@meese-os/server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS Server",
-  "main": "index.js",
   "scripts": {
     "build": "echo \"There is no build command for server\" && exit 0",
     "test": "npm run eslint && npm run jest",
@@ -11,6 +10,8 @@
     "eslint": "eslint index.js src",
     "prepublishOnly": "npm run test"
   },
+	"license": "BSD-2-Clause",
+	"main": "index.js",
   "files": [
     "src/",
     "index.js",

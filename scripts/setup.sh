@@ -32,8 +32,12 @@ if [ "$?" -ne "1" ]; then
 fi
 
 echo
+echo "Updating pnpm..."
+pnpm add -g pnpm
+
+echo
 echo "Updating rush projects..."
-rush update --max-install-attempts 10 2>&1 | grep "ERROR: Error: The command failed with exit code 1"
+rush update --purge --max-install-attempts 10 2>&1 | grep "ERROR: Error: The command failed with exit code 1"
 if [ "$?" -ne "1" ]; then
   echo
   echo "\e[31m[!] 'rush update' failed! Check your network connection for stability and try again.\e[31m"

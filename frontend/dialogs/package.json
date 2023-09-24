@@ -1,8 +1,17 @@
 {
   "name": "@meese-os/dialogs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS Dialogs",
-  "main": "dist/main.js",
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "eslint": "eslint index.js src/**/*.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
+    "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
+  },
+	"license": "BSD-2-Clause",
+	"main": "dist/main.js",
   "module": "dist/main.js",
   "style": "dist/main.css",
   "files": [
@@ -12,14 +21,6 @@
     "dist/main.css.map",
     "README.md"
   ],
-  "scripts": {
-    "test": "npm run eslint && npm run stylelint",
-    "eslint": "eslint index.js src/**/*.js",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
-    "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build"
-  },
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@meese-os/stylelint-config": "workspace:*",

@@ -1,10 +1,7 @@
 {
   "name": "@meese-os/gui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS GUI",
-  "module": "dist/esm.js",
-  "main": "dist/main.js",
-  "style": "dist/main.css",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
     "eslint": "eslint index.js src/**/*.js",
@@ -13,8 +10,12 @@
     "watch": "webpack --watch",
     "watch:esm": "rollup -c --watch",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
-    "prepublishOnly": "npm run test && rm ./dist/* && NODE_ENV=production npm run build && npm run build:esm"
+    "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build && npm run build:esm"
   },
+	"license": "BSD-2-Clause",
+	"module": "dist/esm.js",
+  "main": "dist/main.js",
+  "style": "dist/main.css",
   "files": [
     "dist/esm.js",
     "dist/esm.js.map",
@@ -41,7 +42,7 @@
     "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
-    "rollup-plugin-terser": "^7.0.2",
+    "@rollup/plugin-terser": "^0.4.3",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
     "stylelint": "^15.10.3",

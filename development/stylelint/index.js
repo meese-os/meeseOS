@@ -19,7 +19,7 @@ module.exports = {
 		"font-family-no-missing-generic-family-keyword": [
 			true,
 			{
-				ignoreFontFamilies: ["Terminal",],
+				ignoreFontFamilies: ["FontAwesome", "Terminal"],
 			},
 		],
 		"indentation": "tab",

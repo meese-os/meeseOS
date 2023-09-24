@@ -1,13 +1,7 @@
 {
   "name": "@meese-os/event-emitter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple event emitter",
-  "main": "dist/main.js",
-  "typings": "index.d.ts",
-  "files": [
-    "dist/",
-    "index.d.ts"
-  ],
   "scripts": {
     "test": "npm run eslint && npm run jest",
     "jest": "jest",
@@ -17,6 +11,13 @@
     "watch": "webpack --watch",
     "prepublishOnly": "npm run test && NODE_ENV=production npm run build"
   },
+	"license": "BSD-2-Clause",
+	"main": "dist/main.js",
+  "typings": "index.d.ts",
+  "files": [
+    "dist/",
+    "index.d.ts"
+  ],
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@babel/core": "^7.22.11",

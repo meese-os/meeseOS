@@ -1,14 +1,15 @@
 {
   "name": "@meese-os/preview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MeeseOS Preview Application",
   "scripts": {
     "eslint": "eslint *.js",
     "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && rm ./dist/* && NODE_ENV=production npm run build"
+    "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
   },
+	"license": "BSD-2-Clause",
   "files": [
     "dist/",
     "metadata.json"

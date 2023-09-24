@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/website",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
@@ -20,11 +20,10 @@
     "make:application": "meese-cli make:application",
     "make:iframe-application": "meese-cli make:iframe-application",
     "make:provider": "meese-cli make:provider",
-    "deploy": "NODE_ENV=production npm run serve",
-    "publish:dry": "rush publish --include-all",
-    "publish": "rush --debug publish --publish --include-all --set-access-level public"
+    "deploy": "NODE_ENV=production npm run serve"
   },
   "author": "Aaron Meese <aaron@meese.dev>",
+	"license": "BSD-2-Clause",
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@meese-os/stylelint-config": "workspace:*",
@@ -110,7 +109,7 @@
       "@babel/plugin-transform-runtime"
     ]
   },
-  "repository": "https://github.com/meeseOS/meeseOS",
+  "repository": "https://github.com/meeseOS/meeseOS.git",
   "publishConfig": {
     "access": "public"
   }

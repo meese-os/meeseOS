@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/old-site",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Old aaronmeese.com design",
   "scripts": {
     "eslint": "eslint *.js",
@@ -8,8 +8,9 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
-    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && npm run build --quiet-deprecation-warnings"
+    "prepublishOnly": "npm run eslint && npm run stylelint && rd /s /q dist>nul 2>&1|echo.>nul && npm run build --quiet-deprecation-warnings"
   },
+	"license": "BSD-3-Clause",
   "files": [
     "dist/",
     "server.js",

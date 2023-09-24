@@ -31,22 +31,25 @@
 	</a>
 </p>
 
+<!-- TODO: Get this working then add to individual subcomponents if possible. -->
+<!--
 <p align="center">
-  <a href="https://codeclimate.com/github/meeseOS/meese-cli/test_coverage">
+  <a href="https://codeclimate.com/github/meeseOS/meeseOS/test_coverage">
     <img
       src="https://api.codeclimate.com/v1/badges/074b81c78fd887a7def5/test_coverage"
       title="Test Coverage on Code Climate"
       alt="Test Coverage on Code Climate"
     />
   </a>
-  <!--<a href="https://codeclimate.com/github/os-js/meese-cli/maintainability">
+  <a href="https://codeclimate.com/github/meeseOS/meeseOS/maintainability">
     <img
       src="https://api.codeclimate.com/v1/badges/074b81c78fd887a7def5/maintainability"
       title="Maintainability on Code Climate"
 			alt="Maintainability on Code Climate"
     />
-  </a>-->
+  </a>
 </p>
+-->
 
 This redesign of my website would not be possible without the _incredible_ work by [Anders Evenrud](https://github.com/andersevenrud) on [OS.js](https://github.com/os-js/OS.js). As you can see in the majority of the files, this monorepo is a modified amalgamation of the OS.js source code.
 
@@ -57,7 +60,7 @@ This redesign of my website would not be possible without the _incredible_ work 
 	- `cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env`
 	- `cp website/src/client/.env.template website/src/client/.env`
 	- `cp website/src/server/auth/template.env.json website/src/server/auth/.env.json`
-- `bash ./setup.sh`
+- `bash ./scripts/setup.sh`
 
 ## Deploy
 
@@ -87,9 +90,9 @@ To run GitHub Actions locally, do the following:
 
 ## Development
 
-To publish changes to the GitHub and NPM registries, run `cd website && pnpm run publish`.
+To publish changes to the NPM registry, run `rush --debug publish --publish --include-all --set-access-level public`. To publish changes to the GitHub registry instead, go into the `common/config/rush/.npmrc-publish` file and uncomment the GitHub Packages line.
 
-If you want to do a dry run first, run `cd website && pnpm run publish:dry`.
+If you want to do a dry run first, run `rush publish --include-all`.
 
 # TODO
 

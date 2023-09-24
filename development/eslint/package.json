@@ -1,13 +1,14 @@
 {
   "name": "@meese-os/eslint-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS ESLint configuration",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"eslint-config has no tests\" && exit 0",
     "build": "echo \"eslint-config does not need to be built\"",
 		"eslint": ""
   },
+	"license": "BSD-3-Clause",
+	"main": "index.js",
   "dependencies": {
     "eslint": "^8.48.0"
   }

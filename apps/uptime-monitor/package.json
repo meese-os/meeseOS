@@ -1,13 +1,14 @@
 {
   "name": "@meese-os/uptime-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "test": "npm run eslint",
     "eslint": "eslint *.js",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run test && rm ./dist/* && npm run build"
+    "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && npm run build"
   },
+	"license": "BSD-3-Clause",
   "files": [
     "dist/",
     "metadata.json"
