@@ -23,11 +23,13 @@ jobs:
     - name: Detect Version Changes
       run: |
         CHANGED_DIRS=""
-        for FILE in $(git diff --name-only HEAD^ HEAD); do
+        PARENT_COMMIT=$(git rev-parse HEAD^)
+
+        for FILE in $(git diff --name-only "$PARENT_COMMIT" HEAD); do
           DIR=$(dirname "$FILE")
           if [ -f "$FILE" ] && [ "$(basename "$FILE")" = "package.json" ] && [[ ! "$DIR" =~ "__mocks__" ]]; then
             # Get the old version before making any changes
-            OLD_PACKAGE_VERSION=$(git show HEAD^:"$FILE" | jq -r .version)
+            OLD_PACKAGE_VERSION=$(git show "$PARENT_COMMIT":"$FILE" | jq -r .version)
             # Get the current version
             CURRENT_PACKAGE_VERSION=$(jq -r .version "$FILE")
 
