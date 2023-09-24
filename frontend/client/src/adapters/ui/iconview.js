@@ -47,8 +47,8 @@ const onDropAction = (actions) =>
 	};
 
 const isRootElement = (ev) =>
-	ev.target &&
-	ev.target.classList.contains("meeseOS-desktop-iconview__wrapper");
+	
+	ev.target?.classList.contains("meeseOS-desktop-iconview__wrapper");
 
 const view = (fileIcon, themeIcon, droppable) => (state, actions) =>
 	h(
@@ -210,7 +210,7 @@ export class DesktopIconView extends EventEmitter {
 	}
 
 	destroy() {
-		if (this.$root && this.$root.parentNode) {
+		if ( this.$root?.parentNode) {
 			this.$root.remove();
 		}
 

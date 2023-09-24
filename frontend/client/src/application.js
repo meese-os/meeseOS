@@ -95,7 +95,7 @@ export default class Application extends EventEmitter {
 			? { ...data.options.settings }
 			: {};
 
-		const name = data.metadata && data.metadata.name
+		const name =  data.metadata?.name
 			? "Application@" + data.metadata.name
 			: "Application" + String(applicationCount);
 
