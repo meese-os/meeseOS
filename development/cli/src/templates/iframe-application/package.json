@@ -1,17 +1,22 @@
 {
   "name": "___NAME___",
-  "version": "1.0.1",
+  "version": "1.0.0",
+  "description": "meeseOS __NAME__ Application",
   "scripts": {
-    "test": "npm run eslint",
     "eslint": "eslint *.js",
+    "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && npm run build"
   },
+  "license": "BSD-3-Clause",
   "files": [
     "dist/",
     "metadata.json"
   ],
+  "meeseOS": {
+    "type": "package"
+  },
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@babel/core": "^7.22.11",
@@ -25,9 +30,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {},
-  "meeseOS": {
-    "type": "package"
-  },
   "eslintConfig": {
     "env": {
       "browser": true,
@@ -45,5 +47,18 @@
     "plugins": [
       "@babel/plugin-transform-runtime"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeseOS/meeseOS.git",
+    "directory": "apps/___NAME___"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "app"
+  ]
 }
