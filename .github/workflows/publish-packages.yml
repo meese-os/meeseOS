@@ -23,7 +23,7 @@ jobs:
     - name: Detect Version Changes
       run: |
         CHANGED_DIRS=""
-        PARENT_COMMIT=$(git rev-parse HEAD^)
+        PARENT_COMMIT=$(git log -n 1 --pretty=format:%H HEAD)
 
         for FILE in $(git diff --name-only "$PARENT_COMMIT" HEAD); do
           DIR=$(dirname "$FILE")
