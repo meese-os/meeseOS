@@ -23,9 +23,10 @@ jobs:
     - name: Detect Version Changes
       run: |
         CHANGED_DIRS=""
+        PREVIOUS_COMMIT=$(git log --skip=1 -n 1 --pretty=format:"%H")
         for DIR in $(find . -name "package.json" -type f); do
           PACKAGE_VERSION=$(jq -r .version $DIR)
-          OLD_VERSION=$(git show HEAD^:$DIR | jq -r .version)
+          OLD_VERSION=$(git show $PREVIOUS_COMMIT:$DIR | jq -r .version)
           if [ "$PACKAGE_VERSION" != "$OLD_VERSION" ]; then
             CHANGED_DIRS="$CHANGED_DIRS $(dirname $DIR)"
           fi
