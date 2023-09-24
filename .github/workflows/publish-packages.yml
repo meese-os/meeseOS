@@ -20,6 +20,7 @@ jobs:
       with:
         node-version: 16
         cache: 'pnpm'
+        cache-dependency-path: 'common/config/rush/pnpm-lock.yaml'
 
     - name: Detect Version Changes
       run: |
