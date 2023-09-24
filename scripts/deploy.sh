@@ -13,13 +13,15 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm use
+pnpm add -g pnpm
 rush update
 NODE_ENV=production rush build
 
 # Deletes the old server process if it exists, done last to minimize downtime
-pm2 delete "npm run deploy" 2>/dev/null
+pm2 delete "pnpm run deploy" 2>/dev/null
 
 # Starts the server
 cd ./website
-pm2 start "npm run deploy"
+pm2 update
+pm2 start "pnpm run deploy"
 pm2 save --force
