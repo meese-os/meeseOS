@@ -20,7 +20,6 @@ jobs:
       with:
         node-version: 16
         cache: 'pnpm'
-        cache-dependency-path: '**/pnpm-lock.json'
 
     - name: Detect Version Changes
       run: |
