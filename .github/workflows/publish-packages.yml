@@ -16,11 +16,9 @@ jobs:
         version: 8
 
     - name: Install Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: 16
-        cache: 'pnpm'
-        cache-dependency-path: 'common/config/rush/pnpm-lock.yaml'
 
     - name: Detect Version Changes
       run: |
