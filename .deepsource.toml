@@ -1,6 +1,7 @@
 version = 1
 
 exclude_patterns = ["common/**"]
+test_patterns = ["__tests__/**"]
 
 [[analyzers]]
 name = "javascript"
