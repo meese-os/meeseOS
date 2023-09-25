@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/windows8-theme",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS Windows 8 Style Theme",
   "files": [
     "dist/",
@@ -13,7 +13,7 @@
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "license": "BSD-2-Clause",
   "devDependencies": {

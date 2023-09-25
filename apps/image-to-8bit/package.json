@@ -1,13 +1,13 @@
 {
   "name": "@meese-os/image-to-8bit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MeeseOS Image to 8bit application",
   "scripts": {
     "eslint": "eslint *.js",
     "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && npm run build"
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && npm run build"
   },
   "license": "MIT",
   "files": [

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Apps-Visual-Studio-Code" width="64" height="64" enable-background="new 0 0 1024 1024" image-rendering="optimizeSpeed" version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css"/>
+  <style type="text/css"/>
+  <linearGradient id="linearGradient1455" x1="4" x2="60" y1="27" y2="27" gradientTransform="matrix(1 0 0 1.0556 1e-6 -.5)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#555a5f" offset="0"/>
+   <stop stop-color="#4b4f53" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient17498" x1="15.408" x2="60" y1="19" y2="45" gradientTransform="matrix(.96428 0 0 1 1.1428 1)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#0082e5" offset="0"/>
+   <stop stop-color="#42b7ff" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient29240" x1="32" x2="32" y1="44" y2="52" gradientTransform="matrix(.79998 0 0 1 6.4007 0)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#818990" offset="0"/>
+   <stop stop-color="#9fa8b0" offset="1"/>
+  </linearGradient>
+  <linearGradient id="linearGradient4253" x1="2" x2="62" y1="16" y2="51" gradientTransform="matrix(.36666 0 0 .4 6.9084 7.0387)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient920"/>
+  <linearGradient id="linearGradient920" x1="2" x2="62" y1="16" y2="51" gradientTransform="matrix(.26458 0 0 .26458 -6e-5 -1.5876)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#555a5f" offset="0"/>
+   <stop stop-color="#4b4f53" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g shape-rendering="auto">
+  <path d="m20.667 51h22.667l2.6667 3h-28z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="#bcc5cf" image-rendering="optimizeSpeed" solid-color="#000000" stop-color="#000000" stroke-width="5.7734" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+  <path d="m28.001 44.222h7.999v7.7779h-7.999z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="url(#linearGradient29240)" image-rendering="optimizeSpeed" solid-color="#000000" stop-color="#000000" stroke-width="5.4429" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+  <path d="m18 54h28v2h-28z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="#44484c" fill-opacity=".99608" image-rendering="optimizeSpeed" solid-color="#000000" stop-color="#000000" stroke-width="6.6666" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;inline-size:0;isolation:auto;mix-blend-mode:normal;shape-margin:0;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+ </g>
+ <g stroke-linecap="round" stroke-linejoin="round">
+  <rect x="4" y="9" width="56" height="38" ry="0" fill="url(#linearGradient1455)" stroke-width=".82192"/>
+  <rect x="5" y="10" width="54" height="36" ry="0" fill="url(#linearGradient17498)" stroke-width=".78558"/>
+  <path d="m5 8h54l1 1h-56z" color="#000000" fill="#b8c2cc" stroke-width=".26458" style="-inkscape-stroke:none"/>
+ </g>
+ <g transform="translate(.78703 -.61946)">
+  <rect x="7.6417" y="13.438" width="22" height="14" ry="0" fill="url(#linearGradient4253)" image-rendering="optimizeSpeed" stroke-width=".38297"/>
+  <rect x="8.6417" y="14.438" width="20" height="12" ry="0" fill="#fff" image-rendering="optimizeSpeed" stroke-width=".35411"/>
+  <g transform="translate(25.143)">
+   <rect x="7.6417" y="13.438" width="22" height="14" ry="0" fill="url(#linearGradient4253)" image-rendering="optimizeSpeed" stroke-width=".38297"/>
+   <rect x="8.6417" y="14.438" width="20" height="12" ry="0" fill="#fff" image-rendering="optimizeSpeed" stroke-width=".35411"/>
+  </g>
+  <g transform="translate(25.143 16.653)">
+   <rect x="7.6417" y="13.438" width="22" height="14" ry="0" fill="url(#linearGradient4253)" image-rendering="optimizeSpeed" stroke-width=".38297"/>
+   <rect x="8.6417" y="14.438" width="20" height="12" ry="0" fill="#fff" image-rendering="optimizeSpeed" stroke-width=".35411"/>
+  </g>
+ </g>
+ <path d="m5 10h35l-25 36h-10z" color="#000000" fill="#fff" opacity=".15" stroke-linecap="round" stroke-linejoin="round" stroke-width=".78558" style="-inkscape-stroke:none"/>
+</svg>

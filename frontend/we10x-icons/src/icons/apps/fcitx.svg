@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="linearGradient1053" x1="68" x2="128" y1="62" y2="2" gradientTransform="matrix(.91665 0 0 .91665 2.2353 34.915)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#e0e4e9" offset="0"/>
+   <stop stop-color="#fefeff" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g transform="translate(-60.067 -32.248)">
+  <rect x="64.567" y="36.748" width="55" height="55" ry="2.75" fill="url(#linearGradient1053)" stroke-width="3.4646"/>
+  <text x="78.658157" y="80.289886" fill="#323232" font-family="sans-serif" font-size="44.009px" font-weight="bold" letter-spacing="0px" stroke-width="1.1003" word-spacing="0px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="78.658157" y="80.289886" stroke-width="1.1003">A</tspan></text>
+ </g>
+</svg>

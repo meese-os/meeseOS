@@ -1,9 +1,10 @@
 {
   "name": "@meese-os/website",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
+    "preinstall": "git config core.hooksPath hooks",
     "eslint": "eslint src/client/**/*.js src/server/**/*.js",
     "stylelint": "stylelint src/client/*.scss --fix --quiet-deprecation-warnings",
     "test": "npm run eslint && npm run stylelint",
@@ -21,7 +22,7 @@
     "make:iframe-application": "meese-cli make:iframe-application",
     "make:provider": "meese-cli make:provider",
     "deploy": "NODE_ENV=production npm run serve",
-    "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "author": "Aaron Meese <aaron@meese.dev>",
   "license": "BSD-2-Clause",

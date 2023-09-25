@@ -1,13 +1,13 @@
 {
   "name": "@meese-os/google-api-provider",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Google API Service Provider for meeseOS",
   "scripts": {
     "test": "npm run eslint",
     "eslint": "eslint *.js",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && rd /s /q dist>nul 2>&1|echo.>nul && npm run build"
+    "prepublishOnly": "npm run eslint && rm -rf ./dist/* && npm run build"
   },
   "license": "BSD-2-Clause",
   "files": [

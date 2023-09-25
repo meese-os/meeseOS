@@ -1,12 +1,12 @@
 {
   "name": "@meese-os/static-wallpapers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS Static Wallpapers",
   "scripts": {
     "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build",
+    "prepublishOnly": "rm -rf ./dist/* && NODE_ENV=production npm run build",
     "eslint": ""
   },
   "license": "BSD-3-Clause",
