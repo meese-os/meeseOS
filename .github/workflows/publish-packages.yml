@@ -20,6 +20,9 @@ jobs:
       with:
         node-version: 16
 
+    - name: Install dependencies
+      run: rush install
+
     - name: Detect Version Changes
       id: detect
       run: |
@@ -71,7 +74,7 @@ jobs:
         CHANGED_DIRS="${{ steps.detect.outputs.changed_dirs }}"
         for DIR in $CHANGED_DIRS; do
           echo "Publishing packages in $DIR to GitHub Package Registry..."
-          (cd $DIR && npm publish  --dry-run --registry https://npm.pkg.github.com)
+          (cd $DIR && pnpm publish --dry-run --registry https://npm.pkg.github.com)
         done
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
@@ -81,7 +84,7 @@ jobs:
         CHANGED_DIRS="${{ steps.detect.outputs.changed_dirs }}"
         for DIR in $CHANGED_DIRS; do
           echo "Publishing packages in $DIR to npmjs Package Registry..."
-          (cd $DIR && npm publish  --dry-run --registry https://registry.npmjs.org/)
+          (cd $DIR && pnpm publish --dry-run --registry https://registry.npmjs.org/)
         done
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
