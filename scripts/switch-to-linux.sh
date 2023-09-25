@@ -1,21 +1,13 @@
 #!/bin/bash
+#
+# This script is used to replace the Windows commands in the package.json files
+# with their Linux equivalents. This is done to allow the project to be built
+# on Linux systems, such as the GitHub Actions runners.
 
 # Define the search root directory
 rootDirectory=".."
 
-# Recursively search for package.json files
-packageJsonFiles=$(find "$rootDirectory" -type f -name "package.json" | grep -Ev '/(node_modules|dist)/')
-
-# Iterate through the found package.json files and perform replacements
-for file in $packageJsonFiles; do
-  # Read the file content
-  fileContent=$(<"$file")
-
-  # Perform replacements using sed
-  newContent=$(echo "$fileContent" | sed -e 's/rd \/s \/q dist>nul 2>&1|echo.>nul/rm -rf .\/dist\/*/')
-
-  # Save the modified content back to the file
-  echo "$newContent" > "$file"
-done
+# Use find and sed to perform replacements directly in the files
+find "$rootDirectory" -type f -name "package.json" ! -path "*/node_modules/*" ! -path "*/dist/*" -exec sed -i 's/rd \/s \/q dist>nul 2>&1|echo.>nul/rm -rf .\/dist\/*/g' {} +
 
 echo "Replacements completed."

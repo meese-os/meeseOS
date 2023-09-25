@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Change to the project root directory
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+# Use git diff to list changed package.json files
+changedPackageJsonFiles=$(git diff --name-only HEAD^ HEAD | grep -E 'package\.json$')
+
+# Iterate through the changed package.json files and change the
+# Windows remove command to the Unix remove command
+for file in $changedPackageJsonFiles; do
+	sed -i 's/rd \/s \/q dist>nul 2>&1|echo.>nul/rm -rf .\/dist\/*/g' "$file"
+	git add "$file"
+done
+
+echo "Replacements completed for changed package.json files."
+
+# Continue with the default pre-commit actions
+exit $?

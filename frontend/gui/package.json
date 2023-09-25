@@ -10,7 +10,7 @@
     "watch": "webpack --watch",
     "watch:esm": "rollup -c --watch",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
-    "prepublishOnly": "npm run test && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build && npm run build:esm"
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build && npm run build:esm"
   },
   "license": "BSD-2-Clause",
   "module": "dist/esm.js",
