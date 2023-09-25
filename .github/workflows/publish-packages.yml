@@ -28,24 +28,21 @@ jobs:
         CURRENT_COMMIT="$GITHUB_SHA"
 
         # Create a ZIP archive of the repository at the current commit
-        git archive -o repo_snapshot.zip "$CURRENT_COMMIT"
+        git archive -o repo_snapshot.zip "$CURRENT_COMMIT" &>/dev/null
 
         # Extract the ZIP archive to a temporary directory
         mkdir repo_snapshot
-        unzip repo_snapshot.zip -d repo_snapshot
+        unzip repo_snapshot.zip -d repo_snapshot &>/dev/null
         cd repo_snapshot || exit 1
 
         # Obtain a list of changed files
         CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
-        echo "Changed files: $CHANGED_FILES"
 
         # Check if there are changes
         if [ -n "$CHANGED_FILES" ]; then
           for FILE in $CHANGED_FILES; do
             DIR=$(dirname "$FILE")
             FILENAME=$(basename "$FILE")
-            echo "DIR: $DIR"
-            echo "File basename: $FILENAME"
             if [ "$FILENAME" = "package.json" ] && [[ ! "$DIR" =~ "__mocks__" ]]; then
               # Get the old version before making any changes
               OLD_PACKAGE_VERSION=$(git show HEAD^:"$FILE" | jq -r .version)
@@ -66,7 +63,7 @@ jobs:
         rm -rf repo_snapshot repo_snapshot.zip
 
         echo "Changed directories with package.json version changes: $CHANGED_DIRS"
-        echo "::set-output name=changed_dirs::$CHANGED_DIRS"
+        echo "changed_dirs=$CHANGED_DIRS" >> $GITHUB_OUTPUT
 
     - name: Publish to GitHub Package Registry
       run: |
