@@ -25,8 +25,17 @@ jobs:
         #!/bin/bash
 
         CHANGED_DIRS=""
+        CURRENT_COMMIT="$GITHUB_SHA"
 
-        # Obtain a list of changed files in the last commit
+        # Create a ZIP archive of the repository at the current commit
+        git archive -o repo_snapshot.zip "$CURRENT_COMMIT"
+
+        # Extract the ZIP archive to a temporary directory
+        mkdir repo_snapshot
+        unzip repo_snapshot.zip -d repo_snapshot
+        cd repo_snapshot || exit 1
+
+        # Obtain a list of changed files
         CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
         echo "Changed files: $CHANGED_FILES"
 
@@ -51,6 +60,10 @@ jobs:
             fi
           done
         fi
+
+        # Clean up the temporary directory and ZIP archive
+        cd ..
+        rm -rf repo_snapshot repo_snapshot.zip
 
         echo "Changed directories with package.json version changes: $CHANGED_DIRS"
         echo "::set-output name=changed_dirs::$CHANGED_DIRS"
