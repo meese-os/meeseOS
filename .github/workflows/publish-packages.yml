@@ -36,6 +36,9 @@ jobs:
     - name: Install dependencies
       run: rush install
 
+    - name: Build packages
+      run: NODE_ENV=production rush build
+
     - name: Publish to npmjs Package Registry
       run: |
         rush publish --publish --include-all --registry https://registry.npmjs.org/
