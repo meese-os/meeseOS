@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/standard-theme",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS Standard Theme",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",

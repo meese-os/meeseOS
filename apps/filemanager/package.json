@@ -1,13 +1,13 @@
 {
   "name": "@meese-os/filemanager",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS Filemanager Application",
   "scripts": {
     "eslint": "eslint *.js",
     "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && rm -rf ./dist/* && NODE_ENV=production npm run build"
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "license": "BSD-2-Clause",
   "files": [

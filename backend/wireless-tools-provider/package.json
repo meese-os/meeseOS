@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/wireless-tools-provider",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS wireless-tools Provider",
   "files": [
     "dist/",

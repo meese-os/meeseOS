@@ -1,12 +1,12 @@
 {
   "name": "@meese-os/games",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
+    "eslint": "eslint index.js",
+    "stylelint": "stylelint index.scss --fix --quiet-deprecation-warnings",
     "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "eslint": "eslint index.js",
-    "stylelint": "stylelint index.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run test && rm -rf ./dist/* && npm run build"
   },
   "license": "BSD-3-Clause",

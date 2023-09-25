@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/google-api-provider",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Google API Service Provider for meeseOS",
   "scripts": {
     "test": "npm run eslint",

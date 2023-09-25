@@ -1,9 +1,9 @@
 {
   "name": "@meese-os/cyberchef",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
-    "test": "npm run eslint",
     "eslint": "eslint *.js",
+    "test": "npm run eslint",
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublishOnly": "npm run test && rm -rf ./dist/* && npm run build"

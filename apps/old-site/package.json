@@ -1,14 +1,14 @@
 {
   "name": "@meese-os/old-site",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Old aaronmeese.com design",
   "scripts": {
     "eslint": "eslint *.js",
-    "test": "npm run eslint",
+    "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
+    "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
     "watch": "webpack --watch",
-    "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
-    "prepublishOnly": "npm run eslint && npm run stylelint && rm -rf ./dist/* && npm run build --quiet-deprecation-warnings"
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && npm run build --quiet-deprecation-warnings"
   },
   "license": "BSD-3-Clause",
   "files": [

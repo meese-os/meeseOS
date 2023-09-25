@@ -3,6 +3,8 @@ name: Publish Packages on Version Change
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
 
 jobs:
   publish:
