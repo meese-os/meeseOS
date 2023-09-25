@@ -167,7 +167,7 @@
     //   // "autoinstallerName": "my-task"
     // }
 
-		{
+    {
       "commandKind": "bulk",
       "name": "eslint",
       "summary": "Runs eslint on all JavaScript files.",
@@ -180,6 +180,22 @@
       "summary": "Runs tests for all projects.",
       "description": "Runs the specified tests for each project, usually 'eslint' and 'jest.'",
       "enableParallelism": true
+    },
+    {
+      "name": "build",
+      "commandKind": "bulk",
+      "summary": "Build all projects that haven't been built, or have changed since they were last built",
+      "incremental": true,
+      "enableParallelism": true,
+      "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "rebuild",
+      "commandKind": "bulk",
+      "summary": "Rebuild all projects",
+      "incremental": false,
+      "enableParallelism": true,
+      "allowWarningsInSuccessfulBuild": true
     }
   ],
 
@@ -309,7 +325,7 @@
     //   ]
     // }
 
-		{
+    {
       "parameterKind": "flag",
       "longName": "--fix",
       "description": "Fix all the detected linting errors.",
