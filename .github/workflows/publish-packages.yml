@@ -9,6 +9,8 @@ on:
 env:
   GH_USERNAME: ${{ secrets.GH_USERNAME }}
   GH_PAT: ${{ secrets.GH_PAT }}
+  GH_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
+  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
 jobs:
   publish:
@@ -32,14 +34,14 @@ jobs:
     - name: Install dependencies
       run: rush install
 
-    - name: Publish to GitHub Package Registry
-      run: |
-        rush publish --publish --include-all --registry https://npm.pkg.github.com/
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
-
     - name: Publish to npmjs Package Registry
       run: |
         rush publish --publish --include-all --registry https://registry.npmjs.org/
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+    - name: Publish to GitHub Package Registry
+      run: |
+        rush publish --publish --include-all --registry https://npm.pkg.github.com/
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
