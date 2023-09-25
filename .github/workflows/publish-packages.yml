@@ -32,72 +32,14 @@ jobs:
     - name: Install dependencies
       run: rush install
 
-    - name: Detect Version Changes
-      id: detect
-      run: |
-        #!/bin/bash
-
-        CHANGED_DIRS=""
-        CURRENT_COMMIT="$GITHUB_SHA"
-
-        # Create a ZIP archive of the repository at the current commit
-        git archive -o repo_snapshot.zip "$CURRENT_COMMIT" &>/dev/null
-
-        # Extract the ZIP archive to a temporary directory
-        mkdir repo_snapshot
-        unzip repo_snapshot.zip -d repo_snapshot &>/dev/null
-        cd repo_snapshot || exit 1
-
-        # Obtain a list of changed files
-        CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
-
-        # Check if there are changes
-        if [ -n "$CHANGED_FILES" ]; then
-          for FILE in $CHANGED_FILES; do
-            DIR=$(dirname "$FILE")
-            FILENAME=$(basename "$FILE")
-            if [ "$FILENAME" = "package.json" ] && [[ ! "$DIR" =~ "__mocks__" ]]; then
-              # Get the old version before making any changes
-              OLD_PACKAGE_VERSION=$(git show HEAD^:"$FILE" | jq -r .version)
-              # Get the current version
-              CURRENT_PACKAGE_VERSION=$(jq -r .version "$FILE")
-
-              echo "Package version: $CURRENT_PACKAGE_VERSION; old version: $OLD_PACKAGE_VERSION"
-
-              if [ "$CURRENT_PACKAGE_VERSION" != "$OLD_PACKAGE_VERSION" ]; then
-                CHANGED_DIRS="$CHANGED_DIRS $DIR"
-              fi
-            fi
-          done
-        fi
-
-        # Clean up the temporary directory and ZIP archive
-        cd ..
-        rm -rf repo_snapshot repo_snapshot.zip
-
-        echo "Changed directories with package.json version changes: $CHANGED_DIRS"
-        echo "changed_dirs=$CHANGED_DIRS" >> $GITHUB_OUTPUT
-
-        # Discard unstaged changes
-        git reset --hard
-        git checkout master
-
     - name: Publish to GitHub Package Registry
       run: |
-        CHANGED_DIRS="${{ steps.detect.outputs.changed_dirs }}"
-        for DIR in $CHANGED_DIRS; do
-          echo "Publishing packages in $DIR to GitHub Package Registry..."
-          (cd $DIR && pnpm publish --dry-run --registry https://npm.pkg.github.com)
-        done
+        rush publish --publish --include-all --registry https://npm.pkg.github.com/
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
 
     - name: Publish to npmjs Package Registry
       run: |
-        CHANGED_DIRS="${{ steps.detect.outputs.changed_dirs }}"
-        for DIR in $CHANGED_DIRS; do
-          echo "Publishing packages in $DIR to npmjs Package Registry..."
-          (cd $DIR && pnpm publish --dry-run --registry https://registry.npmjs.org/)
-        done
+        rush publish --publish --include-all --registry https://registry.npmjs.org/
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
