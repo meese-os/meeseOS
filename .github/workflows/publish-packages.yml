@@ -22,24 +22,35 @@ jobs:
 
     - name: Detect Version Changes
       run: |
+        #!/bin/bash
+
         CHANGED_DIRS=""
-        PARENT_COMMIT=$(git log -n 1 --pretty=format:%H HEAD)
 
-        for FILE in $(git diff --name-only "$PARENT_COMMIT" HEAD); do
-          DIR=$(dirname "$FILE")
-          if [ -f "$FILE" ] && [ "$(basename "$FILE")" = "package.json" ] && [[ ! "$DIR" =~ "__mocks__" ]]; then
-            # Get the old version before making any changes
-            OLD_PACKAGE_VERSION=$(git show "$PARENT_COMMIT":"$FILE" | jq -r .version)
-            # Get the current version
-            CURRENT_PACKAGE_VERSION=$(jq -r .version "$FILE")
+        # Obtain a list of changed files in the last commit
+        CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+        echo "Changed files: $CHANGED_FILES"
 
-            echo "Package version: $CURRENT_PACKAGE_VERSION; old version: $OLD_PACKAGE_VERSION"
+        # Check if there are changes
+        if [ -n "$CHANGED_FILES" ]; then
+          for FILE in $CHANGED_FILES; do
+            DIR=$(dirname "$FILE")
+            FILENAME=$(basename "$FILE")
+            echo "DIR: $DIR"
+            echo "File basename: $FILENAME"
+            if [ "$FILENAME" = "package.json" ] && [[ ! "$DIR" =~ "__mocks__" ]]; then
+              # Get the old version before making any changes
+              OLD_PACKAGE_VERSION=$(git show HEAD^:"$FILE" | jq -r .version)
+              # Get the current version
+              CURRENT_PACKAGE_VERSION=$(jq -r .version "$FILE")
 
-            if [ "$CURRENT_PACKAGE_VERSION" != "$OLD_PACKAGE_VERSION" ]; then
-              CHANGED_DIRS="$CHANGED_DIRS $DIR"
+              echo "Package version: $CURRENT_PACKAGE_VERSION; old version: $OLD_PACKAGE_VERSION"
+
+              if [ "$CURRENT_PACKAGE_VERSION" != "$OLD_PACKAGE_VERSION" ]; then
+                CHANGED_DIRS="$CHANGED_DIRS $DIR"
+              fi
             fi
-          fi
-        done
+          done
+        fi
 
         echo "Changed directories with package.json version changes: $CHANGED_DIRS"
         echo "::set-output name=changed_dirs::$CHANGED_DIRS"
