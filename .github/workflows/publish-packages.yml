@@ -10,6 +10,7 @@ env:
   # Required for the `old-site` app to build
   GH_USERNAME: ${{ secrets.GH_USERNAME }}
   GH_PAT: ${{ secrets.GH_PAT }}
+  PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
   # Required for the `website` package to build
   GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
