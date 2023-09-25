@@ -1,0 +1,10 @@
+{
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": null,
+	"editor.detectIndentation": false,
+	"files.associations": {
+		"*.json": "jsonc",
+		"*.psql": "sql",
+		".npmrc-publish": "shellscript"
+	}
+}

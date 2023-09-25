@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/games",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "eslint": "eslint index.js",
     "stylelint": "stylelint index.scss --fix --quiet-deprecation-warnings",

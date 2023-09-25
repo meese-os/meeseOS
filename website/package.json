@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/website",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
@@ -38,7 +38,9 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "css-minimizer-webpack-plugin": "^5.0.1",
+    "editorconfig": "^2.0.0",
     "eslint": "^8.48.0",
+    "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.6",
     "pm2": "^5.2.0",
