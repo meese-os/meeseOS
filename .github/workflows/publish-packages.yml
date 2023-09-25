@@ -20,6 +20,9 @@ jobs:
       with:
         node-version: 16
 
+    - name: Install Rush
+      run: pnpm install -g @microsoft/rush
+
     - name: Install dependencies
       run: rush install
 
