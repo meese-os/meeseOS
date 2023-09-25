@@ -9,8 +9,17 @@ changedPackageJsonFiles=$(git diff --name-only HEAD^ HEAD | grep -E 'package\.js
 # Iterate through the changed package.json files and change the
 # Windows remove command to the Unix remove command
 for file in $changedPackageJsonFiles; do
-	sed -i 's/rd \/s \/q dist>nul 2>&1|echo.>nul/rm -rf .\/dist\/*/g' "$file"
-	git add "$file"
+	to_replace="rd \/s \/q dist>nul 2>&1|echo.>nul"
+	replacement="rm -rf .\/dist\/*"
+
+	# https://stackoverflow.com/a/61808364/6456163
+	changes=""
+	changes+=$(sed -i '' "s/$to_replace/$replacement/g w /dev/stdout" "$file")
+	if [ "$changes" != "" ]; then
+		# NOTE: This pushes *all* changes to the affected `package.json` files,
+		# not just the changes made by the `sed` command above. Be careful!
+		git add "$file"
+	fi
 done
 
 echo "Replacements completed for changed package.json files."
