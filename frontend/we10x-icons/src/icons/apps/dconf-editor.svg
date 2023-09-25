@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient1983" x1="-22.489" x2="-6.6145" y1="5.8207" y2="5.8207" gradientTransform="matrix(.92308 0 0 .92308 20.634 4.1876)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient1995"/>
+  <linearGradient id="linearGradient1995" x1="-22.489" x2="-6.6145" y1="5.8207" y2="5.8207" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#f55055" offset="0"/>
+   <stop stop-color="#eb1e32" offset="1"/>
+  </linearGradient>
+  <filter id="filter2838" x="-.036921" y="-.1747" width="1.0738" height="1.3494" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="0.31673924"/>
+  </filter>
+  <filter id="filter2834" x="-.13107" y="-.13107" width="1.2621" height="1.2621" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="0.55896915"/>
+  </filter>
+  <linearGradient id="linearGradient2777" x1="4.3106" x2="14.36" y1="8.4665" y2="8.4665" gradientTransform="matrix(.93235 0 0 .93235 3.2843 -5.8823)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient1995"/>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(.70247 -1.5425)">
+  <rect x="2.8544" y="4.9203" width="12.895" height="10.746" ry=".73268" fill="#960a14" stroke-width=".92308"/>
+  <rect x="-.12534" y="3.4549" width="14.654" height="12.211" ry=".9769" fill="url(#linearGradient1983)" stroke-width=".92308"/>
+  <g fill="#fff" stroke-width=".92308">
+   <rect x="1.3396" y="5.1645" width="11.723" height="1.4654" ry=".24423"/>
+   <rect x="1.3396" y="8.0953" width="5.373" height="5.6172" ry=".48846"/>
+   <rect x="7.6894" y="8.0953" width="5.373" height="1.2211" ry=".24423"/>
+   <rect x="7.6894" y="9.0722" width="5.373" height="1.9538" ry=".24423" opacity=".8"/>
+   <rect x="7.6894" y="10.293" width="5.373" height="1.9538" ry=".24423" opacity=".6"/>
+  </g>
+  <rect transform="matrix(.20585 .20585 -.20585 .20585 -3.3225 .13721)" x="60.933" y="-3.6309" width="20.589" height="4.3513" ry="2.1756" filter="url(#filter2838)" opacity=".3" stroke-width="3.2028"/>
+  <circle transform="matrix(.20585 .20585 -.20585 .20585 -3.3225 .13721)" cx="48.881" cy="-1.4566" r="13.974" fill="none" filter="url(#filter2834)" opacity=".3" stroke="#000" stroke-linecap="round" stroke-width="4.643"/>
+  <circle cx="7.0689" cy="9.8669" r="3.5886" fill="#f44b51" opacity=".5" stroke-linecap="round" stroke-width=".12238"/>
+  <rect transform="rotate(45)" x="15.497" y="1.379" width="5.9938" height="1.2667" ry=".63335" fill="#960a14" stroke-width=".93238"/>
+  <circle transform="rotate(45)" cx="11.988" cy="2.0122" r="4.068" fill="none" stroke="url(#linearGradient2777)" stroke-linecap="round" stroke-width="1.3516"/>
+ </g>
+</svg>

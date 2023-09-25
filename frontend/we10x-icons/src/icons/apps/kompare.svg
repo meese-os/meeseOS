@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="b" x1="399.57" x2="399.57" y1="545.8" y2="517.8" gradientTransform="matrix(2.1429,0,0,2.1429,-826.36,-1107.5)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#3889e9" offset="0"/>
+   <stop stop-color="#5ea5fb" offset="1"/>
+  </linearGradient>
+ </defs>
+ <circle cx="164.7" cy="32.044" r="30.001" fill-opacity="0" stroke-width="1.5715"/>
+ <circle cx="32.02" cy="32.044" r="0" fill="url(#b)" stroke-width="1.5715"/>
+ <g transform="translate(-86.61 -18.409)">
+  <rect x="108.72" y="32.59" width="32.63" height="45.319" ry="3.5616" fill="#ffc107" stroke-linecap="round" stroke-width="2.8464"/>
+  <g fill="#ff9b00">
+   <rect x="114.84" y="39.589" width="20.394" height="1.5106" ry=".75532"/>
+   <rect x="114.84" y="44.504" width="20.394" height="1.5106" ry=".75532"/>
+   <rect x="114.84" y="49.42" width="12.84" height="1.5106" ry=".75532"/>
+   <rect x="114.84" y="57.115" width="20.394" height="1.5106" ry=".75532"/>
+   <rect x="114.84" y="62.031" width="20.394" height="1.5106" ry=".75532"/>
+   <rect x="114.84" y="66.947" width="12.84" height="1.5106" ry=".75532"/>
+  </g>
+  <rect x="95.869" y="22.909" width="32.63" height="45.319" ry="3.5616" fill="#e4e4e4" stroke-linecap="round" stroke-width="2.8464"/>
+  <g fill="#c2c2c2">
+   <rect x="101.94" y="29.757" width="20.489" height="1.5106" ry=".75532"/>
+   <rect x="101.94" y="34.673" width="20.489" height="1.5106" ry=".75532"/>
+   <rect x="101.94" y="39.589" width="12.9" height="1.5106" ry=".75532"/>
+   <rect x="101.94" y="47.284" width="20.489" height="1.5106" ry=".75532"/>
+   <rect x="101.94" y="52.2" width="20.489" height="1.5106" ry=".75532"/>
+   <rect x="101.94" y="57.115" width="12.9" height="1.5106" ry=".75532"/>
+  </g>
+ </g>
+</svg>

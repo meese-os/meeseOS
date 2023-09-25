@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <filter id="filter1536" x="-.062745" y="-.057485" width="1.1255" height="1.115" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="0.9411685"/>
+  </filter>
+  <linearGradient id="c" x1="98.123" x2="510.56" y1="1517.5" y2="828.58" gradientTransform="matrix(.015911 0 0 .015283 -9.591 3.0785)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#7ccbea" offset="0"/>
+   <stop stop-color="#00b9ff" offset="1"/>
+  </linearGradient>
+  <linearGradient id="b" x1="-323.88" x2="75.682" y1="1270.6" y2="1061.4" gradientTransform="matrix(.015911 0 0 .015283 -9.591 3.0785)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#00b2ed" offset="0"/>
+   <stop stop-color="#009bdb" offset="1"/>
+  </linearGradient>
+  <linearGradient id="a" x1="73.727" x2="90.762" y1="1076.4" y2="571" gradientTransform="matrix(.015911 0 0 .015283 -9.591 3.0785)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#01a8ec" offset="0"/>
+   <stop stop-color="#74d8ff" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(16.752 -10.777)" fill-rule="evenodd">
+  <path transform="matrix(.37592 0 0 .37592 -20.315 7.2138)" d="m32.088 12.354-17.945 9.9902-0.01953-0.0098v0.02148l-0.05274 0.0293 0.05274 0.0293-0.12305 19.059 18.002 10.174v-0.04297l17.998-10.172-0.12305-19.008 0.06641-0.03516-0.06641-0.03711v-0.05859l-0.05273 0.0293-17.736-9.9688z" filter="url(#filter1536)" image-rendering="optimizeSpeed" opacity=".3" stroke-width=".048559"/>
+  <g stroke-width=".018255">
+   <path d="m-8.286 26.614 6.7676-3.8247-0.046067-7.195-6.7213 3.6831z" fill="url(#c)" image-rendering="optimizeSpeed"/>
+   <path d="m-8.2844 26.629-6.7676-3.8247 0.04607-7.195 6.7213 3.6831z" fill="url(#b)" image-rendering="optimizeSpeed"/>
+   <path d="m-15.025 15.629 6.773-3.7711 6.713 3.7727-6.7492 3.6978z" fill="url(#a)" image-rendering="optimizeSpeed"/>
+  </g>
+ </g>
+</svg>
