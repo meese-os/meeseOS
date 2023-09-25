@@ -73,7 +73,8 @@ jobs:
         echo "changed_dirs=$CHANGED_DIRS" >> $GITHUB_OUTPUT
 
         # Discard unstaged changes
-        git restore .
+        git reset --hard
+        git checkout master
 
     - name: Publish to GitHub Package Registry
       run: |
