@@ -1,11 +1,11 @@
 {
   "name": "@meese-os/website",
-  "version": "98.98.98",
+  "version": "98.99.98",
   "description": "meeseOS, implemented in OS.js",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint src/client/**/*.js src/server/**/*.js",
-    "stylelint": "stylelint src/client/*.scss --fix --quiet-deprecation-warnings",
+    "eslint": "npx eslint src/client/**/*.js src/server/**/*.js",
+    "stylelint": "npx stylelint src/client/*.scss --fix --quiet-deprecation-warnings",
     "test": "npm run eslint && npm run stylelint",
     "serve": "node src/server/index.js",
     "build": "webpack && npm run build:manifest",
