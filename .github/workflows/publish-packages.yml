@@ -6,6 +6,10 @@ on:
     branches:
       - master
 
+env:
+  GH_USERNAME: ${{ secrets.GH_USERNAME }}
+  GH_PAT: ${{ secrets.GH_PAT }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
