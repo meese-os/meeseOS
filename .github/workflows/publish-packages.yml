@@ -72,6 +72,9 @@ jobs:
         echo "Changed directories with package.json version changes: $CHANGED_DIRS"
         echo "changed_dirs=$CHANGED_DIRS" >> $GITHUB_OUTPUT
 
+        # Discard unstaged changes
+        git restore .
+
     - name: Publish to GitHub Package Registry
       run: |
         CHANGED_DIRS="${{ steps.detect.outputs.changed_dirs }}"
