@@ -36,7 +36,8 @@ const templates = path.resolve(__dirname, "../templates");
 
 const filterInput = (input) =>
 	String(input)
-		.replace(/[^A-z0-9_@/]/g, "")
+		.toLowerCase()
+		.replace(/[^a-z0-9_@\-/]/g, "")
 		.trim();
 
 const scaffolds = {
@@ -197,7 +198,7 @@ const scaffoldPackage = (type) =>
 		const choices = force || (await inquirer.prompt([
 			{
 				name: "name",
-				message: "Enter name of package ([A-z0-9_@/])",
+				message: "Enter name of package ([a-z0-9_@\\-/])",
 				default: defaultName,
 				filter: filterInput,
 				validate: (input) => {
