@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/client",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "meeseOS client",
   "scripts": {
     "test": "npm run eslint && npm run stylelint && npm run jest",

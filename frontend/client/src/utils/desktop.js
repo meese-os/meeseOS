@@ -143,7 +143,7 @@ const createStaticBackground = (core, background) => {
 			styles.backgroundImage = `url(${getRandomWallpaper()})`;
 		} else if (background.src === undefined) {
 			styles.backgroundImage = undefined;
-		} else if (background.src.match(/^meeseOS:/)) {
+		} else if (/^meeseOS:/.test(background.src)) {
 			core
 				.make("meeseOS/vfs")
 				.url(background.src)
@@ -242,7 +242,7 @@ export const resourceResolver = (core) => {
 	const getSoundThemeName = () => getThemeName("sounds");
 
 	const soundResource = (path) => {
-		if (!path.match(/\.([a-z]+)$/)) {
+		if (!/\.([a-z]+)$/i.test(path)) {
 			const defaultExtension = "mp3";
 			const checkExtensions = ["oga", "mp3"];
 			const found = checkExtensions.find((str) => media.audio[str] === true);

@@ -152,7 +152,7 @@ export default class Core extends CoreBase {
 		this.options.classNames.forEach((n) => this.$root.classList.add(n));
 
 		const { uri } = this.configuration.ws;
-		if (!uri.match(/^wss?:/)) {
+		if (!/^wss?:/.test(uri)) {
 			const { protocol, host } = window.location;
 
 			this.configuration.ws.uri =
@@ -485,7 +485,7 @@ export default class Core extends CoreBase {
 			);
 		}
 
-		if (!url.match(/^((http|ws|ftp)s?:)/i)) {
+		if (!/^((http|ws|ftp)s?:)/i.test(url)) {
 			url = this.url(url);
 
 			options = merge(

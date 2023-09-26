@@ -40,7 +40,7 @@ const makeTree = (core, icon) => {
 
 	const getIcon = (m, fallbackIcon) =>
 		m.icon
-			? m.icon.match(/^(https?:)\//)
+			? /^(https?:)\//.test(m.icon)
 				? m.icon
 				: core.url(m.icon, {}, m)
 			: fallbackIcon;

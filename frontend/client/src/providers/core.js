@@ -455,7 +455,7 @@ export default class CoreServiceProvider extends ServiceProvider {
 			resource: soundResource,
 			play: (src, options = {}) => {
 				if (soundsEnabled()) {
-					const absoluteSrc = src.match(/^(\/|https?:)/)
+					const absoluteSrc = /^(\/|https?:)/.test(src)
 						? src
 						: soundResource(src);
 

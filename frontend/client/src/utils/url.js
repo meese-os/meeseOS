@@ -50,7 +50,7 @@ export const urlResolver = (configuration) => {
 	return (endpoint = "/", options = {}, metadata = {}) => {
 		if (typeof endpoint !== "string") {
 			return http.public;
-		} else if (endpoint.match(/^(http|ws|ftp)s?:/i)) {
+		} else if (/^(http|ws|ftp)s?:/i.test(endpoint)) {
 			return endpoint;
 		}
 

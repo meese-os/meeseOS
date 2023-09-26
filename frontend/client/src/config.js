@@ -40,7 +40,7 @@ const createUri = (str) =>
 
 const pathname = createUri(window.location.pathname);
 const href = createUri(window.location.href);
-const development = !(process.env.NODE_ENV || "").match(/^prod/i);
+const development = !/^prod/i.test(process.env.NODE_ENV || "");
 
 export const defaultConfiguration = {
 	development: development,

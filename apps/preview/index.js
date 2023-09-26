@@ -79,9 +79,9 @@ const openFile = async (core, proc, win, a, file, restore) => {
 	const url = await core.make("meeseOS/vfs").url(file);
 	const ref = { ...file, url };
 
-	if (file.mime.match(/^image/)) {
+	if (/^image/.test(file.mime)) {
 		a.setImage({ image: ref, restore });
-	} else if (file.mime.match(/^video/)) {
+	} else if (/^video/.test(file.mime)) {
 		a.setVideo({ video: ref, restore });
 	}
 

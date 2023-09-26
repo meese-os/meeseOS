@@ -39,7 +39,7 @@ const ONTOP_ZINDEX = 8388635;
 const BOTTOM_ZINDEX = 10;
 
 /**
- * Creates window attributes from an object
+ * Creates window attributes from an object.
  * @param {Object} attrs
  */
 export const createAttributes = (attrs) => ({
@@ -77,7 +77,7 @@ export const createAttributes = (attrs) => ({
 });
 
 /**
- * Creates window state from an object
+ * Creates window state from an object.
  * @param {WindowState} state
  * @param {Object} options
  * @param {WindowAttributes} attrs
@@ -108,7 +108,7 @@ export const createState = (state, options, attrs) => ({
 });
 
 /**
- * Creates data attributes for window DOM
+ * Creates data attributes for window DOM.
  * @param {String} id
  * @param {WindowState} state
  * @param {WindowAttributes} attributes
@@ -132,7 +132,7 @@ export const createDOMAttributes = (id, state, attributes) => ({
 });
 
 /**
- * Creates styles for window DOM
+ * Creates styles for window DOM.
  * @param {WindowState} state
  * @param {WindowAttributes} attributes
  * @returns {Object}
@@ -150,7 +150,7 @@ export const createDOMStyles = (
 });
 
 /**
- * Clamps position to viewport
+ * Clamps position to viewport.
  * @param {Object} rect
  */
 export const clampPosition = (rect, { dimension, position }) => {
@@ -168,7 +168,7 @@ export const clampPosition = (rect, { dimension, position }) => {
 };
 
 /**
- * Window rendering callback function
+ * Window rendering callback function.
  * @param {Window} win Window reference
  * @param {Function} callback
  */
@@ -195,7 +195,7 @@ export const renderCallback = (win, callback) => {
 };
 
 /**
- * Gets new position based on "gravity"
+ * Gets new position based on "gravity".
  * @param {Window} win Window reference
  * @param {Object} rect
  * @param {String} gravity
@@ -210,21 +210,21 @@ export const positionFromGravity = (win, rect, gravity) => {
 		const hasVertical = gravity.match(/top|bottom/);
 		const hasHorizontal = gravity.match(/left|rigth/);
 
-		if (gravity.match(/top/)) {
+		if (/top/.test(gravity)) {
 			top = rect.top;
-		} else if (gravity.match(/bottom/)) {
+		} else if (/bottom/.test(gravity)) {
 			top = rect.height - win.state.dimension.height + rect.top;
 		}
 
-		if (gravity.match(/left/)) {
+		if (/left/.test(gravity)) {
 			left = rect.left;
-		} else if (gravity.match(/right/)) {
+		} else if (/right/.test(gravity)) {
 			left = rect.width - win.state.dimension.width;
 		}
 
-		if (!hasVertical && gravity.match(/center/)) {
+		if (!hasVertical && /center/.test(gravity)) {
 			top = rect.height / 2 - win.state.dimension.height / 2;
-		} else if (!hasHorizontal && gravity.match(/center/)) {
+		} else if (!hasHorizontal && /center/.test(gravity)) {
 			left = rect.width / 2 - win.state.dimension.width / 2;
 		}
 	}
@@ -233,7 +233,7 @@ export const positionFromGravity = (win, rect, gravity) => {
 };
 
 /**
- * Gets new dimension based on container
+ * Gets new dimension based on container.
  * @param {Window} win Window reference
  * @param {Object} rect
  * @param {HTMLElement} container
@@ -277,7 +277,7 @@ export const dimensionFromElement = (win, rect, container) => {
 };
 
 /**
- * Transforms vector values (ex. float to integer)
+ * Transforms vector values (ex. float to integer).
  * @param {Object} rect
  */
 export const transformVectors = (rect, { width, height }, { top, left }) => {
@@ -304,7 +304,7 @@ export const transformVectors = (rect, { width, height }, { top, left }) => {
 };
 
 /**
- * Creates a clamper for resize/move
+ * Creates a clamper for resize/move.
  * @param {Window} win Window reference
  */
 const clamper = (win) => {
@@ -330,7 +330,7 @@ const clamper = (win) => {
 };
 
 /**
- * Creates a resize handler
+ * Creates a resize handler.
  * @param {Window} win Window reference
  */
 export const resizer = (win, handle) => {
@@ -352,7 +352,7 @@ export const resizer = (win, handle) => {
 };
 
 /**
- * Creates a movement handler
+ * Creates a movement handler.
  * @param {Window} win Window reference
  */
 export const mover = (win, rect) => {
@@ -367,7 +367,7 @@ export const mover = (win, rect) => {
 };
 
 /**
- * Calculates a new initial position for window
+ * Calculates a new initial position for window.
  * @param {Window} win Window reference
  * @param {Object} rect
  */
@@ -395,7 +395,7 @@ const getScreenOrientation = (screen) =>
 			: "landscape";
 
 /**
- * Gets a media query name from a map
+ * Gets a media query name from a map.
  * @param {Window} win Window reference
  * @returns {String}
  */
@@ -412,7 +412,7 @@ export const getMediaQueryName = (win) =>
 		.pop();
 
 /**
- * Loads [certain] window options from configuration
+ * Loads [certain] window options from configuration.
  */
 export const loadOptionsFromConfig = (config, appName, windowId) => {
 	const matchStringOrRegex = (str, matcher) =>

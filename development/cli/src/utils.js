@@ -90,7 +90,7 @@ const loadTasks = async (defaults, includes, options) => {
 };
 
 const createOptions = (options) => ({
-	production: Boolean((process.env.NODE_ENV || "development").match(/^prod/)),
+	production: /^prod/i.test(process.env.NODE_ENV || "development"),
 	cli: createPath(options.root, "src/cli"),
 	npm: createPath(options.root, "package.json"),
 	packages: createPath(options.root, "packages.json"),

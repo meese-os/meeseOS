@@ -95,7 +95,7 @@ const removeSoftDeleted = (logger, disabled) => (iter) => {
 		return false;
 	}
 
-	if (iter.filename.toLowerCase().match(/\.disabled$/)) {
+	if (/\.disabled$/i.test(iter.filename)) {
 		logger.warn(iter.meta.name, "was disabled by directory suffix");
 		return false;
 	}
@@ -173,7 +173,7 @@ const action = async ({ logger, options, args }) => {
 		});
 
 	packages.forEach((pkg) => {
-		const type = pkg.filename.match(/node_modules/) ? "npm" : "local";
+		const type = /node_modules/.test(pkg.filename) ? "npm" : "local";
 		const method = copyFiles ? "copy" : "symlink";
 		logger.log(`- ${pkg.json.name} as ${pkg.meta.name} [${method}, ${type}]`);
 	});

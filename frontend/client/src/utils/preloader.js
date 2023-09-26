@@ -50,12 +50,12 @@ import logger from "../logger";
  */
 
 /**
- * The Preloader loads styles and scripts
+ * The Preloader loads styles and scripts.
  */
 export default class Preloader {
 	constructor(root) {
 		/**
-		 * A list of cached preloads
+		 * A list of cached preloads.
 		 * @type {String[]}
 		 */
 		this.loaded = [];
@@ -71,7 +71,7 @@ export default class Preloader {
 	}
 
 	/**
-	 * Loads all resources required for a package
+	 * Loads all resources required for a package.
 	 * @param {String[]} list A list of resources
 	 * @param {Boolean} [force=false] Force loading even though previously cached
 	 * @returns {Promise<PreloaderResult>} A list of failed resources
@@ -85,7 +85,7 @@ export default class Preloader {
 			.map((entry) => {
 				logger.debug("Packages::preload()", entry);
 
-				const p = entry.match(/\.js$/)
+				const p = /\.js$/.test(entry)
 					? script(this.$root, entry)
 					: style(this.$root, entry);
 
@@ -98,7 +98,7 @@ export default class Preloader {
 	}
 
 	/**
-	 * Checks the loaded list
+	 * Checks the loaded list.
 	 * @private
 	 * @param {Object[]} results Preload results
 	 * @param {String[]} cached Already cached preloads

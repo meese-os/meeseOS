@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/preview",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "MeeseOS Preview Application",
   "scripts": {
     "eslint": "eslint *.js",
