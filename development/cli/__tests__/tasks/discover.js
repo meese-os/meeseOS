@@ -10,6 +10,10 @@ describe("task > package:discover", () => {
 	const root = temp.mkdirSync("meese-cli-jest");
 	const fname = (str) => createPath(root, str);
 
+	beforeAll(() => {
+		jest.spyOn(console, "warn").mockImplementation(() => {});
+	});
+
 	afterAll(() => fs.removeSync(root));
 
 	test("should discover packages", async () => {

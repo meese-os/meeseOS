@@ -2,6 +2,10 @@ const path = require("path");
 const utils = require("../src/utils.js");
 
 describe("utils", () => {
+	beforeAll(() => {
+		jest.spyOn(console, "warn").mockImplementation(() => {});
+	});
+
 	describe("createOptions", () => {
 		test("should create structured object", () => {
 			const options = utils.createOptions({
