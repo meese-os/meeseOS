@@ -74,9 +74,14 @@ const sanitize = (path) => {
  */
 const streamFromRequest = (req) => {
 	const isStream = req.files.upload instanceof Stream;
-	return isStream
-		? req.files.upload
-		: fs.createReadStream(req.files.upload.filepath);
+	if (isStream) return req.files.upload;
+
+	const filePath = req.files.upload.filepath || req.files.upload.path;
+	if (!filePath) {
+		throw new Error("File path is empty or undefined.");
+	}
+
+	return fs.createReadStream(filePath);
 };
 
 /**

@@ -146,7 +146,7 @@ const getRealPath = (core, session, mount, file) => {
 };
 
 /**
- * System VFS adapter
+ * System VFS adapter.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} [options] Adapter options
  */
@@ -268,7 +268,7 @@ module.exports = (core) => {
 				}),
 
 		/**
-		 * Gets the real filesystem path (internal only)
+		 * Gets the real filesystem path (internal only).
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
 		 * @returns {String}
@@ -426,7 +426,7 @@ module.exports = (core) => {
 		copy: crossWrapper("copy"),
 
 		/**
-		 * Removes given file or directory
+		 * Removes given file or directory.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
 		 * @returns {Boolean}
