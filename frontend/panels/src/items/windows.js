@@ -57,9 +57,7 @@ const mapWindow = (win) => {
  */
 export default class WindowsPanelItem extends PanelItem {
 	init() {
-		if (this.inited) {
-			return;
-		}
+		if (this.inited) return;
 
 		const filterVisibility = (win) =>
 			typeof win.attributes.visibility === "undefined" ||
@@ -198,9 +196,9 @@ export default class WindowsPanelItem extends PanelItem {
 				[
 					h("img", {
 						src: w.icon,
-						alt: w.title || "(window)",
+						alt: w.title ?? "(window)",
 					}),
-					h("span", {}, w.title || "(window)"),
+					h("span", {}, w.title ?? "(window)"),
 				]
 			)
 		);

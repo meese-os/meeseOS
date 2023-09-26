@@ -48,7 +48,7 @@ export const TextField = (props = {}, _children = []) =>
 			autocorrect: "off",
 			autocapitalize: "off",
 			spellcheck: "false",
-			type: props.type || "text",
+			type: props.type ?? "text",
 		},
 		(fieldProps) => h("input", fieldProps)
 	);

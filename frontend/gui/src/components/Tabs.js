@@ -66,7 +66,7 @@ const view = nestable(
 	},
 	{
 		init: (props) => ({
-			selectedIndex: props.selectedIndex || 0,
+			selectedIndex: props.selectedIndex ?? 0,
 		}),
 		setSelectedIndex: (selectedIndex) => (_state) => ({ selectedIndex }),
 	},
@@ -98,7 +98,7 @@ export const Tabs = (props, children) =>
 	h(
 		view,
 		{
-			class: "meeseOS-gui meeseOS-gui-tabs " + (props.class || ""),
+			class: "meeseOS-gui meeseOS-gui-tabs " + (props.class ?? ""),
 			...props,
 		},
 		children

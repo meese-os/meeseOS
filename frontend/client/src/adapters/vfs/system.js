@@ -57,7 +57,7 @@ const requester = (core) =>
 			}
 
 			const contentType = response.headers.get("content-type")
-				|| "application/octet-stream";
+				?? "application/octet-stream";
 
 			return response.arrayBuffer().then((result) => ({
 				mime: contentType,

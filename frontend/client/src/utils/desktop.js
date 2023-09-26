@@ -192,7 +192,7 @@ export const applyCursorEffect = (cursor) => {
 	}
 
 	// Calls the cursor effect function by name
-	const effectName = cursor.effect || "none";
+	const effectName = cursor.effect ?? "none";
 	const options = cursor.options || {};
 	cursorEffects[effectName].effect(options);
 };

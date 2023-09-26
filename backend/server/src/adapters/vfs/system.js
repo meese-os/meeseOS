@@ -487,7 +487,7 @@ module.exports = (core) => {
 					(file) => getRealPath(core, options.session, vfs.mount, file)
 				);
 
-				const action = options.action || "compress";
+				const action = options.action ?? "compress";
 				switch (action) {
 					case "compress": {
 						// Define the archive instance

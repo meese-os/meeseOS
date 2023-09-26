@@ -69,7 +69,7 @@ export const ToggleField = (props = {}, children = []) =>
 					{
 						class: "meeseOS-toggle-label",
 					},
-					[props.label || "", ...children]
+					[props.label ?? "", ...children]
 				),
 			]),
 		(ev) => [

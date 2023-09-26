@@ -1,3 +1,36 @@
+/**
+ * MeeseOS - JavaScript Cloud/Web Desktop Platform
+ *
+ * Copyright (c) 2023-Present, Aaron Meese <aaron@meese.dev>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ * 	 and/or other materials provided with the distribution.
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ * 	 without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author  Aaron Meese <aaron@meese.dev>
+ * @licence Modified BSD License
+ */
+
 import { Box, BoxContainer, SelectField, TextField } from "@meese-os/gui";
 import {
 	componentToHex,
@@ -10,11 +43,11 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Default MeeseOS multiple colors dialog
+ * Default MeeseOS multiple colors dialog.
  */
 export default class MultipleColorsDialog extends Dialog {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
@@ -28,7 +61,7 @@ export default class MultipleColorsDialog extends Dialog {
 				className: "color",
 				buttons: ["ok", "cancel"],
 				window: {
-					title: args.title || "Select Colors",
+					title: args.title ?? "Select Colors",
 					attributes: {
 						minDimension: {
 							width: 500,
@@ -41,7 +74,7 @@ export default class MultipleColorsDialog extends Dialog {
 		);
 
 		// Format: { colorOne: "#000000", colorTwo: "#000000", ... }
-		this.value = structuredClone(args.colors) || { default: "#000000" };
+		this.value = structuredClone(args.colors) ?? { default: "#000000" };
 
 		// IDEA: Show a preview of the new widget
 		// TODO: Close dialog if the widget is deleted

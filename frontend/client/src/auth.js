@@ -52,7 +52,7 @@ const createAdapter = (core, options) => {
 		? localStorageAuth
 		: typeof options.adapter === "function"
 			? options.adapter
-			: defaultAdapters[options.adapter || "server"];
+			: defaultAdapters[options.adapter ?? "server"];
 
 	return {
 		login: () => Promise.reject(new Error("Not implemented")),
@@ -60,7 +60,7 @@ const createAdapter = (core, options) => {
 		register: () => Promise.reject(new Error("Not implemented")),
 		init: () => Promise.resolve(true),
 		destroy: () => {},
-		...adapter(core, options.config || {}),
+		...adapter(core, options.config ?? {}),
 	};
 };
 

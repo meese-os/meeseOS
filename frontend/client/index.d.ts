@@ -560,32 +560,32 @@ declare class Window extends EventEmitter {
 	_updateDOM(): void;
 
 	/**
-	 * Updates the window buttons in DOM.
+	 * Updates the window buttons in the DOM.
 	 */
 	private _updateButtons;
 
 	/**
-	 * Updates window title in DOM.
+	 * Updates window title in the DOM.
 	 */
 	private _updateTitle;
 
 	/**
-	 * Updates window icon decoration in DOM.
+	 * Updates window icon decoration in the DOM.
 	 */
 	private _updateIconStyles;
 
 	/**
-	 * Updates window header decoration in DOM.
+	 * Updates window header decoration in the DOM.
 	 */
 	private _updateHeaderStyles;
 
 	/**
-	 * Updates window data in DOM.
+	 * Updates window data in the DOM.
 	 */
 	private _updateAttributes;
 
 	/**
-	 * Updates window style in DOM.
+	 * Updates window style in the DOM.
 	 */
 	private _updateStyles;
 }
@@ -1063,7 +1063,7 @@ declare class Core extends CoreBase {
 	readonly splash: Splash;
 
 	/**
-	 * Main DOM element.
+	 * Main the DOM element.
 	 */
 	readonly $root: Element;
 

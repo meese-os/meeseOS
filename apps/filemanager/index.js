@@ -105,7 +105,7 @@ const getDirectoryCount = (files) =>
 const getFileCount = (files) =>
 	files.filter((file) => !file.isDirectory).length;
 const getTotalSize = (files) =>
-	files.reduce((total, file) => total + (file.size || 0), 0);
+	files.reduce((total, file) => total + (file.size ?? 0), 0);
 
 /**
  * Formats the file selection status message

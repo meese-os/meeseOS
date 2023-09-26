@@ -199,7 +199,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 			refresh(refreshValue);
 			return result;
 		} catch (error) {
-			dialog("error", error, defaultError || "An error occurred");
+			dialog("error", error, defaultError ?? "An error occurred");
 		} finally {
 			win.setState("loading", false);
 		}

@@ -46,8 +46,8 @@ let terminals = [];
  */
 const createTerminal = (core, ws, options = {}, args = []) => {
 	const hostname = core.config("xterm.hostname", "localhost");
-	const username = process.env.USERNAME || options.username || "root";
-	const password = process.env.PASSWORD || options.password || "toor";
+	const username = process.env.USERNAME ?? options.username ?? "root";
+	const password = process.env.PASSWORD ?? options.password ?? "toor";
 	const sshCommand = `ssh -o StrictHostKeyChecking=no ${username}@${hostname}`;
 	let sshPassCommand = `sshpass -p ${password} ${sshCommand}`;
 

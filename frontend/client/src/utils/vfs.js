@@ -108,8 +108,7 @@ const sortMap = {
  */
 const createSpecials = (path) => {
 	const specials = [];
-
-	const stripped = path.replace(/\/+/g, "/").replace(/^(\w+):/, "") || "/";
+	const stripped = path.replace(/\/+/g, "/").replace(/^(\w+):/, "") ?? "/";
 
 	if (stripped !== "/") {
 		specials.push({
@@ -119,7 +118,7 @@ const createSpecials = (path) => {
 			size: 0,
 			stat: {},
 			filename: "..",
-			path: parentDirectory(path) || "/",
+			path: parentDirectory(path) ?? "/",
 		});
 	}
 
@@ -127,7 +126,7 @@ const createSpecials = (path) => {
 };
 
 /**
- * Creates a FileReader (promisified)
+ * Creates a FileReader (promisified).
  *
  * @param {String} method The method to call
  * @param {ArrayBuffer} ab The ArrayBuffer

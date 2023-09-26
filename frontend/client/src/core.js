@@ -108,7 +108,7 @@ export default class Core extends CoreBase {
 		this.ping = null;
 
 		/**
-		 * Main DOM element (typically `<body>`)
+		 * Main the DOM element (typically `<body>`)
 		 * @type {Element}
 		 * @readonly
 		 */

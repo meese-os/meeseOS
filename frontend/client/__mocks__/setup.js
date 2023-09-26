@@ -116,7 +116,7 @@ document.createElement = (type) => {
 	const el = originalCreateElement.call(document, type);
 	if (type === "script" || type === "link") {
 		setTimeout(() => {
-			const src = (el.src || el.href || "").replace(/\.(css|js)$/, "");
+			const src = (el.src ?? el.href ?? "").replace(/\.(css|js)$/, "");
 			if (src === "http://localhost/onreadystatechange") {
 				el.readyState = "loaded";
 				el.onreadystatechange();

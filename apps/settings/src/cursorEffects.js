@@ -69,7 +69,7 @@ const getCursorChoices = () =>
 		const properties = cursorEffects[key];
 
 		return {
-			label: properties.label || "Mystery",
+			label: properties.label ?? "Mystery",
 			value: properties.effect.name,
 		};
 	});

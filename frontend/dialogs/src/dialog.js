@@ -47,7 +47,7 @@ const defaultButtons = () => ({
 });
 
 /**
- * Creates a button from a name
+ * Creates a button from a name.
  * @param {String} name button name
  * @returns {Object} button
  */
@@ -65,7 +65,7 @@ const defaultButton = (name) => {
 };
 
 /**
- * Creates options
+ * Creates options.
  */
 const createOptions = (options, _args) =>
 	merge(
@@ -76,7 +76,7 @@ const createOptions = (options, _args) =>
 			buttons: [],
 			sound: null,
 			window: {
-				id: options.id || "Dialog_" + String(dialogCount),
+				id: options.id ?? "Dialog_" + String(dialogCount),
 				title: "Dialog",
 				attributes: {
 					gravity: "center",
@@ -86,7 +86,7 @@ const createOptions = (options, _args) =>
 					sessionable: false,
 					classNames: [
 						"meeseOS-dialog",
-						`meeseOS-${options.className || "unknown"}-dialog`,
+						`meeseOS-${options.className ?? "unknown"}-dialog`,
 					],
 					minDimension: {
 						width: 300,
@@ -100,23 +100,23 @@ const createOptions = (options, _args) =>
 	);
 
 /**
- * MeeseOS default Dialog implementation
+ * MeeseOS default Dialog implementation.
  *
- * Creates a Window with predefined content and actions(s)
+ * Creates a Window with predefined content and actions(s).
  */
 export default class Dialog {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {Object} options Dialog options (including Window)
 	 * @param {Object} [options.defaultValue] Default callback value
-	 * @param {Function} callback The callback function
+	 * @param {Function} [callback=function() {}] The callback function
 	 */
-	constructor(core, args, options, callback) {
+	constructor(core, args, options, callback = function() {}) {
 		this.core = core;
 		this.args = args;
-		this.callback = callback || function() {};
+		this.callback = callback;
 		this.options = createOptions(options, args);
 		this.win = null;
 		this.value = undefined;
@@ -126,16 +126,16 @@ export default class Dialog {
 			typeof n === "string"
 				? defaultButton(n)
 				: {
-					label: n.label || "button",
-					name: n.name || "unknown",
-				  }
+					label: n.label ?? "button",
+					name: n.name ?? "unknown",
+				}
 		);
 
 		dialogCount++;
 	}
 
 	/**
-	 * Destroys the dialog
+	 * Destroys the dialog.
 	 */
 	destroy() {
 		if (this.win) {
@@ -147,11 +147,11 @@ export default class Dialog {
 	}
 
 	/**
-	 * Renders the dialog
+	 * Renders the dialog.
 	 * @param {Function} cb Callback from window
 	 */
 	render(options, cb) {
-		const opts = merge(this.options.window || {}, options, {
+		const opts = merge(this.options.window ?? {}, options, {
 			isMergeableObject: plain,
 		});
 
@@ -199,22 +199,22 @@ export default class Dialog {
 	}
 
 	/**
-	 * Creates the default view
+	 * Creates the default view.
 	 * @param {Object[]} children Child nodes
 	 * @param {Object} [state] Pass on application state (mainly used for buttons)
-	 * @returns {Object} Virtual dom node
+	 * @returns {Object} Virtual DOM node
 	 */
 	createView(children, state = {}) {
 		return h(Box, { grow: 1, shrink: 1 }, [
 			...children,
 			h(Toolbar, { class: "meeseOS-dialog-buttons" }, [
-				...this.createButtons(state.buttons || {}),
+				...this.createButtons(state.buttons ?? {}),
 			]),
 		]);
 	}
 
 	/**
-	 * Gets the button (virtual) DOM elements
+	 * Gets the button (virtual) DOM elements.
 	 * @param {Object} [states] Button states
 	 * @returns {Object[]} Virtual dom node children list
 	 */
@@ -237,7 +237,7 @@ export default class Dialog {
 	}
 
 	/**
-	 * Emits the callback
+	 * Emits the callback.
 	 * @param {String} name Button or action name
 	 * @param {Event} [event] Browser event reference
 	 * @param {Boolean} [close=false] Close dialog
@@ -256,7 +256,7 @@ export default class Dialog {
 	}
 
 	/**
-	 * Plays a sound
+	 * Plays a sound.
 	 * @returns {Boolean} whether the sound was played
 	 */
 	playSound() {
@@ -273,7 +273,7 @@ export default class Dialog {
 	}
 
 	/**
-	 * Gets the first positive button
+	 * Gets the first positive button.
 	 * @returns {String|undefined}
 	 */
 	getPositiveButton() {
@@ -282,7 +282,7 @@ export default class Dialog {
 	}
 
 	/**
-	 * Gets the first negative button
+	 * Gets the first negative button.
 	 * @returns {String|undefined}
 	 */
 	getNegativeButton() {
@@ -291,7 +291,7 @@ export default class Dialog {
 	}
 
 	/**
-	 * Gets the dialog result value
+	 * Gets the dialog result value.
 	 * @returns {*}
 	 */
 	getValue() {

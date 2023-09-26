@@ -735,10 +735,10 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Set the Window title.
-	 * @param {String} title Title
+	 * @param {String} [title=""] Title
 	 */
-	setTitle(title) {
-		this.state.title = title || "";
+	setTitle(title = "") {
+		this.state.title = title;
 		this._updateTitle();
 
 		this.core.emit("meeseOS/window:change", this, "title", title);
@@ -746,10 +746,10 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Set the Window dimension.
-	 * @param {WindowDimension} dimension The dimension
+	 * @param {WindowDimension} [dimension={}] The dimension
 	 */
-	setDimension(dimension) {
-		const { width, height } = { ...this.state.dimension, ...(dimension || {}) };
+	setDimension(dimension = {}) {
+		const { width, height } = { ...this.state.dimension, ...dimension };
 
 		this.state.dimension.width = width;
 		this.state.dimension.height = height;
@@ -759,11 +759,11 @@ export default class Window extends EventEmitter {
 
 	/**
 	 * Set the Window position.
-	 * @param {WindowPosition} position The position
+	 * @param {WindowPosition} [position={}] The position
 	 * @param {Boolean} [preventDefault=false] Prevents any future position setting in init procedure
 	 */
-	setPosition(position, preventDefault = false) {
-		const { left, top } = { ...this.state.position, ...(position || {}) };
+	setPosition(position = {}, preventDefault = false) {
+		const { left, top } = { ...this.state.position, ...position };
 
 		this.state.position.top = top;
 		this.state.position.left = left;
@@ -888,7 +888,6 @@ export default class Window extends EventEmitter {
 	 * @param {String} name State name
 	 * @param {*} value State value
 	 * @param {Boolean} [update=true] Update the DOM
-	 * @param {Boolean} [updateAll=true] Update the entire DOM
 	 */
 	_setState(name, value, update = true) {
 		const oldValue = this.state[name];
@@ -913,9 +912,7 @@ export default class Window extends EventEmitter {
 	 * @param {Boolean} [update=true] Update the DOM
 	 */
 	_toggleState(name, value, eventName, update = true) {
-		if (this.state[name] === value) {
-			return false;
-		}
+		if (this.state[name] === value) return false;
 
 		logger.debug("Window::_toggleState()", name, value, eventName, update);
 
@@ -958,7 +955,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates the window buttons in DOM.
+	 * Updates the window buttons in the DOM.
 	 * @private
 	 */
 	_updateButtons() {
@@ -987,7 +984,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window title in DOM.
+	 * Updates window title in the DOM.
 	 * @private
 	 */
 	_updateTitle() {
@@ -1000,7 +997,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window icon decoration in DOM.
+	 * Updates window icon decoration in the DOM.
 	 * @private
 	 */
 	_updateIconStyles() {
@@ -1013,7 +1010,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window header decoration in DOM.
+	 * Updates window header decoration in the DOM.
 	 * @private
 	 */
 	_updateHeaderStyles() {
@@ -1026,7 +1023,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window data in DOM.
+	 * Updates window data in the DOM.
 	 * @private
 	 */
 	_updateAttributes() {
@@ -1046,7 +1043,7 @@ export default class Window extends EventEmitter {
 	}
 
 	/**
-	 * Updates window style in DOM.
+	 * Updates window style in the DOM.
 	 * @private
 	 */
 	_updateStyles() {

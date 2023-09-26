@@ -33,11 +33,11 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Default MeeseOS Prompt Dialog
+ * Default MeeseOS Prompt Dialog.
  */
 export default class PromptDialog extends Dialog {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
@@ -57,7 +57,7 @@ export default class PromptDialog extends Dialog {
 				className: "prompt",
 				buttons: ["ok", "cancel"],
 				window: {
-					title: args.title || "Prompt",
+					title: args.title ?? "Prompt",
 					attributes: {
 						minDimension: {
 							width: 500,

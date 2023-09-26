@@ -423,7 +423,7 @@ export const loadOptionsFromConfig = (config, appName, windowId) => {
 			return false;
 		} else if (application && !matchStringOrRegex(appName, application)) {
 			return false;
-		} else if (window && !matchStringOrRegex(windowId || "", window)) {
+		} else if (window && !matchStringOrRegex(windowId ?? "", window)) {
 			return false;
 		}
 

@@ -144,7 +144,7 @@ const fetchXhr = (target, fetchOptions) =>
 		Object.entries(fetchOptions.headers).forEach(([key, val]) =>
 			req.setRequestHeader(key, val)
 		);
-		req.responseType = fetchOptions.responseType || "";
+		req.responseType = fetchOptions.responseType ?? "";
 		req.send(fetchOptions.body);
 	});
 

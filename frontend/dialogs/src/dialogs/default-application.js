@@ -33,11 +33,12 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Default MeeseOS DefaultApplication Dialog
+ * Default MeeseOS DefaultApplication Dialog.
  */
 export default class DefaultApplicationDialog extends Dialog {
 	/**
-	 * Constructor
+	 * Constructor.
+	 *
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
@@ -49,7 +50,6 @@ export default class DefaultApplicationDialog extends Dialog {
 	 */
 	constructor(core, args, callback) {
 		args = {
-
 			title: "DefaultApplication",
 			message: "",
 			choices: {},
@@ -104,12 +104,12 @@ export default class DefaultApplicationDialog extends Dialog {
 							h(SelectField, {
 								choices: this.args.choices,
 								value: state.value,
-								onchange: (ev, val) => actions.setValue(val),
+								onchange: (_ev, val) => actions.setValue(val),
 							}),
 							h(ToggleField, {
-								label: this.args.label || "Use as default",
+								label: this.args.label ?? "Use as default",
 								checked: state.checked,
-								onchange: (ev, val) => actions.setChecked(val),
+								onchange: (_ev, val) => actions.setChecked(val),
 							}),
 						]),
 					]),

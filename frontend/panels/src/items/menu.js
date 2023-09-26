@@ -66,8 +66,8 @@ const makeTree = (core, icon) => {
 			.filter((m) => m.hidden !== true)
 			.forEach((m) => {
 				const cat =
-					Object.keys(configuredCategories).find((c) => c === m.category) ||
-					"other";
+					Object.keys(configuredCategories).find((c) => c === m.category)
+					?? "other";
 				const found = configuredCategories[cat];
 
 				if (!categories[cat]) {

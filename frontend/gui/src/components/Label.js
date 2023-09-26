@@ -33,6 +33,7 @@ import { h } from "hyperapp";
 
 /**
  * A label element.
+ *
  * @param {Object} props Properties
  * @param {String} [props.text] Label Text
  * @param {String} [props.placement] Placement
@@ -41,15 +42,15 @@ import { h } from "hyperapp";
  * @param {h[]} children Children
  */
 export const Label = (props = {}, children = []) => {
-	const placement = props.placement || "top";
-	const text = props.text || "";
+	const placement = props.placement ?? "top";
+	const text = props.text ?? "";
 
 	const elementProps = {
 		class: [
 			"meeseOS-gui-field-label",
 			"meeseOS-gui-field-label-on-" + placement,
 		],
-		...props.box || {}
+		...props.box ?? {}
 	};
 
 	return h(Element, elementProps, [

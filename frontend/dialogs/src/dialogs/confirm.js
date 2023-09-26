@@ -33,11 +33,11 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Default MeeseOS Confirm Dialog
+ * Default MeeseOS Confirm Dialog.
  */
 export default class ConfirmDialog extends Dialog {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
@@ -61,7 +61,7 @@ export default class ConfirmDialog extends Dialog {
 			{
 				className: "confirm",
 				window: {
-					title: args.title || "Confirm",
+					title: args.title ?? "Confirm",
 					attributes: {
 						minDimension: {
 							height: 140,

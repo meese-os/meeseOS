@@ -87,7 +87,7 @@ export default class FileDialog extends Dialog {
 		try {
 			args.path = {
 				isDirectory: true,
-				filename: args.path.path.split(":/")[1].split("/").pop() || "",
+				filename: args.path.path.split(":/")[1].split("/").pop() ?? "",
 				...args.path
 			};
 		} catch (e) {

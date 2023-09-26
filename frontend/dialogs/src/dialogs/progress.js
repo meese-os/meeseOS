@@ -33,11 +33,11 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Default MeeseOS Progress Dialog
+ * Default MeeseOS Progress Dialog.
  */
 export default class ProgressDialog extends Dialog {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
@@ -55,7 +55,7 @@ export default class ProgressDialog extends Dialog {
 				className: "progress",
 				buttons: args.buttons || ["cancel"],
 				window: {
-					title: args.title || "Progress",
+					title: args.title ?? "Progress",
 					attributes: {
 						minDimension: {
 							width: 500,
@@ -67,8 +67,8 @@ export default class ProgressDialog extends Dialog {
 			callback
 		);
 
-		this.value = this.args.progress || 0;
-		this.status = this.args.status || "";
+		this.value = this.args.progress ?? 0;
+		this.status = this.args.status ?? "";
 		this.app = null;
 	}
 
@@ -105,7 +105,7 @@ export default class ProgressDialog extends Dialog {
 	}
 
 	/**
-	 * Set the progress value
+	 * Set the progress value.
 	 * @param {Number} value A value between 0 and 100
 	 */
 	setProgress(value) {
@@ -113,7 +113,7 @@ export default class ProgressDialog extends Dialog {
 	}
 
 	/**
-	 * Set the status text
+	 * Set the status text.
 	 * @param {String} status Status text
 	 */
 	setStatus(status) {

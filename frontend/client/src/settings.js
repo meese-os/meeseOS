@@ -44,7 +44,7 @@ const createAdapter = (core, options) => {
 		? localStorageSettings
 		: typeof options.adapter === "function"
 			? options.adapter
-			: defaultAdapters[options.adapter || "localStorage"];
+			: defaultAdapters[options.adapter ?? "localStorage"];
 
 	return {
 		load: () => Promise.reject(new Error("Not implemented")),
@@ -52,7 +52,7 @@ const createAdapter = (core, options) => {
 		init: () => Promise.resolve(true),
 		clear: () => Promise.resolve(true),
 		destroy: () => {},
-		...adapter(core, options.config),
+		...adapter(core, options.config ?? {}),
 	};
 };
 

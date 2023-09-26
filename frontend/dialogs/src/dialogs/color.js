@@ -40,11 +40,11 @@ import { app, h } from "hyperapp";
 import Dialog from "../dialog";
 
 /**
- * Default MeeseOS Color Dialog
+ * Default MeeseOS Color Dialog.
  */
 export default class ColorDialog extends Dialog {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} args Arguments given from service creation
 	 * @param {String} [args.title] Dialog title
@@ -58,7 +58,7 @@ export default class ColorDialog extends Dialog {
 				className: "color",
 				buttons: ["ok", "cancel"],
 				window: {
-					title: args.title || "Select Color",
+					title: args.title ?? "Select Color",
 					attributes: {
 						minDimension: {
 							width: 500,

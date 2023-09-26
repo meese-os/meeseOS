@@ -42,13 +42,13 @@ const createAttributes = (props, field, disabled) => {
 	disabled = disabled ? "disabled" : undefined;
 	if (field.tagName === "input") {
 		if (field.attributes.type !== "submit") {
-			const autocomplete = field.attributes.autocomplete || true;
+			const autocomplete = field.attributes.autocomplete ?? true;
 			return {
 				autocapitalize: "off",
 				autocomplete: autocomplete ? "new-" + field.attributes.name : "off",
 				disabled,
 				oncreate: (el) =>
-					(el.value = props[field.attributes.name] || field.value || ""),
+					(el.value = props[field.attributes.name] ?? field.value ?? ""),
 				...field.attributes,
 			};
 		}

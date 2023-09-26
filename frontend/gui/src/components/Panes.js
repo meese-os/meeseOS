@@ -35,14 +35,12 @@ import nestable from "hyperapp-nestable";
 const onmousedown = (ev, actions, orientation) => {
 	const { target, clientX, clientY } = ev;
 	const pane = target.previousSibling;
-	const { offsetWidth, offsetHeight } = pane;
 	const index = Array.from(target.parentNode.children).indexOf(pane);
+	if (index < 0) return;
+
+	const { offsetWidth, offsetHeight } = pane;
 	const maxWidth = pane.parentNode.offsetWidth * 0.8;
 	const maxHeight = pane.parentNode.offsetHeight * 0.8;
-
-	if (index < 0) {
-		return;
-	}
 
 	const mousemove = (ev) => {
 		ev.preventDefault();
@@ -104,7 +102,7 @@ const panes = (state, actions, children, orientation) => {
 };
 
 const view = (state, actions) => (props, children) => {
-	const orientation = props.orientation || "vertical";
+	const orientation = props.orientation ?? "vertical";
 
 	return h(
 		Element,
@@ -121,7 +119,7 @@ const inner = nestable(
 		sizes: [],
 	},
 	{
-		init: (props) => ({ sizes: props.sizes || [150] }),
+		init: (props) => ({ sizes: props.sizes ?? [150] }),
 		setSize:
 			({ index, size }) =>
 				(state) => {
@@ -141,7 +139,7 @@ const inner = nestable(
  * @param {Number[]} [props.sizes] Pane sizes
  * @param {h[]} children Children
  */
-export const Panes = (props, children) =>
+export const Panes = (_props, children) =>
 	h(
 		inner,
 		{

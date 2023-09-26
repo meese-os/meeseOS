@@ -170,7 +170,7 @@ class Filesystem {
 
 		return filenames[path.basename(filename)]
 			? filenames[path.basename(filename)]
-			: mime.getType(filename) || "application/octet-stream";
+			: mime.getType(filename) ?? "application/octet-stream";
 	}
 
 	/**
