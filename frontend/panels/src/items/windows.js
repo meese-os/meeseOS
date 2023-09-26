@@ -82,7 +82,7 @@ export default class WindowsPanelItem extends PanelItem {
 
 					const windows = state.windows
 						.concat([win])
-						.filter((win) => !win.inited || !win.rendered)
+						.filter((w) => !w.inited || !w.rendered)
 						.filter(filterVisibility);
 
 					return { windows };
@@ -208,7 +208,6 @@ export default class WindowsPanelItem extends PanelItem {
 		);
 
 		const children = [...windows, ...special];
-
 		return super.render("windows", children);
 	}
 }

@@ -138,7 +138,7 @@ export default class Auth {
 		 * @type {AuthCallback}
 		 * @readonly
 		 */
-		this.callback = function() {};
+		this.callback = function() { /* noop */ };
 
 		/**
 		 * Core instance reference.
@@ -257,6 +257,8 @@ export default class Auth {
 					logger.warn("Exception on login:", e);
 				}
 
+				// TODO: Show something like "incorrect username or password" instead of "Login failed"
+				// if there wasn't a technical error
 				this.ui.emit("login:error", "Login failed");
 				this.ui.emit("login:stop");
 

@@ -113,7 +113,7 @@ export default class Dialog {
 	 * @param {Object} [options.defaultValue] Default callback value
 	 * @param {Function} [callback=function() {}] The callback function
 	 */
-	constructor(core, args, options, callback = function() {}) {
+	constructor(core, args, options, callback = function() { /* noop */ }) {
 		this.core = core;
 		this.args = args;
 		this.callback = callback;
