@@ -51,7 +51,7 @@ const mapWindow = (win) => {
 };
 
 /**
- * Window List
+ * Window List.
  *
  * @desc Window List Panel Item. Also displays launching applications.
  */
@@ -150,7 +150,7 @@ export default class WindowsPanelItem extends PanelItem {
 		});
 	}
 
-	render(state, actions) {
+	render(state, _actions) {
 		const windows = state.windows.map((w) =>
 			h(
 				"div",

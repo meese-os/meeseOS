@@ -48,7 +48,7 @@ const npmDirectories = (npmFile) =>
 	});
 
 const realpaths = (list) =>
-	Promise.all(list.map((fn) => fs.realpath(fn).catch((err) => false))).then(
+	Promise.all(list.map((fn) => fs.realpath(fn).catch((_err) => false))).then(
 		(list) => list.filter((value) => value !== false)
 	);
 

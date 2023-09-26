@@ -80,10 +80,10 @@ export default class ProgressDialog extends Dialog {
 					status: this.status,
 				},
 				{
-					setProgress: (progress) => (state) => ({ progress }),
-					setStatus: (status) => (state) => ({ status }),
+					setProgress: (progress) => (_state) => ({ progress }),
+					setStatus: (status) => (_state) => ({ status }),
 				},
-				(state, actions) =>
+				(state, _actions) =>
 					this.createView([
 						h(Box, { grow: 1, shrink: 1 }, [
 							h(

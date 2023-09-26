@@ -32,7 +32,7 @@ import { Element } from "./Element";
 import { h } from "hyperapp";
 
 /**
- * A progress bar
+ * A progress bar.
  * @param {Object} props Properties
  * @param {Number} [props.value] The value (percentage)
  * @param {BoxProperties} [props.box] Box Properties

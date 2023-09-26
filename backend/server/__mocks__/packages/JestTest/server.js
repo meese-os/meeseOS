@@ -28,11 +28,11 @@
  * @licence Simplified BSD License
  */
 
-module.exports = (core, proc) => ({
+module.exports = (_core, _proc) => ({
 	init: async () => {},
 	start: () => {},
 	destroy: () => {},
-	onmessage: (ws, respond, args) => respond("Pong"),
+	onmessage: (_ws, respond, _args) => respond("Pong"),
 	test: () => {
 		throw new Error("Simulated failure");
 	},

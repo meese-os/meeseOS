@@ -33,24 +33,21 @@ import PanelItem from "../panel-item";
 import dateformat from "dateformat";
 
 /**
- * Clock
+ * Clock.
  *
  * @desc Clock Panel Item
  */
 export default class ClockPanelItem extends PanelItem {
 	init() {
 		const date = () => dateformat(new Date(), "HH:MM:ss");
-
-		if (this.inited) {
-			return;
-		}
+		if (this.inited) return;
 
 		const actions = super.init(
 			{
 				time: date(),
 			},
 			{
-				increment: () => (state) => {
+				increment: () => (_state) => {
 					return { time: date() };
 				},
 			}
@@ -66,7 +63,7 @@ export default class ClockPanelItem extends PanelItem {
 		super.destroy();
 	}
 
-	render(state, actions) {
+	render(state, _actions) {
 		return super.render("clock", [h("span", {}, state.time)]);
 	}
 }

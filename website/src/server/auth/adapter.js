@@ -7,22 +7,22 @@
 
 const dotenvJSON = require("complex-dotenv-json");
 const path = require("path");
-const jwt = require("jsonwebtoken");
+//const jwt = require("jsonwebtoken");
 
 const envFile = path.resolve(__dirname, ".env.json");
 dotenvJSON({ path: envFile });
 
 /**
- * JSON-based Auth adapter
+ * JSON-based Auth adapter.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} [options] Adapter options
  */
-module.exports = (core, options) => ({
+module.exports = (_core, _options) => ({
 	init: () => true,
 
 	destroy: () => true,
 
-	login(req, res) {
+	login(req, _res) {
 		const { username, password } = req.body;
 		let groups = [];
 
@@ -51,9 +51,9 @@ module.exports = (core, options) => ({
 		return ({ username: req.body.username });
 	},
 
-	register(req, res) {
+	register(_req, _res) {
 		throw new Error("Registration not available");
 	},
 
-	logout: (req, res) => true,
+	logout: (_req, _res) => true,
 });

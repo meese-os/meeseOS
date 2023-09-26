@@ -35,7 +35,7 @@ const sources = (list) => list.map((item) => h("source", item));
 const isTrue = (v) => typeof v === "undefined" || v === true;
 
 /**
- * A video
+ * A video element.
  * @param {Object} props Properties
  * @param {String} [props.class] Append this className
  * @param {Object} [props.style] CSS Style object

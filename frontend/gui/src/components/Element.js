@@ -31,7 +31,7 @@
 import { h } from "hyperapp";
 
 /**
- * Elemet Box definition
+ * Elemet Box definition.
  * @property {String} [class] Container class name
  * @property {Number} [grow] Flexbox grow value
  * @property {Number} [shrink] Flexbox shrink value
@@ -61,7 +61,7 @@ const boxPropNames = {
 };
 
 /**
- * A generic MeeseOS GUI container
+ * A generic MeeseOS GUI container.
  * @param {Object} props Properties
  * @param {h[]} children Children
  */

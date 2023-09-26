@@ -32,7 +32,7 @@ import { Element } from "./Element";
 import { h } from "hyperapp";
 
 /**
- * A toolbar
+ * A toolbar.
  * @desc Contains entries with spacing
  * @param {BoxProperties} props Properties
  * @param {String} [props.orientation='vertical'] Box orientation

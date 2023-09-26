@@ -281,7 +281,7 @@ const parseFormData = (req, { maxFieldsSize, maxFileSize }) => {
  * @returns {Promise<any>}
  */
 const parseFields = (config) =>
-	(req, res) => {
+	(req, _res) => {
 		if (["get", "head"].indexOf(req.method.toLowerCase()) !== -1) {
 			return Promise.resolve(parseGet(req));
 		}

@@ -1,4 +1,4 @@
-module.exports = (core, config) => ({
+module.exports = (_core, _config) => ({
 	login(values) {
 		// You can transform the form values from login here if you want
 		return values;

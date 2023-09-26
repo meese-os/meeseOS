@@ -142,7 +142,7 @@ const createShortcuts = (root, readfile, writefile) => {
 
 		return readfile(filename)
 			.then((contents) => JSON.parse(contents))
-			.catch((error) => []);
+			.catch((_error) => []);
 	};
 
 	const write = (shortcuts) => {
@@ -294,12 +294,12 @@ export class DesktopIconView extends EventEmitter {
 
 				selectEntry: ({ index }) => ({ selected: index }),
 
-				uploadEntries: (files) => {
+				uploadEntries: (_files) => {
 					// TODO
 				},
 
 				addEntry: ({ entry, shortcut }) =>
-					(state, actions) => {
+					(_state, actions) => {
 						const dest = `${root}/${entry.filename}`;
 
 						mkdir(root)
@@ -319,7 +319,7 @@ export class DesktopIconView extends EventEmitter {
 					},
 
 				removeEntry: (entry) =>
-					(state, actions) => {
+					(_state, actions) => {
 						if (entry.shortcut !== false) {
 							shortcuts
 								.remove(entry.shortcut)
@@ -335,7 +335,7 @@ export class DesktopIconView extends EventEmitter {
 					},
 
 				reload: (fromUI) =>
-					(state, actions) => {
+					(_state, actions) => {
 						if (fromUI && this.core.config("vfs.watch")) {
 							return;
 						}

@@ -32,7 +32,7 @@ import { createField } from "../element";
 import { h } from "hyperapp";
 
 /**
- * A range field
+ * A range field.
  * @param {Object} props Properties
  * @param {String} [props.min] Minimum value
  * @param {String} [props.max] Maximum value
@@ -40,7 +40,7 @@ import { h } from "hyperapp";
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
-export const RangeField = (props = {}, children = []) =>
+export const RangeField = (props = {}, _children = []) =>
 	createField(
 		"range-field",
 		props,

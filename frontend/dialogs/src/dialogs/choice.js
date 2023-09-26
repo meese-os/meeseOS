@@ -88,7 +88,7 @@ export default class ChoiceDialog extends Dialog {
 					current: this.value,
 				},
 				{
-					setCurrent: (current) => (state) => {
+					setCurrent: (current) => (_state) => {
 						this.value = current;
 
 						return { current };
@@ -105,7 +105,7 @@ export default class ChoiceDialog extends Dialog {
 							h(SelectField, {
 								choices: this.args.choices,
 								value: state.current,
-								onchange: (ev, val) => actions.setCurrent(val),
+								onchange: (_ev, val) => actions.setCurrent(val),
 							}),
 						]),
 					]),

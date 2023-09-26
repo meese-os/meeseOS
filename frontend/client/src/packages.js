@@ -215,7 +215,7 @@ export default class Packages {
 			const found = this._running.filter((n) => n === name);
 
 			if (found.length > 0) {
-				return new Promise((resolve, reject) => {
+				return new Promise((resolve, _reject) => {
 					this.core.once(`meeseOS/application:${name}:launched`, (a) => {
 						if (signaled) {
 							resolve(a);

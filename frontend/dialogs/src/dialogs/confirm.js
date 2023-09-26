@@ -79,7 +79,7 @@ export default class ConfirmDialog extends Dialog {
 			app(
 				{},
 				{},
-				(state, actions) =>
+				(_state, _actions) =>
 					this.createView([
 						h(Box, { grow: 1 }, [
 							h(

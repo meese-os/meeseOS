@@ -135,7 +135,7 @@ const inner = nestable(
 );
 
 /**
- * Resizable panes
+ * Resizable panes.
  * @param {Object} props Properties
  * @param {String} [props.orientation='vertical'] Pane orientation
  * @param {Number[]} [props.sizes] Pane sizes

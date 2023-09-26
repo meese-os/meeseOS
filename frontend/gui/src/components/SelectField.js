@@ -32,7 +32,7 @@ import { createField } from "../element";
 import { h } from "hyperapp";
 
 /**
- * A text field
+ * A text field.
  * @param {Object} props Properties
  * @param {String} [props.value] Value
  * @param {BoxProperties} [props.box] Box Properties

@@ -32,7 +32,7 @@ import { Element } from "./Element";
 import { h } from "hyperapp";
 
 /**
- * A flexbox
+ * A flexbox.
  * @param {BoxProperties} props Properties
  * @param {String} [props.orientation='horizontal'] Box orientation
  * @param {h[]} children Children

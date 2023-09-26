@@ -113,7 +113,7 @@ export default class AlertDialog extends Dialog {
 			app(
 				{},
 				{},
-				(state, actions) => this.createView([h(Box, { grow: 1 }, children)]),
+				(_state, _actions) => this.createView([h(Box, { grow: 1 }, children)]),
 				$content
 			);
 		});

@@ -114,7 +114,7 @@ const ul = (props, children = [], level = 0) => {
 };
 
 /**
- * Menu tree
+ * Menu tree.
  * @property {String} label Label
  * @property {String} [icon] Icon source
  * @property {Boolean} [disabled] Disabled state
@@ -126,7 +126,7 @@ const ul = (props, children = [], level = 0) => {
  */
 
 /**
- * A menu
+ * A menu.
  * @param {Object} props Properties
  * @param {Boolean} [props.visible=true] Visible property
  * @param {Object} [posprops.ition] Position

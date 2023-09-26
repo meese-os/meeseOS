@@ -33,7 +33,7 @@ import { filteredProps } from "../utils";
 import { h } from "hyperapp";
 
 /**
- * A iframe
+ * An iframe.
  * @param {Object} props Properties
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children

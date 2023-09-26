@@ -33,7 +33,7 @@ import { filteredProps } from "./utils";
 import { h } from "hyperapp";
 
 /**
- * Creates a new field Element wrapper
+ * Creates a new field Element wrapper.
  * @param {String} name Field name
  * @param {Object} props Field props
  * @param {Function} cb Callback to create inner element => (props)

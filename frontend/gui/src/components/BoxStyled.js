@@ -32,7 +32,7 @@ import { h } from "hyperapp";
 import { Element } from "./Element";
 
 /**
- * A styled flexbox container
+ * A styled flexbox container.
  * @param {BoxProperties} props Properties
  * @param {h[]} children Children
  */

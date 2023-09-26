@@ -67,7 +67,7 @@ const defaultButton = (name) => {
 /**
  * Creates options
  */
-const createOptions = (options, args) =>
+const createOptions = (options, _args) =>
 	merge(
 		{
 			id: null,
@@ -157,7 +157,7 @@ export default class Dialog {
 
 		this.win = this.core.make("meeseOS/window", opts);
 
-		this.win.on("keydown", (ev, win) => {
+		this.win.on("keydown", (ev, _win) => {
 			if (ev.keyCode === 27) {
 				this.emitCallback(this.getNegativeButton(), null, true);
 			}

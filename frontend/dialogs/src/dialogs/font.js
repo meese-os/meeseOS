@@ -115,11 +115,11 @@ export default class FontDialog extends Dialog {
 				this.value.size = size;
 				return { size };
 			},
-			setFont: (name) => (state) => {
+			setFont: (name) => (_state) => {
 				this.value.name = name;
 				return { name };
 			},
-			setStyle: (style) => (state) => {
+			setStyle: (style) => (_state) => {
 				this.value.style = style;
 				return { style };
 			},
@@ -144,7 +144,7 @@ export default class FontDialog extends Dialog {
 								},
 								value: state.size,
 								choices: fontSizes,
-								onchange: (ev, v) => actions.setSize(v),
+								onchange: (_ev, v) => actions.setSize(v),
 							}),
 							h(SelectField, {
 								box: {
@@ -158,7 +158,7 @@ export default class FontDialog extends Dialog {
 								},
 								value: state.name.toLowerCase(),
 								choices: fontNames,
-								onchange: (ev, v) => actions.setFont(v),
+								onchange: (_ev, v) => actions.setFont(v),
 							}),
 							h(SelectField, {
 								box: {
@@ -172,7 +172,7 @@ export default class FontDialog extends Dialog {
 								},
 								value: state.size,
 								choices: fontStyles,
-								onchange: (ev, v) => actions.setStyle(v),
+								onchange: (_ev, v) => actions.setStyle(v),
 							}),
 						]),
 						h(TextareaField, {

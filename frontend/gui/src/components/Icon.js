@@ -31,15 +31,14 @@
 import { h } from "hyperapp";
 
 /**
- * An icon
+ * An icon.
  * @param {Object} props Properties
  * @param {String} props.src Icon src
  * @param {String} [props.name] Icon name
  * @param {h[]} children Children
  */
-export const Icon = (props, children) => {
+export const Icon = (props, _children) => {
 	const i = props && typeof props === "object" ? props.src : props;
-
 	const n = props && typeof props === "object" ? props.name : undefined;
 
 	return h("i", {

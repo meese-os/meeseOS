@@ -105,7 +105,7 @@ export default class ColorDialog extends Dialog {
 			const canvas = createPalette(98, 98);
 			const initialState = { ...this.value };
 			const initialActions = {
-				setColor: (color) => (state) => color,
+				setColor: (color) => (_state) => color,
 				setComponent:
 					({ color, newValue }) =>
 						(state) => {

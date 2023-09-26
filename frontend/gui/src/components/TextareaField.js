@@ -32,7 +32,7 @@ import { createField } from "../element";
 import { h } from "hyperapp";
 
 /**
- * A text field
+ * A textarea field.
  * @param {Object} props Properties
  * @param {String} [props.value] Value
  * @param {Number} [props.rows=4] Number of rows

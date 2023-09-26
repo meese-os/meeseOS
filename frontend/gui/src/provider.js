@@ -31,7 +31,7 @@
 import { ContextMenu } from "./contextmenu.js";
 
 /**
- * Check if a target allows for context menu
+ * Check if a target allows for context menu.
  */
 const validContextMenuTarget = (ev) => {
 	const target = ev.target;
@@ -45,7 +45,7 @@ const validContextMenuTarget = (ev) => {
 };
 
 /**
- * MeeseOS GUI Service Provider
+ * MeeseOS GUI Service Provider.
  * @desc Provides wrapper services around GUI features
  */
 export class GUIServiceProvider {

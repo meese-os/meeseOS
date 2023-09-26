@@ -1,5 +1,5 @@
 /* global Dos, emulators */
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { DosPlayer as Instance } from "js-dos";
 

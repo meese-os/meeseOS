@@ -79,7 +79,7 @@ export default class PromptDialog extends Dialog {
 					value: this.args.value,
 				},
 				{
-					setValue: (value) => (state) => {
+					setValue: (value) => (_state) => {
 						this.value = value;
 						return { value };
 					},
@@ -100,7 +100,7 @@ export default class PromptDialog extends Dialog {
 
 									this.emitCallback(this.getPositiveButton(), ev, true);
 								},
-								oninput: (ev, value) => actions.setValue(value),
+								oninput: (_ev, value) => actions.setValue(value),
 							}),
 						]),
 					]),

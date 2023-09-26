@@ -33,10 +33,10 @@
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} [options] Adapter options
  */
-module.exports = (core, options) => ({
+module.exports = (_core, _options) => ({
 	init: async () => true,
 	destroy: async () => true,
-	register: async (req, res) => ({ username: req.body.username }),
-	login: async (req, res) => ({ id: 0, username: req.body.username }),
-	logout: async (req, res) => true,
+	register: async (req, _res) => ({ username: req.body.username }),
+	login: async (req, _res) => ({ id: 0, username: req.body.username }),
+	logout: async (_req, _res) => true,
 });

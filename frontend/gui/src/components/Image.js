@@ -31,7 +31,7 @@
 import { h } from "hyperapp";
 
 /**
- * A image
+ * An image.
  * @param {Object} props Properties
  * @param {String} props.src The image source
  * @param {String} [props.alt] The image alternate text
@@ -42,7 +42,7 @@ import { h } from "hyperapp";
  * @param {Function} [props.onupdate] Hyperapp onupdate function
  * @param {Function} [props.ondestroy] Hyperapp ondestroy function
  */
-export const Image = (props, children) =>
+export const Image = (props, _children) =>
 	h(
 		"div",
 		{

@@ -32,7 +32,7 @@ import { createField } from "../element";
 import { h } from "hyperapp";
 
 /**
- * Parses option value
+ * Parses option value.
  */
 const parseValue = (value) => {
 	try {
@@ -43,7 +43,7 @@ const parseValue = (value) => {
 };
 
 /**
- * A text field
+ * A toggle field.
  * @param {Object} props Properties
  * @param {String} [props.checked] Value
  * @param {String} [props.type=checkbox] Type

@@ -32,7 +32,7 @@ import { Element } from "./Element";
 import { h } from "hyperapp";
 
 /**
- * A label element
+ * A label element.
  * @param {Object} props Properties
  * @param {String} [props.text] Label Text
  * @param {String} [props.placement] Placement

@@ -28,7 +28,14 @@
  * @licence Simplified BSD License
  */
 
-export const register = (core, desktop, options, metadata) => {
+/**
+ * Register theme hooks for the desktop.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {Desktop} desktop Desktop instance reference
+ * @param {Object} options Theme options
+ * @param {Object} metadata Theme metadata
+ */
+export const register = (_core, desktop, _options, _metadata) => {
 	desktop.on("theme:window:change", (win, name, value) => {
 		if (name === "minimized" && value === false) {
 			win.state.styles.display = "block";

@@ -1,3 +1,3 @@
-module.exports = (core) => ({
-	readdir: (vfs) => (path) => [],
+module.exports = (_core) => ({
+	readdir: (_vfs) => (_path) => [],
 });

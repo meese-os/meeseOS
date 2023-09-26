@@ -1,4 +1,4 @@
-const myAdapter = (core, config) => ({
+const myAdapter = (_core, _config) => ({
 	async login(values) {
 		// You can transform the form values from login here if you want
 		return values;
@@ -9,7 +9,7 @@ const myAdapter = (core, config) => ({
 		return true;
 	},
 
-	async register(values) {
+	async register(_values) {
 		throw new Error("Registration not available");
 	},
 });

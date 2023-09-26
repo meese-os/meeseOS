@@ -135,10 +135,10 @@ const makeTree = (core, icon) => {
 };
 
 /**
- * Menu Panel Item
+ * Menu Panel Item.
  */
 export default class MenuPanelItem extends PanelItem {
-	render(state, actions) {
+	render(_state, _actions) {
 		const icon = this.options.icon || defaultIcon;
 
 		const logout = async (save = false) => {

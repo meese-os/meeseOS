@@ -1,11 +1,11 @@
-module.exports = (core, options) => ({
+module.exports = (_core, _options) => ({
 	// req.body has all settings from client
-	async save(req, res) {
+	async save(_req, _res) {
 		return true;
 	},
 
 	// return all settings for user here
-	async load(req, res) {
+	async load(_req, _res) {
 		return {};
 	},
 });

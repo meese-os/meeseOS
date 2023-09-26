@@ -32,7 +32,7 @@ import { Element } from "./Element";
 import { h } from "hyperapp";
 
 /**
- * A menubar item
+ * A menubar item.
  * @param {Object} props Properties
  * @param {h[]} children Children
  */
@@ -59,7 +59,7 @@ export const MenubarItem = (props, children = []) => {
 };
 
 /**
- * A menubar container
+ * A menubar container.
  * @param {BoxProperties} [props] Box Properties
  * @param {MenubarItem[]} [props.items] Array of object
  * @param {h[]} children Children

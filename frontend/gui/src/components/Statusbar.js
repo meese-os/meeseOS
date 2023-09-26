@@ -32,7 +32,7 @@ import { Element } from "./Element";
 import { h } from "hyperapp";
 
 /**
- * A status bar
+ * A status bar.
  * @param {Object} props Properties
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children

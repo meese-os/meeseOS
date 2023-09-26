@@ -1,5 +1,5 @@
-module.exports = (core, config) => ({
-	login(req, res) {
+module.exports = (_core, _config) => ({
+	login(req, _res) {
 		const { username } = req.body;
 
 		return {
@@ -8,11 +8,11 @@ module.exports = (core, config) => ({
 		};
 	},
 
-	logout(req, res) {
+	logout(_req, _res) {
 		return true;
 	},
 
-	register(req, res) {
+	register(_req, _res) {
 		throw new Error("Registration not available");
 	},
 });

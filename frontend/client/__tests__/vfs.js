@@ -30,7 +30,7 @@ const otherMount = {
 };
 
 const testAdapter = Object.assign({}, nullAdapter, {
-	readdir: (path, options) =>
+	readdir: (_path, _options) =>
 		Promise.resolve([
 			{
 				isDirectory: false,

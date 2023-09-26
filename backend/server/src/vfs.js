@@ -73,7 +73,7 @@ const parseRangeHeader = (range) => {
  * @param {Request} req
  * @param {Response} res
  */
-const onDone = (req, res) => {
+const onDone = (req, _res) => {
 	if (req.files) {
 		for (const fieldname in req.files) {
 			fs.unlink(req.files[fieldname].filepath, () => ({}));
@@ -230,7 +230,7 @@ const createRequestFactory = (findMountpoint) =>
  * @returns {Boolean}
  */
 const createCrossRequestFactory = (findMountpoint) =>
-	(getter, method, respond) =>
+	(getter, method, _respond) =>
 		async (req, res) => {
 			const [from, to, options] = [...getter(req, res), createOptions(req)];
 
@@ -346,7 +346,7 @@ module.exports = (core) => {
 	router.post("/archive", wrapper(methods.archive));
 
 	// Finally catch promise exceptions
-	router.use((error, req, res, next) => {
+	router.use((error, _req, res, _next) => {
 		const code = typeof error.code === "number"
 			? error.code
 			: errorCodes[error.code] || 400;

@@ -29,7 +29,7 @@
  */
 
 /**
- * Filter an object based on keys
+ * Filter an object based on keys.
  * @param {Object} props Props
  * @param {String[]} filterKeys List of keys to filter
  * @returns {Object}
@@ -49,7 +49,7 @@ export const filteredProps = (props, filterKeys) => {
 };
 
 /**
- * Creates a double-tap event handler
+ * Creates a double-tap event handler.
  * @param {Number} [timeout=250] Timeout
  * @returns {Function} Handler with => (ev, cb)
  */

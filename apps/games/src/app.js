@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import DosPlayer from "./dos-player";
 import "./games.scss";

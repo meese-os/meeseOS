@@ -1,6 +1,6 @@
-const myAdapter = (core, options) => ({
+const myAdapter = (_core, _options) => ({
 	// Create your own request here with 'values' settings
-	save(values) {
+	save(_values) {
 		return true;
 	},
 

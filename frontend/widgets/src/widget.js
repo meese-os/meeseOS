@@ -84,6 +84,12 @@ const animator = (fps, stopFn) => {
 	return animate;
 };
 
+/**
+ * Serves as the mouse down handler for the widget.
+ * @param {MouseEvent} ev The mouse event
+ * @param {Element} $root The root element
+ * @param {Widget} widget The widget instance
+ */
 const onmousedown = (ev, $root, widget) => {
 	let debounce;
 	const startX = ev.clientX;
@@ -157,6 +163,8 @@ export const clampPosition = (rect, { dimension, position }) => {
 
 export default class Widget {
 	/**
+	 * Creates a new Widget instance.
+	 * @param {Core} core MeeseOS Core instance reference
 	 * @param {Object} options The options from the provider create function (usually settings storage result)
 	 * @param {Object} [attrs] Widget attributes
 	 * @param {Object} [settings] A set of defaults for the settings storage
@@ -217,6 +225,9 @@ export default class Widget {
 		};
 	}
 
+	/**
+	 * Destroys the widget instance.
+	 */
 	destroy() {
 		if (this.destroyed) return;
 		this.destroyed = true;
@@ -240,13 +251,14 @@ export default class Widget {
 		this.attributes = {};
 	}
 
-	render(viewport) {}
+	render(_viewport) {}
 
 	start() {
+		const { width, height } = this.options.dimension;
 		const render = () =>
 			this.render({
-				width: this.options.dimension?.width ?? 0,
-				height: this.options.dimension?.height ?? 0,
+				width: width ? width : 0,
+				height: height ? height : 0,
 				canvas: this.$canvas,
 				context: this.context,
 			});
@@ -265,6 +277,9 @@ export default class Widget {
 		setTimeout(() => this.clampToViewport(), 100);
 	}
 
+	/**
+	 * Initializes the widget instance.
+	 */
 	init() {
 		const $root = this.core.$contents;
 		const resizer = document.createElement("div");
@@ -287,6 +302,9 @@ export default class Widget {
 		this.start();
 	}
 
+	/**
+	 * Updates the widget dimensions.
+	 */
 	updateDimension() {
 		if (this.destroyed) return;
 
@@ -299,6 +317,9 @@ export default class Widget {
 		}
 	}
 
+	/**
+	 * Updates the widget position.
+	 */
 	updatePosition() {
 		if (this.destroyed) return;
 
@@ -315,6 +336,9 @@ export default class Widget {
 		this.$element.style.bottom = getValue(bottom);
 	}
 
+	/**
+	 * Saves the widget settings.
+	 */
 	saveSettings() {
 		this.saveDebounce = clearTimeout(this.saveDebounce);
 		this.saveDebounce = setTimeout(
@@ -383,7 +407,7 @@ export default class Widget {
 		const rect = this.core.make("meeseOS/desktop").getRect();
 		const pos = clampPosition(rect, this.options);
 
-		if (pos?.left !== left || pos?.top !== top) {
+		if ((pos && pos.left) !== left || (pos && pos.top !== top)) {
 			this.options.position = { ...pos };
 			this.updatePosition();
 		}

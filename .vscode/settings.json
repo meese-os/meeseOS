@@ -1,5 +1,5 @@
 {
-	"editor.formatOnSave": true,
+	"editor.formatOnSave": false,
 	"editor.defaultFormatter": null,
 	"editor.detectIndentation": false,
 	"files.associations": {

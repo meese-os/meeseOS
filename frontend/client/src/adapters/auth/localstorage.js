@@ -33,7 +33,7 @@
  * @param {Core} core MeeseOS Core instance reference
  * @param {Object} [options] Adapter options
  */
-const localStorageAuth = (core, options) => ({
+const localStorageAuth = (_core, _options) => ({
 	login: (values) => Promise.resolve(values),
 });
 

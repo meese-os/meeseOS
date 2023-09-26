@@ -33,7 +33,7 @@ import { createField } from "../element";
 import { h } from "hyperapp";
 
 /**
- * A button
+ * A button.
  * @param {Object} props Properties
  * @param {String} [props.icon] Icon source
  * @param {String} [props.label] Use this as label instead of children

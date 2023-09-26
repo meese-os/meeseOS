@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/gui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "meeseOS GUI",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",

@@ -14,7 +14,7 @@ const {
 	SettingsServiceProvider,
 } = require("../index.js");
 
-module.exports = (options = {}) => {
+module.exports = (_options = {}) => {
 	const tempPath = temp.mkdirSync("meeseOS-vfs");
 
 	const meeseOS = new Core(

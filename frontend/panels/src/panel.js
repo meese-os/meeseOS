@@ -157,6 +157,12 @@ export default class Panel extends EventEmitter {
 		}
 	}
 
+	/**
+	 * Sets the panel position.
+	 * @param {String} position The new position for the panel
+	 * @returns {Promise<undefined>}
+	 * @todo Make sure the return type is accurate
+	 */
 	setPosition(position) {
 		this.options.position = position;
 

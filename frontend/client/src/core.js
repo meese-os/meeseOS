@@ -347,7 +347,7 @@ export default class Core extends CoreBase {
 		});
 
 		// Sets up a server ping
-		this.on("meeseOS/core:connected", (config) => {
+		this.on("meeseOS/core:connected", (_config) => {
 			const enabled = this.config("http.ping");
 
 			if (enabled) {

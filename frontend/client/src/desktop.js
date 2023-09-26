@@ -203,7 +203,7 @@ export default class Desktop extends EventEmitter {
 			});
 		});
 
-		this.core.on("meeseOS/core:connect", (ev, reconnected) => {
+		this.core.on("meeseOS/core:connect", (_ev, reconnected) => {
 			logger.debug("Connection opened");
 
 			if (reconnected) {
@@ -214,7 +214,7 @@ export default class Desktop extends EventEmitter {
 			}
 		});
 
-		this.core.on("meeseOS/core:connection-failed", (ev) => {
+		this.core.on("meeseOS/core:connection-failed", (_ev) => {
 			logger.warn("Connection failed");
 
 			this.core.make("meeseOS/notification", {

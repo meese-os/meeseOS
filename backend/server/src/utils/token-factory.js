@@ -84,7 +84,7 @@ class TokenFactory {
 				}
 			});
 		}).catch((error) => {
-			// this.core.logger.warn("Access token validation error:", error);
+			this.core.logger.warn("Access token validation error:", error);
 			return false;
 		});
 	}
@@ -117,7 +117,7 @@ class TokenFactory {
 				}
 			});
 		}).catch((error) => {
-			// this.core.logger.warn("Refresh token validation error:", error);
+			this.core.logger.warn("Refresh token validation error:", error);
 			return false;
 		});
 	}

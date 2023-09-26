@@ -32,7 +32,7 @@ import { app, h } from "hyperapp";
 import { Menu } from "./components/Menu";
 
 /**
- * Makes sure sub-menus stay within the viewport
+ * Makes sure sub-menus stay within the viewport.
  */
 const clampSubMenu = (root, ev) => {
 	let ul = ev.target.querySelector("ul");
@@ -56,7 +56,7 @@ const clampSubMenu = (root, ev) => {
 };
 
 /**
- * Makes sure menu stays within the viewport
+ * Makes sure menu stays within the viewport.
  */
 const clampMenu = (root, el, currentPosition) => {
 	const result = {};
@@ -81,7 +81,7 @@ const clampMenu = (root, el, currentPosition) => {
 };
 
 /**
- * Context Menu view
+ * Context Menu view.
  */
 const view = (callback) => (props, actions) =>
 	h(Menu, {
@@ -98,7 +98,7 @@ const timeout = (fn) => {
 };
 
 /**
- * ContextMenu Class
+ * ContextMenu Class.
  *
  * @desc Handles a Menu/ContextMenu globally for MeeseOS
  */
@@ -116,7 +116,7 @@ export class ContextMenu {
 	}
 
 	/**
-	 * Initializes the Menu Hyperapp
+	 * Initializes the Menu Hyperapp.
 	 */
 	init() {
 		let clampTimeout;
@@ -147,10 +147,10 @@ export class ContextMenu {
 						return { position: newPosition };
 					}
 				},
-				onshow: (ev) => (props) => {
+				onshow: (ev) => (_props) => {
 					clampTimeout = timeout(() => clampSubMenu(this.core.$root, ev));
 				},
-				show: (options) => (props, actions) => {
+				show: (options) => (_props, actions) => {
 					let { menu, position, toggle } = options;
 					if (toggle && isActive) {
 						return actions.hide();
@@ -185,7 +185,7 @@ export class ContextMenu {
 						position: position || { top: 0, left: 0 },
 					};
 				},
-				hide: () => (props) => {
+				hide: () => (_props) => {
 					if (isActive) {
 						setTimeout(() => (isActive = false), 0);
 					}
@@ -210,14 +210,14 @@ export class ContextMenu {
 	}
 
 	/**
-	 * Show the menu
+	 * Show the menu.
 	 */
 	show(...args) {
 		return this.actions ? this.actions.show(...args) : null;
 	}
 
 	/**
-	 * Hide the menu
+	 * Hide the menu.
 	 */
 	hide(...args) {
 		return this.actions ? this.actions.hide(...args) : null;

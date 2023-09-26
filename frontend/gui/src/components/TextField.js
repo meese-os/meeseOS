@@ -32,14 +32,14 @@ import { createField } from "../element";
 import { h } from "hyperapp";
 
 /**
- * A text field
+ * A text field.
  * @param {Object} props Properties
  * @param {String} [props.value] Value
  * @param {String} [props.type=text] Type
  * @param {BoxProperties} [props.box] Box Properties
  * @param {h[]} children Children
  */
-export const TextField = (props = {}, children = []) =>
+export const TextField = (props = {}, _children = []) =>
 	createField(
 		"text-field",
 		props,

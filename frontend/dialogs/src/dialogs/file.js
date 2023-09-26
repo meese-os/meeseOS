@@ -141,7 +141,7 @@ export default class FileDialog extends Dialog {
 				{
 					_readdir:
 						({ path, files }) =>
-							(state, actions) => {
+							(state, _actions) => {
 								const listview = state.listview;
 								listview.selectedIndex = -1;
 								listview.rows = files.map((file) => ({
@@ -163,13 +163,13 @@ export default class FileDialog extends Dialog {
 						buttons: { ...state.buttons, ...btn },
 					}),
 
-					setMountpoint: (mount) => (state, actions) => {
+					setMountpoint: (mount) => (_state, actions) => {
 						actions.setPath({ path: mount });
 
 						return { mount };
 					},
 
-					setPath: (file) => async (state, actions) => {
+					setPath: (file) => async (_state, actions) => {
 						const files = await this.core.make("meeseOS/vfs").readdir(file, {
 							filter: (item) => {
 								if (this.args.filetype === "directory") {
@@ -200,7 +200,7 @@ export default class FileDialog extends Dialog {
 						}
 					},
 
-					setFilename: (filename) => (state) => ({ filename }),
+					setFilename: (filename) => (_state) => ({ filename }),
 
 					listview: listView.actions({
 						select: ({ data }) => {
@@ -227,7 +227,7 @@ export default class FileDialog extends Dialog {
 						[
 							h(SelectField, {
 								choices: getMountpoints(this.core),
-								onchange: (ev, val) => a.setMountpoint(val),
+								onchange: (_ev, val) => a.setMountpoint(val),
 								value: state.mount,
 							}),
 							h(
@@ -242,7 +242,7 @@ export default class FileDialog extends Dialog {
 							h(TextField, {
 								placeholder: "Filename",
 								value: state.filename,
-								onenter: (ev, value) =>
+								onenter: (ev, _value) =>
 									this.emitCallback(this.getPositiveButton(), ev, true),
 								oninput: (ev) => {
 									const filename = ev.target.value;

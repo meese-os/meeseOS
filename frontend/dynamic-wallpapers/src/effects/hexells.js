@@ -102,6 +102,7 @@ const hexells = (background, options) => {
 	 * @link https://dev.to/marcinwosinek/lazy-load-library-in-application-build-with-webpack-5757
 	 */
 	import(/* webpackChunkName: "hexells" */ "hexells").then(() => {
+		// skipcq: JS-0125
 		effect = new Hexells(canvas, settings);
 
 		// Set the canvas width and height to the screen width and height
