@@ -102,9 +102,9 @@ const onmousedown = (ev, $root, widget) => {
 	const resize = ev.target.classList.contains("meeseOS-widget-resize");
 	const { minDimension, maxDimension } = widget.attributes;
 
-	const mousemove = (ev) => {
-		const diffX = ev.clientX - startX;
-		const diffY = ev.clientY - startY;
+	const mousemove = (move_ev) => {
+		const diffX = move_ev.clientX - startX;
+		const diffY = move_ev.clientY - startY;
 
 		// TODO: Aspect Ratio!
 
@@ -134,7 +134,7 @@ const onmousedown = (ev, $root, widget) => {
 		}
 	};
 
-	const mouseup = (ev) => {
+	const mouseup = (_up_ev) => {
 		window.removeEventListener("mousemove", mousemove);
 		window.removeEventListener("mouseup", mouseup);
 
@@ -251,7 +251,9 @@ export default class Widget {
 		this.attributes = {};
 	}
 
-	render(_viewport) {}
+	render(_viewport) {
+		// Intentionally empty, will be overridden by the class extending this
+	}
 
 	start() {
 		const { width, height } = this.options.dimension;
@@ -407,7 +409,7 @@ export default class Widget {
 		const rect = this.core.make("meeseOS/desktop").getRect();
 		const pos = clampPosition(rect, this.options);
 
-		if ((pos && pos.left) !== left || (pos && pos.top !== top)) {
+		if (pos?.left !== left || pos?.top !== top) {
 			this.options.position = { ...pos };
 			this.updatePosition();
 		}
