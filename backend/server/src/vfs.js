@@ -129,7 +129,7 @@ const createMiddleware = (core) => {
 
 const createOptions = (req) => {
 	const options = req.fields.options;
-	const range = req.headers && req.headers.range;
+	const range = req.headers?.range;
 	const session = { ...(req.session || {}) };
 	let result = options || {};
 

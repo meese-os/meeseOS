@@ -154,7 +154,7 @@ export default class Search {
 		if (this.ui) {
 			const win = Window.lastWindow();
 
-			this.focusLastWindow = win && win.blur();
+			this.focusLastWindow = win?.blur();
 
 			this.ui.emit("toggle", true);
 			setTimeout(() => this.focus(), 1);

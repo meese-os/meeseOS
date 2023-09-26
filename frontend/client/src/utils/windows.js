@@ -388,7 +388,7 @@ export const getCascadePosition = (win, rect, pos) => {
 };
 
 const getScreenOrientation = (screen) =>
-	screen && screen.orientation
+	screen?.orientation
 		? screen.orientation.type
 		: window.matchMedia("(orientation: portrait)")
 			? "portrait"
@@ -430,7 +430,7 @@ export const loadOptionsFromConfig = (config, appName, windowId) => {
 		return true;
 	});
 
-	const foundOptions = found && found.options ? found.options : {};
+	const foundOptions = found?.options ? found.options : {};
 	const allowedProperties = ["position", "dimension", "attributes"];
 
 	return allowedProperties.reduce(

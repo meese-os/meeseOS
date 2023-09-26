@@ -161,7 +161,7 @@ export class EventEmitter {
 						console.warn(e);
 					}
 
-					if (options && options.once) {
+					if (options?.once) {
 						this.events[n].splice(i, 1);
 					}
 				}
