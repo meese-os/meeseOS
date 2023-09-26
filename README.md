@@ -103,7 +103,16 @@ To run GitHub Actions locally, do the following:
 
 ### Publishing
 
-To publish changes to the NPM registry, run `rush --debug publish --publish --include-all --set-access-level public`. To publish changes to the GitHub registry instead, go into the `common/config/rush/.npmrc-publish` file and uncomment the GitHub Packages line.
+To publish changes to MeeseOS, use the following command:
+
+```sh
+rush --debug publish --publish --include-all --set-access-level public
+```
+
+You can specify which registry you want to publish by adding one of the following flags:
+
+- GitHub Packages: `--registry https://npm.pkg.github.com`
+- NPM: `--registry https://registry.npmjs.org`
 
 If you want to do a dry run first, run `rush publish --include-all`.
 

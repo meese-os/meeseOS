@@ -23,7 +23,4 @@
 //registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
 
 # GitHub Packages
-# NOTE: Will need to uncomment the following to publish to GitHub Packages,
-# since NPM doesn't support using multiple registries at once.
-#@meese-os:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GH_AUTH_TOKEN}
