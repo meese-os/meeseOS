@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const mode = process.env.NODE_ENV || "development";
+const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const plugins = [];
 

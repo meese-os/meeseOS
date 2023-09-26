@@ -1,5 +1,5 @@
 const path = require("path");
-const mode = process.env.NODE_ENV || "development";
+const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");

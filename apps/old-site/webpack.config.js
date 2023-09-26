@@ -5,7 +5,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const dotenv = require("dotenv");
 const env_vars = dotenv.config().parsed;
 
-const mode = process.env.NODE_ENV || "development";
+const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const plugins = [];
 const localhost = "localhost:8000";

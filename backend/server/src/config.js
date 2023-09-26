@@ -33,7 +33,7 @@ const maxAge = 60 * 60 * 12;
 const mb = (m) => m * 1024 * 1024;
 
 const defaultConfiguration = {
-	development: !/^prod/i.test(process.env.NODE_ENV || ""),
+	development: !/^prod/i.test(process.env.NODE_ENV ?? ""),
 	logging: true,
 	index: "index.html",
 	bind: "127.0.0.1",

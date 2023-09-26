@@ -1,5 +1,5 @@
 const path = require("path");
-const mode = process.env.NODE_ENV || "development";
+const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const plugins = [];
 
