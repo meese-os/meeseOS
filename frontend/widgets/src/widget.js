@@ -239,7 +239,7 @@ export default class Widget {
 			this.dialog.destroy();
 		}
 
-		if (this.$element && this.$element.parentNode) {
+		if (this.$element?.parentNode) {
 			this.$element.remove();
 		}
 

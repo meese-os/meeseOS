@@ -268,7 +268,7 @@ class Filesystem {
 	async unmount(mountpoint) {
 		const found = this.watches.find((w) => w.id === mountpoint.id);
 
-		if (found && found.watch) {
+		if (found?.watch) {
 			await found.watch.close();
 		}
 
