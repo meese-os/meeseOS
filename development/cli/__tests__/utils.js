@@ -3,7 +3,7 @@ const utils = require("../src/utils.js");
 
 describe("utils", () => {
 	beforeAll(() => {
-		jest.spyOn(console, "warn").mockImplementation(() => {});
+		jest.spyOn(console, "warn").mockImplementation(() => { /* noop */ });
 	});
 
 	describe("createOptions", () => {

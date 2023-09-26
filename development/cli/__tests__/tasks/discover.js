@@ -11,7 +11,7 @@ describe("task > package:discover", () => {
 	const fname = (str) => createPath(root, str);
 
 	beforeAll(() => {
-		jest.spyOn(console, "warn").mockImplementation(() => {});
+		jest.spyOn(console, "warn").mockImplementation(() => { /* noop */ });
 	});
 
 	afterAll(() => fs.removeSync(root));
