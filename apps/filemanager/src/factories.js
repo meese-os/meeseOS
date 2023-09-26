@@ -298,7 +298,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 			// Converts the FileList to an array for the map function below
 			const fileArray = Array.from(files);
 
-			fileArray.map((file) => writeRelative(file)
+			fileArray.forEach((file) => writeRelative(file)
 				.then(() => refresh(file.name))
 				.catch((error) => dialog("error", error, "Failed to upload file"))
 			);

@@ -358,7 +358,7 @@ export default class Desktop extends EventEmitter {
 		};
 
 		window.addEventListener("keydown", (ev) => {
-			Object.keys(keybindings).some((eventName) => {
+			Object.keys(keybindings).forEach((eventName) => {
 				const combo = keybindings[eventName];
 				const result = matchKeyCombo(combo, ev);
 				if (result) {
