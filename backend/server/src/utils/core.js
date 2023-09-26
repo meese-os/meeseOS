@@ -54,12 +54,13 @@ module.exports.argvToConfig = {
 
 /**
  * Create session parser.
- * @param {Object} configuration
+ * @param {Object} configuration Configuration tree specified in `src/config.js`
  * @returns {express.RequestHandler}
  */
 module.exports.createSession = (configuration) => {
 	const Store = require(configuration.session.store.module)(express_session);
-	const store = new Store(configuration.session.store.options);
+	// TODO: Determine why this is leaving open handles with Jest
+	const store = new Store(configuration.session.store.options || {});
 
 	return express_session({
 		store,

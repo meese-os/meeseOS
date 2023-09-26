@@ -1,13 +1,13 @@
 {
   "name": "@meese-os/server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "meeseOS Server",
   "scripts": {
     "build": "echo \"There is no build command for server\" && exit 0",
-    "test": "npm run eslint && npm run jest",
-    "jest": "jest",
-    "coverage": "jest --coverage",
     "eslint": "eslint index.js src",
+    "jest": "jest --runInBand --silent false --verbose true --useStderr=true --detectOpenHandles --forceExit",
+		"coverage": "jest --coverage",
+    "test": "npm run eslint && npm run jest",
     "prepublishOnly": "npm run test"
   },
   "license": "BSD-2-Clause",

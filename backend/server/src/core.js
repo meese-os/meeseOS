@@ -54,7 +54,7 @@ let _instance;
  */
 class Core extends CoreBase {
 	/**
-	 * Creates a new instance
+	 * Creates a new Core instance.
 	 * @param {Object} cfg Configuration tree
 	 * @param {Object} [options] Options
 	 */
@@ -119,17 +119,14 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Destroys the instance
+	 * Destroys the instance.
 	 * @param {Function} [done] Callback when done
 	 * @returns {Promise<undefined>}
 	 */
 	async destroy(done = () => {}) {
-		if (this.destroyed) {
-			return;
-		}
+		if (this.destroyed) return;
 
 		this.emit("meeseOS/core:destroy");
-
 		logger.info("Shutting down...");
 
 		if (this.wss) {
@@ -157,7 +154,7 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Starts the server
+	 * Starts the server.
 	 * @returns {Promise<Boolean>}
 	 */
 	async start() {
@@ -175,7 +172,7 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Initializes the server
+	 * Initializes the server.
 	 * @returns {Promise<Boolean>}
 	 */
 	async boot() {
@@ -204,7 +201,7 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Opens HTTP server
+	 * Opens HTTP server.
 	 */
 	listen() {
 		const httpPort = this.config("port");
@@ -252,7 +249,7 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Broadcast given event to client
+	 * Broadcast given event to client.
 	 * @param {String} name Event name
 	 * @param {Array} params A list of parameters to send to client
 	 * @param {Function} [filter] A function to filter clients
@@ -277,7 +274,7 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Broadcast given event to all clients
+	 * Broadcast given event to all clients.
 	 * @param {String} name Event name
 	 * @param {Array} ...params A list of parameters to send to client
 	 */
@@ -286,7 +283,7 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Broadcast given event to client filtered by username
+	 * Broadcast given event to client filtered by username.
 	 * @param {String} username Username to send to
 	 * @param {String} name Event name
 	 * @param {Array} ...params A list of parameters to send to client
@@ -298,7 +295,7 @@ class Core extends CoreBase {
 	}
 
 	/**
-	 * Gets the server instance
+	 * Gets the server instance.
 	 * @returns {Core}
 	 */
 	static getInstance() {

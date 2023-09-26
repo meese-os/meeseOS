@@ -36,8 +36,7 @@ const defaultConfiguration = {
 	development: !(process.env.NODE_ENV || "").match(/^prod/i),
 	logging: true,
 	index: "index.html",
-	// NOTE: You will likely need to override `localhost` on Windows machines
-	bind: "0.0.0.0",
+	bind: "127.0.0.1",
 	port: 8000,
 	public: null,
 	morgan: "tiny",
