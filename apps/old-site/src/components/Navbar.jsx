@@ -14,18 +14,18 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className={`navbar navbar-expand-lg fixed-top navbar-light ${
+			className={`navbar navbar-expand-md fixed-top navbar-light ${
 				isTop ? "bg-transparent" : "bg-gradient"
 			} `}
 		>
-			<a className="navbar-brand" href={process.env.PUBLIC_URL + "/#home"}>
+			<a className="navbar-brand ms-2" href={"#home"}>
 				{`<${FirstName} />`}
 			</a>
 			<button
-				className="navbar-toggler"
+				className="navbar-toggler me-3"
 				type="button"
-				data-toggle="collapse"
-				data-target="#navbarToggler"
+				data-bs-toggle="collapse"
+				data-bs-target="#navbarToggler"
 				aria-controls="navbarToggler"
 				aria-expanded="false"
 				aria-label="Toggle navigation"
@@ -34,7 +34,7 @@ const Navbar = () => {
 			</button>
 
 			<div className="collapse navbar-collapse" id="navbarToggler">
-				<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+				<ul className="navbar-nav mr-auto ms-2 mt-2 mt-lg-0">
 					<NavItem name="About" href="#aboutme" />
 					<NavItem name="Articles" href="#articles" />
 					<NavItem name="Popular" href="#popularProjects" />

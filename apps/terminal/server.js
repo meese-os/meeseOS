@@ -42,7 +42,11 @@ const connections = {};
 let terminals = [];
 
 /**
- * Creates a new Terminal
+ * Creates a new Terminal.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {WebSocket} ws WebSocket instance
+ * @param {Object} [options={}] Options
+ * @param {Array} [args=[]] Arguments
  */
 const createTerminal = (core, ws, options = {}, args = []) => {
 	const hostname = core.config("xterm.hostname", "localhost");
@@ -124,7 +128,9 @@ const createTerminal = (core, ws, options = {}, args = []) => {
 };
 
 /**
- * Creates a new Terminal connection
+ * Creates a new Terminal connection.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {WebSocket} ws WebSocket instance
  */
 const createConnection = (core, ws) => {
 	console.log("[Xterm]", "Creating connection...");
@@ -143,7 +149,9 @@ const createConnection = (core, ws) => {
 };
 
 /**
- * Add routes for application
+ * Add routes for application.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {Application} proc MeeseOS Application instance reference
  */
 const init = async (core, proc) => {
 	const { app } = core;
@@ -180,22 +188,26 @@ const init = async (core, proc) => {
 		res.send();
 	});
 
-	app.ws(proc.resource("/socket"), (ws, req) => {
+	app.ws(proc.resource("/socket"), (ws, _req) => {
 		createConnection(core, ws);
 	});
 };
 
 /**
- * Destroy the server
+ * Destroys the server.
  */
 const destroy = () => {
 	terminals.forEach((iter) => iter.terminal.kill());
 	terminals = [];
 };
 
-module.exports = (core, proc) => {
-	return {
-		init: () => init(core, proc),
-		destroy,
-	};
-};
+/**
+ * The server module for the application.
+ * @param {Core} core The MeeseOS Core instance reference
+ * @param {Application} proc The MeeseOS Application instance reference
+ * @returns {Object} The server module
+ */
+module.exports = (core, proc) => ({
+	init: () => init(core, proc),
+	destroy,
+});

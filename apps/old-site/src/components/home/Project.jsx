@@ -1,54 +1,44 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	gitHubQuery,
 	projectsLength,
 } from "../../editable-stuff/configurations.json";
 import { useWindowSize } from "@react-hook/window-size/throttled";
 import ProjectCard from "./ProjectCard";
-import axios from "axios";
 
-const Project = () => {
+/**
+ * Creates the Projects section of the Home page.
+ * @param {Application} proc MeeseOS Application instance reference
+ * @returns {React.JSX.Element}
+ */
+const Project = ({ proc }) => {
 	const [recentProjects, setRecentProjectsArray] = useState([]);
 	const [popularProjects, setPopularProjectsArray] = useState([]);
 	const [width] = useWindowSize({ fps: 60 });
 
-	const getGitHubData = useCallback((e) => {
-		// TODO: Do this server-side, hide the PAT from users;
-		// maybe https://medium.com/swlh/keeping-env-variables-private-in-react-app-fa44a9b33c31 ?
-		const headers = {
-			auth: {
-				username: process.env.GH_USERNAME,
-				password: process.env.GH_PAT,
-			},
-		};
+	async function getGitHubData() {
+		const res = await proc.request("/github_data", {
+			method: "post",
+			body: { gitHubQuery, projectsLength },
+		});
 
-		axios
-			.get(
-				"https://api.github.com/users/" + process.env.GH_USERNAME + gitHubQuery,
-				headers
-			)
-			.then((response) => {
-				setRecentProjectsArray(response.data.slice(0, projectsLength));
-				return response.data;
-			})
-			.catch((error) => console.error(error.message))
-			.then((data) => {
-				// TODO: Handle this more elegantly, like displaying an error message
-				if (!data) return;
+		if (res.error) {
+			console.error(res.error);
+			setRecentProjectsArray([]);
+			setPopularProjectsArray([]);
+		} else {
+			setRecentProjectsArray(res.recent);
+			setPopularProjectsArray(res.popular);
+		}
+	}
 
-				// Sort by most popular projects
-				const popular = data.sort((a, b) =>
-					a.stargazers_count > b.stargazers_count ? -1 : 1
-				);
-				setPopularProjectsArray(popular.slice(0, projectsLength));
-			});
+	useEffect(() => {
+		getGitHubData();
 	}, []);
-
-	useEffect(() => getGitHubData(), [getGitHubData]);
 
 	return (
 		<div id="projects" className="jumbotron jumbotron-fluid bg-transparent m-0">
-			{popularProjects.length && (
+			{popularProjects.length ? (
 				<div
 					id="popularProjects"
 					className={`container container-fluid p-${width > 560 ? "5" : "4"}`}
@@ -61,31 +51,33 @@ const Project = () => {
 								id={project.id}
 								value={project}
 								index={index}
+								proc={proc}
 							/>
 						))}
 					</div>
 				</div>
-			)}
+			) : <></>}
 
 			{/* NOTE: When a project is starred, it will show as recently updated with the old date */}
-			{recentProjects.length && (
+			{recentProjects.length ? (
 				<div
 					id="recentProjects"
 					className={`container container-fluid p-${width > 560 ? "5" : "4"}`}
 				>
 					<h1 className="display-4 pb-4">Recently Updated Projects</h1>
-					<div className="row">
+					<div className="row row-cols-1 row-cols-md-6">
 						{recentProjects.map((project, index) => (
 							<ProjectCard
 								key={project.id}
 								id={project.id}
 								value={project}
 								index={index}
+								proc={proc}
 							/>
 						))}
 					</div>
 				</div>
-			)}
+			) : <></>}
 		</div>
 	);
 };

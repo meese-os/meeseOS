@@ -7,8 +7,6 @@
     "eslint": "eslint index.js src/**/*.js",
     "build": "webpack",
     "build:esm": "rollup -c",
-    "watch": "webpack --watch",
-    "watch:esm": "rollup -c --watch",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build && npm run build:esm"
   },

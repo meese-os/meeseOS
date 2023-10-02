@@ -1,13 +1,12 @@
 {
   "name": "@meese-os/old-site",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Old aaronmeese.com design",
   "scripts": {
     "eslint": "eslint *.js",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
-    "watch": "webpack --watch",
     "prepublishOnly": "npm run test && rm -rf ./dist/* && npm run build --quiet-deprecation-warnings"
   },
   "license": "BSD-3-Clause",
@@ -22,6 +21,7 @@
     "@babel/core": "^7.22.11",
     "@babel/plugin-transform-runtime": "^7.22.10",
     "@babel/preset-env": "^7.22.10",
+    "@babel/preset-react": "^7.22.5",
     "@babel/runtime": "^7.22.11",
     "babel-loader": "^9.1.3",
     "copy-webpack-plugin": "^11.0.0",
@@ -29,33 +29,28 @@
     "css-minimizer-webpack-plugin": "^5.0.1",
     "eslint": "^8.48.0",
     "mini-css-extract-plugin": "^2.7.6",
+    "postcss": "^8.4.28",
+    "postcss-loader": "^7.3.3",
+    "postcss-preset-env": "^9.1.1",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
     "stylelint": "^15.10.3",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^10.0.0",
     "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
-    "@babel/preset-react": "^7.22.5",
-    "postcss": "^8.4.28",
-    "postcss-loader": "^7.3.3",
-    "postcss-preset-env": "^9.1.1",
-    "style-loader": "^3.3.3"
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
     "@react-hook/window-size": "3.1.1",
     "axios": "^1.5.0",
     "bootstrap": "^5.3.1",
     "dotenv": "^16.3.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router": "^6.4.2",
-    "react-router-dom": "^6.4.2",
-    "react-typical": "^0.1.3"
+    "react-type-animation": "^3.1.0"
   },
   "meeseOS": {
     "type": "package"

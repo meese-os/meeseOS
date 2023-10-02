@@ -37,7 +37,12 @@ import { name as applicationName } from "./metadata.json";
 import { Terminal } from "xterm";
 
 /**
- * Creates a new Terminal connection
+ * Creates a new Terminal connection.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {Application} proc MeeseOS Application instance reference
+ * @param {Window} win MeeseOS Window instance reference
+ * @param {Terminal} term Xterm instance reference
+ * @param {Function} fit Fit function
  */
 const createConnection = async (core, proc, win, term, fit) => {
 	const params = {
@@ -51,6 +56,10 @@ const createConnection = async (core, proc, win, term, fit) => {
 	term.clear();
 	term.writeln("Requesting connection....");
 
+	/**
+	 * The randomly-generated UUID of the connection.
+	 * @type {String}
+	 */
 	const { uuid } = await proc.request("/create", {
 		method: "post",
 		body: params,
@@ -127,7 +136,10 @@ const createConnection = async (core, proc, win, term, fit) => {
 };
 
 /**
- * Creates a new Terminal and Window
+ * Creates a new Terminal and Window.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {Application} proc MeeseOS Application instance reference
+ * @param {Number} index The index of the terminal
  */
 const createTerminal = (core, proc, index) => {
 	const term = new Terminal({
@@ -138,6 +150,10 @@ const createTerminal = (core, proc, index) => {
 	const fitAddon = new FitAddon();
 	term.loadAddon(fitAddon);
 
+	/**
+	 * Fits the terminal to the window size, puts it into focus, and scrolls
+	 * to the bottom.
+	 */
 	const fit = () => {
 		setTimeout(() => {
 			fitAddon.fit();
@@ -146,6 +162,10 @@ const createTerminal = (core, proc, index) => {
 		}, 100);
 	};
 
+	/**
+	 * Renders the terminal.
+	 * @param {HTMLElement} $content The element to render the terminal in
+	 */
 	const render = ($content) => {
 		term.open($content);
 		fitAddon.fit();
@@ -192,7 +212,14 @@ const createTerminal = (core, proc, index) => {
 	win.render(render);
 };
 
-// Callback for launching application
+/**
+ * Callback for launching application.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {*} args
+ * @param {Object} options
+ * @param {Object} metadata
+ * @returns {Application}
+ */
 meeseOS.register(applicationName, (core, args, options, metadata) => {
 	const proc = core.make("meeseOS/application", {
 		args,
@@ -206,6 +233,10 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 		}
 	});
 
+	/**
+	 * Creates a new terminal window.
+	 * @returns {void}
+	 */
 	const createWindow = () => createTerminal(core, proc, proc.windows.length);
 
 	if (core.has("meeseOS/tray")) {

@@ -2,7 +2,7 @@ module.exports = (core, proc) => {
 	const { routeAuthenticated } = core.make("meeseOS/express");
 
 	return {
-		// When server initializes
+		/** When server initializes */
 		async init() {
 			// HTTP Route example (see index.js)
 			routeAuthenticated("POST", proc.resource("/test"), (_req, res) => {
@@ -16,13 +16,13 @@ module.exports = (core, proc) => {
 			});
 		},
 
-		// When server starts
-		async start() {},
+		/** When server starts */
+		async start() { /* noop */ },
 
-		// When server goes down
-		destroy() {},
+		/** When server goes down */
+		destroy() { /* noop */ },
 
-		// When using an internally bound websocket, messages comes here
+		/** When using an internally bound websocket, messages comes here */
 		onmessage(_ws, respond, _args) {
 			respond("Pong");
 		},

@@ -54,7 +54,7 @@ import "./index.scss";
 import meeseOS from "meeseOS";
 
 /**
- * Creates default settings
+ * Creates default settings.
  * @returns {Object} The default settings
  */
 const createDefaultSettings = () => ({
@@ -63,7 +63,7 @@ const createDefaultSettings = () => ({
 });
 
 /**
- * Creates the default window options
+ * Creates the default window options.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @param {String} title The window title
@@ -86,7 +86,7 @@ const createWindowOptions = (core, proc, title) => ({
 });
 
 /**
- * Creates the initial paths
+ * Creates the initial paths.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @returns {Object} The initial paths
@@ -108,7 +108,7 @@ const getTotalSize = (files) =>
 	files.reduce((total, file) => total + (file.size ?? 0), 0);
 
 /**
- * Formats the file selection status message
+ * Formats the file selection status message.
  * @param {Array} files The selected files
  * @returns {String} The file selection status message
  */
@@ -129,18 +129,18 @@ const formatStatusMessage = (files) => {
 };
 
 /**
- * Creates a new FileManager user interface view
+ * Creates a new FileManager user interface view.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @param {Window} win Window instance reference
  * @returns {Function}
  */
-const createView = (core, proc, win) => {
+const createView = (core, _proc, win) => {
 	const { icon } = core.make("meeseOS/theme");
 
 	const onMenuClick = (name, args) =>
 		(ev) => win.emit("filemanager:menu", { ev, name }, args);
-	const onInputEnter = (ev, value) =>
+	const onInputEnter = (_ev, value) =>
 		win.emit("filemanager:navigate", { path: value });
 
 	const canGoBack = ({ list, index }) => !list.length || index <= 0;
@@ -195,7 +195,7 @@ const createView = (core, proc, win) => {
 };
 
 /**
- * Creates a new FileManager user interface
+ * Creates a new FileManager user interface.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @returns {Function}
@@ -325,7 +325,7 @@ const createApplication = (core, proc) => {
 };
 
 /**
- * Creates a new FileManager window
+ * Creates a new FileManager window.
  * @param {Core} core MeeseOS Core instance reference
  * @param {Application} proc Application instance reference
  * @returns {Window}
@@ -432,7 +432,7 @@ const createWindow = (core, proc) => {
 };
 
 /**
- * Launches the MeeseOS application process
+ * Launches the MeeseOS application process.
  * @param {Core} core MeeseOS Core instance reference
  * @param {*} args
  * @param {Object} options

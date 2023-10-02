@@ -5,7 +5,6 @@
   "scripts": {
     "test": "npm run eslint",
     "build": "webpack",
-    "watch": "webpack --watch",
     "prepublishOnly": "rm -rf ./dist/* && NODE_ENV=production npm run build",
     "eslint": ""
   },

@@ -1,3 +1,7 @@
+a, a:hover {
+	text-decoration: none;
+}
+
 .bgstyle {
 	background: linear-gradient(
 		136deg,

@@ -6,7 +6,6 @@
     "stylelint": "stylelint index.scss --fix --quiet-deprecation-warnings",
     "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
-    "watch": "webpack --watch",
     "prepublishOnly": "npm run test && rm -rf ./dist/* && npm run build"
   },
   "license": "BSD-3-Clause",

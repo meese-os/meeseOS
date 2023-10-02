@@ -5,10 +5,24 @@ import {
 	icons,
 } from "../../editable-stuff/configurations.json";
 import React, { useEffect, useState } from "react";
-import Typical from "react-typical";
+import { TypeAnimation } from "react-type-animation";
 import { createLettercrap } from "../../../lettercrap";
 
 const MainBody = () => {
+	/**
+	 * Combines the phrases and the delays into a single array.
+	 * @link https://stackoverflow.com/a/55387306/6456163
+	 * @param {string[]} phrases The phrases to be typed out
+	 * @param {number} delay The delay between each phrase
+	 * @returns {(string|number)[]} The combined array of strings and numbers
+	 */
+	const interleave = (phrases, delay) =>
+		[].concat(...phrases.map((n) => [n, delay])).slice(0, -1);
+
+	const lastName = LastName.toLowerCase();
+	const phrases = descWords.map((phrase) => `let ${lastName} = '${phrase}';`);
+	const typingArray = interleave(phrases, 1750);
+
 	const [hoverstatus, setHoverstatus] = useState(
 		new Array(icons.length).fill("socialicons")
 	);
@@ -41,11 +55,13 @@ const MainBody = () => {
 					<div
 						className="lettercrap"
 						// TODO: Resize the font and line height to make it prettier on different screen sizes
-						data-lettercrap-text={FirstName + " " + LastName}
+						data-lettercrap-text={`${FirstName} ${LastName}`}
 						data-lettercrap-aspect-ratio="0.3"
 					/>
 				</h1>
-				<TypingAnimation />
+
+				<TypeAnimation wrapper="p" sequence={typingArray} repeat={Infinity} className="lead" />
+
 				<div className="p-5" id="socialIcons">
 					{icons?.map((icon) => (
 							<a
@@ -60,7 +76,13 @@ const MainBody = () => {
 									onMouseOver={function () {
 										toggleHover({ icon, event: "enter" });
 									}}
+									onFocus={function () {
+										toggleHover({ icon, event: "enter" });
+									}}
 									onMouseOut={function () {
+										toggleHover({ icon, event: "leave" });
+									}}
+									onBlur={function () {
 										toggleHover({ icon, event: "leave" });
 									}}
 								/>
@@ -79,22 +101,5 @@ const MainBody = () => {
 		</div>
 	);
 };
-
-// https://stackoverflow.com/a/55387306/6456163
-const interleave = (arr, thing) =>
-	[].concat(...arr.map((n) => [n, thing])).slice(0, -1);
-const lastName = LastName.toLowerCase();
-const phrases = descWords.map((x) => "let " + lastName + " = '" + x + "';");
-const typingArray = interleave(phrases, 1750);
-
-// https://github.com/catalinmiron/react-typical/issues/6#issuecomment-667327923
-const TypingAnimation = React.memo(
-	() => {
-		return (
-			<Typical wrapper="p" steps={typingArray} loop={1} className="lead" />
-		);
-	},
-	(props, prevProp) => true
-); // The unused props prevent re-rendering
 
 export default MainBody;

@@ -117,15 +117,15 @@ const fieldMap = () => {
 				),
 			]),
 
-		boolean: (props) => (state, actions) =>
+		boolean: (props) => (_state, actions) =>
 			h(ToggleField, {
 				oncreate: (ev) => (ev.checked = getValue(props)),
 				checked: getValue(props),
-				oninput: (ev, checked) =>
+				oninput: (_ev, checked) =>
 					actions.update({ path: props.path, value: checked }),
 			}),
 
-		number: (props) => (state, actions) =>
+		number: (props) => (_state, actions) =>
 			h(TextField, {
 				box: {
 					shrink: 1,
@@ -136,13 +136,13 @@ const fieldMap = () => {
 				},
 				type: "number",
 				oncreate: (el) => (el.value = Number(getValue(props))),
-				oninput: (ev, value) => {
+				oninput: (_ev, value) => {
 					value = Number(value);
 					actions.update({ path: props.path, value });
 				},
 			}),
 
-		wallpaper: (props) => (state, actions) =>
+		wallpaper: (_props) => (state, actions) =>
 			h(Box, { grow: 1, shrink: 1 }, [
 				h(SelectField, {
 					choices: [
@@ -169,16 +169,16 @@ const fieldMap = () => {
 				render(state, actions, dynamicBackgroundItems(state)),
 			]),
 
-		cursor: (props) => (state, actions) =>
+		cursor: (_props) => (state, actions) =>
 			h(Box, { grow: 1, shrink: 0 }, [
 				render(state, actions, cursorEffectSelect(state, actions)),
 				render(state, actions, cursorItems(state)),
 			]),
 
-		fallback: (props) => (state, actions) =>
+		fallback: (props) => (_state, actions) =>
 			h(TextField, {
 				value: getValue(props),
-				oninput: (ev, value) => actions.update({ path: props.path, value }),
+				oninput: (_ev, value) => actions.update({ path: props.path, value }),
 			}),
 	};
 };
@@ -209,7 +209,7 @@ const renderItem = (state, actions) => (item) => {
 };
 
 /** Renders tab sections into the settings app */
-const renderSections = (core, state, actions) =>
+const renderSections = (_core, state, actions) =>
 	tabSections.map((section) => {
 		const items = section.items.map((item) => renderItem(state, actions)(item));
 
@@ -226,8 +226,12 @@ const renderSections = (core, state, actions) =>
 		);
 	});
 
-/** Renders our settings window */
-const renderWindow = (core, proc) => ($content, win) => {
+/**
+ * Renders our settings window.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {Application} proc MeeseOS Application instance reference
+ */
+const renderWindow = (core, _proc) => ($content, win) => {
 	const settingsService = core.make("meeseOS/settings");
 	const packageService = core.make("meeseOS/packages");
 	const desktopService = core.make("meeseOS/desktop");
@@ -363,8 +367,18 @@ const renderWindow = (core, proc) => ($content, win) => {
 	win.on("settings/refresh", refresh);
 };
 
-/** Create our application */
+/**
+ * Create the settings application.
+ * @param {Core} core MeeseOS Core instance reference
+ * @param {*} args
+ * @param {Object} options
+ * @param {Object} metadata
+ * @returns {Application}
+ */
 const register = (core, args, options, metadata) => {
+	/**
+	 * @type {Application}
+	 */
 	const proc = core.make("meeseOS/application", {
 		args,
 		options,

@@ -1,4 +1,5 @@
 {
+  "type": "application",
   "name": "Terminal",
   "category": "network",
   "icon": "logo.svg",

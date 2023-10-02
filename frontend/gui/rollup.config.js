@@ -6,9 +6,6 @@ import terser from "@rollup/plugin-terser";
 export default [
 	{
 		input: "index.js",
-		watch: {
-			chokidar: false,
-		},
 		output: [
 			{
 				file: "dist/esm.js",

@@ -35,7 +35,7 @@ import logger from "./logger";
 import merge from "deepmerge";
 import Websocket from "./websocket";
 import Window from "./window";
-import Core from "../src/core.js";
+import { Core, WindowOptions } from "../index.d.ts";
 /* eslint-enable no-unused-vars */
 
 const applications = [];
@@ -191,6 +191,7 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Destroy application.
+	 * @param {Boolean} [remove=true] Whether or not to remove from list
 	 */
 	destroy(remove = true) {
 		if (this.destroyed) return;
@@ -249,8 +250,8 @@ export default class Application extends EventEmitter {
 	 *
 	 * If given path is an URI it will just return itself.
 	 *
-	 * @param {String} path The path
-	 * @param {Object} [options] Options for url() in core
+	 * @param {String} [path="/"] The path
+	 * @param {Object} [options={}] Options for url() in core
 	 * @returns {String} A complete URI
 	 */
 	resource(path = "/", options = {}) {
@@ -260,9 +261,9 @@ export default class Application extends EventEmitter {
 	/**
 	 * Performs a request to the MeeseOS server with the application
 	 * as the endpoint.
-	 * @param {String} [path=/] Append this to endpoint
-	 * @param {Options} [options] fetch options
-	 * @param {String} [type='json'] Request / Response type
+	 * @param {String} [path="/"] Append this to endpoint
+	 * @param {Options} [options={}] fetch options
+	 * @param {String} [type="json"] Request / Response type
 	 * @returns {Promise<*>} ArrayBuffer or JSON
 	 */
 	request(path = "/", options = {}, type = "json") {
@@ -273,7 +274,7 @@ export default class Application extends EventEmitter {
 
 	/**
 	 * Creates a new Websocket.
-	 * @param {String} [path=/socket] Append this to endpoint
+	 * @param {String} [path="/socket"] Append this to endpoint
 	 * @param {WebsocketOptions} [options={}] Connection options
 	 * @returns {Websocket}
 	 */
@@ -310,7 +311,7 @@ export default class Application extends EventEmitter {
 	/**
 	 * Creates a new Worker.
 	 * @param {String} filename Worker filename
-	 * @param {Object} [options] Worker options
+	 * @param {Object} [options={}] Worker options
 	 * @returns {Worker}
 	 */
 	worker(filename, options = {}) {

@@ -3,11 +3,10 @@
   "version": "1.0.3",
   "description": "meeseOS Static Wallpapers",
   "scripts": {
+    "eslint": "",
     "test": "npm run eslint",
     "build": "webpack",
-    "watch": "webpack --watch",
-    "prepublishOnly": "rm -rf ./dist/* && NODE_ENV=production npm run build",
-    "eslint": ""
+    "prepublishOnly": "rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "license": "BSD-3-Clause",
   "files": [

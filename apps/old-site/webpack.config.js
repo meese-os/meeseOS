@@ -1,23 +1,18 @@
 const path = require("path");
-const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const dotenv = require("dotenv");
-const env_vars = dotenv.config().parsed;
 
 const mode = process.env.NODE_ENV ?? "development";
-const minimize = mode === "production";
+const production = mode === "production";
 const plugins = [];
-const localhost = "localhost:8000";
-
-if (mode === "production") {
+if (production) {
 	plugins.push(new CssMinimizerPlugin());
 }
 
 // Loaders
 const cssLoader = {
 	loader: "css-loader",
-	options: { sourceMap: minimize },
+	options: { sourceMap: production },
 };
 const postcssLoader = {
 	// Required for Bootstrap as per the following:
@@ -31,7 +26,7 @@ const postcssLoader = {
 };
 const sassLoader = {
 	loader: "sass-loader",
-	options: { sourceMap: minimize },
+	options: { sourceMap: production },
 };
 const styleLoader = {
 	test: /\.css$/,
@@ -88,20 +83,9 @@ module.exports = {
 		meeseOS: "MeeseOS",
 	},
 	optimization: {
-		minimize,
+		minimize: production,
 	},
 	plugins: [
-		new webpack.DefinePlugin({
-			"process.env.PUBLIC_URL": JSON.stringify(
-				minimize ? process.env.PUBLIC_URL || env_vars.PUBLIC_URL : localhost
-			),
-			"process.env.GH_USERNAME": JSON.stringify(
-				process.env.GH_USERNAME || env_vars.GH_USERNAME
-			),
-			"process.env.GH_PAT": JSON.stringify(
-				process.env.GH_PAT || env_vars.GH_PAT
-			),
-		}),
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
 			chunkFilename: "[id].css",

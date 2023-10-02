@@ -1,14 +1,13 @@
 {
   "name": "@meese-os/we10x-icons",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS we10x Icons",
   "scripts": {
     "eslint": "eslint index.js",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "test": "npm run eslint && npm run stylelint",
     "build": "webpack",
-    "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && npm run stylelint && rd /s /q dist>nul 2>&1|echo.>nul && NODE_ENV=production npm run build"
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "license": "BSD-3-Clause",
   "files": [

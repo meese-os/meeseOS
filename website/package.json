@@ -1,8 +1,7 @@
 {
   "name": "@meese-os/website",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "meeseOS, implemented in OS.js",
-  "main": "index.js",
   "scripts": {
     "preinstall": "git config core.hooksPath hooks",
     "eslint": "eslint src/client/**/*.js src/server/**/*.js",
@@ -12,7 +11,6 @@
     "build": "webpack && npm run build:manifest",
     "build:production": "NODE_ENV=production rush build",
     "build:manifest": "meese-cli package:discover",
-    "watch": "webpack --watch",
     "package:discover": "meese-cli package:discover",
     "package:create": "meese-cli package:create",
     "make:auth": "meese-cli make:auth",
@@ -26,6 +24,7 @@
   },
   "author": "Aaron Meese <aaron@meese.dev>",
   "license": "BSD-2-Clause",
+  "main": "index.js",
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
     "@meese-os/stylelint-config": "workspace:*",

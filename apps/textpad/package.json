@@ -6,7 +6,6 @@
     "eslint": "eslint *.js",
     "test": "npm run eslint",
     "build": "webpack",
-    "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "license": "BSD-2-Clause",

@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const mode = process.env.NODE_ENV ?? "development";
-const minimize = mode === "production";
+const production = mode === "production";
 
 // Plugins
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -18,7 +18,7 @@ const client_env_vars = dotenv.config({
 }).parsed;
 
 const plugins = [];
-if (mode === "production") {
+if (production) {
 	plugins.push(new CssMinimizerPlugin());
 	plugins.push(new UglifyJsPlugin({
 		sourceMap: true
@@ -42,12 +42,8 @@ module.exports = {
 		maxEntrypointSize: 500 * 1024,
 		maxAssetSize: 500 * 1024,
 	},
-	watchOptions: {
-		aggregateTimeout: 500,
-		poll: 1000,
-	},
 	optimization: {
-		minimize,
+		minimize: production,
 		splitChunks: {
 			chunks: "all",
 		},
@@ -65,15 +61,11 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: "[name].css",
 		}),
-		new webpack.DefinePlugin({
-			"process.env": {
-				"GOOGLE_API_KEY": JSON.stringify(
-					process.env.GOOGLE_API_KEY || client_env_vars.GOOGLE_API_KEY
-				),
-				"GOOGLE_CLIENT_ID": JSON.stringify(
-					process.env.GOOGLE_CLIENT_ID || client_env_vars.GOOGLE_CLIENT_ID
-				),
-			},
+		new webpack.EnvironmentPlugin({
+			"GOOGLE_API_KEY":
+				process.env.GOOGLE_API_KEY ?? client_env_vars.GOOGLE_API_KEY,
+			"GOOGLE_CLIENT_ID":
+				process.env.GOOGLE_CLIENT_ID ?? client_env_vars.GOOGLE_CLIENT_ID,
 		}),
 		...plugins,
 	],

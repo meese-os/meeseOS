@@ -2,18 +2,17 @@
   "name": "@meese-os/widgets",
   "version": "1.0.4",
   "description": "meeseOS Widgets",
-  "main": "dist/main.js",
-  "module": "dist/main.js",
-  "style": "dist/main.scss",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
     "eslint": "eslint index.js src/**/*.js",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "build": "webpack",
-    "watch": "webpack --watch",
     "prepublishOnly": "npm run eslint && npm run stylelint && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
   "license": "BSD-3-Clause",
+  "main": "dist/main.js",
+  "module": "dist/main.js",
+  "style": "dist/main.scss",
   "files": [
     "dist/main.js",
     "dist/main.js.map",

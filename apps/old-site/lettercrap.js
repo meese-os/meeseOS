@@ -85,10 +85,13 @@ function render(element, image, prev) {
 		words,
 		letters
 	);
-	document.querySelector(".lettercrap").innerHTML = text;
 
-	const data = { width: newWidth, height: newHeight, text: text };
-	setTimeout(() => render(element, image, data), updateInterval);
+	const lettercrap = document.querySelector(".lettercrap");
+	if (lettercrap) {
+		lettercrap.innerHTML = text;
+		const data = { width: newWidth, height: newHeight, text: text };
+		setTimeout(() => render(element, image, data), updateInterval);
+	}
 }
 
 function getTextContentWithImageAtSize(

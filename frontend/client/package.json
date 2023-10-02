@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/client",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "meeseOS client",
   "scripts": {
     "test": "npm run eslint && npm run stylelint && npm run jest",
@@ -8,7 +8,6 @@
     "coverage": "jest --coverage",
     "eslint": "eslint index.js src/**/*.js",
     "build": "webpack",
-    "watch": "webpack --watch",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
   },
@@ -40,6 +39,7 @@
     "eslint-plugin-jest": "^27.2.3",
     "html-loader": "^3.1.0",
     "html-loader-jest": "^0.2.1",
+    "ignore-loader": "^0.1.2",
     "mini-css-extract-plugin": "^2.7.6",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",

@@ -71,6 +71,12 @@ module.exports = {
 					loader: "babel-loader",
 				},
 			},
+			{
+				test: /\.d\.ts$/,
+				use: {
+					loader: "ignore-loader",
+				},
+			},
 		],
 	},
 };

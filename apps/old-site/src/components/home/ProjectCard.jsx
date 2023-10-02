@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 
-const ProjectCard = ({ value, index }) => {
+const ProjectCard = ({ value, index, proc }) => {
 	const [updated_at, setUpdatedAt] = useState("0 mints");
 	const handleUpdateTime = useCallback(
 		(e) => {
@@ -57,7 +56,7 @@ const ProjectCard = ({ value, index }) => {
 					</a>
 					<p className="card-text">{description} </p>
 					<hr />
-					<Languages value={languages_url} svn_url={svn_url} />
+					<Languages languages_url={languages_url} svn_url={svn_url} proc={proc} />
 					<p className="card-text d-flex justify-content-between">
 						<a
 							href={svn_url + "/stargazers"}
@@ -66,7 +65,7 @@ const ProjectCard = ({ value, index }) => {
 						>
 							<span className="text-dark card-link mr-4">
 								<i className="fab fa-github" /> Stars{" "}
-								<span className="badge badge-dark">{stargazers_count}</span>
+								<span className="badge bg-dark">{stargazers_count}</span>
 							</span>
 						</a>
 						<small className="text-muted">Updated {updated_at}</small>
@@ -86,29 +85,31 @@ ProjectCard.propTypes = {
 		pushed_at: PropTypes.string.isRequired,
 	}),
 	index: PropTypes.number.isRequired,
+	proc: PropTypes.object.isRequired,
 };
 
-const Languages = ({ value, svn_url }) => {
+const Languages = ({ languages_url, svn_url, proc }) => {
 	const [data, setData] = useState([]);
 
-	const getLanguages = useCallback(
-		(e) => {
-			axios
-				.get(value, {
-					auth: {
-						username: process.env.GH_USERNAME,
-						password: process.env.GH_PAT,
-					},
-				})
-				.then((response) => setData(response.data))
-				.catch((error) => console.error(error.message))
-				.finally(() => {});
-		},
-		[value]
-	);
+	async function getLanguages() {
+		const res = await proc.request("/language_data", {
+			method: "post",
+			body: { languages_url },
+		});
 
-	useEffect(() => getLanguages(), [getLanguages]);
+		if (res.error) {
+			console.error(res.error);
+			setData({});
+		} else {
+			setData(res);
+		}
+	}
 
+	useEffect(() => {
+		getLanguages();
+	}, []);
+
+	if (!data) return null;
 	const array = [];
 	let total_count = 0;
 	for (const index in data) {
@@ -116,13 +117,12 @@ const Languages = ({ value, svn_url }) => {
 		total_count += data[index];
 	}
 
-	if (!array.length) return null;
 	return (
 		<div className="pb-3">
 			{array.map((language) => (
 				<a
 					key={language}
-					className="badge badge-light card-link mr-2 mb-1 ml-0"
+					className="badge bg-light text-dark card-link mr-2 mb-1 ml-0"
 					href={svn_url + `/search?l=${language}`}
 					target=" _blank"
 				>
@@ -133,8 +133,9 @@ const Languages = ({ value, svn_url }) => {
 	);
 };
 Languages.propTypes = {
-	value: PropTypes.string.isRequired,
+	languages_url: PropTypes.string.isRequired,
 	svn_url: PropTypes.string.isRequired,
+	proc: PropTypes.object.isRequired,
 };
 
 export default ProjectCard;
