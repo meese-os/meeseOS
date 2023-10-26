@@ -4,7 +4,8 @@
   "description": "meeseOS client",
   "scripts": {
     "test": "npm run eslint && npm run stylelint && npm run jest",
-    "jest": "jest --runInBand --silent false --verbose true --useStderr=true",
+    "jest": "jest",
+    "jest:debug": "jest --runInBand --silent false --verbose true --useStderr=true",
     "coverage": "jest --coverage",
     "eslint": "eslint index.js src/**/*.js",
     "build": "webpack",
@@ -134,7 +135,7 @@
     "moduleNameMapper": {
       "^meeseOS$": "<rootDir>/__mocks__/core.js",
       "^.+\\.html?$": "html-loader-jest",
-      "^.+\\.scss$": "<rootDir>/__mocks__/null-module.js",
+      "^.+\\.(scss|d.ts)$": "<rootDir>/__mocks__/null-module.js",
       "^.+\\.(png|jpe?g|gif)$": "<rootDir>/__mocks__/null-module.js"
     },
     "coveragePathIgnorePatterns": [

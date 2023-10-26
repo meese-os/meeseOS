@@ -5,7 +5,8 @@
   "scripts": {
     "build": "echo \"There is no build command for server\" && exit 0",
     "eslint": "eslint index.js src",
-    "jest": "jest --runInBand --silent false --verbose true --useStderr=true --detectOpenHandles --forceExit",
+    "jest": "jest --detectOpenHandles --forceExit",
+    "jest:debug": "jest --runInBand --silent false --verbose true --useStderr=true --detectOpenHandles --forceExit",
 		"coverage": "jest --coverage",
     "test": "npm run eslint && npm run jest",
     "prepublishOnly": "npm run test"
