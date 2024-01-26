@@ -10,7 +10,7 @@ This is the Widgets module for MeeseOS
 
 In your client bootstrap (`src/client/index.js`):
 
-```javascript
+```js
 import { WidgetServiceProvider } from "@aaronmeese.com/widgets";
 
 meeseOS.register(WidgetServiceProvider);
@@ -24,7 +24,7 @@ And in your stylesheet (`src/client/index.scss`):
 
 To set up a default set of widgets in the user settings, modify your client configuration file (`src/client/config.js`):
 
-```javascript
+```js
 {
 	desktop: {
 		settings: {

@@ -13,7 +13,7 @@ if (minimize) {
 module.exports = {
 	mode,
 	devtool: "source-map",
-	entry: [path.resolve(__dirname, "index.js")],
+	entry: path.resolve(__dirname, "index.js"),
 	output: {
 		library: "meeseOSWidgets",
 		libraryTarget: "umd",

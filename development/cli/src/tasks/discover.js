@@ -181,12 +181,12 @@ const action = async ({ logger, options, args }) => {
 	logger.info("Flushing out old discoveries...");
 
 	await fs.ensureDir(dist.root);
+	await fs.ensureDir(dist.packages);
 	await fs.ensureDir(dist.themes);
 	await fs.ensureDir(dist.wallpapers);
-	await fs.ensureDir(dist.packages);
+	await clean(dist.packages);
 	await clean(dist.themes);
 	await clean(dist.wallpapers);
-	await clean(dist.packages);
 
 	logger.info("Placing packages in dist...");
 

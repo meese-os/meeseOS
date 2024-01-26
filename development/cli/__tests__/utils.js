@@ -14,12 +14,12 @@ describe("utils", () => {
 
 			expect(options.dist()).toEqual({
 				root: "/tmp/dist",
-				themes: "/tmp/dist/themes",
 				icons: "/tmp/dist/icons",
-				sounds: "/tmp/dist/sounds",
-				wallpapers: "/tmp/dist/wallpapers",
-				packages: "/tmp/dist/apps",
 				metadata: "/tmp/dist/metadata.json",
+				packages: "/tmp/dist/apps",
+				sounds: "/tmp/dist/sounds",
+				themes: "/tmp/dist/themes",
+				wallpapers: "/tmp/dist/wallpapers",
 			});
 
 			expect(options).toMatchObject({

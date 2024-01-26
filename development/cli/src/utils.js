@@ -106,12 +106,12 @@ const createOptions = (options) => ({
 
 		return {
 			root,
-			themes: createPath(root, "themes"),
 			icons: createPath(root, "icons"),
-			sounds: createPath(root, "sounds"),
-			wallpapers: createPath(root, "wallpapers"),
-			packages: createPath(root, "apps"),
 			metadata: createPath(root, "metadata.json"),
+			packages: createPath(root, "apps"),
+			sounds: createPath(root, "sounds"),
+			themes: createPath(root, "themes"),
+			wallpapers: createPath(root, "wallpapers"),
 		};
 	},
 	...options,

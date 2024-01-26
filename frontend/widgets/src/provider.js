@@ -31,6 +31,7 @@
 import DigitalClock from "./items/digitalclock";
 import AnalogClock from "./items/analogclock";
 import QuoteDisplay from "./items/quotedisplay";
+import Clippy from "./items/clippy";
 
 /**
  * Widget Service Provider
@@ -46,6 +47,7 @@ export default class WidgetServiceProvider {
 			digitalclock: DigitalClock,
 			analogclock: AnalogClock,
 			quotedisplay: QuoteDisplay,
+			clippy: Clippy,
 			...(args.registry || {}),
 		};
 	}
