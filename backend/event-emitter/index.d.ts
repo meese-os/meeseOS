@@ -93,4 +93,9 @@ export class EventEmitter {
 	 * Emits an event.
 	 */
 	emit(event: EventName, ...args: any): this;
+
+	/**
+	 * Destroys all events
+	 */
+	destroy(): void;
 }

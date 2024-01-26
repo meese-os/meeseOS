@@ -139,12 +139,18 @@ export const readdir = (adapter, mount) =>
  * @returns {Promise<ArrayBuffer>}
  */
 export const readfile = (adapter, mount) =>
-	(path, type = "string", options = {}) =>
-		adapter
+	(path, type = "string", options = {}) => {
+		if (!["arraybuffer", "blob", "uri", "string"].includes(type)) {
+			throw new Error("Invalid type passed to VFS::readfile()");
+		}
+
+		return adapter
 			.readfile(pathToObject(path), type, options, mount)
-			.then((response) =>
-				transformArrayBuffer(response.body, response.mime, type)
-			);
+			.then((response) => {
+				console.log("readfile response:", response);
+				return transformArrayBuffer(response.body, response.mime, type);
+			});
+	};
 
 /**
  * Writes a file.

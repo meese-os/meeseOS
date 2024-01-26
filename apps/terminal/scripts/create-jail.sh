@@ -16,11 +16,12 @@ tar xvfz "jailkit-$JAILKIT_VERSION.tar.gz"
 
 # Install jailkit
 cd "jailkit-$JAILKIT_VERSION"
-./configure
+bash ./configure
 sudo make
 sudo make install
 
 # Configure jailkit
 sudo jk_init -v -j /jail ssh
-sudo mkdir /jail/home
+sudo mkdir -p /jail/home
+sudo mkdir -p /jail/etc/group
 echo "users:x:100:" | sudo tee /jail/etc/group

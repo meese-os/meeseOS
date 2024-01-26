@@ -19,8 +19,10 @@ NERD_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/$NERD_F
 
 cd "$HOME/Downloads" && curl -L -O "$NERD_FONT_URL"
 sudo apt-get install unzip -y
-sudo unzip "$NERD_FONT_NAME.zip" -d "$INSTALL_PATH"
-sudo rm "$NERD_FONT_NAME.zip"
+if [ -f "$NERD_FONT_NAME.zip" ]; then
+  sudo unzip "$NERD_FONT_NAME.zip" -d "$INSTALL_PATH"
+  sudo rm "$NERD_FONT_NAME.zip"
+fi
 
 # Install the Nerd Font to the system
 sudo fc-cache -f

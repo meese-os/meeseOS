@@ -44,17 +44,11 @@ const {
 const respondNumber = (result) => (typeof result === "number" ? result : -1);
 const respondBoolean = (result) =>
 	typeof result === "boolean" ? result : Boolean(result);
+const requestSelection = (req) => [sanitize(req.fields.selection)];
 const requestPath = (req) => [sanitize(req.fields.path)];
-const requestSelection = (req) => [req.fields.selection];
 const requestSearch = (req) => [sanitize(req.fields.root), req.fields.pattern];
-const requestCross = (req) => [
-	sanitize(req.fields.from),
-	sanitize(req.fields.to),
-];
-const requestFile = (req) => [
-	sanitize(req.fields.path),
-	streamFromRequest(req),
-];
+const requestFile = (req) => [sanitize(req.fields.path), streamFromRequest(req)];
+const requestCross = (req) => [sanitize(req.fields.from), sanitize(req.fields.to)];
 
 /**
  * Parses the range request headers.
@@ -76,7 +70,14 @@ const parseRangeHeader = (range) => {
 const onDone = (req, _res) => {
 	if (req.files) {
 		for (const fieldname in req.files) {
-			fs.unlink(req.files[fieldname].filepath, () => ({}));
+			try {
+				const n = req.files[fieldname].path;
+				if (fs.existsSync(n)) {
+					fs.removeSync(n);
+				}
+			} catch (e) {
+				console.warn("Failed to unlink temporary file", e);
+			}
 		}
 	}
 };
@@ -88,19 +89,18 @@ const onDone = (req, _res) => {
 const wrapper = (fn) =>
 	(req, res, next) =>
 		fn(req, res)
-			.then((result) => {
+			.then((result) => new Promise((resolve, reject) => {
 				if (result instanceof Stream) {
+					result.once("error", reject);
+					result.once("end", resolve);
 					result.pipe(res);
 				} else {
 					res.json(result);
+					resolve();
 				}
-
-				onDone(req, res);
-			})
-			.catch((error) => {
-				onDone(req, res);
-				next(error);
-			});
+			}))
+			.catch(error => next(error))
+			.finally(() => onDone(req, res));
 
 /**
  * Creates the middleware.
@@ -159,69 +159,75 @@ const createOptions = (req) => {
 const createRequestFactory = (findMountpoint) =>
 	(getter, method, readOnly, respond) =>
 		async (req, res) => {
-			const options = createOptions(req);
-			const args = [...getter(req, res), options];
+			const call = async (target, rest, options) => {
+				const found = await findMountpoint(target);
+				const attributes = found.mount.attributes || {};
+				const strict = attributes.strictGroups !== false;
 
-			const found = await findMountpoint(args[0]);
-			if (method === "search") {
-				if (
-					found.mount.attributes &&
-					found.mount.attributes.searchable === false
-				) {
-					return [];
-				}
-			}
-
-			const { attributes } = found.mount;
-			const strict = attributes.strictGroups !== false;
-			const ranges = !attributes.adapter ||
-				attributes.adapter === "system" ||
-				attributes.ranges === true;
-
-			const vfsMethodWrapper = (method) =>
-				found.adapter[method]
-					? found.adapter[method](found)(...args)
-					: Promise.reject(new Error(`Adapter does not support ${method}`));
-
-			const readstat = () => vfsMethodWrapper("stat").catch(() => ({}));
-			await checkMountpointPermission(req, res, method, readOnly, strict)(found);
-
-			const result = await vfsMethodWrapper(method);
-			if (method === "readfile") {
-				const stat = await readstat();
-
-				if (ranges && options.range) {
-					try {
-						if (stat.size) {
-							const size = stat.size;
-							const [start, end] = options.range;
-							const realEnd = end || size - 1;
-							const chunksize = realEnd - start + 1;
-
-							res.writeHead(206, {
-								"Content-Range": `bytes ${start}-${realEnd}/${size}`,
-								"Accept-Ranges": "bytes",
-								"Content-Length": chunksize,
-								"Content-Type": stat.mime,
-							});
-						}
-					} catch (e) {
-						console.warn("Failed to send a ranged response", e);
+				if (method === "search") {
+					if (attributes.searchable === false) {
+						return [];
 					}
-				} else if (stat.mime) {
-					res.append("Content-Type", stat.mime);
 				}
 
-				if (options.download) {
-					const filename = encodeURIComponent(path.basename(args[0]));
-					res.append(
-						"Content-Disposition",
-						`attachment; filename*=utf-8''${filename}`
-					);
-				}
-			}
+				await checkMountpointPermission(req, res, method, readOnly, strict)(found);
 
-			return respond ? respond(result) : result;
+				const vfsMethodWrapper = m => {
+					return found.adapter[m]
+						? found.adapter[m](found)(target, ...rest, options)
+						: Promise.reject(new Error(`Adapter does not support ${m}`));
+				};
+
+				const result = await vfsMethodWrapper(method);
+				if (method === "readfile") {
+					const ranges = (!attributes.adapter || attributes.adapter === "system") || attributes.ranges === true;
+					const stat = await vfsMethodWrapper("stat").catch(() => ({}));
+
+					if (ranges && options.range) {
+						try {
+							if (stat.size) {
+								const size = stat.size;
+								const [start, end] = options.range;
+								const realEnd = end ? end : size - 1;
+								const chunksize = (realEnd - start) + 1;
+
+								res.writeHead(206, {
+									"Accept-Ranges": "bytes",
+									"Content-Length": chunksize,
+									"Content-Range": `bytes ${start}-${realEnd}/${size}`,
+									"Content-Type": stat.mime
+								});
+							}
+						} catch (e) {
+							console.warn("Failed to send a ranged response", e);
+						}
+					} else if (stat.mime) {
+						res.append("Content-Type", stat.mime);
+					}
+
+					if (options.download) {
+						const filename = encodeURIComponent(path.basename(target));
+						res.append(
+							"Content-Disposition",
+							`attachment; filename*=utf-8''${filename}`
+						);
+					}
+				}
+
+				return respond ? respond(result) : result;
+			};
+
+			return new Promise((resolve, reject) => {
+				const options = createOptions(req);
+				const [target, ...rest] = getter(req, res);
+				const [resource] = rest;
+
+				if (resouce instanceof Stream) {
+					resource.once("error", reject);
+				}
+
+				call(target, rest, options).then(resolve).catch(reject);
+			});
 		};
 
 /**
