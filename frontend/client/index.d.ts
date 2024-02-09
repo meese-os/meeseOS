@@ -703,7 +703,9 @@ export type WindowAttributes = {
 	/**
 	 * If window should have the default drop action.
 	 */
-	droppable?: boolean;
+	droppable?: boolean | {
+		dataTransferProperty?: 'files' | 'items';
+	};
 
 	/**
 	 * Minimum dimension.
