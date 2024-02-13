@@ -10,7 +10,7 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           npm install -g \
@@ -43,7 +43,7 @@ jobs:
         id: push_directory
         uses: meeseOS/github-action-push-to-another-repository@v1.6
         env:
-          API_TOKEN_GITHUB: ${{ secrets.MANUAL_REPO_PAT }}
+          API_TOKEN_GITHUB: ${{ secrets.GH_AUTH_TOKEN }}
         with:
           source-directories: |
             frontend/client/doc
