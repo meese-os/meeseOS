@@ -24,6 +24,9 @@
      * instead of the latest version.
      */
     // "some-library": "1.2.3"
+
+		// https://github.com/microsoft/rushstack/issues/2981#issuecomment-1157233890
+		"browserslist": "4.23.0"
   },
 
   /**
