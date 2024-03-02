@@ -33,13 +33,17 @@ module.exports = (_core, _options) => ({
 			groups = ["guest"];
 		} else {
 			// Validate the user against the 'database'
-			const users = JSON.parse(process.env.meeseOS_users);
-			const usernameExists = Object.prototype.hasOwnProperty.call(users, username);
-			if (usernameExists) {
-				const passwordCorrect = users[username].password === password;
-				if (passwordCorrect) {
-					groups = users[username].groups;
+			try {
+				const users = JSON.parse(process.env.meeseOS_users);
+				const usernameExists = Object.prototype.hasOwnProperty.call(users, username);
+				if (usernameExists) {
+					const passwordCorrect = users[username].password === password;
+					if (passwordCorrect) {
+						groups = users[username].groups;
+					}
 				}
+			} catch (e) {
+				console.error("Error validating user against the database:", e);
 			}
 		}
 

@@ -222,7 +222,7 @@ const createRequestFactory = (findMountpoint) =>
 				const [target, ...rest] = getter(req, res);
 				const [resource] = rest;
 
-				if (resouce instanceof Stream) {
+				if (resource instanceof Stream) {
 					resource.once("error", reject);
 				}
 

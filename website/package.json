@@ -10,6 +10,7 @@
     "serve": "node src/server/index.js",
     "build": "webpack && npm run build:manifest",
     "build:production": "NODE_ENV=production rush build",
+    "build:prod": "npm run build:production",
     "build:manifest": "meese-cli package:discover",
     "package:discover": "meese-cli package:discover",
     "package:create": "meese-cli package:create",
