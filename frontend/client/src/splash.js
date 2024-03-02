@@ -162,5 +162,11 @@ export default class Splash {
 		if (this.$loading.parentNode) {
 			this.$loading.remove();
 		}
+
+		// *ENSURE* the splash screen is removed from the DOM
+		const splash = document.querySelector(".meeseOS-boot-splash");
+		if (splash) {
+			splash.remove();
+		}
 	}
 }
