@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo "Installing nvm..."
-echo
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+if [ ! -d "${HOME}/.nvm/.git" ]; then
+	echo "Installing nvm..."
+	echo
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+else
+  echo "NVM already installed, skipping..."
+fi
 
 echo "Sourcing nvm..."
 export NVM_DIR="$HOME/.nvm"
@@ -11,38 +15,25 @@ export NVM_DIR="$HOME/.nvm"
 
 echo "Installing Node version specified in .nvmrc..."
 echo
-nvm install && nvm use
+nvm install
+nvm use
 
 # Optional, can be useful for some issues on Ubuntu
 # sudo apt-get purge nodejs npm --auto-remove
 
 echo
-echo "Updating npm..."
-npm install -g npm@latest
-
-echo
-echo "Installing rush and pm2..."
-npm install -g @microsoft/rush pm2 2>&1 | grep "npm ERR!"
-if [ "$?" -ne "1" ]; then
-  # This method of checking for whether `npm install` was successful is from here:
-  # https://devops.stackexchange.com/a/1268/41518
-  echo
-  echo "\e[31m[!] 'npm install' failed! Check your network connection for stability and try again.\e[31m"
-  exit 1
-fi
+echo "Installing global dependencies..."
+npm install -g @microsoft/rush pm2 pnpm
 
 echo
 echo "Updating pnpm..."
+pnpm setup
+source ~/.bashrc
 pnpm add -g pnpm
 
 echo
 echo "Updating rush projects..."
-rush update --purge --max-install-attempts 10 2>&1 | grep "ERROR: Error: The command failed with exit code 1"
-if [ "$?" -ne "1" ]; then
-  echo
-  echo "\e[31m[!] 'rush update' failed! Check your network connection for stability and try again.\e[31m"
-  exit 1
-fi
+rush update --purge --max-install-attempts 10
 
 echo
 echo "Installing rush dependencies..."
