@@ -94,7 +94,7 @@ export default class AlertDialog extends Dialog {
 
 			if (this.args.type === "error") {
 				const { error } = this.args;
-				const msg = error instanceof Error ? `${error.message}\n\n${error.stack || 'No stack'}` : error;
+				const msg = error instanceof Error ? `${error.message}\n\n${error.stack || "No stack"}` : error;
 
 				children.push(
 					h(TextareaField, {
