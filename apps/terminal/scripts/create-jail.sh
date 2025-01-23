@@ -8,6 +8,18 @@ if [ -d "/jail" ]; then
   exit 0
 fi
 
+# Configure pyenv to use Python 3.12
+sudo apt-get install -y libbz2-dev lzma liblzma-dev
+pyenv install 3.12
+pyenv global 3.12
+
+# Add the pyenv path to the PATH
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+set -e
+
 # Download and unpack jailkit
 JAILKIT_VERSION=2.23
 cd /tmp
@@ -23,5 +35,6 @@ sudo make install
 # Configure jailkit
 sudo jk_init -v -j /jail ssh
 sudo mkdir -p /jail/home
-sudo mkdir -p /jail/etc/group
 echo "users:x:100:" | sudo tee /jail/etc/group
+
+set +e

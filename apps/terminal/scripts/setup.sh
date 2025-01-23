@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ##############################################################
 # See my raspberrypi repo to configure your server securely: #
@@ -14,7 +15,7 @@ if [ -f .env ]; then
 elif [ -v $USERNAME ]; then
   # If no `.env` file exists and the env vars aren't already set,
   # ask the user for the data
-  echo "The USERNAME environment variable is not set, prompting for input..."
+  echo "[-] The USERNAME environment variable is not set, prompting for input..."
   read -p "Username: " USERNAME
   export USERNAME
   read -sp "Password: " PASSWORD
@@ -22,7 +23,7 @@ elif [ -v $USERNAME ]; then
   printf "\n"
 else
   # The env vars are already set, so just export them to be safe
-  echo "The USERNAME environment variable is set, exporting it..."
+  echo "[-] The USERNAME environment variable is set, exporting it..."
   export USERNAME
   export PASSWORD
 fi
@@ -36,12 +37,12 @@ bash ./create-user.sh
 # Hide the `uname` MOTD on SSH login to the server
 uname_motd=/etc/update-motd.d/10-uname
 if [ -f "$uname_motd" ]; then
-  echo "Hiding the 'uname' output from the terminal on SSH login..."
+  echo "[>] Hiding the 'uname' output from the terminal on SSH login..."
   perl -p -e 's/\nuname -snrvm/\n# uname -snrvm/' "$uname_motd" | sudo tee "$uname_motd"
 fi
 
 # Installs some helpful packages used by the terminal app
-sudo apt install -y sshpass python2 build-essential
+sudo apt-get install -y sshpass build-essential
 
 # OPTIONAL: Install `oh-my-posh`
 bash ./oh-my-posh.sh
@@ -50,12 +51,11 @@ bash ./oh-my-posh.sh
 # private Zork repo, no peeking at the code and cheating!
 bash ./install-zork.sh
 
-# Prevent the user from writing to any files in their home directory
-sudo chmod -R 544 "/jail/home/$USERNAME" 2>/dev/null
+echo "[>] Preventing the user from writing to any files in their home directory..."
+sudo find "/jail/home/$USERNAME" -type f ! -name '.bashrc' -exec chmod 544 {} +
 
-# Clean up the environment
-echo "Cleaning up..."
+echo "[>] Cleaning up..."
 unset USERNAME
 unset PASSWORD
 history -c 2>/dev/null
-echo "Done!"
+echo "[+] Done!"
