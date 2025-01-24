@@ -520,7 +520,7 @@ export default class Window extends EventEmitter {
 	 * @param {Function} [callback] Callback when window DOM has been constructed
 	 * @returns {Window} this instance
 	 */
-	render(callback = function () { /* noop */ }) {
+	render(callback = function() { /* noop */ }) {
 		if (this.rendered) {
 			return this;
 		} else if (!this.inited) {

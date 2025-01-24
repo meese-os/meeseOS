@@ -437,7 +437,7 @@ module.exports = (core) => {
 		 * Searches for files and folders.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {Boolean}
+		 * @returns {Promise<Object>}
 		 */
 		search: (vfs) =>
 			(root, pattern, options = {}) =>
