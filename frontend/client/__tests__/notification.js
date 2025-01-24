@@ -21,7 +21,7 @@ describe("Notification", () => {
 			message: "Jest",
 		});
 
-		expect(ev).toBeCalled();
+		expect(ev).toHaveBeenCalled();
 	});
 
 	test("#render", () => {
@@ -43,7 +43,7 @@ describe("Notification", () => {
 		core.on("meeseOS/notification:destroy", ev);
 		notification.destroy();
 
-		expect(ev).toBeCalled();
+		expect(ev).toHaveBeenCalled();
 	});
 
 	test("Native notification", () => {

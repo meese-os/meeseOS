@@ -24,7 +24,7 @@ describe("Core Utils", () => {
 	test("isAuthenticated - success on no groups", () => {
 		request.session = { user: { groups: [] } };
 		utils.isAuthenticated(core, [], false)(request, response, next);
-		expect(next).toBeCalled();
+		expect(next).toHaveBeenCalled();
 	});
 
 	test("isAuthenticated - fail on some required group", () => {
@@ -38,7 +38,7 @@ describe("Core Utils", () => {
 	test("isAuthenticated - success on some required group", () => {
 		request.session = { user: { groups: ["required", "other"] } };
 		utils.isAuthenticated(core, ["required"], false)(request, response, next);
-		expect(next).toBeCalled();
+		expect(next).toHaveBeenCalled();
 	});
 
 	test("isAuthenticated - fail on all required group", () => {
@@ -60,6 +60,6 @@ describe("Core Utils", () => {
 			response,
 			next
 		);
-		expect(next).toBeCalled();
+		expect(next).toHaveBeenCalled();
 	});
 });

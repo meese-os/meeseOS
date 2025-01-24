@@ -163,7 +163,7 @@ describe("Authentication", () => {
 	test("#logout", async () => {
 		await auth.logout(request, response);
 
-		expect(request.session.destroy).toBeCalled();
+		expect(request.session.destroy).toHaveBeenCalled();
 		expect(response.json).toBeCalledWith({});
 	});
 

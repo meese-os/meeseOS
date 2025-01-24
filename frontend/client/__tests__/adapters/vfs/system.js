@@ -99,7 +99,7 @@ describe("System VFS Adapter", () => {
 				}
 			)
 			.then(() => {
-				expect(open).toBeCalled();
+				expect(open).toHaveBeenCalled();
 			});
 	});
 

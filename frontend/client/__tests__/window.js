@@ -59,12 +59,12 @@ describe("Window", () => {
 		win.render(render);
 		win.render(render);
 
-		expect(oninit).toBeCalledTimes(1);
-		expect(render).toBeCalledTimes(1);
+		expect(oninit).toHaveBeenCalledTimes(1);
+		expect(render).toHaveBeenCalledTimes(1);
 		expect(win.$content.innerHTML).toBe("Hello World");
 		expect(win.rendered).toBe(true);
 
-		setTimeout(() => expect(onrender).toBeCalled(), 10);
+		setTimeout(() => expect(onrender).toHaveBeenCalled(), 10);
 	});
 
 	test("#minimize", () => {
@@ -74,7 +74,7 @@ describe("Window", () => {
 		expect(win.minimize()).toBe(true);
 		expect(win.minimize()).toBe(false);
 		expect(win.state.minimized).toBe(true);
-		expect(onminimize).toBeCalled();
+		expect(onminimize).toHaveBeenCalled();
 	});
 
 	test("#raise", () => {
@@ -84,7 +84,7 @@ describe("Window", () => {
 		expect(win.raise()).toBe(true);
 		expect(win.raise()).toBe(false);
 		expect(win.state.minimized).toBe(false);
-		expect(onraise).toBeCalled();
+		expect(onraise).toHaveBeenCalled();
 	});
 
 	test("#maximize", () => {
@@ -96,8 +96,8 @@ describe("Window", () => {
 		expect(win.maximize()).toBe(true);
 		expect(win.maximize()).toBe(false);
 		expect(win.state.maximized).toBe(true);
-		expect(onmaximize).toBeCalled();
-		//  expect(onresized).toBeCalled(); //  FIXME
+		expect(onmaximize).toHaveBeenCalled();
+		//  expect(onresized).toHaveBeenCalled(); //  FIXME
 	});
 
 	test("#restore", () => {
@@ -109,8 +109,8 @@ describe("Window", () => {
 		expect(win.restore()).toBe(true);
 		expect(win.restore()).toBe(false);
 		expect(win.state.maximized).toBe(false);
-		expect(onrestore).toBeCalled();
-		//  expect(onresized).toBeCalled(); //  FIXME
+		expect(onrestore).toHaveBeenCalled();
+		//  expect(onresized).toHaveBeenCalled(); //  FIXME
 	});
 
 	test("#focus", () => {
@@ -121,7 +121,7 @@ describe("Window", () => {
 		expect(win.focus()).toBe(true);
 		expect(win.focus()).toBe(false);
 		expect(win.state.focused).toBe(true);
-		expect(onfocus).toBeCalled();
+		expect(onfocus).toHaveBeenCalled();
 	});
 
 	test("#blur", () => {
@@ -132,7 +132,7 @@ describe("Window", () => {
 		expect(win.blur()).toBe(true);
 		expect(win.blur()).toBe(false);
 		expect(win.state.focused).toBe(false);
-		expect(onblur).toBeCalled();
+		expect(onblur).toHaveBeenCalled();
 	});
 
 	test("#setIcon", () => {
@@ -187,7 +187,7 @@ describe("Window", () => {
 		win.on("blur", toggleEvent);
 		win._toggleState("focused", false, "blur");
 		expect(win.state.focused).toBe(false);
-		expect(toggleEvent).toBeCalled();
+		expect(toggleEvent).toHaveBeenCalled();
 	});
 
 	test("#getState", () => {

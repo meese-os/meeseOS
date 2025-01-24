@@ -127,7 +127,7 @@ describe("Packages", () => {
 		packages.register("Package2", cb);
 
 		return packages.launch("Package2").then(() => {
-			expect(cb).toBeCalled();
+			expect(cb).toHaveBeenCalled();
 		});
 	});
 
@@ -153,7 +153,7 @@ describe("Packages", () => {
 			app.on("attention", fn);
 
 			return packages.launch("Package4").then(() => {
-				expect(fn).toBeCalled();
+				expect(fn).toHaveBeenCalled();
 			});
 		});
 	});
@@ -181,7 +181,7 @@ describe("Packages", () => {
 		}, 25);
 
 		return pkgs.launch(name).then(() => {
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 		});
 	});
 });
