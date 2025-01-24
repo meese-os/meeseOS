@@ -7,10 +7,11 @@ describe("#resourceResolver icon themes", () => {
 
 	beforeAll(() => createInstance().then(
 		(c) => {
-			resolver = resourceResolver(c);
 			core = c;
+			resolver = resourceResolver(c);
 		}
 	));
+
 	afterAll(() => core.destroy());
 
 	test("Should work with image extensions in the icon name", () => {

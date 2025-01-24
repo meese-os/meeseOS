@@ -259,7 +259,7 @@ export default class Auth {
 
 				// TODO: Show something like "incorrect username or password" instead of "Login failed"
 				// if there wasn't a technical error
-				this.ui.emit("login:error", "Login failed");
+				this.ui.emit("login:error", "Login failed", e);
 				this.ui.emit("login:stop");
 
 				Cookies.remove(settings.name);

@@ -7,7 +7,7 @@
     "jest": "jest",
     "jest:debug": "jest --runInBand --silent false --verbose true --useStderr=true",
     "coverage": "jest --coverage",
-    "eslint": "eslint index.js src/**/*.js",
+    "eslint": "eslint src __tests__ __mocks__",
     "build": "webpack",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
     "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"

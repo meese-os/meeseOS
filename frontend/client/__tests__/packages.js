@@ -21,6 +21,12 @@ const packageList = [
 		singleton: true,
 	},
 	{
+		name: "Package5",
+		type: "application",
+		mimes: ["video/mpeg"],
+		hidden: true,
+	},
+	{
 		name: "PackageMissingRuntime",
 		type: "application",
 	},
@@ -37,7 +43,7 @@ const packageMatch = [
 	{ name: "ValidApplication", type: "application" },
 	...packageList
 		.filter((pkg) => pkg.name.indexOf("Test") === -1)
-		.map((pkg) => Object.assign({ type: "application" }, pkg)),
+		.map((pkg) => ({ type: "application", ...pkg })),
 ];
 
 describe("Packages", () => {

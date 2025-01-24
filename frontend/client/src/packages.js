@@ -462,7 +462,7 @@ export default class Packages {
 	 */
 	getCompatiblePackages(mimeType) {
 		return this.getPackages((meta) => {
-			if (meta.mimes) {
+			if (meta.mimes && !meta.hidden) {
 				return Boolean(
 					meta.mimes.find((mime) => {
 						try {

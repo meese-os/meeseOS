@@ -91,7 +91,7 @@ import logger from "./logger";
  * @property {Boolean} [controls=true] Show controls
  * @property {String} [visibility=global] Global visibility, 'restricted' to hide from window lists etc.
  * @property {Boolean} [clamp=true] Clamp the window position upon creation
- * @property {Boolean} [droppable=true] If window should have the default drop action
+ * @property {boolean | {dataTransferProperty?: "files" | "items"}} [droppable=true] If window should have the default drop action
  * @property {WindowDimension} [minDimension] Minimum dimension
  * @property {WindowDimension} [maxDimension] Maximum dimension
  * @property {{name: string}} [mediaQueries] A map of matchMedia to name
@@ -470,11 +470,16 @@ export default class Window extends EventEmitter {
 
 		// DnD functionality
 		if (this.attributes.droppable) {
+			const { dataTransferProperty = "files" } = this.attributes.droppable === true
+				? {}
+				: this.attributes.droppable;
+
 			const d = droppable(this.$element, {
 				ondragenter: (...args) => this.emit("dragenter", ...args, this),
 				ondragover: (...args) => this.emit("dragover", ...args, this),
 				ondragleave: (...args) => this.emit("dragleave", ...args, this),
 				ondrop: (...args) => this.emit("drop", ...args, this),
+				dataTransferProperty,
 			});
 
 			this.on("destroy", () => d.destroy());
@@ -515,7 +520,7 @@ export default class Window extends EventEmitter {
 	 * @param {Function} [callback] Callback when window DOM has been constructed
 	 * @returns {Window} this instance
 	 */
-	render(callback = function() { /* noop */ }) {
+	render(callback = function () { /* noop */ }) {
 		if (this.rendered) {
 			return this;
 		} else if (!this.inited) {
@@ -960,9 +965,9 @@ export default class Window extends EventEmitter {
 	 */
 	_updateButtons() {
 		const hideButton = (action) =>
-			(this.$header.querySelector(
-				`.meeseOS-window-button[data-action=${action}]`
-			).style.display = "none");
+		(this.$header.querySelector(
+			`.meeseOS-window-button[data-action=${action}]`
+		).style.display = "none");
 
 		const buttonmap = {
 			maximizable: "maximize",

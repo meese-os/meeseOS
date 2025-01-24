@@ -29,7 +29,8 @@ const otherMount = {
 	},
 };
 
-const testAdapter = Object.assign({}, nullAdapter, {
+const testAdapter = {
+	...nullAdapter,
 	readdir: (_path, _options) =>
 		Promise.resolve([
 			{
@@ -40,7 +41,7 @@ const testAdapter = Object.assign({}, nullAdapter, {
 				mime: "text/plain",
 			},
 		]),
-});
+};
 
 const call = (method, ...args) => VFS[method](testAdapter, testMount)(...args);
 const callOther = (method, ...args) =>

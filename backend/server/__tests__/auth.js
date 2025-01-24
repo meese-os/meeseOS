@@ -1,5 +1,4 @@
 const meeseOS = require("meeseOS");
-const fs = require("fs-extra");
 const path = require("path");
 const Auth = require("../src/auth.js");
 const Filesystem = require("../src/filesystem.js");
