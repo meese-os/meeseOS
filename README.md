@@ -135,7 +135,7 @@ You can specify which registry you want to publish by adding one of the followin
 - GitHub Packages: `--registry https://npm.pkg.github.com`
 - NPM: `--registry https://registry.npmjs.org`
 
-If you want to do a dry run first, run `rush publish --include-all`.
+If you want to do a dry run first, run `rush publish --include-all`. You will have to set your environmental variables based on the repository you are publishing to, either `NPM_AUTH_TOKEN` or `GH_AUTH_TOKEN`.
 
 # TODO
 
