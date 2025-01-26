@@ -136,9 +136,8 @@ describe("Window Utils", () => {
 		});
 	});
 
-	test("dimensionFromElement", () => {
-		// TODO
-	});
+	// TODO
+	// test("dimensionFromElement", () => { });
 
 	test("transformVectors", () => {
 		expect(

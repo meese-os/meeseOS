@@ -1,10 +1,11 @@
 #!/bin/bash
+set -e
 
 ###
 # Copy over commands that you want the new user to have access to
 ###
 
-echo "Copying over commands for the new user..."
+echo "[>] Copying over commands for the new user..."
 
 declare -a commands=(
   "/bin/bash"        # The default shell
@@ -19,8 +20,7 @@ declare -a commands=(
 
 # Props to https://stackoverflow.com/a/22432604/6456163 for array looping code
 num_commands=${#commands[@]}
-for (( i=0; i<num_commands; i++ ));
-do
+for (( i=0; i<num_commands; i++ )); do
   sudo jk_cp -v -f /jail "${commands[$i]}"
 done
 
@@ -29,15 +29,20 @@ done
 ###
 
 # https://unix.stackexchange.com/a/83872/370076
-echo "Copying over terminal info, this may take a while..."
+echo "[>] Copying over terminal info, this may take a while..."
 sudo jk_cp -v -f /jail /usr/share/terminfo >/dev/null
-sudo jk_cp -v -f /jail /lib/terminfo >/dev/null
+if [ -d /lib/terminfo ]; then
+  sudo jk_cp -v -f /jail /lib/terminfo >/dev/null
+elif [ -d /usr/share/terminfo ]; then
+  sudo jk_cp -v -f /jail /usr/share/terminfo >/dev/null
+fi
+echo "[+] Copied over terminal info successfully!"
 
 ###
 # Remove access to system commands that you don't want the new user to have access to
 ###
 
-echo "Removing access to system commands..."
+echo "[>] Removing access to system commands..."
 sudo rm -rf /jail/usr/bin/ssh
 
 ###
@@ -45,12 +50,13 @@ sudo rm -rf /jail/usr/bin/ssh
 # https://superuser.com/a/165117/704578
 ###
 
-echo "Creating the /proc directory..."
-sudo mkdir /jail/proc
+echo "[>] Creating the /proc directory..."
+sudo mkdir -p /jail/proc
 sudo mount -t proc /proc /jail/proc/
 # TODO: Try remounting /proc on every reboot with
 # https://serverfault.com/a/302124/537331
 
 # Create a `/tmp` directory for use by oh-my-posh
-sudo mkdir /jail/tmp
+echo "[>] Creating the /tmp directory..."
+sudo mkdir -p /jail/tmp
 sudo chmod 777 /jail/tmp # ;)

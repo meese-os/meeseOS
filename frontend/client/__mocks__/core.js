@@ -24,7 +24,7 @@ class MockDesktopServiceProvider extends ServiceProvider {
 	}
 }
 
-export const createInstance = () => {
+export const createInstance = (onInit) => {
 	const core = new Core(
 		merge(config, {
 			settings: {
@@ -46,6 +46,10 @@ export const createInstance = () => {
 	core.register(SettingsServiceProvider, { before: true });
 	core.register(ServiceProvider);
 	core.register(MockDesktopServiceProvider);
+
+	if (typeof onInit === "function") {
+		onInit(core);
+	}
 
 	return core
 		.boot()

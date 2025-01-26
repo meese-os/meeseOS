@@ -76,15 +76,6 @@ class Settings {
 	}
 
 	/**
-	 * Destroy instance.
-	 */
-	destroy() {
-		if (this.adapter.destroy) {
-			this.adapter.destroy();
-		}
-	}
-
-	/**
 	 * Initializes adapter.
 	 * @returns {Promise<Boolean>}
 	 */
@@ -116,6 +107,15 @@ class Settings {
 	async load(req, res) {
 		const result = await this.adapter.load(req, res);
 		res.json(result);
+	}
+
+	/**
+	 * Destroy instance.
+	 */
+	destroy() {
+		if (this.adapter.destroy) {
+			this.adapter.destroy();
+		}
 	}
 }
 

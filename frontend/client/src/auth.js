@@ -191,10 +191,10 @@ export default class Auth {
 
 	/**
 	 * Shows Login UI.
-	 * @param {AuthCallback} cb Authentication callback
+	 * @param {AuthCallback} [cb=noop] Authentication callback
 	 * @returns {Promise<Boolean>}
 	 */
-	show(cb) {
+	show(cb = () => {}) {
 		const login = this.core.config("auth.login", {});
 		const autologin = login.username && login.password;
 		const settings = this.core.config("auth.cookie");
@@ -259,7 +259,7 @@ export default class Auth {
 
 				// TODO: Show something like "incorrect username or password" instead of "Login failed"
 				// if there wasn't a technical error
-				this.ui.emit("login:error", "Login failed");
+				this.ui.emit("login:error", "Login failed", e);
 				this.ui.emit("login:stop");
 
 				Cookies.remove(settings.name);

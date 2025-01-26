@@ -52,9 +52,9 @@ describe("Middleware", () => {
 
 		middleware.get("group").forEach((callback) => callback());
 
-		expect(firstCallback).toBeCalled();
-		expect(secondCallback).toBeCalled();
-		expect(thirdCallback).toBeCalled();
+		expect(firstCallback).toHaveBeenCalled();
+		expect(secondCallback).toHaveBeenCalled();
+		expect(thirdCallback).toHaveBeenCalled();
 	});
 
 	test("#core middleware", () => {

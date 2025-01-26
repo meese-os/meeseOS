@@ -36,16 +36,16 @@ const blob2str = (blob) =>
 		reader.readAsText(blob);
 	});
 
-describe("utils.vfs#getFileIcon", () => {
+describe("utils.vfs#parentDirectory", () => {
 	const check = (s) => vfs.parentDirectory(s);
 
 	test("Should remove slashes", () =>
 		expect(check("foo://///")).toEqual("foo:/"));
 	test("Should get parent directory", () =>
 		expect(check("foo:/bar")).toEqual("foo:/"));
-	test("Should get parent directory", () =>
+	test("Should get nested parent directory", () =>
 		expect(check("foo:/bar/baz")).toEqual("foo:/bar/"));
-	test("Should get parent directory", () =>
+	test("Should get multi-level nested parent directory", () =>
 		expect(check("foo:/bar/baz/jazz")).toEqual("foo:/bar/baz/"));
 });
 
@@ -211,8 +211,8 @@ describe("utils.vfs#createFileIter", () => {
 describe("utils.vfs#humanFileSize", () => {
 	const check = (s, i, si) => vfs.humanFileSize(Math.pow(s, i), si);
 
-	test("Should return in B-s", () => expect(check(1)).toBe("0 B"));
 	test("Should return in B-s", () => expect(check(1, 1, true)).toBe("1 B"));
+	test("Should return in B-s for 0 bytes", () => expect(check(1)).toBe("0 B"));
 
 	test("Should return in KiB-s", () => expect(check(1024, 1)).toBe("1.0 KiB"));
 	test("Should return in MiB-s", () => expect(check(1024, 2)).toBe("1.0 MiB"));

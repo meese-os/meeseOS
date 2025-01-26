@@ -5,6 +5,7 @@ describe("Preloader", () => {
 
 	test("#constructor", () => {
 		pre = new Preloader(document.body);
+		expect(pre).toBeDefined();
 	});
 
 	test("#load", () => {

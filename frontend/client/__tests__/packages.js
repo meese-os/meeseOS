@@ -21,6 +21,12 @@ const packageList = [
 		singleton: true,
 	},
 	{
+		name: "Package5",
+		type: "application",
+		mimes: ["video/mpeg"],
+		hidden: true,
+	},
+	{
 		name: "PackageMissingRuntime",
 		type: "application",
 	},
@@ -37,7 +43,7 @@ const packageMatch = [
 	{ name: "ValidApplication", type: "application" },
 	...packageList
 		.filter((pkg) => pkg.name.indexOf("Test") === -1)
-		.map((pkg) => Object.assign({ type: "application" }, pkg)),
+		.map((pkg) => ({ type: "application", ...pkg })),
 ];
 
 describe("Packages", () => {
@@ -58,6 +64,7 @@ describe("Packages", () => {
 
 	test("#constructor", () => {
 		packages = new Packages(core);
+		expect(packages).toBeDefined();
 	});
 
 	test("#init", () => {
@@ -94,7 +101,7 @@ describe("Packages", () => {
 		expect(() => packages.register("Invalid", () => {})).toThrow(Error);
 	});
 
-	test("#register - register once ", () => {
+	test("#register - register once", () => {
 		expect(() =>
 			packages.register("Package1", () => {
 				throw new Error("Simulate failure");
@@ -121,7 +128,7 @@ describe("Packages", () => {
 		packages.register("Package2", cb);
 
 		return packages.launch("Package2").then(() => {
-			expect(cb).toBeCalled();
+			expect(cb).toHaveBeenCalled();
 		});
 	});
 
@@ -147,7 +154,7 @@ describe("Packages", () => {
 			app.on("attention", fn);
 
 			return packages.launch("Package4").then(() => {
-				expect(fn).toBeCalled();
+				expect(fn).toHaveBeenCalled();
 			});
 		});
 	});
@@ -175,7 +182,7 @@ describe("Packages", () => {
 		}, 25);
 
 		return pkgs.launch(name).then(() => {
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 		});
 	});
 });

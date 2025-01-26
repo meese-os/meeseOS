@@ -1,4 +1,4 @@
-import { createInstance } from "../__mocks__/core.js";
+import { createInstance } from "meeseOS";
 import Application from "../src/application.js";
 import Core from "../src/core.js";
 
@@ -140,8 +140,8 @@ describe("Core", () => {
 			app.on("broadcast-eventz", invalid);
 			core.broadcast("ValidApplication", "broadcast-event");
 
-			expect(valid).toBeCalled();
-			expect(invalid).not.toBeCalled();
+			expect(valid).toHaveBeenCalled();
+			expect(invalid).not.toHaveBeenCalled();
 			app.destroy();
 		});
 	});
@@ -160,7 +160,7 @@ describe("Core", () => {
 				}),
 			});
 
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 			expect(fn.mock.calls[0]).toEqual([1, 2, 3]);
 		});
 	});
@@ -176,7 +176,7 @@ describe("Core", () => {
 				args: [1, 2, 3],
 			});
 
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 			expect(fn.mock.calls[0]).toEqual([1, 2, 3]);
 			app.destroy();
 		});
@@ -204,7 +204,7 @@ describe("Core", () => {
 
 			window.dispatchEvent(event);
 
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 			expect(fn.mock.calls[0]).toEqual([1, 2, 3]);
 			app.destroy();
 		});

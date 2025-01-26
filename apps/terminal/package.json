@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/terminal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "meeseOS Terminal Application",
   "scripts": {
     "eslint": "eslint index.js",

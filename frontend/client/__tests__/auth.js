@@ -13,6 +13,7 @@ describe("Auth", () => {
 
 	test("#constructor", () => {
 		auth = new Auth(core);
+		expect(auth).toBeDefined();
 	});
 
 	test("#init", () => {
@@ -29,7 +30,7 @@ describe("Auth", () => {
 				password: "demo",
 			})
 			.then((result) => {
-				expect(cb).toBeCalled();
+				expect(cb).toHaveBeenCalled();
 				expect(result).toBe(true);
 			});
 	});
@@ -65,9 +66,7 @@ describe("Auth", () => {
 		});
 
 		const a = new Auth(c);
-
-		// TODO: Determine why this is returning false
-		//return expect(a.show()).resolves.toBe(true);
+		return expect(a.show()).resolves.toBe(true);
 	});
 
 	test("event: meeseOS/core:logged-in", () => {
@@ -82,7 +81,7 @@ describe("Auth", () => {
 			password: "test",
 		});
 
-		setTimeout(() => expect(fn).toBeCalled(), 25);
+		setTimeout(() => expect(fn).toHaveBeenCalled(), 25);
 	});
 
 	test("#login - failure", () => {
@@ -104,8 +103,8 @@ describe("Auth", () => {
 			.login()
 			.then(() => a.logout())
 			.then(() => {
-				expect(fnError).toBeCalled();
-				expect(fnStop).toBeCalled();
+				expect(fnError).toHaveBeenCalledWith("Login failed", "Simulated failure");
+				expect(fnStop).toHaveBeenCalled();
 			});
 	});
 });

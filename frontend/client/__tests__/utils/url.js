@@ -24,7 +24,7 @@ describe("Url Resolver Utils", () => {
 		expect(resolver("bar/baz")).toBe("/bar/baz");
 	});
 
-	test("Should resolve paths correctly on root install", () => {
+	test("Should resolve complex paths correctly on root install", () => {
 		const resolver = createResolver("/proxy/path");
 		expect(resolver("/")).toBe("/proxy/path/");
 		expect(resolver("/foo")).toBe("/proxy/path/foo");

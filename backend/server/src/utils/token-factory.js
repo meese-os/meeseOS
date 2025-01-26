@@ -31,10 +31,9 @@
  * @licence Modified BSD License
  */
 
-/* eslint-disable no-unused-vars */
 const jwt = require("jsonwebtoken");
+// eslint-disable-next-line no-unused-vars
 const TokenStorage = require("../utils/token-storage");
-/* eslint-enable no-unused-vars */
 
 /**
  * Token Factory Options

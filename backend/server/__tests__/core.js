@@ -74,7 +74,7 @@ describe("Core", () => {
 
 		expect(core.wss.clients[0].send).toBeCalledWith(testEvent);
 		expect(core.wss.clients[1].send).toBeCalledWith(testEvent);
-		expect(core.wss.clients[2].send).not.toBeCalled();
+		expect(core.wss.clients[2].send).not.toHaveBeenCalled();
 	});
 
 	test("#broadcastAll", () => {
@@ -82,15 +82,15 @@ describe("Core", () => {
 
 		expect(core.wss.clients[0].send).toBeCalledWith(testEvent);
 		expect(core.wss.clients[1].send).toBeCalledWith(testEvent);
-		expect(core.wss.clients[2].send).not.toBeCalled();
+		expect(core.wss.clients[2].send).not.toHaveBeenCalled();
 	});
 
 	test("#broadcastUser", () => {
 		core.broadcastUser("jest", "test/jest", 1, 2, 3);
 
 		expect(core.wss.clients[0].send).toBeCalledWith(testEvent);
-		expect(core.wss.clients[1].send).not.toBeCalled();
-		expect(core.wss.clients[2].send).not.toBeCalled();
+		expect(core.wss.clients[1].send).not.toHaveBeenCalled();
+		expect(core.wss.clients[2].send).not.toHaveBeenCalled();
 	});
 
 	test("#destroy", async () => {

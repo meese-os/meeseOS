@@ -26,17 +26,18 @@ describe("BasicApplication", () => {
 		});
 		win = proc.createWindow();
 		basic = new BasicApplication(core, proc, win);
+		expect(basic).toBeDefined();
 	});
 
 	test("#init", () => {
-		expect(basic.init()).resolves.toBe(true);
+		return expect(basic.init()).resolves.toBe(true);
 	});
 
 	test("#createNew", () => {
 		const fn = jest.fn();
 		basic.once("new-file", fn);
 		basic.createNew();
-		expect(fn).toBeCalled();
+		expect(fn).toHaveBeenCalled();
 		expect(proc.args.file).toBe(null);
 		expect(win.state.title).toEqual("Test - New File");
 	});
@@ -51,7 +52,7 @@ describe("BasicApplication", () => {
 		basic.once("open-file", fn);
 		basic.open(file);
 
-		expect(fn).toBeCalled();
+		expect(fn).toHaveBeenCalled();
 		expect(proc.args.file).toEqual(file);
 		expect(win.state.title).toEqual(`Test - ${file.filename}`);
 	});
@@ -66,7 +67,7 @@ describe("BasicApplication", () => {
 		basic.once("save-file", fn);
 		basic.save(file);
 
-		expect(fn).toBeCalled();
+		expect(fn).toHaveBeenCalled();
 		expect(proc.args.file).toEqual(file);
 		expect(win.state.title).toEqual(`Test - ${file.filename}`);
 	});

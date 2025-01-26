@@ -70,7 +70,7 @@ export default class ClippyWidget extends Widget {
 		this.clippyElem.className = "clippy-container";
 		this.$element.appendChild(this.clippyElem);
 
-		console.log("Clippy:", clippy)
+		console.log("Clippy:", clippy);
 
 		// Initialize Clippy
 		clippy.load({

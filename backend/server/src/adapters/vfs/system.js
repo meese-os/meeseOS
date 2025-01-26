@@ -151,6 +151,13 @@ const getRealPath = (core, session, mount, file) => {
  * @param {Object} [options] Adapter options
  */
 module.exports = (core) => {
+	/**
+	 * Wrapper for cross-adapter methods.
+	 * @param {String} method The method to wrap
+	 * @param {Function} cb The callback to use
+	 * @param {...any} args The arguments to pass to the method
+	 * @returns {Function}
+	 */
 	const wrapper = (method, cb, ...args) =>
 		(vfs) =>
 			(file, options = {}) => {
@@ -163,6 +170,11 @@ module.exports = (core) => {
 					: promise.then(() => true);
 			};
 
+	/**
+	 * Cross-adapter wrapper.
+	 * @param {String} method The method to wrap
+	 * @returns {Function}
+	 */
 	const crossWrapper = (method) =>
 		(srcVfs, destVfs) =>
 			(src, dest, options = {}) =>
@@ -173,6 +185,11 @@ module.exports = (core) => {
 					.then(({ realSource, realDest }) => fs[method](realSource, realDest))
 					.then(() => true);
 
+	/**
+	 * Adds a file to the archive.
+	 * @param {yazl.ZipFile} zipfile The ZIP file to add to
+	 * @param {String} realPath The real path to the file
+	 */
 	const addFileToArchive = (zipfile, realPath) => {
 		const zipfileLocation = zipfile.outputStream._readableState.pipes[0].path;
 		const archiveRoot = path.parse(zipfileLocation).dir + path.sep;
@@ -182,6 +199,11 @@ module.exports = (core) => {
 		zipfile.addReadStream(readStream, destination);
 	};
 
+	/**
+	 * Adds a directory to the archive.
+	 * @param {yazl.ZipFile} zipfile The ZIP file to add to
+	 * @param {String} realPath The real path to the file/directory
+	 */
 	const addDirToArchive = async (zipfile, realPath) => {
 		const files = await fs.readdir(realPath)
 			.then((files) => ({ realPath, files }))
@@ -218,6 +240,9 @@ module.exports = (core) => {
 		} else {
 			await addFileToArchive(zipfile, realPath);
 		}
+
+		// Remove the original file or directory after adding to the archive
+		await fs.remove(realPath);
 	};
 
 	return {
@@ -437,7 +462,7 @@ module.exports = (core) => {
 		 * Searches for files and folders.
 		 * @param {String} file The file path from client
 		 * @param {Object} [options={}] Options
-		 * @returns {Boolean}
+		 * @returns {Promise<Object>}
 		 */
 		search: (vfs) =>
 			(root, pattern, options = {}) =>
@@ -502,9 +527,6 @@ module.exports = (core) => {
 							// Add the files to the archive
 							for (const realPath of realPaths) {
 								await addToArchive(zipfile, realPath);
-
-								// Delete the original file
-								// fs.unlink(realPath);
 							}
 
 							zipfile.end();
@@ -525,9 +547,6 @@ module.exports = (core) => {
 
 							// Extract the archive
 							await extract(realPath, { dir: target });
-
-							// Delete the archive file
-							// fs.unlink(realPath);
 						}
 
 						break;

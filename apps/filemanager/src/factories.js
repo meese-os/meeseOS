@@ -441,7 +441,7 @@ export const dialogFactory = (core, proc, win) => {
 		dialog(
 			"confirm",
 			{
-				message: `Delete ${files.length} file(s)?`,
+				message: `Delete ${files.length} file${files.length !== 1 ? "s" : ""}?`,
 			},
 			usingPositiveButton(() => {
 				action(

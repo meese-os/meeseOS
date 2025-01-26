@@ -28,15 +28,17 @@
  * @licence Simplified BSD License
  */
 
+const consola = require("consola");
+const deepmerge = require("deepmerge");
+const express = require("express");
+// eslint-disable-next-line no-unused-vars
+const express_ws = require("express-ws");
 const fs = require("fs-extra");
 const http = require("http");
 const https = require("https");
-const path = require("path");
 const morgan = require("morgan");
-const express = require("express");
 const minimist = require("minimist");
-const deepmerge = require("deepmerge");
-const consola = require("consola");
+const path = require("path");
 const { CoreBase } = require("@meese-os/common");
 const {
 	argvToConfig,
@@ -96,12 +98,12 @@ class Core extends CoreBase {
 			: http.createServer(this.app);
 
 		/**
-		 * @type {Object}
+		 * @type {express.RequestHandler}
 		 */
 		this.session = createSession(this.configuration);
 
 		/**
-		 * @type {Object}
+		 * @type {express_ws.Instance}
 		 */
 		this.ws = createWebsocket(
 			this.app,

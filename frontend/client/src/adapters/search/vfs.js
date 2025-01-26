@@ -25,58 +25,32 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @author  Anders Evenrud <andersevenrud@gmail.com>
- * @licence Simplified BSD License
+ * @license Simplified BSD License
  */
+import logger from "../../logger";
 
-const { ServiceProvider } = require("@meese-os/common");
-const Auth = require("../auth.js");
-
-/**
- * MeeseOS Auth Service Provider
- */
-class AuthServiceProvider extends ServiceProvider {
-	/**
-	 * Create new instance.
-	 * @param {Core} core MeeseOS Core instance reference
-	 * @param {Object} [options={}] Arguments
-	 */
-	constructor(core, options = {}) {
-		super(core, options);
-
-		this.auth = new Auth(core, options);
+export default class VFSSearchAdapter {
+	constructor(core) {
+		this.core = core;
 	}
 
-	/**
-	 * A list of services this provider depends on.
-	 * @returns {String[]}
-	 */
-	depends() {
-		return ["meeseOS/token-factory"];
-	}
+	async init() { }
 
-	/**
-	 * Initializes auth.
-	 * @returns {Promise<undefined>}
-	 */
-	async init() {
-		// eslint-disable-next-line no-unused-vars
-		const { route, routeAuthenticated } = this.core.make("meeseOS/express");
+	destroy() { }
 
-		route("post", "/register", (req, res) => this.auth.register(req, res));
-		route("post", "/login", (req, res) => this.auth.login(req, res));
-		// TODO: fix the issue of this not working when `routeAuthenticated` is used
-		route("post", "/logout", (req, res) => this.auth.logout(req, res));
-
-		await this.auth.init();
-	}
-
-	/**
-	 * Destroys instance.
-	 */
-	destroy() {
-		this.auth.destroy();
-		super.destroy();
+	async search(pattern) {
+		const vfs = this.core.make("meeseOS/vfs");
+		const promises = this.core.make("meeseOS/fs")
+			.mountpoints()
+			.map((mount) => `${mount.name}:/`)
+			.map((path) => {
+				return vfs.search({ path }, pattern)
+					.catch((error) => {
+						logger.warn("Error while searching", error);
+						return [];
+					});
+			});
+		return Promise.all(promises)
+			.then(lists => [].concat(...lists));
 	}
 }
-
-module.exports = AuthServiceProvider;

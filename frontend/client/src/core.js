@@ -161,17 +161,6 @@ export default class Core extends CoreBase {
 				host +
 				uri.replace(/^\/+/, "/");
 		}
-
-		// Only create the splash in production
-		if (this.configuration.development === false) {
-			/**
-			 * Splash instance
-			 * @type {Splash}
-			 * @readonly
-			 */
-			this.splash = options.splash ? options.splash(this) : new Splash(this);
-			this.splash.init();
-		}
 	}
 
 	/**
@@ -229,6 +218,17 @@ export default class Core extends CoreBase {
 		this.$root.appendChild(this.$contents);
 		this._attachEvents();
 		this.emit("meeseOS/core:boot");
+
+		// Only create the splash in production and on boot
+		if (this.configuration.development === false) {
+			/**
+			 * Splash instance
+			 * @type {Splash}
+			 * @readonly
+			 */
+			this.splash = this.options.splash ? this.options.splash(this) : new Splash(this);
+			this.splash.init();
+		}
 
 		// TODO: Start the service providers before auth, not after
 		return super

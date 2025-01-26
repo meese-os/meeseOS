@@ -57,7 +57,7 @@ describe("Application", () => {
 		expect(application.createWindow()).toBeInstanceOf(Window);
 
 		expect(application.windows.length).toBe(2);
-		expect(fn).toBeCalled();
+		expect(fn).toHaveBeenCalled();
 	});
 
 	test("#createWindow - w/restore data", () => {
@@ -86,7 +86,7 @@ describe("Application", () => {
 		application.removeWindow((win, index) => index > 0);
 
 		expect(application.windows.length).toBe(1);
-		expect(fn).toBeCalled();
+		expect(fn).toHaveBeenCalled();
 	});
 
 	test("#request", () => {
@@ -136,16 +136,15 @@ describe("Application", () => {
 
 		application.destroy();
 		application.destroy();
-		expect(onLocalDestroy).toBeCalledTimes(1);
-		expect(onGlobalDestroy).toBeCalledTimes(1);
+		expect(onLocalDestroy).toHaveBeenCalledTimes(1);
+		expect(onGlobalDestroy).toHaveBeenCalledTimes(1);
 		expect(application.workers.length).toBe(0);
 		expect(application.sockets.length).toBe(0);
 		expect(application.windows.length).toBe(0);
 	});
 
 	test("#saveSettings", () => {
-		// TODO: Determine why this is not working
-		//expect(application.saveSettings()).resolves.toBe(true);
+		return expect(application.saveSettings()).resolves.toBe(true);
 	});
 
 	test(".destroyAll", () => {

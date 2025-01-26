@@ -29,7 +29,7 @@
  */
 import Window from "./window";
 import createUI from "./adapters/ui/search";
-import logger from "./logger";
+import VFSSearchAdapter from "./adapters/search/vfs";
 
 /**
  * Search Service
@@ -38,8 +38,9 @@ export default class Search {
 	/**
 	 * Create Search instance
 	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {Object} options Options
 	 */
-	constructor(core) {
+	constructor(core, options = {}) {
 		/**
 		 * Core instance reference
 		 * @type {Core}
@@ -65,6 +66,10 @@ export default class Search {
 		 * @readonly
 		 */
 		this.$element = document.createElement("div");
+
+		const providedAdapters = options.adapters || [];
+		const useAdapters = [VFSSearchAdapter, ...providedAdapters];
+		this.adapters = useAdapters.map((A) => new A(core));
 	}
 
 	/**
@@ -79,7 +84,7 @@ export default class Search {
 	/**
 	 * Initializes Search Service
 	 */
-	init() {
+	async init() {
 		const { icon } = this.core.make("meeseOS/theme");
 
 		this.$element.className = "meeseOS-search";
@@ -101,6 +106,8 @@ export default class Search {
 				.then((results) => this.ui.emit("success", results))
 				.catch((error) => this.ui.emit("error", error));
 		});
+
+		await Promise.all(this.adapters.map((a) => a.init()));
 	}
 
 	/**
@@ -108,20 +115,9 @@ export default class Search {
 	 * @param {String} pattern Search query
 	 * @returns {Promise<FileMetadata[]>}
 	 */
-	search(pattern) {
-		const vfs = this.core.make("meeseOS/vfs");
-		const promises = this.core
-			.make("meeseOS/fs")
-			.mountpoints()
-			.map((mount) => `${mount.name}:/`)
-			.map((path) => {
-				return vfs.search({ path }, pattern).catch((error) => {
-					logger.warn("Error while searching", error);
-					return [];
-				});
-			});
-
-		return Promise.all(promises).then((lists) => [].concat(...lists));
+	async search(pattern) {
+		const results = await Promise.all(this.adapters.map((a) => a.search(pattern)));
+		return results.flat(1);
 	}
 
 	/**

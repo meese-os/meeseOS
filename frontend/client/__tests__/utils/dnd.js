@@ -21,19 +21,20 @@ describe("draggable", () => {
 	test("dragstart", () => {
 		const ev = new Event("dragstart");
 		el.dispatchEvent(ev);
-		expect(ondragstart).toBeCalled();
+		expect(ondragstart).toHaveBeenCalled();
 		expect(el.getAttribute("aria-grabbed")).toBe("true");
 	});
 
 	test("dragend", () => {
 		const ev = new Event("dragend");
 		el.dispatchEvent(ev);
-		expect(ondragend).toBeCalled();
+		expect(ondragend).toHaveBeenCalled();
 		expect(el.getAttribute("aria-grabbed")).toBe("false");
 	});
 
 	test("destroy", () => {
 		dragger.destroy();
+		expect(el.classList.contains("meeseOS__draggable")).toBe(false);
 	});
 });
 
@@ -61,7 +62,7 @@ describe("droppable", () => {
 	test("dragenter", () => {
 		const ev = new Event("dragenter");
 		el.dispatchEvent(ev);
-		expect(ondragenter).toBeCalled();
+		expect(ondragenter).toHaveBeenCalled();
 	});
 
 	// TODO: Find a way to trigger false behavior
@@ -69,14 +70,14 @@ describe("droppable", () => {
 		const ev = new Event("dragover");
 		ev.dataTransfer = {};
 		el.dispatchEvent(ev);
-		expect(ondragover).toBeCalled();
+		expect(ondragover).toHaveBeenCalled();
 		expect(el.classList.contains("meeseOS__drop")).toBe(true);
 	});
 
 	test("dragleave", () => {
 		const ev = new Event("dragleave");
 		el.dispatchEvent(ev);
-		expect(ondragleave).toBeCalled();
+		expect(ondragleave).toHaveBeenCalled();
 	});
 
 	test("drop", () => {
@@ -91,10 +92,11 @@ describe("droppable", () => {
 		};
 
 		el.dispatchEvent(ev);
-		expect(ondrop).toBeCalledWith(ev, data, files);
+		expect(ondrop).toHaveBeenCalledWith(ev, data, files);
 	});
 
 	test("destroy", () => {
 		dropper.destroy();
+		expect(el.classList.contains("meeseOS__droppable")).toBe(false);
 	});
 });

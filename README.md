@@ -101,6 +101,27 @@ To run GitHub Actions locally, do the following:
 5. `act --pull=false -s GITHUB_TOKEN=ENTER_YOUR_PAT_HERE`
 6. Select "Medium" as the image size
 
+### Building
+
+To build the project, run:
+
+```sh
+cd website
+rush build
+pnpm run deploy
+```
+
+Ensure you have properly updated `website/src/server/auth/.env.json` to not include the placeholder comments.
+
+### Testing
+
+To run the test suite, run:
+
+```sh
+rush build
+rush test
+```
+
 ### Publishing
 
 To publish changes to MeeseOS, use the following command:

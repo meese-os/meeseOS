@@ -54,7 +54,7 @@ describe("DOM Utils", () => {
 	});
 
 	test("playSound", () => {
-		expect(playSound()).resolves.toBeInstanceOf(HTMLAudioElement);
+		return expect(playSound()).resolves.toBeInstanceOf(HTMLAudioElement);
 	});
 
 	test("handleTabOnTextarea", () => {

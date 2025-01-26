@@ -52,7 +52,7 @@ export default class DesktopServiceProvider extends ServiceProvider {
 	 * @param {Object} [options={}] Arguments
 	 */
 	constructor(core, options = {}) {
-		super(core, options || {});
+		super(core, options);
 
 		/**
 		 * @type {Desktop}
