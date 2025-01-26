@@ -1,4 +1,4 @@
-import { createInstance } from "../__mocks__/core.js";
+import { createInstance } from "meeseOS";
 import Application from "../src/application.js";
 import Core from "../src/core.js";
 

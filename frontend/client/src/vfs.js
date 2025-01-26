@@ -147,7 +147,7 @@ export const readfile = (adapter, mount) =>
 		return adapter
 			.readfile(pathToObject(path), type, options, mount)
 			.then((response) => {
-				console.log("readfile response:", response);
+				console.debug("readfile response:", response);
 				return transformArrayBuffer(response.body, response.mime, type);
 			});
 	};

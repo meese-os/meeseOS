@@ -144,8 +144,7 @@ describe("Application", () => {
 	});
 
 	test("#saveSettings", () => {
-		// TODO: Determine why this is not working
-		//expect(application.saveSettings()).resolves.toBe(true);
+		return expect(application.saveSettings()).resolves.toBe(true);
 	});
 
 	test(".destroyAll", () => {

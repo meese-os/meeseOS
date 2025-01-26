@@ -28,12 +28,12 @@
  * @licence Simplified BSD License
  */
 
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
+const express = require("express");
 const express_session = require("express-session");
 const express_ws = require("express-ws");
-const Auth = require("../auth");
+// eslint-disable-next-line no-unused-vars
 const TokenFactory = require("./token-factory");
-/* eslint-enable no-unused-vars */
 
 /**
  * Converts an input argument to configuration entry.
@@ -59,7 +59,7 @@ module.exports.argvToConfig = {
  */
 module.exports.createSession = (configuration) => {
 	const Store = require(configuration.session.store.module)(express_session);
-	// TODO: Determine why this is leaving open handles with Jest
+	// TODO: Determine why this is allegedly leaving open handles with Jest
 	const store = new Store(configuration.session.store.options || {});
 
 	return express_session({
@@ -134,6 +134,7 @@ module.exports.useWebTokens = (core) =>
 
 		if (user && core.configuration) {
 			let accessToken = user.accessToken;
+			/** @type {TokenFactory} */
 			const tokenFactory = core.make("meeseOS/token-factory");
 			const accessTokenUser = await tokenFactory.validateAccessToken(accessToken);
 

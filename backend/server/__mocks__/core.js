@@ -10,6 +10,8 @@ const {
 	CoreServiceProvider,
 	PackageServiceProvider,
 	VFSServiceProvider,
+	TokenStorageServiceProvider,
+	TokenFactoryServiceProvider,
 	AuthServiceProvider,
 	SettingsServiceProvider,
 } = require("../index.js");
@@ -48,6 +50,8 @@ module.exports = (_options = {}) => {
 	meeseOS.register(CoreServiceProvider, { before: true });
 	meeseOS.register(PackageServiceProvider);
 	meeseOS.register(VFSServiceProvider);
+	meeseOS.register(TokenFactoryServiceProvider);
+	meeseOS.register(TokenStorageServiceProvider);
 	meeseOS.register(AuthServiceProvider);
 	meeseOS.register(SettingsServiceProvider);
 

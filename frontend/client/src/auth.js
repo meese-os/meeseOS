@@ -191,10 +191,10 @@ export default class Auth {
 
 	/**
 	 * Shows Login UI.
-	 * @param {AuthCallback} cb Authentication callback
+	 * @param {AuthCallback} [cb=noop] Authentication callback
 	 * @returns {Promise<Boolean>}
 	 */
-	show(cb) {
+	show(cb = () => {}) {
 		const login = this.core.config("auth.login", {});
 		const autologin = login.username && login.password;
 		const settings = this.core.config("auth.cookie");

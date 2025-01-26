@@ -13,6 +13,7 @@ describe("Auth", () => {
 
 	test("#constructor", () => {
 		auth = new Auth(core);
+		expect(auth).toBeDefined();
 	});
 
 	test("#init", () => {
@@ -65,9 +66,7 @@ describe("Auth", () => {
 		});
 
 		const a = new Auth(c);
-
-		// TODO: Determine why this is returning false
-		//return expect(a.show()).resolves.toBe(true);
+		return expect(a.show()).resolves.toBe(true);
 	});
 
 	test("event: meeseOS/core:logged-in", () => {

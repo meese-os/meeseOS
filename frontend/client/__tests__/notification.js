@@ -51,6 +51,6 @@ describe("Notification", () => {
 			native: true,
 		});
 
-		expect(n.render()).resolves.toBe(true);
+		return expect(n.render()).resolves.toBe(true);
 	});
 });

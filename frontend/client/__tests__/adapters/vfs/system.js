@@ -67,7 +67,7 @@ describe("System VFS Adapter", () => {
 	test("#url", () => {
 		return adapter
 			.url({ path: "null:/filename" })
-			.then((result) => expect(typeof result === "string"));
+			.then((result) => expect(typeof result).toBe("string"));
 	});
 
 	test("#search", () => {

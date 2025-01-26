@@ -1,5 +1,5 @@
-import { ServiceProvider } from "@meeseOS/common";
 import { createInstance } from "meeseOS";
+import { ServiceProvider } from "@meese-os/common";
 import Search from "../src/search.js";
 
 const files = [{
@@ -67,6 +67,7 @@ describe("Search", () => {
 		search = new Search(core, {
 			adapters: [MySearchAdapter],
 		});
+		expect(search).toBeDefined();
 	});
 
 	test("#search", () => {

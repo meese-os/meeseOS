@@ -964,10 +964,14 @@ export default class Window extends EventEmitter {
 	 * @private
 	 */
 	_updateButtons() {
-		const hideButton = (action) =>
-		(this.$header.querySelector(
-			`.meeseOS-window-button[data-action=${action}]`
-		).style.display = "none");
+		const hideButton = (action) => {
+			const button = this.$header.querySelector(
+				`.meeseOS-window-button[data-action=${action}]`
+			);
+			if (button) {
+				button.style.display = "none";
+			}
+		};
 
 		const buttonmap = {
 			maximizable: "maximize",

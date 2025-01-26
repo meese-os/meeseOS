@@ -94,7 +94,6 @@ export default class Splash {
 		];
 
 		core.on("meeseOS/core:boot", () => this.show());
-		core.on("meeseOS/core:logged-in", () => this.show());
 		core.on("meeseOS/splash:finished", () => this.destroy());
 	}
 
@@ -102,7 +101,7 @@ export default class Splash {
 	 * Initializes splash with listener for user interaction.
 	 */
 	init() {
-		this.$loading.appendChild(stringToHTML(loadingScreen));
+		this.$loading?.appendChild(stringToHTML(loadingScreen));
 		this.core.emit("meeseOS/splash:loaded");
 
 		// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#specifying_this_using_bind
@@ -150,8 +149,8 @@ export default class Splash {
 	 * Shows splash.
 	 */
 	show() {
-		if (!this.$loading.parentNode) {
-			this.core.$root.appendChild(this.$loading);
+		if (!this.$loading?.parentNode) {
+			this.core.$root?.appendChild(this.$loading);
 		}
 	}
 
@@ -159,7 +158,7 @@ export default class Splash {
 	 * Destroys splash.
 	 */
 	destroy() {
-		if (this.$loading.parentNode) {
+		if (this.$loading?.parentNode) {
 			this.$loading.remove();
 		}
 
@@ -168,5 +167,8 @@ export default class Splash {
 		if (splash) {
 			splash.remove();
 		}
+
+		// Clear the reference to the splash element
+		this.$loading = null;
 	}
 }

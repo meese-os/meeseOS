@@ -322,9 +322,7 @@ export const pathname = (path) => {
  */
 export const parseMountpointPrefix = (str) => {
 	const re = /^([\w-_]+):+(.*)/;
-
 	const match = String(str).replace(/\+/g, "/").match(re);
-
 	const [prefix] = Array.from(match || []).slice(1);
 
 	return prefix;

@@ -5,23 +5,36 @@ describe("Splash", () => {
 	let core;
 	let splash;
 
-	beforeAll(() => {
-		return createInstance().then((c) => {
-			core = c;
-			splash = new Splash(core);
-		});
+	beforeAll(async () => {
+		core = await createInstance();
+		splash = new Splash(core);
 	});
 
 	afterAll(() => core.destroy());
 
-	// TODO: Check DOM node
-	// TODO: Check events ?
-
-	test("#show", () => {
-		splash.show();
+	test("#init", () => {
+		splash.init();
+		expect(splash).toBeDefined();
 	});
 
-	test("#destroy", () => {
+	test("#show - splash is shown on boot", () => {
+		const showSpy = jest.spyOn(splash, "show");
+		core.emit("meeseOS/core:boot");
+		expect(showSpy).toHaveBeenCalled();
+		showSpy.mockClear();
+	});
+
+	test("#show - splash is not shown on logout", () => {
+		const showSpy = jest.spyOn(splash, "show");
+		core.emit("meeseOS/core:destroy");
+		expect(showSpy).not.toHaveBeenCalled();
+	});
+
+	test("#destroy - removes splash element from DOM", () => {
+		splash.show();
 		splash.destroy();
+
+		const splashElement = document.querySelector(".meeseOS-boot-splash");
+		expect(splashElement).toBeNull();
 	});
 });

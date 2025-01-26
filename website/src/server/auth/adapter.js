@@ -7,7 +7,6 @@
 
 const dotenvJSON = require("complex-dotenv-json");
 const path = require("path");
-//const jwt = require("jsonwebtoken");
 
 const envFile = path.resolve(__dirname, ".env.json");
 dotenvJSON({ path: envFile });

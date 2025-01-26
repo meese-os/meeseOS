@@ -121,8 +121,7 @@ describe("VFS", () => {
 	});
 
 	test("#unlink", () => {
-		// TODO: Fix the error `EPERM: operation not permitted, watch`
-		//return expect(call("unlink", "null:/directory")).resolves.toBe(false);
+		return expect(call("unlink", "null:/directory")).resolves.toBe(false);
 	});
 
 	test("#exists", () => {

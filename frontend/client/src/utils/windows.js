@@ -237,6 +237,7 @@ export const positionFromGravity = (win, rect, gravity) => {
  * @param {Window} win Window reference
  * @param {Object} rect
  * @param {HTMLElement} container
+ * @returns {Object}
  */
 export const dimensionFromElement = (win, rect, container) => {
 	const innerBox = (
@@ -279,6 +280,8 @@ export const dimensionFromElement = (win, rect, container) => {
 /**
  * Transforms vector values (ex. float to integer).
  * @param {Object} rect
+ * @param {Object} vectors
+ * @returns {Object}
  */
 export const transformVectors = (rect, { width, height }, { top, left }) => {
 	const transform = (val, attr) => {
@@ -306,6 +309,7 @@ export const transformVectors = (rect, { width, height }, { top, left }) => {
 /**
  * Creates a clamper for resize/move.
  * @param {Window} win Window reference
+ * @returns {Function}
  */
 const clamper = (win) => {
 	const { maxDimension, minDimension } = win.attributes;
@@ -332,6 +336,7 @@ const clamper = (win) => {
 /**
  * Creates a resize handler.
  * @param {Window} win Window reference
+ * @returns {Function}
  */
 export const resizer = (win, handle) => {
 	const clamp = clamper(win);
@@ -354,6 +359,7 @@ export const resizer = (win, handle) => {
 /**
  * Creates a movement handler.
  * @param {Window} win Window reference
+ * @returns {Function}
  */
 export const mover = (win, rect) => {
 	const { position } = win.state;
@@ -370,6 +376,7 @@ export const mover = (win, rect) => {
  * Calculates a new initial position for window.
  * @param {Window} win Window reference
  * @param {Object} rect
+ * @returns {Object}
  */
 export const getCascadePosition = (win, rect, pos) => {
 	const startX = CASCADE_DISTANCE + rect.left;
@@ -413,6 +420,10 @@ export const getMediaQueryName = (win) =>
 
 /**
  * Loads [certain] window options from configuration.
+ * @param {Object} config
+ * @param {String} appName
+ * @param {String} windowId
+ * @returns {Object}
  */
 export const loadOptionsFromConfig = (config, appName, windowId) => {
 	const matchStringOrRegex = (str, matcher) =>

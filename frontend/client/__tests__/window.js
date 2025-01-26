@@ -33,6 +33,8 @@ describe("Window", () => {
 				height: 600,
 			},
 		});
+
+		expect(win).toBeInstanceOf(Window);
 	});
 
 	test("Should be inited with correct attributes", () => {
@@ -221,15 +223,11 @@ describe("Window", () => {
 		}, 300);
 	});
 
-	test("#resizeFit", () => {
-		// TODO
-		// win.resizeFit()
-	});
+	// TODO
+	// test("#resizeFit", () => { win.resizeFit(); });
 
-	test("#clampToViewport", () => {
-		// TODO
-		// win.clampToViewport()
-	});
+	// TODO
+	// test("#clampToViewport", () => { win.clampToViewport(); });
 
 	test("#gravitate", () => {
 		win.setPosition({ top: 0, left: 0 });

@@ -64,6 +64,7 @@ describe("Packages", () => {
 
 	test("#constructor", () => {
 		packages = new Packages(core);
+		expect(packages).toBeDefined();
 	});
 
 	test("#init", () => {
@@ -100,7 +101,7 @@ describe("Packages", () => {
 		expect(() => packages.register("Invalid", () => {})).toThrow(Error);
 	});
 
-	test("#register - register once ", () => {
+	test("#register - register once", () => {
 		expect(() =>
 			packages.register("Package1", () => {
 				throw new Error("Simulate failure");

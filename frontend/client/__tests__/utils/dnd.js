@@ -34,6 +34,7 @@ describe("draggable", () => {
 
 	test("destroy", () => {
 		dragger.destroy();
+		expect(el.classList.contains("meeseOS__draggable")).toBe(false);
 	});
 });
 
@@ -91,10 +92,11 @@ describe("droppable", () => {
 		};
 
 		el.dispatchEvent(ev);
-		expect(ondrop).toBeCalledWith(ev, data, files);
+		expect(ondrop).toHaveBeenCalledWith(ev, data, files);
 	});
 
 	test("destroy", () => {
 		dropper.destroy();
+		expect(el.classList.contains("meeseOS__droppable")).toBe(false);
 	});
 });

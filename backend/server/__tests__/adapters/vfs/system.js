@@ -2,18 +2,21 @@ const meeseOS = require("meeseOS");
 const path = require("path");
 const stream = require("stream");
 const systemAdapter = require("../../../src/adapters/vfs/system.js");
+const fs = require("fs-extra");
 
 describe("VFS System adapter", () => {
+	/** @type {MeeseOS} */
 	let core;
+	/** @type {systemAdapter} */
 	let adapter;
 
-	beforeAll(() =>
-		meeseOS().then((c) => {
-			core = c;
-			adapter = systemAdapter(core);
-		})
-	);
+	beforeAll(async () => {
+		// Initialize the core and adapter
+		core = await meeseOS();
+		adapter = systemAdapter(core);
+	});
 
+	// Clean up and destroy the core
 	afterAll(() => core.destroy());
 
 	const vfs = {
@@ -50,46 +53,6 @@ describe("VFS System adapter", () => {
 		return expect(
 			request("touch", "home:/test", createOptions())
 		).resolves.toBe(true);
-	});
-
-	test("#archive - compress", () => {
-		const options = createOptions({ action: "compress" });
-
-		// TODO: Fix the error: `Rejected to value: [Error: ENOENT: no such file or directory, stat '...\AppData\Local\Temp\meeseOS-vfs2023823-53868-1dobu9w.kjbb\jest\exampleFileWithContents.txt']`
-		/*return expect(
-			request(
-				"archive",
-				// TODO: Figure out why this is being uploaded as a directory instead of a file.
-				["home:/exampleFileWithContents.txt", "home:/exampleEmptyFile.xml"],
-				options
-			)
-		).resolves.toBe(true);*/
-	});
-
-	test("#archive - compress error", () => {
-		const options = createOptions({ action: "compress" });
-
-		return expect(
-			request("archive", ["home:/fakefile.php"], options)
-		).rejects.toThrowError();
-	});
-
-	test("#archive - extract", () => {
-		const options = createOptions({ action: "extract" });
-
-		// TODO: Fix the error `ENOENT: no such file or directory, open '...\AppData\Local\Temp\meeseOS-vfs202386-23064-154xyrt.v38e\jest\exampleFileWithContents.txt.zip']`
-			// Received promise rejected instead of resolved
-		/*return expect(
-			request("archive", ["home:/exampleFileWithContents.txt.zip"], options)
-		).resolves.toBe(true);*/
-	});
-
-	test("#archive - bad option", () => {
-		const options = createOptions({ action: "fake" });
-
-		return expect(
-			request("archive", ["home:/text.txt.zip"], options)
-		).rejects.toThrowError();
 	});
 
 	test("#stat", () => {
@@ -145,7 +108,7 @@ describe("VFS System adapter", () => {
 
 	test("#writefile", () => {
 		const s = new stream.Readable();
-		s._read = () => {};
+		s._read = () => { };
 		s.push("jest");
 		s.push(null);
 
@@ -210,31 +173,115 @@ describe("VFS System adapter", () => {
 		);
 	});
 
-	test("#unlink", () => {
-		const files = ["home:/test", "home:/test-directory", "home:/test-rename"];
-
-		// TODO: Fix the error `EPERM: operation not permitted, watch`
-		/*return Promise.all(
-			files.map((file) => {
-				return expect(request("unlink", file, createOptions())).resolves.toBe(
-					true
-				);
-			})
-		);*/
-	});
-
-	test("#unlink", () => {
-		// TODO: Fix the error `EPERM: operation not permitted, watch`
-		/*return expect(
-			request("unlink", "home:/test-directory", createOptions())
-		).resolves.toBe(true);*/
-	});
-
 	test("#realpath", () => {
 		const realPath = path.join(core.configuration.tempPath, "jest/test");
 
 		return expect(
 			request("realpath", "home:/test", createOptions())
 		).resolves.toBe(realPath);
+	});
+
+	test("#archive - compress files", async () => {
+		const options = createOptions({ action: "compress" });
+
+		// Compress the files
+		await expect(
+			request("archive", ["home:/test", "home:/test-rename"], options)
+		).resolves.toBe(true);
+
+		// Ensure the zip file exists
+		await expect(
+			request("exists", "home:/test.zip", createOptions())
+		).resolves.toBe(true);
+	});
+
+	test("#archive - compress directory", async () => {
+		const options = createOptions({ action: "compress" });
+
+		// Compress the directory
+		await expect(
+			request("archive", ["home:/test-directory"], options)
+		).resolves.toBe(true);
+
+		// Ensure the zip file exists
+		await expect(
+			request("exists", "home:/test-directory.zip", createOptions())
+		).resolves.toBe(true);
+	});
+
+	test("#archive - compress error", () => {
+		const options = createOptions({ action: "compress" });
+
+		return expect(
+			request("archive", ["home:/fakefile.php"], options)
+		).rejects.toThrowError();
+	});
+
+	test("#archive - extract", async () => {
+		const options = createOptions({ action: "extract" });
+
+		// Extract the archive
+		await expect(
+			request("archive", ["home:/test.zip"], options)
+		).resolves.toBe(true);
+
+		// Ensure a folder was created for the extracted files
+		await expect(
+			request("exists", "home:/test", createOptions())
+		).resolves.toBe(true);
+
+		// Check the contents of the directory
+		const extractedFiles = await request("readdir", "home:/test", createOptions());
+		expect(extractedFiles).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({ filename: "test", isFile: true }),
+				expect.objectContaining({ filename: "test-rename", isFile: true }),
+			])
+		);
+
+		// Ensure the contents of the files are the same
+		const extractedFileContents = await fs.readFile(path.join(core.config("tempPath"), "jest/test/test"), "utf8");
+		expect(extractedFileContents).toBe("jest");
+
+		const extractedEmptyFileContents = await fs.readFile(path.join(core.config("tempPath"), "jest/test/test-rename"), "utf8");
+		expect(extractedEmptyFileContents).toBe("");
+	});
+
+	test("#archive - extract error", () => {
+		const options = createOptions({ action: "extract" });
+
+		return expect(
+			request("archive", ["home:/fakefile.php"], options)
+		).rejects.toThrowError();
+	});
+
+	test("#archive - bad option", () => {
+		const options = createOptions({ action: "fake" });
+
+		return expect(
+			request("archive", ["home:/test.zip"], options)
+		).rejects.toThrowError();
+	});
+
+	test("#unlink - files", () => {
+		const files = ["home:/test.zip", "home:/test/test", "home:/test/test-rename"];
+
+		return Promise.all(
+			files.map((file) => {
+				return expect(request("unlink", file, createOptions())).resolves.toBe(
+					true
+				);
+			})
+		);
+	});
+
+	test("#unlink - folders", () => {
+		const directories = ["home:/test-directory", "home:/test"];
+
+		return Promise.all(
+			directories.map((dir) => {
+				return expect(request("unlink", dir, createOptions())).resolves.toBe(true);
+			})
+		);
 	});
 });

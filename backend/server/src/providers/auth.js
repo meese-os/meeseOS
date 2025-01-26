@@ -35,7 +35,12 @@ const Auth = require("../auth.js");
  * MeeseOS Auth Service Provider
  */
 class AuthServiceProvider extends ServiceProvider {
-	constructor(core, options) {
+	/**
+	 * Create new instance.
+	 * @param {Core} core MeeseOS Core instance reference
+	 * @param {Object} [options={}] Arguments
+	 */
+	constructor(core, options = {}) {
 		super(core, options);
 
 		this.auth = new Auth(core, options);
@@ -49,6 +54,10 @@ class AuthServiceProvider extends ServiceProvider {
 		return ["meeseOS/token-factory"];
 	}
 
+	/**
+	 * Initializes auth.
+	 * @returns {Promise<undefined>}
+	 */
 	async init() {
 		// eslint-disable-next-line no-unused-vars
 		const { route, routeAuthenticated } = this.core.make("meeseOS/express");
@@ -61,6 +70,9 @@ class AuthServiceProvider extends ServiceProvider {
 		await this.auth.init();
 	}
 
+	/**
+	 * Destroys instance.
+	 */
 	destroy() {
 		this.auth.destroy();
 		super.destroy();

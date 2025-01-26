@@ -26,10 +26,11 @@ describe("BasicApplication", () => {
 		});
 		win = proc.createWindow();
 		basic = new BasicApplication(core, proc, win);
+		expect(basic).toBeDefined();
 	});
 
 	test("#init", () => {
-		expect(basic.init()).resolves.toBe(true);
+		return expect(basic.init()).resolves.toBe(true);
 	});
 
 	test("#createNew", () => {

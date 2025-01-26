@@ -46,12 +46,19 @@ class SettingsServiceProvider extends ServiceProvider {
 		this.settings = new Settings(core, options);
 	}
 
+	/**
+	 * Destroy instance.
+	 */
 	destroy() {
 		this.settings.destroy();
 		super.destroy();
 	}
 
-	init() {
+	/**
+	 * Initialize instance.
+	 * @returns {Promise<Boolean>}
+	 */
+	async init() {
 		this.core
 			.make("meeseOS/express")
 			.routeAuthenticated("post", "/settings", (req, res) =>
