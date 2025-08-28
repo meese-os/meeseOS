@@ -30,7 +30,7 @@
 
 // This is the client configuration tree.
 // Guide: https://manual.aaronmeese.com/config/#client
-// Complete config tree: https://github.com/meeseOS/meeseOS/blob/master/frontend/client/src/config.js
+// Complete config tree: https://github.com/meese-os/meeseOS/blob/master/frontend/client/src/config.js
 
 const api_key = process.env.GOOGLE_API_KEY;
 const client_id = process.env.GOOGLE_CLIENT_ID;

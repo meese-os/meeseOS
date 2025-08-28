@@ -41,7 +41,7 @@ jobs:
           cd ../event-emitter && esdoc
       - name: Deploy to manual repository
         id: push_directory
-        uses: meeseOS/github-action-push-to-another-repository@v1.6
+        uses: meese-os/github-action-push-to-another-repository@v1.6
         env:
           API_TOKEN_GITHUB: ${{ secrets.GH_AUTH_TOKEN }}
         with:
