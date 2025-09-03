@@ -75,3 +75,6 @@ coverage
 
 # GitHub Actions executable
 /bin
+
+# AI files
+AGENTS.md
