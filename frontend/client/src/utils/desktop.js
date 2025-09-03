@@ -168,7 +168,8 @@ const createStaticBackground = (core, background) => {
  */
 export const applyBackgroundStyles = (core, background) => {
 	if (background.type === "static") {
-		core.make("meeseOS/background-canvas").removeAll();
+		// Stop and remove any dynamic backgrounds before applying static styles
+		core.make("meeseOS/background-canvas").destroyAll();
 		createStaticBackground(core, background);
 	} else if (background.type === "dynamic") {
 		core.make("meeseOS/background-canvas").start(
