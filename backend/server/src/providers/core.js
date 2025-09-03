@@ -169,10 +169,39 @@ class CoreServiceProvider extends ServiceProvider {
 				useDefaults: true,
 				directives: {
 					"default-src": ["'self'"],
-					"script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+					// Allow the Google Identity Services loader while keeping inline/eval allowances
+					// used elsewhere in the app. Consider moving to nonces/hashes later.
+					"script-src": [
+						"'self'",
+						"'unsafe-inline'",
+						"'unsafe-eval'",
+						"https://accounts.google.com",
+					],
 					"style-src": ["'self'", "'unsafe-inline'"],
-					"img-src": ["'self'", "data:"],
-					"connect-src": ["'self'"]
+					// Permit remote images (e.g., Unsplash wallpapers) in addition to local/data/blob
+					"img-src": [
+						"'self'",
+						"data:",
+						"blob:",
+						"https:",
+					],
+					// Allow required outbound connections for GIS and similar SDKs
+					"connect-src": [
+						"'self'",
+						"https://accounts.google.com",
+						"https://*.googleapis.com",
+						"https://*.gstatic.com",
+					],
+					// Allow embedding external applications without enumerating domains.
+					// Keep clickjacking protection via frame-ancestors from Helmet defaults.
+					"frame-src": [
+						"'self'",
+						"https:",
+						"blob:",
+						"data:",
+						// Allow http: only in development for local testing
+						...(configuration.development ? ["http:"] : []),
+					],
 				}
 			},
 			referrerPolicy: { policy: "no-referrer" },
@@ -180,10 +209,10 @@ class CoreServiceProvider extends ServiceProvider {
 			hsts: configuration.development
 				? false
 				: {
-					maxAge: 63072000,
-					includeSubDomains: true,
-					preload: true,
-				},
+						maxAge: 63072000,
+						includeSubDomains: true,
+						preload: true,
+					},
 		};
 
 		app.use(helmet(helmetConfig));
