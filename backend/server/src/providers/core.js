@@ -32,6 +32,7 @@ const path = require("path");
 const express = require("express");
 const chokidar = require("chokidar");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 const proxy = require("express-http-proxy");
 const nocache = require("nocache");
 const { ServiceProvider } = require("@meese-os/common");
@@ -163,6 +164,30 @@ class CoreServiceProvider extends ServiceProvider {
 		const { app, session, configuration } = this.core;
 		const limit = configuration.express.maxBodySize;
 
+		const helmetConfig = {
+			contentSecurityPolicy: {
+				useDefaults: true,
+				directives: {
+					"default-src": ["'self'"],
+					"script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+					"style-src": ["'self'", "'unsafe-inline'"],
+					"img-src": ["'self'", "data:"],
+					"connect-src": ["'self'"]
+				}
+			},
+			referrerPolicy: { policy: "no-referrer" },
+			crossOriginEmbedderPolicy: false,
+			hsts: configuration.development
+				? false
+				: {
+					maxAge: 63072000,
+					includeSubDomains: true,
+					preload: true,
+				},
+		};
+
+		app.use(helmet(helmetConfig));
+
 		if (configuration.development) {
 			app.use(nocache());
 		} else {
@@ -231,12 +256,12 @@ class CoreServiceProvider extends ServiceProvider {
 
 			const pingInterval = interval
 				? setInterval(() => {
-					ws.send(
-						JSON.stringify({
-							name: "meeseOS/core:ping",
-						})
-					);
-				  }, interval)
+						ws.send(
+							JSON.stringify({
+								name: "meeseOS/core:ping",
+							})
+						);
+					}, interval)
 				: undefined;
 
 			ws.on("close", () => {
