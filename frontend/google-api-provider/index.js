@@ -225,7 +225,7 @@ export class GisServiceProvider {
 					scope: scope.join(" "),
 					// This is called on the success of `requestAccessToken`
 					callback: (res) => {
-						if (res && res.access_token) {
+						if (res?.access_token) {
 							this.accessToken = res;
 							this.signedIn = true;
 							this.bus.emit("signed-in");
