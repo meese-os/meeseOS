@@ -4,7 +4,7 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
-pnpmfileChecksum: avk5jcsa6uxo2n5cahoirjiuw4
+pnpmfileChecksum: sha256-La8sfCMI7irxJPTW6u4mJb4vNiyLrXeEbKaXv5G3dL0=
 
 importers:
 
@@ -1863,8 +1863,8 @@ importers:
         specifier: workspace:*
         version: link:../backend/wireless-tools-provider
       complex-dotenv-json:
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.2.0
+        version: 1.2.0
       dotenv:
         specifier: ^16.3.1
         version: 16.3.1
@@ -4177,8 +4177,8 @@ packages:
   commondir@1.0.1:
     resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
 
-  complex-dotenv-json@1.1.0:
-    resolution: {integrity: sha512-mWCokEc1aJY/9g268XHdS/O40cpx8n/gkIW3G6cEKzdS2L8voZwRaGa+kjKdTw0QnSC/bzsYpTE+MUT1pvNcIw==}
+  complex-dotenv-json@1.2.0:
+    resolution: {integrity: sha512-L4vdSmjXs7w443wc5bHbwmmDL215gnHuNxxoqcZImqgy7+GuQnOKMFPvV+0PkzAQ62pz9WDX+mWhgCdw/dR9iQ==}
 
   component-emitter@1.3.0:
     resolution: {integrity: sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==}
@@ -11807,7 +11807,7 @@ snapshots:
 
   commondir@1.0.1: {}
 
-  complex-dotenv-json@1.1.0: {}
+  complex-dotenv-json@1.2.0: {}
 
   component-emitter@1.3.0: {}
 
