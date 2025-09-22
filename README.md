@@ -56,11 +56,17 @@ This redesign of my website would not be possible without the _incredible_ work 
 ## Setup
 
 - Run the following commands and update the generated files with your own information:
-	- `cp apps/old-site/.env.template apps/old-site/.env`
-	- `cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env`
-	- `cp website/src/client/.env.template website/src/client/.env`
-	- `cp website/src/server/auth/template.env.json website/src/server/auth/.env.json`
-- `bash ./scripts/setup.sh`
+```sh
+cp apps/old-site/.env.template apps/old-site/.env
+cp apps/terminal/scripts/.env.template apps/terminal/scripts/.env
+cp website/src/client/.env.template website/src/client/.env
+cp website/src/server/auth/template.env.json website/src/server/auth/.env.json
+```
+
+- Run the following commands to setup the project:
+```sh
+bash ./scripts/setup.sh
+```
 
 ## Deploy
 

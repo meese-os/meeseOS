@@ -32,6 +32,7 @@ const path = require("path");
 const express = require("express");
 const chokidar = require("chokidar");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 const proxy = require("express-http-proxy");
 const nocache = require("nocache");
 const { ServiceProvider } = require("@meese-os/common");
@@ -163,6 +164,64 @@ class CoreServiceProvider extends ServiceProvider {
 		const { app, session, configuration } = this.core;
 		const limit = configuration.express.maxBodySize;
 
+		const helmetConfig = {
+			contentSecurityPolicy: {
+				useDefaults: true,
+				directives: {
+					"default-src": ["'self'"],
+					// Allow the Google Identity Services loader while keeping inline/eval allowances
+					// used elsewhere in the app. Consider moving to nonces/hashes later.
+					"script-src": [
+						"'self'",
+						"'unsafe-inline'",
+						"'unsafe-eval'",
+						"https://accounts.google.com",
+						"https://apis.google.com",
+						"https://*.gstatic.com",
+					],
+					"style-src": ["'self'", "'unsafe-inline'"],
+					// Permit remote images (e.g., Unsplash wallpapers) in addition to local/data/blob
+					"img-src": [
+						"'self'",
+						"data:",
+						"blob:",
+						"https:",
+					],
+					// Allow required outbound connections for GIS and similar SDKs
+					"connect-src": [
+						"'self'",
+						"https://accounts.google.com",
+						"https://*.googleapis.com",
+						"https://*.gstatic.com",
+						"https://apis.google.com",
+					],
+					// Allow embedding external applications without enumerating domains.
+					// Keep clickjacking protection via frame-ancestors from Helmet defaults.
+					"frame-src": [
+						"'self'",
+						"https:",
+						"blob:",
+						"data:",
+						// Allow http: only in development for local testing
+						...(configuration.development ? ["http:"] : []),
+					],
+				}
+			},
+			referrerPolicy: { policy: "no-referrer" },
+			crossOriginEmbedderPolicy: false,
+			// Some OAuth/GIS popup flows require COOP to be disabled
+			crossOriginOpenerPolicy: { policy: "unsafe-none" },
+			hsts: configuration.development
+				? false
+				: {
+					maxAge: 63072000,
+					includeSubDomains: true,
+					preload: true,
+				},
+		};
+
+		app.use(helmet(helmetConfig));
+
 		if (configuration.development) {
 			app.use(nocache());
 		} else {
@@ -236,7 +295,7 @@ class CoreServiceProvider extends ServiceProvider {
 							name: "meeseOS/core:ping",
 						})
 					);
-				  }, interval)
+				}, interval)
 				: undefined;
 
 			ws.on("close", () => {

@@ -224,10 +224,16 @@ export class GisServiceProvider {
 					// Full list: https://developers.google.com/identity/protocols/googlescopes
 					scope: scope.join(" "),
 					// This is called on the success of `requestAccessToken`
-					callback: (accessToken) => {
-						this.accessToken = accessToken;
-						this.signedIn = true;
-						this.bus.emit("signed-in");
+					callback: (res) => {
+						if (res?.access_token) {
+							this.accessToken = res;
+							this.signedIn = true;
+							this.bus.emit("signed-in");
+						} else {
+							// Surface any error response for easier debugging
+							// Example: { error: 'access_denied', ... }
+							console.warn("GIS token response missing access_token:", res);
+						}
 					}
 				});
 			});

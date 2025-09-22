@@ -16,7 +16,7 @@
    * path segment in the "$schema" field for all your Rush config files.  This will ensure
    * correct error-underlining and tab-completion for editors such as VS Code.
    */
-  "rushVersion": "5.148.0",
+  "rushVersion": "5.158.1",
 
   /**
    * The next field selects which package manager should be installed and determines its version.
@@ -26,7 +26,7 @@
    * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
-  "pnpmVersion": "9.15.4",
+  "pnpmVersion": "10.17.0",
 
   /**
    * Options that are only used when the PNPM package manager is selected
@@ -121,7 +121,7 @@
    * LTS schedule: https://nodejs.org/en/about/releases/
    * LTS versions: https://nodejs.org/en/download/releases/
    */
-  "nodeSupportedVersionRange": ">=18.0.0 <19.0.0",
+  "nodeSupportedVersionRange": ">=20.0.0 <21.0.0",
 
   /**
    * Odd-numbered major versions of Node.js are experimental.  Even-numbered releases
@@ -284,7 +284,7 @@
      * your PR branch, and in this situation "rush change" will also automatically invoke "git fetch"
      * to retrieve the latest activity for the remote master branch.
      */
-     "url": "https://github.com/meeseOS/meeseOS",
+     "url": "https://github.com/meese-os/meeseOS",
     /**
      * The default branch name. This tells "rush change" which remote branch to compare against.
      * The default value is "master"

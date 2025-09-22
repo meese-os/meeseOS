@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/event-emitter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple event emitter",
   "scripts": {
     "test": "npm run eslint && npm run jest",
@@ -92,7 +92,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/meeseOS/meeseOS.git",
+    "url": "https://github.com/meese-os/meeseOS.git",
     "directory": "backend/event-emitter"
   },
   "keywords": [

@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/client",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "description": "meeseOS client",
   "scripts": {
     "test": "npm run eslint && npm run stylelint && npm run jest",
@@ -146,7 +146,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/meeseOS/meeseOS.git",
+    "url": "https://github.com/meese-os/meeseOS.git",
     "directory": "frontend/client"
   },
   "keywords": [

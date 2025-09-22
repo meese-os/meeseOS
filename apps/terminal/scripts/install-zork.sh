@@ -10,7 +10,7 @@ sudo rm -rf $(ls -A | grep -E "(COMPILED)|(zork*)")
 popd
 
 echo "[>] Cloning the Zork repository..."
-if ! (sudo git clone "https://$GITHUB_USERNAME:$GITHUB_PAT@github.com/meeseOS/zork.git" "$zork_dir") then
+if ! (sudo git clone "https://$GITHUB_USERNAME:$GITHUB_PAT@github.com/meese-os/zork.git" "$zork_dir") then
 	echo "ERROR: Failed to clone the repository. Did you set the GITHUB_USERNAME and GITHUB_PAT environment variables?"
 	echo "If you did, do you have permission to clone the repository?"
 	echo
