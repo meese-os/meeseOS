@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/stylelint-config",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "meeseOS Stylelint configuration",
   "scripts": {
     "test": "echo \"stylelint-config has no tests\" && exit 0",

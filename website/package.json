@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/website",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "meeseOS, implemented in OS.js",
   "scripts": {
     "preinstall": "git config core.hooksPath hooks",

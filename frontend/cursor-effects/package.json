@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/cursor-effects",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "meeseOS Cursor Effects",
   "scripts": {
     "eslint": "eslint index.js",

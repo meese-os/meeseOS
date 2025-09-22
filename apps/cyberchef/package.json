@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/cyberchef",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "eslint": "eslint *.js",
     "test": "npm run eslint",

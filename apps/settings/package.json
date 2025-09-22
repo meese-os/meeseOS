@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/settings",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "MeeseOS Settings Application",
   "scripts": {
     "eslint": "eslint *.js",

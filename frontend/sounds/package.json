@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/sounds",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "meeseOS Sounds",
   "scripts": {
     "test": "npm run eslint",

@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/gnome-icons",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "meeseOS Gnome Icons",
   "scripts": {
     "eslint": "eslint index.js",

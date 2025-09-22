@@ -38,6 +38,8 @@
 // https://manual.aaronmeese.com/resource/official/
 //
 
+// TODO: Deploy the manual to the website
+
 const {
 	Core,
 	CoreServiceProvider,

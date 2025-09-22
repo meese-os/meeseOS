@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/windows8-theme",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "meeseOS Windows 8 Style Theme",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",

@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/widgets",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "meeseOS Widgets",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",
