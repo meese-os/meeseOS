@@ -53,7 +53,7 @@
     "morgan": "^1.10.0",
     "nocache": "^3.0.1",
     "sanitize-filename": "^1.6.3",
-    "uuid": "^8.3.2",
+    "uuid": "^9.0.0",
     "yazl": "^2.5.1"
   },
   "eslintConfig": {

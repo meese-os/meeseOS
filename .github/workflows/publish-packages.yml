@@ -20,19 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v5
 
-    - uses: pnpm/action-setup@v2
+    - uses: pnpm/action-setup@v4
       with:
-        version: 8
+        version: 10
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v5
       with:
         node-version: 20
 
     - name: Install Rush
       run: pnpm install -g @microsoft/rush
+
+    - name: Install native build deps for node-canvas
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
     - name: Install dependencies
       run: rush install
