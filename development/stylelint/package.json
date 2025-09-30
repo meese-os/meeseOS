@@ -10,7 +10,7 @@
   "license": "BSD-3-Clause",
   "main": "index.js",
   "dependencies": {
-    "stylelint": "^15.0.0"
+    "stylelint": "^15.10.3"
   },
   "repository": {
     "type": "git",

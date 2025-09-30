@@ -10,7 +10,7 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install dependencies
         run: |
           npm install -g \
@@ -67,6 +67,6 @@ jobs:
           target-branch: master
           destination-github-username: meeseOS
           destination-repository-name: meeseOS-manual
-          user-email: ajmeese7@gmail.com
+          user-email: aaron@meese.dev
           user-name: ajmeese7
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
