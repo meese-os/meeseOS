@@ -49,10 +49,7 @@
     "plugins": ["jest"],
     "parserOptions": {
       "sourceType": "module",
-      "ecmaVersion": 11,
-      "ecmaFeatures": {
-        "experimentalObjectRestSpread": true
-      }
+      "ecmaVersion": 11
     },
     "extends": ["@meese-os/eslint-config", "plugin:jest/recommended"]
   },
