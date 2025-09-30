@@ -1,27 +1,17 @@
 module.exports = {
-	extends: "stylelint-config-standard",
-	plugins: ["stylelint-scss"],
+	extends: "stylelint-config-standard-scss",
+	plugins: ["@stylistic/stylelint-plugin"],
 	rules: {
 		"selector-class-pattern": /^[A-Za-z-_]+$/,
 		"selector-id-pattern": /^[A-Za-z-_]+$/,
-		"at-rule-no-unknown": [
-			true,
-			{
-				ignoreAtRules: ["extend", "mixin", "include", "each", "use"],
-			},
-		],
-		"function-no-unknown": [
-			true,
-			{
-				ignoreFunctions: ["color.adjust"],
-			},
-		],
 		"font-family-no-missing-generic-family-keyword": [
 			true,
 			{
 				ignoreFontFamilies: ["FontAwesome", "Terminal"],
 			},
 		],
-		"indentation": "tab",
+		"@stylistic/indentation": "tab",
+		"declaration-property-value-no-unknown": null,
+		"function-no-unknown": null,
 	},
 };

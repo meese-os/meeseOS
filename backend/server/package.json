@@ -23,8 +23,8 @@
   },
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
-    "eslint": "^8.48.0",
-    "eslint-plugin-jest": "^27.2.3",
+    "eslint": "^9.36.0",
+    "eslint-plugin-jest": "^28.10.0",
     "jest-express": "^1.12.0",
     "temp": "^0.9.4",
     "jest": "^29.6.4"
@@ -46,7 +46,7 @@
     "formidable": "^2.0.1",
     "fs-extra": "^10.0.0",
     "helmet": "^7.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "lokijs": "^1.5.12",
     "mime": "^3.0.0",
     "minimist": "^1.2.5",

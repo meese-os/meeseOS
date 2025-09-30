@@ -64,8 +64,7 @@ $search-image-size: 16px;
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
-	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow: hidden scroll;
 }
 
 .meeseOS-search-result {
