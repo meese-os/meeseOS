@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/eslint-config",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "meeseOS ESLint configuration",
   "scripts": {
     "test": "echo \"eslint-config has no tests\" && exit 0",
@@ -9,8 +9,11 @@
   },
   "license": "BSD-3-Clause",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
-    "eslint": "^8.48.0"
+    "@eslint/js": "^9.36.0",
+    "eslint": "^9.36.0",
+    "globals": "^15.14.0"
   },
   "repository": {
     "type": "git",

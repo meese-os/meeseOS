@@ -6,7 +6,7 @@
 	"preventManualShrinkwrapChanges": true,
   "unsupportedPackageJsonSettings": {
     "pnpm": {
-      "onlyBuiltDependencies": ["canvas"]
+      "onlyBuiltDependencies": ["canvas", "node-pty"]
     }
   }
 }

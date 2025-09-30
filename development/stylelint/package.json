@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/stylelint-config",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "meeseOS Stylelint configuration",
   "scripts": {
     "test": "echo \"stylelint-config has no tests\" && exit 0",
@@ -10,7 +10,9 @@
   "license": "BSD-3-Clause",
   "main": "index.js",
   "dependencies": {
-    "stylelint": "^15.10.3"
+    "@stylistic/stylelint-plugin": "^3.1.0",
+    "stylelint": "^16.24.0",
+    "stylelint-config-standard-scss": "^16.0.0"
   },
   "repository": {
     "type": "git",
