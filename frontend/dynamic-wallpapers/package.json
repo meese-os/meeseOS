@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/dynamic-wallpapers",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "meeseOS Dynamic Wallpapers",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",

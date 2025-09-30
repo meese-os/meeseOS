@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/event-emitter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple event emitter",
   "scripts": {
     "test": "npm run eslint && npm run jest",

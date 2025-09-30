@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/image-to-8bit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "MeeseOS Image to 8bit application",
   "scripts": {
     "eslint": "eslint *.js",

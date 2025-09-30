@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/panels",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "meeseOS Panels",
   "scripts": {
     "test": "npm run eslint && npm run stylelint",

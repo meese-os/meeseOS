@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/wireless-tools-provider",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "meeseOS wireless-tools Provider",
   "scripts": {
     "test": "npm run eslint",
