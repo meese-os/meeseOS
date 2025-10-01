@@ -198,7 +198,7 @@ export class GisServiceProvider {
 					items: [
 						{ label: `Name: ${displayName}` },
 						{ label: `Email: ${email}` },
-						...(photoUrl && this.isValidGooglePhotoUrl(photoUrl) ? [{
+						...(photoUrl && GisServiceProvider.isValidGooglePhotoUrl(photoUrl) ? [{
 							label: "View Profile Picture",
 							onclick: () => window.open(photoUrl, "_blank")
 						}] : []),
@@ -252,7 +252,7 @@ export class GisServiceProvider {
 	 * @param {String} url URL to validate
 	 * @returns {Boolean} True if URL is from a trusted Google domain
 	 */
-	isValidGooglePhotoUrl(url) {
+	static isValidGooglePhotoUrl(url) {
 		if (!url) return false;
 		return url.startsWith("https://lh3.googleusercontent.com/");
 	}
