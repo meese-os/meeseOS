@@ -143,8 +143,6 @@ You can specify which registry you want to publish by adding one of the followin
 
 If you want to do a dry run first, run `rush publish --include-all`. You will have to set your environmental variables based on the repository you are publishing to, either `NPM_AUTH_TOKEN` or `GH_AUTH_TOKEN`.
 
-# TODO
+## Build cache
 
-- Caching for "rush-project.json"
-  - "Project does not have a rush-project.json configuration file, or one provided by a rig, so it does not support caching."
-  - "rush build --verbose"
+This repository is configured to take advantage of Rush's build cache. Each package defines a `config/rush-project.json` file so that `rush build --verbose` can reuse cached output when available while intentionally skipping caching for tooling packages that do not emit build artifacts.
