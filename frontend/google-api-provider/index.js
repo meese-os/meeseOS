@@ -48,6 +48,18 @@ import GoogleLogo from "./icons/gis-logo.svg";
  */
 
 /**
+ * @typedef {Object} GoogleUserInfo
+ * @property {String} id Google User ID
+ * @property {String} email User's email address
+ * @property {Boolean} verified_email Whether email is verified
+ * @property {String} name User's full name
+ * @property {String} given_name User's first name
+ * @property {String} family_name User's last name
+ * @property {String} picture URL to user's profile picture
+ * @property {String} locale User's locale
+ */
+
+/**
  * Google Identity Service (GIS) Service Provider.
  * @see https://developers.google.com/identity/oauth2/web/guides/overview
  */
@@ -101,7 +113,12 @@ export class GisServiceProvider {
 		/**
 		 * @type {GisAccessToken}
 		 */
-		this.accessToken = null;
+		this.tokenResponse = null;
+
+		/**
+		 * @type {GoogleUserInfo}
+		 */
+		this.userInfo = null;
 	}
 
 	/**
@@ -169,22 +186,41 @@ export class GisServiceProvider {
 			title: "Google API",
 			icon: GoogleLogo,
 		}, ev => {
+			const menu = [];
+
+			// Show user information when signed in
+			if (this.signedIn && this.userInfo) {
+				menu.push({
+					label: "User Information",
+					items: [
+						{ label: `Name: ${this.userInfo.name || "N/A"}` },
+						{ label: `Email: ${this.userInfo.email || "N/A"}` },
+						...(this.userInfo.picture ? [{
+							label: "View Profile Picture",
+							onclick: () => window.open(this.userInfo.picture, "_blank")
+						}] : []),
+					]
+				});
+			}
+
+			menu.push({
+				label: "Scopes",
+				items: this.options.scope.map((label) => ({
+					label,
+				}))
+			}, {
+				label: "Sign In",
+				disabled: this.signedIn,
+				onclick: () => this.login(),
+			}, {
+				label: "Sign Out",
+				disabled: !this.signedIn,
+				onclick: () => this.logout(),
+			});
+
 			this.core.make("meeseOS/contextmenu").show({
 				position: ev.target,
-				menu: [{
-					label: "Scopes",
-					items: this.options.scope.map((label) => ({
-						label,
-					}))
-				}, {
-					label: "Sign In",
-					disabled: this.signedIn,
-					onclick: () => this.login(),
-				}, {
-					label: "Sign Out",
-					disabled: !this.signedIn,
-					onclick: () => this.logout(),
-				}]
+				menu
 			});
 		});
 
@@ -202,9 +238,38 @@ export class GisServiceProvider {
 
 		this.bus.on("signed-out", () => {
 			this.loaded = false;
+			this.userInfo = null;
 
 			this.emitAll("signed-out");
 		});
+	}
+
+	/**
+	 * Fetches user profile information from Google.
+	 * @returns {Promise<GoogleUserInfo>}
+	 */
+	async fetchUserInfo() {
+		if (!this.tokenResponse?.access_token) {
+			throw new Error("No access token available");
+		}
+
+		try {
+			const response = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+				headers: {
+					Authorization: `Bearer ${this.tokenResponse.access_token}`
+				}
+			});
+
+			if (!response.ok) {
+				throw new Error(`Failed to fetch user info: ${response.statusText}`);
+			}
+
+			this.userInfo = await response.json();
+			return this.userInfo;
+		} catch (err) {
+			console.error("Error fetching Google user info:", err);
+			throw err;
+		}
 	}
 
 	/**
@@ -224,10 +289,18 @@ export class GisServiceProvider {
 					// Full list: https://developers.google.com/identity/protocols/googlescopes
 					scope: scope.join(" "),
 					// This is called on the success of `requestAccessToken`
-					callback: (res) => {
+					callback: async (res) => {
 						if (res?.access_token) {
-							this.accessToken = res;
+							this.tokenResponse = res;
 							this.signedIn = true;
+
+							// Fetch user profile information
+							try {
+								await this.fetchUserInfo();
+							} catch (err) {
+								console.warn("Failed to fetch user info after sign-in:", err);
+							}
+
 							this.bus.emit("signed-in");
 						} else {
 							// Surface any error response for easier debugging
@@ -295,7 +368,7 @@ export class GisServiceProvider {
 		if (this.signedIn) {
 			try {
 				window.google.accounts.oauth2.revoke(
-					this.accessToken.access_token,
+					this.tokenResponse.access_token,
 					() => { /* Currently no operation is required */ }
 				);
 			} catch (err) {
@@ -303,6 +376,8 @@ export class GisServiceProvider {
 			}
 
 			this.signedIn = false;
+			this.tokenResponse = null;
+			this.userInfo = null;
 			this.bus.emit("signed-out");
 		}
 
