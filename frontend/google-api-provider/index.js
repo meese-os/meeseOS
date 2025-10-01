@@ -56,7 +56,6 @@ import GoogleLogo from "./icons/gis-logo.svg";
  * @property {String} given_name User's first name
  * @property {String} family_name User's last name
  * @property {String} picture URL to user's profile picture
- * @property {String} locale User's locale
  */
 
 /**
@@ -245,7 +244,8 @@ export class GisServiceProvider {
 	}
 
 	/**
-	 * Fetches user profile information from Google.
+	 * Fetches user profile information from Google OAuth2 userinfo endpoint.
+	 * Using v3 endpoint which is OpenID Connect compliant and works with basic profile/email scopes.
 	 * @returns {Promise<GoogleUserInfo>}
 	 */
 	async fetchUserInfo() {
@@ -254,11 +254,14 @@ export class GisServiceProvider {
 		}
 
 		try {
-			const response = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
-				headers: {
-					Authorization: `Bearer ${this.tokenResponse.access_token}`
+			const response = await fetch(
+				"https://www.googleapis.com/oauth2/v3/userinfo",
+				{
+					headers: {
+						Authorization: `Bearer ${this.tokenResponse.access_token}`
+					}
 				}
-			});
+			);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch user info: ${response.statusText}`);
