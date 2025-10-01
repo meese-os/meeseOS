@@ -189,14 +189,18 @@ export class GisServiceProvider {
 
 			// Show user information when signed in
 			if (this.signedIn && this.userInfo) {
+				const displayName = this.userInfo.name || "N/A";
+				const email = this.userInfo.email || "N/A";
+				const photoUrl = this.userInfo.picture;
+
 				menu.push({
 					label: "User Information",
 					items: [
-						{ label: `Name: ${this.userInfo.name || "N/A"}` },
-						{ label: `Email: ${this.userInfo.email || "N/A"}` },
-						...(this.userInfo.picture ? [{
+						{ label: `Name: ${displayName}` },
+						{ label: `Email: ${email}` },
+						...(photoUrl && this.isValidGooglePhotoUrl(photoUrl) ? [{
 							label: "View Profile Picture",
-							onclick: () => window.open(this.userInfo.picture, "_blank")
+							onclick: () => window.open(photoUrl, "_blank")
 						}] : []),
 					]
 				});
@@ -241,6 +245,16 @@ export class GisServiceProvider {
 
 			this.emitAll("signed-out");
 		});
+	}
+
+	/**
+	 * Validates that a URL is from a trusted Google profile picture domain.
+	 * @param {String} url URL to validate
+	 * @returns {Boolean} True if URL is from a trusted Google domain
+	 */
+	isValidGooglePhotoUrl(url) {
+		if (!url) return false;
+		return url.startsWith("https://lh3.googleusercontent.com/");
 	}
 
 	/**
