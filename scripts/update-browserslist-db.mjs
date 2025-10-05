@@ -3,6 +3,7 @@
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import fs from "node:fs";
+import os from "node:os";
 import { spawnSync } from "node:child_process";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,26 +17,47 @@ if (!fs.existsSync(lockfilePath)) {
 	process.exit(1);
 }
 
+const rushConfigPath = path.join(repoRoot, "rush.json");
+const rushConfigRaw = fs.readFileSync(rushConfigPath, "utf8");
+const pnpmVersionMatch = rushConfigRaw.match(/"pnpmVersion"\s*:\s*"([^"]+)"/);
+const expectedPnpmVersion = pnpmVersionMatch?.[1];
+
+if (!expectedPnpmVersion) {
+	console.error("Could not read pnpmVersion from rush.json.");
+	process.exit(1);
+}
+
 const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
-const pnpmCheck = spawnSync(pnpmCommand, ["--version"], { stdio: "ignore" });
+const pnpmCheck = spawnSync(pnpmCommand, ["--version"], { stdio: "pipe", encoding: "utf8" });
 if (pnpmCheck.error || pnpmCheck.status !== 0) {
 	console.error("pnpm must be available on your PATH before updating Browserslist data.");
 	process.exit(1);
 }
 
+const actualVersion = pnpmCheck.stdout.trim();
+const [expMajor, expMinor] = expectedPnpmVersion.split(".").map(Number);
+const [actMajor, actMinor] = actualVersion.split(".").map(Number);
+
+if (expMajor !== actMajor || expMinor !== actMinor) {
+	console.error(
+		`pnpm version mismatch: rush.json pins ${expectedPnpmVersion} but found ${actualVersion}.\n` +
+		`Install the correct version to avoid lockfile format issues.`
+	);
+	process.exit(1);
+}
+
 console.log("Updating Browserslist data using pnpm-lock.yaml...");
 
-const packageJsonPath = path.join(lockDir, "package.json");
-const pnpmfilePath = path.join(lockDir, ".pnpmfile.cjs");
-const nodeModulesPath = path.join(lockDir, "node_modules");
+const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "meeseos-browserslist-"));
+const tempLockfilePath = path.join(tempDir, "pnpm-lock.yaml");
+const packageJsonPath = path.join(tempDir, "package.json");
+const pnpmfilePath = path.join(tempDir, ".pnpmfile.cjs");
 
-const hadPackageJson = fs.existsSync(packageJsonPath);
-const hadPnpmfile = fs.existsSync(pnpmfilePath);
-const hadNodeModules = fs.existsSync(nodeModulesPath);
+fs.copyFileSync(lockfilePath, tempLockfilePath);
 
 const runPnpm = (args, options = {}) => {
 	const result = spawnSync(pnpmCommand, args, {
-		cwd: lockDir,
+		cwd: tempDir,
 		stdio: "inherit",
 		...options
 	});
@@ -45,44 +67,40 @@ const runPnpm = (args, options = {}) => {
 	return result.status ?? 1;
 };
 
-if (!hadPackageJson) {
-	const placeholder = {
-		name: "meeseos-browserslist-updater",
-		private: true,
-		version: "0.0.0",
-		dependencies: {
-			"caniuse-lite": "*"
-		}
-	};
-	const placeholderJson = `${JSON.stringify(placeholder, null, 2)}\n`;
-	fs.writeFileSync(packageJsonPath, placeholderJson);
-}
+const placeholder = {
+	name: "meeseos-browserslist-updater",
+	private: true,
+	version: "0.0.0",
+	dependencies: {
+		"caniuse-lite": "*"
+	}
+};
+const placeholderJson = `${JSON.stringify(placeholder, null, 2)}\n`;
+fs.writeFileSync(packageJsonPath, placeholderJson);
 
-if (!hadPnpmfile) {
-	const pnpmfileStub = [
-		"module.exports = {",
-		"\thooks: {",
-		"\t\treadPackage(pkg) {",
-		"\t\t\treturn pkg;",
-		"\t\t}",
-		"\t}",
-		"};",
-		""
-	].join("\n");
-	fs.writeFileSync(pnpmfilePath, pnpmfileStub);
-}
+const pnpmfileStub = [
+	"module.exports = {",
+	"\thooks: {",
+	"\t\treadPackage(pkg) {",
+	"\t\t\treturn pkg;",
+	"\t\t}",
+	"\t}",
+	"};",
+	""
+].join("\n");
+fs.writeFileSync(pnpmfilePath, pnpmfileStub);
 
 let status = 1;
 
 try {
-	status = runPnpm(["dlx", "update-browserslist-db@latest"]);
+	status = runPnpm(["dlx", "update-browserslist-db@1.1.3"]);
 
 	if (status === 0) {
 		status = runPnpm([
 			"up",
 			"--recursive",
 			"--lockfile-only",
-			"caniuse-lite@latest"
+			"caniuse-lite@^1"
 		]);
 	}
 
@@ -93,24 +111,19 @@ try {
 	console.error(error);
 	status = 1;
 } finally {
-	if (!hadPackageJson && fs.existsSync(packageJsonPath)) {
+	if (status === 0 && fs.existsSync(tempLockfilePath)) {
 		try {
-			fs.unlinkSync(packageJsonPath);
+			fs.copyFileSync(tempLockfilePath, lockfilePath);
 		} catch (error) {
-			console.warn(`Failed to clean up temporary package.json: ${error.message}`);
+			console.error(`Failed to copy updated lockfile back: ${error.message}`);
+			status = 1;
 		}
 	}
 
-	if (!hadPnpmfile && fs.existsSync(pnpmfilePath)) {
-		try {
-			fs.unlinkSync(pnpmfilePath);
-		} catch (error) {
-			console.warn(`Failed to clean up temporary .pnpmfile.cjs: ${error.message}`);
-		}
-	}
-
-	if (!hadNodeModules && fs.existsSync(nodeModulesPath)) {
-		fs.rmSync(nodeModulesPath, { recursive: true, force: true });
+	try {
+		fs.rmSync(tempDir, { recursive: true, force: true });
+	} catch (error) {
+		console.warn(`Failed to clean up temporary directory: ${error.message}`);
 	}
 }
 
