@@ -196,6 +196,13 @@
       "incremental": false,
       "enableParallelism": true,
       "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "update:browserslist",
+      "commandKind": "global",
+      "summary": "Update the shared caniuse-lite data for Browserslist.",
+      "description": "Runs update-browserslist-db against the repo lockfile so every package picks up the latest caniuse-lite release.",
+      "shellCommand": "node ./scripts/update-browserslist-db.mjs"
     }
   ],
 
