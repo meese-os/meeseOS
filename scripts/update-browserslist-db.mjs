@@ -97,7 +97,7 @@ fs.writeFileSync(pnpmfilePath, pnpmfileStub);
 let status = 1;
 
 try {
-	status = runPnpm(["dlx", "update-browserslist-db@1.1.3"]);
+	status = runPnpm(["dlx", "update-browserslist-db@1.1.3", "--yes"]);
 
 	if (status === 0) {
 		status = runPnpm([
