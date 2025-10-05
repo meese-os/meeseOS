@@ -14,7 +14,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm use
 pnpm add -g pnpm
-node ./scripts/update-browserslist-db.mjs
 rush update
 NODE_ENV=production rush build
 
