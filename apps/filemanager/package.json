@@ -28,7 +28,7 @@
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
-    "eslint": "^9.36.0",
+    "eslint": "^9.37.0",
     "mini-css-extract-plugin": "^2.9.4",
     "sass": "^1.93.2",
     "sass-loader": "^16.0.5",
@@ -40,12 +40,12 @@
   "dependencies": {
     "@meese-os/gui": "workspace:*",
     "dateformat": "^3.0.3",
-    "file-type": "^17.1.4",
+    "file-type": "^17.1.6",
     "hyperapp": "^1.2.10",
     "stream-browserify": "^3.0.0",
-    "graceful-fs": "^4.2.10",
-    "url": "^0.11.0",
-    "read-chunk": "^4.0.2"
+    "graceful-fs": "^4.2.11",
+    "url": "^0.11.4",
+    "read-chunk": "^4.0.3"
   },
   "eslintConfig": {
     "env": {

@@ -128,6 +128,16 @@ rush build
 rush test
 ```
 
+### Updating Browserslist data
+
+To refresh the shared Browserslist cache and silence `caniuse-lite` warnings, run:
+
+```sh
+rush update:browserslist
+```
+
+This command invokes the helper in `scripts/update-browserslist-db.mjs` to update the central `pnpm-lock.yaml` used by every package and deduplicate `caniuse-lite` versions in the lockfile. After refreshing the lockfile, run `rush update --purge` so the next install pulls the new `caniuse-lite` data instead of reusing cached dependencies.
+
 ### Publishing
 
 To publish changes to MeeseOS, use the following command:
