@@ -41,7 +41,7 @@ const [actMajor, actMinor] = actualVersion.split(".").map(Number);
 if (expMajor !== actMajor || expMinor !== actMinor) {
 	console.error(
 		`pnpm version mismatch: rush.json pins ${expectedPnpmVersion} but found ${actualVersion}.\n` +
-		`Install the correct version to avoid lockfile format issues.`
+		"Install the correct version to avoid lockfile format issues."
 	);
 	process.exit(1);
 }
@@ -55,6 +55,10 @@ const pnpmfilePath = path.join(tempDir, ".pnpmfile.cjs");
 
 fs.copyFileSync(lockfilePath, tempLockfilePath);
 
+/**
+	Executes `pnpm` inside the temporary workspace and surfaces its exit status.
+	Inherits stdio so callers can stream command output, and throws on spawn errors.
+*/
 const runPnpm = (args, options = {}) => {
 	const result = spawnSync(pnpmCommand, args, {
 		cwd: tempDir,
