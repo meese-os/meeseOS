@@ -119,6 +119,8 @@ pnpm run deploy
 
 Ensure you have properly updated `website/src/server/auth/.env.json` to not include the placeholder comments.
 
+You can run `pnpm run build:production` to build the project in production mode, otherwise it will be built in development mode.
+
 ### Testing
 
 To run the test suite, run:

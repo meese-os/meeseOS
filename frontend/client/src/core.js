@@ -215,9 +215,13 @@ export default class Core extends CoreBase {
 
 		console.group("Core::boot()");
 
+		// Configuration.development comes from frontend/client/src/config.js where it
+		// mirrors process.env.NODE_ENV during the build step.
+		const bootMode = this.configuration.development ? "development" : "production";
+		logger.info(`Booting client in ${bootMode} mode`);
+
 		this.$root.appendChild(this.$contents);
 		this._attachEvents();
-		this.emit("meeseOS/core:boot");
 
 		// Only create the splash in production and on boot
 		if (this.configuration.development === false) {
@@ -229,6 +233,8 @@ export default class Core extends CoreBase {
 			this.splash = this.options.splash ? this.options.splash(this) : new Splash(this);
 			this.splash.init();
 		}
+
+		this.emit("meeseOS/core:boot");
 
 		// TODO: Start the service providers before auth, not after
 		return super
