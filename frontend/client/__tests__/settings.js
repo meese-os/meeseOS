@@ -34,7 +34,7 @@ describe("Settings", () => {
 
 	test("#get", () => {
 		expect(settings.get("meeseOS/jest", "foo")).toBe("Hello World");
-		expect(settings.get("meeseOS/jest", "bar")).toBe(undefined);
+		expect(settings.get("meeseOS/jest", "bar")).toBeUndefined();
 		expect(settings.get("meeseOS/jest", "baz", "default")).toBe("default");
 		expect(settings.get("meeseOS/jest")).toEqual({
 			foo: "Hello World",
@@ -56,7 +56,7 @@ describe("Settings", () => {
 	test("#clear", () => {
 		return settings.clear("meeseOS/jest").then((result) => {
 			expect(result).toBe(true);
-			expect(settings.get("meeseOS/jest", "foo")).toBe(undefined);
+			expect(settings.get("meeseOS/jest", "foo")).toBeUndefined();
 		});
 	});
 });

@@ -8,10 +8,10 @@ describe("cli", () => {
 		});
 
 	test("should initialize without error", () => {
-		return expect(createInstance()).resolves.toBe(undefined);
+		return expect(createInstance()).resolves.toBeUndefined();
 	});
 
 	test("should run info task", () => {
-		return expect(createInstance("info")).resolves.toBe(undefined);
+		return expect(createInstance("info")).resolves.toBeUndefined();
 	});
 });

@@ -13,7 +13,7 @@ describe("Clipboard", () => {
 		clipboard.set("value");
 		clipboard.clear();
 
-		return clipboard.get().then((value) => expect(value).toBe(undefined));
+		return clipboard.get().then((value) => expect(value).toBeUndefined());
 	});
 
 	test("#has", () => {
@@ -35,7 +35,7 @@ describe("Clipboard", () => {
 		return clipboard.get(true).then((value) => {
 			expect(value).toBe("value");
 
-			return clipboard.get().then((value) => expect(value).toBe(undefined));
+			return clipboard.get().then((value) => expect(value).toBeUndefined());
 		});
 	});
 });
