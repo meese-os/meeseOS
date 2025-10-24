@@ -163,7 +163,7 @@ describe("VFS", () => {
 	});
 
 	test("#download", () => {
-		return expect(call("download", "null:/")).resolves.toBe(undefined);
+		return expect(call("download", "null:/")).resolves.toBeUndefined();
 	});
 
 	test("#archive - compress file", () => {

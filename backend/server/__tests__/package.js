@@ -53,7 +53,7 @@ describe("Package", () => {
 	});
 
 	test("#init", () => {
-		return expect(pkg.init()).resolves.toBe(undefined);
+		return expect(pkg.init()).resolves.toBeUndefined();
 	});
 
 	test("#validate", () => {

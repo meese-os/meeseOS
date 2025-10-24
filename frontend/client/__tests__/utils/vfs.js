@@ -312,10 +312,10 @@ describe("utils.vfs#parseMountpointPrefix", () => {
 	});
 
 	test("Should fail on valid", () => {
-		expect(vfs.parseMountpointPrefix(":dir:/")).toBe(undefined);
-		expect(vfs.parseMountpointPrefix("invalid.:/")).toBe(undefined);
-		expect(vfs.parseMountpointPrefix("invalid@:/")).toBe(undefined);
-		expect(vfs.parseMountpointPrefix("invalid/:/")).toBe(undefined);
+		expect(vfs.parseMountpointPrefix(":dir:/")).toBeUndefined();
+		expect(vfs.parseMountpointPrefix("invalid.:/")).toBeUndefined();
+		expect(vfs.parseMountpointPrefix("invalid@:/")).toBeUndefined();
+		expect(vfs.parseMountpointPrefix("invalid/:/")).toBeUndefined();
 	});
 });
 
