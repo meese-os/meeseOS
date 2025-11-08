@@ -7,29 +7,9 @@
 </p>
 <br />
 
-<p align="center">
-  <a href="https://deepsource.io/gh/meese-os/meeseOS/?ref=repository-badge">
-    <img
-      src="https://deepsource.io/gh/meese-os/meeseOS.svg/?label=active+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
-      title="Active issues on DeepSource"
-      alt="Active issues on DeepSource"
-    />
-  </a>
-  <a href="https://deepsource.io/gh/meese-os/meeseOS/?ref=repository-badge">
-    <img
-      src="https://deepsource.io/gh/meese-os/meeseOS.svg/?label=resolved+issues&show_trend=true&token=CRr7brFwKTb7yUJpTlVeUpjA"
-      title="Resolved issues on DeepSource"
-			alt="Resolved issues on DeepSource"
-    />
-  </a>
-	<a href="https://gitter.im/meeseOS/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
-		<img
-			src="https://badges.gitter.im/meeseOS/community.svg"
-			title="Gitter"
-			alt="Gitter"
-		/>
-	</a>
-</p>
+[![Active issues on DeepSource](https://deepsource.io/gh/meese-os/meeseOS.svg)](https://deepsource.io/gh/meese-os/meeseOS)
+[![Gitter](https://badges.gitter.im/meeseOS/community.svg)](https://gitter.im/meeseOS/community)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/meese-os/meeseOS)
 
 <!-- TODO: Get this working then add to individual subcomponents if possible. -->
 <!--
