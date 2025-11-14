@@ -8,9 +8,12 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 DEV_MODE="${MEESEOS_DEV_MODE:-false}"
 SKIP_RESET="${MEESEOS_SKIP_RESET:-false}"
 
-# Fetches the latest code from the repo (unless in dev mode or --no-reset flag)
+# Fetches the latest code from the repo unless one of the following is set:
+#   - MEESEOS_DEV_MODE=true (environment variable): for development mode
+#   - MEESEOS_SKIP_RESET=true (environment variable): to explicitly skip git reset
+#   - --no-reset (command-line flag): to skip git reset for this run
 if [ "$DEV_MODE" = "true" ] || [ "$SKIP_RESET" = "true" ] || [ "$1" = "--no-reset" ]; then
-	echo "Development mode: Skipping git reset to preserve local changes..."
+	echo "Skipping git reset to preserve local changes..."
 else
 	echo "Fetching latest code from repo..."
 	git fetch --all
@@ -37,12 +40,22 @@ pm2 delete meeseos --silent 2>/dev/null || true
 pm2 delete "pnpm run deploy" --silent 2>/dev/null || true
 
 # Update PM2 silently
-pm2 update --silent 2>/dev/null || true
+pm2 update --silent || true
 
 # Start PM2 with ecosystem config
-pm2 start ecosystem.config.js --silent 2>/dev/null
+pm2 start ecosystem.config.js --silent
+PM2_START_EXIT_CODE=$?
+if [ $PM2_START_EXIT_CODE -ne 0 ]; then
+    echo "ERROR: PM2 failed to start the service. Check the output above for details." >&2
+    exit $PM2_START_EXIT_CODE
+fi
 
 # Save PM2 process list
-pm2 save --force --silent 2>/dev/null || true
+pm2 save --force --silent
 
-echo "meeseOS service started successfully"
+if pm2 list | grep -q "meeseos" && pm2 status meeseos | grep -q "online"; then
+    echo "meeseOS service started successfully"
+else
+    echo "ERROR: meeseOS service failed to start. Check PM2 logs for details." >&2
+    exit 1
+fi

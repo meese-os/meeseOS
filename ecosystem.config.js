@@ -10,7 +10,7 @@ module.exports = {
 		{
 			name: "meeseos",
 			script: "/bin/bash",
-			args: ["-c", `cd "${websiteDir}" && pnpm run deploy`],
+			args: ["-c", "pnpm run deploy"],
 			cwd: websiteDir,
 			instances: 1,
 			exec_mode: "fork",
