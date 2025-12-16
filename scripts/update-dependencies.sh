@@ -88,7 +88,7 @@ while IFS= read -r package_file; do
 	package_name=$(basename "$package_dir")
 
 	echo "[$CURRENT/$TOTAL] Updating $package_name..."
-	(cd "$package_dir" && ncu $NCU_ARGS)
+	(cd "$package_dir" && ncu "$NCU_ARGS")
 
 	if [ $? -eq 0 ]; then
 		echo "✓ Updated $package_name"

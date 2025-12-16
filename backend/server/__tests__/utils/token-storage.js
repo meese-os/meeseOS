@@ -8,7 +8,7 @@ describe("TokenStorage", () => {
 	let tokenStorage;
 
 	beforeAll(() =>
-		meeseOS().then(async (c) => {
+		meeseOS().then((c) => {
 			core = c;
 		})
 	);
@@ -29,7 +29,7 @@ describe("TokenStorage", () => {
 		});
 	});
 
-	afterEach(async () => {
+	afterEach(() => {
 		if (tokenStorage) {
 			tokenStorage.destroy();
 			tokenStorage = null;
