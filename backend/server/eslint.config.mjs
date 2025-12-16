@@ -10,13 +10,11 @@ export default [
 		rules: {
 			...jestPlugin.configs.recommended.rules,
 		},
-		overrides: [
-			{
-				files: ["**/__tests__/**", "**/__mocks__/**", "**/*.test.js"],
-				env: {
-					jest: true,
-				},
-			},
-		],
+	},
+	{
+		files: ["**/__tests__/**", "**/__mocks__/**", "**/*.test.js"],
+		env: {
+			jest: true,
+		},
 	},
 ];

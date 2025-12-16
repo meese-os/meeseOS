@@ -29,7 +29,7 @@ export default function DosPlayer({ bundleUrl }) {
 		setDos(instance);
 
 		// Cleanup function
-		instance.stop();
+		return () => instance.stop();
 	}, [rootRef]);
 
 	useEffect(() => {
