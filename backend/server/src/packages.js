@@ -32,7 +32,7 @@ const fs = require("fs-extra");
 const fg = require("fast-glob");
 const path = require("path");
 const Package = require("./package.js");
-const consola = require("consola");
+const { consola } = require("consola");
 const logger = consola.withTag("Packages");
 
 const relative = (filename) => filename.replace(process.cwd(), "");

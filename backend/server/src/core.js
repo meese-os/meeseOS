@@ -28,7 +28,7 @@
  * @licence Simplified BSD License
  */
 
-const consola = require("consola");
+const { consola } = require("consola");
 const deepmerge = require("deepmerge");
 const express = require("express");
 // eslint-disable-next-line no-unused-vars

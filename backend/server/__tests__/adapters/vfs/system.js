@@ -91,7 +91,7 @@ describe("VFS System adapter", () => {
 	test("#mkdir - existing directory", () => {
 		return expect(
 			request("mkdir", "home:/test-directory", createOptions())
-		).rejects.toThrowError();
+		).rejects.toThrow();
 	});
 
 	test("#mkdir - ensure", () => {
@@ -214,7 +214,7 @@ describe("VFS System adapter", () => {
 
 		return expect(
 			request("archive", ["home:/fakefile.php"], options)
-		).rejects.toThrowError();
+		).rejects.toThrow();
 	});
 
 	test("#archive - extract", async () => {
@@ -252,7 +252,7 @@ describe("VFS System adapter", () => {
 
 		return expect(
 			request("archive", ["home:/fakefile.php"], options)
-		).rejects.toThrowError();
+		).rejects.toThrow();
 	});
 
 	test("#archive - bad option", () => {
@@ -260,7 +260,7 @@ describe("VFS System adapter", () => {
 
 		return expect(
 			request("archive", ["home:/test.zip"], options)
-		).rejects.toThrowError();
+		).rejects.toThrow();
 	});
 
 	test("#unlink - files", () => {

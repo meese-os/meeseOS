@@ -1,4 +1,4 @@
-const consola = require("consola");
+const { consola } = require("consola");
 consola.pauseLogs();
 
 const temp = require("temp").track();

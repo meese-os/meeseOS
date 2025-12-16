@@ -10,8 +10,8 @@
   "license": "BSD-3-Clause",
   "main": "index.js",
   "dependencies": {
-    "@stylistic/stylelint-plugin": "^3.1.0",
-    "stylelint": "^16.25.0",
+    "@stylistic/stylelint-plugin": "^4.0.0",
+    "stylelint": "^16.26.1",
     "stylelint-config-standard-scss": "^16.0.0"
   },
   "repository": {

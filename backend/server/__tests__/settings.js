@@ -43,13 +43,13 @@ describe("Settings", () => {
 	test("#save", async () => {
 		await settings.save(request, response);
 
-		expect(response.json).toBeCalledWith(true);
+		expect(response.json).toHaveBeenCalledWith(true);
 	});
 
 	test("#load", async () => {
 		await settings.load(request, response);
 
-		expect(response.json).toBeCalledWith({});
+		expect(response.json).toHaveBeenCalledWith({});
 	});
 
 	test("#destroy", async () => {

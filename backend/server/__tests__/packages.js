@@ -44,7 +44,7 @@ describe("Packages", () => {
 
 		packages.handleMessage(ws, params);
 
-		expect(ws.send).toBeCalledWith(
+		expect(ws.send).toHaveBeenCalledWith(
 			JSON.stringify({
 				name: "meeseOS/application:socket:message",
 				params: [

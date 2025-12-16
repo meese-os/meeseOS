@@ -319,6 +319,28 @@ const scaffoldBasic = (type) =>
 		console.log(s.info);
 	};
 
+const scaffoldPackageCreate = async ({ logger, options, args }) => {
+	const { type } = await inquirer.prompt([
+		{
+			name: "type",
+			message: "Select package type",
+			type: "list",
+			choices: [
+				{
+					name: "Application",
+					value: "application",
+				},
+				{
+					name: "iFrame Application",
+					value: "iframe-application",
+				},
+			],
+		},
+	]);
+
+	return scaffoldPackage(type)({ logger, options, args });
+};
+
 module.exports = {
 	"make:auth": {
 		description: "Create Authentication adapter script",
@@ -357,5 +379,14 @@ module.exports = {
 			"--name": "Specify name instead of using interactive wizard",
 		},
 		action: scaffoldPackage("iframe-application"),
+	},
+	"package:create": {
+		description: "Create a new package (interactive)",
+		options: {
+			"--force": "Force overwrite of existing package",
+			"--dry": "Skip npm scripts",
+			"--name": "Specify name instead of using wizard",
+		},
+		action: scaffoldPackageCreate,
 	},
 };

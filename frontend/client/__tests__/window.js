@@ -140,7 +140,7 @@ describe("Window", () => {
 	test("#setIcon", () => {
 		win.setIcon("new-icon");
 		expect(win.state.icon).toBe("new-icon");
-		expect(win.$icon.style.backgroundImage).toBe("url(new-icon)");
+		expect(win.$icon.style.backgroundImage).toBe("url(\"new-icon\")");
 	});
 
 	test("#setTitle", () => {

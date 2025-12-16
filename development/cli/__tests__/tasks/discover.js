@@ -1,4 +1,4 @@
-const logger = require("consola");
+const { consola: logger } = require("consola");
 const temp = require("temp");
 const fs = require("fs-extra");
 const utils = require("../../src/utils.js");

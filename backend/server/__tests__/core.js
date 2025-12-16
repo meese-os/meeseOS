@@ -1,4 +1,4 @@
-const consola = require("consola");
+const { consola } = require("consola");
 consola.pauseLogs();
 
 const Core = require("../src/core.js");
@@ -52,7 +52,7 @@ describe("Core", () => {
 	});
 
 	test("#constructor - requires options", () => {
-		expect(() => new Core()).toThrowError("The public option is required");
+		expect(() => new Core()).toThrow("The public option is required");
 	});
 
 	test(".getInstance", () => {
@@ -72,23 +72,23 @@ describe("Core", () => {
 	test("#broadcast", () => {
 		core.broadcast("test/jest", [1, 2, 3]);
 
-		expect(core.wss.clients[0].send).toBeCalledWith(testEvent);
-		expect(core.wss.clients[1].send).toBeCalledWith(testEvent);
+		expect(core.wss.clients[0].send).toHaveBeenCalledWith(testEvent);
+		expect(core.wss.clients[1].send).toHaveBeenCalledWith(testEvent);
 		expect(core.wss.clients[2].send).not.toHaveBeenCalled();
 	});
 
 	test("#broadcastAll", () => {
 		core.broadcastAll("test/jest", 1, 2, 3);
 
-		expect(core.wss.clients[0].send).toBeCalledWith(testEvent);
-		expect(core.wss.clients[1].send).toBeCalledWith(testEvent);
+		expect(core.wss.clients[0].send).toHaveBeenCalledWith(testEvent);
+		expect(core.wss.clients[1].send).toHaveBeenCalledWith(testEvent);
 		expect(core.wss.clients[2].send).not.toHaveBeenCalled();
 	});
 
 	test("#broadcastUser", () => {
 		core.broadcastUser("jest", "test/jest", 1, 2, 3);
 
-		expect(core.wss.clients[0].send).toBeCalledWith(testEvent);
+		expect(core.wss.clients[0].send).toHaveBeenCalledWith(testEvent);
 		expect(core.wss.clients[1].send).not.toHaveBeenCalled();
 		expect(core.wss.clients[2].send).not.toHaveBeenCalled();
 	});

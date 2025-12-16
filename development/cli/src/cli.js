@@ -30,7 +30,7 @@
 
 const fs = require("fs-extra");
 const path = require("path");
-const consola = require("consola");
+const { consola } = require("consola");
 const commander = require("commander");
 const getopts = require("getopts");
 const { createOptions, resolveOptions, loadTasks } = require("./utils.js");
@@ -63,13 +63,15 @@ const load = (filename) => {
 };
 
 const cli = (argv = [], opts = {}) => {
-	commander
+	const program = new commander.Command();
+
+	program
 		.version(version)
 		.option("--dist [dist]", "Target dist directory ('dist/' by default)")
 		.on("command:*", () => {
 			console.error(
 				"Invalid command: %s\nSee --help for a list of available commands.",
-				commander.args.join(" ")
+				program.args.join(" ")
 			);
 			process.exit(1);
 		})
@@ -87,7 +89,7 @@ const cli = (argv = [], opts = {}) => {
 		.then((tasks) => {
 			Object.keys(tasks).forEach((name) => {
 				try {
-					const current = commander.command(name);
+					const current = program.command(name);
 					const i = tasks[name];
 					const task = typeof i === "function" ? { action: i } : i;
 
@@ -107,7 +109,7 @@ const cli = (argv = [], opts = {}) => {
 						const args = getopts(process.argv.slice(2));
 
 						task
-							.action({ logger, options, args, commander, argv })
+							.action({ logger, options, args, commander: program, argv })
 							.then(() => {
 								const diff = new Date() - started;
 								consola.success(`Finished in ${diff}ms`);
@@ -124,11 +126,11 @@ const cli = (argv = [], opts = {}) => {
 			}
 
 			if (argv.length < 3) {
-				commander.help();
+				program.help();
 				process.exit(1);
 			}
 
-			commander.parse(argv);
+			program.parse(argv);
 		})
 		.catch(error);
 };
