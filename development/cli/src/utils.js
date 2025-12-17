@@ -62,7 +62,11 @@ const npmPackages = async (root) => {
 		)
 	);
 
-	return list.filter((res) => Boolean(res));
+	return list.filter((res) => Boolean(res)).sort((a, b) => {
+		const nameA = a.meta?.name || "";
+		const nameB = b.meta?.name || "";
+		return nameA.localeCompare(nameB);
+	});
 };
 
 const spawnAsync = (cmd, args, options) =>
