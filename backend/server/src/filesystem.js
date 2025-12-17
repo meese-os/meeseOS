@@ -35,7 +35,7 @@ const mime = require("mime");
 const path = require("path");
 const vfs = require("./vfs");
 const { closeWatches } = require("./utils/core.js");
-const consola = require("consola");
+const { consola } = require("consola");
 const logger = consola.withTag("Filesystem");
 
 /**

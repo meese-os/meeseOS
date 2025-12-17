@@ -1,6 +1,5 @@
 /* global Dos, emulators */
 import { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
 import { DosPlayer as Instance } from "js-dos";
 
 export default function DosPlayer({ bundleUrl }) {
@@ -22,7 +21,6 @@ export default function DosPlayer({ bundleUrl }) {
 			onExit: () => {
 				const parent = root.parentElement;
 				parent.style.display = "none";
-				ReactDOM.unmountComponentAtNode(parent);
 				root.remove();
 			}
 		};
@@ -31,7 +29,9 @@ export default function DosPlayer({ bundleUrl }) {
 		setDos(instance);
 
 		// Cleanup function
-		return () => { instance.stop(); };
+		return () => {
+			instance.stop();
+		};
 	}, [rootRef]);
 
 	useEffect(() => {

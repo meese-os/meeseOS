@@ -11,4 +11,10 @@ export default [
 			...jestPlugin.configs.recommended.rules,
 		},
 	},
+	{
+		files: ["**/__tests__/**", "**/__mocks__/**", "**/*.test.js"],
+		env: {
+			jest: true,
+		},
+	},
 ];

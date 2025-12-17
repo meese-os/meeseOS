@@ -67,12 +67,18 @@ class TokenStorage {
 
 	/**
 	 * Initializes the instance.
+	 * @returns {Promise<void>}
 	 */
 	init() {
-		this.db = new loki(
-			this.options.databaseName,
-			{
-				autoloadCallback: () => {
+		return new Promise((resolve) => {
+			const databaseOptions = {
+				...this.options.databaseOptions,
+			};
+
+			// If autoload is enabled, wrap the callback to resolve the promise
+			if (databaseOptions.autoload) {
+				const originalCallback = databaseOptions.autoloadCallback;
+				databaseOptions.autoloadCallback = () => {
 					// Returns the collection if it exists, otherwise creates it
 					let collection = this.db.getCollection(this.options.collectionName);
 					if (!collection) {
@@ -80,10 +86,32 @@ class TokenStorage {
 					}
 
 					this.collection = collection;
-				},
-				...this.options.databaseOptions,
-			},
-		);
+
+					// Call original callback if provided
+					if (originalCallback) {
+						originalCallback();
+					}
+
+					resolve();
+				};
+			}
+
+			this.db = new loki(
+				this.options.databaseName,
+				databaseOptions,
+			);
+
+			// If autoload is disabled, create collection immediately
+			if (!databaseOptions.autoload) {
+				let collection = this.db.getCollection(this.options.collectionName);
+				if (!collection) {
+					collection = this.db.addCollection(this.options.collectionName);
+				}
+
+				this.collection = collection;
+				resolve();
+			}
+		});
 	}
 
 	/**
@@ -124,7 +152,9 @@ class TokenStorage {
 	 * Destroys the instance.
 	 */
 	destroy() {
-		this.db.close();
+		if (this.db) {
+			this.db.close();
+		}
 	}
 }
 

@@ -120,6 +120,29 @@ rush update:browserslist
 
 This command invokes the helper in `scripts/update-browserslist-db.mjs` to update the central `pnpm-lock.yaml` used by every package and deduplicate `caniuse-lite` versions in the lockfile. After refreshing the lockfile, run `rush update --purge` so the next install pulls the new `caniuse-lite` data instead of reusing cached dependencies.
 
+### Updating Dependencies
+
+To update the dependencies for all packages, run:
+
+```sh
+bash ./scripts/update-dependencies.sh
+```
+
+You can specify which dependencies to update by adding the following flags:
+
+- `--dep dev`: Update only the development dependencies
+- `--dep prod`: Update only the production dependencies
+- `--reject <pattern>`: Exclude packages matching the pattern
+- `--filter <pattern>`: Include only packages matching the pattern
+- `--target minor`: Update to the next minor version
+- `--target patch`: Update to the next patch version
+
+I recommend running with the following rejection flags to avoid any difficult migrations:
+
+```sh
+bash ./scripts/update-dependencies.sh --reject hyperapp --reject three --reject js-dos --reject chokidar --reject uuid --reject globby --reject mime --reject inquirer
+```
+
 ### Publishing
 
 To publish changes to MeeseOS, use the following command:

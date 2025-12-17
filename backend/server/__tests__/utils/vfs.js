@@ -142,7 +142,7 @@ describe("VFS Utils", () => {
 			},
 		};
 
-		return expect(check({ mount })).rejects.toThrowError(
+		return expect(check({ mount })).rejects.toThrow(
 			"Mountpoint 'meeseOS' is read-only"
 		);
 	});
@@ -150,15 +150,15 @@ describe("VFS Utils", () => {
 	test("checkMountpointPermission - groups", async () => {
 		await expect(
 			checkMountpointGroupPermission([], ["required"])
-		).rejects.toThrowError("Permission was denied for 'readdir' in 'meeseOS'");
+		).rejects.toThrow("Permission was denied for 'readdir' in 'meeseOS'");
 
 		await expect(
 			checkMountpointGroupPermission(["missing"], ["required"])
-		).rejects.toThrowError("Permission was denied for 'readdir' in 'meeseOS'");
+		).rejects.toThrow("Permission was denied for 'readdir' in 'meeseOS'");
 
 		await expect(
 			checkMountpointGroupPermission(["required"], ["required", "some-other"])
-		).rejects.toThrowError("Permission was denied for 'readdir' in 'meeseOS'");
+		).rejects.toThrow("Permission was denied for 'readdir' in 'meeseOS'");
 
 		await expect(
 			checkMountpointGroupPermission(["required"], ["required"])

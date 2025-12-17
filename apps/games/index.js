@@ -2,7 +2,7 @@ import "./index.scss";
 import { name as applicationName } from "./metadata.json";
 import App from "./src/app";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import meeseOS from "meeseOS";
 
 // Our launcher
@@ -24,12 +24,17 @@ const register = (core, args, options, metadata) => {
 	});
 
 	const app = React.createElement(App, { pid: proc.pid });
-	win.render(($content) => ReactDOM.render(app, $content));
+	let root = null;
+	win.render(($content) => {
+		root = createRoot($content);
+		root.render(app);
+	});
 
 	win.on("destroy", () => {
-		ReactDOM.unmountComponentAtNode(
-			document.getElementById(`pid_${proc.pid}_game`)
-		);
+		if (root) {
+			root.unmount();
+			root = null;
+		}
 		proc.destroy();
 	});
 

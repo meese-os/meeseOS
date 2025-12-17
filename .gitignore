@@ -76,3 +76,6 @@ coverage
 
 # GitHub Actions executable
 /bin
+
+# Developer files
+wip.*

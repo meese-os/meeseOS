@@ -1,4 +1,4 @@
-const logger = require("consola");
+const { consola: logger } = require("consola");
 
 jest.spyOn(console, "info").mockImplementation(() => {});
 

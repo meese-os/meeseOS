@@ -95,7 +95,8 @@ const getResolutionDistance = (realSize, standard) =>
 	);
 
 /**
- * Uses the screen resolution to find an Unsplash wallpaper that matches the screen resolution.
+ * Uses the screen resolution to find a random wallpaper that matches the screen resolution.
+ * Uses Picsum Photos as a replacement for the deprecated Unsplash source API.
  * @returns {String}
  * @link https://stackoverflow.com/a/56306192/6456163
  */
@@ -109,11 +110,10 @@ const getRandomWallpaper = () => {
 			: curr
 	);
 
-	const resolution = `${closestResolution.width}x${closestResolution.height}`;
-	const orientation = window.innerHeight > window.innerWidth ? "portrait" : "landscape";
-	const orientationParam = `orientation=${orientation}`;
-	const sigParam = `sig=${Math.random()}`;
-	return `https://source.unsplash.com/random/${resolution}?${orientationParam}&${sigParam}`;
+	const resolution = `${closestResolution.width}/${closestResolution.height}`;
+	// Add a random seed to ensure different images on each call
+	const seed = Math.floor(Math.random() * 1000);
+	return `https://picsum.photos/seed/${seed}/${resolution}`;
 };
 
 /**

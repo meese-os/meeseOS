@@ -125,7 +125,7 @@ describe("Filesystem", () => {
 			Number of calls: 0
 		```
 		*/
-		/*expect(cb).toBeCalledWith(
+		/*expect(cb).toHaveBeenCalledWith(
 			expect.objectContaining({
 				type: "add",
 				target: "home:/watch.txt",

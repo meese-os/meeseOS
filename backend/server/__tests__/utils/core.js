@@ -32,7 +32,7 @@ describe("Core Utils", () => {
 		utils.isAuthenticated(core, ["required"], false)(request, response, next);
 
 		// TODO: Fix the error with the function not being called
-		//expect(response.status).toBeCalledWith(403);
+		//expect(response.status).toHaveBeenCalledWith(403);
 	});
 
 	test("isAuthenticated - success on some required group", () => {
@@ -50,7 +50,7 @@ describe("Core Utils", () => {
 		);
 
 		// TODO: Fix the error with the function not being called
-		//expect(response.status).toBeCalledWith(403);
+		//expect(response.status).toHaveBeenCalledWith(403);
 	});
 
 	test("isAuthenticated - success on all required group", () => {

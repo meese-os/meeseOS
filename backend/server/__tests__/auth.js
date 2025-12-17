@@ -79,8 +79,8 @@ describe("Authentication", () => {
 	test("#login - fail on error", async () => {
 		await auth.login(request, response);
 
-		expect(response.status).toBeCalledWith(403);
-		expect(response.json).toBeCalledWith({
+		expect(response.status).toHaveBeenCalledWith(403);
+		expect(response.json).toHaveBeenCalledWith({
 			error: "Invalid login or permission denied",
 		});
 	});
@@ -90,10 +90,10 @@ describe("Authentication", () => {
 
 		await auth.login(request, response);
 
-		expect(response.status).toBeCalledWith(200);
+		expect(response.status).toHaveBeenCalledWith(200);
 		expect(request.session.user).toMatchObject(profile);
 		expect(request.session.save).toHaveBeenCalled();
-		expect(response.json).toBeCalledWith(expect.objectContaining(profile));
+		expect(response.json).toHaveBeenCalledWith(expect.objectContaining(profile));
 	});
 
 	test("#login - createHomeDirectory string", async () => {
@@ -144,8 +144,8 @@ describe("Authentication", () => {
 
 		await auth.login(request, response);
 
-		expect(response.status).toBeCalledWith(403);
-		expect(response.json).toBeCalledWith({
+		expect(response.status).toHaveBeenCalledWith(403);
+		expect(response.json).toHaveBeenCalledWith({
 			error: "Invalid login or permission denied",
 		});
 	});
@@ -157,8 +157,8 @@ describe("Authentication", () => {
 
 		await auth.login(request, response);
 
-		expect(response.status).toBeCalledWith(403);
-		expect(response.json).toBeCalledWith({
+		expect(response.status).toHaveBeenCalledWith(403);
+		expect(response.json).toHaveBeenCalledWith({
 			error: "Invalid login or permission denied",
 		});
 	});
@@ -167,7 +167,7 @@ describe("Authentication", () => {
 		await auth.logout(request, response);
 
 		expect(request.session.destroy).toHaveBeenCalled();
-		expect(response.json).toBeCalledWith({});
+		expect(response.json).toHaveBeenCalledWith({});
 	});
 
 	test("#register", async () => {
@@ -175,7 +175,7 @@ describe("Authentication", () => {
 
 		await auth.register(request, response);
 
-		expect(response.json).toBeCalledWith({ username: "jest" });
+		expect(response.json).toHaveBeenCalledWith({ username: "jest" });
 	});
 
 	test("#destroy", async () => {

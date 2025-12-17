@@ -30,7 +30,7 @@
 
 /* eslint-disable no-unused-vars */
 const fs = require("fs-extra");
-const consola = require("consola");
+const { consola } = require("consola");
 const pathLib = require("path");
 const logger = consola.withTag("Auth");
 const nullAdapter = require("./adapters/auth/null");
@@ -320,7 +320,7 @@ class Auth {
 				const { path, contents = "" } = file;
 				const shortcutsFile = await vfs.realpath(`home:/${path}`, profile);
 				const dir = pathLib.dirname(shortcutsFile);
-				if (!await fs.pathExists(shortcutsFile)) {
+				if (!(await fs.pathExists(shortcutsFile))) {
 					await fs.ensureDir(dir);
 					await fs.writeFile(shortcutsFile, contents);
 				}
