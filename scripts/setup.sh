@@ -17,6 +17,7 @@ echo "Installing Node version specified in .nvmrc..."
 echo
 nvm install
 nvm use
+nvm alias default "$(nvm current)"
 
 # Optional, can be useful for some issues on Ubuntu
 # sudo apt-get purge nodejs npm --auto-remove
@@ -74,3 +75,6 @@ echo "Setting up the terminal app..."
 pushd ./apps/terminal/scripts
 bash ./setup.sh
 popd
+
+echo
+echo "[+] Setup complete. Run 'nvm use' in this shell before 'rush build'."

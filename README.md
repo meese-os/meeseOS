@@ -43,7 +43,7 @@ cp website/src/client/.env.template website/src/client/.env
 cp website/src/server/auth/template.env.json website/src/server/auth/.env.json
 ```
 
-- Run the following commands to setup the project:
+- Run the following to setup the project and install deps:
 ```sh
 bash ./scripts/setup.sh
 ```
@@ -92,14 +92,15 @@ To run GitHub Actions locally, do the following:
 To build the project, run:
 
 ```sh
+nvm use
 cd website
 rush build
-pnpm run deploy
+rushx deploy
 ```
 
 Ensure you have properly updated `website/src/server/auth/.env.json` to not include the placeholder comments.
 
-You can run `pnpm run build:production` to build the project in production mode, otherwise it will be built in development mode.
+You can run `rushx build:production` to build the project in production mode, otherwise it will be built in development mode.
 
 ### Testing
 
