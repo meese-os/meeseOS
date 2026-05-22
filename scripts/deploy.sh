@@ -37,7 +37,7 @@ cd "$REPO_ROOT"
 
 # Delete old process first to ensure clean start
 pm2 delete meeseos --silent 2>/dev/null || true
-pm2 delete "pnpm run deploy" --silent 2>/dev/null || true
+pm2 delete "rushx deploy" --silent 2>/dev/null || true
 
 # Update PM2 silently
 pm2 update --silent || true
