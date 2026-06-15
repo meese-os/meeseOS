@@ -60,36 +60,29 @@ const wipeCaches = () => {
 	}
 
 	// Layer 2: per-package node_modules/.cache (babel-loader, future webpack FS cache)
-	// Depth-bounded (maxdepth 6) find, excluding common/temp/ to protect the pnpm virtual store
+	// Depth-bounded (-maxdepth before -path, per GNU find option ordering), excluding
+	// common/temp/ to protect the pnpm virtual store. No `2>/dev/null || true`: a wipe
+	// failure must abort the run, otherwise we would time a "cold" build against a dirty
+	// cache and report a corrupt number as if it were valid.
 	try {
 		execSync(
-			`find "${repoRoot}" -path "*/node_modules/.cache" -maxdepth 6 -not -path "${commonTempDir}/*" -exec rm -rf {} + 2>/dev/null || true`,
+			`find "${repoRoot}" -maxdepth 6 -path "*/node_modules/.cache" -not -path "${commonTempDir}/*" -exec rm -rf {} +`,
 			{ stdio: "inherit", cwd: repoRoot }
 		);
-	} catch (_) {
-		// find -exec rm errors are non-fatal; the 2>/dev/null || true handles most cases
+	} catch (err) {
+		throw new Error(`Cache wipe failed; aborting to avoid reporting a polluted "cold" timing: ${err.message}`);
 	}
 };
 
 /**
-	Runs a cold build and returns wall-clock duration in milliseconds.
-	The intent is "rush rebuild" semantics (no cache read, full webpack run). In this
-	repo (Rush 5.158.1), `rush rebuild` requires each package.json to define a
-	"rebuild" script -- none of the 36 packages do. We achieve identical cold-build
-	semantics by wiping both cache layers before each run (wipeCaches()) and then
-	running `rush build`. With zero cache entries present, `rush build` performs a
-	full webpack run on every package, matching what `rush rebuild` would do.
-*/
-const timedRushRebuild = () => {
-	const start = Date.now();
-	execSync("rush build", { stdio: "inherit", cwd: repoRoot });
-	return Date.now() - start;
-};
-
-/**
-	Runs `rush build` once for the warm/incremental secondary number (D-05).
-	Immediately after the third cold run, the Rush build cache has been fully populated
-	by that run, so `rush build` reads cached output and reflects incremental rebuild speed.
+	Runs `rush build` and returns wall-clock duration in milliseconds.
+	Cold vs warm is determined entirely by cache state, not by a different command:
+	- Cold: called right after wipeCaches(), so with both cache layers empty `rush build`
+	  performs a full webpack run on every package (the "rush rebuild" semantics we want).
+	  `rush rebuild` itself is unusable here because it requires a per-package "rebuild"
+	  script and none of the 36 packages define one.
+	- Warm: called once after the cold runs, when the build cache is fully populated, so it
+	  reflects incremental rebuild speed (D-05).
 */
 const timedRushBuild = () => {
 	const start = Date.now();
@@ -127,13 +120,19 @@ const readRushVersions = () => {
 
 // Main benchmark flow
 
+// Ensure the output directory exists BEFORE spending minutes on builds. `.planning/` is
+// git-ignored, so on a fresh clone or CI it may not exist; create it now so a missing dir
+// fails fast here instead of throwing ENOENT after the full run and discarding all results.
+const resultsPath = path.join(repoRoot, ".planning", "benchmarks", "results.md");
+fs.mkdirSync(path.dirname(resultsPath), { recursive: true });
+
 const coldDurations = [];
 
 for (let i = 0; i < COLD_RUNS; i++) {
 	console.log(`\nCold run ${i + 1}/${COLD_RUNS} -- wiping cache...`);
 	wipeCaches();
-	console.log(`Cold run ${i + 1}/${COLD_RUNS} -- running rush rebuild...`);
-	const duration = timedRushRebuild();
+	console.log(`Cold run ${i + 1}/${COLD_RUNS} -- running rush build (cold: caches wiped)...`);
+	const duration = timedRushBuild();
 	coldDurations.push(duration);
 	console.log(`Cold run ${i + 1}/${COLD_RUNS} -- completed in ${fmtMs(duration)}`);
 }
@@ -154,8 +153,6 @@ const { rushVersion, pnpmVersion } = readRushVersions();
 const runDate = new Date().toISOString().split("T")[0];
 
 // Results markdown -- format lets Phase 3 fill in the "Phase 3 After" and "Delta" columns
-const resultsPath = path.join(repoRoot, ".planning", "benchmarks", "results.md");
-
 const resultsContent = [
 	"# Build Speedup Benchmark Results",
 	"",
