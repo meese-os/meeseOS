@@ -71,6 +71,9 @@ common/autoinstallers/*/.npmrc
 # Webpack build directories
 dist
 
+# Webpack filesystem cache (per-package, generated at build time)
+**/.webpack-cache
+
 # Jest test coverage
 coverage
 

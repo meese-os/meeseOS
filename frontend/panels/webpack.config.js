@@ -12,7 +12,14 @@ if (mode === "production") {
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: [path.resolve(__dirname, "index.js")],
 	output: {
 		library: "meeseOSPanels",
@@ -20,6 +27,10 @@ module.exports = {
 		umdNamedDefine: true,
 		sourceMapFilename: "[file].map",
 		filename: "[name].js",
+		pathinfo: false,
+	},
+	resolve: {
+		symlinks: false,
 	},
 	optimization: {
 		minimize,

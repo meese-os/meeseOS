@@ -64,7 +64,14 @@ const fontAwesomeLoader = {
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: path.resolve(__dirname, "index.js"),
 	target: "web",
 	resolve: {
@@ -73,12 +80,16 @@ module.exports = {
 			os: false,
 			path: false,
 		},
+		symlinks: false,
 	},
 	externals: {
 		meeseOS: "MeeseOS",
 	},
 	optimization: {
 		minimize: production,
+	},
+	output: {
+		pathinfo: false,
 	},
 	plugins: [
 		new MiniCssExtractPlugin({

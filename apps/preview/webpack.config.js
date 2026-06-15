@@ -5,10 +5,23 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: path.resolve(__dirname, "index.js"),
 	externals: {
 		meeseOS: "MeeseOS",
+	},
+	output: {
+		pathinfo: false,
+	},
+	resolve: {
+		symlinks: false,
 	},
 	optimization: {
 		minimize,

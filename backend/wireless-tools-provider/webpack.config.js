@@ -4,7 +4,14 @@ const minimize = mode === "production";
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: [path.resolve(__dirname, "src/client.js")],
 	output: {
 		library: "meeseOSWirelessToolsProvider",
@@ -13,6 +20,10 @@ module.exports = {
 		sourceMapFilename: "[file].map",
 		filename: "[name].js",
 		path: path.resolve(__dirname, "dist"),
+		pathinfo: false,
+	},
+	resolve: {
+		symlinks: false,
 	},
 	optimization: {
 		minimize,

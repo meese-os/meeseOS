@@ -28,19 +28,30 @@ const jsxLoader = {
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: path.resolve(__dirname, "index.js"),
 	target: "web",
 	resolve: {
 		fallback: {
 			url: false,
 		},
+		symlinks: false,
 	},
 	externals: {
 		meeseOS: "MeeseOS",
 	},
 	optimization: {
 		minimize,
+	},
+	output: {
+		pathinfo: false,
 	},
 	plugins: [
 		new CopyWebpackPlugin({
