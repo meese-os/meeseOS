@@ -38,18 +38,13 @@ const jsxLoader = {
 	resolve: {
 		extensions: [".js", ".jsx"],
 	},
-	use: [
-		{
-			loader: "babel-loader",
-			options: {
-				presets: [
-					"@babel/preset-env",
-					["@babel/preset-react", { runtime: "automatic" }],
-				],
-				cacheDirectory: true,
-			},
-		},
-	],
+	loader: "esbuild-loader",
+	options: {
+		target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
+		loader: "jsx",
+		jsx: "automatic",
+		jsxImportSource: "react",
+	},
 };
 const pdfLoader = {
 	test: /\.pdf$/,
