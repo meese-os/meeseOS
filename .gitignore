@@ -79,3 +79,7 @@ coverage
 
 # Developer files
 wip.*
+
+# GSD artifacts (kept local, not version controlled)
+.claude/
+.planning/
