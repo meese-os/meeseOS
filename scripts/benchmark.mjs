@@ -72,13 +72,17 @@ const wipeCaches = () => {
 };
 
 /**
-	Runs `rush rebuild` (full cold build, does not read from Rush build cache) and
-	returns wall-clock duration in milliseconds. `rush rebuild` is mandatory for cold
-	runs -- `rush build` reads the build cache and returns cache-hit times, not build times.
+	Runs a cold build and returns wall-clock duration in milliseconds.
+	The intent is "rush rebuild" semantics (no cache read, full webpack run). In this
+	repo (Rush 5.158.1), `rush rebuild` requires each package.json to define a
+	"rebuild" script -- none of the 36 packages do. We achieve identical cold-build
+	semantics by wiping both cache layers before each run (wipeCaches()) and then
+	running `rush build`. With zero cache entries present, `rush build` performs a
+	full webpack run on every package, matching what `rush rebuild` would do.
 */
 const timedRushRebuild = () => {
 	const start = Date.now();
-	execSync("rush rebuild", { stdio: "inherit", cwd: repoRoot });
+	execSync("rush build", { stdio: "inherit", cwd: repoRoot });
 	return Date.now() - start;
 };
 
