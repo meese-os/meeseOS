@@ -21,8 +21,10 @@ module.exports = {
 		rules: [
 			{
 				test: /\.js$/,
-				use: {
-					loader: "babel-loader",
+				loader: "esbuild-loader",
+				options: {
+					target: "node22",
+					loader: "js",
 				},
 			},
 		],
