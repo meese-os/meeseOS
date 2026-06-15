@@ -17,8 +17,10 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				use: {
-					loader: "babel-loader",
+				loader: "esbuild-loader",
+				options: {
+					target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
+					loader: "js",
 				},
 			},
 		],
