@@ -17,9 +17,6 @@ module.exports = {
 	output: {
 		pathinfo: false,
 	},
-	resolve: {
-		symlinks: false,
-	},
 	optimization: {
 		minimize,
 	},

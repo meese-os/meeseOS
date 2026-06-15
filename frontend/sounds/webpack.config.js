@@ -16,9 +16,6 @@ module.exports = {
 		path: path.resolve(__dirname, "dist"),
 		pathinfo: false,
 	},
-	resolve: {
-		symlinks: false,
-	},
 	plugins: [
 		new CopyWebpackPlugin({
 			patterns: [{ from: path.resolve("./src") }],

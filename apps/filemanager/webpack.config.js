@@ -31,7 +31,6 @@ module.exports = {
 			stream: require.resolve("stream-browserify"),
 			events: require.resolve("events/"),
 		},
-		symlinks: false,
 	},
 	externals: {
 		meeseOS: "MeeseOS",

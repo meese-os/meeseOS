@@ -29,9 +29,6 @@ module.exports = {
 		filename: "[name].js",
 		pathinfo: false,
 	},
-	resolve: {
-		symlinks: false,
-	},
 	optimization: {
 		minimize,
 	},

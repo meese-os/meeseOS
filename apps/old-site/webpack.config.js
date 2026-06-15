@@ -80,7 +80,6 @@ module.exports = {
 			os: false,
 			path: false,
 		},
-		symlinks: false,
 	},
 	externals: {
 		meeseOS: "MeeseOS",

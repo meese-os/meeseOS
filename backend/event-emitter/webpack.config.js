@@ -18,9 +18,6 @@ module.exports = {
 		libraryTarget: "umd",
 		pathinfo: false,
 	},
-	resolve: {
-		symlinks: false,
-	},
 	optimization: {
 		minimize: mode === "production",
 	},

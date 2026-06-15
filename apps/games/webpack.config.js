@@ -42,7 +42,6 @@ module.exports = {
 		fallback: {
 			url: false,
 		},
-		symlinks: false,
 	},
 	externals: {
 		meeseOS: "MeeseOS",
