@@ -1130,6 +1130,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1200,6 +1203,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1260,6 +1266,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1308,6 +1317,9 @@ importers:
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1445,6 +1457,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1521,6 +1536,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1581,6 +1599,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1650,6 +1671,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
@@ -1781,6 +1805,9 @@ importers:
       css-minimizer-webpack-plugin:
         specifier: ^7.0.4
         version: 7.0.4(webpack-cli@6.0.1)
+      esbuild-loader:
+        specifier: ^4.4.3
+        version: 4.5.0(webpack-cli@6.0.1)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2
