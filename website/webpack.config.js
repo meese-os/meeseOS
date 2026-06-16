@@ -19,7 +19,8 @@ const client_env_vars = dotenv.config({
 
 const plugins = [];
 if (production) {
-	plugins.push(new CssMinimizerPlugin());
+	// NOTE: CssMinimizerPlugin lives in optimization.minimizer (the correct slot);
+	// pushing it here too minified the CSS twice.
 	plugins.push(new CleanWebpackPlugin());
 }
 
