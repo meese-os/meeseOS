@@ -125,13 +125,6 @@ module.exports = {
 				...makeEsbuildRule(),
 				exclude: /node_modules/,
 			},
-			{
-				test: /\.js$/,
-				enforce: "pre",
-				use: {
-					loader: "source-map-loader",
-				},
-			},
 		],
 	},
 };

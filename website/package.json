@@ -47,7 +47,6 @@
     "pm2": "^6.0.14",
     "sass": "^1.96.0",
     "sass-loader": "^16.0.6",
-    "source-map-loader": "^5.0.0",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1",
     "stylelint-config-standard-scss": "^16.0.0",
