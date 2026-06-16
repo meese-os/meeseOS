@@ -7,9 +7,9 @@ const production = mode === "production";
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { EsbuildPlugin } = require("esbuild-loader");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 // Environment variables
 const dotenv = require("dotenv");
@@ -20,15 +20,19 @@ const client_env_vars = dotenv.config({
 const plugins = [];
 if (production) {
 	plugins.push(new CssMinimizerPlugin());
-	plugins.push(new UglifyJsPlugin({
-		sourceMap: true
-	}));
 	plugins.push(new CleanWebpackPlugin());
 }
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: production ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: {
 		meeseOS: path.resolve(__dirname, "src/client/index.js"),
 	},
@@ -36,7 +40,8 @@ module.exports = {
 		// https://medium.com/walkme-engineering/how-and-when-not-to-use-webpack-for-lazy-loading-bef9d37c42c1
 		chunkFilename: "chunks/[name].[chunkhash].bundle.js",
 		filename: "[name].[chunkhash].bundle.js",
-		path: path.resolve(__dirname, "dist")
+		path: path.resolve(__dirname, "dist"),
+		pathinfo: false,
 	},
 	performance: {
 		maxEntrypointSize: 500 * 1024,
@@ -44,14 +49,19 @@ module.exports = {
 	},
 	optimization: {
 		minimize: production,
+		minimizer: [
+			new EsbuildPlugin({
+				target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
+			}),
+			new CssMinimizerPlugin(),
+		],
 		splitChunks: {
 			chunks: "all",
 		},
 	},
 	plugins: [
 		new CopyWebpackPlugin({
-			patterns: ["src/client/social.png"],
-			patterns: ["src/client/icon.png"],
+			patterns: ["src/client/social.png", "src/client/icon.png"],
 		}),
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "src/client/index.ejs"),
@@ -111,8 +121,11 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
-					loader: "babel-loader",
-					options: { compact: false },
+					loader: "esbuild-loader",
+					options: {
+						target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
+						loader: "js",
+					},
 				},
 			},
 			{
