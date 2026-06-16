@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -12,17 +13,10 @@ if (mode === "production") {
 }
 
 const jsxLoader = {
-	test: /\.jsx?$/,
+	...makeEsbuildRule({ loader: "jsx" }),
 	exclude: /node_modules/,
 	resolve: {
 		extensions: [".js", ".jsx"],
-	},
-	loader: "esbuild-loader",
-	options: {
-		target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
-		loader: "jsx",
-		jsx: "automatic",
-		jsxImportSource: "react",
 	},
 };
 

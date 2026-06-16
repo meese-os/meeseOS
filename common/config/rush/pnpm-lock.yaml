@@ -27,6 +27,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -91,6 +94,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -164,6 +170,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -224,6 +233,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -294,6 +306,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -376,6 +391,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -449,6 +467,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -537,6 +558,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -607,6 +631,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -664,6 +691,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -710,6 +740,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -746,6 +779,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -880,6 +916,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -960,6 +999,8 @@ importers:
         specifier: ^16.0.0
         version: 16.0.0
 
+  ../../development/webpack: {}
+
   ../../frontend/client:
     dependencies:
       '@meese-os/common':
@@ -1020,6 +1061,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1102,6 +1146,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1151,6 +1198,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1227,6 +1277,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1287,6 +1340,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1347,6 +1403,9 @@ importers:
       '@meese-os/eslint-config':
         specifier: workspace:*
         version: link:../../development/eslint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1390,6 +1449,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       '@rollup/plugin-babel':
         specifier: ^6.1.0
         version: 6.1.0
@@ -1478,6 +1540,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1557,6 +1622,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1620,6 +1688,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1695,6 +1766,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1759,6 +1833,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1826,6 +1903,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)
@@ -1986,6 +2066,9 @@ importers:
       '@meese-os/stylelint-config':
         specifier: workspace:*
         version: link:../development/stylelint
+      '@meese-os/webpack-config':
+        specifier: workspace:*
+        version: link:../development/webpack
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(webpack-cli@6.0.1)

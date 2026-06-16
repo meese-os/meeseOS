@@ -8,6 +8,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { EsbuildPlugin } = require("esbuild-loader");
+const { makeEsbuildRule, BROWSER_TARGET } = require("@meese-os/webpack-config");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -54,7 +55,7 @@ module.exports = {
 		minimize: production,
 		minimizer: [
 			new EsbuildPlugin({
-				target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
+				target: BROWSER_TARGET,
 			}),
 			new CssMinimizerPlugin(),
 		],
@@ -121,15 +122,8 @@ module.exports = {
 				loader: "html-loader",
 			},
 			{
-				test: /\.js$/,
+				...makeEsbuildRule(),
 				exclude: /node_modules/,
-				use: {
-					loader: "esbuild-loader",
-					options: {
-						target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
-						loader: "js",
-					},
-				},
 			},
 			{
 				test: /\.js$/,

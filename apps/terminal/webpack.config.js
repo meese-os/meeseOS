@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -70,13 +71,8 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.js$/,
+				...makeEsbuildRule(),
 				exclude: /node_modules/,
-				loader: "esbuild-loader",
-				options: {
-					target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
-					loader: "js",
-				},
 			},
 		],
 	},

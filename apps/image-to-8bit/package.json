@@ -15,6 +15,7 @@
   ],
   "devDependencies": {
     "@meese-os/eslint-config": "workspace:*",
+    "@meese-os/webpack-config": "workspace:*",
     "@babel/core": "^7.28.5",
     "@babel/plugin-transform-runtime": "^7.28.5",
     "@babel/preset-env": "^7.28.5",

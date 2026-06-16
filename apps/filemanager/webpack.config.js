@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -91,15 +92,10 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.js$/,
+				...makeEsbuildRule(),
 				exclude: /node_modules\/(?!@meese-os)/,
 				resolve: {
 					fullySpecified: false,
-				},
-				loader: "esbuild-loader",
-				options: {
-					target: ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"],
-					loader: "js",
 				},
 			},
 		],

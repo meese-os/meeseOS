@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule, NODE_TARGET } = require("@meese-os/webpack-config");
 const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const plugins = [];
@@ -27,14 +28,7 @@ module.exports = {
 	plugins: [...plugins],
 	module: {
 		rules: [
-			{
-				test: /\.js$/,
-				loader: "esbuild-loader",
-				options: {
-					target: "node22",
-					loader: "js",
-				},
-			},
+			makeEsbuildRule({ target: NODE_TARGET }),
 		],
 	},
 };

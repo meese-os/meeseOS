@@ -403,6 +403,11 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@meese-os/webpack-config",
+      "projectFolder": "development/webpack",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@meese-os/dynamic-wallpapers",
       "projectFolder": "frontend/dynamic-wallpapers",
       "shouldPublish": true

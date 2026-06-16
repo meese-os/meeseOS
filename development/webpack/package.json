@@ -1,0 +1,28 @@
+{
+  "name": "@meese-os/webpack-config",
+  "version": "1.0.0",
+  "description": "meeseOS shared webpack esbuild-loader configuration",
+  "scripts": {
+    "test": "echo \"webpack-config has no tests\" && exit 0",
+    "build": "echo \"webpack-config does not need to be built\"",
+    "eslint": ""
+  },
+  "license": "BSD-3-Clause",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meese-os/meeseOS.git",
+    "directory": "development/webpack"
+  },
+  "keywords": [
+    "os",
+    "osjs",
+    "operating system",
+    "webOS",
+    "meeseOS",
+    "webpack",
+    "esbuild",
+    "esbuild-loader",
+    "webpack-config"
+  ]
+}
