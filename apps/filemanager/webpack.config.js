@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -14,7 +15,14 @@ if (mode === "production") {
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: [path.resolve(__dirname, "index.js")],
 	resolve: {
 		fallback: {
@@ -30,6 +38,9 @@ module.exports = {
 	},
 	optimization: {
 		minimize,
+	},
+	output: {
+		pathinfo: false,
 	},
 	plugins: [
 		new CopyWebpackPlugin({
@@ -81,13 +92,10 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.js$/,
+				...makeEsbuildRule(),
 				exclude: /node_modules\/(?!@meese-os)/,
 				resolve: {
 					fullySpecified: false,
-				},
-				use: {
-					loader: "babel-loader",
 				},
 			},
 		],

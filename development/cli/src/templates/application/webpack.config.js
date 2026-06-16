@@ -2,24 +2,32 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 
 const mode = process.env.NODE_ENV ?? "development";
-const minimize = mode === "production";
+const production = mode === "production";
 const plugins = [];
 
-if (mode === "production") {
+if (production) {
 	plugins.push(new CssMinimizerPlugin());
 }
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: production ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: path.resolve(__dirname, "index.js"),
 	externals: {
 		meeseOS: "MeeseOS",
 	},
 	optimization: {
-		minimize,
+		minimize: production,
 	},
 	plugins: [
 		new CopyWebpackPlugin({
@@ -53,11 +61,8 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.js$/,
+				...makeEsbuildRule(),
 				exclude: /node_modules/,
-				use: {
-					loader: "babel-loader",
-				},
 			},
 		],
 	},

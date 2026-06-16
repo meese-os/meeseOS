@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
@@ -12,7 +13,14 @@ if (mode === "production") {
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: [path.resolve(__dirname, "index.js")],
 	output: {
 		library: "meeseOSClient",
@@ -20,6 +28,7 @@ module.exports = {
 		umdNamedDefine: true,
 		sourceMapFilename: "[file].map",
 		filename: "[name].js",
+		pathinfo: false,
 	},
 	optimization: {
 		minimize,
@@ -65,11 +74,8 @@ module.exports = {
 				loader: "html-loader",
 			},
 			{
-				test: /\.js$/,
+				...makeEsbuildRule(),
 				exclude: /node_modules\/(?!@meese-os)/,
-				use: {
-					loader: "babel-loader",
-				},
 			},
 			{
 				test: /\.d\.ts$/,

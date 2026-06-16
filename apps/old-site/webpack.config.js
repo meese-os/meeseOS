@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
@@ -33,23 +34,11 @@ const styleLoader = {
 	use: ["style-loader", cssLoader],
 };
 const jsxLoader = {
-	test: /\.jsx?$/,
+	...makeEsbuildRule({ loader: "jsx" }),
 	exclude: /node_modules/,
 	resolve: {
 		extensions: [".js", ".jsx"],
 	},
-	use: [
-		{
-			loader: "babel-loader",
-			options: {
-				presets: [
-					"@babel/preset-env",
-					["@babel/preset-react", { runtime: "automatic" }],
-				],
-				cacheDirectory: true,
-			},
-		},
-	],
 };
 const pdfLoader = {
 	test: /\.pdf$/,
@@ -69,7 +58,14 @@ const fontAwesomeLoader = {
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: path.resolve(__dirname, "index.js"),
 	target: "web",
 	resolve: {
@@ -84,6 +80,9 @@ module.exports = {
 	},
 	optimization: {
 		minimize: production,
+	},
+	output: {
+		pathinfo: false,
 	},
 	plugins: [
 		new MiniCssExtractPlugin({

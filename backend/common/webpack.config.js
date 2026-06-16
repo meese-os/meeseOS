@@ -1,4 +1,5 @@
 const path = require("path");
+const { makeEsbuildRule, NODE_TARGET } = require("@meese-os/webpack-config");
 const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const plugins = [];
@@ -6,12 +7,20 @@ const plugins = [];
 module.exports = {
 	mode,
 	target: "node",
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: [path.resolve(__dirname, "index.js")],
 	output: {
 		libraryTarget: "commonjs",
 		sourceMapFilename: "[file].map",
 		filename: "[name].js",
+		pathinfo: false,
 	},
 	optimization: {
 		minimize,
@@ -19,12 +28,7 @@ module.exports = {
 	plugins: [...plugins],
 	module: {
 		rules: [
-			{
-				test: /\.js$/,
-				use: {
-					loader: "babel-loader",
-				},
-			},
+			makeEsbuildRule({ target: NODE_TARGET }),
 		],
 	},
 };

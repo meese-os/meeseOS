@@ -1,12 +1,23 @@
 const path = require("path");
+const { makeEsbuildRule } = require("@meese-os/webpack-config");
 const mode = process.env.NODE_ENV ?? "development";
 const minimize = mode === "production";
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
 	mode,
-	devtool: "source-map",
+	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	entry: [path.resolve(__dirname, "index.js")],
+	output: {
+		pathinfo: false,
+	},
 	optimization: {
 		minimize,
 	},
@@ -21,11 +32,8 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				...makeEsbuildRule(),
 				exclude: /node_modules\/(?!@meese-os)/,
-				use: {
-					loader: "babel-loader",
-				},
 			},
 		],
 	},

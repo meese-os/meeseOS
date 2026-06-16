@@ -71,6 +71,13 @@ common/autoinstallers/*/.npmrc
 # Webpack build directories
 dist
 
+# Webpack filesystem cache (per-package, generated at build time)
+**/.webpack-cache
+
+# Runtime data stores (lokijs / connect-loki, generated when the server runs)
+meeseOS.db
+session-store.db
+
 # Jest test coverage
 coverage
 
@@ -79,3 +86,7 @@ coverage
 
 # Developer files
 wip.*
+
+# GSD artifacts (kept local, not version controlled)
+.claude/
+.planning/
