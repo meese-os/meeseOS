@@ -81,7 +81,7 @@ const readRushProjects = () => {
 	// a project block. We use a regex that grabs both fields from the same entry.
 	// Pattern: "packageName": "...", followed (anywhere in the same block) by "projectFolder": "..."
 	const projectBlockRe = /"packageName"\s*:\s*"([^"]+)"[\s\S]*?"projectFolder"\s*:\s*"([^"]+)"/g;
-	let match;
+	let match = null;
 	while ((match = projectBlockRe.exec(raw)) !== null) {
 		projects.push({
 			packageName: match[1],
@@ -115,7 +115,7 @@ const captureOutputSizes = (label) => {
 	fs.mkdirSync(outDir, { recursive: true });
 
 	const outPath = path.join(outDir, `bundle-sizes-${label}.json`);
-	fs.writeFileSync(outPath, JSON.stringify(sizes, null, "\t") + "\n");
+	fs.writeFileSync(outPath, `${JSON.stringify(sizes, null, "\t")}\n`);
 
 	console.log(`\nBundle sizes (${label}) written to ${outPath}`);
 	console.log(`Packages with dist/ output: ${Object.keys(sizes).length}`);
