@@ -13,9 +13,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // Environment variables
 const dotenv = require("dotenv");
+// .parsed is undefined when src/client/.env is absent (fresh checkout / CI);
+// fall back to {} so the env-var reads below don't throw at config load.
 const client_env_vars = dotenv.config({
 	path: path.resolve(__dirname, "src/client/.env"),
-}).parsed;
+}).parsed ?? {};
 
 const plugins = [];
 if (production) {
