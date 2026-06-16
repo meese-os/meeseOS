@@ -39,7 +39,9 @@ const repoRoot = path.resolve(__dirname, "..");
 
 /**
 	Recursively sums the byte size of all .js and .css files under a directory.
-	Descends into subdirectories (e.g. chunks/).
+	Descends into real subdirectories only (e.g. chunks/), skipping symlinked directories.
+	Skipping symlinks prevents double-counting: website/dist/ contains symlinked app bundle dirs
+	that point back to each app package's own dist/, which is already counted separately.
 */
 const sumJsCssBytes = (dir) => {
 	let total = 0;
@@ -48,11 +50,17 @@ const sumJsCssBytes = (dir) => {
 	}
 	for (const entry of fs.readdirSync(dir)) {
 		const fullPath = path.join(dir, entry);
-		const stat = fs.statSync(fullPath);
-		if (stat.isDirectory()) {
+		// Use lstat to detect symlinks without following them.
+		const lstat = fs.lstatSync(fullPath);
+		if (lstat.isSymbolicLink()) {
+			// Skip symlinks -- website/dist/ uses symlinks to serve other packages' outputs.
+			// Those packages are counted via their own dist/ directories.
+			continue;
+		}
+		if (lstat.isDirectory()) {
 			total += sumJsCssBytes(fullPath);
 		} else if (entry.endsWith(".js") || entry.endsWith(".css")) {
-			total += stat.size;
+			total += lstat.size;
 		}
 	}
 	return total;
