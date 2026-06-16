@@ -8,7 +8,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { EsbuildPlugin } = require("esbuild-loader");
-const { makeEsbuildRule, BROWSER_TARGET } = require("@meese-os/webpack-config");
+const { makeEsbuildRule, BROWSER_TARGET, INFRASTRUCTURE_LOGGING } = require("@meese-os/webpack-config");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -30,6 +30,7 @@ if (production) {
 module.exports = {
 	mode,
 	devtool: production ? "source-map" : "eval-cheap-module-source-map",
+	infrastructureLogging: INFRASTRUCTURE_LOGGING,
 	cache: {
 		type: "filesystem",
 		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),

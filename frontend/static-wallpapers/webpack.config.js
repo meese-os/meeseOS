@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
 	devtool: "source-map",
 	mode: "production",
+	infrastructureLogging: { level: "error" },
 	cache: {
 		type: "filesystem",
 		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),

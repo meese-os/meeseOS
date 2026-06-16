@@ -1,5 +1,5 @@
 const path = require("path");
-const { makeEsbuildRule } = require("@meese-os/webpack-config");
+const { makeEsbuildRule, INFRASTRUCTURE_LOGGING } = require("@meese-os/webpack-config");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -16,6 +16,7 @@ if (mode === "production") {
 module.exports = {
 	mode,
 	devtool: mode === "production" ? "source-map" : "eval-cheap-module-source-map",
+	infrastructureLogging: INFRASTRUCTURE_LOGGING,
 	cache: {
 		type: "filesystem",
 		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
