@@ -259,6 +259,29 @@ export default class Application extends EventEmitter {
 	}
 
 	/**
+	 * Resolves this application's icon to a URI.
+	 *
+	 * A bare name (no extension and no path separator, e.g. "folder" or
+	 * "utilities-terminal") is treated as a standard icon and resolved through
+	 * the active icon theme, so it honours the user's icon style preference.
+	 * Anything else (e.g. "icon.png" or "assets/logo.svg") is treated as a file
+	 * packaged with the application.
+	 *
+	 * @param {String} [name] Icon to resolve; defaults to the metadata icon
+	 * @returns {String|null} A complete URI, or null when no icon is set
+	 */
+	icon(name = this.metadata.icon) {
+		if (!name) {
+			return null;
+		}
+
+		const isStandardIcon = !/[/.]/.test(name);
+		return isStandardIcon
+			? this.core.make("meeseOS/theme").icon(name)
+			: this.resource(name);
+	}
+
+	/**
 	 * Performs a request to the MeeseOS server with the application
 	 * as the endpoint.
 	 * @param {String} [path="/"] Append this to endpoint
@@ -344,7 +367,18 @@ export default class Application extends EventEmitter {
 			this.metadata.name,
 			options.id
 		);
-		const instance = new Window(this.core, merge(options, applyOptions));
+		const windowOptions = merge(options, applyOptions);
+
+		// Fall back to the application's (optionally theme-resolved) icon when a
+		// window does not specify one of its own, so apps need not hard-code it.
+		if (!windowOptions.icon) {
+			const appIcon = this.icon();
+			if (appIcon) {
+				windowOptions.icon = appIcon;
+			}
+		}
+
+		const instance = new Window(this.core, windowOptions);
 
 		if (this.options.restore) {
 			const windows = this.options.restore.windows || [];
