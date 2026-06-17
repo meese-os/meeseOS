@@ -10,6 +10,18 @@
 const BROWSER_TARGET = ["chrome109", "edge147", "firefox150", "ios18.5", "opera127", "safari26.3"];
 const NODE_TARGET = "node22";
 
+// Quiet webpack's filesystem-cache chatter. PackFileCacheStrategy logs a
+// "Restoring/Caching failed for pack" warning whenever it meets a corrupt or
+// truncated .pack file (left behind by an interrupted or OOM-killed build).
+// webpack recovers on its own by rebuilding the entry, so the build is always
+// correct; the warnings are advisory noise, not actionable errors. Rush caches
+// each operation's terminal output, so a single corrupt-pack build gets its
+// warning log replayed on every later cache restore, which makes the noise look
+// permanent. Demoting infrastructure logging to "error" drops the advisory
+// cache warnings while leaving real compile errors and warnings (which come
+// through `stats`, not the infrastructure logger) fully visible.
+const INFRASTRUCTURE_LOGGING = { level: "error" };
+
 /**
  * Build the esbuild-loader `module.rules` entry used across meeseOS webpack configs.
  *
@@ -33,4 +45,4 @@ const makeEsbuildRule = (opts = {}) => {
 	};
 };
 
-module.exports = { makeEsbuildRule, BROWSER_TARGET, NODE_TARGET };
+module.exports = { makeEsbuildRule, BROWSER_TARGET, NODE_TARGET, INFRASTRUCTURE_LOGGING };

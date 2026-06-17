@@ -2,11 +2,12 @@ const path = require("path");
 const mode = process.env.NODE_ENV ?? "development";
 const production = mode === "production";
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { makeEsbuildRule } = require("@meese-os/webpack-config");
+const { makeEsbuildRule, INFRASTRUCTURE_LOGGING } = require("@meese-os/webpack-config");
 
 module.exports = {
 	mode,
 	devtool: production ? "source-map" : "eval-cheap-module-source-map",
+	infrastructureLogging: INFRASTRUCTURE_LOGGING,
 	cache: {
 		type: "filesystem",
 		cacheDirectory: path.resolve(__dirname, ".webpack-cache"),
