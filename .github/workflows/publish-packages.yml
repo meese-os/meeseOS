@@ -46,6 +46,11 @@ jobs:
     - name: Build packages
       run: NODE_ENV=production rush build
 
+    # CI only UPDATES existing packages; it never CREATES new ones. The tokens
+    # below are intentionally scoped to the existing @meese-os packages, so a
+    # brand-new package name fails with a 404 on publish. Publish a new
+    # package's first version manually (npm publish --access public from its
+    # directory) before merging it to master.
     - name: Publish to npmjs Package Registry
       run: |
         rush publish --publish --include-all --registry https://registry.npmjs.org/
