@@ -534,6 +534,31 @@ export const menuFactory = (core, proc, win) => {
 		{ label: "Quit", onclick: () => win.emit("filemanager:menu:quit") },
 	];
 
+	// Shown when right-clicking empty whitespace in the file listing.
+	const createDirectoryMenu = () => {
+		const menu = [
+			{ label: "Upload", onclick: () => win.emit("filemanager:menu:upload") },
+			{
+				label: "Create new directory",
+				onclick: () => win.emit("filemanager:menu:mkdir"),
+			},
+		];
+
+		if (clipboard.has(/^filemanager:/)) {
+			menu.push({
+				label: "Paste",
+				onclick: () => win.emit("filemanager:menu:paste"),
+			});
+		}
+
+		menu.push({
+			label: "Refresh",
+			onclick: () => win.emit("filemanager:menu:refresh"),
+		});
+
+		return menu;
+	};
+
 	const createEditMenu = async (items, isContextMenu) => {
 		const emitter = (name) => win.emit(name, items);
 		const item = items[items.length - 1];
@@ -728,6 +753,7 @@ export const menuFactory = (core, proc, win) => {
 
 	const menuItems = {
 		file: createFileMenu,
+		directory: createDirectoryMenu,
 		edit: createEditMenu,
 		view: createViewMenu,
 		go: createGoMenu,
