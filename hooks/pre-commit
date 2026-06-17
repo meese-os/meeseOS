@@ -1,28 +1,32 @@
 #!/bin/sh
+#
+# Normalize the Windows-only "clean" command in staged package.json files to
+# its Unix equivalent, so the same package.json works regardless of the OS the
+# author committed from. POSIX sh: runs on Linux, macOS, and Git Bash.
 
-# Change to the project root directory
-cd "$(git rev-parse --show-toplevel)" || exit 1
+set -eu
 
-# Use git diff to list changed package.json files
-changedPackageJsonFiles=$(git diff --name-only HEAD^ HEAD | grep -E 'package\.json$')
+cd "$(git rev-parse --show-toplevel)"
 
-# Iterate through the changed package.json files and change the
-# Windows remove command to the Unix remove command
-for file in $changedPackageJsonFiles; do
-	to_replace="rd \/s \/q dist>nul 2>&1|echo.>nul"
-	replacement="rm -rf .\/dist\/*"
+to_replace='rd /s /q dist>nul 2>&1|echo.>nul'
+replacement='rm -rf ./dist/*'
 
-	# https://stackoverflow.com/a/61808364/6456163
-	changes=""
-	changes+=$(sed -i '' "s/$to_replace/$replacement/g w /dev/stdout" "$file")
-	if [ "$changes" != "" ]; then
-		# NOTE: This pushes *all* changes to the affected `package.json` files,
-		# not just the changes made by the `sed` command above. Be careful!
+# Inspect only the package.json files staged for THIS commit (added/copied/
+# modified). The old hook diffed HEAD^..HEAD, i.e. the *previous* commit.
+git diff --cached --name-only --diff-filter=ACM \
+	| grep -E '(^|/)package\.json$' \
+	| while IFS= read -r file; do
+		[ -f "$file" ] || continue
+		# Fixed-string match for detection avoids regex surprises.
+		grep -qF "$to_replace" "$file" || continue
+
+		# Portable in-place edit: GNU and BSD sed disagree on -i, so write to a
+		# temp file and move it back. '#' delimiter avoids escaping the '/'s.
+		tmp=$(mktemp)
+		sed "s#$to_replace#$replacement#g" "$file" >"$tmp" && mv "$tmp" "$file"
+
+		# NOTE: this re-stages the whole file, including any other unstaged
+		# edits to it. Keep unrelated package.json edits out of such a commit.
 		git add "$file"
-	fi
-done
-
-echo "Replacements completed for changed package.json files."
-
-# Continue with the default pre-commit actions
-exit $?
+		echo "Normalized clean command in $file"
+	done
