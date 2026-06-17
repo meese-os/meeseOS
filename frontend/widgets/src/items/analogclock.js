@@ -86,39 +86,21 @@ export default class AnalogClockWidget extends Widget {
 				},
 			}
 		);
-
-		this.$tmpCanvas = document.createElement("canvas");
-		this.$tmpCanvas.width = startingSize;
-		this.$tmpCanvas.height = startingSize;
-		this.tmpContext = this.$tmpCanvas.getContext("2d");
-
-		/**
-		 * Indicates whether the clock has already been rendered at
-		 * the specified size.
-		 * @type {Boolean}
-		 */
-		this.firstRender = true;
 	}
 
-	compute() {
+	render({ context }) {
+		// Always work from the canvas's current pixel size. The base render loop
+		// captures the starting dimensions once, so reading them here keeps the
+		// clock centered and circular after the widget is resized to any aspect
+		// ratio (fixes off-center numbers on tall/wide widgets).
 		const { width, height } = this.$canvas;
-		const { $tmpCanvas } = this;
 
-		$tmpCanvas.width = width;
-		$tmpCanvas.height = height;
-	}
-
-	onResize() {
-		this.compute();
-		this.firstRender = true;
-	}
-
-	render({ context, width, height }) {
-		// Translate to center of canvas initially
-		if (this.firstRender) {
-			context.translate(width / 2, height / 2);
-			this.firstRender = false;
-		}
+		// Reset the transform every frame and clear, rather than translating once
+		// and relying on the matrix persisting (it is reset whenever the canvas
+		// is resized, which is exactly when the old approach broke).
+		context.setTransform(1, 0, 0, 1, 0, 0);
+		context.clearRect(0, 0, width, height);
+		context.translate(width / 2, height / 2);
 
 		const size = Math.min(width, height);
 		const radius = (size / 2) * 0.9;
@@ -149,7 +131,6 @@ export default class AnalogClockWidget extends Widget {
 			(btn, value) => {
 				if (btn === "ok") {
 					this.options.fontFamily = value.name;
-					this.compute();
 					this.saveSettings();
 				}
 			}
@@ -170,7 +151,6 @@ export default class AnalogClockWidget extends Widget {
 			(btn, value) => {
 				if (btn === "ok") {
 					this.options.colors = value;
-					this.compute();
 					this.saveSettings();
 				}
 			}
