@@ -382,10 +382,10 @@ export default class Application extends EventEmitter {
 
 		if (this.options.restore) {
 			const windows = this.options.restore.windows || [];
-			const found = windows.findIndex((win) => win.id === instance.id);
+			const restoreIndex = windows.findIndex((win) => win.id === instance.id);
 
-			if (found !== -1) {
-				const restore = windows[found];
+			if (restoreIndex !== -1) {
+				const restore = windows[restoreIndex];
 				instance.setPosition(restore.position, true);
 				instance.setDimension(restore.dimension);
 
@@ -395,7 +395,7 @@ export default class Application extends EventEmitter {
 					instance.maximize();
 				}
 
-				this.options.restore.windows.splice(found, 1);
+				this.options.restore.windows.splice(restoreIndex, 1);
 			}
 		}
 
