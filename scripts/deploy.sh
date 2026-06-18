@@ -13,7 +13,7 @@ SKIP_RESET="${MEESEOS_SKIP_RESET:-false}"
 #   - MEESEOS_DEV_MODE=true (environment variable): for development mode
 #   - MEESEOS_SKIP_RESET=true (environment variable): to explicitly skip git reset
 #   - --no-reset (command-line flag): to skip git reset for this run
-if [ "$DEV_MODE" = "true" ] || [ "$SKIP_RESET" = "true" ] || [ "$1" = "--no-reset" ]; then
+if [ "$DEV_MODE" = "true" ] || [ "$SKIP_RESET" = "true" ] || [ "${1:-}" = "--no-reset" ]; then
 	echo "Skipping git reset to preserve local changes..."
 else
 	echo "Fetching latest code from repo..."
