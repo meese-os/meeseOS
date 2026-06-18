@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Automatically detect the root directory (where this script is located)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -12,7 +13,7 @@ SKIP_RESET="${MEESEOS_SKIP_RESET:-false}"
 #   - MEESEOS_DEV_MODE=true (environment variable): for development mode
 #   - MEESEOS_SKIP_RESET=true (environment variable): to explicitly skip git reset
 #   - --no-reset (command-line flag): to skip git reset for this run
-if [ "$DEV_MODE" = "true" ] || [ "$SKIP_RESET" = "true" ] || [ "$1" = "--no-reset" ]; then
+if [ "$DEV_MODE" = "true" ] || [ "$SKIP_RESET" = "true" ] || [ "${1:-}" = "--no-reset" ]; then
 	echo "Skipping git reset to preserve local changes..."
 else
 	echo "Fetching latest code from repo..."
@@ -24,9 +25,13 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm use
-pnpm add -g pnpm
-rush update
-NODE_ENV=production rush build
+
+# Use Rush's bundled launcher so we don't depend on a global `rush` being on PATH
+# (the deploy shell is non-interactive and doesn't get the pnpm/npm global bin dir).
+# It auto-installs the rush version pinned in rush.json.
+RUSH="node $REPO_ROOT/common/scripts/install-run-rush.js"
+$RUSH update
+NODE_ENV=production $RUSH build
 
 # Ensure logs directory exists
 mkdir -p "$REPO_ROOT/logs"
@@ -43,11 +48,9 @@ pm2 delete "rushx deploy" --silent 2>/dev/null || true
 pm2 update --silent || true
 
 # Start PM2 with ecosystem config
-pm2 start ecosystem.config.js --silent
-PM2_START_EXIT_CODE=$?
-if [ $PM2_START_EXIT_CODE -ne 0 ]; then
+if ! pm2 start ecosystem.config.js --silent; then
     echo "ERROR: PM2 failed to start the service. Check the output above for details." >&2
-    exit $PM2_START_EXIT_CODE
+    exit 1
 fi
 
 # Save PM2 process list
