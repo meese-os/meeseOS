@@ -64,6 +64,48 @@ const buildMonthCells = (year, month) => {
 };
 
 /**
+ * Renders the calendar popover for the currently viewed month.
+ * @param {Object} state Item state
+ * @param {Object} actions Bound actions
+ * @returns {Node} A *virtual* node
+ */
+const renderPopover = (state, actions) => {
+	const today = new Date();
+	const { year, month } = state.view;
+	const showingThisMonth =
+		year === today.getFullYear() && month === today.getMonth();
+
+	const weekdays = WEEKDAYS.map((label) =>
+		h("span", { class: "meeseOS-clock-popover-weekday" }, label)
+	);
+
+	const days = buildMonthCells(year, month).map((day) => {
+		const isToday = showingThisMonth && day === today.getDate();
+		return h(
+			"span",
+			{
+				class: `meeseOS-clock-popover-day${isToday ? " meeseOS__active" : ""}`,
+			},
+			day ? String(day) : ""
+		);
+	});
+
+	return h("div", { class: "meeseOS-clock-popover" }, [
+		h(
+			"div",
+			{ class: "meeseOS-clock-popover-date" },
+			dateformat(today, "dddd, mmmm d, yyyy")
+		),
+		h("div", { class: "meeseOS-clock-popover-nav" }, [
+			h("button", { type: "button", onclick: () => actions.prevMonth() }, "‹"),
+			h("span", {}, dateformat(new Date(year, month, 1), "mmmm yyyy")),
+			h("button", { type: "button", onclick: () => actions.nextMonth() }, "›"),
+		]),
+		h("div", { class: "meeseOS-clock-popover-grid" }, [...weekdays, ...days]),
+	]);
+};
+
+/**
  * Clock.
  *
  * @desc Clock Panel Item. Shows the time, and opens a calendar popover with the
@@ -111,57 +153,6 @@ export default class ClockPanelItem extends PanelItem {
 		super.destroy();
 	}
 
-	/**
-	 * Renders the calendar popover for the currently viewed month.
-	 * @param {Object} state Item state
-	 * @param {Object} actions Bound actions
-	 * @returns {Node} A *virtual* node
-	 */
-	renderPopover(state, actions) {
-		const today = new Date();
-		const { year, month } = state.view;
-		const showingThisMonth =
-			year === today.getFullYear() && month === today.getMonth();
-
-		const weekdays = WEEKDAYS.map((label) =>
-			h("span", { class: "meeseOS-clock-popover-weekday" }, label)
-		);
-
-		const days = buildMonthCells(year, month).map((day) => {
-			const isToday = showingThisMonth && day === today.getDate();
-			return h(
-				"span",
-				{
-					class:
-						"meeseOS-clock-popover-day" + (isToday ? " meeseOS__active" : ""),
-				},
-				day ? String(day) : ""
-			);
-		});
-
-		return h("div", { class: "meeseOS-clock-popover" }, [
-			h(
-				"div",
-				{ class: "meeseOS-clock-popover-date" },
-				dateformat(today, "dddd, mmmm d, yyyy")
-			),
-			h("div", { class: "meeseOS-clock-popover-nav" }, [
-				h(
-					"button",
-					{ type: "button", onclick: () => actions.prevMonth() },
-					"‹"
-				),
-				h("span", {}, dateformat(new Date(year, month, 1), "mmmm yyyy")),
-				h(
-					"button",
-					{ type: "button", onclick: () => actions.nextMonth() },
-					"›"
-				),
-			]),
-			h("div", { class: "meeseOS-clock-popover-grid" }, [...weekdays, ...days]),
-		]);
-	}
-
 	render(state, actions) {
 		const children = [
 			h(
@@ -176,7 +167,7 @@ export default class ClockPanelItem extends PanelItem {
 		];
 
 		if (state.open) {
-			children.push(this.renderPopover(state, actions));
+			children.push(renderPopover(state, actions));
 		}
 
 		return super.render("clock", children);
