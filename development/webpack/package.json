@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/webpack-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "meeseOS shared webpack esbuild-loader configuration",
   "scripts": {
     "test": "echo \"webpack-config has no tests\" && exit 0",

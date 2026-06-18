@@ -1,6 +1,6 @@
 {
   "name": "@meese-os/static-wallpapers",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "meeseOS Static Wallpapers",
   "scripts": {
     "eslint": "",
