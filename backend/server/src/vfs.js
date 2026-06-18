@@ -69,9 +69,9 @@ const parseRangeHeader = (range) => {
  */
 const onDone = (req, _res) => {
 	if (req.files) {
-		for (const fieldname in req.files) {
+		for (const file of Object.values(req.files)) {
 			try {
-				const n = req.files[fieldname].path;
+				const n = file.filepath || file.path;
 				if (fs.existsSync(n)) {
 					fs.removeSync(n);
 				}
@@ -136,7 +136,7 @@ const createOptions = (req) => {
 	if (typeof options === "string") {
 		try {
 			result = JSON.parse(options) || {};
-		} catch (e) {
+		} catch {
 			// Allow to fall through
 		}
 	}
@@ -332,6 +332,7 @@ module.exports = (core) => {
 	const logEnabled = core.config("development");
 
 	// Middleware first
+	// skipcq: JS-0820 -- useWebTokens is Express middleware, not a React hook
 	router.use(useWebTokens(core));
 	router.use(isAuthenticated(vfsGroups));
 	router.use(middleware);
