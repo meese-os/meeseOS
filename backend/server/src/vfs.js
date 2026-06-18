@@ -71,7 +71,8 @@ const onDone = (req, _res) => {
 	if (req.files) {
 		for (const fieldname in req.files) {
 			try {
-				const n = req.files[fieldname].path;
+				const file = req.files[fieldname];
+				const n = file.filepath || file.path;
 				if (fs.existsSync(n)) {
 					fs.removeSync(n);
 				}

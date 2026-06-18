@@ -31,7 +31,7 @@
 const fs = require("fs-extra");
 const url = require("url");
 const sanitizeFilename = require("sanitize-filename");
-const formidable = require("formidable");
+const { formidable } = require("formidable");
 const { Stream } = require("stream");
 
 /**
@@ -279,9 +279,21 @@ const parseFormData = (req, { maxFieldsSize, maxFileSize }) => {
 		maxFileSize,
 	});
 
+	// formidable v3 returns every field and file as an array. The rest of the
+	// VFS code expects scalars, so unwrap single-element arrays back to v2 shape.
+	const unwrap = (obj) =>
+		Object.fromEntries(
+			Object.entries(obj).map(([key, value]) => [
+				key,
+				Array.isArray(value) && value.length === 1 ? value[0] : value,
+			])
+		);
+
 	return new Promise((resolve, reject) => {
 		form.parse(req, (err, fields, files) => {
-			return err ? reject(err) : resolve({ fields, files });
+			return err
+				? reject(err)
+				: resolve({ fields: unwrap(fields), files: unwrap(files) });
 		});
 	});
 };
