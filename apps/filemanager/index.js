@@ -445,7 +445,7 @@ const createWindow = (core, proc) => {
 		.on("filemanager:menu:download", onMenuDownload)
 		.on("filemanager:menu:extract", onMenuExtract)
 		.on("filemanager:menu:compress", onMenuCompress)
-		.render(($content, win) => (wired = render($content, win)));
+		.render(($content, windowObj) => (wired = render($content, windowObj)));
 };
 
 /**
@@ -482,13 +482,13 @@ const createProcess = (core, args, options, metadata) => {
 	proc.on("meeseOS:filemanager:remote", onSettingsUpdate);
 	proc.on("filemanager:setting", onSetting);
 
-	const listener = (args) => {
-		if (args.pid === proc.pid) {
+	const listener = (eventArgs) => {
+		if (eventArgs.pid === proc.pid) {
 			return;
 		}
 
 		const currentPath = String(proc.args.path.path).replace(/\/$/, "");
-		const watchPath = String(args.path).replace(/\/$/, "");
+		const watchPath = String(eventArgs.path).replace(/\/$/, "");
 		if (currentPath === watchPath) {
 			win.emit("filemanager:refresh");
 		}

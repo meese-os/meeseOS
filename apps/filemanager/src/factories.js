@@ -139,7 +139,7 @@ export const listViewRowFactory = (core, proc) => {
 			try {
 				const d = new Date(rawDate);
 				return `${dateformat(d, "yyyy-mm-dd")} ${dateformat(d, "HH:MM")}`;
-			} catch (e) {
+			} catch (_e) {
 				return rawDate;
 			}
 		}
