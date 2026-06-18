@@ -34,55 +34,125 @@ import {
 	Image,
 	Menubar,
 	MenubarItem,
+	RangeField,
 	Video,
 } from "@meese-os/gui";
 import { app, h } from "hyperapp";
 import { name as applicationName } from "./metadata.json";
 import meeseOS from "meeseOS";
 
-const view = (core, proc, win) => (state, actions) =>
-	h(Box, {}, [
-		h(Menubar, {}, [
-			h(
-				MenubarItem,
-				{
-					onclick: (ev) => actions.menu(ev),
-				},
-				"File"
-			),
-		]),
-		h(
-			BoxContainer,
-			{
-				grow: 1,
-				shrink: 1,
-				style: { overflow: state.image ? "auto" : "hidden" },
-			},
-			[
-				state.image
-					? h(Image, {
-						src: state.image.url,
-						onload: (ev) => actions.resizeFit(ev.target),
-					  })
-					: null,
-				state.video
-					? h(Video, {
-						src: state.video.url,
-						onload: (ev) => actions.resizeFit(ev.target),
-					  })
-					: null,
-			].filter((i) => Boolean(i))
-		),
-	]);
+/** Smallest and largest zoom the slider allows, as a percentage. */
+const MIN_ZOOM = 10;
+const MAX_ZOOM = 400;
 
-const openFile = async (core, proc, win, a, file, restore) => {
+/**
+ * Computes the zoom percentage that fits the image within its container,
+ * never upscaling past natural size.
+ * @param {{width: Number, height: Number}} naturalSize Image natural size
+ * @param {Element} container The scroll container element
+ * @returns {Number} Zoom percentage
+ */
+const computeFitZoom = (naturalSize, container) => {
+	if (!naturalSize || !container) return 100;
+
+	const fit = Math.min(
+		container.clientWidth / naturalSize.width,
+		container.clientHeight / naturalSize.height,
+		1
+	);
+
+	return Math.max(MIN_ZOOM, Math.round(fit * 100));
+};
+
+/** The displayed image width in pixels for the current zoom, or undefined pre-load. */
+const imageWidth = (state) =>
+	state.naturalSize
+		? Math.round((state.naturalSize.width * state.zoom) / 100)
+		: undefined;
+
+/** Toolbar with a Fit button, a zoom slider, and the current percentage. */
+const zoomBar = (state, actions) =>
+	h(
+		"div",
+		{
+			class: "meeseOS-gui",
+			style: {
+				display: "flex",
+				alignItems: "center",
+				gap: "0.5em",
+				padding: "0.25em 0.5em",
+			},
+		},
+		[
+			h("button", { type: "button", onclick: () => actions.fitImage() }, "Fit"),
+			h(RangeField, {
+				min: String(MIN_ZOOM),
+				max: String(MAX_ZOOM),
+				value: String(state.zoom),
+				style: { width: "100%" },
+				box: { grow: 1, shrink: 1 },
+				oninput: (_ev, value) => actions.setZoom(Number(value)),
+			}),
+			h(
+				"span",
+				{ style: { minWidth: "3em", textAlign: "right" } },
+				`${state.zoom}%`
+			),
+		]
+	);
+
+const view = (core, proc, win, refs) => (state, actions) =>
+	h(
+		Box,
+		{},
+		[
+			h(Menubar, {}, [
+				h(
+					MenubarItem,
+					{
+						onclick: (ev) => actions.menu(ev),
+					},
+					"File"
+				),
+			]),
+			state.image ? zoomBar(state, actions) : null,
+			h(
+				BoxContainer,
+				{
+					grow: 1,
+					shrink: 1,
+					style: { overflow: state.image || state.video ? "auto" : "hidden" },
+				},
+				[
+					state.image
+						? h(Image, {
+							src: state.image.url,
+							width: imageWidth(state),
+							oncreate: (el) => {
+								refs.container = el.parentNode?.parentNode;
+							},
+							onload: (ev) => actions.imageLoaded(ev.target),
+						  })
+						: null,
+					state.video
+						? h(Video, {
+							src: state.video.url,
+							onload: (ev) => actions.resizeFit(ev.target),
+						  })
+						: null,
+				].filter((i) => Boolean(i))
+			),
+		].filter((i) => Boolean(i))
+	);
+
+const openFile = async (core, proc, win, actions, file, restore) => {
 	const url = await core.make("meeseOS/vfs").url(file);
 	const ref = { ...file, url };
 
 	if (/^image/.test(file.mime)) {
-		a.setImage({ image: ref, restore });
+		actions.setImage({ image: ref, restore });
 	} else if (/^video/.test(file.mime)) {
-		a.setVideo({ video: ref, restore });
+		actions.setVideo({ video: ref, restore });
 	}
 
 	win.setTitle(`${proc.metadata.title} - ${file.filename}`);
@@ -104,7 +174,7 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 	});
 
 	win.on("destroy", () => proc.destroy());
-	win.on("render", (win) => win.focus());
+	win.on("render", () => win.focus());
 	win.on("drop", (ev, data) => {
 		if (data.isFile && data.mime) {
 			const found = metadata.mimes.find((m) => new RegExp(m).test(data.mime));
@@ -115,12 +185,15 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 	});
 
 	// TODO: Decompose this
-	win.render(($content, win) => {
-		const a = app(
+	win.render(($content) => {
+		const refs = { container: null };
+		const actions = app(
 			{
 				image: null,
 				video: null,
 				restore: false,
+				zoom: 100,
+				naturalSize: null,
 			},
 			{
 				resizeFit: (target) => (state) => {
@@ -133,8 +206,37 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 					}
 				},
 
-				setVideo: ({ video, restore }) => ({ video, restore }),
-				setImage: ({ image, restore }) => ({ image, restore }),
+				imageLoaded: (target) => (state) => {
+					const naturalSize = {
+						width: target.naturalWidth,
+						height: target.naturalHeight,
+					};
+
+					// Default to fitting the image in the window; honor a restored zoom.
+					if (state.restore) return { naturalSize };
+
+					return {
+						naturalSize,
+						zoom: computeFitZoom(naturalSize, target.parentNode?.parentNode),
+					};
+				},
+
+				setZoom: (zoom) => () => ({
+					zoom: Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Math.round(zoom))),
+				}),
+
+				fitImage: () => (state) => ({
+					zoom: computeFitZoom(state.naturalSize, refs.container),
+				}),
+
+				setVideo: ({ video, restore }) => ({ video, image: null, restore }),
+				setImage: ({ image, restore }) => ({
+					image,
+					video: null,
+					restore,
+					zoom: 100,
+					naturalSize: null,
+				}),
 				menu: (ev) => {
 					core.make("meeseOS/contextmenu").show({
 						menu: [
@@ -159,12 +261,12 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 					});
 				},
 			},
-			view(core, proc, win),
+			view(core, proc, win, refs),
 			$content
 		);
 
 		proc.on("readFile", (file, restore) =>
-			openFile(core, proc, win, a, file, restore)
+			openFile(core, proc, win, actions, file, restore)
 		);
 
 		if (args.file) {
