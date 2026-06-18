@@ -32,4 +32,77 @@
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
+	position: relative;
+
+	.meeseOS-clock-time {
+		cursor: pointer;
+	}
+
+	.meeseOS-clock-popover {
+		position: absolute;
+		right: 0;
+		z-index: 100;
+		min-width: 15em;
+		padding: 0.5em;
+		background: #fff;
+		color: #000;
+		border: 1px solid rgb(0 0 0 / 20%);
+		border-radius: 4px;
+		box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
+		font-size: 0.85rem;
+		cursor: default;
+	}
+
+	.meeseOS-clock-popover-date {
+		margin-bottom: 0.5em;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.meeseOS-clock-popover-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 0.25em;
+
+		button {
+			padding: 0 0.5em;
+			border: 0;
+			background: transparent;
+			color: inherit;
+			font-size: 1em;
+			cursor: pointer;
+		}
+	}
+
+	.meeseOS-clock-popover-grid {
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+		gap: 2px;
+		text-align: center;
+	}
+
+	.meeseOS-clock-popover-weekday {
+		font-weight: bold;
+		opacity: 0.7;
+	}
+
+	.meeseOS-clock-popover-day {
+		padding: 0.2em 0;
+
+		&.meeseOS__active {
+			border-radius: 50%;
+			background: #2196f3;
+			color: #fff;
+		}
+	}
+}
+
+// Open the calendar below the clock on a top panel, above it on a bottom panel.
+.meeseOS-panel[data-position="top"] .meeseOS-clock-popover {
+	top: 100%;
+}
+
+.meeseOS-panel[data-position="bottom"] .meeseOS-clock-popover {
+	bottom: 100%;
 }
