@@ -142,6 +142,12 @@ const createView = (core, _proc, win) => {
 		(ev) => win.emit("filemanager:menu", { ev, name }, args);
 	const onInputEnter = (_ev, value) =>
 		win.emit("filemanager:navigate", { path: value });
+	const onBlankClick = (ev) => {
+		// Right-clicks on a file row have their own menu; ignore them here.
+		if (ev.target.closest(".meeseOS-gui-list-view-cell")) return;
+		ev.preventDefault();
+		win.emit("filemanager:blankcontextmenu", { ev });
+	};
 
 	const canGoBack = ({ list, index }) => !list.length || index <= 0;
 	const canGoForward = ({ list, index }) =>
@@ -187,7 +193,15 @@ const createView = (core, _proc, win) => {
 						onenter: onInputEnter,
 					}),
 				]),
-				h(Panes, { style: { flex: "1 1" } }, [h(MountView), h(FileView)]),
+				h(Panes, { style: { flex: "1 1" } }, [
+					h(MountView),
+					h(FileView, {
+						box: {
+							oncreate: (el) =>
+								el.addEventListener("contextmenu", onBlankClick),
+						},
+					}),
+				]),
 				h(Statusbar, {}, h("span", {}, state.status)),
 			]
 		);
@@ -359,6 +373,8 @@ const createWindow = (core, proc) => {
 		win.emit("filemanager:status", formatStatusMessage(files));
 	const onContextMenu = ({ ev, data }) =>
 		createMenu({ ev, name: "edit" }, data, true);
+	const onBlankContextMenu = ({ ev }) =>
+		createMenu({ ev, name: "directory" }, [], true);
 	const onReaddirRender = (args) => wired.setList(args);
 	const onRefresh = (...args) => vfs.refresh(...args);
 	const onOpen = (files) => {
@@ -407,6 +423,7 @@ const createWindow = (core, proc) => {
 		.on("filemanager:select", onSelectItem)
 		.on("filemanager:select", onSelectStatus)
 		.on("filemanager:contextmenu", onContextMenu)
+		.on("filemanager:blankcontextmenu", onBlankContextMenu)
 		.on("filemanager:readdir", onReaddirRender)
 		.on("filemanager:refresh", onRefresh)
 		.on("filemanager:open", onOpen)
@@ -428,7 +445,7 @@ const createWindow = (core, proc) => {
 		.on("filemanager:menu:download", onMenuDownload)
 		.on("filemanager:menu:extract", onMenuExtract)
 		.on("filemanager:menu:compress", onMenuCompress)
-		.render(($content, win) => (wired = render($content, win)));
+		.render(($content, windowObj) => (wired = render($content, windowObj)));
 };
 
 /**
@@ -465,13 +482,13 @@ const createProcess = (core, args, options, metadata) => {
 	proc.on("meeseOS:filemanager:remote", onSettingsUpdate);
 	proc.on("filemanager:setting", onSetting);
 
-	const listener = (args) => {
-		if (args.pid === proc.pid) {
+	const listener = (eventArgs) => {
+		if (eventArgs.pid === proc.pid) {
 			return;
 		}
 
 		const currentPath = String(proc.args.path.path).replace(/\/$/, "");
-		const watchPath = String(args.path).replace(/\/$/, "");
+		const watchPath = String(eventArgs.path).replace(/\/$/, "");
 		if (currentPath === watchPath) {
 			win.emit("filemanager:refresh");
 		}

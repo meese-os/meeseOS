@@ -942,6 +942,14 @@ declare class Application extends EventEmitter {
 	resource(path?: string, options?: object): string;
 
 	/**
+	 * Resolves this application's icon to a URI.
+	 * A bare name (no extension/path) is resolved through the active icon theme;
+	 * anything else is treated as a file packaged with the application.
+	 * Defaults to the metadata icon and returns null when no icon is set.
+	 */
+	icon(name?: string): string | null;
+
+	/**
 	 * Performs a request to the MeeseOS server with the application
 	 * as the endpoint.
 	 */
