@@ -145,14 +145,14 @@ const view = (core, proc, win, refs) => (state, actions) =>
 		].filter((i) => Boolean(i))
 	);
 
-const openFile = async (core, proc, win, a, file, restore) => {
+const openFile = async (core, proc, win, actions, file, restore) => {
 	const url = await core.make("meeseOS/vfs").url(file);
 	const ref = { ...file, url };
 
 	if (/^image/.test(file.mime)) {
-		a.setImage({ image: ref, restore });
+		actions.setImage({ image: ref, restore });
 	} else if (/^video/.test(file.mime)) {
-		a.setVideo({ video: ref, restore });
+		actions.setVideo({ video: ref, restore });
 	}
 
 	win.setTitle(`${proc.metadata.title} - ${file.filename}`);
@@ -174,7 +174,7 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 	});
 
 	win.on("destroy", () => proc.destroy());
-	win.on("render", (win) => win.focus());
+	win.on("render", () => win.focus());
 	win.on("drop", (ev, data) => {
 		if (data.isFile && data.mime) {
 			const found = metadata.mimes.find((m) => new RegExp(m).test(data.mime));
@@ -185,9 +185,9 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 	});
 
 	// TODO: Decompose this
-	win.render(($content, win) => {
+	win.render(($content) => {
 		const refs = { container: null };
-		const a = app(
+		const actions = app(
 			{
 				image: null,
 				video: null,
@@ -266,7 +266,7 @@ meeseOS.register(applicationName, (core, args, options, metadata) => {
 		);
 
 		proc.on("readFile", (file, restore) =>
-			openFile(core, proc, win, a, file, restore)
+			openFile(core, proc, win, actions, file, restore)
 		);
 
 		if (args.file) {
