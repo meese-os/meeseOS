@@ -43,6 +43,26 @@ describe("Application", () => {
 		expect(application.resource("foo")).toBe("/apps/Jest/foo");
 	});
 
+	test("#icon - packaged file resolves via resource()", () => {
+		expect(application.icon("icon.png")).toBe(application.resource("icon.png"));
+		expect(application.icon("assets/logo.svg")).toBe(
+			application.resource("assets/logo.svg")
+		);
+	});
+
+	test("#icon - bare name resolves via the icon theme", () => {
+		const themeIcon = core.make("meeseOS/theme").icon("utilities-terminal");
+		expect(application.icon("utilities-terminal")).toBe(themeIcon);
+		// A themed icon must not be the same as a packaged resource path.
+		expect(application.icon("utilities-terminal")).not.toBe(
+			application.resource("utilities-terminal")
+		);
+	});
+
+	test("#icon - returns null when no icon is set", () => {
+		expect(application.icon()).toBeNull();
+	});
+
 	test("#createWindow", () => {
 		const fn = jest.fn(() => {});
 

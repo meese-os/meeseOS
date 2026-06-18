@@ -18,6 +18,12 @@ module.exports = {
 	output: {
 		library: "meeseOSEventEmitter",
 		libraryTarget: "umd",
+		// This package is isomorphic: the browser client bundles it too. For
+		// target:"node", webpack defaults the UMD root object to `global`, which
+		// is undefined in browsers and throws "global is not defined" the moment
+		// the wrapper is evaluated. Use an expression that is safe to evaluate in
+		// browsers, web workers, and Node.
+		globalObject: "typeof self !== 'undefined' ? self : this",
 		pathinfo: false,
 	},
 	optimization: {
