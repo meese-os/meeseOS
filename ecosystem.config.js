@@ -10,7 +10,10 @@ module.exports = {
 		{
 			name: "meeseos",
 			script: "/bin/bash",
-			args: ["-c", "pnpm run deploy"],
+			// Launch via `npm`, not `pnpm`: in a Rush package, pnpm's verify-deps-before-run
+			// auto-fires a standalone `pnpm install` that fails (ERR_PNPM_WORKSPACE_PKG_NOT_FOUND)
+			// and crash-loops the service. npm just runs the script. Build is handled by deploy.sh.
+			args: ["-c", "npm run deploy"],
 			cwd: websiteDir,
 			instances: 1,
 			exec_mode: "fork",
