@@ -178,6 +178,8 @@ class CoreServiceProvider extends ServiceProvider {
 						"https://accounts.google.com",
 						"https://apis.google.com",
 						"https://*.gstatic.com",
+						// Cloudflare Web Analytics (RUM) beacon loader
+						"https://static.cloudflareinsights.com",
 					],
 					"style-src": ["'self'", "'unsafe-inline'"],
 					// Permit remote images (e.g., Unsplash wallpapers) in addition to local/data/blob
@@ -194,6 +196,8 @@ class CoreServiceProvider extends ServiceProvider {
 						"https://*.googleapis.com",
 						"https://*.gstatic.com",
 						"https://apis.google.com",
+						// Cloudflare Web Analytics beacon POSTs its RUM payload
+						"https://cloudflareinsights.com",
 					],
 					// Allow embedding external applications without enumerating domains.
 					// Keep clickjacking protection via frame-ancestors from Helmet defaults.
