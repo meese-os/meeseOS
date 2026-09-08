@@ -124,7 +124,7 @@ const action = async ({ logger, options, args }) => {
 
 	await fs.writeJson(destination, entries);
 
-	logger.success(entries.length + " file(s) added to the VFS manifest.");
+	logger.success(`${entries.length} file(s) added to the VFS manifest.`);
 };
 
 module.exports = {

@@ -301,7 +301,7 @@ export default class Filesystem extends EventEmitter {
 
 			if (!error && this.core.config("vfs.watch")) {
 				const events = createWatchEvents(method, args);
-				events.forEach(([event, args]) => this.core.emit(event, args));
+				events.forEach(([event, eventArgs]) => this.core.emit(event, eventArgs));
 			}
 		};
 

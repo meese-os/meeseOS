@@ -7,7 +7,7 @@ const names = (list) => list.map((item) => item.filename).sort();
 const text = async (result) =>
 	Buffer.from(await result.body).toString();
 
-let vfs;
+let vfs = null;
 
 describe("VFS indexeddb adapter", () => {
 	beforeEach(async () => {
