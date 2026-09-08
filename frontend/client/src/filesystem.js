@@ -40,6 +40,7 @@ import defaultAdapter from "./adapters/vfs/null";
 import indexeddbAdapter from "./adapters/vfs/indexeddb";
 import logger from "./logger";
 import merge from "deepmerge";
+import staticAdapter from "./adapters/vfs/static";
 import systemAdapter from "./adapters/vfs/system";
 
 // TODO: Maybe try to add selection in this file
@@ -137,6 +138,7 @@ export default class Filesystem extends EventEmitter {
 			system: systemAdapter,
 			apps: appsAdapter,
 			indexeddb: indexeddbAdapter,
+			static: staticAdapter,
 			...this.core.config("vfs.adapters", {}),
 			...options.adapters,
 		};
