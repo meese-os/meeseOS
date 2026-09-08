@@ -31,6 +31,7 @@
  * @licence Modified BSD License
  */
 
+import { unzip, zip } from "fflate";
 import {
 	createSearchMatcher,
 	filenameOf,
@@ -48,12 +49,19 @@ const PARENT_INDEX = "parent";
 
 /**
  * Builds a stored record.
+ *
+ * Contents are held as an `ArrayBuffer` rather than a `Blob`: it is the value
+ * type every IndexedDB implementation clones reliably, and it keeps `readfile`
+ * free of an extra async hop. Like the server adapter, the MIME type comes from
+ * the filename rather than from whatever the caller happened to tag the data
+ * with.
+ *
  * @param {String} path A normalized path
  * @param {Boolean} isDirectory Whether the record is a directory
- * @param {Blob} [blob] The file contents
+ * @param {ArrayBuffer} [buffer] The file contents
  * @returns {Object} The record
  */
-const createRecord = (path, isDirectory, blob = null) => {
+const createRecord = (path, isDirectory, buffer = null) => {
 	const now = new Date();
 	const filename = filenameOf(path);
 
@@ -63,13 +71,25 @@ const createRecord = (path, isDirectory, blob = null) => {
 		filename,
 		isDirectory,
 		isFile: !isDirectory,
-		mime: isDirectory ? null : blob?.type || mimeFromFilename(filename),
-		size: isDirectory ? 0 : (blob?.size ?? 0),
-		blob,
+		mime: isDirectory ? null : mimeFromFilename(filename),
+		size: isDirectory ? 0 : (buffer?.byteLength ?? 0),
+		buffer,
 		mtime: now,
 		ctime: now,
 		atime: now,
 	};
+};
+
+/**
+ * Coerces whatever the VFS handed us into an `ArrayBuffer`.
+ * @param {ArrayBuffer|Blob|String} data The file contents
+ * @returns {Promise<ArrayBuffer>} The contents as a buffer
+ */
+const toArrayBuffer = (data) => {
+	if (data instanceof ArrayBuffer) return Promise.resolve(data);
+	if (data instanceof Blob) return data.arrayBuffer();
+
+	return new Blob([data]).arrayBuffer();
 };
 
 /**
@@ -93,6 +113,30 @@ const toFileIter = (record) => ({
 		atime: record.atime,
 	},
 });
+
+/**
+ * Promisified `fflate.zip`.
+ * @param {Object} entries A map of archive entry name to bytes
+ * @returns {Promise<Uint8Array>} The archive bytes
+ */
+const zipAsync = (entries) =>
+	new Promise((resolve, reject) => {
+		zip(entries, (error, result) =>
+			error ? reject(error) : resolve(result)
+		);
+	});
+
+/**
+ * Promisified `fflate.unzip`.
+ * @param {Uint8Array} bytes The archive bytes
+ * @returns {Promise<Object>} A map of archive entry name to bytes
+ */
+const unzipAsync = (bytes) =>
+	new Promise((resolve, reject) => {
+		unzip(bytes, (error, result) =>
+			error ? reject(error) : resolve(result)
+		);
+	});
 
 /**
  * Promisifies an IndexedDB request.
@@ -362,11 +406,7 @@ const adapter = (_core, _options = {}) => {
 				throw new Error(`Is a directory: ${record.path}`);
 			}
 
-			// Read the blob outside of any transaction, since awaiting a
-			// non-IndexedDB promise would let the transaction go inactive
-			const body = await record.blob.arrayBuffer();
-
-			return { mime: record.mime, body };
+			return { mime: record.mime, body: record.buffer };
 		},
 
 		writefile: async ({ path }, data) => {
@@ -379,8 +419,7 @@ const adapter = (_core, _options = {}) => {
 				throw new Error(`Is a directory: ${target}`);
 			}
 
-			const blob = data instanceof Blob ? data : new Blob([data]);
-			const record = createRecord(target, false, blob);
+			const record = createRecord(target, false, await toArrayBuffer(data));
 
 			// Unlike the server adapter, missing parents are created rather than
 			// erroring. A browser-local filesystem starts completely empty, so
@@ -458,7 +497,9 @@ const adapter = (_core, _options = {}) => {
 
 			// The caller owns the returned URL and should revoke it once the
 			// consuming element is torn down
-			return URL.createObjectURL(record.blob);
+			return URL.createObjectURL(
+				new Blob([record.buffer], { type: record.mime })
+			);
 		},
 
 		search: async ({ path }, pattern) => {
@@ -489,16 +530,107 @@ const adapter = (_core, _options = {}) => {
 
 			await applyChanges(db, [
 				...createMissingAncestors(records, target),
-				createRecord(target, false, new Blob([])),
+				createRecord(target, false, new ArrayBuffer(0)),
 			]);
 
 			return true;
 		},
 
-		archive: () =>
-			Promise.reject(
-				new Error("Archiving is not yet supported by the indexeddb adapter")
-			),
+		archive: async (selection, options = {}) => {
+			// The filemanager passes the action as a bare string, so accept both
+			// that and the documented `{ action }` object
+			const action =
+				(typeof options === "string" ? options : options.action) ?? "compress";
+
+			if (selection.length === 0) {
+				throw new Error("Nothing selected to archive");
+			}
+
+			const db = await database();
+			const records = await getAllRecords(db);
+			const paths = selection.map((file) => normalize(file.path));
+
+			const byPath = new Map(records.map((record) => [record.path, record]));
+			paths.forEach((path) => {
+				if (!byPath.has(path)) {
+					throw new Error(`No such file or directory: ${path}`);
+				}
+			});
+
+			if (action === "compress") {
+				// Entry names are relative to the directory holding the archive,
+				// matching the server adapter
+				const archiveRoot = parentOf(paths[0]);
+				const prefixLength = archiveRoot.endsWith("/")
+					? archiveRoot.length
+					: archiveRoot.length + 1;
+
+				const selected = paths.flatMap((path) => [
+					byPath.get(path),
+					...records.filter((record) => isDescendantOf(record.path, path)),
+				]);
+
+				const entries = selected
+					.filter((record) => record.isFile)
+					.reduce(
+						(result, record) => ({
+							...result,
+							[record.path.slice(prefixLength)]: new Uint8Array(record.buffer),
+						}),
+						{}
+					);
+
+				const bytes = await zipAsync(entries);
+				const target = `${paths[0]}.zip`;
+
+				await applyChanges(
+					db,
+					[
+						...createMissingAncestors(records, target),
+						createRecord(target, false, bytes.buffer),
+					],
+					// The server removes the originals once they are in the archive
+					selected.map((record) => record.path)
+				);
+
+				return true;
+			}
+
+			if (action === "extract") {
+				const written = [];
+
+				for (const path of paths) {
+					const record = byPath.get(path);
+					if (record.isDirectory) {
+						throw new Error(`Is a directory: ${path}`);
+					}
+
+					// Strip the final extension to get the destination directory
+					const target = path.split(".").slice(0, -1).join(".");
+					const entries = await unzipAsync(new Uint8Array(record.buffer));
+
+					written.push(createRecord(target, true));
+
+					Object.entries(entries).forEach(([name, content]) => {
+						// Directory entries carry no content and are implied by
+						// the ancestors created for each file
+						if (name.endsWith("/")) return;
+
+						const destination = normalize(`${target}/${name}`);
+						written.push(
+							...createMissingAncestors([...records, ...written], destination),
+							createRecord(destination, false, content.slice().buffer)
+						);
+					});
+				}
+
+				await applyChanges(db, written);
+
+				return true;
+			}
+
+			throw new Error(`Unknown archive action: '${action}'`);
+		},
 	};
 };
 

@@ -170,7 +170,7 @@ const adapter = (core) => {
 			return Promise.resolve(true);
 		},
 
-		readdir: ({ path }) => {
+		readdir: async ({ path }) => {
 			const directory = normalize(path);
 			const record = requireRecord(directory);
 
@@ -178,11 +178,9 @@ const adapter = (core) => {
 				throw new Error(`Not a directory: ${directory}`);
 			}
 
-			const children = Array.from(records.values()).filter(
+			return Array.from(records.values()).filter(
 				(entry) => parentOf(entry.path) === directory
 			);
-
-			return Promise.resolve(children);
 		},
 
 		readfile: async ({ path }) => {
@@ -209,20 +207,17 @@ const adapter = (core) => {
 
 		exists: ({ path }) => Promise.resolve(records.has(normalize(path))),
 
-		stat: ({ path }) => Promise.resolve(requireRecord(normalize(path))),
+		stat: async ({ path }) => requireRecord(normalize(path)),
 
 		// Served straight from the origin, so there is no blob URL to revoke
-		url: ({ path }) => Promise.resolve(resolveUrl(requireRecord(normalize(path)).path)),
+		url: async ({ path }) => resolveUrl(requireRecord(normalize(path)).path),
 
-		search: ({ path }, pattern) => {
+		search: async ({ path }, pattern) => {
 			const root = normalize(path);
 			const matches = createSearchMatcher(pattern);
 
-			return Promise.resolve(
-				Array.from(records.values()).filter(
-					(entry) =>
-						isDescendantOf(entry.path, root) && matches(entry.filename)
-				)
+			return Array.from(records.values()).filter(
+				(entry) => isDescendantOf(entry.path, root) && matches(entry.filename)
 			);
 		},
 
