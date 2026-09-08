@@ -128,16 +128,19 @@ const adapter = (core) => {
 
 	/**
 	 * Reads a record from the manifest tree.
+	 *
+	 * Resolves rather than returning directly so callers stay promise-based;
+	 * a synchronous throw would escape the `.catch()` in `Filesystem#_request`.
+	 *
 	 * @param {String} path A normalized path
-	 * @returns {Object} The record
+	 * @returns {Promise<Object>} The record
 	 */
 	const requireRecord = (path) => {
 		const record = records?.get(path);
-		if (!record) {
-			throw new Error(`No such file or directory: ${path}`);
-		}
 
-		return record;
+		return record
+			? Promise.resolve(record)
+			: Promise.reject(new Error(`No such file or directory: ${path}`));
 	};
 
 	return {
@@ -170,21 +173,22 @@ const adapter = (core) => {
 			return Promise.resolve(true);
 		},
 
-		readdir: async ({ path }) => {
+		readdir: ({ path }) => {
 			const directory = normalize(path);
-			const record = requireRecord(directory);
 
-			if (!record.isDirectory) {
-				throw new Error(`Not a directory: ${directory}`);
-			}
+			return requireRecord(directory).then((record) => {
+				if (!record.isDirectory) {
+					throw new Error(`Not a directory: ${directory}`);
+				}
 
-			return Array.from(records.values()).filter(
-				(entry) => parentOf(entry.path) === directory
-			);
+				return Array.from(records.values()).filter(
+					(entry) => parentOf(entry.path) === directory
+				);
+			});
 		},
 
 		readfile: async ({ path }) => {
-			const record = requireRecord(normalize(path));
+			const record = await requireRecord(normalize(path));
 
 			if (record.isDirectory) {
 				throw new Error(`Is a directory: ${record.path}`);
@@ -207,17 +211,20 @@ const adapter = (core) => {
 
 		exists: ({ path }) => Promise.resolve(records.has(normalize(path))),
 
-		stat: async ({ path }) => requireRecord(normalize(path)),
+		stat: ({ path }) => requireRecord(normalize(path)),
 
 		// Served straight from the origin, so there is no blob URL to revoke
-		url: async ({ path }) => resolveUrl(requireRecord(normalize(path)).path),
+		url: ({ path }) =>
+			requireRecord(normalize(path)).then((record) => resolveUrl(record.path)),
 
-		search: async ({ path }, pattern) => {
+		search: ({ path }, pattern) => {
 			const root = normalize(path);
 			const matches = createSearchMatcher(pattern);
 
-			return Array.from(records.values()).filter(
-				(entry) => isDescendantOf(entry.path, root) && matches(entry.filename)
+			return Promise.resolve(
+				Array.from(records.values()).filter(
+					(entry) => isDescendantOf(entry.path, root) && matches(entry.filename)
+				)
 			);
 		},
 

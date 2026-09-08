@@ -12,13 +12,13 @@ const file = (path) => ({ path });
 const names = (list) => list.map((item) => item.filename).sort();
 
 const core = {
-	url: (endpoint) => "/base" + String(endpoint).replace(/^\/?/, "/"),
+	url: (endpoint) => `/base${String(endpoint).replace(/^\/?/, "/")}`,
 	config: (_key, fallback) => fallback,
 };
 
 const mountpoint = { name: "meeseOS", attributes: {} };
 
-let vfs;
+let vfs = null;
 
 describe("VFS static adapter", () => {
 	beforeEach(async () => {

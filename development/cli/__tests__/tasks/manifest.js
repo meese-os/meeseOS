@@ -7,8 +7,8 @@ const task = require("../../src/tasks/manifest.js");
 const { createPath } = require("../../src/createPath.js");
 
 describe("task > package:manifest", () => {
-	let root;
-	let options;
+	let root = null;
+	let options = null;
 
 	const fname = (str) => createPath(root, str);
 	const run = (args = {}) =>
