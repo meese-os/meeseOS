@@ -58,7 +58,9 @@ import "./index.scss";
 import config from "./config.js";
 
 const init = () => {
-	const meeseOS = new Core(config);
+	// `omit` drops the default mountpoints before merging, so the ones in
+	// `config.js` replace them instead of being concatenated onto them
+	const meeseOS = new Core(config, { omit: ["mountpoints"] });
 
 	// Disables the base folder if the user's settings require it
 	if (meeseOS.config("vfs.enableBaseFolder") === false) {

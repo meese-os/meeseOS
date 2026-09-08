@@ -28,6 +28,8 @@
  * @licence Simplified BSD License
  */
 
+import appsIcon from "./icon.png";
+
 // This is the client configuration tree.
 // Guide: https://manual.aaronmeese.com/config/#client
 // Complete config tree: https://github.com/meese-os/meeseOS/blob/master/frontend/client/src/config.js
@@ -54,6 +56,44 @@ export default {
 			username: null,
 			password: null,
 		},
+	},
+
+	// Backed entirely by the browser, so the desktop needs no VFS server.
+	// `meeseOS` is the shipped build output, read over HTTP against the
+	// manifest that `meese-cli package:manifest` writes at build time, and
+	// `home` is per-visitor storage in IndexedDB.
+	//
+	// NOTE: The whole array is replaced rather than merged, which is why
+	// `index.js` builds the Core with `omit: ["mountpoints"]`. Without that,
+	// deepmerge would concatenate these onto the defaults.
+	vfs: {
+		mountpoints: [
+			{
+				name: "apps",
+				label: "Applications",
+				adapter: "apps",
+				icon: appsIcon,
+				attributes: {
+					visibility: "restricted",
+					readOnly: true,
+				},
+			},
+			{
+				name: "meeseOS",
+				label: "MeeseOS",
+				adapter: "static",
+				icon: { name: "folder-publicshare" },
+				attributes: {
+					readOnly: true,
+				},
+			},
+			{
+				name: "home",
+				label: "Home",
+				adapter: "indexeddb",
+				icon: { name: "user-home" },
+			},
+		],
 	},
 
 	gis: {
