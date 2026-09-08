@@ -37,6 +37,7 @@ import { EventEmitter } from "@meese-os/event-emitter";
 import * as VFS from "./vfs";
 import appsAdapter from "./adapters/vfs/apps";
 import defaultAdapter from "./adapters/vfs/null";
+import indexeddbAdapter from "./adapters/vfs/indexeddb";
 import logger from "./logger";
 import merge from "deepmerge";
 import systemAdapter from "./adapters/vfs/system";
@@ -135,6 +136,7 @@ export default class Filesystem extends EventEmitter {
 		this.adapters = {
 			system: systemAdapter,
 			apps: appsAdapter,
+			indexeddb: indexeddbAdapter,
 			...this.core.config("vfs.adapters", {}),
 			...options.adapters,
 		};
