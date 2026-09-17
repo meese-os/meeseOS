@@ -245,6 +245,46 @@ module.exports = (core) => {
 		await fs.remove(realPath);
 	};
 
+	/**
+	 * Extracts an archive alongside itself, without a redundant directory level.
+	 *
+	 * Archives are usually built around a single top-level folder, so unpacking
+	 * `docs.zip` into `docs/` would leave the tree sitting at `docs/docs`. When
+	 * the archive holds exactly one top-level entry it is unpacked in place;
+	 * otherwise its contents get a directory named after the archive so they do
+	 * not spill across the parent.
+	 *
+	 * @param {String} realPath The real path to the archive
+	 * @returns {Promise<undefined>}
+	 */
+	const smartExtract = async (realPath) => {
+		const { dir, name } = path.parse(realPath);
+
+		// Staged outside the destination so a half-extracted archive is never
+		// visible to the client, and hidden so it stays out of a concurrent readdir
+		const staging = await fs.mkdtemp(path.join(dir, `.${name}-`));
+
+		try {
+			await extract(realPath, { dir: staging });
+
+			const entries = await fs.readdir(staging);
+			const [from, to] =
+				entries.length === 1
+					? [path.join(staging, entries[0]), path.join(dir, entries[0])]
+					: [staging, path.join(dir, name)];
+
+			// Extracting over an existing directory merges into it rather than
+			// replacing it, so unrelated files already there are left alone
+			if (await fs.pathExists(to)) {
+				await fs.copy(from, to, { overwrite: true });
+			} else {
+				await fs.move(from, to);
+			}
+		} finally {
+			await fs.remove(staging);
+		}
+	};
+
 	return {
 		watch: (mount, callback) => {
 			const dest = resolveSegments(
@@ -541,12 +581,7 @@ module.exports = (core) => {
 					}
 					case "extract":
 						for (const realPath of realPaths) {
-							// Remove the `.zip` extension from the path
-							// IDEA: Dialog for the target name on the client side?
-							const target = realPath.split(".").slice(0, -1).join(".");
-
-							// Extract the archive
-							await extract(realPath, { dir: target });
+							await smartExtract(realPath);
 						}
 
 						break;

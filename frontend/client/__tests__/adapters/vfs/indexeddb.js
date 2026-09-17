@@ -259,23 +259,52 @@ describe("VFS indexeddb adapter", () => {
 			expect(await vfs.exists(file("home:/docs/one.txt"))).toBe(false);
 		});
 
-		// NOTE: Entry names are relative to the directory holding the archive, so
-		// extracting `docs.zip` into `docs/` nests the tree one level deeper than
-		// it started. The server adapter behaves identically and this asserts
-		// parity with it, not that the nesting is desirable.
-		test("extracts entries relative to the archive directory", async () => {
+		// NOTE: Round-tripping a directory must land it back where it started
+		// rather than at `docs/docs`. The server adapter behaves identically.
+		test("extracts a single-root archive in place", async () => {
 			await vfs.writefile(file("home:/docs/one.txt"), new Blob(["one"]));
 			await vfs.writefile(file("home:/docs/deep/two.txt"), new Blob(["two"]));
 
 			await vfs.archive([file("home:/docs")], { action: "compress" });
 			await vfs.archive([file("home:/docs.zip")], { action: "extract" });
 
+			expect(await text(await vfs.readfile(file("home:/docs/one.txt")))).toBe(
+				"one"
+			);
 			expect(
-				await text(await vfs.readfile(file("home:/docs/docs/one.txt")))
+				await text(await vfs.readfile(file("home:/docs/deep/two.txt")))
+			).toBe("two");
+			expect(await vfs.exists(file("home:/docs/docs"))).toBe(false);
+		});
+
+		test("gives a multi-root archive a directory of its own", async () => {
+			await vfs.writefile(file("home:/one.txt"), new Blob(["one"]));
+			await vfs.writefile(file("home:/two.txt"), new Blob(["two"]));
+
+			await vfs.archive([file("home:/one.txt"), file("home:/two.txt")], {
+				action: "compress",
+			});
+			await vfs.archive([file("home:/one.txt.zip")], { action: "extract" });
+
+			expect(
+				await text(await vfs.readfile(file("home:/one.txt/one.txt")))
 			).toBe("one");
 			expect(
-				await text(await vfs.readfile(file("home:/docs/docs/deep/two.txt")))
+				await text(await vfs.readfile(file("home:/one.txt/two.txt")))
 			).toBe("two");
+		});
+
+		test("extracts a single-file archive in place", async () => {
+			await vfs.writefile(file("home:/notes/one.txt"), new Blob(["one"]));
+
+			await vfs.archive([file("home:/notes/one.txt")], { action: "compress" });
+			await vfs.archive([file("home:/notes/one.txt.zip")], {
+				action: "extract",
+			});
+
+			expect(await text(await vfs.readfile(file("home:/notes/one.txt")))).toBe(
+				"one"
+			);
 		});
 
 		test("accepts the action as a bare string", async () => {

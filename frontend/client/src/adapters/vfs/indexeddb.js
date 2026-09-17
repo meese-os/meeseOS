@@ -605,18 +605,35 @@ const adapter = (_core, _options = {}) => {
 						throw new Error(`Is a directory: ${path}`);
 					}
 
-					// Strip the final extension to get the destination directory
-					const target = path.split(".").slice(0, -1).join(".");
 					const entries = await unzipAsync(new Uint8Array(record.buffer));
 
-					written.push(createRecord(target, true));
+					// Archives are usually built around a single top-level folder,
+					// so unpacking `docs.zip` into `docs/` would leave the tree
+					// sitting at `docs/docs`. Unpack in place when there is one
+					// top-level entry, and give the contents a directory named
+					// after the archive when there is more than one, so they do
+					// not spill across the parent. Matches the server adapter.
+					const roots = new Set(
+						Object.keys(entries)
+							.map((name) => name.split("/")[0])
+							.filter((root) => root.length > 0)
+					);
+
+					const nested = roots.size !== 1;
+					const base = nested
+						? path.split(".").slice(0, -1).join(".")
+						: parentOf(path);
+
+					if (nested) {
+						written.push(createRecord(base, true));
+					}
 
 					Object.entries(entries).forEach(([name, content]) => {
 						// Directory entries carry no content and are implied by
 						// the ancestors created for each file
 						if (name.endsWith("/")) return;
 
-						const destination = normalize(`${target}/${name}`);
+						const destination = normalize(`${base}/${name}`);
 						written.push(
 							...createMissingAncestors([...records, ...written], destination),
 							createRecord(destination, false, content.slice().buffer)

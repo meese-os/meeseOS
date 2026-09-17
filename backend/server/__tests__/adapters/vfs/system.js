@@ -247,6 +247,78 @@ describe("VFS System adapter", () => {
 		expect(extractedEmptyFileContents).toBe("");
 	});
 
+	// NOTE: An archive built around a single top-level folder must round-trip
+	// back to where it started rather than landing at `nested/nested`.
+	test("#archive - extract without nesting a single-root archive", async () => {
+		const contents = new stream.Readable();
+		contents._read = () => { };
+		contents.push("jest");
+		contents.push(null);
+
+		await request("mkdir", "home:/nested", createOptions());
+		await request("writefile", "home:/nested/inner", contents, createOptions());
+
+		await request(
+			"archive",
+			["home:/nested"],
+			createOptions({ action: "compress" })
+		);
+		await request(
+			"archive",
+			["home:/nested.zip"],
+			createOptions({ action: "extract" })
+		);
+
+		await expect(
+			request("exists", "home:/nested/inner", createOptions())
+		).resolves.toBe(true);
+		await expect(
+			request("exists", "home:/nested/nested", createOptions())
+		).resolves.toBe(false);
+
+		// Cleaned up here so the unlink tests below keep their own fixtures
+		await request("unlink", "home:/nested.zip", createOptions());
+		await request("unlink", "home:/nested", createOptions());
+	});
+
+	test("#archive - extract merges into an existing directory", async () => {
+		const readable = (text) => {
+			const contents = new stream.Readable();
+			contents._read = () => { };
+			contents.push(text);
+			contents.push(null);
+			return contents;
+		};
+
+		await request("mkdir", "home:/merge", createOptions());
+		await request("writefile", "home:/merge/inner", readable("jest"), createOptions());
+		await request(
+			"archive",
+			["home:/merge"],
+			createOptions({ action: "compress" })
+		);
+
+		// An unrelated file sitting where the archive is about to land
+		await request("mkdir", "home:/merge", createOptions());
+		await request("writefile", "home:/merge/keep", readable("keep"), createOptions());
+
+		await request(
+			"archive",
+			["home:/merge.zip"],
+			createOptions({ action: "extract" })
+		);
+
+		await expect(
+			request("exists", "home:/merge/inner", createOptions())
+		).resolves.toBe(true);
+		await expect(
+			request("exists", "home:/merge/keep", createOptions())
+		).resolves.toBe(true);
+
+		await request("unlink", "home:/merge.zip", createOptions());
+		await request("unlink", "home:/merge", createOptions());
+	});
+
 	test("#archive - extract error", () => {
 		const options = createOptions({ action: "extract" });
 
