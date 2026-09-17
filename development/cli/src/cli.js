@@ -40,6 +40,7 @@ const DEFAULT_TASKS = {
 	...require("./tasks/info.js"),
 	// ...require('./tasks/watch.js'),
 	...require("./tasks/discover.js"),
+	...require("./tasks/manifest.js"),
 	...require("./tasks/scaffold.js"),
 };
 

@@ -1,3 +1,25 @@
+// jsdom does not implement `structuredClone`, which IndexedDB uses to clone
+// records as they are written. Node's serializer covers every value the VFS
+// stores, Blobs included.
+if (typeof global.structuredClone !== "function") {
+	const v8 = require("node:v8");
+	global.structuredClone = (value) => v8.deserialize(v8.serialize(value));
+}
+
+// jsdom's Blob does not implement `arrayBuffer()`, which every browser the
+// client targets has had for years. Back it with the FileReader jsdom does
+// provide so adapters can use the standard API.
+if (typeof Blob.prototype.arrayBuffer !== "function") {
+	Blob.prototype.arrayBuffer = function() {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onerror = () => reject(reader.error);
+			reader.onload = () => resolve(reader.result);
+			reader.readAsArrayBuffer(this);
+		});
+	};
+}
+
 class MockWebSocket {
 	constructor(uri) {
 		this.onmessage = () => {};
