@@ -1,0 +1,40 @@
+name: Zork service
+
+# The job only reads the repository, so the token gets nothing else
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "services/zork/**"
+      - ".github/workflows/zork.yml"
+  pull_request:
+    paths:
+      - "services/zork/**"
+      - ".github/workflows/zork.yml"
+jobs:
+  check:
+    name: Format, lint, typecheck and test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/zork
+    steps:
+      - uses: actions/checkout@v6
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Check formatting
+        run: deno fmt --check
+      - name: Lint
+        run: deno lint
+      - name: Typecheck
+        run: deno task check
+      # NOTE: Story files are not committed, so the tests that need one skip
+      # themselves here. Run locally with ZORK_STORY set to cover those.
+      - name: Test
+        run: deno task test
