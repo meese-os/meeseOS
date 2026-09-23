@@ -395,6 +395,7 @@ const createWindow = (core, proc) => {
 	const onMenuCompress = (files) => vfs.archive(files, { action: "compress" });
 	const onMenuExtract = (files) => vfs.archive(files, { action: "extract" });
 	const onMenuUpload = (...args) => vfs.upload(...args);
+	const onMenuUploadDirectory = (...args) => vfs.uploadDirectory(...args);
 	const onMenuMkdir = () => dialog("mkdir", vfs.action, state.currentPath);
 	const onMenuQuit = () => proc.destroy();
 	const onMenuRefresh = () => vfs.refresh();
@@ -431,6 +432,7 @@ const createWindow = (core, proc) => {
 		.on("filemanager:historyPush", onHistoryPush)
 		.on("filemanager:historyClear", onHistoryClear)
 		.on("filemanager:menu:upload", onMenuUpload)
+		.on("filemanager:menu:uploaddir", onMenuUploadDirectory)
 		.on("filemanager:menu:mkdir", onMenuMkdir)
 		.on("filemanager:menu:quit", onMenuQuit)
 		.on("filemanager:menu:refresh", onMenuRefresh)
