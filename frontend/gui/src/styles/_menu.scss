@@ -125,6 +125,11 @@
 			display: inline;
 		}
 	}
+
+	& > .meeseOS-gui-menu-shortcut {
+		margin-left: auto;
+		padding-left: calc($base-margin * 2);
+	}
 }
 
 .meeseOS-gui-menu-container {

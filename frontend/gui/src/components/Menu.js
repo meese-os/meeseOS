@@ -45,7 +45,23 @@ const ul = (props, children = [], level = 0) => {
 			children.push(h(Icon, child.icon));
 		}
 
-		children.push(h("span", {}, child.label));
+		children.push(
+			h("span", { class: "meeseOS-gui-menu-label-text" }, child.label)
+		);
+
+		if (
+			child.shortcut !== undefined &&
+			child.shortcut !== null &&
+			child.shortcut !== ""
+		) {
+			children.push(
+				h(
+					"span",
+					{ class: "meeseOS-gui-menu-shortcut" },
+					child.shortcut
+				)
+			);
+		}
 
 		return children;
 	};
@@ -119,6 +135,7 @@ const ul = (props, children = [], level = 0) => {
  * @property {String} [icon] Icon source
  * @property {Boolean} [disabled] Disabled state
  * @property {Boolean} [closeable] Disable close on click
+ * @property {String} [shortcut] Keyboard shortcut label
  * @property {Function} [element] A callback that returns a virtual DOM element (ex. Hyperapp)
  * @property {Function} onclick Click callback
  * @property {MenuItems} [items] Child items
@@ -129,7 +146,7 @@ const ul = (props, children = [], level = 0) => {
  * A menu.
  * @param {Object} props Properties
  * @param {Boolean} [props.visible=true] Visible property
- * @param {Object} [posprops.ition] Position
+ * @param {Object} [props.position] Position
  * @param {MenuItems} [props.menu] Menu items
  */
 export const Menu = (props) =>

@@ -127,6 +127,9 @@ importers:
       events:
         specifier: ^3.3.0
         version: 3.3.0
+      jest:
+        specifier: ^30.2.0
+        version: 30.4.2
       mini-css-extract-plugin:
         specifier: ^2.9.4
         version: 2.10.2(webpack-cli@6.0.1)
@@ -1494,6 +1497,9 @@ importers:
       eslint:
         specifier: ^9.39.2
         version: 9.39.4
+      jest:
+        specifier: ^30.2.0
+        version: 30.4.2
       mini-css-extract-plugin:
         specifier: ^2.9.4
         version: 2.10.2(webpack-cli@6.0.1)
