@@ -1,10 +1,11 @@
 {
   "name": "@meese-os/server",
-  "version": "1.2.2",
+	"version": "1.2.3",
   "description": "meeseOS Server",
   "scripts": {
     "build": "echo \"There is no build command for server\" && exit 0",
     "eslint": "eslint index.js src",
+    "prejest": "npm run build --prefix ../common",
     "jest": "jest --detectOpenHandles --forceExit",
     "jest:debug": "jest --runInBand --silent false --verbose true --useStderr=true --detectOpenHandles --forceExit",
 		"coverage": "jest --coverage",
