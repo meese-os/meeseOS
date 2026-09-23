@@ -46,15 +46,14 @@ describe("System VFS Adapter", () => {
 		await expect(
 			vfs.writefile({ path: "null:/filename" }, new Blob(), { signal })
 		).resolves.toBe(-1);
-		expect(request).toHaveBeenCalledWith(
-			"/vfs/writefile",
-			expect.objectContaining({
-				onProgress: undefined,
-				signal,
-				xhr: false,
-			}),
-			undefined
-		);
+		const [url, options, responseType] = request.mock.calls[0];
+		expect(url).toBe("/vfs/writefile");
+		expect(options).toEqual(expect.objectContaining({
+			onProgress: undefined,
+			signal,
+			xhr: false,
+		}));
+		expect(responseType).toBeUndefined();
 	});
 
 	test("#mkdir forwards its abort signal as a request option", async () => {

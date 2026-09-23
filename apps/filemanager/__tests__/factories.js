@@ -1,5 +1,5 @@
 jest.mock("dateformat", () => () => "");
-jest.mock("file-type", () => ({ fileTypeFromBuffer: async () => null }), { virtual: true });
+jest.mock("file-type", () => ({ fileTypeFromBuffer: () => Promise.resolve(null) }), { virtual: true });
 
 import { vfsActionFactory } from "../src/factories.js";
 
@@ -12,11 +12,11 @@ const createHarness = ({ writefile } = {}) => {
 	};
 	const dialogs = [];
 	const vfs = {
-		mkdir: jest.fn(async (...args) => {
+		mkdir: jest.fn((...args) => {
 			calls.push(["mkdir", ...args]);
 			return true;
 		}),
-		writefile: writefile || jest.fn(async (...args) => {
+		writefile: writefile || jest.fn((...args) => {
 			calls.push(["writefile", ...args]);
 			return true;
 		}),
@@ -47,7 +47,7 @@ const createHarness = ({ writefile } = {}) => {
 };
 
 const selectFiles = (files) => {
-	let field;
+	let field = null;
 	global.document = {
 		createElement: () => {
 			field = {
@@ -105,7 +105,7 @@ describe("vfsActionFactory browser uploads", () => {
 			{ name: "one.txt", size: 3 },
 			{ name: "two.txt", size: 5 },
 		]);
-		let rejectSecond;
+		let rejectSecond = null;
 		const writefile = jest.fn((file) => {
 			if (file.path.endsWith("one.txt")) return Promise.resolve(true);
 			return new Promise((resolve, reject) => {
@@ -146,7 +146,7 @@ describe("vfsActionFactory browser uploads", () => {
 			{ name: "two.txt", size: 1 },
 		]);
 		const harness = createHarness();
-		harness.vfs.writefile.mockImplementation(async (...args) => {
+		harness.vfs.writefile.mockImplementation((...args) => {
 			harness.calls.push(["writefile", ...args]);
 			if (harness.vfs.writefile.mock.calls.length === 1) {
 				harness.state.currentPath = { path: "home:/elsewhere" };
@@ -170,7 +170,7 @@ describe("vfsActionFactory browser uploads", () => {
 			{ name: "two.txt", size: 10 },
 		]);
 		const harness = createHarness();
-		harness.vfs.writefile.mockImplementation(async (_file, _data, options) => {
+		harness.vfs.writefile.mockImplementation((_file, _data, options) => {
 			options.onProgress(undefined, 50);
 			return true;
 		});

@@ -211,9 +211,9 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 		return [];
 	};
 
-	const uploadBrowserFiles = async (files, ev) => {
+	async function uploadBrowserFiles(files, ev) {
 		try {
-			let entries;
+			let entries = [];
 			if (ev?.dataTransfer?.items?.length) {
 				entries = await collectDroppedFiles(ev.dataTransfer.items);
 			} else {
@@ -231,9 +231,9 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 			dialog("error", error, "Failed to upload file(s)");
 			return [];
 		}
-	};
+	}
 
-	const uploadFiles = async (entries) => {
+	async function uploadFiles(entries) {
 		const destinationRoot = state.currentPath.path;
 		const files = entries.filter((entry) => entry.file && entry.path);
 		const directories = new Set();
@@ -255,7 +255,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 
 		const controller = typeof AbortController === "function"
 			? new AbortController()
-			: { signal: undefined, abort: () => {} };
+			: null;
 		const totalBytes = files.reduce(
 			(total, entry) => total + (entry.file.size || 0),
 			0
@@ -273,7 +273,7 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 			(button) => {
 				const name = typeof button === "string" ? button : button?.name;
 				if (["cancel", "destroy"].includes(String(name).toLowerCase())) {
-					controller.abort();
+					controller?.abort();
 				}
 			},
 		);
@@ -294,10 +294,10 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 
 		try {
 			for (const directory of orderedDirectories) {
-				if (controller.signal?.aborted) break;
+				if (controller?.signal.aborted) break;
 				await vfs.mkdir(
 					{ path: pathJoin(destinationRoot, directory) },
-					{ pid: proc.pid, ensure: true, signal: controller.signal }
+					{ pid: proc.pid, ensure: true, signal: controller?.signal }
 				);
 				if (!totalBytes) setProgress({ index: 0, value: 100 }, directory);
 				completedItems++;
@@ -306,14 +306,14 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 			const results = [];
 			for (let index = 0; index < files.length; index++) {
 				const { file, path } = files[index];
-				if (controller.signal?.aborted) break;
+				if (controller?.signal.aborted) break;
 				setProgress({ index, value: 0 }, path);
 				const result = await vfs.writefile(
 					{ path: pathJoin(destinationRoot, path) },
 					file,
 					{
 						pid: proc.pid,
-						signal: controller.signal,
+						signal: controller?.signal,
 						onProgress: (_ev, value) => setProgress({ index, value }, path),
 					}
 				);
@@ -325,14 +325,14 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 			}
 			return results;
 		} catch (error) {
-			if (!controller.signal?.aborted) {
+			if (!controller?.signal.aborted) {
 				dialog("error", error, "Failed to upload file(s)");
 			}
 			return [];
 		} finally {
 			popup.destroy();
 		}
-	};
+	}
 
 	const uploadVirtualFile = (data) => {
 		const dest = { path: pathJoin(state.currentPath.path, data.filename) };
@@ -387,8 +387,8 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 		}
 	};
 
-	const archive = (selection, action) =>
-		vfs.archive(selection, { action });
+	const archive = (selection, archiveAction) =>
+		vfs.archive(selection, { action: archiveAction });
 
 	const upload = () => triggerBrowserUpload(uploadBrowserFiles);
 	const uploadDirectory = () =>
@@ -546,7 +546,7 @@ export const dialogFactory = (core, proc, win) => {
 			})
 		);
 
-	const progressDialog = (args, onAction = () => {}) =>
+	const progressDialog = (args, onAction = () => undefined) =>
 		dialog(
 			"progress",
 			args,

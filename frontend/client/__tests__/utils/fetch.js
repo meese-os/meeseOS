@@ -62,8 +62,8 @@ const createXhrMock = (overrides = {}) => {
 			(this.listeners[name] || []).forEach((callback) => callback(event));
 		}
 
-		getResponseHeader() {
-			return "";
+		getResponseHeader(name) {
+			return this.responseHeaders?.[name] ?? "";
 		}
 	}
 
@@ -91,7 +91,7 @@ describe("fetch utilities", () => {
 				missing: undefined,
 			},
 			null: null,
-			undefined: undefined,
+			undefined,
 		};
 		Object.defineProperty(data, "getter", {
 			enumerable: true,
@@ -188,7 +188,7 @@ describe("fetch utilities", () => {
 			controller.signal,
 			"removeEventListener"
 		);
-		const warn = jest.spyOn(console, "warn").mockImplementation(() => {});
+		const warn = jest.spyOn(console, "warn").mockImplementation(() => undefined);
 
 		window.XMLHttpRequest = MockXMLHttpRequest;
 		const result = fetchRequest("/request", {
@@ -243,7 +243,7 @@ describe("fetch utilities", () => {
 			controller.signal,
 			"removeEventListener"
 		);
-		const warn = jest.spyOn(console, "warn").mockImplementation(() => {});
+		const warn = jest.spyOn(console, "warn").mockImplementation(() => undefined);
 
 		window.XMLHttpRequest = MockXMLHttpRequest;
 		const result = fetchRequest("/request", {

@@ -43,7 +43,7 @@ export const encodeQueryData = (data) =>
 				);
 			}
 
-			return encodeURIComponent(key) + "=" + encodeURIComponent(value);
+			return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
 		})
 		.join("&");
 
@@ -103,7 +103,9 @@ const createFetchOptions = (url, options, type) => {
 
 	if (type === "json" && hasBody && !stringBody) {
 		if (!(fetchOptions.body instanceof FormData)) {
-			const found = bodyTypes.find((type) => fetchOptions.body instanceof type);
+			const found = bodyTypes.find((bodyType) =>
+				fetchOptions.body instanceof bodyType
+			);
 			if (!found) {
 				fetchOptions.body = JSON.stringify(fetchOptions.body);
 			}
@@ -130,7 +132,7 @@ const fetchXhr = (target, { signal, ...fetchOptions }, onProgress) => {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		let settled = false;
-		let progressTarget;
+		let progressTarget = null;
 
 		const cleanup = () => {
 			req.removeEventListener("load", onLoad);
@@ -149,12 +151,12 @@ const fetchXhr = (target, { signal, ...fetchOptions }, onProgress) => {
 			}
 		};
 
-		const onError = (ev) => {
+		function onError(ev) {
 			console.warn("An error occured while performing XHR request", ev);
 			settle(reject, new Error("An error occured while performing XHR request"));
-		};
+		}
 
-		const onLoad = () => {
+		function onLoad() {
 			settle(resolve, {
 				status: req.status,
 				statusText: req.statusText,
@@ -166,19 +168,19 @@ const fetchXhr = (target, { signal, ...fetchOptions }, onProgress) => {
 				json: () => Promise.resolve(JSON.parse(req.responseText)),
 				arrayBuffer: () => Promise.resolve(req.response),
 			});
-		};
+		}
 
-		const onAbort = (ev) => {
+		function onAbort(ev) {
 			console.warn("XHR request was aborted", ev);
 			settle(reject, new Error("XHR request was aborted"));
-		};
+		}
 
-		const onTimeout = (ev) => {
+		function onTimeout(ev) {
 			console.warn("XHR request timed out", ev);
 			settle(reject, new Error("XHR request timed out"));
-		};
+		}
 
-		const onSignalAbort = () => {
+		function onSignalAbort() {
 			if (!settled) {
 				settle(
 					reject,
@@ -186,14 +188,14 @@ const fetchXhr = (target, { signal, ...fetchOptions }, onProgress) => {
 				);
 				req.abort();
 			}
-		};
+		}
 
-		const onProgressEvent = (ev) => {
+		function onProgressEvent(ev) {
 			if (ev.lengthComputable) {
 				const percentComplete = Math.round((ev.loaded / ev.total) * 100);
 				onProgress(ev, percentComplete);
 			}
-		};
+		}
 
 		if (typeof onProgress === "function") {
 			progressTarget = fetchOptions.method.toUpperCase() === "GET"
