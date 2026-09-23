@@ -35,6 +35,10 @@ import {
 	divertDropAction,
 	usingPositiveButton,
 	triggerBrowserUpload,
+	triggerBrowserDirectoryUpload,
+	supportsDirectoryUpload,
+	collectDroppedFiles,
+	normalizeRelativePath,
 	isSpecialFile,
 } from "./utils.js";
 import dateformat from "dateformat";
@@ -207,35 +211,128 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 		return [];
 	};
 
-	const writeRelative = (file) => {
-		const popup = dialog("progress", file);
-		const path = pathJoin(state.currentPath.path, file.name);
+	async function uploadBrowserFiles(files, ev) {
+		try {
+			let entries = [];
+			if (ev?.dataTransfer?.items?.length) {
+				entries = await collectDroppedFiles(ev.dataTransfer.items);
+			} else {
+				entries = Array.from(files || []).map((file) => {
+					const path = normalizeRelativePath(file.webkitRelativePath || file.name);
+					if (!path) {
+						throw new Error("Refusing to upload a file with an unsafe relative path");
+					}
+					return { file, path };
+				});
+			}
 
-		return vfs
-			.writefile(
-				{ path },
-				file,
-				{
-					pid: proc.pid,
-					onProgress: (ev, progress) => popup.setProgress(progress),
+			return uploadFiles(entries);
+		} catch (error) {
+			dialog("error", error, "Failed to upload file(s)");
+			return [];
+		}
+	}
+
+	async function uploadFiles(entries) {
+		const destinationRoot = state.currentPath.path;
+		const files = entries.filter((entry) => entry.file && entry.path);
+		const directories = new Set();
+		entries
+			.filter((entry) => entry.directory)
+			.forEach(({ directory }) => directories.add(directory));
+		files.forEach(({ path }) => {
+			const parts = path.split("/");
+			parts.pop();
+			for (let index = 1; index <= parts.length; index++) {
+				directories.add(parts.slice(0, index).join("/"));
+			}
+		});
+		const orderedDirectories = [...directories].sort((left, right) => {
+			const depth = (value) => value.split("/").length;
+			return depth(left) - depth(right) || left.localeCompare(right);
+		});
+		if (!files.length && !orderedDirectories.length) return [];
+
+		const controller = typeof AbortController === "function"
+			? new AbortController()
+			: null;
+		const totalBytes = files.reduce(
+			(total, entry) => total + (entry.file.size || 0),
+			0
+		);
+		let completedBytes = 0;
+		let completedItems = 0;
+		let lastProgress = -1;
+		const totalItems = files.length + orderedDirectories.length;
+		const popup = dialog(
+			"progress",
+			{
+				message: `Uploading ${totalItems} item${totalItems === 1 ? "" : "s"}...`,
+				buttons: ["cancel"],
+			},
+			(button) => {
+				const name = typeof button === "string" ? button : button?.name;
+				if (["cancel", "destroy"].includes(String(name).toLowerCase())) {
+					controller?.abort();
 				}
-			)
-			.then((result) => {
-				popup.destroy();
-				return result;
-			})
-			.catch((error) => {
-				popup.destroy();
-				throw error;
-			});
-	};
+			},
+		);
 
-	const uploadBrowserFiles = (files) => {
-		Promise.all(files.map((file) => writeRelative(file)
-			.then(() => refresh(file.name))
-			.catch((error) => dialog("error", error, "Failed to upload file"))
-		));
-	};
+		const setProgress = (progress, status) => {
+			if (typeof popup.setStatus === "function") popup.setStatus(status);
+			if (typeof popup.setProgress !== "function") return;
+			const current = totalBytes
+				? completedBytes + ((files[progress.index].file.size || 0) * progress.value / 100)
+				: completedItems + (progress.value / 100);
+			const total = totalBytes || totalItems;
+			const value = Math.min(100, (current / total) * 100);
+			if (value > lastProgress) {
+				lastProgress = value;
+				popup.setProgress(value);
+			}
+		};
+
+		try {
+			for (const directory of orderedDirectories) {
+				if (controller?.signal.aborted) break;
+				await vfs.mkdir(
+					{ path: pathJoin(destinationRoot, directory) },
+					{ pid: proc.pid, ensure: true, signal: controller?.signal }
+				);
+				if (!totalBytes) setProgress({ index: 0, value: 100 }, directory);
+				completedItems++;
+			}
+
+			const results = [];
+			for (let index = 0; index < files.length; index++) {
+				const { file, path } = files[index];
+				if (controller?.signal.aborted) break;
+				setProgress({ index, value: 0 }, path);
+				const result = await vfs.writefile(
+					{ path: pathJoin(destinationRoot, path) },
+					file,
+					{
+						pid: proc.pid,
+						signal: controller?.signal,
+						onProgress: (_ev, value) => setProgress({ index, value }, path),
+					}
+				);
+				setProgress({ index, value: 100 }, path);
+				completedBytes += file.size || 0;
+				completedItems++;
+				results.push(result);
+				refresh(path);
+			}
+			return results;
+		} catch (error) {
+			if (!controller?.signal.aborted) {
+				dialog("error", error, "Failed to upload file(s)");
+			}
+			return [];
+		} finally {
+			popup.destroy();
+		}
+	}
 
 	const uploadVirtualFile = (data) => {
 		const dest = { path: pathJoin(state.currentPath.path, data.filename) };
@@ -290,19 +387,12 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 		}
 	};
 
-	const archive = (selection, action) =>
-		vfs.archive(selection, { action });
+	const archive = (selection, archiveAction) =>
+		vfs.archive(selection, { action: archiveAction });
 
-	const upload = () =>
-		triggerBrowserUpload((files) => {
-			// Converts the FileList to an array for the map function below
-			const fileArray = Array.from(files);
-
-			fileArray.forEach((file) => writeRelative(file)
-				.then(() => refresh(file.name))
-				.catch((error) => dialog("error", error, "Failed to upload file"))
-			);
-		});
+	const upload = () => triggerBrowserUpload(uploadBrowserFiles);
+	const uploadDirectory = () =>
+		triggerBrowserDirectoryUpload(uploadBrowserFiles);
 
 	const paste = (move, currentPath) =>
 		({ items, callback }) => {
@@ -339,6 +429,8 @@ export const vfsActionFactory = (core, proc, win, dialog, state) => {
 		drop,
 		readdir,
 		paste,
+		uploadDirectory,
+		supportsDirectoryUpload,
 	};
 };
 
@@ -454,14 +546,11 @@ export const dialogFactory = (core, proc, win) => {
 			})
 		);
 
-	const progressDialog = (file) =>
+	const progressDialog = (args, onAction = () => undefined) =>
 		dialog(
 			"progress",
-			{
-				message: `Uploading ${file.name}...`,
-				buttons: [],
-			},
-			() => {},
+			args,
+			onAction,
 			false
 		);
 
@@ -525,8 +614,21 @@ export const menuFactory = (core, proc, win) => {
 		return [].concat(...result);
 	};
 
+	const createUploadItems = () => {
+		const items = [
+			{ label: "Upload", onclick: () => win.emit("filemanager:menu:upload") },
+		];
+		if (supportsDirectoryUpload()) {
+			items.push({
+				label: "Upload directory",
+				onclick: () => win.emit("filemanager:menu:uploaddir"),
+			});
+		}
+		return items;
+	};
+
 	const createFileMenu = () => [
-		{ label: "Upload", onclick: () => win.emit("filemanager:menu:upload") },
+		...createUploadItems(),
 		{
 			label: "Create new directory",
 			onclick: () => win.emit("filemanager:menu:mkdir"),
@@ -537,7 +639,7 @@ export const menuFactory = (core, proc, win) => {
 	// Shown when right-clicking empty whitespace in the file listing.
 	const createDirectoryMenu = () => {
 		const menu = [
-			{ label: "Upload", onclick: () => win.emit("filemanager:menu:upload") },
+			...createUploadItems(),
 			{
 				label: "Create new directory",
 				onclick: () => win.emit("filemanager:menu:mkdir"),

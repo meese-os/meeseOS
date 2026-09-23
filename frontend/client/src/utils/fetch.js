@@ -33,10 +33,18 @@
  * @param {Object} data
  * @returns {String}
  */
-const encodeQueryData = (data) =>
-	Object.keys(data)
-		.filter((key) => typeof data[key] !== "object")
-		.map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+export const encodeQueryData = (data) =>
+	Object.entries(data ?? {})
+		.filter(([, value]) => typeof value !== "undefined")
+		.map(([key, value]) => {
+			if (typeof value === "object") {
+				value = JSON.stringify(value, (_key, nestedValue) =>
+					typeof nestedValue === "undefined" ? null : nestedValue
+				);
+			}
+
+			return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+		})
 		.join("&");
 
 const bodyTypes = [
@@ -72,8 +80,21 @@ const createFetchOptions = (url, options, type) => {
 		};
 	}
 
-	if (fetchOptions.body && fetchOptions.method.toLowerCase() === "get") {
-		url += "?" + encodeQueryData(fetchOptions.body);
+	if (
+		typeof fetchOptions.body !== "undefined" &&
+		fetchOptions.method.toLowerCase() === "get"
+	) {
+		const query = encodeQueryData(fetchOptions.body);
+		if (query) {
+			const fragmentIndex = url.indexOf("#");
+			const target = fragmentIndex === -1
+				? url
+				: url.substring(0, fragmentIndex);
+			const fragment = fragmentIndex === -1 ? "" : url.substring(fragmentIndex);
+			const separator = target.indexOf("?") === -1 ? "?" : "&";
+
+			url = target + separator + query + fragment;
+		}
 		delete fetchOptions.body;
 	}
 
@@ -82,7 +103,9 @@ const createFetchOptions = (url, options, type) => {
 
 	if (type === "json" && hasBody && !stringBody) {
 		if (!(fetchOptions.body instanceof FormData)) {
-			const found = bodyTypes.find((type) => fetchOptions.body instanceof type);
+			const found = bodyTypes.find((bodyType) =>
+				fetchOptions.body instanceof bodyType
+			);
 			if (!found) {
 				fetchOptions.body = JSON.stringify(fetchOptions.body);
 			}
@@ -99,17 +122,42 @@ const createFetchOptions = (url, options, type) => {
  * @param {Object} fetchOptions The request options
  * @returns {Promise}
  */
-const fetchXhr = (target, fetchOptions) =>
-	new Promise((resolve, reject) => {
-		const req = new XMLHttpRequest();
+const fetchXhr = (target, { signal, ...fetchOptions }, onProgress) => {
+	if (signal?.aborted) {
+		return Promise.reject(
+			new DOMException("The operation was aborted.", "AbortError")
+		);
+	}
 
-		const onError = (msg) => (ev) => {
-			console.warn(msg, ev);
-			reject(new Error(msg));
+	return new Promise((resolve, reject) => {
+		const req = new XMLHttpRequest();
+		let settled = false;
+		let progressTarget = null;
+
+		const cleanup = () => {
+			req.removeEventListener("load", onLoad);
+			req.removeEventListener("error", onError);
+			req.removeEventListener("abort", onAbort);
+			req.removeEventListener("timeout", onTimeout);
+			progressTarget?.removeEventListener("progress", onProgressEvent);
+			signal?.removeEventListener("abort", onSignalAbort);
 		};
 
-		const onLoad = () => {
-			resolve({
+		const settle = (callback, value) => {
+			if (!settled) {
+				settled = true;
+				cleanup();
+				callback(value);
+			}
+		};
+
+		function onError(ev) {
+			console.warn("An error occured while performing XHR request", ev);
+			settle(reject, new Error("An error occured while performing XHR request"));
+		}
+
+		function onLoad() {
+			settle(resolve, {
 				status: req.status,
 				statusText: req.statusText,
 				ok: req.status >= 200 && req.status <= 299,
@@ -120,33 +168,67 @@ const fetchXhr = (target, fetchOptions) =>
 				json: () => Promise.resolve(JSON.parse(req.responseText)),
 				arrayBuffer: () => Promise.resolve(req.response),
 			});
-		};
+		}
 
-		if (typeof fetchOptions.onProgress === "function") {
-			const rel = fetchOptions.method.toUpperCase() === "GET"
+		function onAbort(ev) {
+			console.warn("XHR request was aborted", ev);
+			settle(reject, new Error("XHR request was aborted"));
+		}
+
+		function onTimeout(ev) {
+			console.warn("XHR request timed out", ev);
+			settle(reject, new Error("XHR request timed out"));
+		}
+
+		function onSignalAbort() {
+			if (!settled) {
+				settle(
+					reject,
+					new DOMException("The operation was aborted.", "AbortError")
+				);
+				req.abort();
+			}
+		}
+
+		function onProgressEvent(ev) {
+			if (ev.lengthComputable) {
+				const percentComplete = Math.round((ev.loaded / ev.total) * 100);
+				onProgress(ev, percentComplete);
+			}
+		}
+
+		if (typeof onProgress === "function") {
+			progressTarget = fetchOptions.method.toUpperCase() === "GET"
 				? req
 				: req.upload;
-			rel.addEventListener("progress", (ev) => {
-				if (ev.lengthComputable) {
-					const percentComplete = Math.round((ev.loaded / ev.total) * 100);
-					fetchOptions.onProgress(ev, percentComplete);
-				}
-			});
+			progressTarget.addEventListener("progress", onProgressEvent);
 		}
 
 		req.addEventListener("load", onLoad);
-		req.addEventListener(
-			"error",
-			onError("An error occured while performing XHR request")
-		);
-		req.addEventListener("abort", onError("XHR request was aborted"));
-		req.open(fetchOptions.method, target);
-		Object.entries(fetchOptions.headers).forEach(([key, val]) =>
-			req.setRequestHeader(key, val)
-		);
-		req.responseType = fetchOptions.responseType ?? "";
-		req.send(fetchOptions.body);
+		req.addEventListener("error", onError);
+		req.addEventListener("abort", onAbort);
+		req.addEventListener("timeout", onTimeout);
+
+		try {
+			req.open(fetchOptions.method, target);
+			Object.entries(fetchOptions.headers).forEach(([key, val]) =>
+				req.setRequestHeader(key, val)
+			);
+			req.responseType = fetchOptions.responseType ?? "";
+			if (typeof fetchOptions.timeout !== "undefined") {
+				req.timeout = fetchOptions.timeout;
+			}
+			signal?.addEventListener("abort", onSignalAbort);
+			if (signal?.aborted) {
+				onSignalAbort();
+				return;
+			}
+			req.send(fetchOptions.body);
+		} catch (error) {
+			settle(reject, error);
+		}
 	});
+};
 
 /**
  * Make an HTTP request.
@@ -157,15 +239,16 @@ const fetchXhr = (target, fetchOptions) =>
  * @returns {Promise<*>}
  */
 export const fetch = (url, options = {}, type = null) => {
-	const [target, fetchOptions] = createFetchOptions(url, options, type);
+	const { onProgress, xhr, ...requestOptions } = options;
+	const [target, fetchOptions] = createFetchOptions(url, requestOptions, type);
 
 	const createErrorRejection = (response, error) =>
 		Promise.reject(
 			new Error(error || `${response.status} (${response.statusText})`)
 		);
 
-	const op = options.xhr
-		? fetchXhr(target, fetchOptions)
+	const op = xhr
+		? fetchXhr(target, fetchOptions, onProgress)
 		: window.fetch(target, fetchOptions);
 
 	return op.then(async (response) => {

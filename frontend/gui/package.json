@@ -1,10 +1,11 @@
 {
   "name": "@meese-os/gui",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "meeseOS GUI",
   "scripts": {
-    "test": "npm run eslint && npm run stylelint",
+    "test": "npm run eslint && npm run stylelint && npm run jest",
     "eslint": "eslint index.js src/**/*.js",
+    "jest": "jest",
     "build": "webpack",
     "build:esm": "rollup -c",
     "stylelint": "stylelint index.scss src/**/*.scss --fix --quiet-deprecation-warnings",
@@ -37,6 +38,7 @@
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.4",
     "eslint": "^9.39.2",
+    "jest": "^30.2.0",
     "mini-css-extract-plugin": "^2.9.4",
     "rollup": "^4.53.4",
     "@rollup/plugin-babel": "^6.1.0",
@@ -79,7 +81,22 @@
     ],
     "plugins": [
       "@babel/plugin-transform-runtime"
-    ]
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": "commonjs"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "esdoc": {
     "source": "./src",

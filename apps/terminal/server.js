@@ -185,7 +185,7 @@ const init = async (core, proc) => {
 			found.terminal.resize(cols, rows);
 		}
 
-		res.send();
+		res.json({});
 	});
 
 	app.ws(proc.resource("/socket"), (ws, _req) => {
