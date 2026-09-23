@@ -34,6 +34,47 @@ describe("System VFS Adapter", () => {
 		).resolves.toBe(-1);
 	});
 
+	test("#writefile forwards its abort signal", async () => {
+		const request = jest.fn(() =>
+			Promise.resolve({
+				json: () => Promise.resolve(-1),
+			})
+		);
+		const signal = new AbortController().signal;
+		const vfs = systemAdapter({ request });
+
+		await expect(
+			vfs.writefile({ path: "null:/filename" }, new Blob(), { signal })
+		).resolves.toBe(-1);
+		expect(request).toHaveBeenCalledWith(
+			"/vfs/writefile",
+			expect.objectContaining({
+				onProgress: undefined,
+				signal,
+				xhr: false,
+			}),
+			undefined
+		);
+	});
+
+	test("#mkdir forwards its abort signal as a request option", async () => {
+		const request = jest.fn(() => Promise.resolve(true));
+		const signal = new AbortController().signal;
+		const vfs = systemAdapter({ request });
+
+		await expect(
+			vfs.mkdir({ path: "null:/directory" }, { ensure: true, signal })
+		).resolves.toBe(true);
+		expect(request).toHaveBeenCalledWith(
+			"/vfs/mkdir",
+			expect.objectContaining({
+				body: { path: "null:/directory", options: { ensure: true } },
+				signal,
+			}),
+			"json"
+		);
+	});
+
 	test("#copy", () => {
 		return expect(
 			adapter.copy({ path: "null:/from" }, { path: "null:/to" })

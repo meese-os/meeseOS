@@ -75,8 +75,15 @@ const requester = (core) =>
  */
 const methods = (core, request) => {
 	const passthrough = (name) =>
-		({ path }, options) =>
-			request(name, { path, options }, "json").then(({ body }) => body);
+		({ path }, options = {}) => {
+			const { signal, ...operationOptions } = options;
+			return request(
+				name,
+				{ path, options: operationOptions },
+				"json",
+				{ signal }
+			).then(({ body }) => body);
+		};
 
 	return {
 		capabilities: passthrough("capabilities"),
@@ -86,13 +93,15 @@ const methods = (core, request) => {
 			request("readfile", { path, options }),
 
 		writefile: ({ path }, data, options = {}) => {
+			const { signal, ...operationOptions } = options;
 			const formData = new FormData();
 			formData.append("upload", data);
 			formData.append("path", path);
-			formData.append("options", options);
+			formData.append("options", operationOptions);
 
 			return request("writefile", formData, undefined, {
 				onProgress: options.onProgress,
+				signal,
 				xhr: Boolean(options.onProgress),
 			});
 		},
