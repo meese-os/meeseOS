@@ -17,7 +17,18 @@ if [ "$DEV_MODE" = "true" ] || [ "$SKIP_RESET" = "true" ] || [ "${1:-}" = "--no-
 	echo "Skipping git reset to preserve local changes..."
 else
 	echo "Fetching latest code from repo..."
-	git fetch --all
+  # DNS and upstream connectivity may still be settling during boot.
+  for attempt in {1..6}; do
+    if git fetch --all; then
+      break
+    fi
+    if [ "$attempt" -eq 6 ]; then
+      echo "ERROR: Git fetch failed after 6 attempts; deployment aborted." >&2
+      exit 1
+    fi
+    echo "Git fetch failed (attempt $attempt/6); retrying in 10 seconds..." >&2
+    sleep 10
+  done
 	git reset --hard origin/master
 fi
 
